@@ -10,6 +10,11 @@
             "StackName": "amplify-sccsystem2-dev-134740",
             "StackId": "arn:aws:cloudformation:ap-northeast-1:251893532135:stack/amplify-sccsystem2-dev-134740/f38a9dc0-e5c4-11ea-8e59-0e2825cd3a94",
             "AmplifyAppId": "d3p5p2xslg6xd8"
+        },
+        "categories": {
+            "auth": {
+                "sccsystem2e3482086": {}
+            }
         }
     }
 }
