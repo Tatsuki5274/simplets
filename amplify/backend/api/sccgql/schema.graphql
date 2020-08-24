@@ -1,4 +1,19 @@
-type Department
+type Company #会社
+@model
+@auth(
+  rules: [
+    {allow: groups, groups: ["Admin"]}
+    {allow: private, operations: [read]}
+  ]
+)
+{
+  id: ID!
+  name: String!
+  shortName: String
+  url: String
+}
+
+type Group #部門
 @model(timestamps:{createdAt: "createdOn", updatedAt: "updatedOn"})
 @auth(
   rules: [
@@ -8,8 +23,9 @@ type Department
 )
 {
   id: ID!
-  code: String
-  name: String! #部署名
+  company: Company @connection
+  group: Group @connection
+  name: String! #部門名
 }
 
 type Category
@@ -22,7 +38,8 @@ type Category
 )
 {
   id: ID!
-  code: String
+  company: Company @connection
+  no: Int
   name: String! #カテゴリ名
 }
 
@@ -37,7 +54,7 @@ type Sheet
 )
 {
   id: ID!
-  year: Int!  #実施年度
+  yearMonth: Int!  #実施年度
   careerPlan: String  #キャリア計画本人希望
   careerPlanComment: String #話し合い結果コメント
     @auth(rules:[
