@@ -89,7 +89,7 @@
 				"Layers": [],
 				"Timeout": "25",
 				"Code": {
-					"S3Bucket": "amplify-sccsystem2-dev-165625-deployment",
+					"S3Bucket": "amplify-sccsystem2-dev-180107-deployment",
 					"S3Key": "amplify-builds/listSheetsLtGrade-614f6469557a536a3350-build.zip"
 				}
 			}
