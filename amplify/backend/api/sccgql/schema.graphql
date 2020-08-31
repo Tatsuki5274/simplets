@@ -1,16 +1,32 @@
+type ApprovalStatus #承認ステータス
+@model
+@auth(
+  rules: [
+    {allow: groups, groups: ["Admin"]}
+    {allow: private, operations: [read]}
+    {allow: private, provider: iam, operations:[read]}
+  ]
+)
+{
+  id: ID!
+  no: Int #ステータスNo
+  name: String! #名称
+}
+
 type Company #会社
 @model
 @auth(
   rules: [
     {allow: groups, groups: ["Admin"]}
     {allow: private, operations: [read]}
+    {allow: private, provider: iam, operations:[read]}
   ]
 )
 {
   id: ID!
   name: String!
   shortName: String
-  url: String
+  url: AWSURL
 }
 
 type Group #部門
@@ -19,6 +35,7 @@ type Group #部門
   rules: [
     {allow: groups, groups: ["Admin"]}
     {allow: private, operations: [read]}
+    {allow: private, provider: iam, operations:[read]}
   ]
 )
 {
@@ -34,6 +51,7 @@ type Category
   rules: [
     {allow: groups, groups: ["Admin"]}
     {allow: private, operations: [read]}
+    {allow: private, provider: iam, operations:[read]}
   ]
 )
 {
@@ -43,79 +61,88 @@ type Category
   name: String! #カテゴリ名
 }
 
-type Sheet
-@model(timestamps:{createdAt: "createdOn", updatedAt: "updatedOn"})
+type Interview
+@model(timestamps:{updatedAt: "updatedOn"})
+@key(name: "bySheet", fields: ["sheetId"])
 @auth(
   rules: [
-    {allow: owner}
-    {allow: groups, groups: ["Admin"]}
-    {allow: groups, groups: ["Manager"], operations: [read]}
+    { allow: groups, groups: ["Admin"]}
+    { allow: owner, ownerField: "reviewee", operations: [read] }
+    {allow: private, provider: iam, operations:[read]}
   ]
 )
 {
   id: ID!
-  yearMonth: Int!  #実施年度
+  sheetId: ID
+  interviewDate: AWSDate
+  detail: String
+
+  reviewee: String #インタビューを受けた人
+}
+
+type Sheet
+@model(timestamps:{updatedAt: "updatedOn"})
+#@key(fields: ["year", "reviewee", "companyId", "grade"])
+@auth(
+  rules: [
+    {allow: owner, ownerField: "reviewee", operations: [read] }
+    {allow: groups, groups: ["Admin"]}
+    {allow: private, provider: iam}
+  ]
+)
+{
+  id: ID!
+  year: Int!  #実施年度
+  grade: Int! #等級
   careerPlan: String  #キャリア計画本人希望
   careerPlanComment: String #話し合い結果コメント
-    @auth(rules:[
-      {allow: groups, groups:["Admin","Manager"]}
-      {allow: owner, operations: [read]}
-    ])
+  reviewComment: String #年間評価コメント
+  reviewDate: AWSDate #年間評価実施日時
+  selfCheckDate: AWSDate #本人確認（日付）
+  firstComment: String #部門長コメント
+  firstCheckDate: AWSDate #部門長確認（日付）
+  secondCheckDate: AWSDate #所属長確認日付
   overAllEvaluation: Int  #総合評価
-    @auth(rules:[
-      {allow: groups, groups:["Admin","Manager"]}
-      {allow: owner, operations: [read]}
-    ])
-  firstComment: Comment #部門長コメント
-    @connection
-    @auth(rules:[
-      {allow: groups, groups: ["Admin", "Manager"]}
-      {allow: owner, operations: [read]}
-    ])
-  secondComment: Comment  #所属長コメント
-  @connection
-  @auth(rules:[
-      {allow: groups, groups: ["Admin", "Manager"]}
-      {allow: owner, operations: [read]}
-  ])
+
+  group: Group @connection
+  interviews: [Interview] @connection(keyName: "bySheet", fields: ["id"])
+  companyId: ID!
+  company: Company @connection(fields: ["companyId"])
+
+  reviewee: String #社員ID(被評価者)
 }
 
 type Objective
-@model(timestamps:{createdAt: "createdOn", updatedAt: "updatedOn"})
+@model(timestamps:{updatedAt: "updatedOn"})
 @auth(
   rules: [
-    {allow: owner}
+    {allow: owner, ownerField: "reviewee" }
     {allow: groups, groups: ["Admin"]}
-    {allow: groups, groups: ["Manager"], operations: [read]}
+    # {allow: groups, groups: ["Manager"], operations: [read]}
+    {allow: private, provider: iam}
   ]
 )
 {
   id: ID!
-  category: Category @connection  #カテゴリへのリレーション
-  objective: String! #目標本文
+  status: String #ステータス文字列
+  content: String! #目標本文
   result: String  #実績
-  status: String  #ステータス　step functionへの移行検討
+  priority: String #優先順位
   selfEvaluation: Int #自己評価
+  firstEvaluation: Int #所属長評価
   lastEvaluation: Int #最終評価
-  @auth(
-    rules: [
-      {allow: groups, groups: ["Admin", "Manager"]}
-      {allow: owner, operations: [read]}
-    ]
-  )
 
+  sheet: Sheet @connection
+  category: Category @connection  #カテゴリへのリレーション
+  
+  reviewee: String #社員ID(被評価者)
 }
 
-type Comment
-@model(timestamps:{createdAt: "createdOn", updatedAt: "updatedOn"})
-@auth(
-  rules: [
-    {allow: groups, groups: ["Admin"]}
-    {allow: groups, groups: ["Manager"]}
-    {allow: private, operations: [read]}
-  ]
-)
-{
-  id: ID!
-  comment: String!
+type Query {
+  #listSheetsLtGrade: String @function(name: "listSheetsLtGrade-${env}")
+  listSheetsLtGrade: [Sheet] @function(name: "listSheetsLtGrade-${env}")
+    @auth(rules:[
+      {allow: groups, groups: ["Admin", "Manager"]}
+      {allow: private, operations: []}
+    ])
 }

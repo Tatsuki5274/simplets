@@ -2,43 +2,194 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const getDepartment = /* GraphQL */ `
-  query GetDepartment($id: ID!) {
-    getDepartment(id: $id) {
+export const listSheetsLtGrade = /* GraphQL */ `
+  query ListSheetsLtGrade {
+    listSheetsLtGrade {
       id
-      code
-      name
-      createdOn
+      year
+      grade
+      careerPlan
+      careerPlanComment
+      reviewComment
+      reviewDate
+      selfCheckDate
+      firstComment
+      firstCheckDate
+      secondCheckDate
+      overAllEvaluation
+      companyId
+      reviewee
+      createdAt
       updatedOn
-    }
-  }
-`;
-export const listDepartments = /* GraphQL */ `
-  query ListDepartments(
-    $filter: ModelDepartmentFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listDepartments(filter: $filter, limit: $limit, nextToken: $nextToken) {
-      items {
+      company {
         id
-        code
+        name
+        shortName
+        url
+        createdAt
+        updatedAt
+      }
+      group {
+        id
         name
         createdOn
         updatedOn
+        company {
+          id
+          name
+          shortName
+          url
+          createdAt
+          updatedAt
+        }
+        group {
+          id
+          name
+          createdOn
+          updatedOn
+        }
+      }
+      interviews {
+        items {
+          id
+          sheetId
+          interviewDate
+          detail
+          reviewee
+          createdAt
+          updatedOn
+        }
+        nextToken
+      }
+    }
+  }
+`;
+export const getApprovalStatus = /* GraphQL */ `
+  query GetApprovalStatus($id: ID!) {
+    getApprovalStatus(id: $id) {
+      id
+      no
+      name
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listApprovalStatuss = /* GraphQL */ `
+  query ListApprovalStatuss(
+    $filter: ModelApprovalStatusFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listApprovalStatuss(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        no
+        name
+        createdAt
+        updatedAt
       }
       nextToken
     }
   }
 `;
-export const getCategory = /* GraphQL */ `
-  query GetCategory($id: ID!) {
-    getCategory(id: $id) {
+export const listCompanys = /* GraphQL */ `
+  query ListCompanys(
+    $filter: ModelCompanyFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listCompanys(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        name
+        shortName
+        url
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const getCompany = /* GraphQL */ `
+  query GetCompany($id: ID!) {
+    getCompany(id: $id) {
       id
-      code
+      name
+      shortName
+      url
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listGroups = /* GraphQL */ `
+  query ListGroups(
+    $filter: ModelGroupFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listGroups(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        name
+        createdOn
+        updatedOn
+        company {
+          id
+          name
+          shortName
+          url
+          createdAt
+          updatedAt
+        }
+        group {
+          id
+          name
+          createdOn
+          updatedOn
+        }
+      }
+      nextToken
+    }
+  }
+`;
+export const getGroup = /* GraphQL */ `
+  query GetGroup($id: ID!) {
+    getGroup(id: $id) {
+      id
       name
       createdOn
       updatedOn
+      company {
+        id
+        name
+        shortName
+        url
+        createdAt
+        updatedAt
+      }
+      group {
+        id
+        name
+        createdOn
+        updatedOn
+        company {
+          id
+          name
+          shortName
+          url
+          createdAt
+          updatedAt
+        }
+        group {
+          id
+          name
+          createdOn
+          updatedOn
+        }
+      }
     }
   }
 `;
@@ -51,38 +202,72 @@ export const listCategorys = /* GraphQL */ `
     listCategorys(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
-        code
+        no
         name
         createdOn
         updatedOn
+        company {
+          id
+          name
+          shortName
+          url
+          createdAt
+          updatedAt
+        }
       }
       nextToken
     }
   }
 `;
-export const getSheet = /* GraphQL */ `
-  query GetSheet($id: ID!) {
-    getSheet(id: $id) {
+export const getCategory = /* GraphQL */ `
+  query GetCategory($id: ID!) {
+    getCategory(id: $id) {
       id
-      year
-      careerPlan
-      careerPlanComment
-      overAllEvaluation
-      firstComment {
-        id
-        comment
-        createdOn
-        updatedOn
-      }
-      secondComment {
-        id
-        comment
-        createdOn
-        updatedOn
-      }
+      no
+      name
       createdOn
       updatedOn
-      owner
+      company {
+        id
+        name
+        shortName
+        url
+        createdAt
+        updatedAt
+      }
+    }
+  }
+`;
+export const getInterview = /* GraphQL */ `
+  query GetInterview($id: ID!) {
+    getInterview(id: $id) {
+      id
+      sheetId
+      interviewDate
+      detail
+      reviewee
+      createdAt
+      updatedOn
+    }
+  }
+`;
+export const listInterviews = /* GraphQL */ `
+  query ListInterviews(
+    $filter: ModelInterviewFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listInterviews(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        sheetId
+        interviewDate
+        detail
+        reviewee
+        createdAt
+        updatedOn
+      }
+      nextToken
     }
   }
 `;
@@ -96,26 +281,101 @@ export const listSheets = /* GraphQL */ `
       items {
         id
         year
+        grade
         careerPlan
         careerPlanComment
+        reviewComment
+        reviewDate
+        selfCheckDate
+        firstComment
+        firstCheckDate
+        secondCheckDate
         overAllEvaluation
-        firstComment {
-          id
-          comment
-          createdOn
-          updatedOn
-        }
-        secondComment {
-          id
-          comment
-          createdOn
-          updatedOn
-        }
-        createdOn
+        companyId
+        reviewee
+        createdAt
         updatedOn
-        owner
+        company {
+          id
+          name
+          shortName
+          url
+          createdAt
+          updatedAt
+        }
+        group {
+          id
+          name
+          createdOn
+          updatedOn
+        }
+        interviews {
+          nextToken
+        }
       }
       nextToken
+    }
+  }
+`;
+export const getSheet = /* GraphQL */ `
+  query GetSheet($id: ID!) {
+    getSheet(id: $id) {
+      id
+      year
+      grade
+      careerPlan
+      careerPlanComment
+      reviewComment
+      reviewDate
+      selfCheckDate
+      firstComment
+      firstCheckDate
+      secondCheckDate
+      overAllEvaluation
+      companyId
+      reviewee
+      createdAt
+      updatedOn
+      company {
+        id
+        name
+        shortName
+        url
+        createdAt
+        updatedAt
+      }
+      group {
+        id
+        name
+        createdOn
+        updatedOn
+        company {
+          id
+          name
+          shortName
+          url
+          createdAt
+          updatedAt
+        }
+        group {
+          id
+          name
+          createdOn
+          updatedOn
+        }
+      }
+      interviews {
+        items {
+          id
+          sheetId
+          interviewDate
+          detail
+          reviewee
+          createdAt
+          updatedOn
+        }
+        nextToken
+      }
     }
   }
 `;
@@ -123,21 +383,66 @@ export const getObjective = /* GraphQL */ `
   query GetObjective($id: ID!) {
     getObjective(id: $id) {
       id
+      status
+      content
+      result
+      priority
+      selfEvaluation
+      firstEvaluation
+      lastEvaluation
+      reviewee
+      createdAt
+      updatedOn
       category {
         id
-        code
+        no
         name
         createdOn
         updatedOn
+        company {
+          id
+          name
+          shortName
+          url
+          createdAt
+          updatedAt
+        }
       }
-      objective
-      result
-      status
-      selfEvaluation
-      lastEvaluation
-      createdOn
-      updatedOn
-      owner
+      sheet {
+        id
+        year
+        grade
+        careerPlan
+        careerPlanComment
+        reviewComment
+        reviewDate
+        selfCheckDate
+        firstComment
+        firstCheckDate
+        secondCheckDate
+        overAllEvaluation
+        companyId
+        reviewee
+        createdAt
+        updatedOn
+        company {
+          id
+          name
+          shortName
+          url
+          createdAt
+          updatedAt
+        }
+        group {
+          id
+          name
+          createdOn
+          updatedOn
+        }
+        interviews {
+          nextToken
+        }
+      }
     }
   }
 `;
@@ -150,48 +455,41 @@ export const listObjectives = /* GraphQL */ `
     listObjectives(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
+        status
+        content
+        result
+        priority
+        selfEvaluation
+        firstEvaluation
+        lastEvaluation
+        reviewee
+        createdAt
+        updatedOn
         category {
           id
-          code
+          no
           name
           createdOn
           updatedOn
         }
-        objective
-        result
-        status
-        selfEvaluation
-        lastEvaluation
-        createdOn
-        updatedOn
-        owner
-      }
-      nextToken
-    }
-  }
-`;
-export const getComment = /* GraphQL */ `
-  query GetComment($id: ID!) {
-    getComment(id: $id) {
-      id
-      comment
-      createdOn
-      updatedOn
-    }
-  }
-`;
-export const listComments = /* GraphQL */ `
-  query ListComments(
-    $filter: ModelCommentFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listComments(filter: $filter, limit: $limit, nextToken: $nextToken) {
-      items {
-        id
-        comment
-        createdOn
-        updatedOn
+        sheet {
+          id
+          year
+          grade
+          careerPlan
+          careerPlanComment
+          reviewComment
+          reviewDate
+          selfCheckDate
+          firstComment
+          firstCheckDate
+          secondCheckDate
+          overAllEvaluation
+          companyId
+          reviewee
+          createdAt
+          updatedOn
+        }
       }
       nextToken
     }

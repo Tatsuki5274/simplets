@@ -19,13 +19,20 @@
                             "userPoolId": "authsccsystem2e3482086"
                         }
                     },
-                    "additionalAuthenticationProviders": []
+                    "additionalAuthenticationProviders": [
+                        {
+                            "authenticationType": "AWS_IAM"
+                        }
+                    ]
                 }
             }
-        },
-        "AdminQueries": {
-            "service": "API Gateway",
+        }
+    },
+    "function": {
+        "listSheetsLtGrade": {
+            "build": true,
             "providerPlugin": "awscloudformation",
+            "service": "Lambda",
             "dependsOn": [
                 {
                     "category": "auth",
@@ -35,27 +42,11 @@
                     ]
                 },
                 {
-                    "category": "function",
-                    "resourceName": "AdminQueriesd1a3dbd5",
+                    "category": "api",
+                    "resourceName": "sccgql",
                     "attributes": [
-                        "Arn",
-                        "Name"
-                    ]
-                }
-            ]
-        }
-    },
-    "function": {
-        "AdminQueriesd1a3dbd5": {
-            "service": "Lambda",
-            "providerPlugin": "awscloudformation",
-            "build": true,
-            "dependsOn": [
-                {
-                    "category": "auth",
-                    "resourceName": "sccsystem2e3482086",
-                    "attributes": [
-                        "UserPoolId"
+                        "GraphQLAPIIdOutput",
+                        "GraphQLAPIEndpointOutput"
                     ]
                 }
             ]

@@ -2,36 +2,186 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const onCreateDepartment = /* GraphQL */ `
-  subscription OnCreateDepartment {
-    onCreateDepartment {
+export const onCreateApprovalStatus = /* GraphQL */ `
+  subscription OnCreateApprovalStatus {
+    onCreateApprovalStatus {
       id
-      code
+      no
       name
-      createdOn
-      updatedOn
+      createdAt
+      updatedAt
     }
   }
 `;
-export const onUpdateDepartment = /* GraphQL */ `
-  subscription OnUpdateDepartment {
-    onUpdateDepartment {
+export const onUpdateApprovalStatus = /* GraphQL */ `
+  subscription OnUpdateApprovalStatus {
+    onUpdateApprovalStatus {
       id
-      code
+      no
       name
-      createdOn
-      updatedOn
+      createdAt
+      updatedAt
     }
   }
 `;
-export const onDeleteDepartment = /* GraphQL */ `
-  subscription OnDeleteDepartment {
-    onDeleteDepartment {
+export const onDeleteApprovalStatus = /* GraphQL */ `
+  subscription OnDeleteApprovalStatus {
+    onDeleteApprovalStatus {
       id
-      code
+      no
+      name
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onCreateCompany = /* GraphQL */ `
+  subscription OnCreateCompany {
+    onCreateCompany {
+      id
+      name
+      shortName
+      url
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateCompany = /* GraphQL */ `
+  subscription OnUpdateCompany {
+    onUpdateCompany {
+      id
+      name
+      shortName
+      url
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteCompany = /* GraphQL */ `
+  subscription OnDeleteCompany {
+    onDeleteCompany {
+      id
+      name
+      shortName
+      url
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onCreateGroup = /* GraphQL */ `
+  subscription OnCreateGroup {
+    onCreateGroup {
+      id
       name
       createdOn
       updatedOn
+      company {
+        id
+        name
+        shortName
+        url
+        createdAt
+        updatedAt
+      }
+      group {
+        id
+        name
+        createdOn
+        updatedOn
+        company {
+          id
+          name
+          shortName
+          url
+          createdAt
+          updatedAt
+        }
+        group {
+          id
+          name
+          createdOn
+          updatedOn
+        }
+      }
+    }
+  }
+`;
+export const onUpdateGroup = /* GraphQL */ `
+  subscription OnUpdateGroup {
+    onUpdateGroup {
+      id
+      name
+      createdOn
+      updatedOn
+      company {
+        id
+        name
+        shortName
+        url
+        createdAt
+        updatedAt
+      }
+      group {
+        id
+        name
+        createdOn
+        updatedOn
+        company {
+          id
+          name
+          shortName
+          url
+          createdAt
+          updatedAt
+        }
+        group {
+          id
+          name
+          createdOn
+          updatedOn
+        }
+      }
+    }
+  }
+`;
+export const onDeleteGroup = /* GraphQL */ `
+  subscription OnDeleteGroup {
+    onDeleteGroup {
+      id
+      name
+      createdOn
+      updatedOn
+      company {
+        id
+        name
+        shortName
+        url
+        createdAt
+        updatedAt
+      }
+      group {
+        id
+        name
+        createdOn
+        updatedOn
+        company {
+          id
+          name
+          shortName
+          url
+          createdAt
+          updatedAt
+        }
+        group {
+          id
+          name
+          createdOn
+          updatedOn
+        }
+      }
     }
   }
 `;
@@ -39,10 +189,18 @@ export const onCreateCategory = /* GraphQL */ `
   subscription OnCreateCategory {
     onCreateCategory {
       id
-      code
+      no
       name
       createdOn
       updatedOn
+      company {
+        id
+        name
+        shortName
+        url
+        createdAt
+        updatedAt
+      }
     }
   }
 `;
@@ -50,10 +208,18 @@ export const onUpdateCategory = /* GraphQL */ `
   subscription OnUpdateCategory {
     onUpdateCategory {
       id
-      code
+      no
       name
       createdOn
       updatedOn
+      company {
+        id
+        name
+        shortName
+        url
+        createdAt
+        updatedAt
+      }
     }
   }
 `;
@@ -61,184 +227,444 @@ export const onDeleteCategory = /* GraphQL */ `
   subscription OnDeleteCategory {
     onDeleteCategory {
       id
-      code
+      no
       name
       createdOn
+      updatedOn
+      company {
+        id
+        name
+        shortName
+        url
+        createdAt
+        updatedAt
+      }
+    }
+  }
+`;
+export const onCreateInterview = /* GraphQL */ `
+  subscription OnCreateInterview($reviewee: String) {
+    onCreateInterview(reviewee: $reviewee) {
+      id
+      sheetId
+      interviewDate
+      detail
+      reviewee
+      createdAt
+      updatedOn
+    }
+  }
+`;
+export const onUpdateInterview = /* GraphQL */ `
+  subscription OnUpdateInterview($reviewee: String) {
+    onUpdateInterview(reviewee: $reviewee) {
+      id
+      sheetId
+      interviewDate
+      detail
+      reviewee
+      createdAt
+      updatedOn
+    }
+  }
+`;
+export const onDeleteInterview = /* GraphQL */ `
+  subscription OnDeleteInterview($reviewee: String) {
+    onDeleteInterview(reviewee: $reviewee) {
+      id
+      sheetId
+      interviewDate
+      detail
+      reviewee
+      createdAt
       updatedOn
     }
   }
 `;
 export const onCreateSheet = /* GraphQL */ `
-  subscription OnCreateSheet($owner: String) {
-    onCreateSheet(owner: $owner) {
+  subscription OnCreateSheet($reviewee: String) {
+    onCreateSheet(reviewee: $reviewee) {
       id
       year
+      grade
       careerPlan
       careerPlanComment
+      reviewComment
+      reviewDate
+      selfCheckDate
+      firstComment
+      firstCheckDate
+      secondCheckDate
       overAllEvaluation
-      firstComment {
-        id
-        comment
-        createdOn
-        updatedOn
-      }
-      secondComment {
-        id
-        comment
-        createdOn
-        updatedOn
-      }
-      createdOn
+      companyId
+      reviewee
+      createdAt
       updatedOn
-      owner
+      company {
+        id
+        name
+        shortName
+        url
+        createdAt
+        updatedAt
+      }
+      group {
+        id
+        name
+        createdOn
+        updatedOn
+        company {
+          id
+          name
+          shortName
+          url
+          createdAt
+          updatedAt
+        }
+        group {
+          id
+          name
+          createdOn
+          updatedOn
+        }
+      }
+      interviews {
+        items {
+          id
+          sheetId
+          interviewDate
+          detail
+          reviewee
+          createdAt
+          updatedOn
+        }
+        nextToken
+      }
     }
   }
 `;
 export const onUpdateSheet = /* GraphQL */ `
-  subscription OnUpdateSheet($owner: String) {
-    onUpdateSheet(owner: $owner) {
+  subscription OnUpdateSheet($reviewee: String) {
+    onUpdateSheet(reviewee: $reviewee) {
       id
       year
+      grade
       careerPlan
       careerPlanComment
+      reviewComment
+      reviewDate
+      selfCheckDate
+      firstComment
+      firstCheckDate
+      secondCheckDate
       overAllEvaluation
-      firstComment {
-        id
-        comment
-        createdOn
-        updatedOn
-      }
-      secondComment {
-        id
-        comment
-        createdOn
-        updatedOn
-      }
-      createdOn
+      companyId
+      reviewee
+      createdAt
       updatedOn
-      owner
+      company {
+        id
+        name
+        shortName
+        url
+        createdAt
+        updatedAt
+      }
+      group {
+        id
+        name
+        createdOn
+        updatedOn
+        company {
+          id
+          name
+          shortName
+          url
+          createdAt
+          updatedAt
+        }
+        group {
+          id
+          name
+          createdOn
+          updatedOn
+        }
+      }
+      interviews {
+        items {
+          id
+          sheetId
+          interviewDate
+          detail
+          reviewee
+          createdAt
+          updatedOn
+        }
+        nextToken
+      }
     }
   }
 `;
 export const onDeleteSheet = /* GraphQL */ `
-  subscription OnDeleteSheet($owner: String) {
-    onDeleteSheet(owner: $owner) {
+  subscription OnDeleteSheet($reviewee: String) {
+    onDeleteSheet(reviewee: $reviewee) {
       id
       year
+      grade
       careerPlan
       careerPlanComment
+      reviewComment
+      reviewDate
+      selfCheckDate
+      firstComment
+      firstCheckDate
+      secondCheckDate
       overAllEvaluation
-      firstComment {
-        id
-        comment
-        createdOn
-        updatedOn
-      }
-      secondComment {
-        id
-        comment
-        createdOn
-        updatedOn
-      }
-      createdOn
+      companyId
+      reviewee
+      createdAt
       updatedOn
-      owner
+      company {
+        id
+        name
+        shortName
+        url
+        createdAt
+        updatedAt
+      }
+      group {
+        id
+        name
+        createdOn
+        updatedOn
+        company {
+          id
+          name
+          shortName
+          url
+          createdAt
+          updatedAt
+        }
+        group {
+          id
+          name
+          createdOn
+          updatedOn
+        }
+      }
+      interviews {
+        items {
+          id
+          sheetId
+          interviewDate
+          detail
+          reviewee
+          createdAt
+          updatedOn
+        }
+        nextToken
+      }
     }
   }
 `;
 export const onCreateObjective = /* GraphQL */ `
-  subscription OnCreateObjective($owner: String) {
-    onCreateObjective(owner: $owner) {
+  subscription OnCreateObjective($reviewee: String) {
+    onCreateObjective(reviewee: $reviewee) {
       id
+      status
+      content
+      result
+      priority
+      selfEvaluation
+      firstEvaluation
+      lastEvaluation
+      reviewee
+      createdAt
+      updatedOn
       category {
         id
-        code
+        no
         name
         createdOn
         updatedOn
+        company {
+          id
+          name
+          shortName
+          url
+          createdAt
+          updatedAt
+        }
       }
-      objective
-      result
-      status
-      selfEvaluation
-      lastEvaluation
-      createdOn
-      updatedOn
-      owner
+      sheet {
+        id
+        year
+        grade
+        careerPlan
+        careerPlanComment
+        reviewComment
+        reviewDate
+        selfCheckDate
+        firstComment
+        firstCheckDate
+        secondCheckDate
+        overAllEvaluation
+        companyId
+        reviewee
+        createdAt
+        updatedOn
+        company {
+          id
+          name
+          shortName
+          url
+          createdAt
+          updatedAt
+        }
+        group {
+          id
+          name
+          createdOn
+          updatedOn
+        }
+        interviews {
+          nextToken
+        }
+      }
     }
   }
 `;
 export const onUpdateObjective = /* GraphQL */ `
-  subscription OnUpdateObjective($owner: String) {
-    onUpdateObjective(owner: $owner) {
+  subscription OnUpdateObjective($reviewee: String) {
+    onUpdateObjective(reviewee: $reviewee) {
       id
+      status
+      content
+      result
+      priority
+      selfEvaluation
+      firstEvaluation
+      lastEvaluation
+      reviewee
+      createdAt
+      updatedOn
       category {
         id
-        code
+        no
         name
         createdOn
         updatedOn
+        company {
+          id
+          name
+          shortName
+          url
+          createdAt
+          updatedAt
+        }
       }
-      objective
-      result
-      status
-      selfEvaluation
-      lastEvaluation
-      createdOn
-      updatedOn
-      owner
+      sheet {
+        id
+        year
+        grade
+        careerPlan
+        careerPlanComment
+        reviewComment
+        reviewDate
+        selfCheckDate
+        firstComment
+        firstCheckDate
+        secondCheckDate
+        overAllEvaluation
+        companyId
+        reviewee
+        createdAt
+        updatedOn
+        company {
+          id
+          name
+          shortName
+          url
+          createdAt
+          updatedAt
+        }
+        group {
+          id
+          name
+          createdOn
+          updatedOn
+        }
+        interviews {
+          nextToken
+        }
+      }
     }
   }
 `;
 export const onDeleteObjective = /* GraphQL */ `
-  subscription OnDeleteObjective($owner: String) {
-    onDeleteObjective(owner: $owner) {
+  subscription OnDeleteObjective($reviewee: String) {
+    onDeleteObjective(reviewee: $reviewee) {
       id
+      status
+      content
+      result
+      priority
+      selfEvaluation
+      firstEvaluation
+      lastEvaluation
+      reviewee
+      createdAt
+      updatedOn
       category {
         id
-        code
+        no
         name
         createdOn
         updatedOn
+        company {
+          id
+          name
+          shortName
+          url
+          createdAt
+          updatedAt
+        }
       }
-      objective
-      result
-      status
-      selfEvaluation
-      lastEvaluation
-      createdOn
-      updatedOn
-      owner
-    }
-  }
-`;
-export const onCreateComment = /* GraphQL */ `
-  subscription OnCreateComment {
-    onCreateComment {
-      id
-      comment
-      createdOn
-      updatedOn
-    }
-  }
-`;
-export const onUpdateComment = /* GraphQL */ `
-  subscription OnUpdateComment {
-    onUpdateComment {
-      id
-      comment
-      createdOn
-      updatedOn
-    }
-  }
-`;
-export const onDeleteComment = /* GraphQL */ `
-  subscription OnDeleteComment {
-    onDeleteComment {
-      id
-      comment
-      createdOn
-      updatedOn
+      sheet {
+        id
+        year
+        grade
+        careerPlan
+        careerPlanComment
+        reviewComment
+        reviewDate
+        selfCheckDate
+        firstComment
+        firstCheckDate
+        secondCheckDate
+        overAllEvaluation
+        companyId
+        reviewee
+        createdAt
+        updatedOn
+        company {
+          id
+          name
+          shortName
+          url
+          createdAt
+          updatedAt
+        }
+        group {
+          id
+          name
+          createdOn
+          updatedOn
+        }
+        interviews {
+          nextToken
+        }
+      }
     }
   }
 `;

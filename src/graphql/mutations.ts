@@ -2,45 +2,213 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const createDepartment = /* GraphQL */ `
-  mutation CreateDepartment(
-    $input: CreateDepartmentInput!
-    $condition: ModelDepartmentConditionInput
+export const createApprovalStatus = /* GraphQL */ `
+  mutation CreateApprovalStatus(
+    $input: CreateApprovalStatusInput!
+    $condition: ModelApprovalStatusConditionInput
   ) {
-    createDepartment(input: $input, condition: $condition) {
+    createApprovalStatus(input: $input, condition: $condition) {
       id
-      code
+      no
       name
-      createdOn
-      updatedOn
+      createdAt
+      updatedAt
     }
   }
 `;
-export const updateDepartment = /* GraphQL */ `
-  mutation UpdateDepartment(
-    $input: UpdateDepartmentInput!
-    $condition: ModelDepartmentConditionInput
+export const updateApprovalStatus = /* GraphQL */ `
+  mutation UpdateApprovalStatus(
+    $input: UpdateApprovalStatusInput!
+    $condition: ModelApprovalStatusConditionInput
   ) {
-    updateDepartment(input: $input, condition: $condition) {
+    updateApprovalStatus(input: $input, condition: $condition) {
       id
-      code
+      no
       name
-      createdOn
-      updatedOn
+      createdAt
+      updatedAt
     }
   }
 `;
-export const deleteDepartment = /* GraphQL */ `
-  mutation DeleteDepartment(
-    $input: DeleteDepartmentInput!
-    $condition: ModelDepartmentConditionInput
+export const deleteApprovalStatus = /* GraphQL */ `
+  mutation DeleteApprovalStatus(
+    $input: DeleteApprovalStatusInput!
+    $condition: ModelApprovalStatusConditionInput
   ) {
-    deleteDepartment(input: $input, condition: $condition) {
+    deleteApprovalStatus(input: $input, condition: $condition) {
       id
-      code
+      no
+      name
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const createCompany = /* GraphQL */ `
+  mutation CreateCompany(
+    $input: CreateCompanyInput!
+    $condition: ModelCompanyConditionInput
+  ) {
+    createCompany(input: $input, condition: $condition) {
+      id
+      name
+      shortName
+      url
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateCompany = /* GraphQL */ `
+  mutation UpdateCompany(
+    $input: UpdateCompanyInput!
+    $condition: ModelCompanyConditionInput
+  ) {
+    updateCompany(input: $input, condition: $condition) {
+      id
+      name
+      shortName
+      url
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteCompany = /* GraphQL */ `
+  mutation DeleteCompany(
+    $input: DeleteCompanyInput!
+    $condition: ModelCompanyConditionInput
+  ) {
+    deleteCompany(input: $input, condition: $condition) {
+      id
+      name
+      shortName
+      url
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const createGroup = /* GraphQL */ `
+  mutation CreateGroup(
+    $input: CreateGroupInput!
+    $condition: ModelGroupConditionInput
+  ) {
+    createGroup(input: $input, condition: $condition) {
+      id
       name
       createdOn
       updatedOn
+      company {
+        id
+        name
+        shortName
+        url
+        createdAt
+        updatedAt
+      }
+      group {
+        id
+        name
+        createdOn
+        updatedOn
+        company {
+          id
+          name
+          shortName
+          url
+          createdAt
+          updatedAt
+        }
+        group {
+          id
+          name
+          createdOn
+          updatedOn
+        }
+      }
+    }
+  }
+`;
+export const updateGroup = /* GraphQL */ `
+  mutation UpdateGroup(
+    $input: UpdateGroupInput!
+    $condition: ModelGroupConditionInput
+  ) {
+    updateGroup(input: $input, condition: $condition) {
+      id
+      name
+      createdOn
+      updatedOn
+      company {
+        id
+        name
+        shortName
+        url
+        createdAt
+        updatedAt
+      }
+      group {
+        id
+        name
+        createdOn
+        updatedOn
+        company {
+          id
+          name
+          shortName
+          url
+          createdAt
+          updatedAt
+        }
+        group {
+          id
+          name
+          createdOn
+          updatedOn
+        }
+      }
+    }
+  }
+`;
+export const deleteGroup = /* GraphQL */ `
+  mutation DeleteGroup(
+    $input: DeleteGroupInput!
+    $condition: ModelGroupConditionInput
+  ) {
+    deleteGroup(input: $input, condition: $condition) {
+      id
+      name
+      createdOn
+      updatedOn
+      company {
+        id
+        name
+        shortName
+        url
+        createdAt
+        updatedAt
+      }
+      group {
+        id
+        name
+        createdOn
+        updatedOn
+        company {
+          id
+          name
+          shortName
+          url
+          createdAt
+          updatedAt
+        }
+        group {
+          id
+          name
+          createdOn
+          updatedOn
+        }
+      }
     }
   }
 `;
@@ -51,10 +219,18 @@ export const createCategory = /* GraphQL */ `
   ) {
     createCategory(input: $input, condition: $condition) {
       id
-      code
+      no
       name
       createdOn
       updatedOn
+      company {
+        id
+        name
+        shortName
+        url
+        createdAt
+        updatedAt
+      }
     }
   }
 `;
@@ -65,10 +241,18 @@ export const updateCategory = /* GraphQL */ `
   ) {
     updateCategory(input: $input, condition: $condition) {
       id
-      code
+      no
       name
       createdOn
       updatedOn
+      company {
+        id
+        name
+        shortName
+        url
+        createdAt
+        updatedAt
+      }
     }
   }
 `;
@@ -79,9 +263,65 @@ export const deleteCategory = /* GraphQL */ `
   ) {
     deleteCategory(input: $input, condition: $condition) {
       id
-      code
+      no
       name
       createdOn
+      updatedOn
+      company {
+        id
+        name
+        shortName
+        url
+        createdAt
+        updatedAt
+      }
+    }
+  }
+`;
+export const createInterview = /* GraphQL */ `
+  mutation CreateInterview(
+    $input: CreateInterviewInput!
+    $condition: ModelInterviewConditionInput
+  ) {
+    createInterview(input: $input, condition: $condition) {
+      id
+      sheetId
+      interviewDate
+      detail
+      reviewee
+      createdAt
+      updatedOn
+    }
+  }
+`;
+export const updateInterview = /* GraphQL */ `
+  mutation UpdateInterview(
+    $input: UpdateInterviewInput!
+    $condition: ModelInterviewConditionInput
+  ) {
+    updateInterview(input: $input, condition: $condition) {
+      id
+      sheetId
+      interviewDate
+      detail
+      reviewee
+      createdAt
+      updatedOn
+    }
+  }
+`;
+export const deleteInterview = /* GraphQL */ `
+  mutation DeleteInterview(
+    $input: DeleteInterviewInput!
+    $condition: ModelInterviewConditionInput
+  ) {
+    deleteInterview(input: $input, condition: $condition) {
+      id
+      sheetId
+      interviewDate
+      detail
+      reviewee
+      createdAt
       updatedOn
     }
   }
@@ -94,24 +334,60 @@ export const createSheet = /* GraphQL */ `
     createSheet(input: $input, condition: $condition) {
       id
       year
+      grade
       careerPlan
       careerPlanComment
+      reviewComment
+      reviewDate
+      selfCheckDate
+      firstComment
+      firstCheckDate
+      secondCheckDate
       overAllEvaluation
-      firstComment {
-        id
-        comment
-        createdOn
-        updatedOn
-      }
-      secondComment {
-        id
-        comment
-        createdOn
-        updatedOn
-      }
-      createdOn
+      companyId
+      reviewee
+      createdAt
       updatedOn
-      owner
+      company {
+        id
+        name
+        shortName
+        url
+        createdAt
+        updatedAt
+      }
+      group {
+        id
+        name
+        createdOn
+        updatedOn
+        company {
+          id
+          name
+          shortName
+          url
+          createdAt
+          updatedAt
+        }
+        group {
+          id
+          name
+          createdOn
+          updatedOn
+        }
+      }
+      interviews {
+        items {
+          id
+          sheetId
+          interviewDate
+          detail
+          reviewee
+          createdAt
+          updatedOn
+        }
+        nextToken
+      }
     }
   }
 `;
@@ -123,24 +399,60 @@ export const updateSheet = /* GraphQL */ `
     updateSheet(input: $input, condition: $condition) {
       id
       year
+      grade
       careerPlan
       careerPlanComment
+      reviewComment
+      reviewDate
+      selfCheckDate
+      firstComment
+      firstCheckDate
+      secondCheckDate
       overAllEvaluation
-      firstComment {
-        id
-        comment
-        createdOn
-        updatedOn
-      }
-      secondComment {
-        id
-        comment
-        createdOn
-        updatedOn
-      }
-      createdOn
+      companyId
+      reviewee
+      createdAt
       updatedOn
-      owner
+      company {
+        id
+        name
+        shortName
+        url
+        createdAt
+        updatedAt
+      }
+      group {
+        id
+        name
+        createdOn
+        updatedOn
+        company {
+          id
+          name
+          shortName
+          url
+          createdAt
+          updatedAt
+        }
+        group {
+          id
+          name
+          createdOn
+          updatedOn
+        }
+      }
+      interviews {
+        items {
+          id
+          sheetId
+          interviewDate
+          detail
+          reviewee
+          createdAt
+          updatedOn
+        }
+        nextToken
+      }
     }
   }
 `;
@@ -152,24 +464,60 @@ export const deleteSheet = /* GraphQL */ `
     deleteSheet(input: $input, condition: $condition) {
       id
       year
+      grade
       careerPlan
       careerPlanComment
+      reviewComment
+      reviewDate
+      selfCheckDate
+      firstComment
+      firstCheckDate
+      secondCheckDate
       overAllEvaluation
-      firstComment {
-        id
-        comment
-        createdOn
-        updatedOn
-      }
-      secondComment {
-        id
-        comment
-        createdOn
-        updatedOn
-      }
-      createdOn
+      companyId
+      reviewee
+      createdAt
       updatedOn
-      owner
+      company {
+        id
+        name
+        shortName
+        url
+        createdAt
+        updatedAt
+      }
+      group {
+        id
+        name
+        createdOn
+        updatedOn
+        company {
+          id
+          name
+          shortName
+          url
+          createdAt
+          updatedAt
+        }
+        group {
+          id
+          name
+          createdOn
+          updatedOn
+        }
+      }
+      interviews {
+        items {
+          id
+          sheetId
+          interviewDate
+          detail
+          reviewee
+          createdAt
+          updatedOn
+        }
+        nextToken
+      }
     }
   }
 `;
@@ -180,21 +528,66 @@ export const createObjective = /* GraphQL */ `
   ) {
     createObjective(input: $input, condition: $condition) {
       id
+      status
+      content
+      result
+      priority
+      selfEvaluation
+      firstEvaluation
+      lastEvaluation
+      reviewee
+      createdAt
+      updatedOn
       category {
         id
-        code
+        no
         name
         createdOn
         updatedOn
+        company {
+          id
+          name
+          shortName
+          url
+          createdAt
+          updatedAt
+        }
       }
-      objective
-      result
-      status
-      selfEvaluation
-      lastEvaluation
-      createdOn
-      updatedOn
-      owner
+      sheet {
+        id
+        year
+        grade
+        careerPlan
+        careerPlanComment
+        reviewComment
+        reviewDate
+        selfCheckDate
+        firstComment
+        firstCheckDate
+        secondCheckDate
+        overAllEvaluation
+        companyId
+        reviewee
+        createdAt
+        updatedOn
+        company {
+          id
+          name
+          shortName
+          url
+          createdAt
+          updatedAt
+        }
+        group {
+          id
+          name
+          createdOn
+          updatedOn
+        }
+        interviews {
+          nextToken
+        }
+      }
     }
   }
 `;
@@ -205,21 +598,66 @@ export const updateObjective = /* GraphQL */ `
   ) {
     updateObjective(input: $input, condition: $condition) {
       id
+      status
+      content
+      result
+      priority
+      selfEvaluation
+      firstEvaluation
+      lastEvaluation
+      reviewee
+      createdAt
+      updatedOn
       category {
         id
-        code
+        no
         name
         createdOn
         updatedOn
+        company {
+          id
+          name
+          shortName
+          url
+          createdAt
+          updatedAt
+        }
       }
-      objective
-      result
-      status
-      selfEvaluation
-      lastEvaluation
-      createdOn
-      updatedOn
-      owner
+      sheet {
+        id
+        year
+        grade
+        careerPlan
+        careerPlanComment
+        reviewComment
+        reviewDate
+        selfCheckDate
+        firstComment
+        firstCheckDate
+        secondCheckDate
+        overAllEvaluation
+        companyId
+        reviewee
+        createdAt
+        updatedOn
+        company {
+          id
+          name
+          shortName
+          url
+          createdAt
+          updatedAt
+        }
+        group {
+          id
+          name
+          createdOn
+          updatedOn
+        }
+        interviews {
+          nextToken
+        }
+      }
     }
   }
 `;
@@ -230,60 +668,66 @@ export const deleteObjective = /* GraphQL */ `
   ) {
     deleteObjective(input: $input, condition: $condition) {
       id
+      status
+      content
+      result
+      priority
+      selfEvaluation
+      firstEvaluation
+      lastEvaluation
+      reviewee
+      createdAt
+      updatedOn
       category {
         id
-        code
+        no
         name
         createdOn
         updatedOn
+        company {
+          id
+          name
+          shortName
+          url
+          createdAt
+          updatedAt
+        }
       }
-      objective
-      result
-      status
-      selfEvaluation
-      lastEvaluation
-      createdOn
-      updatedOn
-      owner
-    }
-  }
-`;
-export const createComment = /* GraphQL */ `
-  mutation CreateComment(
-    $input: CreateCommentInput!
-    $condition: ModelCommentConditionInput
-  ) {
-    createComment(input: $input, condition: $condition) {
-      id
-      comment
-      createdOn
-      updatedOn
-    }
-  }
-`;
-export const updateComment = /* GraphQL */ `
-  mutation UpdateComment(
-    $input: UpdateCommentInput!
-    $condition: ModelCommentConditionInput
-  ) {
-    updateComment(input: $input, condition: $condition) {
-      id
-      comment
-      createdOn
-      updatedOn
-    }
-  }
-`;
-export const deleteComment = /* GraphQL */ `
-  mutation DeleteComment(
-    $input: DeleteCommentInput!
-    $condition: ModelCommentConditionInput
-  ) {
-    deleteComment(input: $input, condition: $condition) {
-      id
-      comment
-      createdOn
-      updatedOn
+      sheet {
+        id
+        year
+        grade
+        careerPlan
+        careerPlanComment
+        reviewComment
+        reviewDate
+        selfCheckDate
+        firstComment
+        firstCheckDate
+        secondCheckDate
+        overAllEvaluation
+        companyId
+        reviewee
+        createdAt
+        updatedOn
+        company {
+          id
+          name
+          shortName
+          url
+          createdAt
+          updatedAt
+        }
+        group {
+          id
+          name
+          createdOn
+          updatedOn
+        }
+        interviews {
+          nextToken
+        }
+      }
     }
   }
 `;

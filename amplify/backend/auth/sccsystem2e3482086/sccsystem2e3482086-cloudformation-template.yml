@@ -146,9 +146,16 @@ Resources:
           Required: true
           Mutable: true
         
-      
-      
-      
+        -
+          Name: companyId
+          Mutable: true
+          AttributeDataType: String
+
+        -
+          Name: grade
+          Mutable: true
+          AttributeDataType: Number
+
       AutoVerifiedAttributes: !Ref autoVerifiedAttributes
       
       
