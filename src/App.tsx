@@ -4,11 +4,13 @@ import RevieweeSheetShow from "./reviewee/sheet/index"
 
 function App() {
   return (
-    <BrowserRouter>
-      <Switch>
-        <Route exact path="/reviewee/sheet/:sheetId" component={RevieweeSheetShow} />
-      </Switch>
-    </BrowserRouter>
+    <div>
+      <BrowserRouter>
+        <Switch>
+          <Route exact path="/reviewee/sheet/:sheetId" component={RevieweeSheetShow} />
+        </Switch>
+      </BrowserRouter>
+    </div>
   );
 }
 
