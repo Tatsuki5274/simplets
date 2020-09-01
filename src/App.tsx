@@ -1,6 +1,6 @@
 import React from 'react';
 import {BrowserRouter, Route, Switch } from "react-router-dom";
-import RevieweeSheetShow from "./reviewee/sheet/index"
+import RevieweeSheetShow from "reviewee/sheet/index"
 
 function App() {
   return (
