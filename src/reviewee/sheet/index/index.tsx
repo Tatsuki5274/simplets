@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Container, Row, Col, Table, Button, Modal } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { Link } from 'react-router-dom';
 //import {BrowserRouter, Route, Link, Switch } from "react-router-dom";
 
 function RevieweeSheetShow() {
@@ -64,7 +65,11 @@ function RevieweeSheetShow() {
                 <Container>
                     <h2>メイン</h2>
                     <h3>目標一覧</h3>
-                    <Button variant="info">目標追加</Button>
+                    <Link to="/reviewee/sheet/new">
+                        <Button variant="info">
+                            目標追加
+                        </Button>
+                    </Link>
 
                     {/* 繰り返しコンポーネント */}
                     <h4>ビジネス成果目標</h4>
