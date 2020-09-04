@@ -1,9 +1,17 @@
+//React
 import React from 'react';
 import {BrowserRouter, Route, Switch, Link } from "react-router-dom";
+//Amplify
+import { withAuthenticator, AmplifySignOut, AmplifyAuthenticator } from '@aws-amplify/ui-react';
+import Amplify, { Auth } from 'aws-amplify';
+import awsconfig from './aws-exports';
+
+//カスタムコンポーネント
 import RevieweeSheetShow from "reviewee/sheet/index/index"
 import RevieweeSheetNew from "reviewee/sheet/new/index"
 import ListPerformanceEvalution from 'reviewee/list/performance';
 import ProgressReferenceList from 'reviewer/list/progress';
+Amplify.configure(awsconfig);
 
 
 
@@ -35,4 +43,4 @@ function App() {
   );
 }
 
-export default App;
+export default withAuthenticator(App);
