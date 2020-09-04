@@ -2,7 +2,7 @@ type ApprovalStatus #承認ステータス
 @model
 @auth(
   rules: [
-    {allow: groups, groups: ["Admin"]}
+    {allow: groups, groups: ["Root"]}
     {allow: private, operations: [read]}
     {allow: private, provider: iam, operations:[read]}
   ]
@@ -17,9 +17,9 @@ type Company #会社
 @model
 @auth(
   rules: [
-    {allow: groups, groups: ["Admin"]}
+    {allow: groups, groups: ["Root"]}
     {allow: private, operations: [read]}
-    {allow: private, provider: iam, operations:[read]}
+    {allow: private, provider: iam}
   ]
 )
 {
@@ -29,11 +29,27 @@ type Company #会社
   url: AWSURL
 }
 
+# ユーザーはcognitoで管理しています。
+# このEmployeeは名簿として機能します。認証とは関係がありません。
+type Employee #社員
+@model
+{
+  id: ID!
+  no: String #社員番号
+  firstName: String!
+  lastName: String!
+  grade: Int! #等級
+  superior: Employee @connection  #所属長ID
+
+  companyId: ID!
+  company: Company @connection(fields: ["companyId"])
+}
+
 type Group #部門
 @model(timestamps:{createdAt: "createdOn", updatedAt: "updatedOn"})
 @auth(
   rules: [
-    {allow: groups, groups: ["Admin"]}
+    {allow: groups, groups: ["Root"]}
     {allow: private, operations: [read]}
     {allow: private, provider: iam, operations:[read]}
   ]
@@ -49,7 +65,7 @@ type Category
 @model(timestamps:{createdAt: "createdOn", updatedAt: "updatedOn"})
 @auth(
   rules: [
-    {allow: groups, groups: ["Admin"]}
+    {allow: groups, groups: ["Root"]}
     {allow: private, operations: [read]}
     {allow: private, provider: iam, operations:[read]}
   ]
@@ -66,7 +82,7 @@ type Interview
 @key(name: "bySheet", fields: ["sheetId"])
 @auth(
   rules: [
-    { allow: groups, groups: ["Admin"]}
+    { allow: groups, groups: ["Root"]}
     { allow: owner, ownerField: "reviewee", operations: [read] }
     {allow: private, provider: iam, operations:[read]}
   ]
@@ -86,7 +102,7 @@ type Sheet
 @auth(
   rules: [
     {allow: owner, ownerField: "reviewee", operations: [read] }
-    {allow: groups, groups: ["Admin"]}
+    {allow: groups, groups: ["Root"]}
     {allow: private, provider: iam}
   ]
 )
@@ -109,7 +125,7 @@ type Sheet
   companyId: ID!
   company: Company @connection(fields: ["companyId"])
 
-  reviewee: String #社員ID(被評価者)
+  reviewee: String #被評価者　オーナーフィールド
 }
 
 type Objective
@@ -117,7 +133,7 @@ type Objective
 @auth(
   rules: [
     {allow: owner, ownerField: "reviewee" }
-    {allow: groups, groups: ["Admin"]}
+    {allow: groups, groups: ["Root"]}
     # {allow: groups, groups: ["Manager"], operations: [read]}
     {allow: private, provider: iam}
   ]
@@ -138,11 +154,11 @@ type Objective
   reviewee: String #社員ID(被評価者)
 }
 
-type Query {
-  #listSheetsLtGrade: String @function(name: "listSheetsLtGrade-${env}")
-  listSheetsLtGrade: [Sheet] @function(name: "listSheetsLtGrade-${env}")
-    @auth(rules:[
-      {allow: groups, groups: ["Admin", "Manager"]}
-      {allow: private, operations: []}
-    ])
-}
+# type Query {
+#   #listSheetsLtGrade: String @function(name: "listSheetsLtGrade-${env}")
+#   listSheetsLtGrade: [Sheet] @function(name: "listSheetsLtGrade-${env}")
+#     @auth(rules:[
+#       {allow: groups, groups: ["Root", "Manager"]}
+#       {allow: private, operations: []}
+#     ])
+# }
