@@ -11,6 +11,7 @@ import RevieweeSheetShow from "reviewee/sheet/index/index"
 import RevieweeSheetNew from "reviewee/sheet/new/index"
 import ListPerformanceEvalution from 'reviewee/list/performance';
 import ProgressReferenceList from 'reviewer/list/progress';
+import EvalutionScreen from "reviewer/sheet/detail";
 Amplify.configure(awsconfig);
 
 
@@ -22,7 +23,8 @@ function Portal(){
       <Link to='/reviewee/sheet/1'>目標設定画面</Link><br />
       <Link to='/reviewee/sheet/new'>目標追加</Link><br />
       <Link to='/reviewee/list'>業績評価一覧</Link><br />
-      <Link to='/reviewer/list'>進捗参照一覧</Link>
+      <Link to='/reviewer/list'>進捗参照一覧</Link><br />
+      <Link to='/reviewer/sheet'>評価画面</Link>
     </div>
   );
 }
@@ -37,6 +39,7 @@ function App() {
           <Route exact path="/reviewee/sheet/:sheetId" component={RevieweeSheetShow} />
           <Route exact path="/reviewee/list" component={ListPerformanceEvalution} />
           <Route exact path="/reviewer/list" component={ProgressReferenceList} />
+          <Route exact path="/reviewer/sheet" component={EvalutionScreen} />
         </Switch>
       </BrowserRouter>
     </div>
