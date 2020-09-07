@@ -1,26 +1,13 @@
 {
   "AWSTemplateFormatVersion": "2010-09-09",
-  "Description": "Lambda Function resource stack creation using Amplify CLI",
+  "Description": "Lambda resource stack creation using Amplify CLI",
   "Parameters": {
-    "CloudWatchRule": {
-      "Type": "String",
-      "Default": "NONE",
-      "Description": " Schedule Expression"
-    },
     "env": {
       "Type": "String"
     },
     "authsccsystem2e3482086UserPoolId": {
       "Type": "String",
       "Default": "authsccsystem2e3482086UserPoolId"
-    },
-    "apisccgqlGraphQLAPIIdOutput": {
-      "Type": "String",
-      "Default": "apisccgqlGraphQLAPIIdOutput"
-    },
-    "apisccgqlGraphQLAPIEndpointOutput": {
-      "Type": "String",
-      "Default": "apisccgqlGraphQLAPIEndpointOutput"
     }
   },
   "Conditions": {
@@ -45,12 +32,12 @@
         "FunctionName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "listSheetsLtGrade",
+            "AdminQueries875203c0",
             {
               "Fn::Join": [
                 "",
                 [
-                  "listSheetsLtGrade",
+                  "AdminQueries875203c0",
                   "-",
                   {
                     "Ref": "env"
@@ -65,17 +52,9 @@
             "ENV": {
               "Ref": "env"
             },
-            "REGION": {
-              "Ref": "AWS::Region"
-            },
-            "AUTH_SCCSYSTEM2E3482086_USERPOOLID": {
+            "GROUP": "Admin",
+            "USERPOOL": {
               "Ref": "authsccsystem2e3482086UserPoolId"
-            },
-            "API_SCCGQL_GRAPHQLAPIIDOUTPUT": {
-              "Ref": "apisccgqlGraphQLAPIIdOutput"
-            },
-            "API_SCCGQL_GRAPHQLAPIENDPOINTOUTPUT": {
-              "Ref": "apisccgqlGraphQLAPIEndpointOutput"
             }
           }
         },
@@ -85,12 +64,11 @@
             "Arn"
           ]
         },
-        "Runtime": "nodejs12.x",
-        "Layers": [],
+        "Runtime": "nodejs10.x",
         "Timeout": "25",
         "Code": {
           "S3Bucket": "amplify-sccsystem2-dev-180107-deployment",
-          "S3Key": "amplify-builds/listSheetsLtGrade-614f6469557a536a3350-build.zip"
+          "S3Key": "amplify-builds/AdminQueries875203c0-3558324f5055754b7842-build.zip"
         }
       }
     },
@@ -100,12 +78,12 @@
         "RoleName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "sccsystem2LambdaRole1aa6f18a",
+            "AdminQueries875203c0LambdaRole",
             {
               "Fn::Join": [
                 "",
                 [
-                  "sccsystem2LambdaRole1aa6f18a",
+                  "AdminQueries875203c0LambdaRole",
                   "-",
                   {
                     "Ref": "env"
@@ -171,97 +149,40 @@
                   }
                 ]
               }
-            }
-          ]
-        }
-      }
-    },
-    "AmplifyResourcesPolicy": {
-      "DependsOn": [
-        "LambdaExecutionRole"
-      ],
-      "Type": "AWS::IAM::Policy",
-      "Properties": {
-        "PolicyName": "amplify-lambda-execution-policy",
-        "Roles": [
-          {
-            "Ref": "LambdaExecutionRole"
-          }
-        ],
-        "PolicyDocument": {
-          "Version": "2012-10-17",
-          "Statement": [
-            {
-              "Effect": "Allow",
-              "Action": [
-                "cognito-identity:Describe*",
-                "cognito-identity:Get*",
-                "cognito-identity:List*",
-                "cognito-idp:Describe*",
-                "cognito-idp:AdminGetDevice",
-                "cognito-idp:AdminGetUser",
-                "cognito-idp:AdminList*",
-                "cognito-idp:List*",
-                "cognito-sync:Describe*",
-                "cognito-sync:Get*",
-                "cognito-sync:List*",
-                "iam:ListOpenIdConnectProviders",
-                "iam:ListRoles",
-                "sns:ListPlatformApplications"
-              ],
-              "Resource": [
-                {
-                  "Fn::Join": [
-                    "",
-                    [
-                      "arn:aws:cognito-idp:",
-                      {
-                        "Ref": "AWS::Region"
-                      },
-                      ":",
-                      {
-                        "Ref": "AWS::AccountId"
-                      },
-                      ":userpool/",
-                      {
-                        "Ref": "authsccsystem2e3482086UserPoolId"
-                      }
-                    ]
-                  ]
-                }
-              ]
             },
             {
               "Effect": "Allow",
               "Action": [
-                "appsync:Create*",
-                "appsync:StartSchemaCreation",
-                "appsync:GraphQL",
-                "appsync:Get*",
-                "appsync:List*"
+                "cognito-idp:ListUsersInGroup",
+                "cognito-idp:AdminUserGlobalSignOut",
+                "cognito-idp:AdminEnableUser",
+                "cognito-idp:AdminDisableUser",
+                "cognito-idp:AdminRemoveUserFromGroup",
+                "cognito-idp:AdminAddUserToGroup",
+                "cognito-idp:AdminListGroupsForUser",
+                "cognito-idp:AdminGetUser",
+                "cognito-idp:AdminConfirmSignUp",
+                "cognito-idp:ListUsers"
               ],
-              "Resource": [
-                {
-                  "Fn::Join": [
-                    "",
-                    [
-                      "arn:aws:appsync:",
-                      {
-                        "Ref": "AWS::Region"
-                      },
-                      ":",
-                      {
-                        "Ref": "AWS::AccountId"
-                      },
-                      ":apis/",
-                      {
-                        "Ref": "apisccgqlGraphQLAPIIdOutput"
-                      },
-                      "/*"
-                    ]
+              "Resource": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:aws:cognito-idp:",
+                    {
+                      "Ref": "AWS::Region"
+                    },
+                    ":",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":userpool/",
+                    {
+                      "Ref": "authsccsystem2e3482086UserPoolId"
+                    }
                   ]
-                }
-              ]
+                ]
+              }
             }
           ]
         }

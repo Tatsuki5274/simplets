@@ -44,48 +44,162 @@ export const deleteApprovalStatus = /* GraphQL */ `
     }
   }
 `;
-export const createCompany = /* GraphQL */ `
-  mutation CreateCompany(
-    $input: CreateCompanyInput!
-    $condition: ModelCompanyConditionInput
+export const createEmployee = /* GraphQL */ `
+  mutation CreateEmployee(
+    $input: CreateEmployeeInput!
+    $condition: ModelEmployeeConditionInput
   ) {
-    createCompany(input: $input, condition: $condition) {
+    createEmployee(input: $input, condition: $condition) {
       id
-      name
-      shortName
-      url
+      no
+      firstName
+      lastName
+      grade
+      superior {
+        id
+        no
+        firstName
+        lastName
+        grade
+        superior {
+          id
+          no
+          firstName
+          lastName
+          grade
+          companyId
+          createdAt
+          updatedAt
+        }
+        companyId
+        createdAt
+        updatedAt
+        company {
+          id
+          name
+          shortName
+          url
+          createdAt
+          updatedAt
+        }
+      }
+      companyId
       createdAt
       updatedAt
+      company {
+        id
+        name
+        shortName
+        url
+        createdAt
+        updatedAt
+      }
     }
   }
 `;
-export const updateCompany = /* GraphQL */ `
-  mutation UpdateCompany(
-    $input: UpdateCompanyInput!
-    $condition: ModelCompanyConditionInput
+export const updateEmployee = /* GraphQL */ `
+  mutation UpdateEmployee(
+    $input: UpdateEmployeeInput!
+    $condition: ModelEmployeeConditionInput
   ) {
-    updateCompany(input: $input, condition: $condition) {
+    updateEmployee(input: $input, condition: $condition) {
       id
-      name
-      shortName
-      url
+      no
+      firstName
+      lastName
+      grade
+      superior {
+        id
+        no
+        firstName
+        lastName
+        grade
+        superior {
+          id
+          no
+          firstName
+          lastName
+          grade
+          companyId
+          createdAt
+          updatedAt
+        }
+        companyId
+        createdAt
+        updatedAt
+        company {
+          id
+          name
+          shortName
+          url
+          createdAt
+          updatedAt
+        }
+      }
+      companyId
       createdAt
       updatedAt
+      company {
+        id
+        name
+        shortName
+        url
+        createdAt
+        updatedAt
+      }
     }
   }
 `;
-export const deleteCompany = /* GraphQL */ `
-  mutation DeleteCompany(
-    $input: DeleteCompanyInput!
-    $condition: ModelCompanyConditionInput
+export const deleteEmployee = /* GraphQL */ `
+  mutation DeleteEmployee(
+    $input: DeleteEmployeeInput!
+    $condition: ModelEmployeeConditionInput
   ) {
-    deleteCompany(input: $input, condition: $condition) {
+    deleteEmployee(input: $input, condition: $condition) {
       id
-      name
-      shortName
-      url
+      no
+      firstName
+      lastName
+      grade
+      superior {
+        id
+        no
+        firstName
+        lastName
+        grade
+        superior {
+          id
+          no
+          firstName
+          lastName
+          grade
+          companyId
+          createdAt
+          updatedAt
+        }
+        companyId
+        createdAt
+        updatedAt
+        company {
+          id
+          name
+          shortName
+          url
+          createdAt
+          updatedAt
+        }
+      }
+      companyId
       createdAt
       updatedAt
+      company {
+        id
+        name
+        shortName
+        url
+        createdAt
+        updatedAt
+      }
     }
   }
 `;
@@ -323,6 +437,51 @@ export const deleteInterview = /* GraphQL */ `
       reviewee
       createdAt
       updatedOn
+    }
+  }
+`;
+export const createCompany = /* GraphQL */ `
+  mutation CreateCompany(
+    $input: CreateCompanyInput!
+    $condition: ModelCompanyConditionInput
+  ) {
+    createCompany(input: $input, condition: $condition) {
+      id
+      name
+      shortName
+      url
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateCompany = /* GraphQL */ `
+  mutation UpdateCompany(
+    $input: UpdateCompanyInput!
+    $condition: ModelCompanyConditionInput
+  ) {
+    updateCompany(input: $input, condition: $condition) {
+      id
+      name
+      shortName
+      url
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteCompany = /* GraphQL */ `
+  mutation DeleteCompany(
+    $input: DeleteCompanyInput!
+    $condition: ModelCompanyConditionInput
+  ) {
+    deleteCompany(input: $input, condition: $condition) {
+      id
+      name
+      shortName
+      url
+      createdAt
+      updatedAt
     }
   }
 `;

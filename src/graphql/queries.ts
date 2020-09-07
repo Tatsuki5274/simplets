@@ -2,38 +2,33 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const listSheetsLtGrade = /* GraphQL */ `
-  query ListSheetsLtGrade {
-    listSheetsLtGrade {
+export const getEmployee = /* GraphQL */ `
+  query GetEmployee($id: ID!) {
+    getEmployee(id: $id) {
       id
-      year
+      no
+      firstName
+      lastName
       grade
-      careerPlan
-      careerPlanComment
-      reviewComment
-      reviewDate
-      selfCheckDate
-      firstComment
-      firstCheckDate
-      secondCheckDate
-      overAllEvaluation
-      companyId
-      reviewee
-      createdAt
-      updatedOn
-      company {
+      superior {
         id
-        name
-        shortName
-        url
+        no
+        firstName
+        lastName
+        grade
+        superior {
+          id
+          no
+          firstName
+          lastName
+          grade
+          companyId
+          createdAt
+          updatedAt
+        }
+        companyId
         createdAt
         updatedAt
-      }
-      group {
-        id
-        name
-        createdOn
-        updatedOn
         company {
           id
           name
@@ -42,25 +37,57 @@ export const listSheetsLtGrade = /* GraphQL */ `
           createdAt
           updatedAt
         }
-        group {
+      }
+      companyId
+      createdAt
+      updatedAt
+      company {
+        id
+        name
+        shortName
+        url
+        createdAt
+        updatedAt
+      }
+    }
+  }
+`;
+export const listEmployees = /* GraphQL */ `
+  query ListEmployees(
+    $filter: ModelEmployeeFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listEmployees(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        no
+        firstName
+        lastName
+        grade
+        superior {
+          id
+          no
+          firstName
+          lastName
+          grade
+          companyId
+          createdAt
+          updatedAt
+        }
+        companyId
+        createdAt
+        updatedAt
+        company {
           id
           name
-          createdOn
-          updatedOn
-        }
-      }
-      interviews {
-        items {
-          id
-          sheetId
-          interviewDate
-          detail
-          reviewee
+          shortName
+          url
           createdAt
-          updatedOn
+          updatedAt
         }
-        nextToken
       }
+      nextToken
     }
   }
 `;
