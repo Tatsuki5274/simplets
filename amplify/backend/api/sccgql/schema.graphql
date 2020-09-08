@@ -99,13 +99,13 @@ type Interview
 type Sheet
 @model(timestamps:{updatedAt: "updatedOn"})
 #@key(fields: ["year", "reviewee", "companyId", "grade"])
-@auth(
-  rules: [
-    {allow: owner, ownerField: "reviewee", operations: [read] }
-    {allow: groups, groups: ["Root"]}
-    {allow: private, provider: iam}
-  ]
-)
+# @auth(
+#   rules: [
+#     {allow: owner, ownerField: "reviewee", operations: [read] }
+#     {allow: groups, groups: ["Root"]}
+#     {allow: private, provider: iam}
+#   ]
+# )
 {
   id: ID!
   year: Int!  #実施年度
@@ -122,8 +122,10 @@ type Sheet
 
   group: Group @connection
   interviews: [Interview] @connection(keyName: "bySheet", fields: ["id"])
-  companyId: ID!
-  company: Company @connection(fields: ["companyId"])
+  sheetCompanyId: ID!
+  company: Company @connection(fields: ["sheetCompanyId"])
+  secondEmployee: Employee @connection  #所属長
+  status: ApprovalStatus @connection    #承認ステータス
 
   reviewee: String #被評価者　オーナーフィールド
 }

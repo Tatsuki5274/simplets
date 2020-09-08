@@ -78,54 +78,30 @@ export type DeleteApprovalStatusInput = {
   id?: string | null,
 };
 
-export type CreateEmployeeInput = {
+export type CreateCompanyInput = {
   id?: string | null,
-  no?: string | null,
-  firstName: string,
-  lastName: string,
-  grade: number,
-  companyId: string,
-  employeeSuperiorId?: string | null,
+  name: string,
+  shortName?: string | null,
+  url?: string | null,
 };
 
-export type ModelEmployeeConditionInput = {
-  no?: ModelStringInput | null,
-  firstName?: ModelStringInput | null,
-  lastName?: ModelStringInput | null,
-  grade?: ModelIntInput | null,
-  companyId?: ModelIDInput | null,
-  and?: Array< ModelEmployeeConditionInput | null > | null,
-  or?: Array< ModelEmployeeConditionInput | null > | null,
-  not?: ModelEmployeeConditionInput | null,
+export type ModelCompanyConditionInput = {
+  name?: ModelStringInput | null,
+  shortName?: ModelStringInput | null,
+  url?: ModelStringInput | null,
+  and?: Array< ModelCompanyConditionInput | null > | null,
+  or?: Array< ModelCompanyConditionInput | null > | null,
+  not?: ModelCompanyConditionInput | null,
 };
 
-export type ModelIDInput = {
-  ne?: string | null,
-  eq?: string | null,
-  le?: string | null,
-  lt?: string | null,
-  ge?: string | null,
-  gt?: string | null,
-  contains?: string | null,
-  notContains?: string | null,
-  between?: Array< string | null > | null,
-  beginsWith?: string | null,
-  attributeExists?: boolean | null,
-  attributeType?: ModelAttributeTypes | null,
-  size?: ModelSizeInput | null,
-};
-
-export type UpdateEmployeeInput = {
+export type UpdateCompanyInput = {
   id: string,
-  no?: string | null,
-  firstName?: string | null,
-  lastName?: string | null,
-  grade?: number | null,
-  companyId?: string | null,
-  employeeSuperiorId?: string | null,
+  name?: string | null,
+  shortName?: string | null,
+  url?: string | null,
 };
 
-export type DeleteEmployeeInput = {
+export type DeleteCompanyInput = {
   id?: string | null,
 };
 
@@ -197,6 +173,22 @@ export type ModelInterviewConditionInput = {
   not?: ModelInterviewConditionInput | null,
 };
 
+export type ModelIDInput = {
+  ne?: string | null,
+  eq?: string | null,
+  le?: string | null,
+  lt?: string | null,
+  ge?: string | null,
+  gt?: string | null,
+  contains?: string | null,
+  notContains?: string | null,
+  between?: Array< string | null > | null,
+  beginsWith?: string | null,
+  attributeExists?: boolean | null,
+  attributeType?: ModelAttributeTypes | null,
+  size?: ModelSizeInput | null,
+};
+
 export type UpdateInterviewInput = {
   id: string,
   sheetId?: string | null,
@@ -206,33 +198,6 @@ export type UpdateInterviewInput = {
 };
 
 export type DeleteInterviewInput = {
-  id?: string | null,
-};
-
-export type CreateCompanyInput = {
-  id?: string | null,
-  name: string,
-  shortName?: string | null,
-  url?: string | null,
-};
-
-export type ModelCompanyConditionInput = {
-  name?: ModelStringInput | null,
-  shortName?: ModelStringInput | null,
-  url?: ModelStringInput | null,
-  and?: Array< ModelCompanyConditionInput | null > | null,
-  or?: Array< ModelCompanyConditionInput | null > | null,
-  not?: ModelCompanyConditionInput | null,
-};
-
-export type UpdateCompanyInput = {
-  id: string,
-  name?: string | null,
-  shortName?: string | null,
-  url?: string | null,
-};
-
-export type DeleteCompanyInput = {
   id?: string | null,
 };
 
@@ -337,18 +302,6 @@ export type UpdateObjectiveInput = {
 
 export type DeleteObjectiveInput = {
   id?: string | null,
-};
-
-export type ModelEmployeeFilterInput = {
-  id?: ModelIDInput | null,
-  no?: ModelStringInput | null,
-  firstName?: ModelStringInput | null,
-  lastName?: ModelStringInput | null,
-  grade?: ModelIntInput | null,
-  companyId?: ModelIDInput | null,
-  and?: Array< ModelEmployeeFilterInput | null > | null,
-  or?: Array< ModelEmployeeFilterInput | null > | null,
-  not?: ModelEmployeeFilterInput | null,
 };
 
 export type ModelApprovalStatusFilterInput = {
@@ -481,180 +434,54 @@ export type DeleteApprovalStatusMutation = {
   } | null,
 };
 
-export type CreateEmployeeMutationVariables = {
-  input: CreateEmployeeInput,
-  condition?: ModelEmployeeConditionInput | null,
+export type CreateCompanyMutationVariables = {
+  input: CreateCompanyInput,
+  condition?: ModelCompanyConditionInput | null,
 };
 
-export type CreateEmployeeMutation = {
-  createEmployee:  {
-    __typename: "Employee",
+export type CreateCompanyMutation = {
+  createCompany:  {
+    __typename: "Company",
     id: string,
-    no: string | null,
-    firstName: string,
-    lastName: string,
-    grade: number,
-    superior:  {
-      __typename: "Employee",
-      id: string,
-      no: string | null,
-      firstName: string,
-      lastName: string,
-      grade: number,
-      superior:  {
-        __typename: "Employee",
-        id: string,
-        no: string | null,
-        firstName: string,
-        lastName: string,
-        grade: number,
-        companyId: string,
-        createdAt: string,
-        updatedAt: string,
-      } | null,
-      companyId: string,
-      createdAt: string,
-      updatedAt: string,
-      company:  {
-        __typename: "Company",
-        id: string,
-        name: string,
-        shortName: string | null,
-        url: string | null,
-        createdAt: string,
-        updatedAt: string,
-      } | null,
-    } | null,
-    companyId: string,
+    name: string,
+    shortName: string | null,
+    url: string | null,
     createdAt: string,
     updatedAt: string,
-    company:  {
-      __typename: "Company",
-      id: string,
-      name: string,
-      shortName: string | null,
-      url: string | null,
-      createdAt: string,
-      updatedAt: string,
-    } | null,
   } | null,
 };
 
-export type UpdateEmployeeMutationVariables = {
-  input: UpdateEmployeeInput,
-  condition?: ModelEmployeeConditionInput | null,
+export type UpdateCompanyMutationVariables = {
+  input: UpdateCompanyInput,
+  condition?: ModelCompanyConditionInput | null,
 };
 
-export type UpdateEmployeeMutation = {
-  updateEmployee:  {
-    __typename: "Employee",
+export type UpdateCompanyMutation = {
+  updateCompany:  {
+    __typename: "Company",
     id: string,
-    no: string | null,
-    firstName: string,
-    lastName: string,
-    grade: number,
-    superior:  {
-      __typename: "Employee",
-      id: string,
-      no: string | null,
-      firstName: string,
-      lastName: string,
-      grade: number,
-      superior:  {
-        __typename: "Employee",
-        id: string,
-        no: string | null,
-        firstName: string,
-        lastName: string,
-        grade: number,
-        companyId: string,
-        createdAt: string,
-        updatedAt: string,
-      } | null,
-      companyId: string,
-      createdAt: string,
-      updatedAt: string,
-      company:  {
-        __typename: "Company",
-        id: string,
-        name: string,
-        shortName: string | null,
-        url: string | null,
-        createdAt: string,
-        updatedAt: string,
-      } | null,
-    } | null,
-    companyId: string,
+    name: string,
+    shortName: string | null,
+    url: string | null,
     createdAt: string,
     updatedAt: string,
-    company:  {
-      __typename: "Company",
-      id: string,
-      name: string,
-      shortName: string | null,
-      url: string | null,
-      createdAt: string,
-      updatedAt: string,
-    } | null,
   } | null,
 };
 
-export type DeleteEmployeeMutationVariables = {
-  input: DeleteEmployeeInput,
-  condition?: ModelEmployeeConditionInput | null,
+export type DeleteCompanyMutationVariables = {
+  input: DeleteCompanyInput,
+  condition?: ModelCompanyConditionInput | null,
 };
 
-export type DeleteEmployeeMutation = {
-  deleteEmployee:  {
-    __typename: "Employee",
+export type DeleteCompanyMutation = {
+  deleteCompany:  {
+    __typename: "Company",
     id: string,
-    no: string | null,
-    firstName: string,
-    lastName: string,
-    grade: number,
-    superior:  {
-      __typename: "Employee",
-      id: string,
-      no: string | null,
-      firstName: string,
-      lastName: string,
-      grade: number,
-      superior:  {
-        __typename: "Employee",
-        id: string,
-        no: string | null,
-        firstName: string,
-        lastName: string,
-        grade: number,
-        companyId: string,
-        createdAt: string,
-        updatedAt: string,
-      } | null,
-      companyId: string,
-      createdAt: string,
-      updatedAt: string,
-      company:  {
-        __typename: "Company",
-        id: string,
-        name: string,
-        shortName: string | null,
-        url: string | null,
-        createdAt: string,
-        updatedAt: string,
-      } | null,
-    } | null,
-    companyId: string,
+    name: string,
+    shortName: string | null,
+    url: string | null,
     createdAt: string,
     updatedAt: string,
-    company:  {
-      __typename: "Company",
-      id: string,
-      name: string,
-      shortName: string | null,
-      url: string | null,
-      createdAt: string,
-      updatedAt: string,
-    } | null,
   } | null,
 };
 
@@ -925,57 +752,6 @@ export type DeleteInterviewMutation = {
     reviewee: string | null,
     createdAt: string,
     updatedOn: string,
-  } | null,
-};
-
-export type CreateCompanyMutationVariables = {
-  input: CreateCompanyInput,
-  condition?: ModelCompanyConditionInput | null,
-};
-
-export type CreateCompanyMutation = {
-  createCompany:  {
-    __typename: "Company",
-    id: string,
-    name: string,
-    shortName: string | null,
-    url: string | null,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
-};
-
-export type UpdateCompanyMutationVariables = {
-  input: UpdateCompanyInput,
-  condition?: ModelCompanyConditionInput | null,
-};
-
-export type UpdateCompanyMutation = {
-  updateCompany:  {
-    __typename: "Company",
-    id: string,
-    name: string,
-    shortName: string | null,
-    url: string | null,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
-};
-
-export type DeleteCompanyMutationVariables = {
-  input: DeleteCompanyInput,
-  condition?: ModelCompanyConditionInput | null,
-};
-
-export type DeleteCompanyMutation = {
-  deleteCompany:  {
-    __typename: "Company",
-    id: string,
-    name: string,
-    shortName: string | null,
-    url: string | null,
-    createdAt: string,
-    updatedAt: string,
   } | null,
 };
 
@@ -1432,52 +1208,25 @@ export type DeleteObjectiveMutation = {
   } | null,
 };
 
-export type GetEmployeeQueryVariables = {
-  id: string,
-};
-
-export type GetEmployeeQuery = {
-  getEmployee:  {
-    __typename: "Employee",
+export type ListSheetsLtGradeQuery = {
+  listSheetsLtGrade:  Array< {
+    __typename: "Sheet",
     id: string,
-    no: string | null,
-    firstName: string,
-    lastName: string,
+    year: number,
     grade: number,
-    superior:  {
-      __typename: "Employee",
-      id: string,
-      no: string | null,
-      firstName: string,
-      lastName: string,
-      grade: number,
-      superior:  {
-        __typename: "Employee",
-        id: string,
-        no: string | null,
-        firstName: string,
-        lastName: string,
-        grade: number,
-        companyId: string,
-        createdAt: string,
-        updatedAt: string,
-      } | null,
-      companyId: string,
-      createdAt: string,
-      updatedAt: string,
-      company:  {
-        __typename: "Company",
-        id: string,
-        name: string,
-        shortName: string | null,
-        url: string | null,
-        createdAt: string,
-        updatedAt: string,
-      } | null,
-    } | null,
+    careerPlan: string | null,
+    careerPlanComment: string | null,
+    reviewComment: string | null,
+    reviewDate: string | null,
+    selfCheckDate: string | null,
+    firstComment: string | null,
+    firstCheckDate: string | null,
+    secondCheckDate: string | null,
+    overAllEvaluation: number | null,
     companyId: string,
+    reviewee: string | null,
     createdAt: string,
-    updatedAt: string,
+    updatedOn: string,
     company:  {
       __typename: "Company",
       id: string,
@@ -1487,39 +1236,12 @@ export type GetEmployeeQuery = {
       createdAt: string,
       updatedAt: string,
     } | null,
-  } | null,
-};
-
-export type ListEmployeesQueryVariables = {
-  filter?: ModelEmployeeFilterInput | null,
-  limit?: number | null,
-  nextToken?: string | null,
-};
-
-export type ListEmployeesQuery = {
-  listEmployees:  {
-    __typename: "ModelEmployeeConnection",
-    items:  Array< {
-      __typename: "Employee",
+    group:  {
+      __typename: "Group",
       id: string,
-      no: string | null,
-      firstName: string,
-      lastName: string,
-      grade: number,
-      superior:  {
-        __typename: "Employee",
-        id: string,
-        no: string | null,
-        firstName: string,
-        lastName: string,
-        grade: number,
-        companyId: string,
-        createdAt: string,
-        updatedAt: string,
-      } | null,
-      companyId: string,
-      createdAt: string,
-      updatedAt: string,
+      name: string,
+      createdOn: string,
+      updatedOn: string,
       company:  {
         __typename: "Company",
         id: string,
@@ -1529,9 +1251,29 @@ export type ListEmployeesQuery = {
         createdAt: string,
         updatedAt: string,
       } | null,
-    } | null > | null,
-    nextToken: string | null,
-  } | null,
+      group:  {
+        __typename: "Group",
+        id: string,
+        name: string,
+        createdOn: string,
+        updatedOn: string,
+      } | null,
+    } | null,
+    interviews:  {
+      __typename: "ModelInterviewConnection",
+      items:  Array< {
+        __typename: "Interview",
+        id: string,
+        sheetId: string | null,
+        interviewDate: string | null,
+        detail: string | null,
+        reviewee: string | null,
+        createdAt: string,
+        updatedOn: string,
+      } | null > | null,
+      nextToken: string | null,
+    } | null,
+  } | null > | null,
 };
 
 export type GetApprovalStatusQueryVariables = {
@@ -2036,168 +1778,6 @@ export type ListObjectivesQuery = {
       } | null,
     } | null > | null,
     nextToken: string | null,
-  } | null,
-};
-
-export type OnCreateEmployeeSubscription = {
-  onCreateEmployee:  {
-    __typename: "Employee",
-    id: string,
-    no: string | null,
-    firstName: string,
-    lastName: string,
-    grade: number,
-    superior:  {
-      __typename: "Employee",
-      id: string,
-      no: string | null,
-      firstName: string,
-      lastName: string,
-      grade: number,
-      superior:  {
-        __typename: "Employee",
-        id: string,
-        no: string | null,
-        firstName: string,
-        lastName: string,
-        grade: number,
-        companyId: string,
-        createdAt: string,
-        updatedAt: string,
-      } | null,
-      companyId: string,
-      createdAt: string,
-      updatedAt: string,
-      company:  {
-        __typename: "Company",
-        id: string,
-        name: string,
-        shortName: string | null,
-        url: string | null,
-        createdAt: string,
-        updatedAt: string,
-      } | null,
-    } | null,
-    companyId: string,
-    createdAt: string,
-    updatedAt: string,
-    company:  {
-      __typename: "Company",
-      id: string,
-      name: string,
-      shortName: string | null,
-      url: string | null,
-      createdAt: string,
-      updatedAt: string,
-    } | null,
-  } | null,
-};
-
-export type OnUpdateEmployeeSubscription = {
-  onUpdateEmployee:  {
-    __typename: "Employee",
-    id: string,
-    no: string | null,
-    firstName: string,
-    lastName: string,
-    grade: number,
-    superior:  {
-      __typename: "Employee",
-      id: string,
-      no: string | null,
-      firstName: string,
-      lastName: string,
-      grade: number,
-      superior:  {
-        __typename: "Employee",
-        id: string,
-        no: string | null,
-        firstName: string,
-        lastName: string,
-        grade: number,
-        companyId: string,
-        createdAt: string,
-        updatedAt: string,
-      } | null,
-      companyId: string,
-      createdAt: string,
-      updatedAt: string,
-      company:  {
-        __typename: "Company",
-        id: string,
-        name: string,
-        shortName: string | null,
-        url: string | null,
-        createdAt: string,
-        updatedAt: string,
-      } | null,
-    } | null,
-    companyId: string,
-    createdAt: string,
-    updatedAt: string,
-    company:  {
-      __typename: "Company",
-      id: string,
-      name: string,
-      shortName: string | null,
-      url: string | null,
-      createdAt: string,
-      updatedAt: string,
-    } | null,
-  } | null,
-};
-
-export type OnDeleteEmployeeSubscription = {
-  onDeleteEmployee:  {
-    __typename: "Employee",
-    id: string,
-    no: string | null,
-    firstName: string,
-    lastName: string,
-    grade: number,
-    superior:  {
-      __typename: "Employee",
-      id: string,
-      no: string | null,
-      firstName: string,
-      lastName: string,
-      grade: number,
-      superior:  {
-        __typename: "Employee",
-        id: string,
-        no: string | null,
-        firstName: string,
-        lastName: string,
-        grade: number,
-        companyId: string,
-        createdAt: string,
-        updatedAt: string,
-      } | null,
-      companyId: string,
-      createdAt: string,
-      updatedAt: string,
-      company:  {
-        __typename: "Company",
-        id: string,
-        name: string,
-        shortName: string | null,
-        url: string | null,
-        createdAt: string,
-        updatedAt: string,
-      } | null,
-    } | null,
-    companyId: string,
-    createdAt: string,
-    updatedAt: string,
-    company:  {
-      __typename: "Company",
-      id: string,
-      name: string,
-      shortName: string | null,
-      url: string | null,
-      createdAt: string,
-      updatedAt: string,
-    } | null,
   } | null,
 };
 

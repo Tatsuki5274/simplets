@@ -2,45 +2,25 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const getEmployee = /* GraphQL */ `
-  query GetEmployee($id: ID!) {
-    getEmployee(id: $id) {
+export const listSheetsLtGrade = /* GraphQL */ `
+  query ListSheetsLtGrade {
+    listSheetsLtGrade {
       id
-      no
-      firstName
-      lastName
+      year
       grade
-      superior {
-        id
-        no
-        firstName
-        lastName
-        grade
-        superior {
-          id
-          no
-          firstName
-          lastName
-          grade
-          companyId
-          createdAt
-          updatedAt
-        }
-        companyId
-        createdAt
-        updatedAt
-        company {
-          id
-          name
-          shortName
-          url
-          createdAt
-          updatedAt
-        }
-      }
+      careerPlan
+      careerPlanComment
+      reviewComment
+      reviewDate
+      selfCheckDate
+      firstComment
+      firstCheckDate
+      secondCheckDate
+      overAllEvaluation
       companyId
+      reviewee
       createdAt
-      updatedAt
+      updatedOn
       company {
         id
         name
@@ -49,35 +29,11 @@ export const getEmployee = /* GraphQL */ `
         createdAt
         updatedAt
       }
-    }
-  }
-`;
-export const listEmployees = /* GraphQL */ `
-  query ListEmployees(
-    $filter: ModelEmployeeFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listEmployees(filter: $filter, limit: $limit, nextToken: $nextToken) {
-      items {
+      group {
         id
-        no
-        firstName
-        lastName
-        grade
-        superior {
-          id
-          no
-          firstName
-          lastName
-          grade
-          companyId
-          createdAt
-          updatedAt
-        }
-        companyId
-        createdAt
-        updatedAt
+        name
+        createdOn
+        updatedOn
         company {
           id
           name
@@ -86,8 +42,25 @@ export const listEmployees = /* GraphQL */ `
           createdAt
           updatedAt
         }
+        group {
+          id
+          name
+          createdOn
+          updatedOn
+        }
       }
-      nextToken
+      interviews {
+        items {
+          id
+          sheetId
+          interviewDate
+          detail
+          reviewee
+          createdAt
+          updatedOn
+        }
+        nextToken
+      }
     }
   }
 `;
