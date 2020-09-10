@@ -2,9 +2,62 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const listSheetsLtGrade = /* GraphQL */ `
-  query ListSheetsLtGrade {
-    listSheetsLtGrade {
+export const getEmployee = /* GraphQL */ `
+  query GetEmployee($id: ID!) {
+    getEmployee(id: $id) {
+      id
+      no
+      firstName
+      lastName
+      grade
+      superior {
+        id
+        no
+        firstName
+        lastName
+        grade
+        companyId
+        createdAt
+        updatedAt
+      }
+      companyId
+      createdAt
+      updatedAt
+      company {
+        id
+        name
+        shortName
+        url
+        createdAt
+        updatedAt
+      }
+    }
+  }
+`;
+export const listEmployees = /* GraphQL */ `
+  query ListEmployees(
+    $filter: ModelEmployeeFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listEmployees(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        no
+        firstName
+        lastName
+        grade
+        companyId
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const getSheet = /* GraphQL */ `
+  query GetSheet($id: ID!) {
+    getSheet(id: $id) {
       id
       year
       grade
@@ -17,10 +70,26 @@ export const listSheetsLtGrade = /* GraphQL */ `
       firstCheckDate
       secondCheckDate
       overAllEvaluation
-      companyId
+      secondEmployee {
+        id
+        no
+        firstName
+        lastName
+        grade
+        companyId
+        createdAt
+        updatedAt
+      }
       reviewee
       createdAt
       updatedOn
+      status {
+        id
+        no
+        name
+        createdAt
+        updatedAt
+      }
       company {
         id
         name
@@ -34,44 +103,41 @@ export const listSheetsLtGrade = /* GraphQL */ `
         name
         createdOn
         updatedOn
-        company {
-          id
-          name
-          shortName
-          url
-          createdAt
-          updatedAt
-        }
-        group {
-          id
-          name
-          createdOn
-          updatedOn
-        }
       }
       interviews {
-        items {
-          id
-          sheetId
-          interviewDate
-          detail
-          reviewee
-          createdAt
-          updatedOn
-        }
+        nextToken
+      }
+      section {
         nextToken
       }
     }
   }
 `;
-export const getApprovalStatus = /* GraphQL */ `
-  query GetApprovalStatus($id: ID!) {
-    getApprovalStatus(id: $id) {
-      id
-      no
-      name
-      createdAt
-      updatedAt
+export const listSheets = /* GraphQL */ `
+  query ListSheets(
+    $filter: ModelSheetFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listSheets(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        year
+        grade
+        careerPlan
+        careerPlanComment
+        reviewComment
+        reviewDate
+        selfCheckDate
+        firstComment
+        firstCheckDate
+        secondCheckDate
+        overAllEvaluation
+        reviewee
+        createdAt
+        updatedOn
+      }
+      nextToken
     }
   }
 `;
@@ -90,6 +156,17 @@ export const listApprovalStatuss = /* GraphQL */ `
         updatedAt
       }
       nextToken
+    }
+  }
+`;
+export const getApprovalStatus = /* GraphQL */ `
+  query GetApprovalStatus($id: ID!) {
+    getApprovalStatus(id: $id) {
+      id
+      no
+      name
+      createdAt
+      updatedAt
     }
   }
 `;
@@ -136,20 +213,6 @@ export const listGroups = /* GraphQL */ `
         name
         createdOn
         updatedOn
-        company {
-          id
-          name
-          shortName
-          url
-          createdAt
-          updatedAt
-        }
-        group {
-          id
-          name
-          createdOn
-          updatedOn
-        }
       }
       nextToken
     }
@@ -175,20 +238,6 @@ export const getGroup = /* GraphQL */ `
         name
         createdOn
         updatedOn
-        company {
-          id
-          name
-          shortName
-          url
-          createdAt
-          updatedAt
-        }
-        group {
-          id
-          name
-          createdOn
-          updatedOn
-        }
       }
     }
   }
@@ -206,14 +255,6 @@ export const listCategorys = /* GraphQL */ `
         name
         createdOn
         updatedOn
-        company {
-          id
-          name
-          shortName
-          url
-          createdAt
-          updatedAt
-        }
       }
       nextToken
     }
@@ -271,111 +312,32 @@ export const listInterviews = /* GraphQL */ `
     }
   }
 `;
-export const listSheets = /* GraphQL */ `
-  query ListSheets(
-    $filter: ModelSheetFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listSheets(filter: $filter, limit: $limit, nextToken: $nextToken) {
-      items {
-        id
-        year
-        grade
-        careerPlan
-        careerPlanComment
-        reviewComment
-        reviewDate
-        selfCheckDate
-        firstComment
-        firstCheckDate
-        secondCheckDate
-        overAllEvaluation
-        companyId
-        reviewee
-        createdAt
-        updatedOn
-        company {
-          id
-          name
-          shortName
-          url
-          createdAt
-          updatedAt
-        }
-        group {
-          id
-          name
-          createdOn
-          updatedOn
-        }
-        interviews {
-          nextToken
-        }
-      }
-      nextToken
+export const getSection = /* GraphQL */ `
+  query GetSection($id: ID!) {
+    getSection(id: $id) {
+      id
+      sectionSheetId
+      sectionCategoryId
+      createdAt
+      updatedOn
     }
   }
 `;
-export const getSheet = /* GraphQL */ `
-  query GetSheet($id: ID!) {
-    getSheet(id: $id) {
-      id
-      year
-      grade
-      careerPlan
-      careerPlanComment
-      reviewComment
-      reviewDate
-      selfCheckDate
-      firstComment
-      firstCheckDate
-      secondCheckDate
-      overAllEvaluation
-      companyId
-      reviewee
-      createdAt
-      updatedOn
-      company {
+export const listSections = /* GraphQL */ `
+  query ListSections(
+    $filter: ModelSectionFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listSections(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
         id
-        name
-        shortName
-        url
+        sectionSheetId
+        sectionCategoryId
         createdAt
-        updatedAt
-      }
-      group {
-        id
-        name
-        createdOn
         updatedOn
-        company {
-          id
-          name
-          shortName
-          url
-          createdAt
-          updatedAt
-        }
-        group {
-          id
-          name
-          createdOn
-          updatedOn
-        }
       }
-      interviews {
-        items {
-          id
-          sheetId
-          interviewDate
-          detail
-          reviewee
-          createdAt
-          updatedOn
-        }
-        nextToken
-      }
+      nextToken
     }
   }
 `;
@@ -390,24 +352,6 @@ export const getObjective = /* GraphQL */ `
       selfEvaluation
       firstEvaluation
       lastEvaluation
-      reviewee
-      createdAt
-      updatedOn
-      category {
-        id
-        no
-        name
-        createdOn
-        updatedOn
-        company {
-          id
-          name
-          shortName
-          url
-          createdAt
-          updatedAt
-        }
-      }
       sheet {
         id
         year
@@ -421,27 +365,19 @@ export const getObjective = /* GraphQL */ `
         firstCheckDate
         secondCheckDate
         overAllEvaluation
-        companyId
         reviewee
         createdAt
         updatedOn
-        company {
-          id
-          name
-          shortName
-          url
-          createdAt
-          updatedAt
-        }
-        group {
-          id
-          name
-          createdOn
-          updatedOn
-        }
-        interviews {
-          nextToken
-        }
+      }
+      reviewee
+      createdAt
+      updatedOn
+      category {
+        id
+        no
+        name
+        createdOn
+        updatedOn
       }
     }
   }
@@ -465,31 +401,6 @@ export const listObjectives = /* GraphQL */ `
         reviewee
         createdAt
         updatedOn
-        category {
-          id
-          no
-          name
-          createdOn
-          updatedOn
-        }
-        sheet {
-          id
-          year
-          grade
-          careerPlan
-          careerPlanComment
-          reviewComment
-          reviewDate
-          selfCheckDate
-          firstComment
-          firstCheckDate
-          secondCheckDate
-          overAllEvaluation
-          companyId
-          reviewee
-          createdAt
-          updatedOn
-        }
       }
       nextToken
     }

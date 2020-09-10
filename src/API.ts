@@ -78,30 +78,54 @@ export type DeleteApprovalStatusInput = {
   id?: string | null,
 };
 
-export type CreateCompanyInput = {
+export type CreateEmployeeInput = {
   id?: string | null,
-  name: string,
-  shortName?: string | null,
-  url?: string | null,
+  no?: string | null,
+  firstName: string,
+  lastName: string,
+  grade: number,
+  companyId: string,
+  employeeSuperiorId?: string | null,
 };
 
-export type ModelCompanyConditionInput = {
-  name?: ModelStringInput | null,
-  shortName?: ModelStringInput | null,
-  url?: ModelStringInput | null,
-  and?: Array< ModelCompanyConditionInput | null > | null,
-  or?: Array< ModelCompanyConditionInput | null > | null,
-  not?: ModelCompanyConditionInput | null,
+export type ModelEmployeeConditionInput = {
+  no?: ModelStringInput | null,
+  firstName?: ModelStringInput | null,
+  lastName?: ModelStringInput | null,
+  grade?: ModelIntInput | null,
+  companyId?: ModelIDInput | null,
+  and?: Array< ModelEmployeeConditionInput | null > | null,
+  or?: Array< ModelEmployeeConditionInput | null > | null,
+  not?: ModelEmployeeConditionInput | null,
 };
 
-export type UpdateCompanyInput = {
+export type ModelIDInput = {
+  ne?: string | null,
+  eq?: string | null,
+  le?: string | null,
+  lt?: string | null,
+  ge?: string | null,
+  gt?: string | null,
+  contains?: string | null,
+  notContains?: string | null,
+  between?: Array< string | null > | null,
+  beginsWith?: string | null,
+  attributeExists?: boolean | null,
+  attributeType?: ModelAttributeTypes | null,
+  size?: ModelSizeInput | null,
+};
+
+export type UpdateEmployeeInput = {
   id: string,
-  name?: string | null,
-  shortName?: string | null,
-  url?: string | null,
+  no?: string | null,
+  firstName?: string | null,
+  lastName?: string | null,
+  grade?: number | null,
+  companyId?: string | null,
+  employeeSuperiorId?: string | null,
 };
 
-export type DeleteCompanyInput = {
+export type DeleteEmployeeInput = {
   id?: string | null,
 };
 
@@ -173,22 +197,6 @@ export type ModelInterviewConditionInput = {
   not?: ModelInterviewConditionInput | null,
 };
 
-export type ModelIDInput = {
-  ne?: string | null,
-  eq?: string | null,
-  le?: string | null,
-  lt?: string | null,
-  ge?: string | null,
-  gt?: string | null,
-  contains?: string | null,
-  notContains?: string | null,
-  between?: Array< string | null > | null,
-  beginsWith?: string | null,
-  attributeExists?: boolean | null,
-  attributeType?: ModelAttributeTypes | null,
-  size?: ModelSizeInput | null,
-};
-
 export type UpdateInterviewInput = {
   id: string,
   sheetId?: string | null,
@@ -214,9 +222,11 @@ export type CreateSheetInput = {
   firstCheckDate?: string | null,
   secondCheckDate?: string | null,
   overAllEvaluation?: number | null,
-  companyId: string,
   reviewee?: string | null,
   sheetGroupId?: string | null,
+  sheetCompanyId?: string | null,
+  sheetSecondEmployeeId?: string | null,
+  sheetStatusId?: string | null,
 };
 
 export type ModelSheetConditionInput = {
@@ -231,7 +241,7 @@ export type ModelSheetConditionInput = {
   firstCheckDate?: ModelStringInput | null,
   secondCheckDate?: ModelStringInput | null,
   overAllEvaluation?: ModelIntInput | null,
-  companyId?: ModelIDInput | null,
+  reviewee?: ModelStringInput | null,
   and?: Array< ModelSheetConditionInput | null > | null,
   or?: Array< ModelSheetConditionInput | null > | null,
   not?: ModelSheetConditionInput | null,
@@ -250,12 +260,65 @@ export type UpdateSheetInput = {
   firstCheckDate?: string | null,
   secondCheckDate?: string | null,
   overAllEvaluation?: number | null,
-  companyId?: string | null,
   reviewee?: string | null,
   sheetGroupId?: string | null,
+  sheetCompanyId?: string | null,
+  sheetSecondEmployeeId?: string | null,
+  sheetStatusId?: string | null,
 };
 
 export type DeleteSheetInput = {
+  id?: string | null,
+};
+
+export type CreateCompanyInput = {
+  id?: string | null,
+  name: string,
+  shortName?: string | null,
+  url?: string | null,
+};
+
+export type ModelCompanyConditionInput = {
+  name?: ModelStringInput | null,
+  shortName?: ModelStringInput | null,
+  url?: ModelStringInput | null,
+  and?: Array< ModelCompanyConditionInput | null > | null,
+  or?: Array< ModelCompanyConditionInput | null > | null,
+  not?: ModelCompanyConditionInput | null,
+};
+
+export type UpdateCompanyInput = {
+  id: string,
+  name?: string | null,
+  shortName?: string | null,
+  url?: string | null,
+};
+
+export type DeleteCompanyInput = {
+  id?: string | null,
+};
+
+export type CreateSectionInput = {
+  id?: string | null,
+  sectionSheetId: string,
+  sectionCategoryId: string,
+};
+
+export type ModelSectionConditionInput = {
+  sectionSheetId?: ModelIDInput | null,
+  sectionCategoryId?: ModelIDInput | null,
+  and?: Array< ModelSectionConditionInput | null > | null,
+  or?: Array< ModelSectionConditionInput | null > | null,
+  not?: ModelSectionConditionInput | null,
+};
+
+export type UpdateSectionInput = {
+  id: string,
+  sectionSheetId?: string | null,
+  sectionCategoryId?: string | null,
+};
+
+export type DeleteSectionInput = {
   id?: string | null,
 };
 
@@ -302,6 +365,37 @@ export type UpdateObjectiveInput = {
 
 export type DeleteObjectiveInput = {
   id?: string | null,
+};
+
+export type ModelEmployeeFilterInput = {
+  id?: ModelIDInput | null,
+  no?: ModelStringInput | null,
+  firstName?: ModelStringInput | null,
+  lastName?: ModelStringInput | null,
+  grade?: ModelIntInput | null,
+  companyId?: ModelIDInput | null,
+  and?: Array< ModelEmployeeFilterInput | null > | null,
+  or?: Array< ModelEmployeeFilterInput | null > | null,
+  not?: ModelEmployeeFilterInput | null,
+};
+
+export type ModelSheetFilterInput = {
+  id?: ModelIDInput | null,
+  year?: ModelIntInput | null,
+  grade?: ModelIntInput | null,
+  careerPlan?: ModelStringInput | null,
+  careerPlanComment?: ModelStringInput | null,
+  reviewComment?: ModelStringInput | null,
+  reviewDate?: ModelStringInput | null,
+  selfCheckDate?: ModelStringInput | null,
+  firstComment?: ModelStringInput | null,
+  firstCheckDate?: ModelStringInput | null,
+  secondCheckDate?: ModelStringInput | null,
+  overAllEvaluation?: ModelIntInput | null,
+  reviewee?: ModelStringInput | null,
+  and?: Array< ModelSheetFilterInput | null > | null,
+  or?: Array< ModelSheetFilterInput | null > | null,
+  not?: ModelSheetFilterInput | null,
 };
 
 export type ModelApprovalStatusFilterInput = {
@@ -351,24 +445,13 @@ export type ModelInterviewFilterInput = {
   not?: ModelInterviewFilterInput | null,
 };
 
-export type ModelSheetFilterInput = {
+export type ModelSectionFilterInput = {
   id?: ModelIDInput | null,
-  year?: ModelIntInput | null,
-  grade?: ModelIntInput | null,
-  careerPlan?: ModelStringInput | null,
-  careerPlanComment?: ModelStringInput | null,
-  reviewComment?: ModelStringInput | null,
-  reviewDate?: ModelStringInput | null,
-  selfCheckDate?: ModelStringInput | null,
-  firstComment?: ModelStringInput | null,
-  firstCheckDate?: ModelStringInput | null,
-  secondCheckDate?: ModelStringInput | null,
-  overAllEvaluation?: ModelIntInput | null,
-  companyId?: ModelIDInput | null,
-  reviewee?: ModelStringInput | null,
-  and?: Array< ModelSheetFilterInput | null > | null,
-  or?: Array< ModelSheetFilterInput | null > | null,
-  not?: ModelSheetFilterInput | null,
+  sectionSheetId?: ModelIDInput | null,
+  sectionCategoryId?: ModelIDInput | null,
+  and?: Array< ModelSectionFilterInput | null > | null,
+  or?: Array< ModelSectionFilterInput | null > | null,
+  not?: ModelSectionFilterInput | null,
 };
 
 export type ModelObjectiveFilterInput = {
@@ -434,54 +517,120 @@ export type DeleteApprovalStatusMutation = {
   } | null,
 };
 
-export type CreateCompanyMutationVariables = {
-  input: CreateCompanyInput,
-  condition?: ModelCompanyConditionInput | null,
+export type CreateEmployeeMutationVariables = {
+  input: CreateEmployeeInput,
+  condition?: ModelEmployeeConditionInput | null,
 };
 
-export type CreateCompanyMutation = {
-  createCompany:  {
-    __typename: "Company",
+export type CreateEmployeeMutation = {
+  createEmployee:  {
+    __typename: "Employee",
     id: string,
-    name: string,
-    shortName: string | null,
-    url: string | null,
+    no: string | null,
+    firstName: string,
+    lastName: string,
+    grade: number,
+    superior:  {
+      __typename: "Employee",
+      id: string,
+      no: string | null,
+      firstName: string,
+      lastName: string,
+      grade: number,
+      companyId: string,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    companyId: string,
     createdAt: string,
     updatedAt: string,
+    company:  {
+      __typename: "Company",
+      id: string,
+      name: string,
+      shortName: string | null,
+      url: string | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
   } | null,
 };
 
-export type UpdateCompanyMutationVariables = {
-  input: UpdateCompanyInput,
-  condition?: ModelCompanyConditionInput | null,
+export type UpdateEmployeeMutationVariables = {
+  input: UpdateEmployeeInput,
+  condition?: ModelEmployeeConditionInput | null,
 };
 
-export type UpdateCompanyMutation = {
-  updateCompany:  {
-    __typename: "Company",
+export type UpdateEmployeeMutation = {
+  updateEmployee:  {
+    __typename: "Employee",
     id: string,
-    name: string,
-    shortName: string | null,
-    url: string | null,
+    no: string | null,
+    firstName: string,
+    lastName: string,
+    grade: number,
+    superior:  {
+      __typename: "Employee",
+      id: string,
+      no: string | null,
+      firstName: string,
+      lastName: string,
+      grade: number,
+      companyId: string,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    companyId: string,
     createdAt: string,
     updatedAt: string,
+    company:  {
+      __typename: "Company",
+      id: string,
+      name: string,
+      shortName: string | null,
+      url: string | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
   } | null,
 };
 
-export type DeleteCompanyMutationVariables = {
-  input: DeleteCompanyInput,
-  condition?: ModelCompanyConditionInput | null,
+export type DeleteEmployeeMutationVariables = {
+  input: DeleteEmployeeInput,
+  condition?: ModelEmployeeConditionInput | null,
 };
 
-export type DeleteCompanyMutation = {
-  deleteCompany:  {
-    __typename: "Company",
+export type DeleteEmployeeMutation = {
+  deleteEmployee:  {
+    __typename: "Employee",
     id: string,
-    name: string,
-    shortName: string | null,
-    url: string | null,
+    no: string | null,
+    firstName: string,
+    lastName: string,
+    grade: number,
+    superior:  {
+      __typename: "Employee",
+      id: string,
+      no: string | null,
+      firstName: string,
+      lastName: string,
+      grade: number,
+      companyId: string,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    companyId: string,
     createdAt: string,
     updatedAt: string,
+    company:  {
+      __typename: "Company",
+      id: string,
+      name: string,
+      shortName: string | null,
+      url: string | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
   } | null,
 };
 
@@ -512,22 +661,6 @@ export type CreateGroupMutation = {
       name: string,
       createdOn: string,
       updatedOn: string,
-      company:  {
-        __typename: "Company",
-        id: string,
-        name: string,
-        shortName: string | null,
-        url: string | null,
-        createdAt: string,
-        updatedAt: string,
-      } | null,
-      group:  {
-        __typename: "Group",
-        id: string,
-        name: string,
-        createdOn: string,
-        updatedOn: string,
-      } | null,
     } | null,
   } | null,
 };
@@ -559,22 +692,6 @@ export type UpdateGroupMutation = {
       name: string,
       createdOn: string,
       updatedOn: string,
-      company:  {
-        __typename: "Company",
-        id: string,
-        name: string,
-        shortName: string | null,
-        url: string | null,
-        createdAt: string,
-        updatedAt: string,
-      } | null,
-      group:  {
-        __typename: "Group",
-        id: string,
-        name: string,
-        createdOn: string,
-        updatedOn: string,
-      } | null,
     } | null,
   } | null,
 };
@@ -606,22 +723,6 @@ export type DeleteGroupMutation = {
       name: string,
       createdOn: string,
       updatedOn: string,
-      company:  {
-        __typename: "Company",
-        id: string,
-        name: string,
-        shortName: string | null,
-        url: string | null,
-        createdAt: string,
-        updatedAt: string,
-      } | null,
-      group:  {
-        __typename: "Group",
-        id: string,
-        name: string,
-        createdOn: string,
-        updatedOn: string,
-      } | null,
     } | null,
   } | null,
 };
@@ -775,10 +876,28 @@ export type CreateSheetMutation = {
     firstCheckDate: string | null,
     secondCheckDate: string | null,
     overAllEvaluation: number | null,
-    companyId: string,
+    secondEmployee:  {
+      __typename: "Employee",
+      id: string,
+      no: string | null,
+      firstName: string,
+      lastName: string,
+      grade: number,
+      companyId: string,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
     reviewee: string | null,
     createdAt: string,
     updatedOn: string,
+    status:  {
+      __typename: "ApprovalStatus",
+      id: string,
+      no: number | null,
+      name: string,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
     company:  {
       __typename: "Company",
       id: string,
@@ -794,35 +913,13 @@ export type CreateSheetMutation = {
       name: string,
       createdOn: string,
       updatedOn: string,
-      company:  {
-        __typename: "Company",
-        id: string,
-        name: string,
-        shortName: string | null,
-        url: string | null,
-        createdAt: string,
-        updatedAt: string,
-      } | null,
-      group:  {
-        __typename: "Group",
-        id: string,
-        name: string,
-        createdOn: string,
-        updatedOn: string,
-      } | null,
     } | null,
     interviews:  {
       __typename: "ModelInterviewConnection",
-      items:  Array< {
-        __typename: "Interview",
-        id: string,
-        sheetId: string | null,
-        interviewDate: string | null,
-        detail: string | null,
-        reviewee: string | null,
-        createdAt: string,
-        updatedOn: string,
-      } | null > | null,
+      nextToken: string | null,
+    } | null,
+    section:  {
+      __typename: "ModelSectionConnection",
       nextToken: string | null,
     } | null,
   } | null,
@@ -848,10 +945,28 @@ export type UpdateSheetMutation = {
     firstCheckDate: string | null,
     secondCheckDate: string | null,
     overAllEvaluation: number | null,
-    companyId: string,
+    secondEmployee:  {
+      __typename: "Employee",
+      id: string,
+      no: string | null,
+      firstName: string,
+      lastName: string,
+      grade: number,
+      companyId: string,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
     reviewee: string | null,
     createdAt: string,
     updatedOn: string,
+    status:  {
+      __typename: "ApprovalStatus",
+      id: string,
+      no: number | null,
+      name: string,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
     company:  {
       __typename: "Company",
       id: string,
@@ -867,35 +982,13 @@ export type UpdateSheetMutation = {
       name: string,
       createdOn: string,
       updatedOn: string,
-      company:  {
-        __typename: "Company",
-        id: string,
-        name: string,
-        shortName: string | null,
-        url: string | null,
-        createdAt: string,
-        updatedAt: string,
-      } | null,
-      group:  {
-        __typename: "Group",
-        id: string,
-        name: string,
-        createdOn: string,
-        updatedOn: string,
-      } | null,
     } | null,
     interviews:  {
       __typename: "ModelInterviewConnection",
-      items:  Array< {
-        __typename: "Interview",
-        id: string,
-        sheetId: string | null,
-        interviewDate: string | null,
-        detail: string | null,
-        reviewee: string | null,
-        createdAt: string,
-        updatedOn: string,
-      } | null > | null,
+      nextToken: string | null,
+    } | null,
+    section:  {
+      __typename: "ModelSectionConnection",
       nextToken: string | null,
     } | null,
   } | null,
@@ -921,10 +1014,28 @@ export type DeleteSheetMutation = {
     firstCheckDate: string | null,
     secondCheckDate: string | null,
     overAllEvaluation: number | null,
-    companyId: string,
+    secondEmployee:  {
+      __typename: "Employee",
+      id: string,
+      no: string | null,
+      firstName: string,
+      lastName: string,
+      grade: number,
+      companyId: string,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
     reviewee: string | null,
     createdAt: string,
     updatedOn: string,
+    status:  {
+      __typename: "ApprovalStatus",
+      id: string,
+      no: number | null,
+      name: string,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
     company:  {
       __typename: "Company",
       id: string,
@@ -940,37 +1051,114 @@ export type DeleteSheetMutation = {
       name: string,
       createdOn: string,
       updatedOn: string,
-      company:  {
-        __typename: "Company",
-        id: string,
-        name: string,
-        shortName: string | null,
-        url: string | null,
-        createdAt: string,
-        updatedAt: string,
-      } | null,
-      group:  {
-        __typename: "Group",
-        id: string,
-        name: string,
-        createdOn: string,
-        updatedOn: string,
-      } | null,
     } | null,
     interviews:  {
       __typename: "ModelInterviewConnection",
-      items:  Array< {
-        __typename: "Interview",
-        id: string,
-        sheetId: string | null,
-        interviewDate: string | null,
-        detail: string | null,
-        reviewee: string | null,
-        createdAt: string,
-        updatedOn: string,
-      } | null > | null,
       nextToken: string | null,
     } | null,
+    section:  {
+      __typename: "ModelSectionConnection",
+      nextToken: string | null,
+    } | null,
+  } | null,
+};
+
+export type CreateCompanyMutationVariables = {
+  input: CreateCompanyInput,
+  condition?: ModelCompanyConditionInput | null,
+};
+
+export type CreateCompanyMutation = {
+  createCompany:  {
+    __typename: "Company",
+    id: string,
+    name: string,
+    shortName: string | null,
+    url: string | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type UpdateCompanyMutationVariables = {
+  input: UpdateCompanyInput,
+  condition?: ModelCompanyConditionInput | null,
+};
+
+export type UpdateCompanyMutation = {
+  updateCompany:  {
+    __typename: "Company",
+    id: string,
+    name: string,
+    shortName: string | null,
+    url: string | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type DeleteCompanyMutationVariables = {
+  input: DeleteCompanyInput,
+  condition?: ModelCompanyConditionInput | null,
+};
+
+export type DeleteCompanyMutation = {
+  deleteCompany:  {
+    __typename: "Company",
+    id: string,
+    name: string,
+    shortName: string | null,
+    url: string | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type CreateSectionMutationVariables = {
+  input: CreateSectionInput,
+  condition?: ModelSectionConditionInput | null,
+};
+
+export type CreateSectionMutation = {
+  createSection:  {
+    __typename: "Section",
+    id: string,
+    sectionSheetId: string,
+    sectionCategoryId: string,
+    createdAt: string,
+    updatedOn: string,
+  } | null,
+};
+
+export type UpdateSectionMutationVariables = {
+  input: UpdateSectionInput,
+  condition?: ModelSectionConditionInput | null,
+};
+
+export type UpdateSectionMutation = {
+  updateSection:  {
+    __typename: "Section",
+    id: string,
+    sectionSheetId: string,
+    sectionCategoryId: string,
+    createdAt: string,
+    updatedOn: string,
+  } | null,
+};
+
+export type DeleteSectionMutationVariables = {
+  input: DeleteSectionInput,
+  condition?: ModelSectionConditionInput | null,
+};
+
+export type DeleteSectionMutation = {
+  deleteSection:  {
+    __typename: "Section",
+    id: string,
+    sectionSheetId: string,
+    sectionCategoryId: string,
+    createdAt: string,
+    updatedOn: string,
   } | null,
 };
 
@@ -990,26 +1178,6 @@ export type CreateObjectiveMutation = {
     selfEvaluation: number | null,
     firstEvaluation: number | null,
     lastEvaluation: number | null,
-    reviewee: string | null,
-    createdAt: string,
-    updatedOn: string,
-    category:  {
-      __typename: "Category",
-      id: string,
-      no: number | null,
-      name: string,
-      createdOn: string,
-      updatedOn: string,
-      company:  {
-        __typename: "Company",
-        id: string,
-        name: string,
-        shortName: string | null,
-        url: string | null,
-        createdAt: string,
-        updatedAt: string,
-      } | null,
-    } | null,
     sheet:  {
       __typename: "Sheet",
       id: string,
@@ -1024,30 +1192,20 @@ export type CreateObjectiveMutation = {
       firstCheckDate: string | null,
       secondCheckDate: string | null,
       overAllEvaluation: number | null,
-      companyId: string,
       reviewee: string | null,
       createdAt: string,
       updatedOn: string,
-      company:  {
-        __typename: "Company",
-        id: string,
-        name: string,
-        shortName: string | null,
-        url: string | null,
-        createdAt: string,
-        updatedAt: string,
-      } | null,
-      group:  {
-        __typename: "Group",
-        id: string,
-        name: string,
-        createdOn: string,
-        updatedOn: string,
-      } | null,
-      interviews:  {
-        __typename: "ModelInterviewConnection",
-        nextToken: string | null,
-      } | null,
+    } | null,
+    reviewee: string | null,
+    createdAt: string,
+    updatedOn: string,
+    category:  {
+      __typename: "Category",
+      id: string,
+      no: number | null,
+      name: string,
+      createdOn: string,
+      updatedOn: string,
     } | null,
   } | null,
 };
@@ -1068,26 +1226,6 @@ export type UpdateObjectiveMutation = {
     selfEvaluation: number | null,
     firstEvaluation: number | null,
     lastEvaluation: number | null,
-    reviewee: string | null,
-    createdAt: string,
-    updatedOn: string,
-    category:  {
-      __typename: "Category",
-      id: string,
-      no: number | null,
-      name: string,
-      createdOn: string,
-      updatedOn: string,
-      company:  {
-        __typename: "Company",
-        id: string,
-        name: string,
-        shortName: string | null,
-        url: string | null,
-        createdAt: string,
-        updatedAt: string,
-      } | null,
-    } | null,
     sheet:  {
       __typename: "Sheet",
       id: string,
@@ -1102,30 +1240,20 @@ export type UpdateObjectiveMutation = {
       firstCheckDate: string | null,
       secondCheckDate: string | null,
       overAllEvaluation: number | null,
-      companyId: string,
       reviewee: string | null,
       createdAt: string,
       updatedOn: string,
-      company:  {
-        __typename: "Company",
-        id: string,
-        name: string,
-        shortName: string | null,
-        url: string | null,
-        createdAt: string,
-        updatedAt: string,
-      } | null,
-      group:  {
-        __typename: "Group",
-        id: string,
-        name: string,
-        createdOn: string,
-        updatedOn: string,
-      } | null,
-      interviews:  {
-        __typename: "ModelInterviewConnection",
-        nextToken: string | null,
-      } | null,
+    } | null,
+    reviewee: string | null,
+    createdAt: string,
+    updatedOn: string,
+    category:  {
+      __typename: "Category",
+      id: string,
+      no: number | null,
+      name: string,
+      createdOn: string,
+      updatedOn: string,
     } | null,
   } | null,
 };
@@ -1146,26 +1274,6 @@ export type DeleteObjectiveMutation = {
     selfEvaluation: number | null,
     firstEvaluation: number | null,
     lastEvaluation: number | null,
-    reviewee: string | null,
-    createdAt: string,
-    updatedOn: string,
-    category:  {
-      __typename: "Category",
-      id: string,
-      no: number | null,
-      name: string,
-      createdOn: string,
-      updatedOn: string,
-      company:  {
-        __typename: "Company",
-        id: string,
-        name: string,
-        shortName: string | null,
-        url: string | null,
-        createdAt: string,
-        updatedAt: string,
-      } | null,
-    } | null,
     sheet:  {
       __typename: "Sheet",
       id: string,
@@ -1180,36 +1288,92 @@ export type DeleteObjectiveMutation = {
       firstCheckDate: string | null,
       secondCheckDate: string | null,
       overAllEvaluation: number | null,
-      companyId: string,
       reviewee: string | null,
       createdAt: string,
       updatedOn: string,
-      company:  {
-        __typename: "Company",
-        id: string,
-        name: string,
-        shortName: string | null,
-        url: string | null,
-        createdAt: string,
-        updatedAt: string,
-      } | null,
-      group:  {
-        __typename: "Group",
-        id: string,
-        name: string,
-        createdOn: string,
-        updatedOn: string,
-      } | null,
-      interviews:  {
-        __typename: "ModelInterviewConnection",
-        nextToken: string | null,
-      } | null,
+    } | null,
+    reviewee: string | null,
+    createdAt: string,
+    updatedOn: string,
+    category:  {
+      __typename: "Category",
+      id: string,
+      no: number | null,
+      name: string,
+      createdOn: string,
+      updatedOn: string,
     } | null,
   } | null,
 };
 
-export type ListSheetsLtGradeQuery = {
-  listSheetsLtGrade:  Array< {
+export type GetEmployeeQueryVariables = {
+  id: string,
+};
+
+export type GetEmployeeQuery = {
+  getEmployee:  {
+    __typename: "Employee",
+    id: string,
+    no: string | null,
+    firstName: string,
+    lastName: string,
+    grade: number,
+    superior:  {
+      __typename: "Employee",
+      id: string,
+      no: string | null,
+      firstName: string,
+      lastName: string,
+      grade: number,
+      companyId: string,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    companyId: string,
+    createdAt: string,
+    updatedAt: string,
+    company:  {
+      __typename: "Company",
+      id: string,
+      name: string,
+      shortName: string | null,
+      url: string | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+  } | null,
+};
+
+export type ListEmployeesQueryVariables = {
+  filter?: ModelEmployeeFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListEmployeesQuery = {
+  listEmployees:  {
+    __typename: "ModelEmployeeConnection",
+    items:  Array< {
+      __typename: "Employee",
+      id: string,
+      no: string | null,
+      firstName: string,
+      lastName: string,
+      grade: number,
+      companyId: string,
+      createdAt: string,
+      updatedAt: string,
+    } | null > | null,
+    nextToken: string | null,
+  } | null,
+};
+
+export type GetSheetQueryVariables = {
+  id: string,
+};
+
+export type GetSheetQuery = {
+  getSheet:  {
     __typename: "Sheet",
     id: string,
     year: number,
@@ -1223,10 +1387,28 @@ export type ListSheetsLtGradeQuery = {
     firstCheckDate: string | null,
     secondCheckDate: string | null,
     overAllEvaluation: number | null,
-    companyId: string,
+    secondEmployee:  {
+      __typename: "Employee",
+      id: string,
+      no: string | null,
+      firstName: string,
+      lastName: string,
+      grade: number,
+      companyId: string,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
     reviewee: string | null,
     createdAt: string,
     updatedOn: string,
+    status:  {
+      __typename: "ApprovalStatus",
+      id: string,
+      no: number | null,
+      name: string,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
     company:  {
       __typename: "Company",
       id: string,
@@ -1242,52 +1424,46 @@ export type ListSheetsLtGradeQuery = {
       name: string,
       createdOn: string,
       updatedOn: string,
-      company:  {
-        __typename: "Company",
-        id: string,
-        name: string,
-        shortName: string | null,
-        url: string | null,
-        createdAt: string,
-        updatedAt: string,
-      } | null,
-      group:  {
-        __typename: "Group",
-        id: string,
-        name: string,
-        createdOn: string,
-        updatedOn: string,
-      } | null,
     } | null,
     interviews:  {
       __typename: "ModelInterviewConnection",
-      items:  Array< {
-        __typename: "Interview",
-        id: string,
-        sheetId: string | null,
-        interviewDate: string | null,
-        detail: string | null,
-        reviewee: string | null,
-        createdAt: string,
-        updatedOn: string,
-      } | null > | null,
       nextToken: string | null,
     } | null,
-  } | null > | null,
+    section:  {
+      __typename: "ModelSectionConnection",
+      nextToken: string | null,
+    } | null,
+  } | null,
 };
 
-export type GetApprovalStatusQueryVariables = {
-  id: string,
+export type ListSheetsQueryVariables = {
+  filter?: ModelSheetFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
 };
 
-export type GetApprovalStatusQuery = {
-  getApprovalStatus:  {
-    __typename: "ApprovalStatus",
-    id: string,
-    no: number | null,
-    name: string,
-    createdAt: string,
-    updatedAt: string,
+export type ListSheetsQuery = {
+  listSheets:  {
+    __typename: "ModelSheetConnection",
+    items:  Array< {
+      __typename: "Sheet",
+      id: string,
+      year: number,
+      grade: number,
+      careerPlan: string | null,
+      careerPlanComment: string | null,
+      reviewComment: string | null,
+      reviewDate: string | null,
+      selfCheckDate: string | null,
+      firstComment: string | null,
+      firstCheckDate: string | null,
+      secondCheckDate: string | null,
+      overAllEvaluation: number | null,
+      reviewee: string | null,
+      createdAt: string,
+      updatedOn: string,
+    } | null > | null,
+    nextToken: string | null,
   } | null,
 };
 
@@ -1309,6 +1485,21 @@ export type ListApprovalStatussQuery = {
       updatedAt: string,
     } | null > | null,
     nextToken: string | null,
+  } | null,
+};
+
+export type GetApprovalStatusQueryVariables = {
+  id: string,
+};
+
+export type GetApprovalStatusQuery = {
+  getApprovalStatus:  {
+    __typename: "ApprovalStatus",
+    id: string,
+    no: number | null,
+    name: string,
+    createdAt: string,
+    updatedAt: string,
   } | null,
 };
 
@@ -1365,22 +1556,6 @@ export type ListGroupsQuery = {
       name: string,
       createdOn: string,
       updatedOn: string,
-      company:  {
-        __typename: "Company",
-        id: string,
-        name: string,
-        shortName: string | null,
-        url: string | null,
-        createdAt: string,
-        updatedAt: string,
-      } | null,
-      group:  {
-        __typename: "Group",
-        id: string,
-        name: string,
-        createdOn: string,
-        updatedOn: string,
-      } | null,
     } | null > | null,
     nextToken: string | null,
   } | null,
@@ -1412,22 +1587,6 @@ export type GetGroupQuery = {
       name: string,
       createdOn: string,
       updatedOn: string,
-      company:  {
-        __typename: "Company",
-        id: string,
-        name: string,
-        shortName: string | null,
-        url: string | null,
-        createdAt: string,
-        updatedAt: string,
-      } | null,
-      group:  {
-        __typename: "Group",
-        id: string,
-        name: string,
-        createdOn: string,
-        updatedOn: string,
-      } | null,
     } | null,
   } | null,
 };
@@ -1448,15 +1607,6 @@ export type ListCategorysQuery = {
       name: string,
       createdOn: string,
       updatedOn: string,
-      company:  {
-        __typename: "Company",
-        id: string,
-        name: string,
-        shortName: string | null,
-        url: string | null,
-        createdAt: string,
-        updatedAt: string,
-      } | null,
     } | null > | null,
     nextToken: string | null,
   } | null,
@@ -1526,127 +1676,39 @@ export type ListInterviewsQuery = {
   } | null,
 };
 
-export type ListSheetsQueryVariables = {
-  filter?: ModelSheetFilterInput | null,
+export type GetSectionQueryVariables = {
+  id: string,
+};
+
+export type GetSectionQuery = {
+  getSection:  {
+    __typename: "Section",
+    id: string,
+    sectionSheetId: string,
+    sectionCategoryId: string,
+    createdAt: string,
+    updatedOn: string,
+  } | null,
+};
+
+export type ListSectionsQueryVariables = {
+  filter?: ModelSectionFilterInput | null,
   limit?: number | null,
   nextToken?: string | null,
 };
 
-export type ListSheetsQuery = {
-  listSheets:  {
-    __typename: "ModelSheetConnection",
+export type ListSectionsQuery = {
+  listSections:  {
+    __typename: "ModelSectionConnection",
     items:  Array< {
-      __typename: "Sheet",
+      __typename: "Section",
       id: string,
-      year: number,
-      grade: number,
-      careerPlan: string | null,
-      careerPlanComment: string | null,
-      reviewComment: string | null,
-      reviewDate: string | null,
-      selfCheckDate: string | null,
-      firstComment: string | null,
-      firstCheckDate: string | null,
-      secondCheckDate: string | null,
-      overAllEvaluation: number | null,
-      companyId: string,
-      reviewee: string | null,
+      sectionSheetId: string,
+      sectionCategoryId: string,
       createdAt: string,
       updatedOn: string,
-      company:  {
-        __typename: "Company",
-        id: string,
-        name: string,
-        shortName: string | null,
-        url: string | null,
-        createdAt: string,
-        updatedAt: string,
-      } | null,
-      group:  {
-        __typename: "Group",
-        id: string,
-        name: string,
-        createdOn: string,
-        updatedOn: string,
-      } | null,
-      interviews:  {
-        __typename: "ModelInterviewConnection",
-        nextToken: string | null,
-      } | null,
     } | null > | null,
     nextToken: string | null,
-  } | null,
-};
-
-export type GetSheetQueryVariables = {
-  id: string,
-};
-
-export type GetSheetQuery = {
-  getSheet:  {
-    __typename: "Sheet",
-    id: string,
-    year: number,
-    grade: number,
-    careerPlan: string | null,
-    careerPlanComment: string | null,
-    reviewComment: string | null,
-    reviewDate: string | null,
-    selfCheckDate: string | null,
-    firstComment: string | null,
-    firstCheckDate: string | null,
-    secondCheckDate: string | null,
-    overAllEvaluation: number | null,
-    companyId: string,
-    reviewee: string | null,
-    createdAt: string,
-    updatedOn: string,
-    company:  {
-      __typename: "Company",
-      id: string,
-      name: string,
-      shortName: string | null,
-      url: string | null,
-      createdAt: string,
-      updatedAt: string,
-    } | null,
-    group:  {
-      __typename: "Group",
-      id: string,
-      name: string,
-      createdOn: string,
-      updatedOn: string,
-      company:  {
-        __typename: "Company",
-        id: string,
-        name: string,
-        shortName: string | null,
-        url: string | null,
-        createdAt: string,
-        updatedAt: string,
-      } | null,
-      group:  {
-        __typename: "Group",
-        id: string,
-        name: string,
-        createdOn: string,
-        updatedOn: string,
-      } | null,
-    } | null,
-    interviews:  {
-      __typename: "ModelInterviewConnection",
-      items:  Array< {
-        __typename: "Interview",
-        id: string,
-        sheetId: string | null,
-        interviewDate: string | null,
-        detail: string | null,
-        reviewee: string | null,
-        createdAt: string,
-        updatedOn: string,
-      } | null > | null,
-      nextToken: string | null,
-    } | null,
   } | null,
 };
 
@@ -1665,26 +1727,6 @@ export type GetObjectiveQuery = {
     selfEvaluation: number | null,
     firstEvaluation: number | null,
     lastEvaluation: number | null,
-    reviewee: string | null,
-    createdAt: string,
-    updatedOn: string,
-    category:  {
-      __typename: "Category",
-      id: string,
-      no: number | null,
-      name: string,
-      createdOn: string,
-      updatedOn: string,
-      company:  {
-        __typename: "Company",
-        id: string,
-        name: string,
-        shortName: string | null,
-        url: string | null,
-        createdAt: string,
-        updatedAt: string,
-      } | null,
-    } | null,
     sheet:  {
       __typename: "Sheet",
       id: string,
@@ -1699,30 +1741,20 @@ export type GetObjectiveQuery = {
       firstCheckDate: string | null,
       secondCheckDate: string | null,
       overAllEvaluation: number | null,
-      companyId: string,
       reviewee: string | null,
       createdAt: string,
       updatedOn: string,
-      company:  {
-        __typename: "Company",
-        id: string,
-        name: string,
-        shortName: string | null,
-        url: string | null,
-        createdAt: string,
-        updatedAt: string,
-      } | null,
-      group:  {
-        __typename: "Group",
-        id: string,
-        name: string,
-        createdOn: string,
-        updatedOn: string,
-      } | null,
-      interviews:  {
-        __typename: "ModelInterviewConnection",
-        nextToken: string | null,
-      } | null,
+    } | null,
+    reviewee: string | null,
+    createdAt: string,
+    updatedOn: string,
+    category:  {
+      __typename: "Category",
+      id: string,
+      no: number | null,
+      name: string,
+      createdOn: string,
+      updatedOn: string,
     } | null,
   } | null,
 };
@@ -1749,35 +1781,302 @@ export type ListObjectivesQuery = {
       reviewee: string | null,
       createdAt: string,
       updatedOn: string,
-      category:  {
-        __typename: "Category",
-        id: string,
-        no: number | null,
-        name: string,
-        createdOn: string,
-        updatedOn: string,
-      } | null,
-      sheet:  {
-        __typename: "Sheet",
-        id: string,
-        year: number,
-        grade: number,
-        careerPlan: string | null,
-        careerPlanComment: string | null,
-        reviewComment: string | null,
-        reviewDate: string | null,
-        selfCheckDate: string | null,
-        firstComment: string | null,
-        firstCheckDate: string | null,
-        secondCheckDate: string | null,
-        overAllEvaluation: number | null,
-        companyId: string,
-        reviewee: string | null,
-        createdAt: string,
-        updatedOn: string,
-      } | null,
     } | null > | null,
     nextToken: string | null,
+  } | null,
+};
+
+export type OnCreateEmployeeSubscription = {
+  onCreateEmployee:  {
+    __typename: "Employee",
+    id: string,
+    no: string | null,
+    firstName: string,
+    lastName: string,
+    grade: number,
+    superior:  {
+      __typename: "Employee",
+      id: string,
+      no: string | null,
+      firstName: string,
+      lastName: string,
+      grade: number,
+      companyId: string,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    companyId: string,
+    createdAt: string,
+    updatedAt: string,
+    company:  {
+      __typename: "Company",
+      id: string,
+      name: string,
+      shortName: string | null,
+      url: string | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+  } | null,
+};
+
+export type OnUpdateEmployeeSubscription = {
+  onUpdateEmployee:  {
+    __typename: "Employee",
+    id: string,
+    no: string | null,
+    firstName: string,
+    lastName: string,
+    grade: number,
+    superior:  {
+      __typename: "Employee",
+      id: string,
+      no: string | null,
+      firstName: string,
+      lastName: string,
+      grade: number,
+      companyId: string,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    companyId: string,
+    createdAt: string,
+    updatedAt: string,
+    company:  {
+      __typename: "Company",
+      id: string,
+      name: string,
+      shortName: string | null,
+      url: string | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+  } | null,
+};
+
+export type OnDeleteEmployeeSubscription = {
+  onDeleteEmployee:  {
+    __typename: "Employee",
+    id: string,
+    no: string | null,
+    firstName: string,
+    lastName: string,
+    grade: number,
+    superior:  {
+      __typename: "Employee",
+      id: string,
+      no: string | null,
+      firstName: string,
+      lastName: string,
+      grade: number,
+      companyId: string,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    companyId: string,
+    createdAt: string,
+    updatedAt: string,
+    company:  {
+      __typename: "Company",
+      id: string,
+      name: string,
+      shortName: string | null,
+      url: string | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+  } | null,
+};
+
+export type OnCreateSheetSubscription = {
+  onCreateSheet:  {
+    __typename: "Sheet",
+    id: string,
+    year: number,
+    grade: number,
+    careerPlan: string | null,
+    careerPlanComment: string | null,
+    reviewComment: string | null,
+    reviewDate: string | null,
+    selfCheckDate: string | null,
+    firstComment: string | null,
+    firstCheckDate: string | null,
+    secondCheckDate: string | null,
+    overAllEvaluation: number | null,
+    secondEmployee:  {
+      __typename: "Employee",
+      id: string,
+      no: string | null,
+      firstName: string,
+      lastName: string,
+      grade: number,
+      companyId: string,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    reviewee: string | null,
+    createdAt: string,
+    updatedOn: string,
+    status:  {
+      __typename: "ApprovalStatus",
+      id: string,
+      no: number | null,
+      name: string,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    company:  {
+      __typename: "Company",
+      id: string,
+      name: string,
+      shortName: string | null,
+      url: string | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    group:  {
+      __typename: "Group",
+      id: string,
+      name: string,
+      createdOn: string,
+      updatedOn: string,
+    } | null,
+    interviews:  {
+      __typename: "ModelInterviewConnection",
+      nextToken: string | null,
+    } | null,
+    section:  {
+      __typename: "ModelSectionConnection",
+      nextToken: string | null,
+    } | null,
+  } | null,
+};
+
+export type OnUpdateSheetSubscription = {
+  onUpdateSheet:  {
+    __typename: "Sheet",
+    id: string,
+    year: number,
+    grade: number,
+    careerPlan: string | null,
+    careerPlanComment: string | null,
+    reviewComment: string | null,
+    reviewDate: string | null,
+    selfCheckDate: string | null,
+    firstComment: string | null,
+    firstCheckDate: string | null,
+    secondCheckDate: string | null,
+    overAllEvaluation: number | null,
+    secondEmployee:  {
+      __typename: "Employee",
+      id: string,
+      no: string | null,
+      firstName: string,
+      lastName: string,
+      grade: number,
+      companyId: string,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    reviewee: string | null,
+    createdAt: string,
+    updatedOn: string,
+    status:  {
+      __typename: "ApprovalStatus",
+      id: string,
+      no: number | null,
+      name: string,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    company:  {
+      __typename: "Company",
+      id: string,
+      name: string,
+      shortName: string | null,
+      url: string | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    group:  {
+      __typename: "Group",
+      id: string,
+      name: string,
+      createdOn: string,
+      updatedOn: string,
+    } | null,
+    interviews:  {
+      __typename: "ModelInterviewConnection",
+      nextToken: string | null,
+    } | null,
+    section:  {
+      __typename: "ModelSectionConnection",
+      nextToken: string | null,
+    } | null,
+  } | null,
+};
+
+export type OnDeleteSheetSubscription = {
+  onDeleteSheet:  {
+    __typename: "Sheet",
+    id: string,
+    year: number,
+    grade: number,
+    careerPlan: string | null,
+    careerPlanComment: string | null,
+    reviewComment: string | null,
+    reviewDate: string | null,
+    selfCheckDate: string | null,
+    firstComment: string | null,
+    firstCheckDate: string | null,
+    secondCheckDate: string | null,
+    overAllEvaluation: number | null,
+    secondEmployee:  {
+      __typename: "Employee",
+      id: string,
+      no: string | null,
+      firstName: string,
+      lastName: string,
+      grade: number,
+      companyId: string,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    reviewee: string | null,
+    createdAt: string,
+    updatedOn: string,
+    status:  {
+      __typename: "ApprovalStatus",
+      id: string,
+      no: number | null,
+      name: string,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    company:  {
+      __typename: "Company",
+      id: string,
+      name: string,
+      shortName: string | null,
+      url: string | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    group:  {
+      __typename: "Group",
+      id: string,
+      name: string,
+      createdOn: string,
+      updatedOn: string,
+    } | null,
+    interviews:  {
+      __typename: "ModelInterviewConnection",
+      nextToken: string | null,
+    } | null,
+    section:  {
+      __typename: "ModelSectionConnection",
+      nextToken: string | null,
+    } | null,
   } | null,
 };
 
@@ -1872,22 +2171,6 @@ export type OnCreateGroupSubscription = {
       name: string,
       createdOn: string,
       updatedOn: string,
-      company:  {
-        __typename: "Company",
-        id: string,
-        name: string,
-        shortName: string | null,
-        url: string | null,
-        createdAt: string,
-        updatedAt: string,
-      } | null,
-      group:  {
-        __typename: "Group",
-        id: string,
-        name: string,
-        createdOn: string,
-        updatedOn: string,
-      } | null,
     } | null,
   } | null,
 };
@@ -1914,22 +2197,6 @@ export type OnUpdateGroupSubscription = {
       name: string,
       createdOn: string,
       updatedOn: string,
-      company:  {
-        __typename: "Company",
-        id: string,
-        name: string,
-        shortName: string | null,
-        url: string | null,
-        createdAt: string,
-        updatedAt: string,
-      } | null,
-      group:  {
-        __typename: "Group",
-        id: string,
-        name: string,
-        createdOn: string,
-        updatedOn: string,
-      } | null,
     } | null,
   } | null,
 };
@@ -1956,22 +2223,6 @@ export type OnDeleteGroupSubscription = {
       name: string,
       createdOn: string,
       updatedOn: string,
-      company:  {
-        __typename: "Company",
-        id: string,
-        name: string,
-        shortName: string | null,
-        url: string | null,
-        createdAt: string,
-        updatedAt: string,
-      } | null,
-      group:  {
-        __typename: "Group",
-        id: string,
-        name: string,
-        createdOn: string,
-        updatedOn: string,
-      } | null,
     } | null,
   } | null,
 };
@@ -2087,219 +2338,36 @@ export type OnDeleteInterviewSubscription = {
   } | null,
 };
 
-export type OnCreateSheetSubscriptionVariables = {
-  reviewee?: string | null,
-};
-
-export type OnCreateSheetSubscription = {
-  onCreateSheet:  {
-    __typename: "Sheet",
+export type OnCreateSectionSubscription = {
+  onCreateSection:  {
+    __typename: "Section",
     id: string,
-    year: number,
-    grade: number,
-    careerPlan: string | null,
-    careerPlanComment: string | null,
-    reviewComment: string | null,
-    reviewDate: string | null,
-    selfCheckDate: string | null,
-    firstComment: string | null,
-    firstCheckDate: string | null,
-    secondCheckDate: string | null,
-    overAllEvaluation: number | null,
-    companyId: string,
-    reviewee: string | null,
+    sectionSheetId: string,
+    sectionCategoryId: string,
     createdAt: string,
     updatedOn: string,
-    company:  {
-      __typename: "Company",
-      id: string,
-      name: string,
-      shortName: string | null,
-      url: string | null,
-      createdAt: string,
-      updatedAt: string,
-    } | null,
-    group:  {
-      __typename: "Group",
-      id: string,
-      name: string,
-      createdOn: string,
-      updatedOn: string,
-      company:  {
-        __typename: "Company",
-        id: string,
-        name: string,
-        shortName: string | null,
-        url: string | null,
-        createdAt: string,
-        updatedAt: string,
-      } | null,
-      group:  {
-        __typename: "Group",
-        id: string,
-        name: string,
-        createdOn: string,
-        updatedOn: string,
-      } | null,
-    } | null,
-    interviews:  {
-      __typename: "ModelInterviewConnection",
-      items:  Array< {
-        __typename: "Interview",
-        id: string,
-        sheetId: string | null,
-        interviewDate: string | null,
-        detail: string | null,
-        reviewee: string | null,
-        createdAt: string,
-        updatedOn: string,
-      } | null > | null,
-      nextToken: string | null,
-    } | null,
   } | null,
 };
 
-export type OnUpdateSheetSubscriptionVariables = {
-  reviewee?: string | null,
-};
-
-export type OnUpdateSheetSubscription = {
-  onUpdateSheet:  {
-    __typename: "Sheet",
+export type OnUpdateSectionSubscription = {
+  onUpdateSection:  {
+    __typename: "Section",
     id: string,
-    year: number,
-    grade: number,
-    careerPlan: string | null,
-    careerPlanComment: string | null,
-    reviewComment: string | null,
-    reviewDate: string | null,
-    selfCheckDate: string | null,
-    firstComment: string | null,
-    firstCheckDate: string | null,
-    secondCheckDate: string | null,
-    overAllEvaluation: number | null,
-    companyId: string,
-    reviewee: string | null,
+    sectionSheetId: string,
+    sectionCategoryId: string,
     createdAt: string,
     updatedOn: string,
-    company:  {
-      __typename: "Company",
-      id: string,
-      name: string,
-      shortName: string | null,
-      url: string | null,
-      createdAt: string,
-      updatedAt: string,
-    } | null,
-    group:  {
-      __typename: "Group",
-      id: string,
-      name: string,
-      createdOn: string,
-      updatedOn: string,
-      company:  {
-        __typename: "Company",
-        id: string,
-        name: string,
-        shortName: string | null,
-        url: string | null,
-        createdAt: string,
-        updatedAt: string,
-      } | null,
-      group:  {
-        __typename: "Group",
-        id: string,
-        name: string,
-        createdOn: string,
-        updatedOn: string,
-      } | null,
-    } | null,
-    interviews:  {
-      __typename: "ModelInterviewConnection",
-      items:  Array< {
-        __typename: "Interview",
-        id: string,
-        sheetId: string | null,
-        interviewDate: string | null,
-        detail: string | null,
-        reviewee: string | null,
-        createdAt: string,
-        updatedOn: string,
-      } | null > | null,
-      nextToken: string | null,
-    } | null,
   } | null,
 };
 
-export type OnDeleteSheetSubscriptionVariables = {
-  reviewee?: string | null,
-};
-
-export type OnDeleteSheetSubscription = {
-  onDeleteSheet:  {
-    __typename: "Sheet",
+export type OnDeleteSectionSubscription = {
+  onDeleteSection:  {
+    __typename: "Section",
     id: string,
-    year: number,
-    grade: number,
-    careerPlan: string | null,
-    careerPlanComment: string | null,
-    reviewComment: string | null,
-    reviewDate: string | null,
-    selfCheckDate: string | null,
-    firstComment: string | null,
-    firstCheckDate: string | null,
-    secondCheckDate: string | null,
-    overAllEvaluation: number | null,
-    companyId: string,
-    reviewee: string | null,
+    sectionSheetId: string,
+    sectionCategoryId: string,
     createdAt: string,
     updatedOn: string,
-    company:  {
-      __typename: "Company",
-      id: string,
-      name: string,
-      shortName: string | null,
-      url: string | null,
-      createdAt: string,
-      updatedAt: string,
-    } | null,
-    group:  {
-      __typename: "Group",
-      id: string,
-      name: string,
-      createdOn: string,
-      updatedOn: string,
-      company:  {
-        __typename: "Company",
-        id: string,
-        name: string,
-        shortName: string | null,
-        url: string | null,
-        createdAt: string,
-        updatedAt: string,
-      } | null,
-      group:  {
-        __typename: "Group",
-        id: string,
-        name: string,
-        createdOn: string,
-        updatedOn: string,
-      } | null,
-    } | null,
-    interviews:  {
-      __typename: "ModelInterviewConnection",
-      items:  Array< {
-        __typename: "Interview",
-        id: string,
-        sheetId: string | null,
-        interviewDate: string | null,
-        detail: string | null,
-        reviewee: string | null,
-        createdAt: string,
-        updatedOn: string,
-      } | null > | null,
-      nextToken: string | null,
-    } | null,
   } | null,
 };
 
@@ -2318,26 +2386,6 @@ export type OnCreateObjectiveSubscription = {
     selfEvaluation: number | null,
     firstEvaluation: number | null,
     lastEvaluation: number | null,
-    reviewee: string | null,
-    createdAt: string,
-    updatedOn: string,
-    category:  {
-      __typename: "Category",
-      id: string,
-      no: number | null,
-      name: string,
-      createdOn: string,
-      updatedOn: string,
-      company:  {
-        __typename: "Company",
-        id: string,
-        name: string,
-        shortName: string | null,
-        url: string | null,
-        createdAt: string,
-        updatedAt: string,
-      } | null,
-    } | null,
     sheet:  {
       __typename: "Sheet",
       id: string,
@@ -2352,30 +2400,20 @@ export type OnCreateObjectiveSubscription = {
       firstCheckDate: string | null,
       secondCheckDate: string | null,
       overAllEvaluation: number | null,
-      companyId: string,
       reviewee: string | null,
       createdAt: string,
       updatedOn: string,
-      company:  {
-        __typename: "Company",
-        id: string,
-        name: string,
-        shortName: string | null,
-        url: string | null,
-        createdAt: string,
-        updatedAt: string,
-      } | null,
-      group:  {
-        __typename: "Group",
-        id: string,
-        name: string,
-        createdOn: string,
-        updatedOn: string,
-      } | null,
-      interviews:  {
-        __typename: "ModelInterviewConnection",
-        nextToken: string | null,
-      } | null,
+    } | null,
+    reviewee: string | null,
+    createdAt: string,
+    updatedOn: string,
+    category:  {
+      __typename: "Category",
+      id: string,
+      no: number | null,
+      name: string,
+      createdOn: string,
+      updatedOn: string,
     } | null,
   } | null,
 };
@@ -2395,26 +2433,6 @@ export type OnUpdateObjectiveSubscription = {
     selfEvaluation: number | null,
     firstEvaluation: number | null,
     lastEvaluation: number | null,
-    reviewee: string | null,
-    createdAt: string,
-    updatedOn: string,
-    category:  {
-      __typename: "Category",
-      id: string,
-      no: number | null,
-      name: string,
-      createdOn: string,
-      updatedOn: string,
-      company:  {
-        __typename: "Company",
-        id: string,
-        name: string,
-        shortName: string | null,
-        url: string | null,
-        createdAt: string,
-        updatedAt: string,
-      } | null,
-    } | null,
     sheet:  {
       __typename: "Sheet",
       id: string,
@@ -2429,30 +2447,20 @@ export type OnUpdateObjectiveSubscription = {
       firstCheckDate: string | null,
       secondCheckDate: string | null,
       overAllEvaluation: number | null,
-      companyId: string,
       reviewee: string | null,
       createdAt: string,
       updatedOn: string,
-      company:  {
-        __typename: "Company",
-        id: string,
-        name: string,
-        shortName: string | null,
-        url: string | null,
-        createdAt: string,
-        updatedAt: string,
-      } | null,
-      group:  {
-        __typename: "Group",
-        id: string,
-        name: string,
-        createdOn: string,
-        updatedOn: string,
-      } | null,
-      interviews:  {
-        __typename: "ModelInterviewConnection",
-        nextToken: string | null,
-      } | null,
+    } | null,
+    reviewee: string | null,
+    createdAt: string,
+    updatedOn: string,
+    category:  {
+      __typename: "Category",
+      id: string,
+      no: number | null,
+      name: string,
+      createdOn: string,
+      updatedOn: string,
     } | null,
   } | null,
 };
@@ -2472,26 +2480,6 @@ export type OnDeleteObjectiveSubscription = {
     selfEvaluation: number | null,
     firstEvaluation: number | null,
     lastEvaluation: number | null,
-    reviewee: string | null,
-    createdAt: string,
-    updatedOn: string,
-    category:  {
-      __typename: "Category",
-      id: string,
-      no: number | null,
-      name: string,
-      createdOn: string,
-      updatedOn: string,
-      company:  {
-        __typename: "Company",
-        id: string,
-        name: string,
-        shortName: string | null,
-        url: string | null,
-        createdAt: string,
-        updatedAt: string,
-      } | null,
-    } | null,
     sheet:  {
       __typename: "Sheet",
       id: string,
@@ -2506,30 +2494,20 @@ export type OnDeleteObjectiveSubscription = {
       firstCheckDate: string | null,
       secondCheckDate: string | null,
       overAllEvaluation: number | null,
-      companyId: string,
       reviewee: string | null,
       createdAt: string,
       updatedOn: string,
-      company:  {
-        __typename: "Company",
-        id: string,
-        name: string,
-        shortName: string | null,
-        url: string | null,
-        createdAt: string,
-        updatedAt: string,
-      } | null,
-      group:  {
-        __typename: "Group",
-        id: string,
-        name: string,
-        createdOn: string,
-        updatedOn: string,
-      } | null,
-      interviews:  {
-        __typename: "ModelInterviewConnection",
-        nextToken: string | null,
-      } | null,
+    } | null,
+    reviewee: string | null,
+    createdAt: string,
+    updatedOn: string,
+    category:  {
+      __typename: "Category",
+      id: string,
+      no: number | null,
+      name: string,
+      createdOn: string,
+      updatedOn: string,
     } | null,
   } | null,
 };

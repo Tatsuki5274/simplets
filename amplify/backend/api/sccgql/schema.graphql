@@ -18,7 +18,7 @@ type Company #会社
 @auth(
   rules: [
     {allow: groups, groups: ["Root"]}
-    {allow: private, operations: [read]}
+    {allow: private}
     {allow: private, provider: iam}
   ]
 )
@@ -122,12 +122,26 @@ type Sheet
 
   group: Group @connection
   interviews: [Interview] @connection(keyName: "bySheet", fields: ["id"])
-  sheetCompanyId: ID!
-  company: Company @connection(fields: ["sheetCompanyId"])
+  company: Company @connection
   secondEmployee: Employee @connection  #所属長
   status: ApprovalStatus @connection    #承認ステータス
+  section: [Section] @connection(keyName: "bySection", fields: ["id"])  #カテゴリセクション
 
   reviewee: String #被評価者　オーナーフィールド
+}
+
+type Section
+@model(timestamps:{updatedAt: "updatedOn"})
+@key(name: "bySection", fields: ["sectionSheetId"])
+@auth(
+  rules: [
+    {allow: private, provider: iam}
+  ]
+)
+{
+  id: ID!
+  sectionSheetId: ID!
+  sectionCategoryId: ID!
 }
 
 type Objective

@@ -44,48 +44,108 @@ export const deleteApprovalStatus = /* GraphQL */ `
     }
   }
 `;
-export const createCompany = /* GraphQL */ `
-  mutation CreateCompany(
-    $input: CreateCompanyInput!
-    $condition: ModelCompanyConditionInput
+export const createEmployee = /* GraphQL */ `
+  mutation CreateEmployee(
+    $input: CreateEmployeeInput!
+    $condition: ModelEmployeeConditionInput
   ) {
-    createCompany(input: $input, condition: $condition) {
+    createEmployee(input: $input, condition: $condition) {
       id
-      name
-      shortName
-      url
+      no
+      firstName
+      lastName
+      grade
+      superior {
+        id
+        no
+        firstName
+        lastName
+        grade
+        companyId
+        createdAt
+        updatedAt
+      }
+      companyId
       createdAt
       updatedAt
+      company {
+        id
+        name
+        shortName
+        url
+        createdAt
+        updatedAt
+      }
     }
   }
 `;
-export const updateCompany = /* GraphQL */ `
-  mutation UpdateCompany(
-    $input: UpdateCompanyInput!
-    $condition: ModelCompanyConditionInput
+export const updateEmployee = /* GraphQL */ `
+  mutation UpdateEmployee(
+    $input: UpdateEmployeeInput!
+    $condition: ModelEmployeeConditionInput
   ) {
-    updateCompany(input: $input, condition: $condition) {
+    updateEmployee(input: $input, condition: $condition) {
       id
-      name
-      shortName
-      url
+      no
+      firstName
+      lastName
+      grade
+      superior {
+        id
+        no
+        firstName
+        lastName
+        grade
+        companyId
+        createdAt
+        updatedAt
+      }
+      companyId
       createdAt
       updatedAt
+      company {
+        id
+        name
+        shortName
+        url
+        createdAt
+        updatedAt
+      }
     }
   }
 `;
-export const deleteCompany = /* GraphQL */ `
-  mutation DeleteCompany(
-    $input: DeleteCompanyInput!
-    $condition: ModelCompanyConditionInput
+export const deleteEmployee = /* GraphQL */ `
+  mutation DeleteEmployee(
+    $input: DeleteEmployeeInput!
+    $condition: ModelEmployeeConditionInput
   ) {
-    deleteCompany(input: $input, condition: $condition) {
+    deleteEmployee(input: $input, condition: $condition) {
       id
-      name
-      shortName
-      url
+      no
+      firstName
+      lastName
+      grade
+      superior {
+        id
+        no
+        firstName
+        lastName
+        grade
+        companyId
+        createdAt
+        updatedAt
+      }
+      companyId
       createdAt
       updatedAt
+      company {
+        id
+        name
+        shortName
+        url
+        createdAt
+        updatedAt
+      }
     }
   }
 `;
@@ -112,20 +172,6 @@ export const createGroup = /* GraphQL */ `
         name
         createdOn
         updatedOn
-        company {
-          id
-          name
-          shortName
-          url
-          createdAt
-          updatedAt
-        }
-        group {
-          id
-          name
-          createdOn
-          updatedOn
-        }
       }
     }
   }
@@ -153,20 +199,6 @@ export const updateGroup = /* GraphQL */ `
         name
         createdOn
         updatedOn
-        company {
-          id
-          name
-          shortName
-          url
-          createdAt
-          updatedAt
-        }
-        group {
-          id
-          name
-          createdOn
-          updatedOn
-        }
       }
     }
   }
@@ -194,20 +226,6 @@ export const deleteGroup = /* GraphQL */ `
         name
         createdOn
         updatedOn
-        company {
-          id
-          name
-          shortName
-          url
-          createdAt
-          updatedAt
-        }
-        group {
-          id
-          name
-          createdOn
-          updatedOn
-        }
       }
     }
   }
@@ -344,10 +362,26 @@ export const createSheet = /* GraphQL */ `
       firstCheckDate
       secondCheckDate
       overAllEvaluation
-      companyId
+      secondEmployee {
+        id
+        no
+        firstName
+        lastName
+        grade
+        companyId
+        createdAt
+        updatedAt
+      }
       reviewee
       createdAt
       updatedOn
+      status {
+        id
+        no
+        name
+        createdAt
+        updatedAt
+      }
       company {
         id
         name
@@ -361,31 +395,11 @@ export const createSheet = /* GraphQL */ `
         name
         createdOn
         updatedOn
-        company {
-          id
-          name
-          shortName
-          url
-          createdAt
-          updatedAt
-        }
-        group {
-          id
-          name
-          createdOn
-          updatedOn
-        }
       }
       interviews {
-        items {
-          id
-          sheetId
-          interviewDate
-          detail
-          reviewee
-          createdAt
-          updatedOn
-        }
+        nextToken
+      }
+      section {
         nextToken
       }
     }
@@ -409,10 +423,26 @@ export const updateSheet = /* GraphQL */ `
       firstCheckDate
       secondCheckDate
       overAllEvaluation
-      companyId
+      secondEmployee {
+        id
+        no
+        firstName
+        lastName
+        grade
+        companyId
+        createdAt
+        updatedAt
+      }
       reviewee
       createdAt
       updatedOn
+      status {
+        id
+        no
+        name
+        createdAt
+        updatedAt
+      }
       company {
         id
         name
@@ -426,31 +456,11 @@ export const updateSheet = /* GraphQL */ `
         name
         createdOn
         updatedOn
-        company {
-          id
-          name
-          shortName
-          url
-          createdAt
-          updatedAt
-        }
-        group {
-          id
-          name
-          createdOn
-          updatedOn
-        }
       }
       interviews {
-        items {
-          id
-          sheetId
-          interviewDate
-          detail
-          reviewee
-          createdAt
-          updatedOn
-        }
+        nextToken
+      }
+      section {
         nextToken
       }
     }
@@ -474,10 +484,26 @@ export const deleteSheet = /* GraphQL */ `
       firstCheckDate
       secondCheckDate
       overAllEvaluation
-      companyId
+      secondEmployee {
+        id
+        no
+        firstName
+        lastName
+        grade
+        companyId
+        createdAt
+        updatedAt
+      }
       reviewee
       createdAt
       updatedOn
+      status {
+        id
+        no
+        name
+        createdAt
+        updatedAt
+      }
       company {
         id
         name
@@ -491,33 +517,100 @@ export const deleteSheet = /* GraphQL */ `
         name
         createdOn
         updatedOn
-        company {
-          id
-          name
-          shortName
-          url
-          createdAt
-          updatedAt
-        }
-        group {
-          id
-          name
-          createdOn
-          updatedOn
-        }
       }
       interviews {
-        items {
-          id
-          sheetId
-          interviewDate
-          detail
-          reviewee
-          createdAt
-          updatedOn
-        }
         nextToken
       }
+      section {
+        nextToken
+      }
+    }
+  }
+`;
+export const createCompany = /* GraphQL */ `
+  mutation CreateCompany(
+    $input: CreateCompanyInput!
+    $condition: ModelCompanyConditionInput
+  ) {
+    createCompany(input: $input, condition: $condition) {
+      id
+      name
+      shortName
+      url
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateCompany = /* GraphQL */ `
+  mutation UpdateCompany(
+    $input: UpdateCompanyInput!
+    $condition: ModelCompanyConditionInput
+  ) {
+    updateCompany(input: $input, condition: $condition) {
+      id
+      name
+      shortName
+      url
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteCompany = /* GraphQL */ `
+  mutation DeleteCompany(
+    $input: DeleteCompanyInput!
+    $condition: ModelCompanyConditionInput
+  ) {
+    deleteCompany(input: $input, condition: $condition) {
+      id
+      name
+      shortName
+      url
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const createSection = /* GraphQL */ `
+  mutation CreateSection(
+    $input: CreateSectionInput!
+    $condition: ModelSectionConditionInput
+  ) {
+    createSection(input: $input, condition: $condition) {
+      id
+      sectionSheetId
+      sectionCategoryId
+      createdAt
+      updatedOn
+    }
+  }
+`;
+export const updateSection = /* GraphQL */ `
+  mutation UpdateSection(
+    $input: UpdateSectionInput!
+    $condition: ModelSectionConditionInput
+  ) {
+    updateSection(input: $input, condition: $condition) {
+      id
+      sectionSheetId
+      sectionCategoryId
+      createdAt
+      updatedOn
+    }
+  }
+`;
+export const deleteSection = /* GraphQL */ `
+  mutation DeleteSection(
+    $input: DeleteSectionInput!
+    $condition: ModelSectionConditionInput
+  ) {
+    deleteSection(input: $input, condition: $condition) {
+      id
+      sectionSheetId
+      sectionCategoryId
+      createdAt
+      updatedOn
     }
   }
 `;
@@ -535,24 +628,6 @@ export const createObjective = /* GraphQL */ `
       selfEvaluation
       firstEvaluation
       lastEvaluation
-      reviewee
-      createdAt
-      updatedOn
-      category {
-        id
-        no
-        name
-        createdOn
-        updatedOn
-        company {
-          id
-          name
-          shortName
-          url
-          createdAt
-          updatedAt
-        }
-      }
       sheet {
         id
         year
@@ -566,27 +641,19 @@ export const createObjective = /* GraphQL */ `
         firstCheckDate
         secondCheckDate
         overAllEvaluation
-        companyId
         reviewee
         createdAt
         updatedOn
-        company {
-          id
-          name
-          shortName
-          url
-          createdAt
-          updatedAt
-        }
-        group {
-          id
-          name
-          createdOn
-          updatedOn
-        }
-        interviews {
-          nextToken
-        }
+      }
+      reviewee
+      createdAt
+      updatedOn
+      category {
+        id
+        no
+        name
+        createdOn
+        updatedOn
       }
     }
   }
@@ -605,24 +672,6 @@ export const updateObjective = /* GraphQL */ `
       selfEvaluation
       firstEvaluation
       lastEvaluation
-      reviewee
-      createdAt
-      updatedOn
-      category {
-        id
-        no
-        name
-        createdOn
-        updatedOn
-        company {
-          id
-          name
-          shortName
-          url
-          createdAt
-          updatedAt
-        }
-      }
       sheet {
         id
         year
@@ -636,27 +685,19 @@ export const updateObjective = /* GraphQL */ `
         firstCheckDate
         secondCheckDate
         overAllEvaluation
-        companyId
         reviewee
         createdAt
         updatedOn
-        company {
-          id
-          name
-          shortName
-          url
-          createdAt
-          updatedAt
-        }
-        group {
-          id
-          name
-          createdOn
-          updatedOn
-        }
-        interviews {
-          nextToken
-        }
+      }
+      reviewee
+      createdAt
+      updatedOn
+      category {
+        id
+        no
+        name
+        createdOn
+        updatedOn
       }
     }
   }
@@ -675,24 +716,6 @@ export const deleteObjective = /* GraphQL */ `
       selfEvaluation
       firstEvaluation
       lastEvaluation
-      reviewee
-      createdAt
-      updatedOn
-      category {
-        id
-        no
-        name
-        createdOn
-        updatedOn
-        company {
-          id
-          name
-          shortName
-          url
-          createdAt
-          updatedAt
-        }
-      }
       sheet {
         id
         year
@@ -706,27 +729,19 @@ export const deleteObjective = /* GraphQL */ `
         firstCheckDate
         secondCheckDate
         overAllEvaluation
-        companyId
         reviewee
         createdAt
         updatedOn
-        company {
-          id
-          name
-          shortName
-          url
-          createdAt
-          updatedAt
-        }
-        group {
-          id
-          name
-          createdOn
-          updatedOn
-        }
-        interviews {
-          nextToken
-        }
+      }
+      reviewee
+      createdAt
+      updatedOn
+      category {
+        id
+        no
+        name
+        createdOn
+        updatedOn
       }
     }
   }
