@@ -1,11 +1,45 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import Amplify, { Storage, API, graphqlOperation } from 'aws-amplify';
 import { Container, Table } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { GraphQLResult } from "@aws-amplify/api";
+import { ListSheetsQuery } from 'API';
+//import {listSheets} from 'graphql/queries'
+
+
+const listSheets = /* GraphQL */ `
+query ListSheets {
+  listSheets {
+    items {
+      year
+      overAllEvaluation
+      id
+      status {
+        name
+      }
+      secondEmployee {
+        lastName
+        firstName
+      }
+    }
+  }
+}`;
 
 function ListPerformanceEvalution() {
+    const [sheets, setSheets] = useState<Array<any> | any>();
+    useEffect(() => {
+        ;(async()=>{
+            const response = (await API.graphql(graphqlOperation(listSheets))
+            )as GraphQLResult<ListSheetsQuery>;
+            const listItems = response.data?.listSheets?.items;
+            setSheets(listItems);
+            console.log(response);
+            console.log(listItems);
+        })()
+      },[]);
+    if(sheets === undefined) return <div>Loading</div>
     return (
         <div>
-
             <div>
                 <Container>
                     <h2>業績評価一覧</h2>
@@ -20,39 +54,22 @@ function ListPerformanceEvalution() {
                                 <td></td>
                             </tr>
                         </thead>
+                        
                         <tbody>
-                            <tr>
-                                <td>
-
-                                    <a href="#">編集</a>
-                                </td>
-                                <td>2020</td>
-                                <td>[所属長氏名]</td>
-                                <td>社長確認済み、所属長承認待</td>
-                                <td>未評価</td>
-                                <td>プレビュー</td>
+                            {sheets.map((sheet: any)=>{
+                                let editName = "編集";
+                                if(sheet.status.name as string === "評価：完了"){
+                                    editName = "確認";
+                                }
+                                return <tr>
+                                    <td><a href={"/reviewee/sheet/"+sheet.id}>{editName}</a></td>
+                                <td>{sheet.year}</td>
+                                <td>{sheet.secondEmployee.lastName}{sheet.secondEmployee.firstName}</td>
+                                <td>{sheet.status.name}</td>
+                                <td>{sheet.overAllEvaluation}</td>
+                                <td><a href="">プレビュー</a></td>
                             </tr>
-                            <tr>
-                                <td>
-                                    <a href="#">確認</a>
-                                </td>
-                                <td>2019</td>
-                                <td>[所属長氏名]</td>
-                                <td>完了</td>
-                                <td>4</td>
-                                <td>プレビュー</td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <a href="#">確認</a>
-                                </td>
-                                <td>2018</td>
-                                <td>[所属長氏名]</td>
-                                <td>完了</td>
-                                <td>5</td>
-                                <td>プレビュー</td>
-                            </tr>
-
+                            })}
                         </tbody>
                     </Table>
                 </Container>
