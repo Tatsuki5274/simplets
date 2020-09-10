@@ -135,17 +135,19 @@ type Section
 @key(name: "bySection", fields: ["sectionSheetId"])
 @auth(
   rules: [
-    {allow: private, provider: iam}
+    {allow: private}
   ]
 )
 {
   id: ID!
   sectionSheetId: ID!
+  objective: [Objective] @connection(keyName: "objectiveBySection", fields: ["id"])
   sectionCategoryId: ID!
 }
 
 type Objective
 @model(timestamps:{updatedAt: "updatedOn"})
+@key(name: "objectiveBySection", fields: ["objectiveSectionId"])
 @auth(
   rules: [
     {allow: owner, ownerField: "reviewee" }
@@ -165,7 +167,8 @@ type Objective
   lastEvaluation: Int #最終評価
 
   sheet: Sheet @connection
-  category: Category @connection  #カテゴリへのリレーション
+  objectiveSectionId: ID!
+  section: Section @connection(fields: ["objectiveSectionId"])
   
   reviewee: String #社員ID(被評価者)
 }
