@@ -16,9 +16,99 @@ export const getEmployee = /* GraphQL */ `
         firstName
         lastName
         grade
+        superior {
+          id
+          no
+          firstName
+          lastName
+          grade
+          superior {
+            id
+            no
+            firstName
+            lastName
+            grade
+            superior {
+              id
+              no
+              firstName
+              lastName
+              grade
+              superior {
+                id
+                no
+                firstName
+                lastName
+                grade
+                superior {
+                  id
+                  no
+                  firstName
+                  lastName
+                  grade
+                  companyId
+                  createdAt
+                  updatedAt
+                }
+                companyId
+                createdAt
+                updatedAt
+                company {
+                  id
+                  name
+                  shortName
+                  url
+                  createdAt
+                  updatedAt
+                }
+              }
+              companyId
+              createdAt
+              updatedAt
+              company {
+                id
+                name
+                shortName
+                url
+                createdAt
+                updatedAt
+              }
+            }
+            companyId
+            createdAt
+            updatedAt
+            company {
+              id
+              name
+              shortName
+              url
+              createdAt
+              updatedAt
+            }
+          }
+          companyId
+          createdAt
+          updatedAt
+          company {
+            id
+            name
+            shortName
+            url
+            createdAt
+            updatedAt
+          }
+        }
         companyId
         createdAt
         updatedAt
+        company {
+          id
+          name
+          shortName
+          url
+          createdAt
+          updatedAt
+        }
       }
       companyId
       createdAt
@@ -47,9 +137,358 @@ export const listEmployees = /* GraphQL */ `
         firstName
         lastName
         grade
+        superior {
+          id
+          no
+          firstName
+          lastName
+          grade
+          superior {
+            id
+            no
+            firstName
+            lastName
+            grade
+            superior {
+              id
+              no
+              firstName
+              lastName
+              grade
+              superior {
+                id
+                no
+                firstName
+                lastName
+                grade
+                superior {
+                  id
+                  no
+                  firstName
+                  lastName
+                  grade
+                  companyId
+                  createdAt
+                  updatedAt
+                }
+                companyId
+                createdAt
+                updatedAt
+                company {
+                  id
+                  name
+                  shortName
+                  url
+                  createdAt
+                  updatedAt
+                }
+              }
+              companyId
+              createdAt
+              updatedAt
+              company {
+                id
+                name
+                shortName
+                url
+                createdAt
+                updatedAt
+              }
+            }
+            companyId
+            createdAt
+            updatedAt
+            company {
+              id
+              name
+              shortName
+              url
+              createdAt
+              updatedAt
+            }
+          }
+          companyId
+          createdAt
+          updatedAt
+          company {
+            id
+            name
+            shortName
+            url
+            createdAt
+            updatedAt
+          }
+        }
         companyId
         createdAt
         updatedAt
+        company {
+          id
+          name
+          shortName
+          url
+          createdAt
+          updatedAt
+        }
+      }
+      nextToken
+    }
+  }
+`;
+export const getGroup = /* GraphQL */ `
+  query GetGroup($id: ID!) {
+    getGroup(id: $id) {
+      id
+      group {
+        id
+        group {
+          id
+          group {
+            id
+            group {
+              id
+              group {
+                id
+                group {
+                  id
+                  name
+                  createdOn
+                  updatedOn
+                }
+                name
+                createdOn
+                updatedOn
+                company {
+                  id
+                  name
+                  shortName
+                  url
+                  createdAt
+                  updatedAt
+                }
+              }
+              name
+              createdOn
+              updatedOn
+              company {
+                id
+                name
+                shortName
+                url
+                createdAt
+                updatedAt
+              }
+            }
+            name
+            createdOn
+            updatedOn
+            company {
+              id
+              name
+              shortName
+              url
+              createdAt
+              updatedAt
+            }
+          }
+          name
+          createdOn
+          updatedOn
+          company {
+            id
+            name
+            shortName
+            url
+            createdAt
+            updatedAt
+          }
+        }
+        name
+        createdOn
+        updatedOn
+        company {
+          id
+          name
+          shortName
+          url
+          createdAt
+          updatedAt
+        }
+      }
+      name
+      createdOn
+      updatedOn
+      company {
+        id
+        name
+        shortName
+        url
+        createdAt
+        updatedAt
+      }
+    }
+  }
+`;
+export const listGroups = /* GraphQL */ `
+  query ListGroups(
+    $filter: ModelGroupFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listGroups(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        group {
+          id
+          group {
+            id
+            group {
+              id
+              group {
+                id
+                group {
+                  id
+                  name
+                  createdOn
+                  updatedOn
+                }
+                name
+                createdOn
+                updatedOn
+                company {
+                  id
+                  name
+                  shortName
+                  url
+                  createdAt
+                  updatedAt
+                }
+              }
+              name
+              createdOn
+              updatedOn
+              company {
+                id
+                name
+                shortName
+                url
+                createdAt
+                updatedAt
+              }
+            }
+            name
+            createdOn
+            updatedOn
+            company {
+              id
+              name
+              shortName
+              url
+              createdAt
+              updatedAt
+            }
+          }
+          name
+          createdOn
+          updatedOn
+          company {
+            id
+            name
+            shortName
+            url
+            createdAt
+            updatedAt
+          }
+        }
+        name
+        createdOn
+        updatedOn
+        company {
+          id
+          name
+          shortName
+          url
+          createdAt
+          updatedAt
+        }
+      }
+      nextToken
+    }
+  }
+`;
+export const getCategory = /* GraphQL */ `
+  query GetCategory($id: ID!) {
+    getCategory(id: $id) {
+      id
+      no
+      name
+      createdOn
+      updatedOn
+      company {
+        id
+        name
+        shortName
+        url
+        createdAt
+        updatedAt
+      }
+    }
+  }
+`;
+export const listCategorys = /* GraphQL */ `
+  query ListCategorys(
+    $filter: ModelCategoryFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listCategorys(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        no
+        name
+        createdOn
+        updatedOn
+        company {
+          id
+          name
+          shortName
+          url
+          createdAt
+          updatedAt
+        }
+      }
+      nextToken
+    }
+  }
+`;
+export const getInterview = /* GraphQL */ `
+  query GetInterview($id: ID!) {
+    getInterview(id: $id) {
+      id
+      sheetId
+      interviewDate
+      detail
+      reviewee
+      createdAt
+      updatedOn
+    }
+  }
+`;
+export const listInterviews = /* GraphQL */ `
+  query ListInterviews(
+    $filter: ModelInterviewFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listInterviews(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        sheetId
+        interviewDate
+        detail
+        reviewee
+        createdAt
+        updatedOn
       }
       nextToken
     }
@@ -68,17 +507,308 @@ export const getSheet = /* GraphQL */ `
       selfCheckDate
       firstComment
       firstCheckDate
+      secondComment
       secondCheckDate
       overAllEvaluation
+      group {
+        id
+        group {
+          id
+          group {
+            id
+            group {
+              id
+              group {
+                id
+                group {
+                  id
+                  name
+                  createdOn
+                  updatedOn
+                }
+                name
+                createdOn
+                updatedOn
+                company {
+                  id
+                  name
+                  shortName
+                  url
+                  createdAt
+                  updatedAt
+                }
+              }
+              name
+              createdOn
+              updatedOn
+              company {
+                id
+                name
+                shortName
+                url
+                createdAt
+                updatedAt
+              }
+            }
+            name
+            createdOn
+            updatedOn
+            company {
+              id
+              name
+              shortName
+              url
+              createdAt
+              updatedAt
+            }
+          }
+          name
+          createdOn
+          updatedOn
+          company {
+            id
+            name
+            shortName
+            url
+            createdAt
+            updatedAt
+          }
+        }
+        name
+        createdOn
+        updatedOn
+        company {
+          id
+          name
+          shortName
+          url
+          createdAt
+          updatedAt
+        }
+      }
+      interviews {
+        items {
+          id
+          sheetId
+          interviewDate
+          detail
+          reviewee
+          createdAt
+          updatedOn
+        }
+        nextToken
+      }
       secondEmployee {
         id
         no
         firstName
         lastName
         grade
+        superior {
+          id
+          no
+          firstName
+          lastName
+          grade
+          superior {
+            id
+            no
+            firstName
+            lastName
+            grade
+            superior {
+              id
+              no
+              firstName
+              lastName
+              grade
+              superior {
+                id
+                no
+                firstName
+                lastName
+                grade
+                superior {
+                  id
+                  no
+                  firstName
+                  lastName
+                  grade
+                  companyId
+                  createdAt
+                  updatedAt
+                }
+                companyId
+                createdAt
+                updatedAt
+                company {
+                  id
+                  name
+                  shortName
+                  url
+                  createdAt
+                  updatedAt
+                }
+              }
+              companyId
+              createdAt
+              updatedAt
+              company {
+                id
+                name
+                shortName
+                url
+                createdAt
+                updatedAt
+              }
+            }
+            companyId
+            createdAt
+            updatedAt
+            company {
+              id
+              name
+              shortName
+              url
+              createdAt
+              updatedAt
+            }
+          }
+          companyId
+          createdAt
+          updatedAt
+          company {
+            id
+            name
+            shortName
+            url
+            createdAt
+            updatedAt
+          }
+        }
         companyId
         createdAt
         updatedAt
+        company {
+          id
+          name
+          shortName
+          url
+          createdAt
+          updatedAt
+        }
+      }
+      section {
+        items {
+          id
+          sectionSheetId
+          objective {
+            items {
+              id
+              status
+              content
+              result
+              priority
+              selfEvaluation
+              firstEvaluation
+              lastEvaluation
+              sheet {
+                id
+                year
+                grade
+                careerPlan
+                careerPlanComment
+                reviewComment
+                reviewDate
+                selfCheckDate
+                firstComment
+                firstCheckDate
+                secondComment
+                secondCheckDate
+                overAllEvaluation
+                group {
+                  id
+                  name
+                  createdOn
+                  updatedOn
+                }
+                interviews {
+                  nextToken
+                }
+                secondEmployee {
+                  id
+                  no
+                  firstName
+                  lastName
+                  grade
+                  companyId
+                  createdAt
+                  updatedAt
+                }
+                section {
+                  nextToken
+                }
+                reviewee
+                createdAt
+                updatedOn
+                status {
+                  id
+                  no
+                  name
+                  createdAt
+                  updatedAt
+                }
+                company {
+                  id
+                  name
+                  shortName
+                  url
+                  createdAt
+                  updatedAt
+                }
+              }
+              objectiveSectionId
+              section {
+                id
+                sectionSheetId
+                objective {
+                  nextToken
+                }
+                category {
+                  id
+                  no
+                  name
+                  createdOn
+                  updatedOn
+                }
+                createdAt
+                updatedOn
+              }
+              reviewee
+              createdAt
+              updatedOn
+            }
+            nextToken
+          }
+          category {
+            id
+            no
+            name
+            createdOn
+            updatedOn
+            company {
+              id
+              name
+              shortName
+              url
+              createdAt
+              updatedAt
+            }
+          }
+          createdAt
+          updatedOn
+        }
+        nextToken
       }
       reviewee
       createdAt
@@ -97,18 +827,6 @@ export const getSheet = /* GraphQL */ `
         url
         createdAt
         updatedAt
-      }
-      group {
-        id
-        name
-        createdOn
-        updatedOn
-      }
-      interviews {
-        nextToken
-      }
-      section {
-        nextToken
       }
     }
   }
@@ -131,8 +849,1464 @@ export const listSheets = /* GraphQL */ `
         selfCheckDate
         firstComment
         firstCheckDate
+        secondComment
         secondCheckDate
         overAllEvaluation
+        group {
+          id
+          group {
+            id
+            group {
+              id
+              group {
+                id
+                group {
+                  id
+                  name
+                  createdOn
+                  updatedOn
+                }
+                name
+                createdOn
+                updatedOn
+                company {
+                  id
+                  name
+                  shortName
+                  url
+                  createdAt
+                  updatedAt
+                }
+              }
+              name
+              createdOn
+              updatedOn
+              company {
+                id
+                name
+                shortName
+                url
+                createdAt
+                updatedAt
+              }
+            }
+            name
+            createdOn
+            updatedOn
+            company {
+              id
+              name
+              shortName
+              url
+              createdAt
+              updatedAt
+            }
+          }
+          name
+          createdOn
+          updatedOn
+          company {
+            id
+            name
+            shortName
+            url
+            createdAt
+            updatedAt
+          }
+        }
+        interviews {
+          items {
+            id
+            sheetId
+            interviewDate
+            detail
+            reviewee
+            createdAt
+            updatedOn
+          }
+          nextToken
+        }
+        secondEmployee {
+          id
+          no
+          firstName
+          lastName
+          grade
+          superior {
+            id
+            no
+            firstName
+            lastName
+            grade
+            superior {
+              id
+              no
+              firstName
+              lastName
+              grade
+              superior {
+                id
+                no
+                firstName
+                lastName
+                grade
+                superior {
+                  id
+                  no
+                  firstName
+                  lastName
+                  grade
+                  companyId
+                  createdAt
+                  updatedAt
+                }
+                companyId
+                createdAt
+                updatedAt
+                company {
+                  id
+                  name
+                  shortName
+                  url
+                  createdAt
+                  updatedAt
+                }
+              }
+              companyId
+              createdAt
+              updatedAt
+              company {
+                id
+                name
+                shortName
+                url
+                createdAt
+                updatedAt
+              }
+            }
+            companyId
+            createdAt
+            updatedAt
+            company {
+              id
+              name
+              shortName
+              url
+              createdAt
+              updatedAt
+            }
+          }
+          companyId
+          createdAt
+          updatedAt
+          company {
+            id
+            name
+            shortName
+            url
+            createdAt
+            updatedAt
+          }
+        }
+        section {
+          items {
+            id
+            sectionSheetId
+            objective {
+              items {
+                id
+                status
+                content
+                result
+                priority
+                selfEvaluation
+                firstEvaluation
+                lastEvaluation
+                sheet {
+                  id
+                  year
+                  grade
+                  careerPlan
+                  careerPlanComment
+                  reviewComment
+                  reviewDate
+                  selfCheckDate
+                  firstComment
+                  firstCheckDate
+                  secondComment
+                  secondCheckDate
+                  overAllEvaluation
+                  reviewee
+                  createdAt
+                  updatedOn
+                }
+                objectiveSectionId
+                section {
+                  id
+                  sectionSheetId
+                  createdAt
+                  updatedOn
+                }
+                reviewee
+                createdAt
+                updatedOn
+              }
+              nextToken
+            }
+            category {
+              id
+              no
+              name
+              createdOn
+              updatedOn
+              company {
+                id
+                name
+                shortName
+                url
+                createdAt
+                updatedAt
+              }
+            }
+            createdAt
+            updatedOn
+          }
+          nextToken
+        }
+        reviewee
+        createdAt
+        updatedOn
+        status {
+          id
+          no
+          name
+          createdAt
+          updatedAt
+        }
+        company {
+          id
+          name
+          shortName
+          url
+          createdAt
+          updatedAt
+        }
+      }
+      nextToken
+    }
+  }
+`;
+export const getSection = /* GraphQL */ `
+  query GetSection($id: ID!) {
+    getSection(id: $id) {
+      id
+      sectionSheetId
+      objective {
+        items {
+          id
+          status
+          content
+          result
+          priority
+          selfEvaluation
+          firstEvaluation
+          lastEvaluation
+          sheet {
+            id
+            year
+            grade
+            careerPlan
+            careerPlanComment
+            reviewComment
+            reviewDate
+            selfCheckDate
+            firstComment
+            firstCheckDate
+            secondComment
+            secondCheckDate
+            overAllEvaluation
+            group {
+              id
+              group {
+                id
+                group {
+                  id
+                  name
+                  createdOn
+                  updatedOn
+                }
+                name
+                createdOn
+                updatedOn
+                company {
+                  id
+                  name
+                  shortName
+                  url
+                  createdAt
+                  updatedAt
+                }
+              }
+              name
+              createdOn
+              updatedOn
+              company {
+                id
+                name
+                shortName
+                url
+                createdAt
+                updatedAt
+              }
+            }
+            interviews {
+              items {
+                id
+                sheetId
+                interviewDate
+                detail
+                reviewee
+                createdAt
+                updatedOn
+              }
+              nextToken
+            }
+            secondEmployee {
+              id
+              no
+              firstName
+              lastName
+              grade
+              superior {
+                id
+                no
+                firstName
+                lastName
+                grade
+                superior {
+                  id
+                  no
+                  firstName
+                  lastName
+                  grade
+                  companyId
+                  createdAt
+                  updatedAt
+                }
+                companyId
+                createdAt
+                updatedAt
+                company {
+                  id
+                  name
+                  shortName
+                  url
+                  createdAt
+                  updatedAt
+                }
+              }
+              companyId
+              createdAt
+              updatedAt
+              company {
+                id
+                name
+                shortName
+                url
+                createdAt
+                updatedAt
+              }
+            }
+            section {
+              items {
+                id
+                sectionSheetId
+                objective {
+                  nextToken
+                }
+                category {
+                  id
+                  no
+                  name
+                  createdOn
+                  updatedOn
+                }
+                createdAt
+                updatedOn
+              }
+              nextToken
+            }
+            reviewee
+            createdAt
+            updatedOn
+            status {
+              id
+              no
+              name
+              createdAt
+              updatedAt
+            }
+            company {
+              id
+              name
+              shortName
+              url
+              createdAt
+              updatedAt
+            }
+          }
+          objectiveSectionId
+          section {
+            id
+            sectionSheetId
+            objective {
+              items {
+                id
+                status
+                content
+                result
+                priority
+                selfEvaluation
+                firstEvaluation
+                lastEvaluation
+                sheet {
+                  id
+                  year
+                  grade
+                  careerPlan
+                  careerPlanComment
+                  reviewComment
+                  reviewDate
+                  selfCheckDate
+                  firstComment
+                  firstCheckDate
+                  secondComment
+                  secondCheckDate
+                  overAllEvaluation
+                  reviewee
+                  createdAt
+                  updatedOn
+                }
+                objectiveSectionId
+                section {
+                  id
+                  sectionSheetId
+                  createdAt
+                  updatedOn
+                }
+                reviewee
+                createdAt
+                updatedOn
+              }
+              nextToken
+            }
+            category {
+              id
+              no
+              name
+              createdOn
+              updatedOn
+              company {
+                id
+                name
+                shortName
+                url
+                createdAt
+                updatedAt
+              }
+            }
+            createdAt
+            updatedOn
+          }
+          reviewee
+          createdAt
+          updatedOn
+        }
+        nextToken
+      }
+      category {
+        id
+        no
+        name
+        createdOn
+        updatedOn
+        company {
+          id
+          name
+          shortName
+          url
+          createdAt
+          updatedAt
+        }
+      }
+      createdAt
+      updatedOn
+    }
+  }
+`;
+export const listSections = /* GraphQL */ `
+  query ListSections(
+    $filter: ModelSectionFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listSections(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        sectionSheetId
+        objective {
+          items {
+            id
+            status
+            content
+            result
+            priority
+            selfEvaluation
+            firstEvaluation
+            lastEvaluation
+            sheet {
+              id
+              year
+              grade
+              careerPlan
+              careerPlanComment
+              reviewComment
+              reviewDate
+              selfCheckDate
+              firstComment
+              firstCheckDate
+              secondComment
+              secondCheckDate
+              overAllEvaluation
+              group {
+                id
+                group {
+                  id
+                  name
+                  createdOn
+                  updatedOn
+                }
+                name
+                createdOn
+                updatedOn
+                company {
+                  id
+                  name
+                  shortName
+                  url
+                  createdAt
+                  updatedAt
+                }
+              }
+              interviews {
+                items {
+                  id
+                  sheetId
+                  interviewDate
+                  detail
+                  reviewee
+                  createdAt
+                  updatedOn
+                }
+                nextToken
+              }
+              secondEmployee {
+                id
+                no
+                firstName
+                lastName
+                grade
+                superior {
+                  id
+                  no
+                  firstName
+                  lastName
+                  grade
+                  companyId
+                  createdAt
+                  updatedAt
+                }
+                companyId
+                createdAt
+                updatedAt
+                company {
+                  id
+                  name
+                  shortName
+                  url
+                  createdAt
+                  updatedAt
+                }
+              }
+              section {
+                items {
+                  id
+                  sectionSheetId
+                  createdAt
+                  updatedOn
+                }
+                nextToken
+              }
+              reviewee
+              createdAt
+              updatedOn
+              status {
+                id
+                no
+                name
+                createdAt
+                updatedAt
+              }
+              company {
+                id
+                name
+                shortName
+                url
+                createdAt
+                updatedAt
+              }
+            }
+            objectiveSectionId
+            section {
+              id
+              sectionSheetId
+              objective {
+                items {
+                  id
+                  status
+                  content
+                  result
+                  priority
+                  selfEvaluation
+                  firstEvaluation
+                  lastEvaluation
+                  objectiveSectionId
+                  reviewee
+                  createdAt
+                  updatedOn
+                }
+                nextToken
+              }
+              category {
+                id
+                no
+                name
+                createdOn
+                updatedOn
+                company {
+                  id
+                  name
+                  shortName
+                  url
+                  createdAt
+                  updatedAt
+                }
+              }
+              createdAt
+              updatedOn
+            }
+            reviewee
+            createdAt
+            updatedOn
+          }
+          nextToken
+        }
+        category {
+          id
+          no
+          name
+          createdOn
+          updatedOn
+          company {
+            id
+            name
+            shortName
+            url
+            createdAt
+            updatedAt
+          }
+        }
+        createdAt
+        updatedOn
+      }
+      nextToken
+    }
+  }
+`;
+export const getObjective = /* GraphQL */ `
+  query GetObjective($id: ID!) {
+    getObjective(id: $id) {
+      id
+      status
+      content
+      result
+      priority
+      selfEvaluation
+      firstEvaluation
+      lastEvaluation
+      sheet {
+        id
+        year
+        grade
+        careerPlan
+        careerPlanComment
+        reviewComment
+        reviewDate
+        selfCheckDate
+        firstComment
+        firstCheckDate
+        secondComment
+        secondCheckDate
+        overAllEvaluation
+        group {
+          id
+          group {
+            id
+            group {
+              id
+              group {
+                id
+                group {
+                  id
+                  name
+                  createdOn
+                  updatedOn
+                }
+                name
+                createdOn
+                updatedOn
+                company {
+                  id
+                  name
+                  shortName
+                  url
+                  createdAt
+                  updatedAt
+                }
+              }
+              name
+              createdOn
+              updatedOn
+              company {
+                id
+                name
+                shortName
+                url
+                createdAt
+                updatedAt
+              }
+            }
+            name
+            createdOn
+            updatedOn
+            company {
+              id
+              name
+              shortName
+              url
+              createdAt
+              updatedAt
+            }
+          }
+          name
+          createdOn
+          updatedOn
+          company {
+            id
+            name
+            shortName
+            url
+            createdAt
+            updatedAt
+          }
+        }
+        interviews {
+          items {
+            id
+            sheetId
+            interviewDate
+            detail
+            reviewee
+            createdAt
+            updatedOn
+          }
+          nextToken
+        }
+        secondEmployee {
+          id
+          no
+          firstName
+          lastName
+          grade
+          superior {
+            id
+            no
+            firstName
+            lastName
+            grade
+            superior {
+              id
+              no
+              firstName
+              lastName
+              grade
+              superior {
+                id
+                no
+                firstName
+                lastName
+                grade
+                superior {
+                  id
+                  no
+                  firstName
+                  lastName
+                  grade
+                  companyId
+                  createdAt
+                  updatedAt
+                }
+                companyId
+                createdAt
+                updatedAt
+                company {
+                  id
+                  name
+                  shortName
+                  url
+                  createdAt
+                  updatedAt
+                }
+              }
+              companyId
+              createdAt
+              updatedAt
+              company {
+                id
+                name
+                shortName
+                url
+                createdAt
+                updatedAt
+              }
+            }
+            companyId
+            createdAt
+            updatedAt
+            company {
+              id
+              name
+              shortName
+              url
+              createdAt
+              updatedAt
+            }
+          }
+          companyId
+          createdAt
+          updatedAt
+          company {
+            id
+            name
+            shortName
+            url
+            createdAt
+            updatedAt
+          }
+        }
+        section {
+          items {
+            id
+            sectionSheetId
+            objective {
+              items {
+                id
+                status
+                content
+                result
+                priority
+                selfEvaluation
+                firstEvaluation
+                lastEvaluation
+                sheet {
+                  id
+                  year
+                  grade
+                  careerPlan
+                  careerPlanComment
+                  reviewComment
+                  reviewDate
+                  selfCheckDate
+                  firstComment
+                  firstCheckDate
+                  secondComment
+                  secondCheckDate
+                  overAllEvaluation
+                  reviewee
+                  createdAt
+                  updatedOn
+                }
+                objectiveSectionId
+                section {
+                  id
+                  sectionSheetId
+                  createdAt
+                  updatedOn
+                }
+                reviewee
+                createdAt
+                updatedOn
+              }
+              nextToken
+            }
+            category {
+              id
+              no
+              name
+              createdOn
+              updatedOn
+              company {
+                id
+                name
+                shortName
+                url
+                createdAt
+                updatedAt
+              }
+            }
+            createdAt
+            updatedOn
+          }
+          nextToken
+        }
+        reviewee
+        createdAt
+        updatedOn
+        status {
+          id
+          no
+          name
+          createdAt
+          updatedAt
+        }
+        company {
+          id
+          name
+          shortName
+          url
+          createdAt
+          updatedAt
+        }
+      }
+      objectiveSectionId
+      section {
+        id
+        sectionSheetId
+        objective {
+          items {
+            id
+            status
+            content
+            result
+            priority
+            selfEvaluation
+            firstEvaluation
+            lastEvaluation
+            sheet {
+              id
+              year
+              grade
+              careerPlan
+              careerPlanComment
+              reviewComment
+              reviewDate
+              selfCheckDate
+              firstComment
+              firstCheckDate
+              secondComment
+              secondCheckDate
+              overAllEvaluation
+              group {
+                id
+                group {
+                  id
+                  name
+                  createdOn
+                  updatedOn
+                }
+                name
+                createdOn
+                updatedOn
+                company {
+                  id
+                  name
+                  shortName
+                  url
+                  createdAt
+                  updatedAt
+                }
+              }
+              interviews {
+                items {
+                  id
+                  sheetId
+                  interviewDate
+                  detail
+                  reviewee
+                  createdAt
+                  updatedOn
+                }
+                nextToken
+              }
+              secondEmployee {
+                id
+                no
+                firstName
+                lastName
+                grade
+                superior {
+                  id
+                  no
+                  firstName
+                  lastName
+                  grade
+                  companyId
+                  createdAt
+                  updatedAt
+                }
+                companyId
+                createdAt
+                updatedAt
+                company {
+                  id
+                  name
+                  shortName
+                  url
+                  createdAt
+                  updatedAt
+                }
+              }
+              section {
+                items {
+                  id
+                  sectionSheetId
+                  createdAt
+                  updatedOn
+                }
+                nextToken
+              }
+              reviewee
+              createdAt
+              updatedOn
+              status {
+                id
+                no
+                name
+                createdAt
+                updatedAt
+              }
+              company {
+                id
+                name
+                shortName
+                url
+                createdAt
+                updatedAt
+              }
+            }
+            objectiveSectionId
+            section {
+              id
+              sectionSheetId
+              objective {
+                items {
+                  id
+                  status
+                  content
+                  result
+                  priority
+                  selfEvaluation
+                  firstEvaluation
+                  lastEvaluation
+                  objectiveSectionId
+                  reviewee
+                  createdAt
+                  updatedOn
+                }
+                nextToken
+              }
+              category {
+                id
+                no
+                name
+                createdOn
+                updatedOn
+                company {
+                  id
+                  name
+                  shortName
+                  url
+                  createdAt
+                  updatedAt
+                }
+              }
+              createdAt
+              updatedOn
+            }
+            reviewee
+            createdAt
+            updatedOn
+          }
+          nextToken
+        }
+        category {
+          id
+          no
+          name
+          createdOn
+          updatedOn
+          company {
+            id
+            name
+            shortName
+            url
+            createdAt
+            updatedAt
+          }
+        }
+        createdAt
+        updatedOn
+      }
+      reviewee
+      createdAt
+      updatedOn
+    }
+  }
+`;
+export const listObjectives = /* GraphQL */ `
+  query ListObjectives(
+    $filter: ModelObjectiveFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listObjectives(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        status
+        content
+        result
+        priority
+        selfEvaluation
+        firstEvaluation
+        lastEvaluation
+        sheet {
+          id
+          year
+          grade
+          careerPlan
+          careerPlanComment
+          reviewComment
+          reviewDate
+          selfCheckDate
+          firstComment
+          firstCheckDate
+          secondComment
+          secondCheckDate
+          overAllEvaluation
+          group {
+            id
+            group {
+              id
+              group {
+                id
+                group {
+                  id
+                  name
+                  createdOn
+                  updatedOn
+                }
+                name
+                createdOn
+                updatedOn
+                company {
+                  id
+                  name
+                  shortName
+                  url
+                  createdAt
+                  updatedAt
+                }
+              }
+              name
+              createdOn
+              updatedOn
+              company {
+                id
+                name
+                shortName
+                url
+                createdAt
+                updatedAt
+              }
+            }
+            name
+            createdOn
+            updatedOn
+            company {
+              id
+              name
+              shortName
+              url
+              createdAt
+              updatedAt
+            }
+          }
+          interviews {
+            items {
+              id
+              sheetId
+              interviewDate
+              detail
+              reviewee
+              createdAt
+              updatedOn
+            }
+            nextToken
+          }
+          secondEmployee {
+            id
+            no
+            firstName
+            lastName
+            grade
+            superior {
+              id
+              no
+              firstName
+              lastName
+              grade
+              superior {
+                id
+                no
+                firstName
+                lastName
+                grade
+                superior {
+                  id
+                  no
+                  firstName
+                  lastName
+                  grade
+                  companyId
+                  createdAt
+                  updatedAt
+                }
+                companyId
+                createdAt
+                updatedAt
+                company {
+                  id
+                  name
+                  shortName
+                  url
+                  createdAt
+                  updatedAt
+                }
+              }
+              companyId
+              createdAt
+              updatedAt
+              company {
+                id
+                name
+                shortName
+                url
+                createdAt
+                updatedAt
+              }
+            }
+            companyId
+            createdAt
+            updatedAt
+            company {
+              id
+              name
+              shortName
+              url
+              createdAt
+              updatedAt
+            }
+          }
+          section {
+            items {
+              id
+              sectionSheetId
+              objective {
+                items {
+                  id
+                  status
+                  content
+                  result
+                  priority
+                  selfEvaluation
+                  firstEvaluation
+                  lastEvaluation
+                  objectiveSectionId
+                  reviewee
+                  createdAt
+                  updatedOn
+                }
+                nextToken
+              }
+              category {
+                id
+                no
+                name
+                createdOn
+                updatedOn
+                company {
+                  id
+                  name
+                  shortName
+                  url
+                  createdAt
+                  updatedAt
+                }
+              }
+              createdAt
+              updatedOn
+            }
+            nextToken
+          }
+          reviewee
+          createdAt
+          updatedOn
+          status {
+            id
+            no
+            name
+            createdAt
+            updatedAt
+          }
+          company {
+            id
+            name
+            shortName
+            url
+            createdAt
+            updatedAt
+          }
+        }
+        objectiveSectionId
+        section {
+          id
+          sectionSheetId
+          objective {
+            items {
+              id
+              status
+              content
+              result
+              priority
+              selfEvaluation
+              firstEvaluation
+              lastEvaluation
+              sheet {
+                id
+                year
+                grade
+                careerPlan
+                careerPlanComment
+                reviewComment
+                reviewDate
+                selfCheckDate
+                firstComment
+                firstCheckDate
+                secondComment
+                secondCheckDate
+                overAllEvaluation
+                group {
+                  id
+                  name
+                  createdOn
+                  updatedOn
+                }
+                interviews {
+                  nextToken
+                }
+                secondEmployee {
+                  id
+                  no
+                  firstName
+                  lastName
+                  grade
+                  companyId
+                  createdAt
+                  updatedAt
+                }
+                section {
+                  nextToken
+                }
+                reviewee
+                createdAt
+                updatedOn
+                status {
+                  id
+                  no
+                  name
+                  createdAt
+                  updatedAt
+                }
+                company {
+                  id
+                  name
+                  shortName
+                  url
+                  createdAt
+                  updatedAt
+                }
+              }
+              objectiveSectionId
+              section {
+                id
+                sectionSheetId
+                objective {
+                  nextToken
+                }
+                category {
+                  id
+                  no
+                  name
+                  createdOn
+                  updatedOn
+                }
+                createdAt
+                updatedOn
+              }
+              reviewee
+              createdAt
+              updatedOn
+            }
+            nextToken
+          }
+          category {
+            id
+            no
+            name
+            createdOn
+            updatedOn
+            company {
+              id
+              name
+              shortName
+              url
+              createdAt
+              updatedAt
+            }
+          }
+          createdAt
+          updatedOn
+        }
         reviewee
         createdAt
         updatedOn
@@ -198,211 +2372,6 @@ export const getCompany = /* GraphQL */ `
       url
       createdAt
       updatedAt
-    }
-  }
-`;
-export const listGroups = /* GraphQL */ `
-  query ListGroups(
-    $filter: ModelGroupFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listGroups(filter: $filter, limit: $limit, nextToken: $nextToken) {
-      items {
-        id
-        name
-        createdOn
-        updatedOn
-      }
-      nextToken
-    }
-  }
-`;
-export const getGroup = /* GraphQL */ `
-  query GetGroup($id: ID!) {
-    getGroup(id: $id) {
-      id
-      name
-      createdOn
-      updatedOn
-      company {
-        id
-        name
-        shortName
-        url
-        createdAt
-        updatedAt
-      }
-      group {
-        id
-        name
-        createdOn
-        updatedOn
-      }
-    }
-  }
-`;
-export const listCategorys = /* GraphQL */ `
-  query ListCategorys(
-    $filter: ModelCategoryFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listCategorys(filter: $filter, limit: $limit, nextToken: $nextToken) {
-      items {
-        id
-        no
-        name
-        createdOn
-        updatedOn
-      }
-      nextToken
-    }
-  }
-`;
-export const getCategory = /* GraphQL */ `
-  query GetCategory($id: ID!) {
-    getCategory(id: $id) {
-      id
-      no
-      name
-      createdOn
-      updatedOn
-      company {
-        id
-        name
-        shortName
-        url
-        createdAt
-        updatedAt
-      }
-    }
-  }
-`;
-export const getInterview = /* GraphQL */ `
-  query GetInterview($id: ID!) {
-    getInterview(id: $id) {
-      id
-      sheetId
-      interviewDate
-      detail
-      reviewee
-      createdAt
-      updatedOn
-    }
-  }
-`;
-export const listInterviews = /* GraphQL */ `
-  query ListInterviews(
-    $filter: ModelInterviewFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listInterviews(filter: $filter, limit: $limit, nextToken: $nextToken) {
-      items {
-        id
-        sheetId
-        interviewDate
-        detail
-        reviewee
-        createdAt
-        updatedOn
-      }
-      nextToken
-    }
-  }
-`;
-export const getSection = /* GraphQL */ `
-  query GetSection($id: ID!) {
-    getSection(id: $id) {
-      id
-      sectionSheetId
-      sectionCategoryId
-      createdAt
-      updatedOn
-    }
-  }
-`;
-export const listSections = /* GraphQL */ `
-  query ListSections(
-    $filter: ModelSectionFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listSections(filter: $filter, limit: $limit, nextToken: $nextToken) {
-      items {
-        id
-        sectionSheetId
-        sectionCategoryId
-        createdAt
-        updatedOn
-      }
-      nextToken
-    }
-  }
-`;
-export const getObjective = /* GraphQL */ `
-  query GetObjective($id: ID!) {
-    getObjective(id: $id) {
-      id
-      status
-      content
-      result
-      priority
-      selfEvaluation
-      firstEvaluation
-      lastEvaluation
-      sheet {
-        id
-        year
-        grade
-        careerPlan
-        careerPlanComment
-        reviewComment
-        reviewDate
-        selfCheckDate
-        firstComment
-        firstCheckDate
-        secondCheckDate
-        overAllEvaluation
-        reviewee
-        createdAt
-        updatedOn
-      }
-      reviewee
-      createdAt
-      updatedOn
-      category {
-        id
-        no
-        name
-        createdOn
-        updatedOn
-      }
-    }
-  }
-`;
-export const listObjectives = /* GraphQL */ `
-  query ListObjectives(
-    $filter: ModelObjectiveFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listObjectives(filter: $filter, limit: $limit, nextToken: $nextToken) {
-      items {
-        id
-        status
-        content
-        result
-        priority
-        selfEvaluation
-        firstEvaluation
-        lastEvaluation
-        reviewee
-        createdAt
-        updatedOn
-      }
-      nextToken
     }
   }
 `;

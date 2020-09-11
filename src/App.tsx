@@ -6,6 +6,9 @@ import { withAuthenticator, AmplifySignOut, AmplifyAuthenticator } from '@aws-am
 import Amplify, { Auth } from 'aws-amplify';
 import awsconfig from './aws-exports';
 
+//Type
+import * as APIt from 'API';
+
 //カスタムコンポーネント
 import RevieweeSheetShow from "reviewee/sheet/index/index"
 import RevieweeSheetNew from "reviewee/sheet/new/index"
@@ -14,6 +17,9 @@ import ProgressReferenceList from 'reviewer/list/progress';
 import EvalutionScreen from "reviewer/sheet/detail";
 Amplify.configure(awsconfig);
 
+export type Sheet = Omit<Exclude<APIt.GetSheetQuery['getSheet'], null>, '__typename'>;
+export type Objective = Omit<Exclude<APIt.GetObjectiveQuery['getObjective'], null>, '__typename'>;
+export type Section = Omit<Exclude<APIt.GetSectionQuery['getSection'], null>, '__typename'>;
 
 
 function Portal(){

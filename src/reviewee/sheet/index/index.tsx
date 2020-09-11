@@ -1,15 +1,54 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Container, Row, Col, Table, Button, Modal } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Link } from 'react-router-dom';
+import { GraphQLResult } from "@aws-amplify/api";
+import  {  API, graphqlOperation } from 'aws-amplify';
 //import {BrowserRouter, Route, Link, Switch } from "react-router-dom";
+import {getSheet, getSection} from 'graphql/queries'
+import { Sheet, Section, Objective } from 'App';
+import {GetSheetQuery} from 'API';
+import * as APIt from 'API';
+import dateFormat from 'dateformat'
 
-function RevieweeSheetShow() {
+type Props = {
+    match: {
+        params: {
+            sheetId: string
+        }
+    }
+}
+
+function RevieweeSheetShow(props: Props) {
+    //モーダル
     const [show, setShow] = useState(false);
-
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
-    
+
+    //表示用データ
+    const [sheet, setSheet] = useState<Sheet>()
+
+    useEffect(() => {
+        ;(async()=>{
+            //URLのパラメータを取得
+            const sheetId = props.match.params.sheetId;
+
+            const input: APIt.GetSheetQueryVariables = {
+                id: sheetId
+            }
+            const response = (await API.graphql(graphqlOperation(getSheet, input))
+            )as GraphQLResult<GetSheetQuery>;
+            const sheet: Sheet = response.data?.getSheet as Sheet;
+            setSheet(sheet);
+            console.log(response);
+        })()
+      },[]);
+
+    if(sheet===undefined) return <p>Loading</p>
+    else if(sheet === null){
+        console.log("sheet not found.");
+        return <p>該当のシートは存在しません</p>
+    }
     return (
         <div>
             {/* サイドバーのコンポーネントを配置する */}
@@ -71,53 +110,57 @@ function RevieweeSheetShow() {
                         </Button>
                     </Link>
 
-                    {/* 繰り返しコンポーネント */}
-                    <h4>ビジネス成果目標</h4>
-                    <Table  striped bordered hover>
-                        <thead>
-                            <tr>
-                                <td>#</td>
-                                <td>目標</td>
-                                <td>実績</td>
-                                <td>ステータス</td>
-                                <td>自己評価</td>
-                                <td>最終評価</td>
-                                <td>更新日時</td>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>
-                                    <Button variant="primary" onClick={handleShow}>変更</Button>
-                                </td>
-                                <td>A社でのOJTを着実に実施し、有償稼働できる状況にする。</td>
-                                <td>A社での保守作業に１０月から有償で参加することができた</td>
-                                <td>実施完了</td>
-                                <td>4</td>
-                                <td>4</td>
-                                <td>2020/08/01 14:33</td>
-                            </tr>
-                            <tr>
-                                <td><a>変更</a></td>
-                                <td> A社SAP運用保守に有償で参加し、与えられた仕事に対して指導を受けながら成果を出す。</td>
-                                <td>A社A社SAP運用保守に１０月から有償で参加し、指導を受けながら活動した。不明な点は自分で調査した上で相手に確認する等、期待通りの成果をあげた。積極的な仕事への取り組みはお客様からも評価されている。</td>
-                                <td>実施完了</td>
-                                <td>3</td>
-                                <td>4</td>
-                                <td>2020/08/02 15:30</td>
-                            </tr>
-                        </tbody>
-                    </Table>
+                    {sheet.section?.items?.map((arg: any) => {
+                        const section: Section = arg    //仮の型変換処理
+                        return (
+                            <div key={section.id}>
+                                <h4>{section.category?.name}</h4>
+                                <Table  striped bordered hover>
+                                    <thead>
+                                        <tr>
+                                            <td>#</td>
+                                            <td>目標</td>
+                                            <td>実績</td>
+                                            <td>ステータス</td>
+                                            <td>自己評価</td>
+                                            <td>最終評価</td>
+                                            <td>更新日時</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {section.objective?.items?.map((arg: any)=>{
+                                            const objective: Objective = arg;   //仮の型変換処理
+                                            const date = new Date(objective.updatedOn);
+                                            return (
+                                                <tr key={objective.id}>
+                                                    <td>
+                                                        <Button variant="primary" onClick={handleShow}>変更</Button>
+                                                    </td>
+                                                    <td>{objective.content}</td>
+                                                    <td>{objective.result}</td>
+                                                    <td>{objective.status}</td>
+                                                    <td>{objective.selfEvaluation}</td>
+                                                    <td>{objective.lastEvaluation}</td>
+                                                    <td>{dateFormat(date, "yyyy/mm/dd HH:MM")}</td>
+                                                </tr>                                            
+                                            )
+                                        })}
+                                    </tbody>
+                                </Table>
+                            </div>
+                        )
+                    })}
+          
                     <h4>キャリア計画</h4>
                     <Row>
                         <Col>
                             <h5>本員希望</h5>
                             <Button variant="info">変更</Button>
-                            <p>様々なスキルを身につけ、早く一人前のSEになりたい。SEの経験を積んだ後も将来はコンサルタントを目指したい。</p>
+                            <p>{sheet.careerPlan}</p>
                         </Col>
                         <Col>
                             <h5>話し合い結果</h5>
-                            <p>与えられた仕事をこなすだけでなく、周りの人の仕事にも注意を払い、余裕のある時は手伝いを申し出る等により幅広い経験をして欲しい。コンサルタントを目指すためには常にお客様の視点を意識して仕事をして欲しい。</p>
+                            <p>{sheet.careerPlanComment}</p>
                         </Col>
                     </Row>
                     <Button variant="success">所属長提出</Button>
@@ -125,14 +168,14 @@ function RevieweeSheetShow() {
                     <Row>
                         <Col>
                             <h5>所属長コメント</h5>
-                            <p>ほぼ予定通りの時期に優勝活動を開始できた。仕事にも真面目に取り組みチームメンバーやお客様からも信頼され始めている。お客様満足度がやや低下してしまったことは残念だが、低下の原因をチーム全員で話し合って今後の満足度改善につなげていってほしい。</p>
+                            <p>{sheet.secondComment}</p>
                         </Col>
                         <Col>
                             <h5>部門長</h5>
-                            <p>〜〜〜</p>
+                            <p>{sheet.firstComment}</p>
                         </Col>
                     </Row>
-                    <h4>総合評価 3</h4>
+                    <h4>総合評価 {sheet.overAllEvaluation}</h4>
                 </Container>
             </div>
         </div>
