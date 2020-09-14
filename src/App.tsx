@@ -45,7 +45,7 @@ function App() {
           <Route exact path="/reviewee/sheet/:sheetId" component={RevieweeSheetShow} />
           <Route exact path="/reviewee/list" component={ListPerformanceEvalution} />
           <Route exact path="/reviewer/list" component={ProgressReferenceList} />
-          <Route exact path="/reviewer/sheet" component={EvalutionScreen} />
+          <Route exact path="/reviewer/sheet/:sheetId" component={EvalutionScreen} />
         </Switch>
       </BrowserRouter>
     </div>

@@ -1,12 +1,56 @@
 import React ,{useState} from 'react';
 import { Container, InputGroup, Table, FormControl, Form, Button, DropdownButton, Dropdown, Modal } from 'react-bootstrap';
 // import DropdownItem from 'react-bootstrap/esm/DropdownItem';
+import { RouteComponentProps } from 'react-router';
+import * as APIt from 'API';
+import API, {GraphQLResult, graphqlOperation} 
+  from '@aws-amplify/api';
+import {updateSheet} 
+  from 'graphql/mutations';
+import {Sheet}
+  from 'App';
 
-function EvalutionScreen() {
+
+//propsの型を指定
+type Props = {
+    match: {
+        params: {
+            sheetId: string
+        }
+    }
+}
+
+
+function EvalutionScreen(props:Props) {
+
     const [show, setShow] = useState(false);
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+
+    const sheetId = props.match.params.sheetId;
+    console.log(sheetId);  
+
+    function HandleUpdateStatus(){
+        (async()=>{
+        //ステータスを「目標：設定中」に変更
+        const updateI: APIt.UpdateSheetInput = 
+        {id:sheetId, sheetStatusId: 'c5c847a3-e919-4133-89c5-747049c4a050'};
+        const updateMV: APIt.UpdateSheetMutationVariables = {
+            input: updateI,
+        };
+        const updateR: GraphQLResult<APIt.UpdateSheetMutation> = 
+        await API.graphql(graphqlOperation(updateSheet, updateMV)) as GraphQLResult<APIt.UpdateSheetMutation>;
+
+        if (updateR.data) {
+            const updateTM: APIt.UpdateSheetMutation = updateR.data;
+            if (updateTM.updateSheet) {
+                const sheet: Sheet = updateTM.updateSheet;
+                console.log('UpdateSheet:', sheet);
+            }
+        }})()
+        handleClose();
+    }
 
     return (
         <div>
@@ -27,7 +71,8 @@ function EvalutionScreen() {
                         </InputGroup>
                     </Modal.Body>
                     <Modal.Footer>
-                        <Button variant="primary" onClick={handleClose}>
+                        {/* <Button variant="primary" onClick={handleClose}> */}
+                        <Button variant="primary" onClick={HandleUpdateStatus}>
                             差し戻し
                         </Button>
                         <Button variant="secondary" onClick={handleClose}>
