@@ -10,6 +10,8 @@ import { Sheet, Section, Objective } from 'App';
 import {GetSheetQuery} from 'API';
 import * as APIt from 'API';
 import dateFormat from 'dateformat'
+import {updateObjective} 
+  from 'graphql/mutations';
 
 type Props = {
     match: {
@@ -19,11 +21,77 @@ type Props = {
     }
 }
 
+type formType = {
+    content:string,
+    status:string
+}
+
+
+
 function RevieweeSheetShow(props: Props) {
     //モーダル
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+
+    const [changeObjectiveId, setObjectiveId] = useState<Array<any> | any>();
+    function HandleChange(event: any){
+        console.log(event.target.getAttribute('data-objectiveId'));
+        setObjectiveId(event.target.getAttribute('data-objectiveId'));
+        handleShow();
+
+    }
+    
+    const [formInput, setFormInput] = useState<any>()
+    function handleChange(event:any){
+        const target = event.target;
+        const value = target.type === 'checkbox' ? target.checked : target.value;
+        const name: string = target.name;
+        
+        // const tmpInput: object = formInput as object;
+        // tmpInput[name] = value;
+        setFormInput({
+            ...formInput, [name]: value
+          });
+        console.log(formInput)
+
+    }
+
+    
+
+
+    //objectiveの更新
+    function HandleUpdateObject(){
+        (async()=>{
+        const objectiveId = changeObjectiveId;
+        //目標変更の目標、ステータス、自己評価、優先順位、実績を項目明細に上書き
+        const updateI: APIt.UpdateObjectiveInput = 
+        {id:objectiveId, content: formInput.content, status:formInput.status, selfEvaluation:3, priority:'', result:'' };
+        const updateMV: APIt.UpdateObjectiveMutationVariables = {
+            input: updateI,
+        };
+        const updateR: GraphQLResult<APIt.UpdateObjectiveMutation> = 
+        await API.graphql(graphqlOperation(updateObjective, updateMV)) as GraphQLResult<APIt.UpdateObjectiveMutation>;
+
+        if (updateR.data) {
+            const updateTM: APIt.UpdateObjectiveMutation = updateR.data;
+            if (updateTM.updateObjective) {
+                const objective: Objective = updateTM.updateObjective;
+                console.log('UpdateObjective:', objective);
+            }
+        }
+        // if(sheet && sheet.section){
+        //     sheet.section.items.forEach(section => {
+        //         section.objective.forEach(objective => {
+        //             sheet.section.items.objective.id
+        //         });
+                
+        //     });
+        // }
+    }
+        )()
+        handleClose();
+    }
 
     //表示用データ
     const [sheet, setSheet] = useState<Sheet>()
@@ -61,15 +129,15 @@ function RevieweeSheetShow(props: Props) {
                     <Modal.Body>
                         <Row>
                             <Col>目標</Col>
-                            <Col><input type="text" /> </Col>
+                            <Col><input type="text" onChange={handleChange} name="content"/> </Col>
                         </Row>
                         <Row>
                             <Col>ステータス</Col>
                             <Col>
-                                <select>
-                                    <option value="">実施前</option>
-                                    <option value="">実施中</option>
-                                    <option value="">実施完了</option>
+                                <select onChange={handleChange} name="status">
+                                    <option value="実施前">実施前</option>
+                                    <option value="実施中">実施中</option>
+                                    <option value="実施完了">実施完了</option>
                                 </select>
                             </Col>
                         </Row>
@@ -86,6 +154,16 @@ function RevieweeSheetShow(props: Props) {
                             </Col>
                         </Row>
                         <Row>
+                            <Col>優先順位</Col>
+                            <Col>
+                                <select>
+                                    <option value="">A</option>
+                                    <option value="">B</option>
+                                    <option value="">C</option>
+                                </select>
+                            </Col>
+                        </Row>
+                        <Row>
                             <Col>実績</Col>
                             <Col><input type="text" /> </Col>
                         </Row>
@@ -94,7 +172,7 @@ function RevieweeSheetShow(props: Props) {
                     <Button variant="secondary" onClick={handleClose}>
                         Close
                     </Button>
-                    <Button variant="primary" onClick={handleClose}>
+                    <Button variant="primary" onClick={HandleUpdateObject}>
                         Save Changes
                     </Button>
                     </Modal.Footer>
@@ -122,6 +200,7 @@ function RevieweeSheetShow(props: Props) {
                                             <td>目標</td>
                                             <td>実績</td>
                                             <td>ステータス</td>
+                                            <td>優先順位</td>
                                             <td>自己評価</td>
                                             <td>最終評価</td>
                                             <td>更新日時</td>
@@ -134,11 +213,12 @@ function RevieweeSheetShow(props: Props) {
                                             return (
                                                 <tr key={objective.id}>
                                                     <td>
-                                                        <Button variant="primary" onClick={handleShow}>変更</Button>
+                                                        <Button variant="primary" data-objectiveId={objective.id} onClick={HandleChange}>変更</Button>
                                                     </td>
                                                     <td>{objective.content}</td>
                                                     <td>{objective.result}</td>
                                                     <td>{objective.status}</td>
+                                                    <td>{objective.priority}</td>
                                                     <td>{objective.selfEvaluation}</td>
                                                     <td>{objective.lastEvaluation}</td>
                                                     <td>{dateFormat(date, "yyyy/mm/dd HH:MM")}</td>
