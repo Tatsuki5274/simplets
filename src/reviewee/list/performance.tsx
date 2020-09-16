@@ -4,6 +4,7 @@ import { Container, Table } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { GraphQLResult } from "@aws-amplify/api";
 import { ListSheetsQuery } from 'API';
+import { Link } from 'react-router-dom';
 //import {listSheets} from 'graphql/queries'
 
 
@@ -61,14 +62,16 @@ function ListPerformanceEvalution() {
                                 if(sheet.status.name as string === "評価：完了"){
                                     editName = "確認";
                                 }
-                                return <tr>
-                                    <td><a href={"/reviewee/sheet/"+sheet.id}>{editName}</a></td>
-                                <td>{sheet.year}</td>
-                                <td>{sheet.secondEmployee.lastName}{sheet.secondEmployee.firstName}</td>
-                                <td>{sheet.status.name}</td>
-                                <td>{sheet.overAllEvaluation}</td>
-                                <td><a href="">プレビュー</a></td>
-                            </tr>
+                                return (
+                                    <tr>
+                                        <td><Link to={"/reviewee/sheet/"+sheet.id}>{editName}</Link></td>
+                                        <td>{sheet.year}</td>
+                                        <td>{sheet.secondEmployee.lastName}{sheet.secondEmployee.firstName}</td>
+                                        <td>{sheet.status.name}</td>
+                                        <td>{sheet.overAllEvaluation}</td>
+                                        <td><a href="">プレビュー</a></td>
+                                    </tr>
+                                )
                             })}
                         </tbody>
                     </Table>
