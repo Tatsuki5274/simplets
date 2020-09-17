@@ -21,6 +21,19 @@ export type Sheet = Omit<Exclude<APIt.GetSheetQuery['getSheet'], null>, '__typen
 export type Objective = Omit<Exclude<APIt.GetObjectiveQuery['getObjective'], null>, '__typename'>;
 export type Section = Omit<Exclude<APIt.GetSectionQuery['getSection'], null>, '__typename'>;
 
+//approvalStatusManagerの引数の型
+export type approvalStatusManagerMutationVariables = {
+  // proceed = ステータスを次へ移動   remand = 差し戻し   reference = ステータスの参照
+  action: "proceed" | "remand",
+  sheetId: number
+};
+export type approvalStatusManagerMutationResult = {
+  result: "success" | "faild"
+  statusCode: number  //通信のステータスコード 基本的に200
+  message?: String
+  error?: String  //エラー時のメッセージを格納
+}
+
 
 function Portal(){
   //一時的な実装。将来的には置き換える。

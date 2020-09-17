@@ -135,8 +135,18 @@ type Sheet
   interviews: [Interview] @connection(keyName: "bySheet", fields: ["id"])
   company: Company @connection
   secondEmployee: Employee @connection  #所属長
-  status: ApprovalStatus @connection    #承認ステータス
+  # status: ApprovalStatus @connection    #承認ステータス
   section: [Section] @connection(keyName: "bySection", fields: ["id"])  #カテゴリセクション
+
+  statusValue: Int  #承認ステータス値（読み取り禁止）
+    @auth(rules:[
+      { allow: groups, groups: ["Root"]}
+      {allow: private, provider: iam}
+      {allow: private, operations: [read]}
+    ])
+
+  status: String  #承認ステータスを返す関数
+    @function(name: "approvalStatusReferencer-${env}")
 
   reviewee: String #被評価者　オーナーフィールド
 }
@@ -186,9 +196,22 @@ type Objective
 
 # type Query {
 #   #listSheetsLtGrade: String @function(name: "listSheetsLtGrade-${env}")
-#   listSheetsLtGrade: [Sheet] @function(name: "listSheetsLtGrade-${env}")
-#     @auth(rules:[
-#       {allow: groups, groups: ["Root", "Manager"]}
-#       {allow: private, operations: []}
-#     ])
+#   # listSheetsLtGrade: [Sheet] @function(name: "listSheetsLtGrade-${env}")
+#   #   @auth(rules:[
+#   #     {allow: groups, groups: ["Root", "Manager"]}
+#   #     {allow: private, operations: []}
+#   #   ])
+#   # approvalStatusReferencer(sheetId: String): String @function(name: "approvalStatusReferencer-${env}")
+#   #   @auth(rules:[
+#   #     {allow: private}
+#   #   ])
 # }
+
+
+type Mutation{
+  approvalStatusManager(action: String, sheetId: String): String @function(name: "approvalStatusManager-${env}")
+    @auth(rules:[
+      {allow: private}
+    ])
+}
+

@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "auth": {
+      "sccsystem2e3482086": [
+        "read"
+      ]
+    },
+    "api": {
+      "sccgql": [
+        "read"
+      ]
+    }
+  },
+  "lambdaLayers": []
+  ,"apisccgqlGraphQLAPIIdOutput": "",
+  "apisccgqlGraphQLAPIEndpointOutput": ""
+}

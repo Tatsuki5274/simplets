@@ -1000,16 +1000,10 @@ export const onCreateSheet = /* GraphQL */ `
                 section {
                   nextToken
                 }
+                status
                 reviewee
                 createdAt
                 updatedOn
-                status {
-                  id
-                  no
-                  name
-                  createdAt
-                  updatedAt
-                }
                 company {
                   id
                   name
@@ -1018,6 +1012,7 @@ export const onCreateSheet = /* GraphQL */ `
                   createdAt
                   updatedAt
                 }
+                statusValue
               }
               objectiveSectionId
               section {
@@ -1062,16 +1057,10 @@ export const onCreateSheet = /* GraphQL */ `
         }
         nextToken
       }
+      status
       reviewee
       createdAt
       updatedOn
-      status {
-        id
-        no
-        name
-        createdAt
-        updatedAt
-      }
       company {
         id
         name
@@ -1080,6 +1069,7 @@ export const onCreateSheet = /* GraphQL */ `
         createdAt
         updatedAt
       }
+      statusValue
     }
   }
 `;
@@ -1337,16 +1327,10 @@ export const onUpdateSheet = /* GraphQL */ `
                 section {
                   nextToken
                 }
+                status
                 reviewee
                 createdAt
                 updatedOn
-                status {
-                  id
-                  no
-                  name
-                  createdAt
-                  updatedAt
-                }
                 company {
                   id
                   name
@@ -1355,6 +1339,7 @@ export const onUpdateSheet = /* GraphQL */ `
                   createdAt
                   updatedAt
                 }
+                statusValue
               }
               objectiveSectionId
               section {
@@ -1399,16 +1384,10 @@ export const onUpdateSheet = /* GraphQL */ `
         }
         nextToken
       }
+      status
       reviewee
       createdAt
       updatedOn
-      status {
-        id
-        no
-        name
-        createdAt
-        updatedAt
-      }
       company {
         id
         name
@@ -1417,6 +1396,7 @@ export const onUpdateSheet = /* GraphQL */ `
         createdAt
         updatedAt
       }
+      statusValue
     }
   }
 `;
@@ -1674,16 +1654,10 @@ export const onDeleteSheet = /* GraphQL */ `
                 section {
                   nextToken
                 }
+                status
                 reviewee
                 createdAt
                 updatedOn
-                status {
-                  id
-                  no
-                  name
-                  createdAt
-                  updatedAt
-                }
                 company {
                   id
                   name
@@ -1692,6 +1666,7 @@ export const onDeleteSheet = /* GraphQL */ `
                   createdAt
                   updatedAt
                 }
+                statusValue
               }
               objectiveSectionId
               section {
@@ -1736,16 +1711,10 @@ export const onDeleteSheet = /* GraphQL */ `
         }
         nextToken
       }
+      status
       reviewee
       createdAt
       updatedOn
-      status {
-        id
-        no
-        name
-        createdAt
-        updatedAt
-      }
       company {
         id
         name
@@ -1754,6 +1723,7 @@ export const onDeleteSheet = /* GraphQL */ `
         createdAt
         updatedAt
       }
+      statusValue
     }
   }
 `;
@@ -1897,16 +1867,10 @@ export const onCreateSection = /* GraphQL */ `
               }
               nextToken
             }
+            status
             reviewee
             createdAt
             updatedOn
-            status {
-              id
-              no
-              name
-              createdAt
-              updatedAt
-            }
             company {
               id
               name
@@ -1915,6 +1879,7 @@ export const onCreateSection = /* GraphQL */ `
               createdAt
               updatedAt
             }
+            statusValue
           }
           objectiveSectionId
           section {
@@ -1944,9 +1909,11 @@ export const onCreateSection = /* GraphQL */ `
                   secondComment
                   secondCheckDate
                   overAllEvaluation
+                  status
                   reviewee
                   createdAt
                   updatedOn
+                  statusValue
                 }
                 objectiveSectionId
                 section {
@@ -2145,16 +2112,10 @@ export const onUpdateSection = /* GraphQL */ `
               }
               nextToken
             }
+            status
             reviewee
             createdAt
             updatedOn
-            status {
-              id
-              no
-              name
-              createdAt
-              updatedAt
-            }
             company {
               id
               name
@@ -2163,6 +2124,7 @@ export const onUpdateSection = /* GraphQL */ `
               createdAt
               updatedAt
             }
+            statusValue
           }
           objectiveSectionId
           section {
@@ -2192,9 +2154,11 @@ export const onUpdateSection = /* GraphQL */ `
                   secondComment
                   secondCheckDate
                   overAllEvaluation
+                  status
                   reviewee
                   createdAt
                   updatedOn
+                  statusValue
                 }
                 objectiveSectionId
                 section {
@@ -2393,16 +2357,10 @@ export const onDeleteSection = /* GraphQL */ `
               }
               nextToken
             }
+            status
             reviewee
             createdAt
             updatedOn
-            status {
-              id
-              no
-              name
-              createdAt
-              updatedAt
-            }
             company {
               id
               name
@@ -2411,6 +2369,7 @@ export const onDeleteSection = /* GraphQL */ `
               createdAt
               updatedAt
             }
+            statusValue
           }
           objectiveSectionId
           section {
@@ -2440,9 +2399,11 @@ export const onDeleteSection = /* GraphQL */ `
                   secondComment
                   secondCheckDate
                   overAllEvaluation
+                  status
                   reviewee
                   createdAt
                   updatedOn
+                  statusValue
                 }
                 objectiveSectionId
                 section {
@@ -2710,9 +2671,11 @@ export const onCreateObjective = /* GraphQL */ `
                   secondComment
                   secondCheckDate
                   overAllEvaluation
+                  status
                   reviewee
                   createdAt
                   updatedOn
+                  statusValue
                 }
                 objectiveSectionId
                 section {
@@ -2747,16 +2710,10 @@ export const onCreateObjective = /* GraphQL */ `
           }
           nextToken
         }
+        status
         reviewee
         createdAt
         updatedOn
-        status {
-          id
-          no
-          name
-          createdAt
-          updatedAt
-        }
         company {
           id
           name
@@ -2765,6 +2722,7 @@ export const onCreateObjective = /* GraphQL */ `
           createdAt
           updatedAt
         }
+        statusValue
       }
       objectiveSectionId
       section {
@@ -2863,16 +2821,10 @@ export const onCreateObjective = /* GraphQL */ `
                 }
                 nextToken
               }
+              status
               reviewee
               createdAt
               updatedOn
-              status {
-                id
-                no
-                name
-                createdAt
-                updatedAt
-              }
               company {
                 id
                 name
@@ -2881,6 +2833,7 @@ export const onCreateObjective = /* GraphQL */ `
                 createdAt
                 updatedAt
               }
+              statusValue
             }
             objectiveSectionId
             section {
@@ -3160,9 +3113,11 @@ export const onUpdateObjective = /* GraphQL */ `
                   secondComment
                   secondCheckDate
                   overAllEvaluation
+                  status
                   reviewee
                   createdAt
                   updatedOn
+                  statusValue
                 }
                 objectiveSectionId
                 section {
@@ -3197,16 +3152,10 @@ export const onUpdateObjective = /* GraphQL */ `
           }
           nextToken
         }
+        status
         reviewee
         createdAt
         updatedOn
-        status {
-          id
-          no
-          name
-          createdAt
-          updatedAt
-        }
         company {
           id
           name
@@ -3215,6 +3164,7 @@ export const onUpdateObjective = /* GraphQL */ `
           createdAt
           updatedAt
         }
+        statusValue
       }
       objectiveSectionId
       section {
@@ -3313,16 +3263,10 @@ export const onUpdateObjective = /* GraphQL */ `
                 }
                 nextToken
               }
+              status
               reviewee
               createdAt
               updatedOn
-              status {
-                id
-                no
-                name
-                createdAt
-                updatedAt
-              }
               company {
                 id
                 name
@@ -3331,6 +3275,7 @@ export const onUpdateObjective = /* GraphQL */ `
                 createdAt
                 updatedAt
               }
+              statusValue
             }
             objectiveSectionId
             section {
@@ -3610,9 +3555,11 @@ export const onDeleteObjective = /* GraphQL */ `
                   secondComment
                   secondCheckDate
                   overAllEvaluation
+                  status
                   reviewee
                   createdAt
                   updatedOn
+                  statusValue
                 }
                 objectiveSectionId
                 section {
@@ -3647,16 +3594,10 @@ export const onDeleteObjective = /* GraphQL */ `
           }
           nextToken
         }
+        status
         reviewee
         createdAt
         updatedOn
-        status {
-          id
-          no
-          name
-          createdAt
-          updatedAt
-        }
         company {
           id
           name
@@ -3665,6 +3606,7 @@ export const onDeleteObjective = /* GraphQL */ `
           createdAt
           updatedAt
         }
+        statusValue
       }
       objectiveSectionId
       section {
@@ -3763,16 +3705,10 @@ export const onDeleteObjective = /* GraphQL */ `
                 }
                 nextToken
               }
+              status
               reviewee
               createdAt
               updatedOn
-              status {
-                id
-                no
-                name
-                createdAt
-                updatedAt
-              }
               company {
                 id
                 name
@@ -3781,6 +3717,7 @@ export const onDeleteObjective = /* GraphQL */ `
                 createdAt
                 updatedAt
               }
+              statusValue
             }
             objectiveSectionId
             section {
