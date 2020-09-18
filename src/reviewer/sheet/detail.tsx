@@ -32,23 +32,23 @@ function EvalutionScreen(props:Props) {
     console.log(sheetId);  
 
     function HandleUpdateStatus(){
-        (async()=>{
-        //ステータスを「目標：設定中」に変更
-        const updateI: APIt.UpdateSheetInput = 
-        {id:sheetId, sheetStatusId: 'c5c847a3-e919-4133-89c5-747049c4a050'};
-        const updateMV: APIt.UpdateSheetMutationVariables = {
-            input: updateI,
-        };
-        const updateR: GraphQLResult<APIt.UpdateSheetMutation> = 
-        await API.graphql(graphqlOperation(updateSheet, updateMV)) as GraphQLResult<APIt.UpdateSheetMutation>;
+        // (async()=>{
+        // //ステータスを「目標：設定中」に変更
+        // const updateI: APIt.UpdateSheetInput = 
+        // {id:sheetId, sheetStatusId: 'c5c847a3-e919-4133-89c5-747049c4a050'};
+        // const updateMV: APIt.UpdateSheetMutationVariables = {
+        //     input: updateI,
+        // };
+        // const updateR: GraphQLResult<APIt.UpdateSheetMutation> = 
+        // await API.graphql(graphqlOperation(updateSheet, updateMV)) as GraphQLResult<APIt.UpdateSheetMutation>;
 
-        if (updateR.data) {
-            const updateTM: APIt.UpdateSheetMutation = updateR.data;
-            if (updateTM.updateSheet) {
-                const sheet: Sheet = updateTM.updateSheet;
-                console.log('UpdateSheet:', sheet);
-            }
-        }})()
+        // if (updateR.data) {
+        //     const updateTM: APIt.UpdateSheetMutation = updateR.data;
+        //     if (updateTM.updateSheet) {
+        //         const sheet: Sheet = updateTM.updateSheet;
+        //         console.log('UpdateSheet:', sheet);
+        //     }
+        // }})()
         handleClose();
     }
 
