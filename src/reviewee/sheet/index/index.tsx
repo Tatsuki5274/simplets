@@ -64,9 +64,10 @@ function RevieweeSheetShow(props: Props) {
     function HandleUpdateObject(){
         (async()=>{
         const objectiveId = changeObjectiveId;
+        const selfEvaluationInput = parseInt(formInput.selfEvaluation);
         //目標変更の目標、ステータス、自己評価、優先順位、実績を項目明細に上書き
         const updateI: APIt.UpdateObjectiveInput = 
-        {id:objectiveId, content: formInput.content, status:formInput.status, selfEvaluation:3, priority:'', result:'' };
+        {id:objectiveId, content: formInput.content, status:formInput.status, selfEvaluation:selfEvaluationInput, priority:formInput.priority, result:formInput.result };
         const updateMV: APIt.UpdateObjectiveMutationVariables = {
             input: updateI,
         };
@@ -80,16 +81,9 @@ function RevieweeSheetShow(props: Props) {
                 console.log('UpdateObjective:', objective);
             }
         }
-        // if(sheet && sheet.section){
-        //     sheet.section.items.forEach(section => {
-        //         section.objective.forEach(objective => {
-        //             sheet.section.items.objective.id
-        //         });
-                
-        //     });
-        // }
     }
         )()
+        window.location.reload()
         handleClose();
     }
 
@@ -144,28 +138,28 @@ function RevieweeSheetShow(props: Props) {
                         <Row>
                             <Col>自己評価</Col>
                             <Col>
-                                <select>
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
-                                    <option value="5">5</option>
+                                <select onChange={handleChange} name="selfEvaluation">
+                                    <option value='1'>1</option>
+                                    <option value='2'>2</option>
+                                    <option value='3'>3</option>
+                                    <option value='4'>4</option>
+                                    <option value='5'>5</option>
                                 </select>
                             </Col>
                         </Row>
                         <Row>
                             <Col>優先順位</Col>
                             <Col>
-                                <select>
-                                    <option value="">A</option>
-                                    <option value="">B</option>
-                                    <option value="">C</option>
+                                <select onChange={handleChange} name="priority">
+                                    <option value="A">A</option>
+                                    <option value="B">B</option>
+                                    <option value="C">C</option>
                                 </select>
                             </Col>
                         </Row>
                         <Row>
                             <Col>実績</Col>
-                            <Col><input type="text" /> </Col>
+                            <Col><input type="text" onChange={handleChange} name="result"/> </Col>
                         </Row>
                     </Modal.Body>
                     <Modal.Footer>
