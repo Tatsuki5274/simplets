@@ -840,13 +840,17 @@ export const createSection = /* GraphQL */ `
       objective {
         items {
           id
-          status
           content
           result
           priority
           selfEvaluation
           firstEvaluation
           lastEvaluation
+          progress
+          status
+          expStartDate
+          expFinishDate
+          expDoneDate
           sheet {
             id
             year
@@ -993,13 +997,17 @@ export const createSection = /* GraphQL */ `
             objective {
               items {
                 id
-                status
                 content
                 result
                 priority
                 selfEvaluation
                 firstEvaluation
                 lastEvaluation
+                progress
+                status
+                expStartDate
+                expFinishDate
+                expDoneDate
                 sheet {
                   id
                   year
@@ -1088,13 +1096,17 @@ export const updateSection = /* GraphQL */ `
       objective {
         items {
           id
-          status
           content
           result
           priority
           selfEvaluation
           firstEvaluation
           lastEvaluation
+          progress
+          status
+          expStartDate
+          expFinishDate
+          expDoneDate
           sheet {
             id
             year
@@ -1241,13 +1253,17 @@ export const updateSection = /* GraphQL */ `
             objective {
               items {
                 id
-                status
                 content
                 result
                 priority
                 selfEvaluation
                 firstEvaluation
                 lastEvaluation
+                progress
+                status
+                expStartDate
+                expFinishDate
+                expDoneDate
                 sheet {
                   id
                   year
@@ -1336,13 +1352,17 @@ export const deleteSection = /* GraphQL */ `
       objective {
         items {
           id
-          status
           content
           result
           priority
           selfEvaluation
           firstEvaluation
           lastEvaluation
+          progress
+          status
+          expStartDate
+          expFinishDate
+          expDoneDate
           sheet {
             id
             year
@@ -1489,13 +1509,17 @@ export const deleteSection = /* GraphQL */ `
             objective {
               items {
                 id
-                status
                 content
                 result
                 priority
                 selfEvaluation
                 firstEvaluation
                 lastEvaluation
+                progress
+                status
+                expStartDate
+                expFinishDate
+                expDoneDate
                 sheet {
                   id
                   year
@@ -1580,13 +1604,17 @@ export const createObjective = /* GraphQL */ `
   ) {
     createObjective(input: $input, condition: $condition) {
       id
-      status
       content
       result
       priority
       selfEvaluation
       firstEvaluation
       lastEvaluation
+      progress
+      status
+      expStartDate
+      expFinishDate
+      expDoneDate
       sheet {
         id
         year
@@ -1764,13 +1792,17 @@ export const createObjective = /* GraphQL */ `
             objective {
               items {
                 id
-                status
                 content
                 result
                 priority
                 selfEvaluation
                 firstEvaluation
                 lastEvaluation
+                progress
+                status
+                expStartDate
+                expFinishDate
+                expDoneDate
                 sheet {
                   id
                   year
@@ -1845,13 +1877,17 @@ export const createObjective = /* GraphQL */ `
         objective {
           items {
             id
-            status
             content
             result
             priority
             selfEvaluation
             firstEvaluation
             lastEvaluation
+            progress
+            status
+            expStartDate
+            expFinishDate
+            expDoneDate
             sheet {
               id
               year
@@ -1956,13 +1992,17 @@ export const createObjective = /* GraphQL */ `
               objective {
                 items {
                   id
-                  status
                   content
                   result
                   priority
                   selfEvaluation
                   firstEvaluation
                   lastEvaluation
+                  progress
+                  status
+                  expStartDate
+                  expFinishDate
+                  expDoneDate
                   objectiveSectionId
                   reviewee
                   createdAt
@@ -2025,13 +2065,17 @@ export const updateObjective = /* GraphQL */ `
   ) {
     updateObjective(input: $input, condition: $condition) {
       id
-      status
       content
       result
       priority
       selfEvaluation
       firstEvaluation
       lastEvaluation
+      progress
+      status
+      expStartDate
+      expFinishDate
+      expDoneDate
       sheet {
         id
         year
@@ -2209,13 +2253,17 @@ export const updateObjective = /* GraphQL */ `
             objective {
               items {
                 id
-                status
                 content
                 result
                 priority
                 selfEvaluation
                 firstEvaluation
                 lastEvaluation
+                progress
+                status
+                expStartDate
+                expFinishDate
+                expDoneDate
                 sheet {
                   id
                   year
@@ -2290,13 +2338,17 @@ export const updateObjective = /* GraphQL */ `
         objective {
           items {
             id
-            status
             content
             result
             priority
             selfEvaluation
             firstEvaluation
             lastEvaluation
+            progress
+            status
+            expStartDate
+            expFinishDate
+            expDoneDate
             sheet {
               id
               year
@@ -2401,13 +2453,17 @@ export const updateObjective = /* GraphQL */ `
               objective {
                 items {
                   id
-                  status
                   content
                   result
                   priority
                   selfEvaluation
                   firstEvaluation
                   lastEvaluation
+                  progress
+                  status
+                  expStartDate
+                  expFinishDate
+                  expDoneDate
                   objectiveSectionId
                   reviewee
                   createdAt
@@ -2470,13 +2526,17 @@ export const deleteObjective = /* GraphQL */ `
   ) {
     deleteObjective(input: $input, condition: $condition) {
       id
-      status
       content
       result
       priority
       selfEvaluation
       firstEvaluation
       lastEvaluation
+      progress
+      status
+      expStartDate
+      expFinishDate
+      expDoneDate
       sheet {
         id
         year
@@ -2654,13 +2714,17 @@ export const deleteObjective = /* GraphQL */ `
             objective {
               items {
                 id
-                status
                 content
                 result
                 priority
                 selfEvaluation
                 firstEvaluation
                 lastEvaluation
+                progress
+                status
+                expStartDate
+                expFinishDate
+                expDoneDate
                 sheet {
                   id
                   year
@@ -2735,13 +2799,17 @@ export const deleteObjective = /* GraphQL */ `
         objective {
           items {
             id
-            status
             content
             result
             priority
             selfEvaluation
             firstEvaluation
             lastEvaluation
+            progress
+            status
+            expStartDate
+            expFinishDate
+            expDoneDate
             sheet {
               id
               year
@@ -2846,13 +2914,17 @@ export const deleteObjective = /* GraphQL */ `
               objective {
                 items {
                   id
-                  status
                   content
                   result
                   priority
                   selfEvaluation
                   firstEvaluation
                   lastEvaluation
+                  progress
+                  status
+                  expStartDate
+                  expFinishDate
+                  expDoneDate
                   objectiveSectionId
                   reviewee
                   createdAt
@@ -3167,13 +3239,17 @@ export const createSheet = /* GraphQL */ `
           objective {
             items {
               id
-              status
               content
               result
               priority
               selfEvaluation
               firstEvaluation
               lastEvaluation
+              progress
+              status
+              expStartDate
+              expFinishDate
+              expDoneDate
               sheet {
                 id
                 year
@@ -3497,13 +3573,17 @@ export const updateSheet = /* GraphQL */ `
           objective {
             items {
               id
-              status
               content
               result
               priority
               selfEvaluation
               firstEvaluation
               lastEvaluation
+              progress
+              status
+              expStartDate
+              expFinishDate
+              expDoneDate
               sheet {
                 id
                 year
@@ -3827,13 +3907,17 @@ export const deleteSheet = /* GraphQL */ `
           objective {
             items {
               id
-              status
               content
               result
               priority
               selfEvaluation
               firstEvaluation
               lastEvaluation
+              progress
+              status
+              expStartDate
+              expFinishDate
+              expDoneDate
               sheet {
                 id
                 year

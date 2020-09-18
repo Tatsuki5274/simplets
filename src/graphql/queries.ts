@@ -502,13 +502,17 @@ export const getSection = /* GraphQL */ `
       objective {
         items {
           id
-          status
           content
           result
           priority
           selfEvaluation
           firstEvaluation
           lastEvaluation
+          progress
+          status
+          expStartDate
+          expFinishDate
+          expDoneDate
           sheet {
             id
             year
@@ -655,13 +659,17 @@ export const getSection = /* GraphQL */ `
             objective {
               items {
                 id
-                status
                 content
                 result
                 priority
                 selfEvaluation
                 firstEvaluation
                 lastEvaluation
+                progress
+                status
+                expStartDate
+                expFinishDate
+                expDoneDate
                 sheet {
                   id
                   year
@@ -752,13 +760,17 @@ export const listSections = /* GraphQL */ `
         objective {
           items {
             id
-            status
             content
             result
             priority
             selfEvaluation
             firstEvaluation
             lastEvaluation
+            progress
+            status
+            expStartDate
+            expFinishDate
+            expDoneDate
             sheet {
               id
               year
@@ -863,13 +875,17 @@ export const listSections = /* GraphQL */ `
               objective {
                 items {
                   id
-                  status
                   content
                   result
                   priority
                   selfEvaluation
                   firstEvaluation
                   lastEvaluation
+                  progress
+                  status
+                  expStartDate
+                  expFinishDate
+                  expDoneDate
                   objectiveSectionId
                   reviewee
                   createdAt
@@ -927,13 +943,17 @@ export const getObjective = /* GraphQL */ `
   query GetObjective($id: ID!) {
     getObjective(id: $id) {
       id
-      status
       content
       result
       priority
       selfEvaluation
       firstEvaluation
       lastEvaluation
+      progress
+      status
+      expStartDate
+      expFinishDate
+      expDoneDate
       sheet {
         id
         year
@@ -1111,13 +1131,17 @@ export const getObjective = /* GraphQL */ `
             objective {
               items {
                 id
-                status
                 content
                 result
                 priority
                 selfEvaluation
                 firstEvaluation
                 lastEvaluation
+                progress
+                status
+                expStartDate
+                expFinishDate
+                expDoneDate
                 sheet {
                   id
                   year
@@ -1192,13 +1216,17 @@ export const getObjective = /* GraphQL */ `
         objective {
           items {
             id
-            status
             content
             result
             priority
             selfEvaluation
             firstEvaluation
             lastEvaluation
+            progress
+            status
+            expStartDate
+            expFinishDate
+            expDoneDate
             sheet {
               id
               year
@@ -1303,13 +1331,17 @@ export const getObjective = /* GraphQL */ `
               objective {
                 items {
                   id
-                  status
                   content
                   result
                   priority
                   selfEvaluation
                   firstEvaluation
                   lastEvaluation
+                  progress
+                  status
+                  expStartDate
+                  expFinishDate
+                  expDoneDate
                   objectiveSectionId
                   reviewee
                   createdAt
@@ -1374,13 +1406,17 @@ export const listObjectives = /* GraphQL */ `
     listObjectives(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
-        status
         content
         result
         priority
         selfEvaluation
         firstEvaluation
         lastEvaluation
+        progress
+        status
+        expStartDate
+        expFinishDate
+        expDoneDate
         sheet {
           id
           year
@@ -1526,13 +1562,17 @@ export const listObjectives = /* GraphQL */ `
               objective {
                 items {
                   id
-                  status
                   content
                   result
                   priority
                   selfEvaluation
                   firstEvaluation
                   lastEvaluation
+                  progress
+                  status
+                  expStartDate
+                  expFinishDate
+                  expDoneDate
                   objectiveSectionId
                   reviewee
                   createdAt
@@ -1581,13 +1621,17 @@ export const listObjectives = /* GraphQL */ `
           objective {
             items {
               id
-              status
               content
               result
               priority
               selfEvaluation
               firstEvaluation
               lastEvaluation
+              progress
+              status
+              expStartDate
+              expFinishDate
+              expDoneDate
               sheet {
                 id
                 year
@@ -1958,13 +2002,17 @@ export const getSheet = /* GraphQL */ `
           objective {
             items {
               id
-              status
               content
               result
               priority
               selfEvaluation
               firstEvaluation
               lastEvaluation
+              progress
+              status
+              expStartDate
+              expFinishDate
+              expDoneDate
               sheet {
                 id
                 year
@@ -2258,13 +2306,17 @@ export const listSheets = /* GraphQL */ `
             objective {
               items {
                 id
-                status
                 content
                 result
                 priority
                 selfEvaluation
                 firstEvaluation
                 lastEvaluation
+                progress
+                status
+                expStartDate
+                expFinishDate
+                expDoneDate
                 sheet {
                   id
                   year

@@ -179,13 +179,20 @@ type Objective
 )
 {
   id: ID!
-  status: String #ステータス文字列
   content: String! #目標本文
   result: String  #実績
   priority: String #優先順位
   selfEvaluation: Int #自己評価
   firstEvaluation: Int #所属長評価
   lastEvaluation: Int #最終評価
+
+  progress: Int #進捗率(%)
+  status: String #progressへ置き換えて廃止予定！
+
+  #expected date
+  expStartDate: AWSDate  #開始予定日
+  expFinishDate: AWSDate  #終了予定日
+  expDoneDate: AWSDate  #完了予定日
 
   sheet: Sheet @connection
   objectiveSectionId: ID!
