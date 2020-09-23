@@ -865,6 +865,7 @@ export const createSection = /* GraphQL */ `
             secondComment
             secondCheckDate
             overAllEvaluation
+            sheetGroupId
             group {
               id
               group {
@@ -1022,6 +1023,7 @@ export const createSection = /* GraphQL */ `
                   secondComment
                   secondCheckDate
                   overAllEvaluation
+                  sheetGroupId
                   status
                   reviewee
                   createdAt
@@ -1121,6 +1123,7 @@ export const updateSection = /* GraphQL */ `
             secondComment
             secondCheckDate
             overAllEvaluation
+            sheetGroupId
             group {
               id
               group {
@@ -1278,6 +1281,7 @@ export const updateSection = /* GraphQL */ `
                   secondComment
                   secondCheckDate
                   overAllEvaluation
+                  sheetGroupId
                   status
                   reviewee
                   createdAt
@@ -1377,6 +1381,7 @@ export const deleteSection = /* GraphQL */ `
             secondComment
             secondCheckDate
             overAllEvaluation
+            sheetGroupId
             group {
               id
               group {
@@ -1534,6 +1539,7 @@ export const deleteSection = /* GraphQL */ `
                   secondComment
                   secondCheckDate
                   overAllEvaluation
+                  sheetGroupId
                   status
                   reviewee
                   createdAt
@@ -1629,6 +1635,7 @@ export const createObjective = /* GraphQL */ `
         secondComment
         secondCheckDate
         overAllEvaluation
+        sheetGroupId
         group {
           id
           group {
@@ -1817,6 +1824,7 @@ export const createObjective = /* GraphQL */ `
                   secondComment
                   secondCheckDate
                   overAllEvaluation
+                  sheetGroupId
                   status
                   reviewee
                   createdAt
@@ -1902,6 +1910,7 @@ export const createObjective = /* GraphQL */ `
               secondComment
               secondCheckDate
               overAllEvaluation
+              sheetGroupId
               group {
                 id
                 group {
@@ -2090,6 +2099,7 @@ export const updateObjective = /* GraphQL */ `
         secondComment
         secondCheckDate
         overAllEvaluation
+        sheetGroupId
         group {
           id
           group {
@@ -2278,6 +2288,7 @@ export const updateObjective = /* GraphQL */ `
                   secondComment
                   secondCheckDate
                   overAllEvaluation
+                  sheetGroupId
                   status
                   reviewee
                   createdAt
@@ -2363,6 +2374,7 @@ export const updateObjective = /* GraphQL */ `
               secondComment
               secondCheckDate
               overAllEvaluation
+              sheetGroupId
               group {
                 id
                 group {
@@ -2551,6 +2563,7 @@ export const deleteObjective = /* GraphQL */ `
         secondComment
         secondCheckDate
         overAllEvaluation
+        sheetGroupId
         group {
           id
           group {
@@ -2739,6 +2752,7 @@ export const deleteObjective = /* GraphQL */ `
                   secondComment
                   secondCheckDate
                   overAllEvaluation
+                  sheetGroupId
                   status
                   reviewee
                   createdAt
@@ -2824,6 +2838,7 @@ export const deleteObjective = /* GraphQL */ `
               secondComment
               secondCheckDate
               overAllEvaluation
+              sheetGroupId
               group {
                 id
                 group {
@@ -3044,6 +3059,7 @@ export const createSheet = /* GraphQL */ `
       secondComment
       secondCheckDate
       overAllEvaluation
+      sheetGroupId
       group {
         id
         group {
@@ -3264,6 +3280,7 @@ export const createSheet = /* GraphQL */ `
                 secondComment
                 secondCheckDate
                 overAllEvaluation
+                sheetGroupId
                 group {
                   id
                   name
@@ -3378,6 +3395,7 @@ export const updateSheet = /* GraphQL */ `
       secondComment
       secondCheckDate
       overAllEvaluation
+      sheetGroupId
       group {
         id
         group {
@@ -3598,6 +3616,7 @@ export const updateSheet = /* GraphQL */ `
                 secondComment
                 secondCheckDate
                 overAllEvaluation
+                sheetGroupId
                 group {
                   id
                   name
@@ -3712,6 +3731,7 @@ export const deleteSheet = /* GraphQL */ `
       secondComment
       secondCheckDate
       overAllEvaluation
+      sheetGroupId
       group {
         id
         group {
@@ -3932,6 +3952,7 @@ export const deleteSheet = /* GraphQL */ `
                 secondComment
                 secondCheckDate
                 overAllEvaluation
+                sheetGroupId
                 group {
                   id
                   name

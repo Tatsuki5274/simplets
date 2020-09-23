@@ -331,10 +331,10 @@ export type CreateSheetInput = {
   secondComment?: string | null,
   secondCheckDate?: string | null,
   overAllEvaluation?: number | null,
+  sheetGroupId: string,
   statusValue?: number | null,
   status?: string | null,
   reviewee?: string | null,
-  sheetGroupId?: string | null,
   sheetCompanyId?: string | null,
   sheetSecondEmployeeId?: string | null,
 };
@@ -352,6 +352,7 @@ export type ModelSheetConditionInput = {
   secondComment?: ModelStringInput | null,
   secondCheckDate?: ModelStringInput | null,
   overAllEvaluation?: ModelIntInput | null,
+  sheetGroupId?: ModelIDInput | null,
   statusValue?: ModelIntInput | null,
   status?: ModelStringInput | null,
   reviewee?: ModelStringInput | null,
@@ -374,10 +375,10 @@ export type UpdateSheetInput = {
   secondComment?: string | null,
   secondCheckDate?: string | null,
   overAllEvaluation?: number | null,
+  sheetGroupId?: string | null,
   statusValue?: number | null,
   status?: string | null,
   reviewee?: string | null,
-  sheetGroupId?: string | null,
   sheetCompanyId?: string | null,
   sheetSecondEmployeeId?: string | null,
 };
@@ -487,6 +488,7 @@ export type ModelSheetFilterInput = {
   secondComment?: ModelStringInput | null,
   secondCheckDate?: ModelStringInput | null,
   overAllEvaluation?: ModelIntInput | null,
+  sheetGroupId?: ModelIDInput | null,
   statusValue?: ModelIntInput | null,
   status?: ModelStringInput | null,
   reviewee?: ModelStringInput | null,
@@ -1472,6 +1474,7 @@ export type CreateSectionMutation = {
           secondComment: string | null,
           secondCheckDate: string | null,
           overAllEvaluation: number | null,
+          sheetGroupId: string,
           group:  {
             __typename: "Group",
             id: string,
@@ -1650,6 +1653,7 @@ export type CreateSectionMutation = {
                 secondComment: string | null,
                 secondCheckDate: string | null,
                 overAllEvaluation: number | null,
+                sheetGroupId: string,
                 status: string | null,
                 reviewee: string | null,
                 createdAt: string,
@@ -1759,6 +1763,7 @@ export type UpdateSectionMutation = {
           secondComment: string | null,
           secondCheckDate: string | null,
           overAllEvaluation: number | null,
+          sheetGroupId: string,
           group:  {
             __typename: "Group",
             id: string,
@@ -1937,6 +1942,7 @@ export type UpdateSectionMutation = {
                 secondComment: string | null,
                 secondCheckDate: string | null,
                 overAllEvaluation: number | null,
+                sheetGroupId: string,
                 status: string | null,
                 reviewee: string | null,
                 createdAt: string,
@@ -2046,6 +2052,7 @@ export type DeleteSectionMutation = {
           secondComment: string | null,
           secondCheckDate: string | null,
           overAllEvaluation: number | null,
+          sheetGroupId: string,
           group:  {
             __typename: "Group",
             id: string,
@@ -2224,6 +2231,7 @@ export type DeleteSectionMutation = {
                 secondComment: string | null,
                 secondCheckDate: string | null,
                 overAllEvaluation: number | null,
+                sheetGroupId: string,
                 status: string | null,
                 reviewee: string | null,
                 createdAt: string,
@@ -2327,6 +2335,7 @@ export type CreateObjectiveMutation = {
       secondComment: string | null,
       secondCheckDate: string | null,
       overAllEvaluation: number | null,
+      sheetGroupId: string,
       group:  {
         __typename: "Group",
         id: string,
@@ -2540,6 +2549,7 @@ export type CreateObjectiveMutation = {
                 secondComment: string | null,
                 secondCheckDate: string | null,
                 overAllEvaluation: number | null,
+                sheetGroupId: string,
                 status: string | null,
                 reviewee: string | null,
                 createdAt: string,
@@ -2633,6 +2643,7 @@ export type CreateObjectiveMutation = {
             secondComment: string | null,
             secondCheckDate: string | null,
             overAllEvaluation: number | null,
+            sheetGroupId: string,
             group:  {
               __typename: "Group",
               id: string,
@@ -2842,6 +2853,7 @@ export type UpdateObjectiveMutation = {
       secondComment: string | null,
       secondCheckDate: string | null,
       overAllEvaluation: number | null,
+      sheetGroupId: string,
       group:  {
         __typename: "Group",
         id: string,
@@ -3055,6 +3067,7 @@ export type UpdateObjectiveMutation = {
                 secondComment: string | null,
                 secondCheckDate: string | null,
                 overAllEvaluation: number | null,
+                sheetGroupId: string,
                 status: string | null,
                 reviewee: string | null,
                 createdAt: string,
@@ -3148,6 +3161,7 @@ export type UpdateObjectiveMutation = {
             secondComment: string | null,
             secondCheckDate: string | null,
             overAllEvaluation: number | null,
+            sheetGroupId: string,
             group:  {
               __typename: "Group",
               id: string,
@@ -3357,6 +3371,7 @@ export type DeleteObjectiveMutation = {
       secondComment: string | null,
       secondCheckDate: string | null,
       overAllEvaluation: number | null,
+      sheetGroupId: string,
       group:  {
         __typename: "Group",
         id: string,
@@ -3570,6 +3585,7 @@ export type DeleteObjectiveMutation = {
                 secondComment: string | null,
                 secondCheckDate: string | null,
                 overAllEvaluation: number | null,
+                sheetGroupId: string,
                 status: string | null,
                 reviewee: string | null,
                 createdAt: string,
@@ -3663,6 +3679,7 @@ export type DeleteObjectiveMutation = {
             secondComment: string | null,
             secondCheckDate: string | null,
             overAllEvaluation: number | null,
+            sheetGroupId: string,
             group:  {
               __typename: "Group",
               id: string,
@@ -3909,6 +3926,7 @@ export type CreateSheetMutation = {
     secondComment: string | null,
     secondCheckDate: string | null,
     overAllEvaluation: number | null,
+    sheetGroupId: string,
     group:  {
       __typename: "Group",
       id: string,
@@ -4158,6 +4176,7 @@ export type CreateSheetMutation = {
               secondComment: string | null,
               secondCheckDate: string | null,
               overAllEvaluation: number | null,
+              sheetGroupId: string,
               group:  {
                 __typename: "Group",
                 id: string,
@@ -4285,6 +4304,7 @@ export type UpdateSheetMutation = {
     secondComment: string | null,
     secondCheckDate: string | null,
     overAllEvaluation: number | null,
+    sheetGroupId: string,
     group:  {
       __typename: "Group",
       id: string,
@@ -4534,6 +4554,7 @@ export type UpdateSheetMutation = {
               secondComment: string | null,
               secondCheckDate: string | null,
               overAllEvaluation: number | null,
+              sheetGroupId: string,
               group:  {
                 __typename: "Group",
                 id: string,
@@ -4661,6 +4682,7 @@ export type DeleteSheetMutation = {
     secondComment: string | null,
     secondCheckDate: string | null,
     overAllEvaluation: number | null,
+    sheetGroupId: string,
     group:  {
       __typename: "Group",
       id: string,
@@ -4910,6 +4932,7 @@ export type DeleteSheetMutation = {
               secondComment: string | null,
               secondCheckDate: string | null,
               overAllEvaluation: number | null,
+              sheetGroupId: string,
               group:  {
                 __typename: "Group",
                 id: string,
@@ -5622,6 +5645,7 @@ export type GetSectionQuery = {
           secondComment: string | null,
           secondCheckDate: string | null,
           overAllEvaluation: number | null,
+          sheetGroupId: string,
           group:  {
             __typename: "Group",
             id: string,
@@ -5800,6 +5824,7 @@ export type GetSectionQuery = {
                 secondComment: string | null,
                 secondCheckDate: string | null,
                 overAllEvaluation: number | null,
+                sheetGroupId: string,
                 status: string | null,
                 reviewee: string | null,
                 createdAt: string,
@@ -5912,6 +5937,7 @@ export type ListSectionsQuery = {
             secondComment: string | null,
             secondCheckDate: string | null,
             overAllEvaluation: number | null,
+            sheetGroupId: string,
             group:  {
               __typename: "Group",
               id: string,
@@ -6118,6 +6144,7 @@ export type GetObjectiveQuery = {
       secondComment: string | null,
       secondCheckDate: string | null,
       overAllEvaluation: number | null,
+      sheetGroupId: string,
       group:  {
         __typename: "Group",
         id: string,
@@ -6331,6 +6358,7 @@ export type GetObjectiveQuery = {
                 secondComment: string | null,
                 secondCheckDate: string | null,
                 overAllEvaluation: number | null,
+                sheetGroupId: string,
                 status: string | null,
                 reviewee: string | null,
                 createdAt: string,
@@ -6424,6 +6452,7 @@ export type GetObjectiveQuery = {
             secondComment: string | null,
             secondCheckDate: string | null,
             overAllEvaluation: number | null,
+            sheetGroupId: string,
             group:  {
               __typename: "Group",
               id: string,
@@ -6636,6 +6665,7 @@ export type ListObjectivesQuery = {
         secondComment: string | null,
         secondCheckDate: string | null,
         overAllEvaluation: number | null,
+        sheetGroupId: string,
         group:  {
           __typename: "Group",
           id: string,
@@ -6878,6 +6908,7 @@ export type ListObjectivesQuery = {
               secondComment: string | null,
               secondCheckDate: string | null,
               overAllEvaluation: number | null,
+              sheetGroupId: string,
               group:  {
                 __typename: "Group",
                 id: string,
@@ -7067,6 +7098,7 @@ export type GetSheetQuery = {
     secondComment: string | null,
     secondCheckDate: string | null,
     overAllEvaluation: number | null,
+    sheetGroupId: string,
     group:  {
       __typename: "Group",
       id: string,
@@ -7316,6 +7348,7 @@ export type GetSheetQuery = {
               secondComment: string | null,
               secondCheckDate: string | null,
               overAllEvaluation: number | null,
+              sheetGroupId: string,
               group:  {
                 __typename: "Group",
                 id: string,
@@ -7446,6 +7479,7 @@ export type ListSheetsQuery = {
       secondComment: string | null,
       secondCheckDate: string | null,
       overAllEvaluation: number | null,
+      sheetGroupId: string,
       group:  {
         __typename: "Group",
         id: string,
@@ -7659,6 +7693,7 @@ export type ListSheetsQuery = {
                 secondComment: string | null,
                 secondCheckDate: string | null,
                 overAllEvaluation: number | null,
+                sheetGroupId: string,
                 status: string | null,
                 reviewee: string | null,
                 createdAt: string,
@@ -8555,6 +8590,7 @@ export type OnCreateSheetSubscription = {
     secondComment: string | null,
     secondCheckDate: string | null,
     overAllEvaluation: number | null,
+    sheetGroupId: string,
     group:  {
       __typename: "Group",
       id: string,
@@ -8804,6 +8840,7 @@ export type OnCreateSheetSubscription = {
               secondComment: string | null,
               secondCheckDate: string | null,
               overAllEvaluation: number | null,
+              sheetGroupId: string,
               group:  {
                 __typename: "Group",
                 id: string,
@@ -8926,6 +8963,7 @@ export type OnUpdateSheetSubscription = {
     secondComment: string | null,
     secondCheckDate: string | null,
     overAllEvaluation: number | null,
+    sheetGroupId: string,
     group:  {
       __typename: "Group",
       id: string,
@@ -9175,6 +9213,7 @@ export type OnUpdateSheetSubscription = {
               secondComment: string | null,
               secondCheckDate: string | null,
               overAllEvaluation: number | null,
+              sheetGroupId: string,
               group:  {
                 __typename: "Group",
                 id: string,
@@ -9297,6 +9336,7 @@ export type OnDeleteSheetSubscription = {
     secondComment: string | null,
     secondCheckDate: string | null,
     overAllEvaluation: number | null,
+    sheetGroupId: string,
     group:  {
       __typename: "Group",
       id: string,
@@ -9546,6 +9586,7 @@ export type OnDeleteSheetSubscription = {
               secondComment: string | null,
               secondCheckDate: string | null,
               overAllEvaluation: number | null,
+              sheetGroupId: string,
               group:  {
                 __typename: "Group",
                 id: string,
@@ -9688,6 +9729,7 @@ export type OnCreateSectionSubscription = {
           secondComment: string | null,
           secondCheckDate: string | null,
           overAllEvaluation: number | null,
+          sheetGroupId: string,
           group:  {
             __typename: "Group",
             id: string,
@@ -9866,6 +9908,7 @@ export type OnCreateSectionSubscription = {
                 secondComment: string | null,
                 secondCheckDate: string | null,
                 overAllEvaluation: number | null,
+                sheetGroupId: string,
                 status: string | null,
                 reviewee: string | null,
                 createdAt: string,
@@ -9970,6 +10013,7 @@ export type OnUpdateSectionSubscription = {
           secondComment: string | null,
           secondCheckDate: string | null,
           overAllEvaluation: number | null,
+          sheetGroupId: string,
           group:  {
             __typename: "Group",
             id: string,
@@ -10148,6 +10192,7 @@ export type OnUpdateSectionSubscription = {
                 secondComment: string | null,
                 secondCheckDate: string | null,
                 overAllEvaluation: number | null,
+                sheetGroupId: string,
                 status: string | null,
                 reviewee: string | null,
                 createdAt: string,
@@ -10252,6 +10297,7 @@ export type OnDeleteSectionSubscription = {
           secondComment: string | null,
           secondCheckDate: string | null,
           overAllEvaluation: number | null,
+          sheetGroupId: string,
           group:  {
             __typename: "Group",
             id: string,
@@ -10430,6 +10476,7 @@ export type OnDeleteSectionSubscription = {
                 secondComment: string | null,
                 secondCheckDate: string | null,
                 overAllEvaluation: number | null,
+                sheetGroupId: string,
                 status: string | null,
                 reviewee: string | null,
                 createdAt: string,
@@ -10528,6 +10575,7 @@ export type OnCreateObjectiveSubscription = {
       secondComment: string | null,
       secondCheckDate: string | null,
       overAllEvaluation: number | null,
+      sheetGroupId: string,
       group:  {
         __typename: "Group",
         id: string,
@@ -10741,6 +10789,7 @@ export type OnCreateObjectiveSubscription = {
                 secondComment: string | null,
                 secondCheckDate: string | null,
                 overAllEvaluation: number | null,
+                sheetGroupId: string,
                 status: string | null,
                 reviewee: string | null,
                 createdAt: string,
@@ -10834,6 +10883,7 @@ export type OnCreateObjectiveSubscription = {
             secondComment: string | null,
             secondCheckDate: string | null,
             overAllEvaluation: number | null,
+            sheetGroupId: string,
             group:  {
               __typename: "Group",
               id: string,
@@ -11038,6 +11088,7 @@ export type OnUpdateObjectiveSubscription = {
       secondComment: string | null,
       secondCheckDate: string | null,
       overAllEvaluation: number | null,
+      sheetGroupId: string,
       group:  {
         __typename: "Group",
         id: string,
@@ -11251,6 +11302,7 @@ export type OnUpdateObjectiveSubscription = {
                 secondComment: string | null,
                 secondCheckDate: string | null,
                 overAllEvaluation: number | null,
+                sheetGroupId: string,
                 status: string | null,
                 reviewee: string | null,
                 createdAt: string,
@@ -11344,6 +11396,7 @@ export type OnUpdateObjectiveSubscription = {
             secondComment: string | null,
             secondCheckDate: string | null,
             overAllEvaluation: number | null,
+            sheetGroupId: string,
             group:  {
               __typename: "Group",
               id: string,
@@ -11548,6 +11601,7 @@ export type OnDeleteObjectiveSubscription = {
       secondComment: string | null,
       secondCheckDate: string | null,
       overAllEvaluation: number | null,
+      sheetGroupId: string,
       group:  {
         __typename: "Group",
         id: string,
@@ -11761,6 +11815,7 @@ export type OnDeleteObjectiveSubscription = {
                 secondComment: string | null,
                 secondCheckDate: string | null,
                 overAllEvaluation: number | null,
+                sheetGroupId: string,
                 status: string | null,
                 reviewee: string | null,
                 createdAt: string,
@@ -11854,6 +11909,7 @@ export type OnDeleteObjectiveSubscription = {
             secondComment: string | null,
             secondCheckDate: string | null,
             overAllEvaluation: number | null,
+            sheetGroupId: string,
             group:  {
               __typename: "Group",
               id: string,

@@ -131,7 +131,8 @@ type Sheet
   secondCheckDate: AWSDate #所属長確認日付
   overAllEvaluation: Int  #総合評価
 
-  group: Group @connection
+  sheetGroupId: ID!
+  group: Group @connection(fields: ["sheetGroupId"])
   interviews: [Interview] @connection(keyName: "bySheet", fields: ["id"])
   company: Company @connection
   secondEmployee: Employee @connection  #所属長
