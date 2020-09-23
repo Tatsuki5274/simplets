@@ -137,6 +137,7 @@ type Sheet
   group: Group @connection(fields: ["sheetGroupId"])
   interviews: [Interview] @connection(keyName: "bySheet", fields: ["id"])
   company: Company @connection
+  revieweeEmployee: Employee @connection  #被評価者
   secondEmployee: Employee @connection  #所属長
   # status: ApprovalStatus @connection    #承認ステータス
   section: [Section] @connection(keyName: "bySection", fields: ["id"])  #カテゴリセクション

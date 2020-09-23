@@ -916,6 +916,52 @@ export const createSection = /* GraphQL */ `
               }
               nextToken
             }
+            revieweeEmployee {
+              id
+              no
+              firstName
+              lastName
+              grade
+              superior {
+                id
+                no
+                firstName
+                lastName
+                grade
+                superior {
+                  id
+                  no
+                  firstName
+                  lastName
+                  grade
+                  companyId
+                  createdAt
+                  updatedAt
+                }
+                companyId
+                createdAt
+                updatedAt
+                company {
+                  id
+                  name
+                  shortName
+                  url
+                  createdAt
+                  updatedAt
+                }
+              }
+              companyId
+              createdAt
+              updatedAt
+              company {
+                id
+                name
+                shortName
+                url
+                createdAt
+                updatedAt
+              }
+            }
             secondEmployee {
               id
               no
@@ -1175,6 +1221,52 @@ export const updateSection = /* GraphQL */ `
               }
               nextToken
             }
+            revieweeEmployee {
+              id
+              no
+              firstName
+              lastName
+              grade
+              superior {
+                id
+                no
+                firstName
+                lastName
+                grade
+                superior {
+                  id
+                  no
+                  firstName
+                  lastName
+                  grade
+                  companyId
+                  createdAt
+                  updatedAt
+                }
+                companyId
+                createdAt
+                updatedAt
+                company {
+                  id
+                  name
+                  shortName
+                  url
+                  createdAt
+                  updatedAt
+                }
+              }
+              companyId
+              createdAt
+              updatedAt
+              company {
+                id
+                name
+                shortName
+                url
+                createdAt
+                updatedAt
+              }
+            }
             secondEmployee {
               id
               no
@@ -1433,6 +1525,52 @@ export const deleteSection = /* GraphQL */ `
                 updatedOn
               }
               nextToken
+            }
+            revieweeEmployee {
+              id
+              no
+              firstName
+              lastName
+              grade
+              superior {
+                id
+                no
+                firstName
+                lastName
+                grade
+                superior {
+                  id
+                  no
+                  firstName
+                  lastName
+                  grade
+                  companyId
+                  createdAt
+                  updatedAt
+                }
+                companyId
+                createdAt
+                updatedAt
+                company {
+                  id
+                  name
+                  shortName
+                  url
+                  createdAt
+                  updatedAt
+                }
+              }
+              companyId
+              createdAt
+              updatedAt
+              company {
+                id
+                name
+                shortName
+                url
+                createdAt
+                updatedAt
+              }
             }
             secondEmployee {
               id
@@ -1717,6 +1855,88 @@ export const createObjective = /* GraphQL */ `
           }
           nextToken
         }
+        revieweeEmployee {
+          id
+          no
+          firstName
+          lastName
+          grade
+          superior {
+            id
+            no
+            firstName
+            lastName
+            grade
+            superior {
+              id
+              no
+              firstName
+              lastName
+              grade
+              superior {
+                id
+                no
+                firstName
+                lastName
+                grade
+                superior {
+                  id
+                  no
+                  firstName
+                  lastName
+                  grade
+                  companyId
+                  createdAt
+                  updatedAt
+                }
+                companyId
+                createdAt
+                updatedAt
+                company {
+                  id
+                  name
+                  shortName
+                  url
+                  createdAt
+                  updatedAt
+                }
+              }
+              companyId
+              createdAt
+              updatedAt
+              company {
+                id
+                name
+                shortName
+                url
+                createdAt
+                updatedAt
+              }
+            }
+            companyId
+            createdAt
+            updatedAt
+            company {
+              id
+              name
+              shortName
+              url
+              createdAt
+              updatedAt
+            }
+          }
+          companyId
+          createdAt
+          updatedAt
+          company {
+            id
+            name
+            shortName
+            url
+            createdAt
+            updatedAt
+          }
+        }
         secondEmployee {
           id
           no
@@ -1950,6 +2170,34 @@ export const createObjective = /* GraphQL */ `
                   updatedOn
                 }
                 nextToken
+              }
+              revieweeEmployee {
+                id
+                no
+                firstName
+                lastName
+                grade
+                superior {
+                  id
+                  no
+                  firstName
+                  lastName
+                  grade
+                  companyId
+                  createdAt
+                  updatedAt
+                }
+                companyId
+                createdAt
+                updatedAt
+                company {
+                  id
+                  name
+                  shortName
+                  url
+                  createdAt
+                  updatedAt
+                }
               }
               secondEmployee {
                 id
@@ -2183,6 +2431,88 @@ export const updateObjective = /* GraphQL */ `
           }
           nextToken
         }
+        revieweeEmployee {
+          id
+          no
+          firstName
+          lastName
+          grade
+          superior {
+            id
+            no
+            firstName
+            lastName
+            grade
+            superior {
+              id
+              no
+              firstName
+              lastName
+              grade
+              superior {
+                id
+                no
+                firstName
+                lastName
+                grade
+                superior {
+                  id
+                  no
+                  firstName
+                  lastName
+                  grade
+                  companyId
+                  createdAt
+                  updatedAt
+                }
+                companyId
+                createdAt
+                updatedAt
+                company {
+                  id
+                  name
+                  shortName
+                  url
+                  createdAt
+                  updatedAt
+                }
+              }
+              companyId
+              createdAt
+              updatedAt
+              company {
+                id
+                name
+                shortName
+                url
+                createdAt
+                updatedAt
+              }
+            }
+            companyId
+            createdAt
+            updatedAt
+            company {
+              id
+              name
+              shortName
+              url
+              createdAt
+              updatedAt
+            }
+          }
+          companyId
+          createdAt
+          updatedAt
+          company {
+            id
+            name
+            shortName
+            url
+            createdAt
+            updatedAt
+          }
+        }
         secondEmployee {
           id
           no
@@ -2416,6 +2746,34 @@ export const updateObjective = /* GraphQL */ `
                   updatedOn
                 }
                 nextToken
+              }
+              revieweeEmployee {
+                id
+                no
+                firstName
+                lastName
+                grade
+                superior {
+                  id
+                  no
+                  firstName
+                  lastName
+                  grade
+                  companyId
+                  createdAt
+                  updatedAt
+                }
+                companyId
+                createdAt
+                updatedAt
+                company {
+                  id
+                  name
+                  shortName
+                  url
+                  createdAt
+                  updatedAt
+                }
               }
               secondEmployee {
                 id
@@ -2649,6 +3007,88 @@ export const deleteObjective = /* GraphQL */ `
           }
           nextToken
         }
+        revieweeEmployee {
+          id
+          no
+          firstName
+          lastName
+          grade
+          superior {
+            id
+            no
+            firstName
+            lastName
+            grade
+            superior {
+              id
+              no
+              firstName
+              lastName
+              grade
+              superior {
+                id
+                no
+                firstName
+                lastName
+                grade
+                superior {
+                  id
+                  no
+                  firstName
+                  lastName
+                  grade
+                  companyId
+                  createdAt
+                  updatedAt
+                }
+                companyId
+                createdAt
+                updatedAt
+                company {
+                  id
+                  name
+                  shortName
+                  url
+                  createdAt
+                  updatedAt
+                }
+              }
+              companyId
+              createdAt
+              updatedAt
+              company {
+                id
+                name
+                shortName
+                url
+                createdAt
+                updatedAt
+              }
+            }
+            companyId
+            createdAt
+            updatedAt
+            company {
+              id
+              name
+              shortName
+              url
+              createdAt
+              updatedAt
+            }
+          }
+          companyId
+          createdAt
+          updatedAt
+          company {
+            id
+            name
+            shortName
+            url
+            createdAt
+            updatedAt
+          }
+        }
         secondEmployee {
           id
           no
@@ -2882,6 +3322,34 @@ export const deleteObjective = /* GraphQL */ `
                   updatedOn
                 }
                 nextToken
+              }
+              revieweeEmployee {
+                id
+                no
+                firstName
+                lastName
+                grade
+                superior {
+                  id
+                  no
+                  firstName
+                  lastName
+                  grade
+                  companyId
+                  createdAt
+                  updatedAt
+                }
+                companyId
+                createdAt
+                updatedAt
+                company {
+                  id
+                  name
+                  shortName
+                  url
+                  createdAt
+                  updatedAt
+                }
               }
               secondEmployee {
                 id
@@ -3161,6 +3629,106 @@ export const createSheet = /* GraphQL */ `
         }
         nextToken
       }
+      revieweeEmployee {
+        id
+        no
+        firstName
+        lastName
+        grade
+        superior {
+          id
+          no
+          firstName
+          lastName
+          grade
+          superior {
+            id
+            no
+            firstName
+            lastName
+            grade
+            superior {
+              id
+              no
+              firstName
+              lastName
+              grade
+              superior {
+                id
+                no
+                firstName
+                lastName
+                grade
+                superior {
+                  id
+                  no
+                  firstName
+                  lastName
+                  grade
+                  companyId
+                  createdAt
+                  updatedAt
+                }
+                companyId
+                createdAt
+                updatedAt
+                company {
+                  id
+                  name
+                  shortName
+                  url
+                  createdAt
+                  updatedAt
+                }
+              }
+              companyId
+              createdAt
+              updatedAt
+              company {
+                id
+                name
+                shortName
+                url
+                createdAt
+                updatedAt
+              }
+            }
+            companyId
+            createdAt
+            updatedAt
+            company {
+              id
+              name
+              shortName
+              url
+              createdAt
+              updatedAt
+            }
+          }
+          companyId
+          createdAt
+          updatedAt
+          company {
+            id
+            name
+            shortName
+            url
+            createdAt
+            updatedAt
+          }
+        }
+        companyId
+        createdAt
+        updatedAt
+        company {
+          id
+          name
+          shortName
+          url
+          createdAt
+          updatedAt
+        }
+      }
       secondEmployee {
         id
         no
@@ -3302,6 +3870,16 @@ export const createSheet = /* GraphQL */ `
                 }
                 interviews {
                   nextToken
+                }
+                revieweeEmployee {
+                  id
+                  no
+                  firstName
+                  lastName
+                  grade
+                  companyId
+                  createdAt
+                  updatedAt
                 }
                 secondEmployee {
                   id
@@ -3498,6 +4076,106 @@ export const updateSheet = /* GraphQL */ `
         }
         nextToken
       }
+      revieweeEmployee {
+        id
+        no
+        firstName
+        lastName
+        grade
+        superior {
+          id
+          no
+          firstName
+          lastName
+          grade
+          superior {
+            id
+            no
+            firstName
+            lastName
+            grade
+            superior {
+              id
+              no
+              firstName
+              lastName
+              grade
+              superior {
+                id
+                no
+                firstName
+                lastName
+                grade
+                superior {
+                  id
+                  no
+                  firstName
+                  lastName
+                  grade
+                  companyId
+                  createdAt
+                  updatedAt
+                }
+                companyId
+                createdAt
+                updatedAt
+                company {
+                  id
+                  name
+                  shortName
+                  url
+                  createdAt
+                  updatedAt
+                }
+              }
+              companyId
+              createdAt
+              updatedAt
+              company {
+                id
+                name
+                shortName
+                url
+                createdAt
+                updatedAt
+              }
+            }
+            companyId
+            createdAt
+            updatedAt
+            company {
+              id
+              name
+              shortName
+              url
+              createdAt
+              updatedAt
+            }
+          }
+          companyId
+          createdAt
+          updatedAt
+          company {
+            id
+            name
+            shortName
+            url
+            createdAt
+            updatedAt
+          }
+        }
+        companyId
+        createdAt
+        updatedAt
+        company {
+          id
+          name
+          shortName
+          url
+          createdAt
+          updatedAt
+        }
+      }
       secondEmployee {
         id
         no
@@ -3639,6 +4317,16 @@ export const updateSheet = /* GraphQL */ `
                 }
                 interviews {
                   nextToken
+                }
+                revieweeEmployee {
+                  id
+                  no
+                  firstName
+                  lastName
+                  grade
+                  companyId
+                  createdAt
+                  updatedAt
                 }
                 secondEmployee {
                   id
@@ -3835,6 +4523,106 @@ export const deleteSheet = /* GraphQL */ `
         }
         nextToken
       }
+      revieweeEmployee {
+        id
+        no
+        firstName
+        lastName
+        grade
+        superior {
+          id
+          no
+          firstName
+          lastName
+          grade
+          superior {
+            id
+            no
+            firstName
+            lastName
+            grade
+            superior {
+              id
+              no
+              firstName
+              lastName
+              grade
+              superior {
+                id
+                no
+                firstName
+                lastName
+                grade
+                superior {
+                  id
+                  no
+                  firstName
+                  lastName
+                  grade
+                  companyId
+                  createdAt
+                  updatedAt
+                }
+                companyId
+                createdAt
+                updatedAt
+                company {
+                  id
+                  name
+                  shortName
+                  url
+                  createdAt
+                  updatedAt
+                }
+              }
+              companyId
+              createdAt
+              updatedAt
+              company {
+                id
+                name
+                shortName
+                url
+                createdAt
+                updatedAt
+              }
+            }
+            companyId
+            createdAt
+            updatedAt
+            company {
+              id
+              name
+              shortName
+              url
+              createdAt
+              updatedAt
+            }
+          }
+          companyId
+          createdAt
+          updatedAt
+          company {
+            id
+            name
+            shortName
+            url
+            createdAt
+            updatedAt
+          }
+        }
+        companyId
+        createdAt
+        updatedAt
+        company {
+          id
+          name
+          shortName
+          url
+          createdAt
+          updatedAt
+        }
+      }
       secondEmployee {
         id
         no
@@ -3976,6 +4764,16 @@ export const deleteSheet = /* GraphQL */ `
                 }
                 interviews {
                   nextToken
+                }
+                revieweeEmployee {
+                  id
+                  no
+                  firstName
+                  lastName
+                  grade
+                  companyId
+                  createdAt
+                  updatedAt
                 }
                 secondEmployee {
                   id
