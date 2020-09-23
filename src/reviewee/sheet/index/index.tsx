@@ -29,6 +29,8 @@ type formType = {
 
 
 function RevieweeSheetShow(props: Props) {
+    const sheetId = props.match.params.sheetId;
+
     //モーダル
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
@@ -93,7 +95,6 @@ function RevieweeSheetShow(props: Props) {
     useEffect(() => {
         ;(async()=>{
             //URLのパラメータを取得
-            const sheetId = props.match.params.sheetId;
 
             const input: APIt.GetSheetQueryVariables = {
                 id: sheetId
@@ -176,7 +177,7 @@ function RevieweeSheetShow(props: Props) {
                 <Container>
                     <h2>メイン</h2>
                     <h3>目標一覧</h3>
-                    <Link to="/reviewee/sheet/new">
+                    <Link to={`/reviewee/objective/new/${sheetId}`}>
                         <Button variant="info">
                             目標追加
                         </Button>
