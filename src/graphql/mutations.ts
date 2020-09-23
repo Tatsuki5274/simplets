@@ -790,6 +790,7 @@ export const createInterview = /* GraphQL */ `
       id
       sheetId
       interviewDate
+      purpose
       detail
       reviewee
       createdAt
@@ -806,6 +807,7 @@ export const updateInterview = /* GraphQL */ `
       id
       sheetId
       interviewDate
+      purpose
       detail
       reviewee
       createdAt
@@ -822,6 +824,7 @@ export const deleteInterview = /* GraphQL */ `
       id
       sheetId
       interviewDate
+      purpose
       detail
       reviewee
       createdAt
@@ -905,6 +908,7 @@ export const createSection = /* GraphQL */ `
                 id
                 sheetId
                 interviewDate
+                purpose
                 detail
                 reviewee
                 createdAt
@@ -1163,6 +1167,7 @@ export const updateSection = /* GraphQL */ `
                 id
                 sheetId
                 interviewDate
+                purpose
                 detail
                 reviewee
                 createdAt
@@ -1421,6 +1426,7 @@ export const deleteSection = /* GraphQL */ `
                 id
                 sheetId
                 interviewDate
+                purpose
                 detail
                 reviewee
                 createdAt
@@ -1703,6 +1709,7 @@ export const createObjective = /* GraphQL */ `
             id
             sheetId
             interviewDate
+            purpose
             detail
             reviewee
             createdAt
@@ -1936,6 +1943,7 @@ export const createObjective = /* GraphQL */ `
                   id
                   sheetId
                   interviewDate
+                  purpose
                   detail
                   reviewee
                   createdAt
@@ -2167,6 +2175,7 @@ export const updateObjective = /* GraphQL */ `
             id
             sheetId
             interviewDate
+            purpose
             detail
             reviewee
             createdAt
@@ -2400,6 +2409,7 @@ export const updateObjective = /* GraphQL */ `
                   id
                   sheetId
                   interviewDate
+                  purpose
                   detail
                   reviewee
                   createdAt
@@ -2631,6 +2641,7 @@ export const deleteObjective = /* GraphQL */ `
             id
             sheetId
             interviewDate
+            purpose
             detail
             reviewee
             createdAt
@@ -2864,6 +2875,7 @@ export const deleteObjective = /* GraphQL */ `
                   id
                   sheetId
                   interviewDate
+                  purpose
                   detail
                   reviewee
                   createdAt
@@ -3141,6 +3153,7 @@ export const createSheet = /* GraphQL */ `
           id
           sheetId
           interviewDate
+          purpose
           detail
           reviewee
           createdAt
@@ -3477,6 +3490,7 @@ export const updateSheet = /* GraphQL */ `
           id
           sheetId
           interviewDate
+          purpose
           detail
           reviewee
           createdAt
@@ -3813,6 +3827,7 @@ export const deleteSheet = /* GraphQL */ `
           id
           sheetId
           interviewDate
+          purpose
           detail
           reviewee
           createdAt

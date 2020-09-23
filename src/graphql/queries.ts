@@ -467,6 +467,7 @@ export const getInterview = /* GraphQL */ `
       id
       sheetId
       interviewDate
+      purpose
       detail
       reviewee
       createdAt
@@ -485,6 +486,7 @@ export const listInterviews = /* GraphQL */ `
         id
         sheetId
         interviewDate
+        purpose
         detail
         reviewee
         createdAt
@@ -567,6 +569,7 @@ export const getSection = /* GraphQL */ `
                 id
                 sheetId
                 interviewDate
+                purpose
                 detail
                 reviewee
                 createdAt
@@ -813,6 +816,7 @@ export const listSections = /* GraphQL */ `
                   id
                   sheetId
                   interviewDate
+                  purpose
                   detail
                   reviewee
                   createdAt
@@ -1039,6 +1043,7 @@ export const getObjective = /* GraphQL */ `
             id
             sheetId
             interviewDate
+            purpose
             detail
             reviewee
             createdAt
@@ -1272,6 +1277,7 @@ export const getObjective = /* GraphQL */ `
                   id
                   sheetId
                   interviewDate
+                  purpose
                   detail
                   reviewee
                   createdAt
@@ -1491,6 +1497,7 @@ export const listObjectives = /* GraphQL */ `
               id
               sheetId
               interviewDate
+              purpose
               detail
               reviewee
               createdAt
@@ -1897,6 +1904,7 @@ export const getSheet = /* GraphQL */ `
           id
           sheetId
           interviewDate
+          purpose
           detail
           reviewee
           createdAt
@@ -2221,6 +2229,7 @@ export const listSheets = /* GraphQL */ `
             id
             sheetId
             interviewDate
+            purpose
             detail
             reviewee
             createdAt

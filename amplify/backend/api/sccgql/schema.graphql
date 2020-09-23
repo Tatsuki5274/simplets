@@ -96,7 +96,9 @@ type Interview
   id: ID!
   sheetId: ID
   interviewDate: AWSDate
-  detail: String
+  
+  purpose: String #インタビュー目的
+  detail: String  #インタビュー内容
 
   reviewee: String #インタビューを受けた人
 }
