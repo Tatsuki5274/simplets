@@ -10,8 +10,9 @@ import { Sheet, Section, Objective } from 'App';
 import {GetSheetQuery} from 'API';
 import * as APIt from 'API';
 import dateFormat from 'dateformat'
-import {updateObjective} 
+import {updateObjective, updateSheet} 
   from 'graphql/mutations';
+import { error } from 'console';
 
 type Props = {
     match: {
@@ -24,22 +25,29 @@ type Props = {
 
 function RevieweeSheetShow(props: Props) {
     const sheetId = props.match.params.sheetId;
+    const [sheet, setSheet] = useState<Sheet>()
 
     //モーダル
-    const [show, setShow] = useState(false);
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
+    const [objectiveUpdateShow, setObjectiveUpdateShow] = useState(false);
+    const handleCloseObjectiveUpdate = () => setObjectiveUpdateShow(false);
+    const handleShowObjectiveUpdate = () => setObjectiveUpdateShow(true);
+
+    const [careerPlanUpdateShow, setCareerPlanUpdateShow] = useState(false);
+    const handleCloseCareerPlanUpdate = () => setCareerPlanUpdateShow(false);
+    const handleShowCareerPlanUpdate = () => setCareerPlanUpdateShow(true);
+
 
     const [changeObjectiveId, setObjectiveId] = useState<Array<any> | any>();
     function HandleChange(event: any){
         console.log(event.target.getAttribute('data-objectiveId'));
         setObjectiveId(event.target.getAttribute('data-objectiveId'));
-        handleShow();
+        handleShowObjectiveUpdate();
 
     }
     
     const [formInput, setFormInput] = useState<any>()
-    function handleChange(event:any){
+
+    function handleChangeObjective(event:any){
         const target = event.target;
         const value = target.type === 'checkbox' ? target.checked : target.value;
         const name: string = target.name;
@@ -52,9 +60,6 @@ function RevieweeSheetShow(props: Props) {
         console.log(formInput)
 
     }
-
-    
-
 
     //objectiveの更新
     function HandleUpdateObject(){
@@ -87,11 +92,50 @@ function RevieweeSheetShow(props: Props) {
     }
         )()
         window.location.reload()
-        handleClose();
+        handleCloseObjectiveUpdate();
+    }
+
+
+    const [formInputCareerPlan, setFormInputCareerPlan] = useState<any>();
+    function handleChangeCareerPlan(event:any){
+        const target = event.target;
+        const value = target.type === 'checkbox' ? target.checked : target.value;
+        const name: string = target.name;
+        
+        // const tmpInput: object = formInput as object;
+        // tmpInput[name] = value;
+        setFormInputCareerPlan({
+            ...formInputCareerPlan, [name]: value
+          });
+    }
+    async function HandleUpdateCareerPlan(e: any){
+        const updateI: APIt.UpdateSheetInput = {
+            id: sheetId, 
+            careerPlan: formInputCareerPlan.careerPlan || ""
+        };
+      const updateMV: APIt.UpdateSheetMutationVariables = {
+        input: updateI,
+      };
+      const updateR: GraphQLResult<APIt.UpdateSheetMutation> = 
+        await API.graphql(graphqlOperation(updateSheet, updateMV)) as GraphQLResult<APIt.UpdateSheetMutation>;
+      if (updateR.data) {
+        const updateTM: APIt.UpdateSheetMutation = updateR.data;
+        if (updateTM.updateSheet) {
+            const updatedSheet: Sheet = updateTM.updateSheet;
+            let newSheet = sheet;
+            if(newSheet){
+                newSheet.careerPlan = updatedSheet.careerPlan;
+                setSheet(newSheet)
+            }else{
+                console.error("現在のシートが存在しません")
+            }
+          console.log('UpdateSheet:', sheet);
+          handleCloseCareerPlanUpdate();
+        }
+      }
     }
 
     //表示用データ
-    const [sheet, setSheet] = useState<Sheet>()
 
     useEffect(() => {
         ;(async()=>{
@@ -118,14 +162,14 @@ function RevieweeSheetShow(props: Props) {
             {/* サイドバーのコンポーネントを配置する */}
 
             <div>
-                <Modal show={show} onHide={handleClose}>
+                <Modal show={objectiveUpdateShow} onHide={handleCloseObjectiveUpdate}>
                     <Modal.Header closeButton>
                     <Modal.Title>目標変更</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
                         <Row>
                             <Col>目標</Col>
-                            <Col><input type="text" onChange={handleChange} name="content"/> </Col>
+                            <Col><input type="text" onChange={handleChangeObjective} name="content"/> </Col>
                         </Row>
                         <Row>
                             <Col md="2" lg="2" xl="2">開始予定日</Col>
@@ -134,7 +178,7 @@ function RevieweeSheetShow(props: Props) {
                                     required
                                     type="datetime-local"
                                     name="expStartDate"
-                                    onChange={handleChange}
+                                    onChange={handleChangeObjective}
                                 />
                             </Col>
                             <Col md="2" lg="2" xl="2">完了予定日</Col>
@@ -143,14 +187,14 @@ function RevieweeSheetShow(props: Props) {
                                     required
                                     type="datetime-local"
                                     name="expDoneDate"
-                                    onChange={handleChange}
+                                    onChange={handleChangeObjective}
                                 />
                             </Col>
                         </Row>
                         <Row>
                             <Col>ステータス</Col>
                             <Col>
-                                <select onChange={handleChange} name="status">
+                                <select onChange={handleChangeObjective} name="status">
                                     <option value="実施前">実施前</option>
                                     <option value="実施中">実施中</option>
                                     <option value="実施完了">実施完了</option>
@@ -160,7 +204,7 @@ function RevieweeSheetShow(props: Props) {
                         <Row>
                             <Col>自己評価</Col>
                             <Col>
-                                <select onChange={handleChange} name="selfEvaluation">
+                                <select onChange={handleChangeObjective} name="selfEvaluation">
                                     <option value='1'>1</option>
                                     <option value='2'>2</option>
                                     <option value='3'>3</option>
@@ -172,7 +216,7 @@ function RevieweeSheetShow(props: Props) {
                         <Row>
                             <Col>優先順位</Col>
                             <Col>
-                                <select onChange={handleChange} name="priority">
+                                <select onChange={handleChangeObjective} name="priority">
                                     <option value="A">A</option>
                                     <option value="B">B</option>
                                     <option value="C">C</option>
@@ -181,14 +225,34 @@ function RevieweeSheetShow(props: Props) {
                         </Row>
                         <Row>
                             <Col>実績</Col>
-                            <Col><input type="text" onChange={handleChange} name="result"/> </Col>
+                            <Col><input type="text" onChange={handleChangeObjective} name="result"/> </Col>
                         </Row>
                     </Modal.Body>
                     <Modal.Footer>
-                    <Button variant="secondary" onClick={handleClose}>
+                    <Button variant="secondary" onClick={handleCloseObjectiveUpdate}>
                         Close
                     </Button>
                     <Button variant="primary" onClick={HandleUpdateObject}>
+                        Save Changes
+                    </Button>
+                    </Modal.Footer>
+                </Modal>
+
+                <Modal show={careerPlanUpdateShow} onHide={handleCloseCareerPlanUpdate}>
+                    <Modal.Header closeButton>
+                    <Modal.Title>キャリアプラン</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <Row>
+                            <Col>キャリアプラン本人希望内容</Col>
+                            <Col><textarea rows={10} cols={60} name="careerPlan" onChange={handleChangeCareerPlan}>{sheet.careerPlan || ""}</textarea></Col>
+                        </Row>
+                    </Modal.Body>
+                    <Modal.Footer>
+                    <Button variant="secondary" onClick={handleCloseCareerPlanUpdate}>
+                        Close
+                    </Button>
+                    <Button variant="primary" onClick={HandleUpdateCareerPlan}>
                         Save Changes
                     </Button>
                     </Modal.Footer>
@@ -255,7 +319,7 @@ function RevieweeSheetShow(props: Props) {
                     <Row>
                         <Col>
                             <h5>本員希望</h5>
-                            <Button variant="info">変更</Button>
+                            <Button variant="info" onClick={handleShowCareerPlanUpdate}>変更</Button>
                             <p>{sheet.careerPlan}</p>
                         </Col>
                         <Col>
