@@ -1,15 +1,15 @@
-import React ,{useState} from 'react';
+import React, { useState, useEffect } from 'react';
 import { Container, InputGroup, Table, FormControl, Form, Button, DropdownButton, Dropdown, Modal } from 'react-bootstrap';
+import { API, graphqlOperation } from 'aws-amplify';
+import { GraphQLResult } from "@aws-amplify/api";
 // import DropdownItem from 'react-bootstrap/esm/DropdownItem';
 import { RouteComponentProps } from 'react-router';
+import { Sheet, Section, Objective } from 'App';
+import { GetSheetQuery, ListSheetsQuery } from 'API';
+import { updateSheet } from 'graphql/mutations';
 import * as APIt from 'API';
-import API, {GraphQLResult, graphqlOperation} 
-  from '@aws-amplify/api';
-import {updateSheet} 
-  from 'graphql/mutations';
-import {Sheet}
-  from 'App';
-
+import { listSheets, getSheet } from 'graphql/queries';
+import dateFormat from 'dateformat';
 
 //propsの型を指定
 type Props = {
@@ -20,18 +20,40 @@ type Props = {
     }
 }
 
-
-function EvalutionScreen(props:Props) {
-
+function EvalutionScreen(props: Props) {
     const [show, setShow] = useState(false);
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
     const sheetId = props.match.params.sheetId;
-    console.log(sheetId);  
+    console.log(sheetId);
 
-    function HandleUpdateStatus(){
+    // sheet 情報取得
+    const [sheet, setSheet] = useState<Sheet>()
+    useEffect(() => {
+        ; (async () => {
+            //const sheetId = props.match.params.sheetId;
+
+            try {
+                const input: APIt.GetSheetQueryVariables = {
+                    id: sheetId
+                }
+                const response = (await API.graphql(graphqlOperation(getSheet, input))
+                ) as GraphQLResult<GetSheetQuery>;
+
+                const sheetItem: Sheet = response.data?.getSheet as Sheet;
+                setSheet(sheetItem);
+                console.log(sheetItem);
+                console.log(response);
+            } catch (e) {
+                console.log(e);
+            }
+
+        })()
+    }, []);
+
+    function HandleUpdateStatus() {
         // (async()=>{
         // //ステータスを「目標：設定中」に変更
         // const updateI: APIt.UpdateSheetInput = 
@@ -52,9 +74,14 @@ function EvalutionScreen(props:Props) {
         handleClose();
     }
 
+    if (sheet === undefined) return <div>Loading...</div>
+    else if (sheet === null) {
+        console.log("sheet not found.");
+        return <p>該当のシートは存在しません</p>
+    }
     return (
         <div>
-           
+
             {/* モーダルウィンドウ 差し戻しコメント */}
             <div>
                 <Modal show={show} onHide={handleClose}>
@@ -65,7 +92,7 @@ function EvalutionScreen(props:Props) {
                     <Modal.Body>
                         <InputGroup>
                             <InputGroup.Prepend>
-                            <InputGroup.Text>理由</InputGroup.Text>
+                                <InputGroup.Text>理由</InputGroup.Text>
                             </InputGroup.Prepend>
                             <FormControl as="textarea" />
                         </InputGroup>
@@ -91,7 +118,10 @@ function EvalutionScreen(props:Props) {
 
                     <div>
                         <h4>本人希望</h4>
-                        <p>様々なスキルを身に付け、早く一人前のSEになりたい。SEの経験を積んだ後も将来はコンサルタントを目指したい。</p>
+
+                        {/* 本人希望　情報表示 */}
+                        <p>{sheet.careerPlan}</p>
+
 
                         <h4>話し合い結果</h4>
                         <InputGroup>
@@ -111,7 +141,7 @@ function EvalutionScreen(props:Props) {
                             <tbody>
                                 <tr>
                                     <td>目標設定</td>
-                                    <td>2017/06/30</td>
+                                    <td>2020/01/01 00:00:00</td>
                                     <td>インタビューを行い目標を設定した。本人の認識と特に大きな相違はなかった。</td>
                                 </tr>
                                 <tr>
@@ -129,6 +159,7 @@ function EvalutionScreen(props:Props) {
                                     <td></td>
                                     <td></td>
                                 </tr>
+
                             </tbody>
 
                         </Table><br />
@@ -156,7 +187,6 @@ function EvalutionScreen(props:Props) {
                                 <Button type="submit">保存して承認</Button>
                                 <Button onClick={handleShow}>差し戻し</Button>
                             </Form.Group>
-
                         </Form><br />
 
                         {/* ビジネス成果目標 */}

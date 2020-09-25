@@ -43,7 +43,7 @@ function Portal(){
       <Link to='/reviewee/objective/new/:sheetId'>目標追加</Link><br />
       <Link to='/reviewee/list'>業績評価一覧</Link><br />
       <Link to='/reviewer/list'>進捗参照一覧</Link><br />
-      <Link to='/reviewer/sheet'>評価画面</Link>
+      <Link to='/reviewer/sheet/1'>評価画面</Link>
     </div>
   );
 }
