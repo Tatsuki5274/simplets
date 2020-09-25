@@ -20,6 +20,7 @@ Amplify.configure(awsconfig);
 export type Sheet = Omit<Exclude<APIt.GetSheetQuery['getSheet'], null>, '__typename'>;
 export type Objective = Omit<Exclude<APIt.GetObjectiveQuery['getObjective'], null>, '__typename'>;
 export type Section = Omit<Exclude<APIt.GetSectionQuery['getSection'], null>, '__typename'>;
+export type Interview = Omit<Exclude<APIt.GetInterviewQuery['getInterview'], null>, '__typename'>;
 
 //approvalStatusManagerの引数の型
 export type approvalStatusManagerMutationVariables = {
