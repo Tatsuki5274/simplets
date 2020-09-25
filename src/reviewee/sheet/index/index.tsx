@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Container, Row, Col, Table, Button, Modal } from 'react-bootstrap';
+import { Container, Row, Col, Table, Button, Modal, Form } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Link } from 'react-router-dom';
 import { GraphQLResult } from "@aws-amplify/api";
@@ -20,12 +20,6 @@ type Props = {
         }
     }
 }
-
-type formType = {
-    content:string,
-    status:string
-}
-
 
 
 function RevieweeSheetShow(props: Props) {
@@ -68,8 +62,15 @@ function RevieweeSheetShow(props: Props) {
         const objectiveId = changeObjectiveId;
         const selfEvaluationInput = parseInt(formInput.selfEvaluation);
         //目標変更の目標、ステータス、自己評価、優先順位、実績を項目明細に上書き
-        const updateI: APIt.UpdateObjectiveInput = 
-        {id:objectiveId, content: formInput.content, status:formInput.status, selfEvaluation:selfEvaluationInput, priority:formInput.priority, result:formInput.result };
+        const updateI: APIt.UpdateObjectiveInput = {
+            id:objectiveId, 
+            content: formInput.content, 
+            selfEvaluation: formInput.selfEvaluationInput, 
+            priority:formInput.priority,
+            result:formInput.result ,
+            expStartDate: formInput.expStartDate,
+            expDoneDate: formInput.expDoneDate
+        };
         const updateMV: APIt.UpdateObjectiveMutationVariables = {
             input: updateI,
         };
@@ -125,6 +126,26 @@ function RevieweeSheetShow(props: Props) {
                         <Row>
                             <Col>目標</Col>
                             <Col><input type="text" onChange={handleChange} name="content"/> </Col>
+                        </Row>
+                        <Row>
+                            <Col md="2" lg="2" xl="2">開始予定日</Col>
+                            <Col md="4" lg="4" xl="4">
+                                <Form.Control
+                                    required
+                                    type="datetime-local"
+                                    name="expStartDate"
+                                    onChange={handleChange}
+                                />
+                            </Col>
+                            <Col md="2" lg="2" xl="2">完了予定日</Col>
+                            <Col md="4" lg="4" xl="4">
+                                <Form.Control
+                                    required
+                                    type="datetime-local"
+                                    name="expDoneDate"
+                                    onChange={handleChange}
+                                />
+                            </Col>
                         </Row>
                         <Row>
                             <Col>ステータス</Col>
@@ -194,8 +215,10 @@ function RevieweeSheetShow(props: Props) {
                                             <td>#</td>
                                             <td>目標</td>
                                             <td>実績</td>
-                                            <td>ステータス</td>
+                                            <td>進捗率</td>
                                             <td>優先順位</td>
+                                            <td>開始予定日</td>
+                                            <td>完了予定日</td>
                                             <td>自己評価</td>
                                             <td>最終評価</td>
                                             <td>更新日時</td>
@@ -212,8 +235,10 @@ function RevieweeSheetShow(props: Props) {
                                                     </td>
                                                     <td>{objective.content}</td>
                                                     <td>{objective.result}</td>
-                                                    <td>{objective.status}</td>
+                                                    <td>{objective.progress || 0}%</td>
                                                     <td>{objective.priority}</td>
+                                                    <td>{objective.expStartDate ? dateFormat(objective.expStartDate, "yyyy/mm/dd") : "" }</td>
+                                                    <td>{objective.expDoneDate ? dateFormat(objective.expDoneDate, "yyyy/mm/dd") : "" }</td>
                                                     <td>{objective.selfEvaluation}</td>
                                                     <td>{objective.lastEvaluation}</td>
                                                     <td>{dateFormat(date, "yyyy/mm/dd HH:MM")}</td>
