@@ -150,7 +150,7 @@ type Sheet
     ])
 
   status: String  #承認ステータスを返す関数
-    @function(name: "approvalStatusReferencer-${env}")
+    #@function(name: "approvalStatusReferencer-${env}")
 
   reviewee: String #被評価者　オーナーフィールド
 }
