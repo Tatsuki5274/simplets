@@ -132,9 +132,7 @@ function EvalutionScreen(props: Props) {
 
 
                         <h4>話し合い結果</h4>
-                        <InputGroup>
-                            <FormControl as="textarea" />
-                        </InputGroup><br />
+                        <textarea name="careerPlanComment">{sheet.careerPlanComment}</textarea>
 
                         {/* インタビュー実施記録 */}
                         <h4>インタビュー実施記録</h4>
@@ -211,7 +209,7 @@ function EvalutionScreen(props: Props) {
                                         <tbody>
                                             {section.objective?.items?.map((arg: any) => {
                                                 const objective: Objective = arg;   //仮の型変換処理
-                                                const date = new Date(objective.updatedOn);
+                                                const date = new Date(objective.updatedAt);
                                                 return (
                                                     <tr key={objective.id}>
 
