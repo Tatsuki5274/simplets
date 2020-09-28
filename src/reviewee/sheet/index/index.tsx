@@ -291,7 +291,7 @@ function RevieweeSheetShow(props: Props) {
                                     <tbody>
                                         {section.objective?.items?.map((arg: any)=>{
                                             const objective: Objective = arg;   //仮の型変換処理
-                                            const date = new Date(objective.updatedOn);
+                                            const date = new Date(objective.updatedAt);
                                             return (
                                                 <tr key={objective.id}>
                                                     <td>

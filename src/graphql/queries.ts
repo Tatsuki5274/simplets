@@ -252,12 +252,12 @@ export const getGroup = /* GraphQL */ `
                 group {
                   id
                   name
-                  createdOn
-                  updatedOn
+                  createdAt
+                  updatedAt
                 }
                 name
-                createdOn
-                updatedOn
+                createdAt
+                updatedAt
                 company {
                   id
                   name
@@ -268,8 +268,8 @@ export const getGroup = /* GraphQL */ `
                 }
               }
               name
-              createdOn
-              updatedOn
+              createdAt
+              updatedAt
               company {
                 id
                 name
@@ -280,8 +280,8 @@ export const getGroup = /* GraphQL */ `
               }
             }
             name
-            createdOn
-            updatedOn
+            createdAt
+            updatedAt
             company {
               id
               name
@@ -292,8 +292,8 @@ export const getGroup = /* GraphQL */ `
             }
           }
           name
-          createdOn
-          updatedOn
+          createdAt
+          updatedAt
           company {
             id
             name
@@ -304,8 +304,8 @@ export const getGroup = /* GraphQL */ `
           }
         }
         name
-        createdOn
-        updatedOn
+        createdAt
+        updatedAt
         company {
           id
           name
@@ -316,8 +316,8 @@ export const getGroup = /* GraphQL */ `
         }
       }
       name
-      createdOn
-      updatedOn
+      createdAt
+      updatedAt
       company {
         id
         name
@@ -349,12 +349,12 @@ export const listGroups = /* GraphQL */ `
                 group {
                   id
                   name
-                  createdOn
-                  updatedOn
+                  createdAt
+                  updatedAt
                 }
                 name
-                createdOn
-                updatedOn
+                createdAt
+                updatedAt
                 company {
                   id
                   name
@@ -365,8 +365,8 @@ export const listGroups = /* GraphQL */ `
                 }
               }
               name
-              createdOn
-              updatedOn
+              createdAt
+              updatedAt
               company {
                 id
                 name
@@ -377,8 +377,8 @@ export const listGroups = /* GraphQL */ `
               }
             }
             name
-            createdOn
-            updatedOn
+            createdAt
+            updatedAt
             company {
               id
               name
@@ -389,8 +389,8 @@ export const listGroups = /* GraphQL */ `
             }
           }
           name
-          createdOn
-          updatedOn
+          createdAt
+          updatedAt
           company {
             id
             name
@@ -401,8 +401,8 @@ export const listGroups = /* GraphQL */ `
           }
         }
         name
-        createdOn
-        updatedOn
+        createdAt
+        updatedAt
         company {
           id
           name
@@ -422,8 +422,8 @@ export const getCategory = /* GraphQL */ `
       id
       no
       name
-      createdOn
-      updatedOn
+      createdAt
+      updatedAt
       company {
         id
         name
@@ -446,8 +446,8 @@ export const listCategorys = /* GraphQL */ `
         id
         no
         name
-        createdOn
-        updatedOn
+        createdAt
+        updatedAt
         company {
           id
           name
@@ -471,7 +471,7 @@ export const getInterview = /* GraphQL */ `
       detail
       reviewee
       createdAt
-      updatedOn
+      updatedAt
     }
   }
 `;
@@ -490,7 +490,7 @@ export const listInterviews = /* GraphQL */ `
         detail
         reviewee
         createdAt
-        updatedOn
+        updatedAt
       }
       nextToken
     }
@@ -537,12 +537,12 @@ export const getSection = /* GraphQL */ `
                 group {
                   id
                   name
-                  createdOn
-                  updatedOn
+                  createdAt
+                  updatedAt
                 }
                 name
-                createdOn
-                updatedOn
+                createdAt
+                updatedAt
                 company {
                   id
                   name
@@ -553,8 +553,8 @@ export const getSection = /* GraphQL */ `
                 }
               }
               name
-              createdOn
-              updatedOn
+              createdAt
+              updatedAt
               company {
                 id
                 name
@@ -573,7 +573,7 @@ export const getSection = /* GraphQL */ `
                 detail
                 reviewee
                 createdAt
-                updatedOn
+                updatedAt
               }
               nextToken
             }
@@ -680,18 +680,18 @@ export const getSection = /* GraphQL */ `
                   id
                   no
                   name
-                  createdOn
-                  updatedOn
+                  createdAt
+                  updatedAt
                 }
                 createdAt
-                updatedOn
+                updatedAt
               }
               nextToken
             }
             status
             reviewee
             createdAt
-            updatedOn
+            updatedAt
             company {
               id
               name
@@ -738,7 +738,7 @@ export const getSection = /* GraphQL */ `
                   status
                   reviewee
                   createdAt
-                  updatedOn
+                  updatedAt
                   statusValue
                 }
                 objectiveSectionId
@@ -746,11 +746,11 @@ export const getSection = /* GraphQL */ `
                   id
                   sectionSheetId
                   createdAt
-                  updatedOn
+                  updatedAt
                 }
                 reviewee
                 createdAt
-                updatedOn
+                updatedAt
               }
               nextToken
             }
@@ -758,8 +758,8 @@ export const getSection = /* GraphQL */ `
               id
               no
               name
-              createdOn
-              updatedOn
+              createdAt
+              updatedAt
               company {
                 id
                 name
@@ -770,11 +770,11 @@ export const getSection = /* GraphQL */ `
               }
             }
             createdAt
-            updatedOn
+            updatedAt
           }
           reviewee
           createdAt
-          updatedOn
+          updatedAt
         }
         nextToken
       }
@@ -782,8 +782,8 @@ export const getSection = /* GraphQL */ `
         id
         no
         name
-        createdOn
-        updatedOn
+        createdAt
+        updatedAt
         company {
           id
           name
@@ -794,7 +794,7 @@ export const getSection = /* GraphQL */ `
         }
       }
       createdAt
-      updatedOn
+      updatedAt
     }
   }
 `;
@@ -842,12 +842,12 @@ export const listSections = /* GraphQL */ `
                 group {
                   id
                   name
-                  createdOn
-                  updatedOn
+                  createdAt
+                  updatedAt
                 }
                 name
-                createdOn
-                updatedOn
+                createdAt
+                updatedAt
                 company {
                   id
                   name
@@ -866,7 +866,7 @@ export const listSections = /* GraphQL */ `
                   detail
                   reviewee
                   createdAt
-                  updatedOn
+                  updatedAt
                 }
                 nextToken
               }
@@ -931,14 +931,14 @@ export const listSections = /* GraphQL */ `
                   id
                   sectionSheetId
                   createdAt
-                  updatedOn
+                  updatedAt
                 }
                 nextToken
               }
               status
               reviewee
               createdAt
-              updatedOn
+              updatedAt
               company {
                 id
                 name
@@ -970,7 +970,7 @@ export const listSections = /* GraphQL */ `
                   objectiveSectionId
                   reviewee
                   createdAt
-                  updatedOn
+                  updatedAt
                 }
                 nextToken
               }
@@ -978,8 +978,8 @@ export const listSections = /* GraphQL */ `
                 id
                 no
                 name
-                createdOn
-                updatedOn
+                createdAt
+                updatedAt
                 company {
                   id
                   name
@@ -990,11 +990,11 @@ export const listSections = /* GraphQL */ `
                 }
               }
               createdAt
-              updatedOn
+              updatedAt
             }
             reviewee
             createdAt
-            updatedOn
+            updatedAt
           }
           nextToken
         }
@@ -1002,8 +1002,8 @@ export const listSections = /* GraphQL */ `
           id
           no
           name
-          createdOn
-          updatedOn
+          createdAt
+          updatedAt
           company {
             id
             name
@@ -1014,7 +1014,7 @@ export const listSections = /* GraphQL */ `
           }
         }
         createdAt
-        updatedOn
+        updatedAt
       }
       nextToken
     }
@@ -1061,12 +1061,12 @@ export const getObjective = /* GraphQL */ `
                 group {
                   id
                   name
-                  createdOn
-                  updatedOn
+                  createdAt
+                  updatedAt
                 }
                 name
-                createdOn
-                updatedOn
+                createdAt
+                updatedAt
                 company {
                   id
                   name
@@ -1077,8 +1077,8 @@ export const getObjective = /* GraphQL */ `
                 }
               }
               name
-              createdOn
-              updatedOn
+              createdAt
+              updatedAt
               company {
                 id
                 name
@@ -1089,8 +1089,8 @@ export const getObjective = /* GraphQL */ `
               }
             }
             name
-            createdOn
-            updatedOn
+            createdAt
+            updatedAt
             company {
               id
               name
@@ -1101,8 +1101,8 @@ export const getObjective = /* GraphQL */ `
             }
           }
           name
-          createdOn
-          updatedOn
+          createdAt
+          updatedAt
           company {
             id
             name
@@ -1121,7 +1121,7 @@ export const getObjective = /* GraphQL */ `
             detail
             reviewee
             createdAt
-            updatedOn
+            updatedAt
           }
           nextToken
         }
@@ -1325,7 +1325,7 @@ export const getObjective = /* GraphQL */ `
                   status
                   reviewee
                   createdAt
-                  updatedOn
+                  updatedAt
                   statusValue
                 }
                 objectiveSectionId
@@ -1333,11 +1333,11 @@ export const getObjective = /* GraphQL */ `
                   id
                   sectionSheetId
                   createdAt
-                  updatedOn
+                  updatedAt
                 }
                 reviewee
                 createdAt
-                updatedOn
+                updatedAt
               }
               nextToken
             }
@@ -1345,8 +1345,8 @@ export const getObjective = /* GraphQL */ `
               id
               no
               name
-              createdOn
-              updatedOn
+              createdAt
+              updatedAt
               company {
                 id
                 name
@@ -1357,14 +1357,14 @@ export const getObjective = /* GraphQL */ `
               }
             }
             createdAt
-            updatedOn
+            updatedAt
           }
           nextToken
         }
         status
         reviewee
         createdAt
-        updatedOn
+        updatedAt
         company {
           id
           name
@@ -1413,12 +1413,12 @@ export const getObjective = /* GraphQL */ `
                 group {
                   id
                   name
-                  createdOn
-                  updatedOn
+                  createdAt
+                  updatedAt
                 }
                 name
-                createdOn
-                updatedOn
+                createdAt
+                updatedAt
                 company {
                   id
                   name
@@ -1437,7 +1437,7 @@ export const getObjective = /* GraphQL */ `
                   detail
                   reviewee
                   createdAt
-                  updatedOn
+                  updatedAt
                 }
                 nextToken
               }
@@ -1502,14 +1502,14 @@ export const getObjective = /* GraphQL */ `
                   id
                   sectionSheetId
                   createdAt
-                  updatedOn
+                  updatedAt
                 }
                 nextToken
               }
               status
               reviewee
               createdAt
-              updatedOn
+              updatedAt
               company {
                 id
                 name
@@ -1541,7 +1541,7 @@ export const getObjective = /* GraphQL */ `
                   objectiveSectionId
                   reviewee
                   createdAt
-                  updatedOn
+                  updatedAt
                 }
                 nextToken
               }
@@ -1549,8 +1549,8 @@ export const getObjective = /* GraphQL */ `
                 id
                 no
                 name
-                createdOn
-                updatedOn
+                createdAt
+                updatedAt
                 company {
                   id
                   name
@@ -1561,11 +1561,11 @@ export const getObjective = /* GraphQL */ `
                 }
               }
               createdAt
-              updatedOn
+              updatedAt
             }
             reviewee
             createdAt
-            updatedOn
+            updatedAt
           }
           nextToken
         }
@@ -1573,8 +1573,8 @@ export const getObjective = /* GraphQL */ `
           id
           no
           name
-          createdOn
-          updatedOn
+          createdAt
+          updatedAt
           company {
             id
             name
@@ -1585,11 +1585,11 @@ export const getObjective = /* GraphQL */ `
           }
         }
         createdAt
-        updatedOn
+        updatedAt
       }
       reviewee
       createdAt
-      updatedOn
+      updatedAt
     }
   }
 `;
@@ -1637,12 +1637,12 @@ export const listObjectives = /* GraphQL */ `
                 group {
                   id
                   name
-                  createdOn
-                  updatedOn
+                  createdAt
+                  updatedAt
                 }
                 name
-                createdOn
-                updatedOn
+                createdAt
+                updatedAt
                 company {
                   id
                   name
@@ -1653,8 +1653,8 @@ export const listObjectives = /* GraphQL */ `
                 }
               }
               name
-              createdOn
-              updatedOn
+              createdAt
+              updatedAt
               company {
                 id
                 name
@@ -1665,8 +1665,8 @@ export const listObjectives = /* GraphQL */ `
               }
             }
             name
-            createdOn
-            updatedOn
+            createdAt
+            updatedAt
             company {
               id
               name
@@ -1685,7 +1685,7 @@ export const listObjectives = /* GraphQL */ `
               detail
               reviewee
               createdAt
-              updatedOn
+              updatedAt
             }
             nextToken
           }
@@ -1838,7 +1838,7 @@ export const listObjectives = /* GraphQL */ `
                   objectiveSectionId
                   reviewee
                   createdAt
-                  updatedOn
+                  updatedAt
                 }
                 nextToken
               }
@@ -1846,8 +1846,8 @@ export const listObjectives = /* GraphQL */ `
                 id
                 no
                 name
-                createdOn
-                updatedOn
+                createdAt
+                updatedAt
                 company {
                   id
                   name
@@ -1858,14 +1858,14 @@ export const listObjectives = /* GraphQL */ `
                 }
               }
               createdAt
-              updatedOn
+              updatedAt
             }
             nextToken
           }
           status
           reviewee
           createdAt
-          updatedOn
+          updatedAt
           company {
             id
             name
@@ -1912,8 +1912,8 @@ export const listObjectives = /* GraphQL */ `
                 group {
                   id
                   name
-                  createdOn
-                  updatedOn
+                  createdAt
+                  updatedAt
                 }
                 interviews {
                   nextToken
@@ -1944,7 +1944,7 @@ export const listObjectives = /* GraphQL */ `
                 status
                 reviewee
                 createdAt
-                updatedOn
+                updatedAt
                 company {
                   id
                   name
@@ -1966,15 +1966,15 @@ export const listObjectives = /* GraphQL */ `
                   id
                   no
                   name
-                  createdOn
-                  updatedOn
+                  createdAt
+                  updatedAt
                 }
                 createdAt
-                updatedOn
+                updatedAt
               }
               reviewee
               createdAt
-              updatedOn
+              updatedAt
             }
             nextToken
           }
@@ -1982,8 +1982,8 @@ export const listObjectives = /* GraphQL */ `
             id
             no
             name
-            createdOn
-            updatedOn
+            createdAt
+            updatedAt
             company {
               id
               name
@@ -1994,11 +1994,11 @@ export const listObjectives = /* GraphQL */ `
             }
           }
           createdAt
-          updatedOn
+          updatedAt
         }
         reviewee
         createdAt
-        updatedOn
+        updatedAt
       }
       nextToken
     }
@@ -2094,12 +2094,12 @@ export const getSheet = /* GraphQL */ `
                 group {
                   id
                   name
-                  createdOn
-                  updatedOn
+                  createdAt
+                  updatedAt
                 }
                 name
-                createdOn
-                updatedOn
+                createdAt
+                updatedAt
                 company {
                   id
                   name
@@ -2110,8 +2110,8 @@ export const getSheet = /* GraphQL */ `
                 }
               }
               name
-              createdOn
-              updatedOn
+              createdAt
+              updatedAt
               company {
                 id
                 name
@@ -2122,8 +2122,8 @@ export const getSheet = /* GraphQL */ `
               }
             }
             name
-            createdOn
-            updatedOn
+            createdAt
+            updatedAt
             company {
               id
               name
@@ -2134,8 +2134,8 @@ export const getSheet = /* GraphQL */ `
             }
           }
           name
-          createdOn
-          updatedOn
+          createdAt
+          updatedAt
           company {
             id
             name
@@ -2146,8 +2146,8 @@ export const getSheet = /* GraphQL */ `
           }
         }
         name
-        createdOn
-        updatedOn
+        createdAt
+        updatedAt
         company {
           id
           name
@@ -2166,7 +2166,7 @@ export const getSheet = /* GraphQL */ `
           detail
           reviewee
           createdAt
-          updatedOn
+          updatedAt
         }
         nextToken
       }
@@ -2406,8 +2406,8 @@ export const getSheet = /* GraphQL */ `
                 group {
                   id
                   name
-                  createdOn
-                  updatedOn
+                  createdAt
+                  updatedAt
                 }
                 interviews {
                   nextToken
@@ -2438,7 +2438,7 @@ export const getSheet = /* GraphQL */ `
                 status
                 reviewee
                 createdAt
-                updatedOn
+                updatedAt
                 company {
                   id
                   name
@@ -2460,15 +2460,15 @@ export const getSheet = /* GraphQL */ `
                   id
                   no
                   name
-                  createdOn
-                  updatedOn
+                  createdAt
+                  updatedAt
                 }
                 createdAt
-                updatedOn
+                updatedAt
               }
               reviewee
               createdAt
-              updatedOn
+              updatedAt
             }
             nextToken
           }
@@ -2476,8 +2476,8 @@ export const getSheet = /* GraphQL */ `
             id
             no
             name
-            createdOn
-            updatedOn
+            createdAt
+            updatedAt
             company {
               id
               name
@@ -2488,14 +2488,14 @@ export const getSheet = /* GraphQL */ `
             }
           }
           createdAt
-          updatedOn
+          updatedAt
         }
         nextToken
       }
       status
       reviewee
       createdAt
-      updatedOn
+      updatedAt
       company {
         id
         name
@@ -2541,12 +2541,12 @@ export const listSheets = /* GraphQL */ `
                 group {
                   id
                   name
-                  createdOn
-                  updatedOn
+                  createdAt
+                  updatedAt
                 }
                 name
-                createdOn
-                updatedOn
+                createdAt
+                updatedAt
                 company {
                   id
                   name
@@ -2557,8 +2557,8 @@ export const listSheets = /* GraphQL */ `
                 }
               }
               name
-              createdOn
-              updatedOn
+              createdAt
+              updatedAt
               company {
                 id
                 name
@@ -2569,8 +2569,8 @@ export const listSheets = /* GraphQL */ `
               }
             }
             name
-            createdOn
-            updatedOn
+            createdAt
+            updatedAt
             company {
               id
               name
@@ -2581,8 +2581,8 @@ export const listSheets = /* GraphQL */ `
             }
           }
           name
-          createdOn
-          updatedOn
+          createdAt
+          updatedAt
           company {
             id
             name
@@ -2601,7 +2601,7 @@ export const listSheets = /* GraphQL */ `
             detail
             reviewee
             createdAt
-            updatedOn
+            updatedAt
           }
           nextToken
         }
@@ -2805,7 +2805,7 @@ export const listSheets = /* GraphQL */ `
                   status
                   reviewee
                   createdAt
-                  updatedOn
+                  updatedAt
                   statusValue
                 }
                 objectiveSectionId
@@ -2813,11 +2813,11 @@ export const listSheets = /* GraphQL */ `
                   id
                   sectionSheetId
                   createdAt
-                  updatedOn
+                  updatedAt
                 }
                 reviewee
                 createdAt
-                updatedOn
+                updatedAt
               }
               nextToken
             }
@@ -2825,8 +2825,8 @@ export const listSheets = /* GraphQL */ `
               id
               no
               name
-              createdOn
-              updatedOn
+              createdAt
+              updatedAt
               company {
                 id
                 name
@@ -2837,14 +2837,14 @@ export const listSheets = /* GraphQL */ `
               }
             }
             createdAt
-            updatedOn
+            updatedAt
           }
           nextToken
         }
         status
         reviewee
         createdAt
-        updatedOn
+        updatedAt
         company {
           id
           name

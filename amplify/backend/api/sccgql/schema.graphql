@@ -14,7 +14,7 @@ type ApprovalStatus #承認ステータス
 }
 
 type Company #会社
-@model
+@model(timestamps:{createdAt: "createdAt", updatedAt: "updatedAt"})
 @auth(
   rules: [
     {allow: groups, groups: ["Root"]}
@@ -37,7 +37,7 @@ type Employee #社員
     {allow: private}
   ]
 )
-@model
+@model(timestamps:{createdAt: "createdAt", updatedAt: "updatedAt"})
 {
   id: ID!
   no: String #社員番号
@@ -51,7 +51,7 @@ type Employee #社員
 }
 
 type Group #部門
-@model(timestamps:{createdAt: "createdOn", updatedAt: "updatedOn"})
+@model(timestamps:{createdAt: "createdAt", updatedAt: "updatedAt"})
 @auth(
   rules: [
     {allow: groups, groups: ["Root"]}
@@ -67,7 +67,7 @@ type Group #部門
 }
 
 type Category
-@model(timestamps:{createdAt: "createdOn", updatedAt: "updatedOn"})
+@model(timestamps:{createdAt: "createdAt", updatedAt: "updatedAt"})
 @auth(
   rules: [
     {allow: groups, groups: ["Root"]}
@@ -83,7 +83,7 @@ type Category
 }
 
 type Interview
-@model(timestamps:{updatedAt: "updatedOn"})
+@model(timestamps:{createdAt: "createdAt", updatedAt: "updatedAt"})
 @key(name: "bySheet", fields: ["sheetId"])
 @auth(
   rules: [
@@ -104,7 +104,7 @@ type Interview
 }
 
 type Sheet
-@model(timestamps:{updatedAt: "updatedOn"})
+@model(timestamps:{createdAt: "createdAt", updatedAt: "updatedAt"})
 #@key(fields: ["year", "reviewee", "companyId", "grade"])
 # @auth(
 #   rules: [
@@ -156,7 +156,7 @@ type Sheet
 }
 
 type Section
-@model(timestamps:{updatedAt: "updatedOn"})
+@model(timestamps:{createdAt: "createdAt", updatedAt: "updatedAt"})
 @key(name: "bySection", fields: ["sectionSheetId"])
 @auth(
   rules: [
@@ -171,7 +171,7 @@ type Section
 }
 
 type Objective
-@model(timestamps:{updatedAt: "updatedOn"})
+@model(timestamps:{createdAt: "createdAt", updatedAt: "updatedAt"})
 @key(name: "objectiveBySection", fields: ["objectiveSectionId"])
 @auth(
   rules: [
