@@ -4,7 +4,7 @@ import { API, graphqlOperation } from 'aws-amplify';
 import { GraphQLResult } from "@aws-amplify/api";
 // import DropdownItem from 'react-bootstrap/esm/DropdownItem';
 import { RouteComponentProps } from 'react-router';
-import { Sheet, Section, Objective } from 'App';
+import { Sheet, Section, Objective, Interview } from 'App';
 import { GetSheetQuery, ListSheetsQuery } from 'API';
 import { updateSheet } from 'graphql/mutations';
 import * as APIt from 'API';
@@ -139,26 +139,19 @@ function EvalutionScreen(props: Props) {
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>目標設定</td>
-                                    <td>2020/01/01 00:00:00</td>
-                                    <td>インタビューを行い目標を設定した。本人の認識と特に大きな相違はなかった。</td>
-                                </tr>
-                                <tr>
-                                    <td>中間#1</td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>中間#2</td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>中間#3</td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
+
+                                {/* インタビュー実施記録　情報表示 */}
+                                {sheet.interviews?.items?.map((arg: any) => {
+                                    const interviews: Interview = arg;
+                                    const date = new Date(interviews.createdAt);
+                                    return (
+                                        <tr key={interviews.id}>
+                                            <td>{interviews.purpose}</td>
+                                            <td>{dateFormat(date, "yyyy/mm/dd")}</td>
+                                            <td><textarea name="interviewDetail">{interviews.detail}</textarea></td>
+                                        </tr>
+                                    );
+                                })}
 
                             </tbody>
 
