@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, ChangeEvent } from 'react';
 import { Container, InputGroup, Table, FormControl, Form, Button, DropdownButton, Dropdown, Modal } from 'react-bootstrap';
 import { API, graphqlOperation } from 'aws-amplify';
 import { GraphQLResult } from "@aws-amplify/api";
@@ -22,12 +22,13 @@ type Props = {
 
 function EvalutionScreen(props: Props) {
     const [show, setShow] = useState(false);
-
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
+    //画面内のフォームデータの管理ステート
+    const [formInput, setFormInput] = useState<any>();
+
     const sheetId = props.match.params.sheetId;
-    console.log(sheetId);
 
     // sheet 情報取得
     const [sheet, setSheet] = useState<Sheet>()
@@ -52,6 +53,13 @@ function EvalutionScreen(props: Props) {
 
         })()
     }, []);
+
+    function handleChange(event: ChangeEvent<HTMLInputElement>){
+        const target = event.target;
+        const value = target.type === 'checkbox' ? target.checked : target.value;
+        const name = target.name;
+        setFormInput({ ...formInput, [name]: value });
+    }
 
     function HandleUpdateStatus() {
         // (async()=>{
