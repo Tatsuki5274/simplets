@@ -5,11 +5,11 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { GraphQLResult } from "@aws-amplify/api";
 import { ListSheetsQuery } from 'API';
 import { Link } from 'react-router-dom';
-import { Interview, Sheet } from 'App';
+import { Category, Interview, Section, Sheet } from 'App';
 import {ApprovalStatus, getStatusValue} from 'lib/getStatusValue'
-import {listSheets} from 'graphql/queries'
+import {listCategorys, listSheets} from 'graphql/queries'
 import * as APIt from 'API';
-import { createInterview, createSheet } from 'graphql/mutations';
+import { createInterview, createSection, createSheet } from 'graphql/mutations';
 
 
 // const listSheets = /* GraphQL */ `
@@ -47,52 +47,122 @@ function ListPerformanceEvalution() {
         //今日の日付を取得
         const today: Date = new Date();
 
-        //シートを作成
-        let sheetId: string = '';
-        const createI: APIt.CreateSheetInput = {
-            grade: 0,
-            sheetGroupId: "0",
-            year: today.getFullYear()
-        };
-        const createMV: APIt.CreateSheetMutationVariables = {
-            input: createI,
-        };
-        const createR: GraphQLResult<APIt.CreateSheetMutation> = 
-            await API.graphql(graphqlOperation(createSheet, createMV)) as GraphQLResult<APIt.CreateSheetMutation>;
-        if (createR.data) {
-            const createTM: APIt.CreateSheetMutation = createR.data;
-            if (createTM.createSheet) {
-                const sheet : Sheet = createTM.createSheet;
-                console.log('CreateSheet', sheet);
-                sheetId = createTM.createSheet.id;
+        //カテゴリを取得する
+        const categorys = await runListCategory();
+        if(categorys){
+            console.log("categorys", categorys)
 
+            //シートを作成
+            const createdSheet = await runCreateSheet();
+            if(createdSheet){
+                console.log('CreateSheet', createdSheet);
                 //インタビューを作成
                 for(let i=0;i<4;i++){
-                    let interviewId: string = '';
-                    const createI: APIt.CreateInterviewInput = {
-                        sheetId: sheetId
-                    };
-                    const createMV: APIt.CreateInterviewMutationVariables = {
-                        input: createI,
-                    };
-                    const createR: GraphQLResult<APIt.CreateInterviewMutation> = 
-                        await API.graphql(graphqlOperation(createInterview, createMV)) as GraphQLResult<APIt.CreateInterviewMutation>;
-                    if (createR.data) {
-                        const createTM: APIt.CreateInterviewMutation = createR.data;
-                        if (createTM.createInterview) {
-                            const interview: Interview = createTM.createInterview;
-                            console.log('CreateInterview', interview);
-                            interviewId = createTM.createInterview.id;
-                        }
-                    }
+                    const createdInterview = await runCreateInterview(createdSheet.id)
+                    console.log('CreateInterview', createdInterview);
                 }
-
-                //現在のステートへ適用
-                const newSheetState = sheets?.concat();
-                newSheetState?.push(sheet)
-                setSheets(newSheetState);
-                console.log("Done.", newSheetState)
+                //取得したカテゴリを元にsectionを作成する
+                categorys.forEach(async (category: Category)=>{
+                    const createdSection = await runCreateSection(category.id, createdSheet.id);
+                    console.log("CreatedSection", createdSection);
+                })
+                //レンダリング要素の追加
+                addSheets(createdSheet);
+                console.log("Done!", sheets);
+            }else{
+                console.error("error");
             }
+        }
+
+
+
+        //カテゴリを取得する
+
+
+        async function runCreateSheet(): Promise<Sheet | undefined>{
+            //シートを作成
+            let sheetId: string = '';
+            const createI: APIt.CreateSheetInput = {
+                grade: 0,
+                sheetGroupId: "0",
+                year: today.getFullYear()
+            };
+            const createMV: APIt.CreateSheetMutationVariables = {
+                input: createI,
+            };
+            const createR: GraphQLResult<APIt.CreateSheetMutation> = 
+                await API.graphql(graphqlOperation(createSheet, createMV)) as GraphQLResult<APIt.CreateSheetMutation>;
+            if (createR.data) {
+                const createTM: APIt.CreateSheetMutation = createR.data;
+                if (createTM.createSheet) {
+                    const sheet : Sheet = createTM.createSheet;
+                    sheetId = createTM.createSheet.id;
+                    return sheet;
+                }
+            }
+        }
+
+        async function runCreateSection(categoryId: string, sheetId: string): Promise<Section | undefined>{
+            const createI: APIt.CreateSectionInput = {
+                sectionSheetId: sheetId,
+                sectionCategoryId: categoryId
+            };
+            const createMV: APIt.CreateSectionMutationVariables = {
+                input: createI,
+            };
+            const createR: GraphQLResult<APIt.CreateSectionMutation> = 
+                await API.graphql(graphqlOperation(createSection, createMV)) as GraphQLResult<APIt.CreateSectionMutation>;
+            if (createR.data) {
+                const createTM: APIt.CreateSectionMutation = createR.data;
+                if (createTM.createSection) {
+                    const createdSection : Section = createTM.createSection;
+                    sheetId = createTM.createSection.id;
+                    return createdSection;
+                }
+            }
+        }
+        async function runListCategory(): Promise<Category[] | undefined> {
+            const listQV: APIt.ListCategorysQueryVariables = {};
+            const listGQL: GraphQLResult<APIt.ListCategorysQuery> = 
+                await API.graphql(graphqlOperation(listCategorys, listQV)) as GraphQLResult<APIt.ListCategorysQuery>;
+            if (listGQL.data) {
+            const listQ: APIt.ListCategorysQuery = listGQL.data;
+            if (listQ.listCategorys && listQ.listCategorys.items) {
+                return listQ.listCategorys.items as Category[];
+
+                // listQ.listCategorys.items.forEach((item: Todo | null) => {
+                //     if (item) {
+                //         const todo: Todo = item;
+                //         console.log('ListTodo:', todo);
+                //     }
+                // });
+            }
+            }
+        }
+        async function runCreateInterview(sheetId: string) : Promise<Interview | undefined>{
+            let interviewId: string = '';
+            const createI: APIt.CreateInterviewInput = {
+                sheetId: sheetId
+            };
+            const createMV: APIt.CreateInterviewMutationVariables = {
+                input: createI,
+            };
+            const createR: GraphQLResult<APIt.CreateInterviewMutation> = 
+                await API.graphql(graphqlOperation(createInterview, createMV)) as GraphQLResult<APIt.CreateInterviewMutation>;
+            if (createR.data) {
+                const createTM: APIt.CreateInterviewMutation = createR.data;
+                if (createTM.createInterview) {
+                    const interview: Interview = createTM.createInterview;
+                    interviewId = createTM.createInterview.id;
+                    return interview;
+                }
+            }
+        }
+        function addSheets(newSheet: Sheet){
+            //現在のステートへ適用
+            const newSheetState = sheets?.concat();
+            newSheetState?.push(newSheet)
+            setSheets(newSheetState);
         }
     }
 

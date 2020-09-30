@@ -65,13 +65,16 @@ function RevieweeSheetNew(props: Props){
 
             const queryInput: ListSectionsQueryVariables = {
                 filter:{
-                    sectionSheetId: sheetId
+                    sectionSheetId: {
+                        eq: sheetId
+                    }
                 } as ModelSectionFilterInput
             }
-            const response = (await API.graphql(graphqlOperation(listSections))
+            const response = (await API.graphql(graphqlOperation(listSections, queryInput))
             )as GraphQLResult<ListSectionsQuery>;
             const repsonseSection = response.data?.listSections?.items as Section[];
             setSections(repsonseSection);
+            console.log("section", repsonseSection);
         })()
       },[]);
       

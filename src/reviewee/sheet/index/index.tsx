@@ -332,11 +332,11 @@ function RevieweeSheetShow(props: Props) {
                     <Row>
                         <Col>
                             <h5>所属長コメント</h5>
-                            <p>{sheet.secondComment}</p>
+                            <p>{sheet.secondComment || "なし"}</p>
                         </Col>
                         <Col>
-                            <h5>部門長</h5>
-                            <p>{sheet.firstComment}</p>
+                            <h5>部門長コメント</h5>
+                            <p>{sheet.firstComment || "なし"}</p>
                         </Col>
                     </Row>
                     <h4>総合評価 {sheet.overAllEvaluation}</h4>
