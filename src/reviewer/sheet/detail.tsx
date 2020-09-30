@@ -59,6 +59,7 @@ function EvalutionScreen(props: Props) {
         const value = target.type === 'checkbox' ? target.checked : target.value;
         const name = target.name;
         setFormInput({ ...formInput, [name]: value });
+        console.log(formInput)
     }
 
     function HandleUpdateStatus() {
@@ -168,18 +169,23 @@ function EvalutionScreen(props: Props) {
                         <Form>
                             <Form.Group>
                                 <Form.Label>所属長コメント</Form.Label>
-                                <Form.Control type="textarea"></Form.Control>
+                                <Form.Control type="textarea" onChange={handleChange} name="secondComment"></Form.Control>
                             </Form.Group>
 
                             <Form.Group>
                                 <Form.Label>総合評価</Form.Label>
-                                <Form.Control as="select">
+                                <Form.Control onChange={handleChange} name="overAllEvaluation" as="select">
                                     <option>5</option>
                                     <option>4</option>
                                     <option>3</option>
                                     <option>2</option>
                                     <option>1</option>
                                 </Form.Control>
+                            </Form.Group>
+
+                            <Form.Group>
+                                <Form.Label>部門長コメント</Form.Label>
+                                <Form.Control type="textarea" onChange={handleChange} name="firstComment"></Form.Control>
                             </Form.Group>
 
                             <Form.Group>
