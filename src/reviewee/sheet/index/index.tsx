@@ -70,7 +70,7 @@ function RevieweeSheetShow(props: Props) {
         const updateI: APIt.UpdateObjectiveInput = {
             id:objectiveId, 
             content: formInput.content, 
-            selfEvaluation: formInput.selfEvaluationInput, 
+            selfEvaluation: selfEvaluationInput, 
             priority:formInput.priority,
             result:formInput.result ,
             expStartDate: formInput.expStartDate,
@@ -205,6 +205,7 @@ function RevieweeSheetShow(props: Props) {
                             <Col>自己評価</Col>
                             <Col>
                                 <select onChange={handleChangeObjective} name="selfEvaluation">
+                                    <option></option>
                                     <option value='1'>1</option>
                                     <option value='2'>2</option>
                                     <option value='3'>3</option>
@@ -217,6 +218,7 @@ function RevieweeSheetShow(props: Props) {
                             <Col>優先順位</Col>
                             <Col>
                                 <select onChange={handleChangeObjective} name="priority">
+                                    <option></option>
                                     <option value="A">A</option>
                                     <option value="B">B</option>
                                     <option value="C">C</option>
