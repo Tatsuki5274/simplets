@@ -6,7 +6,7 @@ import { GraphQLResult } from "@aws-amplify/api";
 import { RouteComponentProps } from 'react-router';
 import { Sheet, Section, Objective, Interview } from 'App';
 import { GetSheetQuery, ListSheetsQuery } from 'API';
-import { updateSheet } from 'graphql/mutations';
+import { updateObjective, updateSheet } from 'graphql/mutations';
 import * as APIt from 'API';
 import { listSheets, getSheet } from 'graphql/queries';
 import dateFormat from 'dateformat';
@@ -35,7 +35,7 @@ function EvalutionScreen(props: Props) {
     useEffect(() => {
         ; (async () => {
             //const sheetId = props.match.params.sheetId;
-          
+
             try {
                 const input: APIt.GetSheetQueryVariables = {
                     id: sheetId
@@ -54,12 +54,36 @@ function EvalutionScreen(props: Props) {
         })()
     }, []);
 
-    function handleChange(event: ChangeEvent<HTMLInputElement>){
+    function handleChange(event: ChangeEvent<HTMLInputElement>) {
         const target = event.target;
         const value = target.type === 'checkbox' ? target.checked : target.value;
         const name = target.name;
         setFormInput({ ...formInput, [name]: value });
         console.log(formInput)
+    }
+
+    // lastEvalutation 更新
+    async function handleChangeObjective(event: any) {
+
+        // ObjectiveId 取得
+        console.log(event.target.getAttribute('data-objective-id'));
+        const objectiveId = event.target.getAttribute('data-objective-id');
+
+        // lastEvaluation value 取得
+        console.log(event.currentTarget.value);
+        const objectiveLastEvaluation = parseInt(event.currentTarget.value);
+
+        const updateI: APIt.UpdateObjectiveInput = {
+            id: objectiveId,
+            lastEvaluation: objectiveLastEvaluation,
+        };
+        const updateMV: APIt.UpdateObjectiveMutationVariables = {
+            input: updateI,
+        };
+        const updateR: GraphQLResult<APIt.UpdateObjectiveMutation> =
+            await API.graphql(graphqlOperation(updateObjective, updateMV)) as GraphQLResult<APIt.UpdateObjectiveMutation>;
+        console.log("updateR", updateR);
+        console.log("sheet", sheet)
     }
 
     function HandleUpdateStatus() {
@@ -216,6 +240,7 @@ function EvalutionScreen(props: Props) {
                                             {section.objective?.items?.map((arg: any) => {
                                                 const objective: Objective = arg;   //仮の型変換処理
                                                 const date = new Date(objective.updatedAt);
+
                                                 return (
                                                     <tr key={objective.id}>
 
@@ -236,16 +261,22 @@ function EvalutionScreen(props: Props) {
 
                                                         {/* 最終評価 */}
                                                         <td>
-                                                            {/* 仮フォーム機能 後ほど修正*/}
-                                                            <InputGroup>
-                                                                <DropdownButton title="select">
-                                                                    <Dropdown.Item value="5">5</Dropdown.Item>
-                                                                    <Dropdown.Item value="4">4</Dropdown.Item>
-                                                                    <Dropdown.Item value="3">3</Dropdown.Item>
-                                                                    <Dropdown.Item value="2">2</Dropdown.Item>
-                                                                    <Dropdown.Item value="1">1</Dropdown.Item>
-                                                                </DropdownButton>
-                                                            </InputGroup>
+                                                            <select name="lastEvaluation" data-objective-id={objective.id} onChange={handleChangeObjective}>
+                                                                <option value=""></option>
+                                                                {[5, 4, 3, 2, 1].map((number: number) => {
+                                                                    if (number === objective.lastEvaluation) {
+                                                                        return (
+                                                                            <option selected value={number}>{number}</option>
+                                                                        );
+
+                                                                    } else {
+                                                                        return (
+                                                                            <option value={number}>{number}</option>
+                                                                        );
+                                                                    }
+                                                                })}
+
+                                                            </select>
                                                         </td>
 
                                                         {/* 更新日時 */}
