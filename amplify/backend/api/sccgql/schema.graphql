@@ -52,6 +52,8 @@ type Employee #社員
 
 type Group #部門
 @model(timestamps:{createdAt: "createdAt", updatedAt: "updatedAt"})
+# gsiとして追加したい
+# @key(name: "listGroupBySort", fields: ["id", "sort"], queryField: "listGroupBySort")
 @auth(
   rules: [
     {allow: groups, groups: ["Root"]}
@@ -64,6 +66,7 @@ type Group #部門
   company: Company @connection
   group: Group @connection
   name: String! #部門名
+  sort: Int  #ソート
 }
 
 type Category
