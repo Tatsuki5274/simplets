@@ -14,7 +14,7 @@ import RevieweeSheetShow from "reviewee/sheet/index/index"
 import RevieweeSheetNew from "reviewee/sheet/new/index"
 import ListPerformanceEvalution from 'reviewee/list/performance';
 import ProgressReferenceList from 'reviewer/list/progress';
-import EvalutionScreen from "reviewer/sheet/detail";
+import EvaluationScreen from "reviewer/sheet/detail";
 Amplify.configure(awsconfig);
 
 export type Sheet = Omit<Exclude<APIt.GetSheetQuery['getSheet'], null>, '__typename'>;
@@ -60,7 +60,7 @@ function App() {
           <Route exact path="/reviewee/sheet/:sheetId" component={RevieweeSheetShow} />
           <Route exact path="/reviewee/list" component={ListPerformanceEvalution} />
           <Route exact path="/reviewer/list" component={ProgressReferenceList} />
-          <Route exact path="/reviewer/sheet/:sheetId" component={EvalutionScreen} />
+          <Route exact path="/reviewer/sheet/:sheetId" component={EvaluationScreen} />
         </Switch>
       </BrowserRouter>
     </div>

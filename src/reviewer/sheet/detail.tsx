@@ -20,7 +20,7 @@ type Props = {
     }
 }
 
-function EvalutionScreen(props: Props) {
+function EvaluationScreen(props: Props) {
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
@@ -299,4 +299,4 @@ function EvalutionScreen(props: Props) {
     );
 }
 
-export default EvalutionScreen;
+export default EvaluationScreen;
