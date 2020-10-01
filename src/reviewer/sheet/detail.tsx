@@ -6,7 +6,7 @@ import { GraphQLResult } from "@aws-amplify/api";
 import { RouteComponentProps } from 'react-router';
 import { Sheet, Section, Objective, Interview } from 'App';
 import { GetSheetQuery, ListSheetsQuery } from 'API';
-import { updateObjective, updateSheet } from 'graphql/mutations';
+import { updateInterview, updateObjective, updateSheet } from 'graphql/mutations';
 import * as APIt from 'API';
 import { listSheets, getSheet } from 'graphql/queries';
 import dateFormat from 'dateformat';
@@ -20,7 +20,7 @@ type Props = {
     }
 }
 
-function EvaluationScreen(props: Props) {
+function EvalutionScreen(props: Props) {
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
@@ -35,7 +35,7 @@ function EvaluationScreen(props: Props) {
     useEffect(() => {
         ; (async () => {
             //const sheetId = props.match.params.sheetId;
-
+          
             try {
                 const input: APIt.GetSheetQueryVariables = {
                     id: sheetId
@@ -54,12 +54,130 @@ function EvaluationScreen(props: Props) {
         })()
     }, []);
 
-    function handleChange(event: ChangeEvent<HTMLInputElement>) {
+    function handleChange(event: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>){
         const target = event.target;
-        const value = target.type === 'checkbox' ? target.checked : target.value;
+        const value = target.value;
         const name = target.name;
         setFormInput({ ...formInput, [name]: value });
         console.log(formInput)
+    }
+    function handleChangeInterview(event: ChangeEvent<HTMLTextAreaElement>){
+        //入力処理
+        const value = event.target.value;
+        const interviewId = event.target.getAttribute('data-interview-id') || "";
+
+        let inputInterviewArray: Interview[] = [];
+        if(formInput && formInput.interviews) inputInterviewArray =formInput.interviews
+
+        //加工処理
+
+        //入力の調整
+        let isExist: boolean = false
+        inputInterviewArray.forEach((interview: Interview)=>{
+            if(interview.id === interviewId){
+                isExist = true
+            }
+        })
+        if(!isExist){
+            inputInterviewArray.push({
+                id: interviewId
+            } as Interview)
+        }
+
+
+        //置き換え
+        const outputInterviewArray = inputInterviewArray.map((interview: Interview)=>{
+            let ret : Interview = interview;
+            if(ret.id === interviewId){
+                ret.detail = value;
+            }
+            return ret;
+        });
+        // const changedInterview: Interview = {
+        //     id: interviewId,
+        //     detail: value
+        // } as Interview
+        // interviewArray.push(changedInterview)
+
+        //出力処理
+        if(!formInput){
+            //一回目の入力時
+            setFormInput({
+                interviews: outputInterviewArray
+            })
+        }else{
+            //二回目以降の入力時
+            setFormInput({
+                 ...formInput, interviews: outputInterviewArray 
+            })
+        }
+    }
+
+    function HandleUpdateStatus() {
+        // (async()=>{
+        // //ステータスを「目標：設定中」に変更
+        // const updateI: APIt.UpdateSheetInput = 
+        // {id:sheetId, status: 'c5c847a3-e919-4133-89c5-747049c4a050'};
+        // const updateMV: APIt.UpdateSheetMutationVariables = {
+        //     input: updateI,
+        // };
+        // const updateR: GraphQLResult<APIt.UpdateSheetMutation> = 
+        // await API.graphql(graphqlOperation(updateSheet, updateMV)) as GraphQLResult<APIt.UpdateSheetMutation>;
+
+        // if (updateR.data) {
+        //     const updateTM: APIt.UpdateSheetMutation = updateR.data;
+        //     if (updateTM.updateSheet) {
+        //         const sheet: Sheet = updateTM.updateSheet;
+        //         console.log('UpdateSheet:', sheet);
+        //     }
+        // }})()
+        handleClose();
+    }
+    async function handleClickSaveAndApprove(){
+        //保存して承認ボタンを押したときの処理
+        runUpdateSheet(formInput);
+        formInput?.interviews?.forEach((interview: Interview)=> {
+            runUpdateInterview(interview)
+        })
+        async function runUpdateSheet(sheet: Sheet) {
+            const updateI: APIt.UpdateSheetInput = {
+                id: sheetId,
+                careerPlanComment: sheet.careerPlanComment,
+                firstComment: sheet.firstComment,
+                secondComment: sheet.secondComment,
+                overAllEvaluation: parseInt(sheet.overAllEvaluation as unknown as string)
+            }
+            const updateMV: APIt.UpdateSheetMutationVariables = {
+            input: updateI,
+            };
+            const updateR: GraphQLResult<APIt.UpdateSheetMutation> = 
+            await API.graphql(graphqlOperation(updateSheet, updateMV)) as GraphQLResult<APIt.UpdateSheetMutation>;
+            if (updateR.data) {
+                const updateTM: APIt.UpdateSheetMutation = updateR.data;
+                if (updateTM.updateSheet) {
+                    const updatedSheet: Sheet = updateTM.updateSheet;
+                    console.log('UpdateSheet:', updatedSheet);
+                }
+            }
+        }
+        async function runUpdateInterview(inputInterview: Interview){
+            const updateI: APIt.UpdateInterviewInput = {
+                id: inputInterview.id,
+                detail: inputInterview.detail
+            }
+            const updateMV: APIt.UpdateInterviewMutationVariables = {
+                input: updateI,
+            };
+            const updateR: GraphQLResult<APIt.UpdateInterviewMutation> = 
+                await API.graphql(graphqlOperation(updateInterview, updateMV)) as GraphQLResult<APIt.UpdateInterviewMutation>;
+            if (updateR.data) {
+                const updateTM: APIt.UpdateInterviewMutation = updateR.data;
+                if (updateTM.updateInterview) {
+                    const interview: Interview = updateTM.updateInterview;
+                    console.log('UpdateTodo:', interview);
+                }
+            }
+        }
     }
 
     // lastEvalutation 更新
@@ -84,27 +202,6 @@ function EvaluationScreen(props: Props) {
             await API.graphql(graphqlOperation(updateObjective, updateMV)) as GraphQLResult<APIt.UpdateObjectiveMutation>;
         console.log("updateR", updateR);
         console.log("sheet", sheet)
-    }
-
-    function HandleUpdateStatus() {
-        // (async()=>{
-        // //ステータスを「目標：設定中」に変更
-        // const updateI: APIt.UpdateSheetInput = 
-        // {id:sheetId, status: 'c5c847a3-e919-4133-89c5-747049c4a050'};
-        // const updateMV: APIt.UpdateSheetMutationVariables = {
-        //     input: updateI,
-        // };
-        // const updateR: GraphQLResult<APIt.UpdateSheetMutation> = 
-        // await API.graphql(graphqlOperation(updateSheet, updateMV)) as GraphQLResult<APIt.UpdateSheetMutation>;
-
-        // if (updateR.data) {
-        //     const updateTM: APIt.UpdateSheetMutation = updateR.data;
-        //     if (updateTM.updateSheet) {
-        //         const sheet: Sheet = updateTM.updateSheet;
-        //         console.log('UpdateSheet:', sheet);
-        //     }
-        // }})()
-        handleClose();
     }
 
     if (sheet === undefined) return <div>Loading...</div>
@@ -157,7 +254,7 @@ function EvaluationScreen(props: Props) {
 
 
                         <h4>話し合い結果</h4>
-                        <textarea name="careerPlanComment">{sheet.careerPlanComment}</textarea>
+                        <textarea name="careerPlanComment" onChange={handleChange}>{sheet.careerPlanComment}</textarea>
 
                         {/* インタビュー実施記録 */}
                         <h4>インタビュー実施記録</h4>
@@ -179,7 +276,7 @@ function EvaluationScreen(props: Props) {
                                         <tr key={interviews.id}>
                                             <td>{interviews.purpose}</td>
                                             <td>{dateFormat(date, "yyyy/mm/dd")}</td>
-                                            <td><textarea name="interviewDetail">{interviews.detail}</textarea></td>
+                                            <td><textarea name="interviewDetail" data-interview-id={interviews.id} onChange={handleChangeInterview}>{interviews.detail}</textarea></td>
                                         </tr>
                                     );
                                 })}
@@ -193,7 +290,7 @@ function EvaluationScreen(props: Props) {
                         <Form>
                             <Form.Group>
                                 <Form.Label>所属長コメント</Form.Label>
-                                <Form.Control type="textarea" onChange={handleChange} name="secondComment"></Form.Control>
+                                <Form.Control type="textarea" onChange={handleChange} name="secondComment" defaultValue={sheet.secondComment || ""}></Form.Control>
                             </Form.Group>
 
                             <Form.Group>
@@ -209,11 +306,11 @@ function EvaluationScreen(props: Props) {
 
                             <Form.Group>
                                 <Form.Label>部門長コメント</Form.Label>
-                                <Form.Control type="textarea" onChange={handleChange} name="firstComment"></Form.Control>
+                                <Form.Control type="textarea" onChange={handleChange} name="firstComment" defaultValue={sheet.firstComment || ""}></Form.Control>
                             </Form.Group>
 
                             <Form.Group>
-                                <Button type="submit">保存して承認</Button>
+                                <Button onClick={handleClickSaveAndApprove}>保存して承認</Button>
                                 <Button onClick={handleShow}>差し戻し</Button>
                             </Form.Group>
                         </Form><br />
@@ -240,7 +337,6 @@ function EvaluationScreen(props: Props) {
                                             {section.objective?.items?.map((arg: any) => {
                                                 const objective: Objective = arg;   //仮の型変換処理
                                                 const date = new Date(objective.updatedAt);
-
                                                 return (
                                                     <tr key={objective.id}>
 
@@ -299,4 +395,4 @@ function EvaluationScreen(props: Props) {
     );
 }
 
-export default EvaluationScreen;
+export default EvalutionScreen;
