@@ -11,6 +11,14 @@ import {getEmployee} from 'graphql/queries'
 
 
 function ProgressReferenceList() {
+    //今日の日付を取得
+    const today: Date = new Date();
+    const thisYear : number = today.getFullYear();
+    let yearList : Array<number> = [];
+    for(let step = 0; step < 10; step++){
+        yearList.push((thisYear - step));
+    }
+
     const [sheets, setSheets] = useState<Sheet[]>();
 
     const [groupValue, setGroupValue] = useState([]);
@@ -48,7 +56,7 @@ function ProgressReferenceList() {
     }, []);
 
     //フォーム内で選択された部門と年度をformInputに保存する
-    const [formInput, setFormInput] = useState<any>()
+    const [formInput, setFormInput] = useState<any>({year:thisYear})
     function handleChange(event:any){
         const target = event.target;
         const value = target.type === 'checkbox' ? target.checked : target.value;
@@ -91,7 +99,7 @@ function ProgressReferenceList() {
                 {/* 部門の選択肢を表示 */}
                 <InputGroup.Prepend>
                     <span>
-                        <InputGroup.Radio checked value="all" name="groupId" onChange={handleChange} aria-label="Radio button for following text input" inline/>
+                        <InputGroup.Radio　value="all" name="groupId" onChange={handleChange} aria-label="Radio button for following text input" inline/>
                         <span>全て</span>
                     </span>
                     {groupList?.map((group:Group)=>{
@@ -111,9 +119,11 @@ function ProgressReferenceList() {
                     <Form.Group controlId="Form.Dropdown"> 
                         <Form.Label>年度</Form.Label>
                         <Form.Control as="select" onChange={handleChange} name="year">
-                            <option value="2020">2020</option>
-                            <option value="2019">2019</option>
-                            <option value="2018">2018</option>
+                            {yearList.map((year:number)=>{
+                                return(
+                                    <option value={year}>{year}</option>
+                                )
+                            })}
                         </Form.Control>
                     </Form.Group>
 
@@ -144,11 +154,20 @@ function ProgressReferenceList() {
                                     if(section && section.objective && section.objective.items){
                                         avg = Math.floor((sum / section.objective.items.length) as number);
                                     }
-                                    return(
-                                        <div>
-                                            <td>{section.category?.name}&nbsp;</td><td>{avg}%</td><br />
-                                        </div>
-                                    )
+                                    {/* データがないcategoryの進捗の表示分け */}
+                                    if(isNaN(avg)){
+                                        return(
+                                            <div>
+                                                <td>{section.category?.name}&nbsp;</td><td>-</td><br />
+                                            </div>
+                                        )
+                                    }else{
+                                        return(
+                                            <div>
+                                                <td>{section.category?.name}&nbsp;</td><td>{avg}%</td><br />
+                                            </div>
+                                        )
+                                    }
                                 })}
                             </Card.Body>
                         </Card>
