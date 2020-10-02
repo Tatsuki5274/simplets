@@ -192,16 +192,6 @@ function RevieweeSheetShow(props: Props) {
                             </Col>
                         </Row>
                         <Row>
-                            <Col>ステータス</Col>
-                            <Col>
-                                <select onChange={handleChangeObjective} name="status">
-                                    <option value="実施前">実施前</option>
-                                    <option value="実施中">実施中</option>
-                                    <option value="実施完了">実施完了</option>
-                                </select>
-                            </Col>
-                        </Row>
-                        <Row>
                             <Col>自己評価</Col>
                             <Col>
                                 <select onChange={handleChangeObjective} name="selfEvaluation">
