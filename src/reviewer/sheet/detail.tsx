@@ -309,9 +309,49 @@ function EvalutionScreen(props: Props) {
                                 <Form.Control type="textarea" onChange={handleChange} name="firstComment" defaultValue={sheet.firstComment || ""}></Form.Control>
                             </Form.Group>
 
+                            {/* ステータスによってボタンの出し分け */}
                             <Form.Group>
-                                <Button onClick={handleClickSaveAndApprove}>保存して承認</Button>
-                                <Button onClick={handleShow}>差し戻し</Button>
+                                {/* 承認ステータスが2または10の時に「保存して承認」ボタンを表示 */}
+                                {(() => {if(sheet.statusValue===2||sheet.statusValue===10){
+                                    return(
+                                        <span>
+                                            <Button onClick={handleClickSaveAndApprove}>保存して承認</Button>
+                                        </span>
+                                    )}
+                                })()}
+                                {/* 承認ステータスが2か3か10か12の時に「保存して承認」ボタンを表示 */}
+                                {(() => {if(sheet.statusValue===2||sheet.statusValue===3||sheet.statusValue===10||sheet.statusValue===12){
+                                    return(
+                                        <span>
+                                            <Button onClick={handleShow}>差し戻し</Button>
+                                        </span>
+                                    )}
+                                })()}
+                                {/* 承認ステータスが12かつ部門長が存在すれば「部門長承認依頼」ボタン、部門長が存在しなければ「最終承認」ボタンを表示 */}
+                                {(() => {if(sheet.statusValue===12){
+                                    if(sheet.secondEmployee?.superior){
+                                        return(
+                                            <span>
+                                                <Button >部門長承認依頼</Button>
+                                            </span>
+                                        ) 
+                                    }else{
+                                        return(
+                                            <span>
+                                                <Button >最終承認</Button>
+                                            </span>
+                                        )
+                                    }
+                                    }
+                                })()}
+                                {/* 承認ステータスが13の時に「最終承認」ボタンを表示 */}
+                                {(() => {if(sheet.statusValue===13){
+                                    return(
+                                        <span>
+                                            <Button >最終承認</Button>
+                                        </span>
+                                    )}
+                                })()}
                             </Form.Group>
                         </Form><br />
 
