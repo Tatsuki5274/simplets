@@ -1,6 +1,6 @@
 import React from 'react';
-import Amplify, { Auth } from 'aws-amplify';
 import { Link } from 'react-router-dom';
+import style from './sidebarStyle.module.scss'
 
 function SidebarComponents() {
     // const sidebarDocked = true;
@@ -9,8 +9,8 @@ function SidebarComponents() {
     return (
         // サイドバーを表示
         <div>
-            <Link to="/reviewee/list">業績評価一覧</Link><br />
-            <Link to="/reviewer/list">進捗参照</Link>
+            <Link className={style.sidebarContents} to="/reviewee/list">業績評価一覧</Link><br />
+            <Link className={style.sidebarContents} to="/reviewer/list">進捗参照</Link>
         </div>        
     );
 }
