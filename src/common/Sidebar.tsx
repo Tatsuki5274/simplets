@@ -1,6 +1,5 @@
 import React from 'react';
 import Amplify, { Auth } from 'aws-amplify';
-import Sidebar from 'react-sidebar';
 import { Link } from 'react-router-dom';
 
 function SidebarComponents() {
