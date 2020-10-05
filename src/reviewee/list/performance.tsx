@@ -6,10 +6,11 @@ import { GraphQLResult } from "@aws-amplify/api";
 import { ListSheetsQuery } from 'API';
 import { Link } from 'react-router-dom';
 import { Category, Interview, Section, Sheet } from 'App';
-import {ApprovalStatus, getStatusValue} from 'lib/getStatusValue'
-import {listCategorys, listSheets} from 'graphql/queries'
+import { ApprovalStatus, getStatusValue } from 'lib/getStatusValue'
+import { listCategorys, listSheets } from 'graphql/queries'
 import * as APIt from 'API';
 import { createInterview, createSection, createSheet } from 'graphql/mutations';
+import SidebarComponents from 'common/Sidebar';
 
 
 // const listSheets = /* GraphQL */ `
@@ -33,43 +34,43 @@ import { createInterview, createSection, createSheet } from 'graphql/mutations';
 function ListPerformanceEvalution() {
     const [sheets, setSheets] = useState<Sheet[]>();
     useEffect(() => {
-        ;(async()=>{
+        ; (async () => {
             const response = (await API.graphql(graphqlOperation(listSheets))
-            )as GraphQLResult<ListSheetsQuery>;
+            ) as GraphQLResult<ListSheetsQuery>;
             const listItems = response.data?.listSheets?.items;
             setSheets(listItems as Sheet[]);
             console.log(response);
             console.log(listItems);
         })()
-      },[]);
+    }, []);
 
-    async function handleClickCreate(){
+    async function handleClickCreate() {
         //今日の日付を取得
         const today: Date = new Date();
 
         //カテゴリを取得する
         const categorys = await runListCategory();
-        if(categorys){
+        if (categorys) {
             console.log("categorys", categorys)
 
             //シートを作成
             const createdSheet = await runCreateSheet();
-            if(createdSheet){
+            if (createdSheet) {
                 console.log('CreateSheet', createdSheet);
                 //インタビューを作成
-                for(let i=0;i<4;i++){
+                for (let i = 0; i < 4; i++) {
                     const createdInterview = await runCreateInterview(createdSheet.id)
                     console.log('CreateInterview', createdInterview);
                 }
                 //取得したカテゴリを元にsectionを作成する
-                categorys.forEach(async (category: Category)=>{
+                categorys.forEach(async (category: Category) => {
                     const createdSection = await runCreateSection(category.id, createdSheet.id);
                     console.log("CreatedSection", createdSection);
                 })
                 //レンダリング要素の追加
                 addSheets(createdSheet);
                 console.log("Done!", sheets);
-            }else{
+            } else {
                 console.error("error");
             }
         }
@@ -79,7 +80,7 @@ function ListPerformanceEvalution() {
         //カテゴリを取得する
 
 
-        async function runCreateSheet(): Promise<Sheet | undefined>{
+        async function runCreateSheet(): Promise<Sheet | undefined> {
             //シートを作成
             let sheetId: string = '';
             const createI: APIt.CreateSheetInput = {
@@ -90,19 +91,19 @@ function ListPerformanceEvalution() {
             const createMV: APIt.CreateSheetMutationVariables = {
                 input: createI,
             };
-            const createR: GraphQLResult<APIt.CreateSheetMutation> = 
+            const createR: GraphQLResult<APIt.CreateSheetMutation> =
                 await API.graphql(graphqlOperation(createSheet, createMV)) as GraphQLResult<APIt.CreateSheetMutation>;
             if (createR.data) {
                 const createTM: APIt.CreateSheetMutation = createR.data;
                 if (createTM.createSheet) {
-                    const sheet : Sheet = createTM.createSheet;
+                    const sheet: Sheet = createTM.createSheet;
                     sheetId = createTM.createSheet.id;
                     return sheet;
                 }
             }
         }
 
-        async function runCreateSection(categoryId: string, sheetId: string): Promise<Section | undefined>{
+        async function runCreateSection(categoryId: string, sheetId: string): Promise<Section | undefined> {
             const createI: APIt.CreateSectionInput = {
                 sectionSheetId: sheetId,
                 sectionCategoryId: categoryId
@@ -110,12 +111,12 @@ function ListPerformanceEvalution() {
             const createMV: APIt.CreateSectionMutationVariables = {
                 input: createI,
             };
-            const createR: GraphQLResult<APIt.CreateSectionMutation> = 
+            const createR: GraphQLResult<APIt.CreateSectionMutation> =
                 await API.graphql(graphqlOperation(createSection, createMV)) as GraphQLResult<APIt.CreateSectionMutation>;
             if (createR.data) {
                 const createTM: APIt.CreateSectionMutation = createR.data;
                 if (createTM.createSection) {
-                    const createdSection : Section = createTM.createSection;
+                    const createdSection: Section = createTM.createSection;
                     sheetId = createTM.createSection.id;
                     return createdSection;
                 }
@@ -123,23 +124,23 @@ function ListPerformanceEvalution() {
         }
         async function runListCategory(): Promise<Category[] | undefined> {
             const listQV: APIt.ListCategorysQueryVariables = {};
-            const listGQL: GraphQLResult<APIt.ListCategorysQuery> = 
+            const listGQL: GraphQLResult<APIt.ListCategorysQuery> =
                 await API.graphql(graphqlOperation(listCategorys, listQV)) as GraphQLResult<APIt.ListCategorysQuery>;
             if (listGQL.data) {
-            const listQ: APIt.ListCategorysQuery = listGQL.data;
-            if (listQ.listCategorys && listQ.listCategorys.items) {
-                return listQ.listCategorys.items as Category[];
+                const listQ: APIt.ListCategorysQuery = listGQL.data;
+                if (listQ.listCategorys && listQ.listCategorys.items) {
+                    return listQ.listCategorys.items as Category[];
 
-                // listQ.listCategorys.items.forEach((item: Todo | null) => {
-                //     if (item) {
-                //         const todo: Todo = item;
-                //         console.log('ListTodo:', todo);
-                //     }
-                // });
-            }
+                    // listQ.listCategorys.items.forEach((item: Todo | null) => {
+                    //     if (item) {
+                    //         const todo: Todo = item;
+                    //         console.log('ListTodo:', todo);
+                    //     }
+                    // });
+                }
             }
         }
-        async function runCreateInterview(sheetId: string) : Promise<Interview | undefined>{
+        async function runCreateInterview(sheetId: string): Promise<Interview | undefined> {
             let interviewId: string = '';
             const createI: APIt.CreateInterviewInput = {
                 sheetId: sheetId
@@ -147,7 +148,7 @@ function ListPerformanceEvalution() {
             const createMV: APIt.CreateInterviewMutationVariables = {
                 input: createI,
             };
-            const createR: GraphQLResult<APIt.CreateInterviewMutation> = 
+            const createR: GraphQLResult<APIt.CreateInterviewMutation> =
                 await API.graphql(graphqlOperation(createInterview, createMV)) as GraphQLResult<APIt.CreateInterviewMutation>;
             if (createR.data) {
                 const createTM: APIt.CreateInterviewMutation = createR.data;
@@ -158,7 +159,7 @@ function ListPerformanceEvalution() {
                 }
             }
         }
-        function addSheets(newSheet: Sheet){
+        function addSheets(newSheet: Sheet) {
             //現在のステートへ適用
             const newSheetState = sheets?.concat();
             newSheetState?.push(newSheet)
@@ -166,9 +167,12 @@ function ListPerformanceEvalution() {
         }
     }
 
-    if(sheets === undefined) return <div>Loading</div>
+    if (sheets === undefined) return <div>Loading</div>
     return (
         <div>
+            {/* サイドバーコンポーネント 表示 */}
+            <SidebarComponents />
+
             <div>
                 <Container>
                     <h2>業績評価一覧</h2>
@@ -184,16 +188,16 @@ function ListPerformanceEvalution() {
                                 <td></td>
                             </tr>
                         </thead>
-                        
+
                         <tbody>
-                            {sheets.map((sheet: Sheet)=>{
+                            {sheets.map((sheet: Sheet) => {
                                 let editName = "編集";
-                                if(sheet.statusValue === ApprovalStatus.DONE){
+                                if (sheet.statusValue === ApprovalStatus.DONE) {
                                     editName = "確認";
                                 }
                                 return (
                                     <tr key={sheet.id}>
-                                        <td><Link to={"/reviewee/sheet/"+sheet.id}>{editName}</Link></td>
+                                        <td><Link to={"/reviewee/sheet/" + sheet.id}>{editName}</Link></td>
                                         <td>{sheet.year}</td>
                                         <td>{sheet.secondEmployee ? sheet.secondEmployee.lastName : ""}{sheet.secondEmployee ? sheet.secondEmployee.firstName : ""}</td>
                                         <td>{getStatusValue(sheet.statusValue || -1)}</td>
