@@ -1,25 +1,9 @@
-type ApprovalStatus #承認ステータス
-@model
-@auth(
-  rules: [
-    {allow: groups, groups: ["Root"]}
-    {allow: private, operations: [read]}
-    {allow: private, provider: iam, operations:[read]}
-  ]
-)
-{
-  id: ID!
-  no: Int #ステータスNo
-  name: String! #名称
-}
-
 type Company #会社
 @model(timestamps:{createdAt: "createdAt", updatedAt: "updatedAt"})
 @auth(
   rules: [
-    {allow: groups, groups: ["Root"]}
-    {allow: private}
-    {allow: private, provider: iam}
+    {allow: groups, groups: ["Admin"]}
+    {allow: groups, groupsField: "companyGroup", operations: [read]}
   ]
 )
 {
@@ -27,6 +11,7 @@ type Company #会社
   name: String!
   shortName: String
   url: AWSURL
+  companyGroup: String
 }
 
 # ユーザーはcognitoで管理しています。
@@ -34,49 +19,49 @@ type Company #会社
 type Employee #社員
 @auth(
   rules:[
-    {allow: private}
+    {allow: groups, groups: ["Admin"]}
+    {allow: groups, groupsField: "companyGroup", operations: [read]}
   ]
 )
 @model(timestamps:{createdAt: "createdAt", updatedAt: "updatedAt"})
 {
-  id: ID!
+  id: ID! #cognito usernameを格納する
   no: String #社員番号
   firstName: String!
   lastName: String!
   grade: Int! #等級
-  superior: Employee @connection  #所属長ID
+  superior: Employee @connection  #上司(所属長や部門長)
   group: Group @connection  #所属部門
 
-  companyId: ID!
-  company: Company @connection(fields: ["companyId"])
+  # companyId: ID!
+  company: Company @connection #(fields: ["companyId"])
+  
+  companyGroup: String
 }
 
 type Group #部門
 @model(timestamps:{createdAt: "createdAt", updatedAt: "updatedAt"})
-# gsiとして追加したい
 # @key(name: "listGroupBySort", fields: ["id", "sort"], queryField: "listGroupBySort")
 @auth(
   rules: [
-    {allow: groups, groups: ["Root"]}
-    {allow: private, operations: [read]}
-    {allow: private}
+    {allow: groups, groups: ["Admin"]}
+    {allow: groups, groupsField: "companyGroup", operations: [read]}
   ]
 )
 {
   id: ID!
-  company: Company @connection
-  group: Group @connection
+  # company: Company @connection  グループフィールドに置き換え
   name: String! #部門名
   sort: Int  #ソート
+  companyGroup: String
 }
 
 type Category
 @model(timestamps:{createdAt: "createdAt", updatedAt: "updatedAt"})
 @auth(
   rules: [
-    {allow: groups, groups: ["Root"]}
-    {allow: private, operations: [read]}
-    {allow: private}
+    {allow: groups, groups: ["Admin"]}
+    {allow: groups, groupsField: "companyGroup", operations: [read]}
   ]
 )
 {
@@ -91,9 +76,8 @@ type Interview
 @key(name: "bySheet", fields: ["sheetId"])
 @auth(
   rules: [
-    { allow: groups, groups: ["Root"]}
-    { allow: owner, ownerField: "reviewee", operations: [read] }
-    {allow: private}
+    {allow: groups, groups: ["Admin"]}
+    {allow: groups, groupsField: "companyGroup", operations: [read]}
   ]
 )
 {
@@ -109,17 +93,14 @@ type Interview
 
 type Sheet
 @model(timestamps:{createdAt: "createdAt", updatedAt: "updatedAt"})
-#@key(fields: ["year", "reviewee", "companyId", "grade"])
-# @auth(
-#   rules: [
-#     {allow: owner, ownerField: "reviewee", operations: [read] }
-#     {allow: groups, groups: ["Root"]}
-#     {allow: private, provider: iam}
-#   ]
-# )
 @auth(
-  rules:[
-    {allow: private}
+  rules: [
+    {allow: groups, groups: ["Admin"]}
+    # {allow: groups, groupsField: "companyGroup", operations: [read]}
+    {allow: owner, ownerField: "reviewer", operations: [update, read]}
+    {allow: owner, ownerField: "reviewee", operations: [create, update, read]}
+    # {allow: private, operations: []}
+    # {allow: public, operations: []}
   ]
 )
 {
@@ -136,27 +117,21 @@ type Sheet
   secondComment: String #所属長コメント
   secondCheckDate: AWSDate #所属長確認日付
   overAllEvaluation: Int  #総合評価
+  statusValue: Int  #承認ステータス値
 
+  # connection
   sheetGroupId: ID!
   group: Group @connection(fields: ["sheetGroupId"])
   interviews: [Interview] @connection(keyName: "bySheet", fields: ["id"])
-  company: Company @connection
+  # company: Company @connection
   revieweeEmployee: Employee @connection  #被評価者
   secondEmployee: Employee @connection  #所属長
-  # status: ApprovalStatus @connection    #承認ステータス
   section: [Section] @connection(keyName: "bySection", fields: ["id"])  #カテゴリセクション
 
-  statusValue: Int  #承認ステータス値（読み取り禁止）
-    @auth(rules:[
-      { allow: groups, groups: ["Root"]}
-      {allow: private, provider: iam}
-      {allow: private, operations: [read]}
-    ])
 
-  status: String  #承認ステータスを返す関数
-    #@function(name: "approvalStatusReferencer-${env}")
-
-  reviewee: String #被評価者　オーナーフィールド
+  #　オーナーフィールド
+  reviewee: String #被評価者
+  reviewer: [String] #評価者  
 }
 
 type Section
@@ -164,8 +139,8 @@ type Section
 @key(name: "bySection", fields: ["sectionSheetId"])
 @auth(
   rules: [
-    {allow: private}
-  ]
+    {allow: groups, groups: ["Admin"]}
+    {allow: groups, groupsField: "companyGroup", operations: [read]}  ]
 )
 {
   id: ID!
@@ -179,10 +154,8 @@ type Objective
 @key(name: "objectiveBySection", fields: ["objectiveSectionId"])
 @auth(
   rules: [
-    {allow: owner, ownerField: "reviewee" }
-    {allow: groups, groups: ["Root"]}
-    # {allow: groups, groups: ["Manager"], operations: [read]}
-    {allow: private}
+    {allow: groups, groups: ["Admin"]}
+    {allow: groups, groupsField: "companyGroup", operations: [read]}
   ]
 )
 {
@@ -199,7 +172,6 @@ type Objective
 
   #expected date
   expStartDate: AWSDate  #開始予定日
-  expFinishDate: AWSDate  #終了予定日
   expDoneDate: AWSDate  #完了予定日
 
   sheet: Sheet @connection
@@ -213,7 +185,7 @@ type Objective
 #   #listSheetsLtGrade: String @function(name: "listSheetsLtGrade-${env}")
 #   # listSheetsLtGrade: [Sheet] @function(name: "listSheetsLtGrade-${env}")
 #   #   @auth(rules:[
-#   #     {allow: groups, groups: ["Root", "Manager"]}
+#   #     {allow: groups, groups: ["Admin", "Manager"]}
 #   #     {allow: private, operations: []}
 #   #   ])
 #   # approvalStatusReferencer(sheetId: String): String @function(name: "approvalStatusReferencer-${env}")
@@ -229,4 +201,3 @@ type Mutation{
       {allow: private}
     ])
 }
-

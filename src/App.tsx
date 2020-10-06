@@ -1,5 +1,5 @@
 //React
-import React from 'react';
+import React, { useEffect } from 'react';
 import {BrowserRouter, Route, Switch, Link } from "react-router-dom";
 //Amplify
 import { withAuthenticator, AmplifySignOut, AmplifyAuthenticator } from '@aws-amplify/ui-react';
@@ -52,6 +52,13 @@ function Portal(){
 }
 
 function App() {
+  useEffect(() => {
+    ;(async()=>{
+      const user = await Auth.currentAuthenticatedUser()
+      console.log("user", user)
+    })()
+  },[]);
+
   return (
     <div>
       <BrowserRouter>

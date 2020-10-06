@@ -1,20 +1,17 @@
 {
   "permissions": {
     "auth": {
-      "sccsystem2e3482086": [
-        "read"
+      "sccsysteme53c89f0": [
+        "read",
+        "update"
       ]
     },
     "api": {
       "sccgql": [
-        "create",
         "read",
-        "update",
-        "delete"
+        "update"
       ]
     }
   },
   "lambdaLayers": []
-  ,"apisccgqlGraphQLAPIIdOutput": "",
-  "apisccgqlGraphQLAPIEndpointOutput": ""
 }

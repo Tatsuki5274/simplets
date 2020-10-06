@@ -1,6 +1,6 @@
 {
   "auth": {
-    "sccsystem2e3482086": {
+    "sccsysteme53c89f0": {
       "service": "Cognito",
       "providerPlugin": "awscloudformation",
       "dependsOn": [],
@@ -8,27 +8,6 @@
     }
   },
   "api": {
-    "AdminQueries": {
-      "service": "API Gateway",
-      "providerPlugin": "awscloudformation",
-      "dependsOn": [
-        {
-          "category": "auth",
-          "resourceName": "sccsystem2e3482086",
-          "attributes": [
-            "UserPoolId"
-          ]
-        },
-        {
-          "category": "function",
-          "resourceName": "AdminQueries875203c0",
-          "attributes": [
-            "Arn",
-            "Name"
-          ]
-        }
-      ]
-    },
     "sccgql": {
       "service": "AppSync",
       "providerPlugin": "awscloudformation",
@@ -37,33 +16,15 @@
           "defaultAuthentication": {
             "authenticationType": "AMAZON_COGNITO_USER_POOLS",
             "userPoolConfig": {
-              "userPoolId": "authsccsystem2e3482086"
+              "userPoolId": "authsccsysteme53c89f0"
             }
           },
-          "additionalAuthenticationProviders": [
-            {
-              "authenticationType": "AWS_IAM"
-            }
-          ]
+          "additionalAuthenticationProviders": []
         }
       }
     }
   },
   "function": {
-    "AdminQueries875203c0": {
-      "service": "Lambda",
-      "providerPlugin": "awscloudformation",
-      "build": true,
-      "dependsOn": [
-        {
-          "category": "auth",
-          "resourceName": "sccsystem2e3482086",
-          "attributes": [
-            "UserPoolId"
-          ]
-        }
-      ]
-    },
     "approvalStatusManager": {
       "build": true,
       "providerPlugin": "awscloudformation",
@@ -71,29 +32,7 @@
       "dependsOn": [
         {
           "category": "auth",
-          "resourceName": "sccsystem2e3482086",
-          "attributes": [
-            "UserPoolId"
-          ]
-        },
-        {
-          "category": "api",
-          "resourceName": "sccgql",
-          "attributes": [
-            "GraphQLAPIIdOutput",
-            "GraphQLAPIEndpointOutput"
-          ]
-        }
-      ]
-    },
-    "approvalStatusReferencer": {
-      "build": true,
-      "providerPlugin": "awscloudformation",
-      "service": "Lambda",
-      "dependsOn": [
-        {
-          "category": "auth",
-          "resourceName": "sccsystem2e3482086",
+          "resourceName": "sccsysteme53c89f0",
           "attributes": [
             "UserPoolId"
           ]

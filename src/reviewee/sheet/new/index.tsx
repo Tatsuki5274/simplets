@@ -49,8 +49,13 @@ function RevieweeSheetNew(props: Props){
         const createMV: APIt.CreateObjectiveMutationVariables = {
             input: createI
         }
-        const createR: GraphQLResult<APIt.CreateObjectiveMutation> = 
-            await API.graphql(graphqlOperation(createObjective, createMV)) as GraphQLResult<APIt.CreateObjectiveMutation>;
+        let createR: GraphQLResult<APIt.CreateObjectiveMutation>
+        try{
+            createR = await API.graphql(graphqlOperation(createObjective, createMV)) as GraphQLResult<APIt.CreateObjectiveMutation>;
+        }catch(e){
+            console.error("エラーを無視しています", e)
+            createR = e;
+        }
         if(createR.data){
             const createTM: APIt.CreateObjectiveMutation = createR.data;
             setIsRedirect(true);

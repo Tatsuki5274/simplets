@@ -2,6 +2,45 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const onCreateCompany = /* GraphQL */ `
+  subscription OnCreateCompany {
+    onCreateCompany {
+      id
+      name
+      shortName
+      url
+      companyGroup
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateCompany = /* GraphQL */ `
+  subscription OnUpdateCompany {
+    onUpdateCompany {
+      id
+      name
+      shortName
+      url
+      companyGroup
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteCompany = /* GraphQL */ `
+  subscription OnDeleteCompany {
+    onDeleteCompany {
+      id
+      name
+      shortName
+      url
+      companyGroup
+      createdAt
+      updatedAt
+    }
+  }
+`;
 export const onCreateEmployee = /* GraphQL */ `
   subscription OnCreateEmployee {
     onCreateEmployee {
@@ -46,7 +85,7 @@ export const onCreateEmployee = /* GraphQL */ `
                   firstName
                   lastName
                   grade
-                  companyId
+                  companyGroup
                   createdAt
                   updatedAt
                 }
@@ -54,340 +93,127 @@ export const onCreateEmployee = /* GraphQL */ `
                   id
                   name
                   sort
+                  companyGroup
                   createdAt
                   updatedAt
                 }
-                companyId
-                createdAt
-                updatedAt
                 company {
                   id
                   name
                   shortName
                   url
+                  companyGroup
                   createdAt
                   updatedAt
                 }
+                companyGroup
+                createdAt
+                updatedAt
               }
               group {
                 id
-                group {
-                  id
-                  name
-                  sort
-                  createdAt
-                  updatedAt
-                }
                 name
                 sort
+                companyGroup
                 createdAt
                 updatedAt
-                company {
-                  id
-                  name
-                  shortName
-                  url
-                  createdAt
-                  updatedAt
-                }
               }
-              companyId
-              createdAt
-              updatedAt
               company {
                 id
                 name
                 shortName
                 url
+                companyGroup
                 createdAt
                 updatedAt
               }
+              companyGroup
+              createdAt
+              updatedAt
             }
             group {
               id
-              group {
-                id
-                group {
-                  id
-                  name
-                  sort
-                  createdAt
-                  updatedAt
-                }
-                name
-                sort
-                createdAt
-                updatedAt
-                company {
-                  id
-                  name
-                  shortName
-                  url
-                  createdAt
-                  updatedAt
-                }
-              }
               name
               sort
+              companyGroup
               createdAt
               updatedAt
-              company {
-                id
-                name
-                shortName
-                url
-                createdAt
-                updatedAt
-              }
             }
-            companyId
-            createdAt
-            updatedAt
             company {
               id
               name
               shortName
               url
+              companyGroup
               createdAt
               updatedAt
             }
+            companyGroup
+            createdAt
+            updatedAt
           }
           group {
             id
-            group {
-              id
-              group {
-                id
-                group {
-                  id
-                  name
-                  sort
-                  createdAt
-                  updatedAt
-                }
-                name
-                sort
-                createdAt
-                updatedAt
-                company {
-                  id
-                  name
-                  shortName
-                  url
-                  createdAt
-                  updatedAt
-                }
-              }
-              name
-              sort
-              createdAt
-              updatedAt
-              company {
-                id
-                name
-                shortName
-                url
-                createdAt
-                updatedAt
-              }
-            }
             name
             sort
+            companyGroup
             createdAt
             updatedAt
-            company {
-              id
-              name
-              shortName
-              url
-              createdAt
-              updatedAt
-            }
           }
-          companyId
-          createdAt
-          updatedAt
           company {
             id
             name
             shortName
             url
+            companyGroup
             createdAt
             updatedAt
           }
+          companyGroup
+          createdAt
+          updatedAt
         }
         group {
           id
-          group {
-            id
-            group {
-              id
-              group {
-                id
-                group {
-                  id
-                  name
-                  sort
-                  createdAt
-                  updatedAt
-                }
-                name
-                sort
-                createdAt
-                updatedAt
-                company {
-                  id
-                  name
-                  shortName
-                  url
-                  createdAt
-                  updatedAt
-                }
-              }
-              name
-              sort
-              createdAt
-              updatedAt
-              company {
-                id
-                name
-                shortName
-                url
-                createdAt
-                updatedAt
-              }
-            }
-            name
-            sort
-            createdAt
-            updatedAt
-            company {
-              id
-              name
-              shortName
-              url
-              createdAt
-              updatedAt
-            }
-          }
           name
           sort
+          companyGroup
           createdAt
           updatedAt
-          company {
-            id
-            name
-            shortName
-            url
-            createdAt
-            updatedAt
-          }
         }
-        companyId
-        createdAt
-        updatedAt
         company {
           id
           name
           shortName
           url
+          companyGroup
           createdAt
           updatedAt
         }
+        companyGroup
+        createdAt
+        updatedAt
       }
       group {
         id
-        group {
-          id
-          group {
-            id
-            group {
-              id
-              group {
-                id
-                group {
-                  id
-                  name
-                  sort
-                  createdAt
-                  updatedAt
-                }
-                name
-                sort
-                createdAt
-                updatedAt
-                company {
-                  id
-                  name
-                  shortName
-                  url
-                  createdAt
-                  updatedAt
-                }
-              }
-              name
-              sort
-              createdAt
-              updatedAt
-              company {
-                id
-                name
-                shortName
-                url
-                createdAt
-                updatedAt
-              }
-            }
-            name
-            sort
-            createdAt
-            updatedAt
-            company {
-              id
-              name
-              shortName
-              url
-              createdAt
-              updatedAt
-            }
-          }
-          name
-          sort
-          createdAt
-          updatedAt
-          company {
-            id
-            name
-            shortName
-            url
-            createdAt
-            updatedAt
-          }
-        }
         name
         sort
+        companyGroup
         createdAt
         updatedAt
-        company {
-          id
-          name
-          shortName
-          url
-          createdAt
-          updatedAt
-        }
       }
-      companyId
-      createdAt
-      updatedAt
       company {
         id
         name
         shortName
         url
+        companyGroup
         createdAt
         updatedAt
       }
+      companyGroup
+      createdAt
+      updatedAt
     }
   }
 `;
@@ -435,7 +261,7 @@ export const onUpdateEmployee = /* GraphQL */ `
                   firstName
                   lastName
                   grade
-                  companyId
+                  companyGroup
                   createdAt
                   updatedAt
                 }
@@ -443,340 +269,127 @@ export const onUpdateEmployee = /* GraphQL */ `
                   id
                   name
                   sort
+                  companyGroup
                   createdAt
                   updatedAt
                 }
-                companyId
-                createdAt
-                updatedAt
                 company {
                   id
                   name
                   shortName
                   url
+                  companyGroup
                   createdAt
                   updatedAt
                 }
+                companyGroup
+                createdAt
+                updatedAt
               }
               group {
                 id
-                group {
-                  id
-                  name
-                  sort
-                  createdAt
-                  updatedAt
-                }
                 name
                 sort
+                companyGroup
                 createdAt
                 updatedAt
-                company {
-                  id
-                  name
-                  shortName
-                  url
-                  createdAt
-                  updatedAt
-                }
               }
-              companyId
-              createdAt
-              updatedAt
               company {
                 id
                 name
                 shortName
                 url
+                companyGroup
                 createdAt
                 updatedAt
               }
+              companyGroup
+              createdAt
+              updatedAt
             }
             group {
               id
-              group {
-                id
-                group {
-                  id
-                  name
-                  sort
-                  createdAt
-                  updatedAt
-                }
-                name
-                sort
-                createdAt
-                updatedAt
-                company {
-                  id
-                  name
-                  shortName
-                  url
-                  createdAt
-                  updatedAt
-                }
-              }
               name
               sort
+              companyGroup
               createdAt
               updatedAt
-              company {
-                id
-                name
-                shortName
-                url
-                createdAt
-                updatedAt
-              }
             }
-            companyId
-            createdAt
-            updatedAt
             company {
               id
               name
               shortName
               url
+              companyGroup
               createdAt
               updatedAt
             }
+            companyGroup
+            createdAt
+            updatedAt
           }
           group {
             id
-            group {
-              id
-              group {
-                id
-                group {
-                  id
-                  name
-                  sort
-                  createdAt
-                  updatedAt
-                }
-                name
-                sort
-                createdAt
-                updatedAt
-                company {
-                  id
-                  name
-                  shortName
-                  url
-                  createdAt
-                  updatedAt
-                }
-              }
-              name
-              sort
-              createdAt
-              updatedAt
-              company {
-                id
-                name
-                shortName
-                url
-                createdAt
-                updatedAt
-              }
-            }
             name
             sort
+            companyGroup
             createdAt
             updatedAt
-            company {
-              id
-              name
-              shortName
-              url
-              createdAt
-              updatedAt
-            }
           }
-          companyId
-          createdAt
-          updatedAt
           company {
             id
             name
             shortName
             url
+            companyGroup
             createdAt
             updatedAt
           }
+          companyGroup
+          createdAt
+          updatedAt
         }
         group {
           id
-          group {
-            id
-            group {
-              id
-              group {
-                id
-                group {
-                  id
-                  name
-                  sort
-                  createdAt
-                  updatedAt
-                }
-                name
-                sort
-                createdAt
-                updatedAt
-                company {
-                  id
-                  name
-                  shortName
-                  url
-                  createdAt
-                  updatedAt
-                }
-              }
-              name
-              sort
-              createdAt
-              updatedAt
-              company {
-                id
-                name
-                shortName
-                url
-                createdAt
-                updatedAt
-              }
-            }
-            name
-            sort
-            createdAt
-            updatedAt
-            company {
-              id
-              name
-              shortName
-              url
-              createdAt
-              updatedAt
-            }
-          }
           name
           sort
+          companyGroup
           createdAt
           updatedAt
-          company {
-            id
-            name
-            shortName
-            url
-            createdAt
-            updatedAt
-          }
         }
-        companyId
-        createdAt
-        updatedAt
         company {
           id
           name
           shortName
           url
+          companyGroup
           createdAt
           updatedAt
         }
+        companyGroup
+        createdAt
+        updatedAt
       }
       group {
         id
-        group {
-          id
-          group {
-            id
-            group {
-              id
-              group {
-                id
-                group {
-                  id
-                  name
-                  sort
-                  createdAt
-                  updatedAt
-                }
-                name
-                sort
-                createdAt
-                updatedAt
-                company {
-                  id
-                  name
-                  shortName
-                  url
-                  createdAt
-                  updatedAt
-                }
-              }
-              name
-              sort
-              createdAt
-              updatedAt
-              company {
-                id
-                name
-                shortName
-                url
-                createdAt
-                updatedAt
-              }
-            }
-            name
-            sort
-            createdAt
-            updatedAt
-            company {
-              id
-              name
-              shortName
-              url
-              createdAt
-              updatedAt
-            }
-          }
-          name
-          sort
-          createdAt
-          updatedAt
-          company {
-            id
-            name
-            shortName
-            url
-            createdAt
-            updatedAt
-          }
-        }
         name
         sort
+        companyGroup
         createdAt
         updatedAt
-        company {
-          id
-          name
-          shortName
-          url
-          createdAt
-          updatedAt
-        }
       }
-      companyId
-      createdAt
-      updatedAt
       company {
         id
         name
         shortName
         url
+        companyGroup
         createdAt
         updatedAt
       }
+      companyGroup
+      createdAt
+      updatedAt
     }
   }
 `;
@@ -824,7 +437,7 @@ export const onDeleteEmployee = /* GraphQL */ `
                   firstName
                   lastName
                   grade
-                  companyId
+                  companyGroup
                   createdAt
                   updatedAt
                 }
@@ -832,340 +445,127 @@ export const onDeleteEmployee = /* GraphQL */ `
                   id
                   name
                   sort
+                  companyGroup
                   createdAt
                   updatedAt
                 }
-                companyId
-                createdAt
-                updatedAt
                 company {
                   id
                   name
                   shortName
                   url
+                  companyGroup
                   createdAt
                   updatedAt
                 }
+                companyGroup
+                createdAt
+                updatedAt
               }
               group {
                 id
-                group {
-                  id
-                  name
-                  sort
-                  createdAt
-                  updatedAt
-                }
                 name
                 sort
+                companyGroup
                 createdAt
                 updatedAt
-                company {
-                  id
-                  name
-                  shortName
-                  url
-                  createdAt
-                  updatedAt
-                }
               }
-              companyId
-              createdAt
-              updatedAt
               company {
                 id
                 name
                 shortName
                 url
+                companyGroup
                 createdAt
                 updatedAt
               }
+              companyGroup
+              createdAt
+              updatedAt
             }
             group {
               id
-              group {
-                id
-                group {
-                  id
-                  name
-                  sort
-                  createdAt
-                  updatedAt
-                }
-                name
-                sort
-                createdAt
-                updatedAt
-                company {
-                  id
-                  name
-                  shortName
-                  url
-                  createdAt
-                  updatedAt
-                }
-              }
               name
               sort
+              companyGroup
               createdAt
               updatedAt
-              company {
-                id
-                name
-                shortName
-                url
-                createdAt
-                updatedAt
-              }
             }
-            companyId
-            createdAt
-            updatedAt
             company {
               id
               name
               shortName
               url
+              companyGroup
               createdAt
               updatedAt
             }
+            companyGroup
+            createdAt
+            updatedAt
           }
           group {
             id
-            group {
-              id
-              group {
-                id
-                group {
-                  id
-                  name
-                  sort
-                  createdAt
-                  updatedAt
-                }
-                name
-                sort
-                createdAt
-                updatedAt
-                company {
-                  id
-                  name
-                  shortName
-                  url
-                  createdAt
-                  updatedAt
-                }
-              }
-              name
-              sort
-              createdAt
-              updatedAt
-              company {
-                id
-                name
-                shortName
-                url
-                createdAt
-                updatedAt
-              }
-            }
             name
             sort
+            companyGroup
             createdAt
             updatedAt
-            company {
-              id
-              name
-              shortName
-              url
-              createdAt
-              updatedAt
-            }
           }
-          companyId
-          createdAt
-          updatedAt
           company {
             id
             name
             shortName
             url
+            companyGroup
             createdAt
             updatedAt
           }
+          companyGroup
+          createdAt
+          updatedAt
         }
         group {
           id
-          group {
-            id
-            group {
-              id
-              group {
-                id
-                group {
-                  id
-                  name
-                  sort
-                  createdAt
-                  updatedAt
-                }
-                name
-                sort
-                createdAt
-                updatedAt
-                company {
-                  id
-                  name
-                  shortName
-                  url
-                  createdAt
-                  updatedAt
-                }
-              }
-              name
-              sort
-              createdAt
-              updatedAt
-              company {
-                id
-                name
-                shortName
-                url
-                createdAt
-                updatedAt
-              }
-            }
-            name
-            sort
-            createdAt
-            updatedAt
-            company {
-              id
-              name
-              shortName
-              url
-              createdAt
-              updatedAt
-            }
-          }
           name
           sort
+          companyGroup
           createdAt
           updatedAt
-          company {
-            id
-            name
-            shortName
-            url
-            createdAt
-            updatedAt
-          }
         }
-        companyId
-        createdAt
-        updatedAt
         company {
           id
           name
           shortName
           url
+          companyGroup
           createdAt
           updatedAt
         }
+        companyGroup
+        createdAt
+        updatedAt
       }
       group {
         id
-        group {
-          id
-          group {
-            id
-            group {
-              id
-              group {
-                id
-                group {
-                  id
-                  name
-                  sort
-                  createdAt
-                  updatedAt
-                }
-                name
-                sort
-                createdAt
-                updatedAt
-                company {
-                  id
-                  name
-                  shortName
-                  url
-                  createdAt
-                  updatedAt
-                }
-              }
-              name
-              sort
-              createdAt
-              updatedAt
-              company {
-                id
-                name
-                shortName
-                url
-                createdAt
-                updatedAt
-              }
-            }
-            name
-            sort
-            createdAt
-            updatedAt
-            company {
-              id
-              name
-              shortName
-              url
-              createdAt
-              updatedAt
-            }
-          }
-          name
-          sort
-          createdAt
-          updatedAt
-          company {
-            id
-            name
-            shortName
-            url
-            createdAt
-            updatedAt
-          }
-        }
         name
         sort
+        companyGroup
         createdAt
         updatedAt
-        company {
-          id
-          name
-          shortName
-          url
-          createdAt
-          updatedAt
-        }
       }
-      companyId
-      createdAt
-      updatedAt
       company {
         id
         name
         shortName
         url
+        companyGroup
         createdAt
         updatedAt
       }
+      companyGroup
+      createdAt
+      updatedAt
     }
   }
 `;
@@ -1173,100 +573,11 @@ export const onCreateGroup = /* GraphQL */ `
   subscription OnCreateGroup {
     onCreateGroup {
       id
-      group {
-        id
-        group {
-          id
-          group {
-            id
-            group {
-              id
-              group {
-                id
-                group {
-                  id
-                  name
-                  sort
-                  createdAt
-                  updatedAt
-                }
-                name
-                sort
-                createdAt
-                updatedAt
-                company {
-                  id
-                  name
-                  shortName
-                  url
-                  createdAt
-                  updatedAt
-                }
-              }
-              name
-              sort
-              createdAt
-              updatedAt
-              company {
-                id
-                name
-                shortName
-                url
-                createdAt
-                updatedAt
-              }
-            }
-            name
-            sort
-            createdAt
-            updatedAt
-            company {
-              id
-              name
-              shortName
-              url
-              createdAt
-              updatedAt
-            }
-          }
-          name
-          sort
-          createdAt
-          updatedAt
-          company {
-            id
-            name
-            shortName
-            url
-            createdAt
-            updatedAt
-          }
-        }
-        name
-        sort
-        createdAt
-        updatedAt
-        company {
-          id
-          name
-          shortName
-          url
-          createdAt
-          updatedAt
-        }
-      }
       name
       sort
+      companyGroup
       createdAt
       updatedAt
-      company {
-        id
-        name
-        shortName
-        url
-        createdAt
-        updatedAt
-      }
     }
   }
 `;
@@ -1274,100 +585,11 @@ export const onUpdateGroup = /* GraphQL */ `
   subscription OnUpdateGroup {
     onUpdateGroup {
       id
-      group {
-        id
-        group {
-          id
-          group {
-            id
-            group {
-              id
-              group {
-                id
-                group {
-                  id
-                  name
-                  sort
-                  createdAt
-                  updatedAt
-                }
-                name
-                sort
-                createdAt
-                updatedAt
-                company {
-                  id
-                  name
-                  shortName
-                  url
-                  createdAt
-                  updatedAt
-                }
-              }
-              name
-              sort
-              createdAt
-              updatedAt
-              company {
-                id
-                name
-                shortName
-                url
-                createdAt
-                updatedAt
-              }
-            }
-            name
-            sort
-            createdAt
-            updatedAt
-            company {
-              id
-              name
-              shortName
-              url
-              createdAt
-              updatedAt
-            }
-          }
-          name
-          sort
-          createdAt
-          updatedAt
-          company {
-            id
-            name
-            shortName
-            url
-            createdAt
-            updatedAt
-          }
-        }
-        name
-        sort
-        createdAt
-        updatedAt
-        company {
-          id
-          name
-          shortName
-          url
-          createdAt
-          updatedAt
-        }
-      }
       name
       sort
+      companyGroup
       createdAt
       updatedAt
-      company {
-        id
-        name
-        shortName
-        url
-        createdAt
-        updatedAt
-      }
     }
   }
 `;
@@ -1375,100 +597,11 @@ export const onDeleteGroup = /* GraphQL */ `
   subscription OnDeleteGroup {
     onDeleteGroup {
       id
-      group {
-        id
-        group {
-          id
-          group {
-            id
-            group {
-              id
-              group {
-                id
-                group {
-                  id
-                  name
-                  sort
-                  createdAt
-                  updatedAt
-                }
-                name
-                sort
-                createdAt
-                updatedAt
-                company {
-                  id
-                  name
-                  shortName
-                  url
-                  createdAt
-                  updatedAt
-                }
-              }
-              name
-              sort
-              createdAt
-              updatedAt
-              company {
-                id
-                name
-                shortName
-                url
-                createdAt
-                updatedAt
-              }
-            }
-            name
-            sort
-            createdAt
-            updatedAt
-            company {
-              id
-              name
-              shortName
-              url
-              createdAt
-              updatedAt
-            }
-          }
-          name
-          sort
-          createdAt
-          updatedAt
-          company {
-            id
-            name
-            shortName
-            url
-            createdAt
-            updatedAt
-          }
-        }
-        name
-        sort
-        createdAt
-        updatedAt
-        company {
-          id
-          name
-          shortName
-          url
-          createdAt
-          updatedAt
-        }
-      }
       name
       sort
+      companyGroup
       createdAt
       updatedAt
-      company {
-        id
-        name
-        shortName
-        url
-        createdAt
-        updatedAt
-      }
     }
   }
 `;
@@ -1476,18 +609,19 @@ export const onCreateCategory = /* GraphQL */ `
   subscription OnCreateCategory {
     onCreateCategory {
       id
-      no
-      name
-      createdAt
-      updatedAt
       company {
         id
         name
         shortName
         url
+        companyGroup
         createdAt
         updatedAt
       }
+      no
+      name
+      createdAt
+      updatedAt
     }
   }
 `;
@@ -1495,18 +629,19 @@ export const onUpdateCategory = /* GraphQL */ `
   subscription OnUpdateCategory {
     onUpdateCategory {
       id
-      no
-      name
-      createdAt
-      updatedAt
       company {
         id
         name
         shortName
         url
+        companyGroup
         createdAt
         updatedAt
       }
+      no
+      name
+      createdAt
+      updatedAt
     }
   }
 `;
@@ -1514,18 +649,19 @@ export const onDeleteCategory = /* GraphQL */ `
   subscription OnDeleteCategory {
     onDeleteCategory {
       id
-      no
-      name
-      createdAt
-      updatedAt
       company {
         id
         name
         shortName
         url
+        companyGroup
         createdAt
         updatedAt
       }
+      no
+      name
+      createdAt
+      updatedAt
     }
   }
 `;
@@ -1572,8 +708,8 @@ export const onDeleteInterview = /* GraphQL */ `
   }
 `;
 export const onCreateSheet = /* GraphQL */ `
-  subscription OnCreateSheet {
-    onCreateSheet {
+  subscription OnCreateSheet($reviewer: String, $reviewee: String) {
+    onCreateSheet(reviewer: $reviewer, reviewee: $reviewee) {
       id
       year
       grade
@@ -1587,88 +723,15 @@ export const onCreateSheet = /* GraphQL */ `
       secondComment
       secondCheckDate
       overAllEvaluation
+      statusValue
       sheetGroupId
       group {
         id
-        group {
-          id
-          group {
-            id
-            group {
-              id
-              group {
-                id
-                group {
-                  id
-                  name
-                  sort
-                  createdAt
-                  updatedAt
-                }
-                name
-                sort
-                createdAt
-                updatedAt
-                company {
-                  id
-                  name
-                  shortName
-                  url
-                  createdAt
-                  updatedAt
-                }
-              }
-              name
-              sort
-              createdAt
-              updatedAt
-              company {
-                id
-                name
-                shortName
-                url
-                createdAt
-                updatedAt
-              }
-            }
-            name
-            sort
-            createdAt
-            updatedAt
-            company {
-              id
-              name
-              shortName
-              url
-              createdAt
-              updatedAt
-            }
-          }
-          name
-          sort
-          createdAt
-          updatedAt
-          company {
-            id
-            name
-            shortName
-            url
-            createdAt
-            updatedAt
-          }
-        }
         name
         sort
+        companyGroup
         createdAt
         updatedAt
-        company {
-          id
-          name
-          shortName
-          url
-          createdAt
-          updatedAt
-        }
       }
       interviews {
         items {
@@ -1719,7 +782,7 @@ export const onCreateSheet = /* GraphQL */ `
                   firstName
                   lastName
                   grade
-                  companyId
+                  companyGroup
                   createdAt
                   updatedAt
                 }
@@ -1727,246 +790,106 @@ export const onCreateSheet = /* GraphQL */ `
                   id
                   name
                   sort
+                  companyGroup
                   createdAt
                   updatedAt
                 }
-                companyId
-                createdAt
-                updatedAt
                 company {
                   id
                   name
                   shortName
                   url
+                  companyGroup
                   createdAt
                   updatedAt
                 }
+                companyGroup
+                createdAt
+                updatedAt
               }
               group {
                 id
-                group {
-                  id
-                  name
-                  sort
-                  createdAt
-                  updatedAt
-                }
                 name
                 sort
+                companyGroup
                 createdAt
                 updatedAt
-                company {
-                  id
-                  name
-                  shortName
-                  url
-                  createdAt
-                  updatedAt
-                }
               }
-              companyId
-              createdAt
-              updatedAt
               company {
                 id
                 name
                 shortName
                 url
+                companyGroup
                 createdAt
                 updatedAt
               }
+              companyGroup
+              createdAt
+              updatedAt
             }
             group {
               id
-              group {
-                id
-                group {
-                  id
-                  name
-                  sort
-                  createdAt
-                  updatedAt
-                }
-                name
-                sort
-                createdAt
-                updatedAt
-                company {
-                  id
-                  name
-                  shortName
-                  url
-                  createdAt
-                  updatedAt
-                }
-              }
               name
               sort
+              companyGroup
               createdAt
               updatedAt
-              company {
-                id
-                name
-                shortName
-                url
-                createdAt
-                updatedAt
-              }
             }
-            companyId
-            createdAt
-            updatedAt
             company {
               id
               name
               shortName
               url
+              companyGroup
               createdAt
               updatedAt
             }
+            companyGroup
+            createdAt
+            updatedAt
           }
           group {
             id
-            group {
-              id
-              group {
-                id
-                group {
-                  id
-                  name
-                  sort
-                  createdAt
-                  updatedAt
-                }
-                name
-                sort
-                createdAt
-                updatedAt
-                company {
-                  id
-                  name
-                  shortName
-                  url
-                  createdAt
-                  updatedAt
-                }
-              }
-              name
-              sort
-              createdAt
-              updatedAt
-              company {
-                id
-                name
-                shortName
-                url
-                createdAt
-                updatedAt
-              }
-            }
             name
             sort
+            companyGroup
             createdAt
             updatedAt
-            company {
-              id
-              name
-              shortName
-              url
-              createdAt
-              updatedAt
-            }
           }
-          companyId
-          createdAt
-          updatedAt
           company {
             id
             name
             shortName
             url
+            companyGroup
             createdAt
             updatedAt
           }
+          companyGroup
+          createdAt
+          updatedAt
         }
         group {
           id
-          group {
-            id
-            group {
-              id
-              group {
-                id
-                group {
-                  id
-                  name
-                  sort
-                  createdAt
-                  updatedAt
-                }
-                name
-                sort
-                createdAt
-                updatedAt
-                company {
-                  id
-                  name
-                  shortName
-                  url
-                  createdAt
-                  updatedAt
-                }
-              }
-              name
-              sort
-              createdAt
-              updatedAt
-              company {
-                id
-                name
-                shortName
-                url
-                createdAt
-                updatedAt
-              }
-            }
-            name
-            sort
-            createdAt
-            updatedAt
-            company {
-              id
-              name
-              shortName
-              url
-              createdAt
-              updatedAt
-            }
-          }
           name
           sort
+          companyGroup
           createdAt
           updatedAt
-          company {
-            id
-            name
-            shortName
-            url
-            createdAt
-            updatedAt
-          }
         }
-        companyId
-        createdAt
-        updatedAt
         company {
           id
           name
           shortName
           url
+          companyGroup
           createdAt
           updatedAt
         }
+        companyGroup
+        createdAt
+        updatedAt
       }
       secondEmployee {
         id
@@ -2004,7 +927,7 @@ export const onCreateSheet = /* GraphQL */ `
                   firstName
                   lastName
                   grade
-                  companyId
+                  companyGroup
                   createdAt
                   updatedAt
                 }
@@ -2012,246 +935,106 @@ export const onCreateSheet = /* GraphQL */ `
                   id
                   name
                   sort
+                  companyGroup
                   createdAt
                   updatedAt
                 }
-                companyId
-                createdAt
-                updatedAt
                 company {
                   id
                   name
                   shortName
                   url
+                  companyGroup
                   createdAt
                   updatedAt
                 }
+                companyGroup
+                createdAt
+                updatedAt
               }
               group {
                 id
-                group {
-                  id
-                  name
-                  sort
-                  createdAt
-                  updatedAt
-                }
                 name
                 sort
+                companyGroup
                 createdAt
                 updatedAt
-                company {
-                  id
-                  name
-                  shortName
-                  url
-                  createdAt
-                  updatedAt
-                }
               }
-              companyId
-              createdAt
-              updatedAt
               company {
                 id
                 name
                 shortName
                 url
+                companyGroup
                 createdAt
                 updatedAt
               }
+              companyGroup
+              createdAt
+              updatedAt
             }
             group {
               id
-              group {
-                id
-                group {
-                  id
-                  name
-                  sort
-                  createdAt
-                  updatedAt
-                }
-                name
-                sort
-                createdAt
-                updatedAt
-                company {
-                  id
-                  name
-                  shortName
-                  url
-                  createdAt
-                  updatedAt
-                }
-              }
               name
               sort
+              companyGroup
               createdAt
               updatedAt
-              company {
-                id
-                name
-                shortName
-                url
-                createdAt
-                updatedAt
-              }
             }
-            companyId
-            createdAt
-            updatedAt
             company {
               id
               name
               shortName
               url
+              companyGroup
               createdAt
               updatedAt
             }
+            companyGroup
+            createdAt
+            updatedAt
           }
           group {
             id
-            group {
-              id
-              group {
-                id
-                group {
-                  id
-                  name
-                  sort
-                  createdAt
-                  updatedAt
-                }
-                name
-                sort
-                createdAt
-                updatedAt
-                company {
-                  id
-                  name
-                  shortName
-                  url
-                  createdAt
-                  updatedAt
-                }
-              }
-              name
-              sort
-              createdAt
-              updatedAt
-              company {
-                id
-                name
-                shortName
-                url
-                createdAt
-                updatedAt
-              }
-            }
             name
             sort
+            companyGroup
             createdAt
             updatedAt
-            company {
-              id
-              name
-              shortName
-              url
-              createdAt
-              updatedAt
-            }
           }
-          companyId
-          createdAt
-          updatedAt
           company {
             id
             name
             shortName
             url
+            companyGroup
             createdAt
             updatedAt
           }
+          companyGroup
+          createdAt
+          updatedAt
         }
         group {
           id
-          group {
-            id
-            group {
-              id
-              group {
-                id
-                group {
-                  id
-                  name
-                  sort
-                  createdAt
-                  updatedAt
-                }
-                name
-                sort
-                createdAt
-                updatedAt
-                company {
-                  id
-                  name
-                  shortName
-                  url
-                  createdAt
-                  updatedAt
-                }
-              }
-              name
-              sort
-              createdAt
-              updatedAt
-              company {
-                id
-                name
-                shortName
-                url
-                createdAt
-                updatedAt
-              }
-            }
-            name
-            sort
-            createdAt
-            updatedAt
-            company {
-              id
-              name
-              shortName
-              url
-              createdAt
-              updatedAt
-            }
-          }
           name
           sort
+          companyGroup
           createdAt
           updatedAt
-          company {
-            id
-            name
-            shortName
-            url
-            createdAt
-            updatedAt
-          }
         }
-        companyId
-        createdAt
-        updatedAt
         company {
           id
           name
           shortName
           url
+          companyGroup
           createdAt
           updatedAt
         }
+        companyGroup
+        createdAt
+        updatedAt
       }
       section {
         items {
@@ -2269,7 +1052,6 @@ export const onCreateSheet = /* GraphQL */ `
               progress
               status
               expStartDate
-              expFinishDate
               expDoneDate
               sheet {
                 id
@@ -2285,11 +1067,13 @@ export const onCreateSheet = /* GraphQL */ `
                 secondComment
                 secondCheckDate
                 overAllEvaluation
+                statusValue
                 sheetGroupId
                 group {
                   id
                   name
                   sort
+                  companyGroup
                   createdAt
                   updatedAt
                 }
@@ -2302,7 +1086,7 @@ export const onCreateSheet = /* GraphQL */ `
                   firstName
                   lastName
                   grade
-                  companyId
+                  companyGroup
                   createdAt
                   updatedAt
                 }
@@ -2312,26 +1096,17 @@ export const onCreateSheet = /* GraphQL */ `
                   firstName
                   lastName
                   grade
-                  companyId
+                  companyGroup
                   createdAt
                   updatedAt
                 }
                 section {
                   nextToken
                 }
-                status
                 reviewee
+                reviewer
                 createdAt
                 updatedAt
-                company {
-                  id
-                  name
-                  shortName
-                  url
-                  createdAt
-                  updatedAt
-                }
-                statusValue
               }
               objectiveSectionId
               section {
@@ -2358,43 +1133,35 @@ export const onCreateSheet = /* GraphQL */ `
           }
           category {
             id
-            no
-            name
-            createdAt
-            updatedAt
             company {
               id
               name
               shortName
               url
+              companyGroup
               createdAt
               updatedAt
             }
+            no
+            name
+            createdAt
+            updatedAt
           }
           createdAt
           updatedAt
         }
         nextToken
       }
-      status
       reviewee
+      reviewer
       createdAt
       updatedAt
-      company {
-        id
-        name
-        shortName
-        url
-        createdAt
-        updatedAt
-      }
-      statusValue
     }
   }
 `;
 export const onUpdateSheet = /* GraphQL */ `
-  subscription OnUpdateSheet {
-    onUpdateSheet {
+  subscription OnUpdateSheet($reviewer: String, $reviewee: String) {
+    onUpdateSheet(reviewer: $reviewer, reviewee: $reviewee) {
       id
       year
       grade
@@ -2408,88 +1175,15 @@ export const onUpdateSheet = /* GraphQL */ `
       secondComment
       secondCheckDate
       overAllEvaluation
+      statusValue
       sheetGroupId
       group {
         id
-        group {
-          id
-          group {
-            id
-            group {
-              id
-              group {
-                id
-                group {
-                  id
-                  name
-                  sort
-                  createdAt
-                  updatedAt
-                }
-                name
-                sort
-                createdAt
-                updatedAt
-                company {
-                  id
-                  name
-                  shortName
-                  url
-                  createdAt
-                  updatedAt
-                }
-              }
-              name
-              sort
-              createdAt
-              updatedAt
-              company {
-                id
-                name
-                shortName
-                url
-                createdAt
-                updatedAt
-              }
-            }
-            name
-            sort
-            createdAt
-            updatedAt
-            company {
-              id
-              name
-              shortName
-              url
-              createdAt
-              updatedAt
-            }
-          }
-          name
-          sort
-          createdAt
-          updatedAt
-          company {
-            id
-            name
-            shortName
-            url
-            createdAt
-            updatedAt
-          }
-        }
         name
         sort
+        companyGroup
         createdAt
         updatedAt
-        company {
-          id
-          name
-          shortName
-          url
-          createdAt
-          updatedAt
-        }
       }
       interviews {
         items {
@@ -2540,7 +1234,7 @@ export const onUpdateSheet = /* GraphQL */ `
                   firstName
                   lastName
                   grade
-                  companyId
+                  companyGroup
                   createdAt
                   updatedAt
                 }
@@ -2548,246 +1242,106 @@ export const onUpdateSheet = /* GraphQL */ `
                   id
                   name
                   sort
+                  companyGroup
                   createdAt
                   updatedAt
                 }
-                companyId
-                createdAt
-                updatedAt
                 company {
                   id
                   name
                   shortName
                   url
+                  companyGroup
                   createdAt
                   updatedAt
                 }
+                companyGroup
+                createdAt
+                updatedAt
               }
               group {
                 id
-                group {
-                  id
-                  name
-                  sort
-                  createdAt
-                  updatedAt
-                }
                 name
                 sort
+                companyGroup
                 createdAt
                 updatedAt
-                company {
-                  id
-                  name
-                  shortName
-                  url
-                  createdAt
-                  updatedAt
-                }
               }
-              companyId
-              createdAt
-              updatedAt
               company {
                 id
                 name
                 shortName
                 url
+                companyGroup
                 createdAt
                 updatedAt
               }
+              companyGroup
+              createdAt
+              updatedAt
             }
             group {
               id
-              group {
-                id
-                group {
-                  id
-                  name
-                  sort
-                  createdAt
-                  updatedAt
-                }
-                name
-                sort
-                createdAt
-                updatedAt
-                company {
-                  id
-                  name
-                  shortName
-                  url
-                  createdAt
-                  updatedAt
-                }
-              }
               name
               sort
+              companyGroup
               createdAt
               updatedAt
-              company {
-                id
-                name
-                shortName
-                url
-                createdAt
-                updatedAt
-              }
             }
-            companyId
-            createdAt
-            updatedAt
             company {
               id
               name
               shortName
               url
+              companyGroup
               createdAt
               updatedAt
             }
+            companyGroup
+            createdAt
+            updatedAt
           }
           group {
             id
-            group {
-              id
-              group {
-                id
-                group {
-                  id
-                  name
-                  sort
-                  createdAt
-                  updatedAt
-                }
-                name
-                sort
-                createdAt
-                updatedAt
-                company {
-                  id
-                  name
-                  shortName
-                  url
-                  createdAt
-                  updatedAt
-                }
-              }
-              name
-              sort
-              createdAt
-              updatedAt
-              company {
-                id
-                name
-                shortName
-                url
-                createdAt
-                updatedAt
-              }
-            }
             name
             sort
+            companyGroup
             createdAt
             updatedAt
-            company {
-              id
-              name
-              shortName
-              url
-              createdAt
-              updatedAt
-            }
           }
-          companyId
-          createdAt
-          updatedAt
           company {
             id
             name
             shortName
             url
+            companyGroup
             createdAt
             updatedAt
           }
+          companyGroup
+          createdAt
+          updatedAt
         }
         group {
           id
-          group {
-            id
-            group {
-              id
-              group {
-                id
-                group {
-                  id
-                  name
-                  sort
-                  createdAt
-                  updatedAt
-                }
-                name
-                sort
-                createdAt
-                updatedAt
-                company {
-                  id
-                  name
-                  shortName
-                  url
-                  createdAt
-                  updatedAt
-                }
-              }
-              name
-              sort
-              createdAt
-              updatedAt
-              company {
-                id
-                name
-                shortName
-                url
-                createdAt
-                updatedAt
-              }
-            }
-            name
-            sort
-            createdAt
-            updatedAt
-            company {
-              id
-              name
-              shortName
-              url
-              createdAt
-              updatedAt
-            }
-          }
           name
           sort
+          companyGroup
           createdAt
           updatedAt
-          company {
-            id
-            name
-            shortName
-            url
-            createdAt
-            updatedAt
-          }
         }
-        companyId
-        createdAt
-        updatedAt
         company {
           id
           name
           shortName
           url
+          companyGroup
           createdAt
           updatedAt
         }
+        companyGroup
+        createdAt
+        updatedAt
       }
       secondEmployee {
         id
@@ -2825,7 +1379,7 @@ export const onUpdateSheet = /* GraphQL */ `
                   firstName
                   lastName
                   grade
-                  companyId
+                  companyGroup
                   createdAt
                   updatedAt
                 }
@@ -2833,246 +1387,106 @@ export const onUpdateSheet = /* GraphQL */ `
                   id
                   name
                   sort
+                  companyGroup
                   createdAt
                   updatedAt
                 }
-                companyId
-                createdAt
-                updatedAt
                 company {
                   id
                   name
                   shortName
                   url
+                  companyGroup
                   createdAt
                   updatedAt
                 }
+                companyGroup
+                createdAt
+                updatedAt
               }
               group {
                 id
-                group {
-                  id
-                  name
-                  sort
-                  createdAt
-                  updatedAt
-                }
                 name
                 sort
+                companyGroup
                 createdAt
                 updatedAt
-                company {
-                  id
-                  name
-                  shortName
-                  url
-                  createdAt
-                  updatedAt
-                }
               }
-              companyId
-              createdAt
-              updatedAt
               company {
                 id
                 name
                 shortName
                 url
+                companyGroup
                 createdAt
                 updatedAt
               }
+              companyGroup
+              createdAt
+              updatedAt
             }
             group {
               id
-              group {
-                id
-                group {
-                  id
-                  name
-                  sort
-                  createdAt
-                  updatedAt
-                }
-                name
-                sort
-                createdAt
-                updatedAt
-                company {
-                  id
-                  name
-                  shortName
-                  url
-                  createdAt
-                  updatedAt
-                }
-              }
               name
               sort
+              companyGroup
               createdAt
               updatedAt
-              company {
-                id
-                name
-                shortName
-                url
-                createdAt
-                updatedAt
-              }
             }
-            companyId
-            createdAt
-            updatedAt
             company {
               id
               name
               shortName
               url
+              companyGroup
               createdAt
               updatedAt
             }
+            companyGroup
+            createdAt
+            updatedAt
           }
           group {
             id
-            group {
-              id
-              group {
-                id
-                group {
-                  id
-                  name
-                  sort
-                  createdAt
-                  updatedAt
-                }
-                name
-                sort
-                createdAt
-                updatedAt
-                company {
-                  id
-                  name
-                  shortName
-                  url
-                  createdAt
-                  updatedAt
-                }
-              }
-              name
-              sort
-              createdAt
-              updatedAt
-              company {
-                id
-                name
-                shortName
-                url
-                createdAt
-                updatedAt
-              }
-            }
             name
             sort
+            companyGroup
             createdAt
             updatedAt
-            company {
-              id
-              name
-              shortName
-              url
-              createdAt
-              updatedAt
-            }
           }
-          companyId
-          createdAt
-          updatedAt
           company {
             id
             name
             shortName
             url
+            companyGroup
             createdAt
             updatedAt
           }
+          companyGroup
+          createdAt
+          updatedAt
         }
         group {
           id
-          group {
-            id
-            group {
-              id
-              group {
-                id
-                group {
-                  id
-                  name
-                  sort
-                  createdAt
-                  updatedAt
-                }
-                name
-                sort
-                createdAt
-                updatedAt
-                company {
-                  id
-                  name
-                  shortName
-                  url
-                  createdAt
-                  updatedAt
-                }
-              }
-              name
-              sort
-              createdAt
-              updatedAt
-              company {
-                id
-                name
-                shortName
-                url
-                createdAt
-                updatedAt
-              }
-            }
-            name
-            sort
-            createdAt
-            updatedAt
-            company {
-              id
-              name
-              shortName
-              url
-              createdAt
-              updatedAt
-            }
-          }
           name
           sort
+          companyGroup
           createdAt
           updatedAt
-          company {
-            id
-            name
-            shortName
-            url
-            createdAt
-            updatedAt
-          }
         }
-        companyId
-        createdAt
-        updatedAt
         company {
           id
           name
           shortName
           url
+          companyGroup
           createdAt
           updatedAt
         }
+        companyGroup
+        createdAt
+        updatedAt
       }
       section {
         items {
@@ -3090,7 +1504,6 @@ export const onUpdateSheet = /* GraphQL */ `
               progress
               status
               expStartDate
-              expFinishDate
               expDoneDate
               sheet {
                 id
@@ -3106,11 +1519,13 @@ export const onUpdateSheet = /* GraphQL */ `
                 secondComment
                 secondCheckDate
                 overAllEvaluation
+                statusValue
                 sheetGroupId
                 group {
                   id
                   name
                   sort
+                  companyGroup
                   createdAt
                   updatedAt
                 }
@@ -3123,7 +1538,7 @@ export const onUpdateSheet = /* GraphQL */ `
                   firstName
                   lastName
                   grade
-                  companyId
+                  companyGroup
                   createdAt
                   updatedAt
                 }
@@ -3133,26 +1548,17 @@ export const onUpdateSheet = /* GraphQL */ `
                   firstName
                   lastName
                   grade
-                  companyId
+                  companyGroup
                   createdAt
                   updatedAt
                 }
                 section {
                   nextToken
                 }
-                status
                 reviewee
+                reviewer
                 createdAt
                 updatedAt
-                company {
-                  id
-                  name
-                  shortName
-                  url
-                  createdAt
-                  updatedAt
-                }
-                statusValue
               }
               objectiveSectionId
               section {
@@ -3179,43 +1585,35 @@ export const onUpdateSheet = /* GraphQL */ `
           }
           category {
             id
-            no
-            name
-            createdAt
-            updatedAt
             company {
               id
               name
               shortName
               url
+              companyGroup
               createdAt
               updatedAt
             }
+            no
+            name
+            createdAt
+            updatedAt
           }
           createdAt
           updatedAt
         }
         nextToken
       }
-      status
       reviewee
+      reviewer
       createdAt
       updatedAt
-      company {
-        id
-        name
-        shortName
-        url
-        createdAt
-        updatedAt
-      }
-      statusValue
     }
   }
 `;
 export const onDeleteSheet = /* GraphQL */ `
-  subscription OnDeleteSheet {
-    onDeleteSheet {
+  subscription OnDeleteSheet($reviewer: String, $reviewee: String) {
+    onDeleteSheet(reviewer: $reviewer, reviewee: $reviewee) {
       id
       year
       grade
@@ -3229,88 +1627,15 @@ export const onDeleteSheet = /* GraphQL */ `
       secondComment
       secondCheckDate
       overAllEvaluation
+      statusValue
       sheetGroupId
       group {
         id
-        group {
-          id
-          group {
-            id
-            group {
-              id
-              group {
-                id
-                group {
-                  id
-                  name
-                  sort
-                  createdAt
-                  updatedAt
-                }
-                name
-                sort
-                createdAt
-                updatedAt
-                company {
-                  id
-                  name
-                  shortName
-                  url
-                  createdAt
-                  updatedAt
-                }
-              }
-              name
-              sort
-              createdAt
-              updatedAt
-              company {
-                id
-                name
-                shortName
-                url
-                createdAt
-                updatedAt
-              }
-            }
-            name
-            sort
-            createdAt
-            updatedAt
-            company {
-              id
-              name
-              shortName
-              url
-              createdAt
-              updatedAt
-            }
-          }
-          name
-          sort
-          createdAt
-          updatedAt
-          company {
-            id
-            name
-            shortName
-            url
-            createdAt
-            updatedAt
-          }
-        }
         name
         sort
+        companyGroup
         createdAt
         updatedAt
-        company {
-          id
-          name
-          shortName
-          url
-          createdAt
-          updatedAt
-        }
       }
       interviews {
         items {
@@ -3361,7 +1686,7 @@ export const onDeleteSheet = /* GraphQL */ `
                   firstName
                   lastName
                   grade
-                  companyId
+                  companyGroup
                   createdAt
                   updatedAt
                 }
@@ -3369,246 +1694,106 @@ export const onDeleteSheet = /* GraphQL */ `
                   id
                   name
                   sort
+                  companyGroup
                   createdAt
                   updatedAt
                 }
-                companyId
-                createdAt
-                updatedAt
                 company {
                   id
                   name
                   shortName
                   url
+                  companyGroup
                   createdAt
                   updatedAt
                 }
+                companyGroup
+                createdAt
+                updatedAt
               }
               group {
                 id
-                group {
-                  id
-                  name
-                  sort
-                  createdAt
-                  updatedAt
-                }
                 name
                 sort
+                companyGroup
                 createdAt
                 updatedAt
-                company {
-                  id
-                  name
-                  shortName
-                  url
-                  createdAt
-                  updatedAt
-                }
               }
-              companyId
-              createdAt
-              updatedAt
               company {
                 id
                 name
                 shortName
                 url
+                companyGroup
                 createdAt
                 updatedAt
               }
+              companyGroup
+              createdAt
+              updatedAt
             }
             group {
               id
-              group {
-                id
-                group {
-                  id
-                  name
-                  sort
-                  createdAt
-                  updatedAt
-                }
-                name
-                sort
-                createdAt
-                updatedAt
-                company {
-                  id
-                  name
-                  shortName
-                  url
-                  createdAt
-                  updatedAt
-                }
-              }
               name
               sort
+              companyGroup
               createdAt
               updatedAt
-              company {
-                id
-                name
-                shortName
-                url
-                createdAt
-                updatedAt
-              }
             }
-            companyId
-            createdAt
-            updatedAt
             company {
               id
               name
               shortName
               url
+              companyGroup
               createdAt
               updatedAt
             }
+            companyGroup
+            createdAt
+            updatedAt
           }
           group {
             id
-            group {
-              id
-              group {
-                id
-                group {
-                  id
-                  name
-                  sort
-                  createdAt
-                  updatedAt
-                }
-                name
-                sort
-                createdAt
-                updatedAt
-                company {
-                  id
-                  name
-                  shortName
-                  url
-                  createdAt
-                  updatedAt
-                }
-              }
-              name
-              sort
-              createdAt
-              updatedAt
-              company {
-                id
-                name
-                shortName
-                url
-                createdAt
-                updatedAt
-              }
-            }
             name
             sort
+            companyGroup
             createdAt
             updatedAt
-            company {
-              id
-              name
-              shortName
-              url
-              createdAt
-              updatedAt
-            }
           }
-          companyId
-          createdAt
-          updatedAt
           company {
             id
             name
             shortName
             url
+            companyGroup
             createdAt
             updatedAt
           }
+          companyGroup
+          createdAt
+          updatedAt
         }
         group {
           id
-          group {
-            id
-            group {
-              id
-              group {
-                id
-                group {
-                  id
-                  name
-                  sort
-                  createdAt
-                  updatedAt
-                }
-                name
-                sort
-                createdAt
-                updatedAt
-                company {
-                  id
-                  name
-                  shortName
-                  url
-                  createdAt
-                  updatedAt
-                }
-              }
-              name
-              sort
-              createdAt
-              updatedAt
-              company {
-                id
-                name
-                shortName
-                url
-                createdAt
-                updatedAt
-              }
-            }
-            name
-            sort
-            createdAt
-            updatedAt
-            company {
-              id
-              name
-              shortName
-              url
-              createdAt
-              updatedAt
-            }
-          }
           name
           sort
+          companyGroup
           createdAt
           updatedAt
-          company {
-            id
-            name
-            shortName
-            url
-            createdAt
-            updatedAt
-          }
         }
-        companyId
-        createdAt
-        updatedAt
         company {
           id
           name
           shortName
           url
+          companyGroup
           createdAt
           updatedAt
         }
+        companyGroup
+        createdAt
+        updatedAt
       }
       secondEmployee {
         id
@@ -3646,7 +1831,7 @@ export const onDeleteSheet = /* GraphQL */ `
                   firstName
                   lastName
                   grade
-                  companyId
+                  companyGroup
                   createdAt
                   updatedAt
                 }
@@ -3654,246 +1839,106 @@ export const onDeleteSheet = /* GraphQL */ `
                   id
                   name
                   sort
+                  companyGroup
                   createdAt
                   updatedAt
                 }
-                companyId
-                createdAt
-                updatedAt
                 company {
                   id
                   name
                   shortName
                   url
+                  companyGroup
                   createdAt
                   updatedAt
                 }
+                companyGroup
+                createdAt
+                updatedAt
               }
               group {
                 id
-                group {
-                  id
-                  name
-                  sort
-                  createdAt
-                  updatedAt
-                }
                 name
                 sort
+                companyGroup
                 createdAt
                 updatedAt
-                company {
-                  id
-                  name
-                  shortName
-                  url
-                  createdAt
-                  updatedAt
-                }
               }
-              companyId
-              createdAt
-              updatedAt
               company {
                 id
                 name
                 shortName
                 url
+                companyGroup
                 createdAt
                 updatedAt
               }
+              companyGroup
+              createdAt
+              updatedAt
             }
             group {
               id
-              group {
-                id
-                group {
-                  id
-                  name
-                  sort
-                  createdAt
-                  updatedAt
-                }
-                name
-                sort
-                createdAt
-                updatedAt
-                company {
-                  id
-                  name
-                  shortName
-                  url
-                  createdAt
-                  updatedAt
-                }
-              }
               name
               sort
+              companyGroup
               createdAt
               updatedAt
-              company {
-                id
-                name
-                shortName
-                url
-                createdAt
-                updatedAt
-              }
             }
-            companyId
-            createdAt
-            updatedAt
             company {
               id
               name
               shortName
               url
+              companyGroup
               createdAt
               updatedAt
             }
+            companyGroup
+            createdAt
+            updatedAt
           }
           group {
             id
-            group {
-              id
-              group {
-                id
-                group {
-                  id
-                  name
-                  sort
-                  createdAt
-                  updatedAt
-                }
-                name
-                sort
-                createdAt
-                updatedAt
-                company {
-                  id
-                  name
-                  shortName
-                  url
-                  createdAt
-                  updatedAt
-                }
-              }
-              name
-              sort
-              createdAt
-              updatedAt
-              company {
-                id
-                name
-                shortName
-                url
-                createdAt
-                updatedAt
-              }
-            }
             name
             sort
+            companyGroup
             createdAt
             updatedAt
-            company {
-              id
-              name
-              shortName
-              url
-              createdAt
-              updatedAt
-            }
           }
-          companyId
-          createdAt
-          updatedAt
           company {
             id
             name
             shortName
             url
+            companyGroup
             createdAt
             updatedAt
           }
+          companyGroup
+          createdAt
+          updatedAt
         }
         group {
           id
-          group {
-            id
-            group {
-              id
-              group {
-                id
-                group {
-                  id
-                  name
-                  sort
-                  createdAt
-                  updatedAt
-                }
-                name
-                sort
-                createdAt
-                updatedAt
-                company {
-                  id
-                  name
-                  shortName
-                  url
-                  createdAt
-                  updatedAt
-                }
-              }
-              name
-              sort
-              createdAt
-              updatedAt
-              company {
-                id
-                name
-                shortName
-                url
-                createdAt
-                updatedAt
-              }
-            }
-            name
-            sort
-            createdAt
-            updatedAt
-            company {
-              id
-              name
-              shortName
-              url
-              createdAt
-              updatedAt
-            }
-          }
           name
           sort
+          companyGroup
           createdAt
           updatedAt
-          company {
-            id
-            name
-            shortName
-            url
-            createdAt
-            updatedAt
-          }
         }
-        companyId
-        createdAt
-        updatedAt
         company {
           id
           name
           shortName
           url
+          companyGroup
           createdAt
           updatedAt
         }
+        companyGroup
+        createdAt
+        updatedAt
       }
       section {
         items {
@@ -3911,7 +1956,6 @@ export const onDeleteSheet = /* GraphQL */ `
               progress
               status
               expStartDate
-              expFinishDate
               expDoneDate
               sheet {
                 id
@@ -3927,11 +1971,13 @@ export const onDeleteSheet = /* GraphQL */ `
                 secondComment
                 secondCheckDate
                 overAllEvaluation
+                statusValue
                 sheetGroupId
                 group {
                   id
                   name
                   sort
+                  companyGroup
                   createdAt
                   updatedAt
                 }
@@ -3944,7 +1990,7 @@ export const onDeleteSheet = /* GraphQL */ `
                   firstName
                   lastName
                   grade
-                  companyId
+                  companyGroup
                   createdAt
                   updatedAt
                 }
@@ -3954,26 +2000,17 @@ export const onDeleteSheet = /* GraphQL */ `
                   firstName
                   lastName
                   grade
-                  companyId
+                  companyGroup
                   createdAt
                   updatedAt
                 }
                 section {
                   nextToken
                 }
-                status
                 reviewee
+                reviewer
                 createdAt
                 updatedAt
-                company {
-                  id
-                  name
-                  shortName
-                  url
-                  createdAt
-                  updatedAt
-                }
-                statusValue
               }
               objectiveSectionId
               section {
@@ -4000,37 +2037,29 @@ export const onDeleteSheet = /* GraphQL */ `
           }
           category {
             id
-            no
-            name
-            createdAt
-            updatedAt
             company {
               id
               name
               shortName
               url
+              companyGroup
               createdAt
               updatedAt
             }
+            no
+            name
+            createdAt
+            updatedAt
           }
           createdAt
           updatedAt
         }
         nextToken
       }
-      status
       reviewee
+      reviewer
       createdAt
       updatedAt
-      company {
-        id
-        name
-        shortName
-        url
-        createdAt
-        updatedAt
-      }
-      statusValue
     }
   }
 `;
@@ -4051,7 +2080,6 @@ export const onCreateSection = /* GraphQL */ `
           progress
           status
           expStartDate
-          expFinishDate
           expDoneDate
           sheet {
             id
@@ -4067,43 +2095,15 @@ export const onCreateSection = /* GraphQL */ `
             secondComment
             secondCheckDate
             overAllEvaluation
+            statusValue
             sheetGroupId
             group {
               id
-              group {
-                id
-                group {
-                  id
-                  name
-                  sort
-                  createdAt
-                  updatedAt
-                }
-                name
-                sort
-                createdAt
-                updatedAt
-                company {
-                  id
-                  name
-                  shortName
-                  url
-                  createdAt
-                  updatedAt
-                }
-              }
               name
               sort
+              companyGroup
               createdAt
               updatedAt
-              company {
-                id
-                name
-                shortName
-                url
-                createdAt
-                updatedAt
-              }
             }
             interviews {
               items {
@@ -4136,7 +2136,7 @@ export const onCreateSection = /* GraphQL */ `
                   firstName
                   lastName
                   grade
-                  companyId
+                  companyGroup
                   createdAt
                   updatedAt
                 }
@@ -4144,54 +2144,43 @@ export const onCreateSection = /* GraphQL */ `
                   id
                   name
                   sort
+                  companyGroup
                   createdAt
                   updatedAt
                 }
-                companyId
-                createdAt
-                updatedAt
                 company {
                   id
                   name
                   shortName
                   url
+                  companyGroup
                   createdAt
                   updatedAt
                 }
+                companyGroup
+                createdAt
+                updatedAt
               }
               group {
                 id
-                group {
-                  id
-                  name
-                  sort
-                  createdAt
-                  updatedAt
-                }
                 name
                 sort
+                companyGroup
                 createdAt
                 updatedAt
-                company {
-                  id
-                  name
-                  shortName
-                  url
-                  createdAt
-                  updatedAt
-                }
               }
-              companyId
-              createdAt
-              updatedAt
               company {
                 id
                 name
                 shortName
                 url
+                companyGroup
                 createdAt
                 updatedAt
               }
+              companyGroup
+              createdAt
+              updatedAt
             }
             secondEmployee {
               id
@@ -4211,7 +2200,7 @@ export const onCreateSection = /* GraphQL */ `
                   firstName
                   lastName
                   grade
-                  companyId
+                  companyGroup
                   createdAt
                   updatedAt
                 }
@@ -4219,54 +2208,43 @@ export const onCreateSection = /* GraphQL */ `
                   id
                   name
                   sort
+                  companyGroup
                   createdAt
                   updatedAt
                 }
-                companyId
-                createdAt
-                updatedAt
                 company {
                   id
                   name
                   shortName
                   url
+                  companyGroup
                   createdAt
                   updatedAt
                 }
+                companyGroup
+                createdAt
+                updatedAt
               }
               group {
                 id
-                group {
-                  id
-                  name
-                  sort
-                  createdAt
-                  updatedAt
-                }
                 name
                 sort
+                companyGroup
                 createdAt
                 updatedAt
-                company {
-                  id
-                  name
-                  shortName
-                  url
-                  createdAt
-                  updatedAt
-                }
               }
-              companyId
-              createdAt
-              updatedAt
               company {
                 id
                 name
                 shortName
                 url
+                companyGroup
                 createdAt
                 updatedAt
               }
+              companyGroup
+              createdAt
+              updatedAt
             }
             section {
               items {
@@ -4287,19 +2265,10 @@ export const onCreateSection = /* GraphQL */ `
               }
               nextToken
             }
-            status
             reviewee
+            reviewer
             createdAt
             updatedAt
-            company {
-              id
-              name
-              shortName
-              url
-              createdAt
-              updatedAt
-            }
-            statusValue
           }
           objectiveSectionId
           section {
@@ -4317,7 +2286,6 @@ export const onCreateSection = /* GraphQL */ `
                 progress
                 status
                 expStartDate
-                expFinishDate
                 expDoneDate
                 sheet {
                   id
@@ -4333,12 +2301,12 @@ export const onCreateSection = /* GraphQL */ `
                   secondComment
                   secondCheckDate
                   overAllEvaluation
+                  statusValue
                   sheetGroupId
-                  status
                   reviewee
+                  reviewer
                   createdAt
                   updatedAt
-                  statusValue
                 }
                 objectiveSectionId
                 section {
@@ -4355,18 +2323,19 @@ export const onCreateSection = /* GraphQL */ `
             }
             category {
               id
-              no
-              name
-              createdAt
-              updatedAt
               company {
                 id
                 name
                 shortName
                 url
+                companyGroup
                 createdAt
                 updatedAt
               }
+              no
+              name
+              createdAt
+              updatedAt
             }
             createdAt
             updatedAt
@@ -4379,18 +2348,19 @@ export const onCreateSection = /* GraphQL */ `
       }
       category {
         id
-        no
-        name
-        createdAt
-        updatedAt
         company {
           id
           name
           shortName
           url
+          companyGroup
           createdAt
           updatedAt
         }
+        no
+        name
+        createdAt
+        updatedAt
       }
       createdAt
       updatedAt
@@ -4414,7 +2384,6 @@ export const onUpdateSection = /* GraphQL */ `
           progress
           status
           expStartDate
-          expFinishDate
           expDoneDate
           sheet {
             id
@@ -4430,43 +2399,15 @@ export const onUpdateSection = /* GraphQL */ `
             secondComment
             secondCheckDate
             overAllEvaluation
+            statusValue
             sheetGroupId
             group {
               id
-              group {
-                id
-                group {
-                  id
-                  name
-                  sort
-                  createdAt
-                  updatedAt
-                }
-                name
-                sort
-                createdAt
-                updatedAt
-                company {
-                  id
-                  name
-                  shortName
-                  url
-                  createdAt
-                  updatedAt
-                }
-              }
               name
               sort
+              companyGroup
               createdAt
               updatedAt
-              company {
-                id
-                name
-                shortName
-                url
-                createdAt
-                updatedAt
-              }
             }
             interviews {
               items {
@@ -4499,7 +2440,7 @@ export const onUpdateSection = /* GraphQL */ `
                   firstName
                   lastName
                   grade
-                  companyId
+                  companyGroup
                   createdAt
                   updatedAt
                 }
@@ -4507,54 +2448,43 @@ export const onUpdateSection = /* GraphQL */ `
                   id
                   name
                   sort
+                  companyGroup
                   createdAt
                   updatedAt
                 }
-                companyId
-                createdAt
-                updatedAt
                 company {
                   id
                   name
                   shortName
                   url
+                  companyGroup
                   createdAt
                   updatedAt
                 }
+                companyGroup
+                createdAt
+                updatedAt
               }
               group {
                 id
-                group {
-                  id
-                  name
-                  sort
-                  createdAt
-                  updatedAt
-                }
                 name
                 sort
+                companyGroup
                 createdAt
                 updatedAt
-                company {
-                  id
-                  name
-                  shortName
-                  url
-                  createdAt
-                  updatedAt
-                }
               }
-              companyId
-              createdAt
-              updatedAt
               company {
                 id
                 name
                 shortName
                 url
+                companyGroup
                 createdAt
                 updatedAt
               }
+              companyGroup
+              createdAt
+              updatedAt
             }
             secondEmployee {
               id
@@ -4574,7 +2504,7 @@ export const onUpdateSection = /* GraphQL */ `
                   firstName
                   lastName
                   grade
-                  companyId
+                  companyGroup
                   createdAt
                   updatedAt
                 }
@@ -4582,54 +2512,43 @@ export const onUpdateSection = /* GraphQL */ `
                   id
                   name
                   sort
+                  companyGroup
                   createdAt
                   updatedAt
                 }
-                companyId
-                createdAt
-                updatedAt
                 company {
                   id
                   name
                   shortName
                   url
+                  companyGroup
                   createdAt
                   updatedAt
                 }
+                companyGroup
+                createdAt
+                updatedAt
               }
               group {
                 id
-                group {
-                  id
-                  name
-                  sort
-                  createdAt
-                  updatedAt
-                }
                 name
                 sort
+                companyGroup
                 createdAt
                 updatedAt
-                company {
-                  id
-                  name
-                  shortName
-                  url
-                  createdAt
-                  updatedAt
-                }
               }
-              companyId
-              createdAt
-              updatedAt
               company {
                 id
                 name
                 shortName
                 url
+                companyGroup
                 createdAt
                 updatedAt
               }
+              companyGroup
+              createdAt
+              updatedAt
             }
             section {
               items {
@@ -4650,19 +2569,10 @@ export const onUpdateSection = /* GraphQL */ `
               }
               nextToken
             }
-            status
             reviewee
+            reviewer
             createdAt
             updatedAt
-            company {
-              id
-              name
-              shortName
-              url
-              createdAt
-              updatedAt
-            }
-            statusValue
           }
           objectiveSectionId
           section {
@@ -4680,7 +2590,6 @@ export const onUpdateSection = /* GraphQL */ `
                 progress
                 status
                 expStartDate
-                expFinishDate
                 expDoneDate
                 sheet {
                   id
@@ -4696,12 +2605,12 @@ export const onUpdateSection = /* GraphQL */ `
                   secondComment
                   secondCheckDate
                   overAllEvaluation
+                  statusValue
                   sheetGroupId
-                  status
                   reviewee
+                  reviewer
                   createdAt
                   updatedAt
-                  statusValue
                 }
                 objectiveSectionId
                 section {
@@ -4718,18 +2627,19 @@ export const onUpdateSection = /* GraphQL */ `
             }
             category {
               id
-              no
-              name
-              createdAt
-              updatedAt
               company {
                 id
                 name
                 shortName
                 url
+                companyGroup
                 createdAt
                 updatedAt
               }
+              no
+              name
+              createdAt
+              updatedAt
             }
             createdAt
             updatedAt
@@ -4742,18 +2652,19 @@ export const onUpdateSection = /* GraphQL */ `
       }
       category {
         id
-        no
-        name
-        createdAt
-        updatedAt
         company {
           id
           name
           shortName
           url
+          companyGroup
           createdAt
           updatedAt
         }
+        no
+        name
+        createdAt
+        updatedAt
       }
       createdAt
       updatedAt
@@ -4777,7 +2688,6 @@ export const onDeleteSection = /* GraphQL */ `
           progress
           status
           expStartDate
-          expFinishDate
           expDoneDate
           sheet {
             id
@@ -4793,43 +2703,15 @@ export const onDeleteSection = /* GraphQL */ `
             secondComment
             secondCheckDate
             overAllEvaluation
+            statusValue
             sheetGroupId
             group {
               id
-              group {
-                id
-                group {
-                  id
-                  name
-                  sort
-                  createdAt
-                  updatedAt
-                }
-                name
-                sort
-                createdAt
-                updatedAt
-                company {
-                  id
-                  name
-                  shortName
-                  url
-                  createdAt
-                  updatedAt
-                }
-              }
               name
               sort
+              companyGroup
               createdAt
               updatedAt
-              company {
-                id
-                name
-                shortName
-                url
-                createdAt
-                updatedAt
-              }
             }
             interviews {
               items {
@@ -4862,7 +2744,7 @@ export const onDeleteSection = /* GraphQL */ `
                   firstName
                   lastName
                   grade
-                  companyId
+                  companyGroup
                   createdAt
                   updatedAt
                 }
@@ -4870,54 +2752,43 @@ export const onDeleteSection = /* GraphQL */ `
                   id
                   name
                   sort
+                  companyGroup
                   createdAt
                   updatedAt
                 }
-                companyId
-                createdAt
-                updatedAt
                 company {
                   id
                   name
                   shortName
                   url
+                  companyGroup
                   createdAt
                   updatedAt
                 }
+                companyGroup
+                createdAt
+                updatedAt
               }
               group {
                 id
-                group {
-                  id
-                  name
-                  sort
-                  createdAt
-                  updatedAt
-                }
                 name
                 sort
+                companyGroup
                 createdAt
                 updatedAt
-                company {
-                  id
-                  name
-                  shortName
-                  url
-                  createdAt
-                  updatedAt
-                }
               }
-              companyId
-              createdAt
-              updatedAt
               company {
                 id
                 name
                 shortName
                 url
+                companyGroup
                 createdAt
                 updatedAt
               }
+              companyGroup
+              createdAt
+              updatedAt
             }
             secondEmployee {
               id
@@ -4937,7 +2808,7 @@ export const onDeleteSection = /* GraphQL */ `
                   firstName
                   lastName
                   grade
-                  companyId
+                  companyGroup
                   createdAt
                   updatedAt
                 }
@@ -4945,54 +2816,43 @@ export const onDeleteSection = /* GraphQL */ `
                   id
                   name
                   sort
+                  companyGroup
                   createdAt
                   updatedAt
                 }
-                companyId
-                createdAt
-                updatedAt
                 company {
                   id
                   name
                   shortName
                   url
+                  companyGroup
                   createdAt
                   updatedAt
                 }
+                companyGroup
+                createdAt
+                updatedAt
               }
               group {
                 id
-                group {
-                  id
-                  name
-                  sort
-                  createdAt
-                  updatedAt
-                }
                 name
                 sort
+                companyGroup
                 createdAt
                 updatedAt
-                company {
-                  id
-                  name
-                  shortName
-                  url
-                  createdAt
-                  updatedAt
-                }
               }
-              companyId
-              createdAt
-              updatedAt
               company {
                 id
                 name
                 shortName
                 url
+                companyGroup
                 createdAt
                 updatedAt
               }
+              companyGroup
+              createdAt
+              updatedAt
             }
             section {
               items {
@@ -5013,19 +2873,10 @@ export const onDeleteSection = /* GraphQL */ `
               }
               nextToken
             }
-            status
             reviewee
+            reviewer
             createdAt
             updatedAt
-            company {
-              id
-              name
-              shortName
-              url
-              createdAt
-              updatedAt
-            }
-            statusValue
           }
           objectiveSectionId
           section {
@@ -5043,7 +2894,6 @@ export const onDeleteSection = /* GraphQL */ `
                 progress
                 status
                 expStartDate
-                expFinishDate
                 expDoneDate
                 sheet {
                   id
@@ -5059,12 +2909,12 @@ export const onDeleteSection = /* GraphQL */ `
                   secondComment
                   secondCheckDate
                   overAllEvaluation
+                  statusValue
                   sheetGroupId
-                  status
                   reviewee
+                  reviewer
                   createdAt
                   updatedAt
-                  statusValue
                 }
                 objectiveSectionId
                 section {
@@ -5081,18 +2931,19 @@ export const onDeleteSection = /* GraphQL */ `
             }
             category {
               id
-              no
-              name
-              createdAt
-              updatedAt
               company {
                 id
                 name
                 shortName
                 url
+                companyGroup
                 createdAt
                 updatedAt
               }
+              no
+              name
+              createdAt
+              updatedAt
             }
             createdAt
             updatedAt
@@ -5105,18 +2956,19 @@ export const onDeleteSection = /* GraphQL */ `
       }
       category {
         id
-        no
-        name
-        createdAt
-        updatedAt
         company {
           id
           name
           shortName
           url
+          companyGroup
           createdAt
           updatedAt
         }
+        no
+        name
+        createdAt
+        updatedAt
       }
       createdAt
       updatedAt
@@ -5136,7 +2988,6 @@ export const onCreateObjective = /* GraphQL */ `
       progress
       status
       expStartDate
-      expFinishDate
       expDoneDate
       sheet {
         id
@@ -5152,73 +3003,15 @@ export const onCreateObjective = /* GraphQL */ `
         secondComment
         secondCheckDate
         overAllEvaluation
+        statusValue
         sheetGroupId
         group {
           id
-          group {
-            id
-            group {
-              id
-              group {
-                id
-                group {
-                  id
-                  name
-                  sort
-                  createdAt
-                  updatedAt
-                }
-                name
-                sort
-                createdAt
-                updatedAt
-                company {
-                  id
-                  name
-                  shortName
-                  url
-                  createdAt
-                  updatedAt
-                }
-              }
-              name
-              sort
-              createdAt
-              updatedAt
-              company {
-                id
-                name
-                shortName
-                url
-                createdAt
-                updatedAt
-              }
-            }
-            name
-            sort
-            createdAt
-            updatedAt
-            company {
-              id
-              name
-              shortName
-              url
-              createdAt
-              updatedAt
-            }
-          }
           name
           sort
+          companyGroup
           createdAt
           updatedAt
-          company {
-            id
-            name
-            shortName
-            url
-            createdAt
-            updatedAt
-          }
         }
         interviews {
           items {
@@ -5263,7 +3056,7 @@ export const onCreateObjective = /* GraphQL */ `
                   firstName
                   lastName
                   grade
-                  companyId
+                  companyGroup
                   createdAt
                   updatedAt
                 }
@@ -5271,167 +3064,85 @@ export const onCreateObjective = /* GraphQL */ `
                   id
                   name
                   sort
+                  companyGroup
                   createdAt
                   updatedAt
                 }
-                companyId
-                createdAt
-                updatedAt
                 company {
                   id
                   name
                   shortName
                   url
+                  companyGroup
                   createdAt
                   updatedAt
                 }
+                companyGroup
+                createdAt
+                updatedAt
               }
               group {
                 id
-                group {
-                  id
-                  name
-                  sort
-                  createdAt
-                  updatedAt
-                }
                 name
                 sort
+                companyGroup
                 createdAt
                 updatedAt
-                company {
-                  id
-                  name
-                  shortName
-                  url
-                  createdAt
-                  updatedAt
-                }
               }
-              companyId
-              createdAt
-              updatedAt
               company {
                 id
                 name
                 shortName
                 url
+                companyGroup
                 createdAt
                 updatedAt
               }
+              companyGroup
+              createdAt
+              updatedAt
             }
             group {
               id
-              group {
-                id
-                group {
-                  id
-                  name
-                  sort
-                  createdAt
-                  updatedAt
-                }
-                name
-                sort
-                createdAt
-                updatedAt
-                company {
-                  id
-                  name
-                  shortName
-                  url
-                  createdAt
-                  updatedAt
-                }
-              }
               name
               sort
+              companyGroup
               createdAt
               updatedAt
-              company {
-                id
-                name
-                shortName
-                url
-                createdAt
-                updatedAt
-              }
             }
-            companyId
-            createdAt
-            updatedAt
             company {
               id
               name
               shortName
               url
+              companyGroup
               createdAt
               updatedAt
             }
+            companyGroup
+            createdAt
+            updatedAt
           }
           group {
             id
-            group {
-              id
-              group {
-                id
-                group {
-                  id
-                  name
-                  sort
-                  createdAt
-                  updatedAt
-                }
-                name
-                sort
-                createdAt
-                updatedAt
-                company {
-                  id
-                  name
-                  shortName
-                  url
-                  createdAt
-                  updatedAt
-                }
-              }
-              name
-              sort
-              createdAt
-              updatedAt
-              company {
-                id
-                name
-                shortName
-                url
-                createdAt
-                updatedAt
-              }
-            }
             name
             sort
+            companyGroup
             createdAt
             updatedAt
-            company {
-              id
-              name
-              shortName
-              url
-              createdAt
-              updatedAt
-            }
           }
-          companyId
-          createdAt
-          updatedAt
           company {
             id
             name
             shortName
             url
+            companyGroup
             createdAt
             updatedAt
           }
+          companyGroup
+          createdAt
+          updatedAt
         }
         secondEmployee {
           id
@@ -5463,7 +3174,7 @@ export const onCreateObjective = /* GraphQL */ `
                   firstName
                   lastName
                   grade
-                  companyId
+                  companyGroup
                   createdAt
                   updatedAt
                 }
@@ -5471,167 +3182,85 @@ export const onCreateObjective = /* GraphQL */ `
                   id
                   name
                   sort
+                  companyGroup
                   createdAt
                   updatedAt
                 }
-                companyId
-                createdAt
-                updatedAt
                 company {
                   id
                   name
                   shortName
                   url
+                  companyGroup
                   createdAt
                   updatedAt
                 }
+                companyGroup
+                createdAt
+                updatedAt
               }
               group {
                 id
-                group {
-                  id
-                  name
-                  sort
-                  createdAt
-                  updatedAt
-                }
                 name
                 sort
+                companyGroup
                 createdAt
                 updatedAt
-                company {
-                  id
-                  name
-                  shortName
-                  url
-                  createdAt
-                  updatedAt
-                }
               }
-              companyId
-              createdAt
-              updatedAt
               company {
                 id
                 name
                 shortName
                 url
+                companyGroup
                 createdAt
                 updatedAt
               }
+              companyGroup
+              createdAt
+              updatedAt
             }
             group {
               id
-              group {
-                id
-                group {
-                  id
-                  name
-                  sort
-                  createdAt
-                  updatedAt
-                }
-                name
-                sort
-                createdAt
-                updatedAt
-                company {
-                  id
-                  name
-                  shortName
-                  url
-                  createdAt
-                  updatedAt
-                }
-              }
               name
               sort
+              companyGroup
               createdAt
               updatedAt
-              company {
-                id
-                name
-                shortName
-                url
-                createdAt
-                updatedAt
-              }
             }
-            companyId
-            createdAt
-            updatedAt
             company {
               id
               name
               shortName
               url
+              companyGroup
               createdAt
               updatedAt
             }
+            companyGroup
+            createdAt
+            updatedAt
           }
           group {
             id
-            group {
-              id
-              group {
-                id
-                group {
-                  id
-                  name
-                  sort
-                  createdAt
-                  updatedAt
-                }
-                name
-                sort
-                createdAt
-                updatedAt
-                company {
-                  id
-                  name
-                  shortName
-                  url
-                  createdAt
-                  updatedAt
-                }
-              }
-              name
-              sort
-              createdAt
-              updatedAt
-              company {
-                id
-                name
-                shortName
-                url
-                createdAt
-                updatedAt
-              }
-            }
             name
             sort
+            companyGroup
             createdAt
             updatedAt
-            company {
-              id
-              name
-              shortName
-              url
-              createdAt
-              updatedAt
-            }
           }
-          companyId
-          createdAt
-          updatedAt
           company {
             id
             name
             shortName
             url
+            companyGroup
             createdAt
             updatedAt
           }
+          companyGroup
+          createdAt
+          updatedAt
         }
         section {
           items {
@@ -5649,7 +3278,6 @@ export const onCreateObjective = /* GraphQL */ `
                 progress
                 status
                 expStartDate
-                expFinishDate
                 expDoneDate
                 sheet {
                   id
@@ -5665,12 +3293,12 @@ export const onCreateObjective = /* GraphQL */ `
                   secondComment
                   secondCheckDate
                   overAllEvaluation
+                  statusValue
                   sheetGroupId
-                  status
                   reviewee
+                  reviewer
                   createdAt
                   updatedAt
-                  statusValue
                 }
                 objectiveSectionId
                 section {
@@ -5687,37 +3315,29 @@ export const onCreateObjective = /* GraphQL */ `
             }
             category {
               id
-              no
-              name
-              createdAt
-              updatedAt
               company {
                 id
                 name
                 shortName
                 url
+                companyGroup
                 createdAt
                 updatedAt
               }
+              no
+              name
+              createdAt
+              updatedAt
             }
             createdAt
             updatedAt
           }
           nextToken
         }
-        status
         reviewee
+        reviewer
         createdAt
         updatedAt
-        company {
-          id
-          name
-          shortName
-          url
-          createdAt
-          updatedAt
-        }
-        statusValue
       }
       objectiveSectionId
       section {
@@ -5735,7 +3355,6 @@ export const onCreateObjective = /* GraphQL */ `
             progress
             status
             expStartDate
-            expFinishDate
             expDoneDate
             sheet {
               id
@@ -5751,28 +3370,15 @@ export const onCreateObjective = /* GraphQL */ `
               secondComment
               secondCheckDate
               overAllEvaluation
+              statusValue
               sheetGroupId
               group {
                 id
-                group {
-                  id
-                  name
-                  sort
-                  createdAt
-                  updatedAt
-                }
                 name
                 sort
+                companyGroup
                 createdAt
                 updatedAt
-                company {
-                  id
-                  name
-                  shortName
-                  url
-                  createdAt
-                  updatedAt
-                }
               }
               interviews {
                 items {
@@ -5799,7 +3405,7 @@ export const onCreateObjective = /* GraphQL */ `
                   firstName
                   lastName
                   grade
-                  companyId
+                  companyGroup
                   createdAt
                   updatedAt
                 }
@@ -5807,20 +3413,22 @@ export const onCreateObjective = /* GraphQL */ `
                   id
                   name
                   sort
+                  companyGroup
                   createdAt
                   updatedAt
                 }
-                companyId
-                createdAt
-                updatedAt
                 company {
                   id
                   name
                   shortName
                   url
+                  companyGroup
                   createdAt
                   updatedAt
                 }
+                companyGroup
+                createdAt
+                updatedAt
               }
               secondEmployee {
                 id
@@ -5834,7 +3442,7 @@ export const onCreateObjective = /* GraphQL */ `
                   firstName
                   lastName
                   grade
-                  companyId
+                  companyGroup
                   createdAt
                   updatedAt
                 }
@@ -5842,20 +3450,22 @@ export const onCreateObjective = /* GraphQL */ `
                   id
                   name
                   sort
+                  companyGroup
                   createdAt
                   updatedAt
                 }
-                companyId
-                createdAt
-                updatedAt
                 company {
                   id
                   name
                   shortName
                   url
+                  companyGroup
                   createdAt
                   updatedAt
                 }
+                companyGroup
+                createdAt
+                updatedAt
               }
               section {
                 items {
@@ -5866,19 +3476,10 @@ export const onCreateObjective = /* GraphQL */ `
                 }
                 nextToken
               }
-              status
               reviewee
+              reviewer
               createdAt
               updatedAt
-              company {
-                id
-                name
-                shortName
-                url
-                createdAt
-                updatedAt
-              }
-              statusValue
             }
             objectiveSectionId
             section {
@@ -5896,7 +3497,6 @@ export const onCreateObjective = /* GraphQL */ `
                   progress
                   status
                   expStartDate
-                  expFinishDate
                   expDoneDate
                   objectiveSectionId
                   reviewee
@@ -5907,18 +3507,19 @@ export const onCreateObjective = /* GraphQL */ `
               }
               category {
                 id
-                no
-                name
-                createdAt
-                updatedAt
                 company {
                   id
                   name
                   shortName
                   url
+                  companyGroup
                   createdAt
                   updatedAt
                 }
+                no
+                name
+                createdAt
+                updatedAt
               }
               createdAt
               updatedAt
@@ -5931,18 +3532,19 @@ export const onCreateObjective = /* GraphQL */ `
         }
         category {
           id
-          no
-          name
-          createdAt
-          updatedAt
           company {
             id
             name
             shortName
             url
+            companyGroup
             createdAt
             updatedAt
           }
+          no
+          name
+          createdAt
+          updatedAt
         }
         createdAt
         updatedAt
@@ -5966,7 +3568,6 @@ export const onUpdateObjective = /* GraphQL */ `
       progress
       status
       expStartDate
-      expFinishDate
       expDoneDate
       sheet {
         id
@@ -5982,73 +3583,15 @@ export const onUpdateObjective = /* GraphQL */ `
         secondComment
         secondCheckDate
         overAllEvaluation
+        statusValue
         sheetGroupId
         group {
           id
-          group {
-            id
-            group {
-              id
-              group {
-                id
-                group {
-                  id
-                  name
-                  sort
-                  createdAt
-                  updatedAt
-                }
-                name
-                sort
-                createdAt
-                updatedAt
-                company {
-                  id
-                  name
-                  shortName
-                  url
-                  createdAt
-                  updatedAt
-                }
-              }
-              name
-              sort
-              createdAt
-              updatedAt
-              company {
-                id
-                name
-                shortName
-                url
-                createdAt
-                updatedAt
-              }
-            }
-            name
-            sort
-            createdAt
-            updatedAt
-            company {
-              id
-              name
-              shortName
-              url
-              createdAt
-              updatedAt
-            }
-          }
           name
           sort
+          companyGroup
           createdAt
           updatedAt
-          company {
-            id
-            name
-            shortName
-            url
-            createdAt
-            updatedAt
-          }
         }
         interviews {
           items {
@@ -6093,7 +3636,7 @@ export const onUpdateObjective = /* GraphQL */ `
                   firstName
                   lastName
                   grade
-                  companyId
+                  companyGroup
                   createdAt
                   updatedAt
                 }
@@ -6101,167 +3644,85 @@ export const onUpdateObjective = /* GraphQL */ `
                   id
                   name
                   sort
+                  companyGroup
                   createdAt
                   updatedAt
                 }
-                companyId
-                createdAt
-                updatedAt
                 company {
                   id
                   name
                   shortName
                   url
+                  companyGroup
                   createdAt
                   updatedAt
                 }
+                companyGroup
+                createdAt
+                updatedAt
               }
               group {
                 id
-                group {
-                  id
-                  name
-                  sort
-                  createdAt
-                  updatedAt
-                }
                 name
                 sort
+                companyGroup
                 createdAt
                 updatedAt
-                company {
-                  id
-                  name
-                  shortName
-                  url
-                  createdAt
-                  updatedAt
-                }
               }
-              companyId
-              createdAt
-              updatedAt
               company {
                 id
                 name
                 shortName
                 url
+                companyGroup
                 createdAt
                 updatedAt
               }
+              companyGroup
+              createdAt
+              updatedAt
             }
             group {
               id
-              group {
-                id
-                group {
-                  id
-                  name
-                  sort
-                  createdAt
-                  updatedAt
-                }
-                name
-                sort
-                createdAt
-                updatedAt
-                company {
-                  id
-                  name
-                  shortName
-                  url
-                  createdAt
-                  updatedAt
-                }
-              }
               name
               sort
+              companyGroup
               createdAt
               updatedAt
-              company {
-                id
-                name
-                shortName
-                url
-                createdAt
-                updatedAt
-              }
             }
-            companyId
-            createdAt
-            updatedAt
             company {
               id
               name
               shortName
               url
+              companyGroup
               createdAt
               updatedAt
             }
+            companyGroup
+            createdAt
+            updatedAt
           }
           group {
             id
-            group {
-              id
-              group {
-                id
-                group {
-                  id
-                  name
-                  sort
-                  createdAt
-                  updatedAt
-                }
-                name
-                sort
-                createdAt
-                updatedAt
-                company {
-                  id
-                  name
-                  shortName
-                  url
-                  createdAt
-                  updatedAt
-                }
-              }
-              name
-              sort
-              createdAt
-              updatedAt
-              company {
-                id
-                name
-                shortName
-                url
-                createdAt
-                updatedAt
-              }
-            }
             name
             sort
+            companyGroup
             createdAt
             updatedAt
-            company {
-              id
-              name
-              shortName
-              url
-              createdAt
-              updatedAt
-            }
           }
-          companyId
-          createdAt
-          updatedAt
           company {
             id
             name
             shortName
             url
+            companyGroup
             createdAt
             updatedAt
           }
+          companyGroup
+          createdAt
+          updatedAt
         }
         secondEmployee {
           id
@@ -6293,7 +3754,7 @@ export const onUpdateObjective = /* GraphQL */ `
                   firstName
                   lastName
                   grade
-                  companyId
+                  companyGroup
                   createdAt
                   updatedAt
                 }
@@ -6301,167 +3762,85 @@ export const onUpdateObjective = /* GraphQL */ `
                   id
                   name
                   sort
+                  companyGroup
                   createdAt
                   updatedAt
                 }
-                companyId
-                createdAt
-                updatedAt
                 company {
                   id
                   name
                   shortName
                   url
+                  companyGroup
                   createdAt
                   updatedAt
                 }
+                companyGroup
+                createdAt
+                updatedAt
               }
               group {
                 id
-                group {
-                  id
-                  name
-                  sort
-                  createdAt
-                  updatedAt
-                }
                 name
                 sort
+                companyGroup
                 createdAt
                 updatedAt
-                company {
-                  id
-                  name
-                  shortName
-                  url
-                  createdAt
-                  updatedAt
-                }
               }
-              companyId
-              createdAt
-              updatedAt
               company {
                 id
                 name
                 shortName
                 url
+                companyGroup
                 createdAt
                 updatedAt
               }
+              companyGroup
+              createdAt
+              updatedAt
             }
             group {
               id
-              group {
-                id
-                group {
-                  id
-                  name
-                  sort
-                  createdAt
-                  updatedAt
-                }
-                name
-                sort
-                createdAt
-                updatedAt
-                company {
-                  id
-                  name
-                  shortName
-                  url
-                  createdAt
-                  updatedAt
-                }
-              }
               name
               sort
+              companyGroup
               createdAt
               updatedAt
-              company {
-                id
-                name
-                shortName
-                url
-                createdAt
-                updatedAt
-              }
             }
-            companyId
-            createdAt
-            updatedAt
             company {
               id
               name
               shortName
               url
+              companyGroup
               createdAt
               updatedAt
             }
+            companyGroup
+            createdAt
+            updatedAt
           }
           group {
             id
-            group {
-              id
-              group {
-                id
-                group {
-                  id
-                  name
-                  sort
-                  createdAt
-                  updatedAt
-                }
-                name
-                sort
-                createdAt
-                updatedAt
-                company {
-                  id
-                  name
-                  shortName
-                  url
-                  createdAt
-                  updatedAt
-                }
-              }
-              name
-              sort
-              createdAt
-              updatedAt
-              company {
-                id
-                name
-                shortName
-                url
-                createdAt
-                updatedAt
-              }
-            }
             name
             sort
+            companyGroup
             createdAt
             updatedAt
-            company {
-              id
-              name
-              shortName
-              url
-              createdAt
-              updatedAt
-            }
           }
-          companyId
-          createdAt
-          updatedAt
           company {
             id
             name
             shortName
             url
+            companyGroup
             createdAt
             updatedAt
           }
+          companyGroup
+          createdAt
+          updatedAt
         }
         section {
           items {
@@ -6479,7 +3858,6 @@ export const onUpdateObjective = /* GraphQL */ `
                 progress
                 status
                 expStartDate
-                expFinishDate
                 expDoneDate
                 sheet {
                   id
@@ -6495,12 +3873,12 @@ export const onUpdateObjective = /* GraphQL */ `
                   secondComment
                   secondCheckDate
                   overAllEvaluation
+                  statusValue
                   sheetGroupId
-                  status
                   reviewee
+                  reviewer
                   createdAt
                   updatedAt
-                  statusValue
                 }
                 objectiveSectionId
                 section {
@@ -6517,37 +3895,29 @@ export const onUpdateObjective = /* GraphQL */ `
             }
             category {
               id
-              no
-              name
-              createdAt
-              updatedAt
               company {
                 id
                 name
                 shortName
                 url
+                companyGroup
                 createdAt
                 updatedAt
               }
+              no
+              name
+              createdAt
+              updatedAt
             }
             createdAt
             updatedAt
           }
           nextToken
         }
-        status
         reviewee
+        reviewer
         createdAt
         updatedAt
-        company {
-          id
-          name
-          shortName
-          url
-          createdAt
-          updatedAt
-        }
-        statusValue
       }
       objectiveSectionId
       section {
@@ -6565,7 +3935,6 @@ export const onUpdateObjective = /* GraphQL */ `
             progress
             status
             expStartDate
-            expFinishDate
             expDoneDate
             sheet {
               id
@@ -6581,28 +3950,15 @@ export const onUpdateObjective = /* GraphQL */ `
               secondComment
               secondCheckDate
               overAllEvaluation
+              statusValue
               sheetGroupId
               group {
                 id
-                group {
-                  id
-                  name
-                  sort
-                  createdAt
-                  updatedAt
-                }
                 name
                 sort
+                companyGroup
                 createdAt
                 updatedAt
-                company {
-                  id
-                  name
-                  shortName
-                  url
-                  createdAt
-                  updatedAt
-                }
               }
               interviews {
                 items {
@@ -6629,7 +3985,7 @@ export const onUpdateObjective = /* GraphQL */ `
                   firstName
                   lastName
                   grade
-                  companyId
+                  companyGroup
                   createdAt
                   updatedAt
                 }
@@ -6637,20 +3993,22 @@ export const onUpdateObjective = /* GraphQL */ `
                   id
                   name
                   sort
+                  companyGroup
                   createdAt
                   updatedAt
                 }
-                companyId
-                createdAt
-                updatedAt
                 company {
                   id
                   name
                   shortName
                   url
+                  companyGroup
                   createdAt
                   updatedAt
                 }
+                companyGroup
+                createdAt
+                updatedAt
               }
               secondEmployee {
                 id
@@ -6664,7 +4022,7 @@ export const onUpdateObjective = /* GraphQL */ `
                   firstName
                   lastName
                   grade
-                  companyId
+                  companyGroup
                   createdAt
                   updatedAt
                 }
@@ -6672,20 +4030,22 @@ export const onUpdateObjective = /* GraphQL */ `
                   id
                   name
                   sort
+                  companyGroup
                   createdAt
                   updatedAt
                 }
-                companyId
-                createdAt
-                updatedAt
                 company {
                   id
                   name
                   shortName
                   url
+                  companyGroup
                   createdAt
                   updatedAt
                 }
+                companyGroup
+                createdAt
+                updatedAt
               }
               section {
                 items {
@@ -6696,19 +4056,10 @@ export const onUpdateObjective = /* GraphQL */ `
                 }
                 nextToken
               }
-              status
               reviewee
+              reviewer
               createdAt
               updatedAt
-              company {
-                id
-                name
-                shortName
-                url
-                createdAt
-                updatedAt
-              }
-              statusValue
             }
             objectiveSectionId
             section {
@@ -6726,7 +4077,6 @@ export const onUpdateObjective = /* GraphQL */ `
                   progress
                   status
                   expStartDate
-                  expFinishDate
                   expDoneDate
                   objectiveSectionId
                   reviewee
@@ -6737,18 +4087,19 @@ export const onUpdateObjective = /* GraphQL */ `
               }
               category {
                 id
-                no
-                name
-                createdAt
-                updatedAt
                 company {
                   id
                   name
                   shortName
                   url
+                  companyGroup
                   createdAt
                   updatedAt
                 }
+                no
+                name
+                createdAt
+                updatedAt
               }
               createdAt
               updatedAt
@@ -6761,18 +4112,19 @@ export const onUpdateObjective = /* GraphQL */ `
         }
         category {
           id
-          no
-          name
-          createdAt
-          updatedAt
           company {
             id
             name
             shortName
             url
+            companyGroup
             createdAt
             updatedAt
           }
+          no
+          name
+          createdAt
+          updatedAt
         }
         createdAt
         updatedAt
@@ -6796,7 +4148,6 @@ export const onDeleteObjective = /* GraphQL */ `
       progress
       status
       expStartDate
-      expFinishDate
       expDoneDate
       sheet {
         id
@@ -6812,73 +4163,15 @@ export const onDeleteObjective = /* GraphQL */ `
         secondComment
         secondCheckDate
         overAllEvaluation
+        statusValue
         sheetGroupId
         group {
           id
-          group {
-            id
-            group {
-              id
-              group {
-                id
-                group {
-                  id
-                  name
-                  sort
-                  createdAt
-                  updatedAt
-                }
-                name
-                sort
-                createdAt
-                updatedAt
-                company {
-                  id
-                  name
-                  shortName
-                  url
-                  createdAt
-                  updatedAt
-                }
-              }
-              name
-              sort
-              createdAt
-              updatedAt
-              company {
-                id
-                name
-                shortName
-                url
-                createdAt
-                updatedAt
-              }
-            }
-            name
-            sort
-            createdAt
-            updatedAt
-            company {
-              id
-              name
-              shortName
-              url
-              createdAt
-              updatedAt
-            }
-          }
           name
           sort
+          companyGroup
           createdAt
           updatedAt
-          company {
-            id
-            name
-            shortName
-            url
-            createdAt
-            updatedAt
-          }
         }
         interviews {
           items {
@@ -6923,7 +4216,7 @@ export const onDeleteObjective = /* GraphQL */ `
                   firstName
                   lastName
                   grade
-                  companyId
+                  companyGroup
                   createdAt
                   updatedAt
                 }
@@ -6931,167 +4224,85 @@ export const onDeleteObjective = /* GraphQL */ `
                   id
                   name
                   sort
+                  companyGroup
                   createdAt
                   updatedAt
                 }
-                companyId
-                createdAt
-                updatedAt
                 company {
                   id
                   name
                   shortName
                   url
+                  companyGroup
                   createdAt
                   updatedAt
                 }
+                companyGroup
+                createdAt
+                updatedAt
               }
               group {
                 id
-                group {
-                  id
-                  name
-                  sort
-                  createdAt
-                  updatedAt
-                }
                 name
                 sort
+                companyGroup
                 createdAt
                 updatedAt
-                company {
-                  id
-                  name
-                  shortName
-                  url
-                  createdAt
-                  updatedAt
-                }
               }
-              companyId
-              createdAt
-              updatedAt
               company {
                 id
                 name
                 shortName
                 url
+                companyGroup
                 createdAt
                 updatedAt
               }
+              companyGroup
+              createdAt
+              updatedAt
             }
             group {
               id
-              group {
-                id
-                group {
-                  id
-                  name
-                  sort
-                  createdAt
-                  updatedAt
-                }
-                name
-                sort
-                createdAt
-                updatedAt
-                company {
-                  id
-                  name
-                  shortName
-                  url
-                  createdAt
-                  updatedAt
-                }
-              }
               name
               sort
+              companyGroup
               createdAt
               updatedAt
-              company {
-                id
-                name
-                shortName
-                url
-                createdAt
-                updatedAt
-              }
             }
-            companyId
-            createdAt
-            updatedAt
             company {
               id
               name
               shortName
               url
+              companyGroup
               createdAt
               updatedAt
             }
+            companyGroup
+            createdAt
+            updatedAt
           }
           group {
             id
-            group {
-              id
-              group {
-                id
-                group {
-                  id
-                  name
-                  sort
-                  createdAt
-                  updatedAt
-                }
-                name
-                sort
-                createdAt
-                updatedAt
-                company {
-                  id
-                  name
-                  shortName
-                  url
-                  createdAt
-                  updatedAt
-                }
-              }
-              name
-              sort
-              createdAt
-              updatedAt
-              company {
-                id
-                name
-                shortName
-                url
-                createdAt
-                updatedAt
-              }
-            }
             name
             sort
+            companyGroup
             createdAt
             updatedAt
-            company {
-              id
-              name
-              shortName
-              url
-              createdAt
-              updatedAt
-            }
           }
-          companyId
-          createdAt
-          updatedAt
           company {
             id
             name
             shortName
             url
+            companyGroup
             createdAt
             updatedAt
           }
+          companyGroup
+          createdAt
+          updatedAt
         }
         secondEmployee {
           id
@@ -7123,7 +4334,7 @@ export const onDeleteObjective = /* GraphQL */ `
                   firstName
                   lastName
                   grade
-                  companyId
+                  companyGroup
                   createdAt
                   updatedAt
                 }
@@ -7131,167 +4342,85 @@ export const onDeleteObjective = /* GraphQL */ `
                   id
                   name
                   sort
+                  companyGroup
                   createdAt
                   updatedAt
                 }
-                companyId
-                createdAt
-                updatedAt
                 company {
                   id
                   name
                   shortName
                   url
+                  companyGroup
                   createdAt
                   updatedAt
                 }
+                companyGroup
+                createdAt
+                updatedAt
               }
               group {
                 id
-                group {
-                  id
-                  name
-                  sort
-                  createdAt
-                  updatedAt
-                }
                 name
                 sort
+                companyGroup
                 createdAt
                 updatedAt
-                company {
-                  id
-                  name
-                  shortName
-                  url
-                  createdAt
-                  updatedAt
-                }
               }
-              companyId
-              createdAt
-              updatedAt
               company {
                 id
                 name
                 shortName
                 url
+                companyGroup
                 createdAt
                 updatedAt
               }
+              companyGroup
+              createdAt
+              updatedAt
             }
             group {
               id
-              group {
-                id
-                group {
-                  id
-                  name
-                  sort
-                  createdAt
-                  updatedAt
-                }
-                name
-                sort
-                createdAt
-                updatedAt
-                company {
-                  id
-                  name
-                  shortName
-                  url
-                  createdAt
-                  updatedAt
-                }
-              }
               name
               sort
+              companyGroup
               createdAt
               updatedAt
-              company {
-                id
-                name
-                shortName
-                url
-                createdAt
-                updatedAt
-              }
             }
-            companyId
-            createdAt
-            updatedAt
             company {
               id
               name
               shortName
               url
+              companyGroup
               createdAt
               updatedAt
             }
+            companyGroup
+            createdAt
+            updatedAt
           }
           group {
             id
-            group {
-              id
-              group {
-                id
-                group {
-                  id
-                  name
-                  sort
-                  createdAt
-                  updatedAt
-                }
-                name
-                sort
-                createdAt
-                updatedAt
-                company {
-                  id
-                  name
-                  shortName
-                  url
-                  createdAt
-                  updatedAt
-                }
-              }
-              name
-              sort
-              createdAt
-              updatedAt
-              company {
-                id
-                name
-                shortName
-                url
-                createdAt
-                updatedAt
-              }
-            }
             name
             sort
+            companyGroup
             createdAt
             updatedAt
-            company {
-              id
-              name
-              shortName
-              url
-              createdAt
-              updatedAt
-            }
           }
-          companyId
-          createdAt
-          updatedAt
           company {
             id
             name
             shortName
             url
+            companyGroup
             createdAt
             updatedAt
           }
+          companyGroup
+          createdAt
+          updatedAt
         }
         section {
           items {
@@ -7309,7 +4438,6 @@ export const onDeleteObjective = /* GraphQL */ `
                 progress
                 status
                 expStartDate
-                expFinishDate
                 expDoneDate
                 sheet {
                   id
@@ -7325,12 +4453,12 @@ export const onDeleteObjective = /* GraphQL */ `
                   secondComment
                   secondCheckDate
                   overAllEvaluation
+                  statusValue
                   sheetGroupId
-                  status
                   reviewee
+                  reviewer
                   createdAt
                   updatedAt
-                  statusValue
                 }
                 objectiveSectionId
                 section {
@@ -7347,37 +4475,29 @@ export const onDeleteObjective = /* GraphQL */ `
             }
             category {
               id
-              no
-              name
-              createdAt
-              updatedAt
               company {
                 id
                 name
                 shortName
                 url
+                companyGroup
                 createdAt
                 updatedAt
               }
+              no
+              name
+              createdAt
+              updatedAt
             }
             createdAt
             updatedAt
           }
           nextToken
         }
-        status
         reviewee
+        reviewer
         createdAt
         updatedAt
-        company {
-          id
-          name
-          shortName
-          url
-          createdAt
-          updatedAt
-        }
-        statusValue
       }
       objectiveSectionId
       section {
@@ -7395,7 +4515,6 @@ export const onDeleteObjective = /* GraphQL */ `
             progress
             status
             expStartDate
-            expFinishDate
             expDoneDate
             sheet {
               id
@@ -7411,28 +4530,15 @@ export const onDeleteObjective = /* GraphQL */ `
               secondComment
               secondCheckDate
               overAllEvaluation
+              statusValue
               sheetGroupId
               group {
                 id
-                group {
-                  id
-                  name
-                  sort
-                  createdAt
-                  updatedAt
-                }
                 name
                 sort
+                companyGroup
                 createdAt
                 updatedAt
-                company {
-                  id
-                  name
-                  shortName
-                  url
-                  createdAt
-                  updatedAt
-                }
               }
               interviews {
                 items {
@@ -7459,7 +4565,7 @@ export const onDeleteObjective = /* GraphQL */ `
                   firstName
                   lastName
                   grade
-                  companyId
+                  companyGroup
                   createdAt
                   updatedAt
                 }
@@ -7467,20 +4573,22 @@ export const onDeleteObjective = /* GraphQL */ `
                   id
                   name
                   sort
+                  companyGroup
                   createdAt
                   updatedAt
                 }
-                companyId
-                createdAt
-                updatedAt
                 company {
                   id
                   name
                   shortName
                   url
+                  companyGroup
                   createdAt
                   updatedAt
                 }
+                companyGroup
+                createdAt
+                updatedAt
               }
               secondEmployee {
                 id
@@ -7494,7 +4602,7 @@ export const onDeleteObjective = /* GraphQL */ `
                   firstName
                   lastName
                   grade
-                  companyId
+                  companyGroup
                   createdAt
                   updatedAt
                 }
@@ -7502,20 +4610,22 @@ export const onDeleteObjective = /* GraphQL */ `
                   id
                   name
                   sort
+                  companyGroup
                   createdAt
                   updatedAt
                 }
-                companyId
-                createdAt
-                updatedAt
                 company {
                   id
                   name
                   shortName
                   url
+                  companyGroup
                   createdAt
                   updatedAt
                 }
+                companyGroup
+                createdAt
+                updatedAt
               }
               section {
                 items {
@@ -7526,19 +4636,10 @@ export const onDeleteObjective = /* GraphQL */ `
                 }
                 nextToken
               }
-              status
               reviewee
+              reviewer
               createdAt
               updatedAt
-              company {
-                id
-                name
-                shortName
-                url
-                createdAt
-                updatedAt
-              }
-              statusValue
             }
             objectiveSectionId
             section {
@@ -7556,7 +4657,6 @@ export const onDeleteObjective = /* GraphQL */ `
                   progress
                   status
                   expStartDate
-                  expFinishDate
                   expDoneDate
                   objectiveSectionId
                   reviewee
@@ -7567,18 +4667,19 @@ export const onDeleteObjective = /* GraphQL */ `
               }
               category {
                 id
-                no
-                name
-                createdAt
-                updatedAt
                 company {
                   id
                   name
                   shortName
                   url
+                  companyGroup
                   createdAt
                   updatedAt
                 }
+                no
+                name
+                createdAt
+                updatedAt
               }
               createdAt
               updatedAt
@@ -7591,92 +4692,24 @@ export const onDeleteObjective = /* GraphQL */ `
         }
         category {
           id
-          no
-          name
-          createdAt
-          updatedAt
           company {
             id
             name
             shortName
             url
+            companyGroup
             createdAt
             updatedAt
           }
+          no
+          name
+          createdAt
+          updatedAt
         }
         createdAt
         updatedAt
       }
       reviewee
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const onCreateApprovalStatus = /* GraphQL */ `
-  subscription OnCreateApprovalStatus {
-    onCreateApprovalStatus {
-      id
-      no
-      name
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const onUpdateApprovalStatus = /* GraphQL */ `
-  subscription OnUpdateApprovalStatus {
-    onUpdateApprovalStatus {
-      id
-      no
-      name
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const onDeleteApprovalStatus = /* GraphQL */ `
-  subscription OnDeleteApprovalStatus {
-    onDeleteApprovalStatus {
-      id
-      no
-      name
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const onCreateCompany = /* GraphQL */ `
-  subscription OnCreateCompany {
-    onCreateCompany {
-      id
-      name
-      shortName
-      url
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const onUpdateCompany = /* GraphQL */ `
-  subscription OnUpdateCompany {
-    onUpdateCompany {
-      id
-      name
-      shortName
-      url
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const onDeleteCompany = /* GraphQL */ `
-  subscription OnDeleteCompany {
-    onDeleteCompany {
-      id
-      name
-      shortName
-      url
       createdAt
       updatedAt
     }

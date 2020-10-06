@@ -110,8 +110,14 @@ function RevieweeSheetShow(props: Props) {
         const updateMV: APIt.UpdateObjectiveMutationVariables = {
             input: updateI,
         };
-        const updateR: GraphQLResult<APIt.UpdateObjectiveMutation> =
-            await API.graphql(graphqlOperation(updateObjective, updateMV)) as GraphQLResult<APIt.UpdateObjectiveMutation>;
+        let updateR: GraphQLResult<APIt.UpdateObjectiveMutation>
+        try{
+            updateR =
+                await API.graphql(graphqlOperation(updateObjective, updateMV)) as GraphQLResult<APIt.UpdateObjectiveMutation>;
+        }catch(e){
+            console.error("エラーを無視しています", e)
+            updateR = e;
+        }
         // console.log("updateR", updateR);
         // console.log("sheet", sheet)
     }
@@ -134,26 +140,30 @@ function RevieweeSheetShow(props: Props) {
             id: sheetId,
             careerPlan: formInputCareerPlan.careerPlan || ""
         };
-        const updateMV: APIt.UpdateSheetMutationVariables = {
-            input: updateI,
-        };
-        const updateR: GraphQLResult<APIt.UpdateSheetMutation> =
+      const updateMV: APIt.UpdateSheetMutationVariables = {
+        input: updateI,
+      };
+      let updateR: GraphQLResult<APIt.UpdateSheetMutation>
+      try{
+        updateR = 
             await API.graphql(graphqlOperation(updateSheet, updateMV)) as GraphQLResult<APIt.UpdateSheetMutation>;
-        if (updateR.data) {
-            const updateTM: APIt.UpdateSheetMutation = updateR.data;
-            if (updateTM.updateSheet) {
-                const updatedSheet: Sheet = updateTM.updateSheet;
-                let newSheet = sheet;
-                if (newSheet) {
-                    newSheet.careerPlan = updatedSheet.careerPlan;
-                    setSheet(newSheet)
-                } else {
-                    console.error("現在のシートが存在しません")
-                }
-                console.log('UpdateSheet:', sheet);
-                handleCloseCareerPlanUpdate();
+      }catch(e){
+            console.error("エラーを無視しています", e)
+            updateR = e;
+      }
+      if (updateR.data) {
+        const updateTM: APIt.UpdateSheetMutation = updateR.data;
+        if (updateTM.updateSheet) {
+            const updatedSheet: Sheet = updateTM.updateSheet;
+            let newSheet = sheet;
+            if(newSheet){
+                newSheet.careerPlan = updatedSheet.careerPlan;
+                setSheet(newSheet)
+            }else{
+                console.error("現在のシートが存在しません")
             }
         }
+      }
     }
 
     //表示用データ
@@ -165,8 +175,14 @@ function RevieweeSheetShow(props: Props) {
             const input: APIt.GetSheetQueryVariables = {
                 id: sheetId
             }
-            const response = (await API.graphql(graphqlOperation(getSheet, input))
-            ) as GraphQLResult<GetSheetQuery>;
+            let response
+            try{
+                response = (await API.graphql(graphqlOperation(getSheet, input))
+                )as GraphQLResult<GetSheetQuery>;
+            }catch(e){
+                console.error("エラーを無視しています", e)
+                response = e;
+            }
             const sheet: Sheet = response.data?.getSheet as Sheet;
             setSheet(sheet);
             console.log(response);

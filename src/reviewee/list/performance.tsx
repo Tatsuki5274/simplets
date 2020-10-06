@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import Amplify, { Storage, API, graphqlOperation } from 'aws-amplify';
+import Amplify, { Storage, API, graphqlOperation, Auth } from 'aws-amplify';
 import { Button, Container, Table } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { GraphQLResult } from "@aws-amplify/api";
@@ -33,14 +33,22 @@ import SidebarComponents from 'common/Sidebar';
 
 function ListPerformanceEvalution() {
     const [sheets, setSheets] = useState<Sheet[]>();
+
     useEffect(() => {
-        ; (async () => {
-            const response = (await API.graphql(graphqlOperation(listSheets))
-            ) as GraphQLResult<ListSheetsQuery>;
+        ;(async()=>{
+            let response
+            try{
+                response = (await API.graphql(graphqlOperation(listSheets))
+                )as GraphQLResult<ListSheetsQuery>;
+            }catch(e){
+                console.error("エラーを無視しています", e)
+                response = e
+            }
             const listItems = response.data?.listSheets?.items;
             setSheets(listItems as Sheet[]);
             console.log(response);
             console.log(listItems);
+
         })()
     }, []);
 
@@ -76,11 +84,7 @@ function ListPerformanceEvalution() {
         }
 
 
-
-        //カテゴリを取得する
-
-
-        async function runCreateSheet(): Promise<Sheet | undefined> {
+        async function runCreateSheet(): Promise<Sheet | undefined>{
             //シートを作成
             let sheetId: string = '';
             const createI: APIt.CreateSheetInput = {
@@ -91,8 +95,13 @@ function ListPerformanceEvalution() {
             const createMV: APIt.CreateSheetMutationVariables = {
                 input: createI,
             };
-            const createR: GraphQLResult<APIt.CreateSheetMutation> =
-                await API.graphql(graphqlOperation(createSheet, createMV)) as GraphQLResult<APIt.CreateSheetMutation>;
+            let createR: GraphQLResult<APIt.CreateSheetMutation>
+            try{
+                createR = await API.graphql(graphqlOperation(createSheet, createMV)) as GraphQLResult<APIt.CreateSheetMutation>;
+            }catch(e){
+                console.error("エラーを無視しています", e)
+                createR = e;
+            }
             if (createR.data) {
                 const createTM: APIt.CreateSheetMutation = createR.data;
                 if (createTM.createSheet) {
