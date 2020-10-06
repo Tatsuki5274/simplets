@@ -45,6 +45,7 @@ type Employee #社員
   lastName: String!
   grade: Int! #等級
   superior: Employee @connection  #所属長ID
+  group: Group @connection  #所属部門
 
   companyId: ID!
   company: Company @connection(fields: ["companyId"])

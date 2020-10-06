@@ -50,7 +50,36 @@ export const onCreateEmployee = /* GraphQL */ `
                   createdAt
                   updatedAt
                 }
+                group {
+                  id
+                  name
+                  sort
+                  createdAt
+                  updatedAt
+                }
                 companyId
+                createdAt
+                updatedAt
+                company {
+                  id
+                  name
+                  shortName
+                  url
+                  createdAt
+                  updatedAt
+                }
+              }
+              group {
+                id
+                group {
+                  id
+                  name
+                  sort
+                  createdAt
+                  updatedAt
+                }
+                name
+                sort
                 createdAt
                 updatedAt
                 company {
@@ -74,7 +103,96 @@ export const onCreateEmployee = /* GraphQL */ `
                 updatedAt
               }
             }
+            group {
+              id
+              group {
+                id
+                group {
+                  id
+                  name
+                  sort
+                  createdAt
+                  updatedAt
+                }
+                name
+                sort
+                createdAt
+                updatedAt
+                company {
+                  id
+                  name
+                  shortName
+                  url
+                  createdAt
+                  updatedAt
+                }
+              }
+              name
+              sort
+              createdAt
+              updatedAt
+              company {
+                id
+                name
+                shortName
+                url
+                createdAt
+                updatedAt
+              }
+            }
             companyId
+            createdAt
+            updatedAt
+            company {
+              id
+              name
+              shortName
+              url
+              createdAt
+              updatedAt
+            }
+          }
+          group {
+            id
+            group {
+              id
+              group {
+                id
+                group {
+                  id
+                  name
+                  sort
+                  createdAt
+                  updatedAt
+                }
+                name
+                sort
+                createdAt
+                updatedAt
+                company {
+                  id
+                  name
+                  shortName
+                  url
+                  createdAt
+                  updatedAt
+                }
+              }
+              name
+              sort
+              createdAt
+              updatedAt
+              company {
+                id
+                name
+                shortName
+                url
+                createdAt
+                updatedAt
+              }
+            }
+            name
+            sort
             createdAt
             updatedAt
             company {
@@ -98,7 +216,156 @@ export const onCreateEmployee = /* GraphQL */ `
             updatedAt
           }
         }
+        group {
+          id
+          group {
+            id
+            group {
+              id
+              group {
+                id
+                group {
+                  id
+                  name
+                  sort
+                  createdAt
+                  updatedAt
+                }
+                name
+                sort
+                createdAt
+                updatedAt
+                company {
+                  id
+                  name
+                  shortName
+                  url
+                  createdAt
+                  updatedAt
+                }
+              }
+              name
+              sort
+              createdAt
+              updatedAt
+              company {
+                id
+                name
+                shortName
+                url
+                createdAt
+                updatedAt
+              }
+            }
+            name
+            sort
+            createdAt
+            updatedAt
+            company {
+              id
+              name
+              shortName
+              url
+              createdAt
+              updatedAt
+            }
+          }
+          name
+          sort
+          createdAt
+          updatedAt
+          company {
+            id
+            name
+            shortName
+            url
+            createdAt
+            updatedAt
+          }
+        }
         companyId
+        createdAt
+        updatedAt
+        company {
+          id
+          name
+          shortName
+          url
+          createdAt
+          updatedAt
+        }
+      }
+      group {
+        id
+        group {
+          id
+          group {
+            id
+            group {
+              id
+              group {
+                id
+                group {
+                  id
+                  name
+                  sort
+                  createdAt
+                  updatedAt
+                }
+                name
+                sort
+                createdAt
+                updatedAt
+                company {
+                  id
+                  name
+                  shortName
+                  url
+                  createdAt
+                  updatedAt
+                }
+              }
+              name
+              sort
+              createdAt
+              updatedAt
+              company {
+                id
+                name
+                shortName
+                url
+                createdAt
+                updatedAt
+              }
+            }
+            name
+            sort
+            createdAt
+            updatedAt
+            company {
+              id
+              name
+              shortName
+              url
+              createdAt
+              updatedAt
+            }
+          }
+          name
+          sort
+          createdAt
+          updatedAt
+          company {
+            id
+            name
+            shortName
+            url
+            createdAt
+            updatedAt
+          }
+        }
+        name
+        sort
         createdAt
         updatedAt
         company {
@@ -172,7 +439,36 @@ export const onUpdateEmployee = /* GraphQL */ `
                   createdAt
                   updatedAt
                 }
+                group {
+                  id
+                  name
+                  sort
+                  createdAt
+                  updatedAt
+                }
                 companyId
+                createdAt
+                updatedAt
+                company {
+                  id
+                  name
+                  shortName
+                  url
+                  createdAt
+                  updatedAt
+                }
+              }
+              group {
+                id
+                group {
+                  id
+                  name
+                  sort
+                  createdAt
+                  updatedAt
+                }
+                name
+                sort
                 createdAt
                 updatedAt
                 company {
@@ -196,7 +492,96 @@ export const onUpdateEmployee = /* GraphQL */ `
                 updatedAt
               }
             }
+            group {
+              id
+              group {
+                id
+                group {
+                  id
+                  name
+                  sort
+                  createdAt
+                  updatedAt
+                }
+                name
+                sort
+                createdAt
+                updatedAt
+                company {
+                  id
+                  name
+                  shortName
+                  url
+                  createdAt
+                  updatedAt
+                }
+              }
+              name
+              sort
+              createdAt
+              updatedAt
+              company {
+                id
+                name
+                shortName
+                url
+                createdAt
+                updatedAt
+              }
+            }
             companyId
+            createdAt
+            updatedAt
+            company {
+              id
+              name
+              shortName
+              url
+              createdAt
+              updatedAt
+            }
+          }
+          group {
+            id
+            group {
+              id
+              group {
+                id
+                group {
+                  id
+                  name
+                  sort
+                  createdAt
+                  updatedAt
+                }
+                name
+                sort
+                createdAt
+                updatedAt
+                company {
+                  id
+                  name
+                  shortName
+                  url
+                  createdAt
+                  updatedAt
+                }
+              }
+              name
+              sort
+              createdAt
+              updatedAt
+              company {
+                id
+                name
+                shortName
+                url
+                createdAt
+                updatedAt
+              }
+            }
+            name
+            sort
             createdAt
             updatedAt
             company {
@@ -220,7 +605,156 @@ export const onUpdateEmployee = /* GraphQL */ `
             updatedAt
           }
         }
+        group {
+          id
+          group {
+            id
+            group {
+              id
+              group {
+                id
+                group {
+                  id
+                  name
+                  sort
+                  createdAt
+                  updatedAt
+                }
+                name
+                sort
+                createdAt
+                updatedAt
+                company {
+                  id
+                  name
+                  shortName
+                  url
+                  createdAt
+                  updatedAt
+                }
+              }
+              name
+              sort
+              createdAt
+              updatedAt
+              company {
+                id
+                name
+                shortName
+                url
+                createdAt
+                updatedAt
+              }
+            }
+            name
+            sort
+            createdAt
+            updatedAt
+            company {
+              id
+              name
+              shortName
+              url
+              createdAt
+              updatedAt
+            }
+          }
+          name
+          sort
+          createdAt
+          updatedAt
+          company {
+            id
+            name
+            shortName
+            url
+            createdAt
+            updatedAt
+          }
+        }
         companyId
+        createdAt
+        updatedAt
+        company {
+          id
+          name
+          shortName
+          url
+          createdAt
+          updatedAt
+        }
+      }
+      group {
+        id
+        group {
+          id
+          group {
+            id
+            group {
+              id
+              group {
+                id
+                group {
+                  id
+                  name
+                  sort
+                  createdAt
+                  updatedAt
+                }
+                name
+                sort
+                createdAt
+                updatedAt
+                company {
+                  id
+                  name
+                  shortName
+                  url
+                  createdAt
+                  updatedAt
+                }
+              }
+              name
+              sort
+              createdAt
+              updatedAt
+              company {
+                id
+                name
+                shortName
+                url
+                createdAt
+                updatedAt
+              }
+            }
+            name
+            sort
+            createdAt
+            updatedAt
+            company {
+              id
+              name
+              shortName
+              url
+              createdAt
+              updatedAt
+            }
+          }
+          name
+          sort
+          createdAt
+          updatedAt
+          company {
+            id
+            name
+            shortName
+            url
+            createdAt
+            updatedAt
+          }
+        }
+        name
+        sort
         createdAt
         updatedAt
         company {
@@ -294,7 +828,36 @@ export const onDeleteEmployee = /* GraphQL */ `
                   createdAt
                   updatedAt
                 }
+                group {
+                  id
+                  name
+                  sort
+                  createdAt
+                  updatedAt
+                }
                 companyId
+                createdAt
+                updatedAt
+                company {
+                  id
+                  name
+                  shortName
+                  url
+                  createdAt
+                  updatedAt
+                }
+              }
+              group {
+                id
+                group {
+                  id
+                  name
+                  sort
+                  createdAt
+                  updatedAt
+                }
+                name
+                sort
                 createdAt
                 updatedAt
                 company {
@@ -318,7 +881,96 @@ export const onDeleteEmployee = /* GraphQL */ `
                 updatedAt
               }
             }
+            group {
+              id
+              group {
+                id
+                group {
+                  id
+                  name
+                  sort
+                  createdAt
+                  updatedAt
+                }
+                name
+                sort
+                createdAt
+                updatedAt
+                company {
+                  id
+                  name
+                  shortName
+                  url
+                  createdAt
+                  updatedAt
+                }
+              }
+              name
+              sort
+              createdAt
+              updatedAt
+              company {
+                id
+                name
+                shortName
+                url
+                createdAt
+                updatedAt
+              }
+            }
             companyId
+            createdAt
+            updatedAt
+            company {
+              id
+              name
+              shortName
+              url
+              createdAt
+              updatedAt
+            }
+          }
+          group {
+            id
+            group {
+              id
+              group {
+                id
+                group {
+                  id
+                  name
+                  sort
+                  createdAt
+                  updatedAt
+                }
+                name
+                sort
+                createdAt
+                updatedAt
+                company {
+                  id
+                  name
+                  shortName
+                  url
+                  createdAt
+                  updatedAt
+                }
+              }
+              name
+              sort
+              createdAt
+              updatedAt
+              company {
+                id
+                name
+                shortName
+                url
+                createdAt
+                updatedAt
+              }
+            }
+            name
+            sort
             createdAt
             updatedAt
             company {
@@ -342,7 +994,156 @@ export const onDeleteEmployee = /* GraphQL */ `
             updatedAt
           }
         }
+        group {
+          id
+          group {
+            id
+            group {
+              id
+              group {
+                id
+                group {
+                  id
+                  name
+                  sort
+                  createdAt
+                  updatedAt
+                }
+                name
+                sort
+                createdAt
+                updatedAt
+                company {
+                  id
+                  name
+                  shortName
+                  url
+                  createdAt
+                  updatedAt
+                }
+              }
+              name
+              sort
+              createdAt
+              updatedAt
+              company {
+                id
+                name
+                shortName
+                url
+                createdAt
+                updatedAt
+              }
+            }
+            name
+            sort
+            createdAt
+            updatedAt
+            company {
+              id
+              name
+              shortName
+              url
+              createdAt
+              updatedAt
+            }
+          }
+          name
+          sort
+          createdAt
+          updatedAt
+          company {
+            id
+            name
+            shortName
+            url
+            createdAt
+            updatedAt
+          }
+        }
         companyId
+        createdAt
+        updatedAt
+        company {
+          id
+          name
+          shortName
+          url
+          createdAt
+          updatedAt
+        }
+      }
+      group {
+        id
+        group {
+          id
+          group {
+            id
+            group {
+              id
+              group {
+                id
+                group {
+                  id
+                  name
+                  sort
+                  createdAt
+                  updatedAt
+                }
+                name
+                sort
+                createdAt
+                updatedAt
+                company {
+                  id
+                  name
+                  shortName
+                  url
+                  createdAt
+                  updatedAt
+                }
+              }
+              name
+              sort
+              createdAt
+              updatedAt
+              company {
+                id
+                name
+                shortName
+                url
+                createdAt
+                updatedAt
+              }
+            }
+            name
+            sort
+            createdAt
+            updatedAt
+            company {
+              id
+              name
+              shortName
+              url
+              createdAt
+              updatedAt
+            }
+          }
+          name
+          sort
+          createdAt
+          updatedAt
+          company {
+            id
+            name
+            shortName
+            url
+            createdAt
+            updatedAt
+          }
+        }
+        name
+        sort
         createdAt
         updatedAt
         company {
@@ -385,10 +1186,12 @@ export const onCreateGroup = /* GraphQL */ `
                 group {
                   id
                   name
+                  sort
                   createdAt
                   updatedAt
                 }
                 name
+                sort
                 createdAt
                 updatedAt
                 company {
@@ -401,6 +1204,7 @@ export const onCreateGroup = /* GraphQL */ `
                 }
               }
               name
+              sort
               createdAt
               updatedAt
               company {
@@ -413,6 +1217,7 @@ export const onCreateGroup = /* GraphQL */ `
               }
             }
             name
+            sort
             createdAt
             updatedAt
             company {
@@ -425,6 +1230,7 @@ export const onCreateGroup = /* GraphQL */ `
             }
           }
           name
+          sort
           createdAt
           updatedAt
           company {
@@ -437,6 +1243,7 @@ export const onCreateGroup = /* GraphQL */ `
           }
         }
         name
+        sort
         createdAt
         updatedAt
         company {
@@ -449,6 +1256,7 @@ export const onCreateGroup = /* GraphQL */ `
         }
       }
       name
+      sort
       createdAt
       updatedAt
       company {
@@ -479,10 +1287,12 @@ export const onUpdateGroup = /* GraphQL */ `
                 group {
                   id
                   name
+                  sort
                   createdAt
                   updatedAt
                 }
                 name
+                sort
                 createdAt
                 updatedAt
                 company {
@@ -495,6 +1305,7 @@ export const onUpdateGroup = /* GraphQL */ `
                 }
               }
               name
+              sort
               createdAt
               updatedAt
               company {
@@ -507,6 +1318,7 @@ export const onUpdateGroup = /* GraphQL */ `
               }
             }
             name
+            sort
             createdAt
             updatedAt
             company {
@@ -519,6 +1331,7 @@ export const onUpdateGroup = /* GraphQL */ `
             }
           }
           name
+          sort
           createdAt
           updatedAt
           company {
@@ -531,6 +1344,7 @@ export const onUpdateGroup = /* GraphQL */ `
           }
         }
         name
+        sort
         createdAt
         updatedAt
         company {
@@ -543,6 +1357,7 @@ export const onUpdateGroup = /* GraphQL */ `
         }
       }
       name
+      sort
       createdAt
       updatedAt
       company {
@@ -573,10 +1388,12 @@ export const onDeleteGroup = /* GraphQL */ `
                 group {
                   id
                   name
+                  sort
                   createdAt
                   updatedAt
                 }
                 name
+                sort
                 createdAt
                 updatedAt
                 company {
@@ -589,6 +1406,7 @@ export const onDeleteGroup = /* GraphQL */ `
                 }
               }
               name
+              sort
               createdAt
               updatedAt
               company {
@@ -601,6 +1419,7 @@ export const onDeleteGroup = /* GraphQL */ `
               }
             }
             name
+            sort
             createdAt
             updatedAt
             company {
@@ -613,6 +1432,7 @@ export const onDeleteGroup = /* GraphQL */ `
             }
           }
           name
+          sort
           createdAt
           updatedAt
           company {
@@ -625,6 +1445,7 @@ export const onDeleteGroup = /* GraphQL */ `
           }
         }
         name
+        sort
         createdAt
         updatedAt
         company {
@@ -637,6 +1458,7 @@ export const onDeleteGroup = /* GraphQL */ `
         }
       }
       name
+      sort
       createdAt
       updatedAt
       company {
@@ -779,10 +1601,12 @@ export const onCreateSheet = /* GraphQL */ `
                 group {
                   id
                   name
+                  sort
                   createdAt
                   updatedAt
                 }
                 name
+                sort
                 createdAt
                 updatedAt
                 company {
@@ -795,6 +1619,7 @@ export const onCreateSheet = /* GraphQL */ `
                 }
               }
               name
+              sort
               createdAt
               updatedAt
               company {
@@ -807,6 +1632,7 @@ export const onCreateSheet = /* GraphQL */ `
               }
             }
             name
+            sort
             createdAt
             updatedAt
             company {
@@ -819,6 +1645,7 @@ export const onCreateSheet = /* GraphQL */ `
             }
           }
           name
+          sort
           createdAt
           updatedAt
           company {
@@ -831,6 +1658,7 @@ export const onCreateSheet = /* GraphQL */ `
           }
         }
         name
+        sort
         createdAt
         updatedAt
         company {
@@ -895,7 +1723,36 @@ export const onCreateSheet = /* GraphQL */ `
                   createdAt
                   updatedAt
                 }
+                group {
+                  id
+                  name
+                  sort
+                  createdAt
+                  updatedAt
+                }
                 companyId
+                createdAt
+                updatedAt
+                company {
+                  id
+                  name
+                  shortName
+                  url
+                  createdAt
+                  updatedAt
+                }
+              }
+              group {
+                id
+                group {
+                  id
+                  name
+                  sort
+                  createdAt
+                  updatedAt
+                }
+                name
+                sort
                 createdAt
                 updatedAt
                 company {
@@ -919,6 +1776,43 @@ export const onCreateSheet = /* GraphQL */ `
                 updatedAt
               }
             }
+            group {
+              id
+              group {
+                id
+                group {
+                  id
+                  name
+                  sort
+                  createdAt
+                  updatedAt
+                }
+                name
+                sort
+                createdAt
+                updatedAt
+                company {
+                  id
+                  name
+                  shortName
+                  url
+                  createdAt
+                  updatedAt
+                }
+              }
+              name
+              sort
+              createdAt
+              updatedAt
+              company {
+                id
+                name
+                shortName
+                url
+                createdAt
+                updatedAt
+              }
+            }
             companyId
             createdAt
             updatedAt
@@ -931,7 +1825,126 @@ export const onCreateSheet = /* GraphQL */ `
               updatedAt
             }
           }
+          group {
+            id
+            group {
+              id
+              group {
+                id
+                group {
+                  id
+                  name
+                  sort
+                  createdAt
+                  updatedAt
+                }
+                name
+                sort
+                createdAt
+                updatedAt
+                company {
+                  id
+                  name
+                  shortName
+                  url
+                  createdAt
+                  updatedAt
+                }
+              }
+              name
+              sort
+              createdAt
+              updatedAt
+              company {
+                id
+                name
+                shortName
+                url
+                createdAt
+                updatedAt
+              }
+            }
+            name
+            sort
+            createdAt
+            updatedAt
+            company {
+              id
+              name
+              shortName
+              url
+              createdAt
+              updatedAt
+            }
+          }
           companyId
+          createdAt
+          updatedAt
+          company {
+            id
+            name
+            shortName
+            url
+            createdAt
+            updatedAt
+          }
+        }
+        group {
+          id
+          group {
+            id
+            group {
+              id
+              group {
+                id
+                group {
+                  id
+                  name
+                  sort
+                  createdAt
+                  updatedAt
+                }
+                name
+                sort
+                createdAt
+                updatedAt
+                company {
+                  id
+                  name
+                  shortName
+                  url
+                  createdAt
+                  updatedAt
+                }
+              }
+              name
+              sort
+              createdAt
+              updatedAt
+              company {
+                id
+                name
+                shortName
+                url
+                createdAt
+                updatedAt
+              }
+            }
+            name
+            sort
+            createdAt
+            updatedAt
+            company {
+              id
+              name
+              shortName
+              url
+              createdAt
+              updatedAt
+            }
+          }
+          name
+          sort
           createdAt
           updatedAt
           company {
@@ -995,7 +2008,36 @@ export const onCreateSheet = /* GraphQL */ `
                   createdAt
                   updatedAt
                 }
+                group {
+                  id
+                  name
+                  sort
+                  createdAt
+                  updatedAt
+                }
                 companyId
+                createdAt
+                updatedAt
+                company {
+                  id
+                  name
+                  shortName
+                  url
+                  createdAt
+                  updatedAt
+                }
+              }
+              group {
+                id
+                group {
+                  id
+                  name
+                  sort
+                  createdAt
+                  updatedAt
+                }
+                name
+                sort
                 createdAt
                 updatedAt
                 company {
@@ -1019,6 +2061,43 @@ export const onCreateSheet = /* GraphQL */ `
                 updatedAt
               }
             }
+            group {
+              id
+              group {
+                id
+                group {
+                  id
+                  name
+                  sort
+                  createdAt
+                  updatedAt
+                }
+                name
+                sort
+                createdAt
+                updatedAt
+                company {
+                  id
+                  name
+                  shortName
+                  url
+                  createdAt
+                  updatedAt
+                }
+              }
+              name
+              sort
+              createdAt
+              updatedAt
+              company {
+                id
+                name
+                shortName
+                url
+                createdAt
+                updatedAt
+              }
+            }
             companyId
             createdAt
             updatedAt
@@ -1031,7 +2110,126 @@ export const onCreateSheet = /* GraphQL */ `
               updatedAt
             }
           }
+          group {
+            id
+            group {
+              id
+              group {
+                id
+                group {
+                  id
+                  name
+                  sort
+                  createdAt
+                  updatedAt
+                }
+                name
+                sort
+                createdAt
+                updatedAt
+                company {
+                  id
+                  name
+                  shortName
+                  url
+                  createdAt
+                  updatedAt
+                }
+              }
+              name
+              sort
+              createdAt
+              updatedAt
+              company {
+                id
+                name
+                shortName
+                url
+                createdAt
+                updatedAt
+              }
+            }
+            name
+            sort
+            createdAt
+            updatedAt
+            company {
+              id
+              name
+              shortName
+              url
+              createdAt
+              updatedAt
+            }
+          }
           companyId
+          createdAt
+          updatedAt
+          company {
+            id
+            name
+            shortName
+            url
+            createdAt
+            updatedAt
+          }
+        }
+        group {
+          id
+          group {
+            id
+            group {
+              id
+              group {
+                id
+                group {
+                  id
+                  name
+                  sort
+                  createdAt
+                  updatedAt
+                }
+                name
+                sort
+                createdAt
+                updatedAt
+                company {
+                  id
+                  name
+                  shortName
+                  url
+                  createdAt
+                  updatedAt
+                }
+              }
+              name
+              sort
+              createdAt
+              updatedAt
+              company {
+                id
+                name
+                shortName
+                url
+                createdAt
+                updatedAt
+              }
+            }
+            name
+            sort
+            createdAt
+            updatedAt
+            company {
+              id
+              name
+              shortName
+              url
+              createdAt
+              updatedAt
+            }
+          }
+          name
+          sort
           createdAt
           updatedAt
           company {
@@ -1091,6 +2289,7 @@ export const onCreateSheet = /* GraphQL */ `
                 group {
                   id
                   name
+                  sort
                   createdAt
                   updatedAt
                 }
@@ -1223,10 +2422,12 @@ export const onUpdateSheet = /* GraphQL */ `
                 group {
                   id
                   name
+                  sort
                   createdAt
                   updatedAt
                 }
                 name
+                sort
                 createdAt
                 updatedAt
                 company {
@@ -1239,6 +2440,7 @@ export const onUpdateSheet = /* GraphQL */ `
                 }
               }
               name
+              sort
               createdAt
               updatedAt
               company {
@@ -1251,6 +2453,7 @@ export const onUpdateSheet = /* GraphQL */ `
               }
             }
             name
+            sort
             createdAt
             updatedAt
             company {
@@ -1263,6 +2466,7 @@ export const onUpdateSheet = /* GraphQL */ `
             }
           }
           name
+          sort
           createdAt
           updatedAt
           company {
@@ -1275,6 +2479,7 @@ export const onUpdateSheet = /* GraphQL */ `
           }
         }
         name
+        sort
         createdAt
         updatedAt
         company {
@@ -1339,7 +2544,36 @@ export const onUpdateSheet = /* GraphQL */ `
                   createdAt
                   updatedAt
                 }
+                group {
+                  id
+                  name
+                  sort
+                  createdAt
+                  updatedAt
+                }
                 companyId
+                createdAt
+                updatedAt
+                company {
+                  id
+                  name
+                  shortName
+                  url
+                  createdAt
+                  updatedAt
+                }
+              }
+              group {
+                id
+                group {
+                  id
+                  name
+                  sort
+                  createdAt
+                  updatedAt
+                }
+                name
+                sort
                 createdAt
                 updatedAt
                 company {
@@ -1363,6 +2597,43 @@ export const onUpdateSheet = /* GraphQL */ `
                 updatedAt
               }
             }
+            group {
+              id
+              group {
+                id
+                group {
+                  id
+                  name
+                  sort
+                  createdAt
+                  updatedAt
+                }
+                name
+                sort
+                createdAt
+                updatedAt
+                company {
+                  id
+                  name
+                  shortName
+                  url
+                  createdAt
+                  updatedAt
+                }
+              }
+              name
+              sort
+              createdAt
+              updatedAt
+              company {
+                id
+                name
+                shortName
+                url
+                createdAt
+                updatedAt
+              }
+            }
             companyId
             createdAt
             updatedAt
@@ -1375,7 +2646,126 @@ export const onUpdateSheet = /* GraphQL */ `
               updatedAt
             }
           }
+          group {
+            id
+            group {
+              id
+              group {
+                id
+                group {
+                  id
+                  name
+                  sort
+                  createdAt
+                  updatedAt
+                }
+                name
+                sort
+                createdAt
+                updatedAt
+                company {
+                  id
+                  name
+                  shortName
+                  url
+                  createdAt
+                  updatedAt
+                }
+              }
+              name
+              sort
+              createdAt
+              updatedAt
+              company {
+                id
+                name
+                shortName
+                url
+                createdAt
+                updatedAt
+              }
+            }
+            name
+            sort
+            createdAt
+            updatedAt
+            company {
+              id
+              name
+              shortName
+              url
+              createdAt
+              updatedAt
+            }
+          }
           companyId
+          createdAt
+          updatedAt
+          company {
+            id
+            name
+            shortName
+            url
+            createdAt
+            updatedAt
+          }
+        }
+        group {
+          id
+          group {
+            id
+            group {
+              id
+              group {
+                id
+                group {
+                  id
+                  name
+                  sort
+                  createdAt
+                  updatedAt
+                }
+                name
+                sort
+                createdAt
+                updatedAt
+                company {
+                  id
+                  name
+                  shortName
+                  url
+                  createdAt
+                  updatedAt
+                }
+              }
+              name
+              sort
+              createdAt
+              updatedAt
+              company {
+                id
+                name
+                shortName
+                url
+                createdAt
+                updatedAt
+              }
+            }
+            name
+            sort
+            createdAt
+            updatedAt
+            company {
+              id
+              name
+              shortName
+              url
+              createdAt
+              updatedAt
+            }
+          }
+          name
+          sort
           createdAt
           updatedAt
           company {
@@ -1439,7 +2829,36 @@ export const onUpdateSheet = /* GraphQL */ `
                   createdAt
                   updatedAt
                 }
+                group {
+                  id
+                  name
+                  sort
+                  createdAt
+                  updatedAt
+                }
                 companyId
+                createdAt
+                updatedAt
+                company {
+                  id
+                  name
+                  shortName
+                  url
+                  createdAt
+                  updatedAt
+                }
+              }
+              group {
+                id
+                group {
+                  id
+                  name
+                  sort
+                  createdAt
+                  updatedAt
+                }
+                name
+                sort
                 createdAt
                 updatedAt
                 company {
@@ -1463,6 +2882,43 @@ export const onUpdateSheet = /* GraphQL */ `
                 updatedAt
               }
             }
+            group {
+              id
+              group {
+                id
+                group {
+                  id
+                  name
+                  sort
+                  createdAt
+                  updatedAt
+                }
+                name
+                sort
+                createdAt
+                updatedAt
+                company {
+                  id
+                  name
+                  shortName
+                  url
+                  createdAt
+                  updatedAt
+                }
+              }
+              name
+              sort
+              createdAt
+              updatedAt
+              company {
+                id
+                name
+                shortName
+                url
+                createdAt
+                updatedAt
+              }
+            }
             companyId
             createdAt
             updatedAt
@@ -1475,7 +2931,126 @@ export const onUpdateSheet = /* GraphQL */ `
               updatedAt
             }
           }
+          group {
+            id
+            group {
+              id
+              group {
+                id
+                group {
+                  id
+                  name
+                  sort
+                  createdAt
+                  updatedAt
+                }
+                name
+                sort
+                createdAt
+                updatedAt
+                company {
+                  id
+                  name
+                  shortName
+                  url
+                  createdAt
+                  updatedAt
+                }
+              }
+              name
+              sort
+              createdAt
+              updatedAt
+              company {
+                id
+                name
+                shortName
+                url
+                createdAt
+                updatedAt
+              }
+            }
+            name
+            sort
+            createdAt
+            updatedAt
+            company {
+              id
+              name
+              shortName
+              url
+              createdAt
+              updatedAt
+            }
+          }
           companyId
+          createdAt
+          updatedAt
+          company {
+            id
+            name
+            shortName
+            url
+            createdAt
+            updatedAt
+          }
+        }
+        group {
+          id
+          group {
+            id
+            group {
+              id
+              group {
+                id
+                group {
+                  id
+                  name
+                  sort
+                  createdAt
+                  updatedAt
+                }
+                name
+                sort
+                createdAt
+                updatedAt
+                company {
+                  id
+                  name
+                  shortName
+                  url
+                  createdAt
+                  updatedAt
+                }
+              }
+              name
+              sort
+              createdAt
+              updatedAt
+              company {
+                id
+                name
+                shortName
+                url
+                createdAt
+                updatedAt
+              }
+            }
+            name
+            sort
+            createdAt
+            updatedAt
+            company {
+              id
+              name
+              shortName
+              url
+              createdAt
+              updatedAt
+            }
+          }
+          name
+          sort
           createdAt
           updatedAt
           company {
@@ -1535,6 +3110,7 @@ export const onUpdateSheet = /* GraphQL */ `
                 group {
                   id
                   name
+                  sort
                   createdAt
                   updatedAt
                 }
@@ -1667,10 +3243,12 @@ export const onDeleteSheet = /* GraphQL */ `
                 group {
                   id
                   name
+                  sort
                   createdAt
                   updatedAt
                 }
                 name
+                sort
                 createdAt
                 updatedAt
                 company {
@@ -1683,6 +3261,7 @@ export const onDeleteSheet = /* GraphQL */ `
                 }
               }
               name
+              sort
               createdAt
               updatedAt
               company {
@@ -1695,6 +3274,7 @@ export const onDeleteSheet = /* GraphQL */ `
               }
             }
             name
+            sort
             createdAt
             updatedAt
             company {
@@ -1707,6 +3287,7 @@ export const onDeleteSheet = /* GraphQL */ `
             }
           }
           name
+          sort
           createdAt
           updatedAt
           company {
@@ -1719,6 +3300,7 @@ export const onDeleteSheet = /* GraphQL */ `
           }
         }
         name
+        sort
         createdAt
         updatedAt
         company {
@@ -1783,7 +3365,36 @@ export const onDeleteSheet = /* GraphQL */ `
                   createdAt
                   updatedAt
                 }
+                group {
+                  id
+                  name
+                  sort
+                  createdAt
+                  updatedAt
+                }
                 companyId
+                createdAt
+                updatedAt
+                company {
+                  id
+                  name
+                  shortName
+                  url
+                  createdAt
+                  updatedAt
+                }
+              }
+              group {
+                id
+                group {
+                  id
+                  name
+                  sort
+                  createdAt
+                  updatedAt
+                }
+                name
+                sort
                 createdAt
                 updatedAt
                 company {
@@ -1807,6 +3418,43 @@ export const onDeleteSheet = /* GraphQL */ `
                 updatedAt
               }
             }
+            group {
+              id
+              group {
+                id
+                group {
+                  id
+                  name
+                  sort
+                  createdAt
+                  updatedAt
+                }
+                name
+                sort
+                createdAt
+                updatedAt
+                company {
+                  id
+                  name
+                  shortName
+                  url
+                  createdAt
+                  updatedAt
+                }
+              }
+              name
+              sort
+              createdAt
+              updatedAt
+              company {
+                id
+                name
+                shortName
+                url
+                createdAt
+                updatedAt
+              }
+            }
             companyId
             createdAt
             updatedAt
@@ -1819,7 +3467,126 @@ export const onDeleteSheet = /* GraphQL */ `
               updatedAt
             }
           }
+          group {
+            id
+            group {
+              id
+              group {
+                id
+                group {
+                  id
+                  name
+                  sort
+                  createdAt
+                  updatedAt
+                }
+                name
+                sort
+                createdAt
+                updatedAt
+                company {
+                  id
+                  name
+                  shortName
+                  url
+                  createdAt
+                  updatedAt
+                }
+              }
+              name
+              sort
+              createdAt
+              updatedAt
+              company {
+                id
+                name
+                shortName
+                url
+                createdAt
+                updatedAt
+              }
+            }
+            name
+            sort
+            createdAt
+            updatedAt
+            company {
+              id
+              name
+              shortName
+              url
+              createdAt
+              updatedAt
+            }
+          }
           companyId
+          createdAt
+          updatedAt
+          company {
+            id
+            name
+            shortName
+            url
+            createdAt
+            updatedAt
+          }
+        }
+        group {
+          id
+          group {
+            id
+            group {
+              id
+              group {
+                id
+                group {
+                  id
+                  name
+                  sort
+                  createdAt
+                  updatedAt
+                }
+                name
+                sort
+                createdAt
+                updatedAt
+                company {
+                  id
+                  name
+                  shortName
+                  url
+                  createdAt
+                  updatedAt
+                }
+              }
+              name
+              sort
+              createdAt
+              updatedAt
+              company {
+                id
+                name
+                shortName
+                url
+                createdAt
+                updatedAt
+              }
+            }
+            name
+            sort
+            createdAt
+            updatedAt
+            company {
+              id
+              name
+              shortName
+              url
+              createdAt
+              updatedAt
+            }
+          }
+          name
+          sort
           createdAt
           updatedAt
           company {
@@ -1883,7 +3650,36 @@ export const onDeleteSheet = /* GraphQL */ `
                   createdAt
                   updatedAt
                 }
+                group {
+                  id
+                  name
+                  sort
+                  createdAt
+                  updatedAt
+                }
                 companyId
+                createdAt
+                updatedAt
+                company {
+                  id
+                  name
+                  shortName
+                  url
+                  createdAt
+                  updatedAt
+                }
+              }
+              group {
+                id
+                group {
+                  id
+                  name
+                  sort
+                  createdAt
+                  updatedAt
+                }
+                name
+                sort
                 createdAt
                 updatedAt
                 company {
@@ -1907,6 +3703,43 @@ export const onDeleteSheet = /* GraphQL */ `
                 updatedAt
               }
             }
+            group {
+              id
+              group {
+                id
+                group {
+                  id
+                  name
+                  sort
+                  createdAt
+                  updatedAt
+                }
+                name
+                sort
+                createdAt
+                updatedAt
+                company {
+                  id
+                  name
+                  shortName
+                  url
+                  createdAt
+                  updatedAt
+                }
+              }
+              name
+              sort
+              createdAt
+              updatedAt
+              company {
+                id
+                name
+                shortName
+                url
+                createdAt
+                updatedAt
+              }
+            }
             companyId
             createdAt
             updatedAt
@@ -1919,7 +3752,126 @@ export const onDeleteSheet = /* GraphQL */ `
               updatedAt
             }
           }
+          group {
+            id
+            group {
+              id
+              group {
+                id
+                group {
+                  id
+                  name
+                  sort
+                  createdAt
+                  updatedAt
+                }
+                name
+                sort
+                createdAt
+                updatedAt
+                company {
+                  id
+                  name
+                  shortName
+                  url
+                  createdAt
+                  updatedAt
+                }
+              }
+              name
+              sort
+              createdAt
+              updatedAt
+              company {
+                id
+                name
+                shortName
+                url
+                createdAt
+                updatedAt
+              }
+            }
+            name
+            sort
+            createdAt
+            updatedAt
+            company {
+              id
+              name
+              shortName
+              url
+              createdAt
+              updatedAt
+            }
+          }
           companyId
+          createdAt
+          updatedAt
+          company {
+            id
+            name
+            shortName
+            url
+            createdAt
+            updatedAt
+          }
+        }
+        group {
+          id
+          group {
+            id
+            group {
+              id
+              group {
+                id
+                group {
+                  id
+                  name
+                  sort
+                  createdAt
+                  updatedAt
+                }
+                name
+                sort
+                createdAt
+                updatedAt
+                company {
+                  id
+                  name
+                  shortName
+                  url
+                  createdAt
+                  updatedAt
+                }
+              }
+              name
+              sort
+              createdAt
+              updatedAt
+              company {
+                id
+                name
+                shortName
+                url
+                createdAt
+                updatedAt
+              }
+            }
+            name
+            sort
+            createdAt
+            updatedAt
+            company {
+              id
+              name
+              shortName
+              url
+              createdAt
+              updatedAt
+            }
+          }
+          name
+          sort
           createdAt
           updatedAt
           company {
@@ -1979,6 +3931,7 @@ export const onDeleteSheet = /* GraphQL */ `
                 group {
                   id
                   name
+                  sort
                   createdAt
                   updatedAt
                 }
@@ -2122,10 +4075,12 @@ export const onCreateSection = /* GraphQL */ `
                 group {
                   id
                   name
+                  sort
                   createdAt
                   updatedAt
                 }
                 name
+                sort
                 createdAt
                 updatedAt
                 company {
@@ -2138,6 +4093,7 @@ export const onCreateSection = /* GraphQL */ `
                 }
               }
               name
+              sort
               createdAt
               updatedAt
               company {
@@ -2184,7 +4140,36 @@ export const onCreateSection = /* GraphQL */ `
                   createdAt
                   updatedAt
                 }
+                group {
+                  id
+                  name
+                  sort
+                  createdAt
+                  updatedAt
+                }
                 companyId
+                createdAt
+                updatedAt
+                company {
+                  id
+                  name
+                  shortName
+                  url
+                  createdAt
+                  updatedAt
+                }
+              }
+              group {
+                id
+                group {
+                  id
+                  name
+                  sort
+                  createdAt
+                  updatedAt
+                }
+                name
+                sort
                 createdAt
                 updatedAt
                 company {
@@ -2230,7 +4215,36 @@ export const onCreateSection = /* GraphQL */ `
                   createdAt
                   updatedAt
                 }
+                group {
+                  id
+                  name
+                  sort
+                  createdAt
+                  updatedAt
+                }
                 companyId
+                createdAt
+                updatedAt
+                company {
+                  id
+                  name
+                  shortName
+                  url
+                  createdAt
+                  updatedAt
+                }
+              }
+              group {
+                id
+                group {
+                  id
+                  name
+                  sort
+                  createdAt
+                  updatedAt
+                }
+                name
+                sort
                 createdAt
                 updatedAt
                 company {
@@ -2424,10 +4438,12 @@ export const onUpdateSection = /* GraphQL */ `
                 group {
                   id
                   name
+                  sort
                   createdAt
                   updatedAt
                 }
                 name
+                sort
                 createdAt
                 updatedAt
                 company {
@@ -2440,6 +4456,7 @@ export const onUpdateSection = /* GraphQL */ `
                 }
               }
               name
+              sort
               createdAt
               updatedAt
               company {
@@ -2486,7 +4503,36 @@ export const onUpdateSection = /* GraphQL */ `
                   createdAt
                   updatedAt
                 }
+                group {
+                  id
+                  name
+                  sort
+                  createdAt
+                  updatedAt
+                }
                 companyId
+                createdAt
+                updatedAt
+                company {
+                  id
+                  name
+                  shortName
+                  url
+                  createdAt
+                  updatedAt
+                }
+              }
+              group {
+                id
+                group {
+                  id
+                  name
+                  sort
+                  createdAt
+                  updatedAt
+                }
+                name
+                sort
                 createdAt
                 updatedAt
                 company {
@@ -2532,7 +4578,36 @@ export const onUpdateSection = /* GraphQL */ `
                   createdAt
                   updatedAt
                 }
+                group {
+                  id
+                  name
+                  sort
+                  createdAt
+                  updatedAt
+                }
                 companyId
+                createdAt
+                updatedAt
+                company {
+                  id
+                  name
+                  shortName
+                  url
+                  createdAt
+                  updatedAt
+                }
+              }
+              group {
+                id
+                group {
+                  id
+                  name
+                  sort
+                  createdAt
+                  updatedAt
+                }
+                name
+                sort
                 createdAt
                 updatedAt
                 company {
@@ -2726,10 +4801,12 @@ export const onDeleteSection = /* GraphQL */ `
                 group {
                   id
                   name
+                  sort
                   createdAt
                   updatedAt
                 }
                 name
+                sort
                 createdAt
                 updatedAt
                 company {
@@ -2742,6 +4819,7 @@ export const onDeleteSection = /* GraphQL */ `
                 }
               }
               name
+              sort
               createdAt
               updatedAt
               company {
@@ -2788,7 +4866,36 @@ export const onDeleteSection = /* GraphQL */ `
                   createdAt
                   updatedAt
                 }
+                group {
+                  id
+                  name
+                  sort
+                  createdAt
+                  updatedAt
+                }
                 companyId
+                createdAt
+                updatedAt
+                company {
+                  id
+                  name
+                  shortName
+                  url
+                  createdAt
+                  updatedAt
+                }
+              }
+              group {
+                id
+                group {
+                  id
+                  name
+                  sort
+                  createdAt
+                  updatedAt
+                }
+                name
+                sort
                 createdAt
                 updatedAt
                 company {
@@ -2834,7 +4941,36 @@ export const onDeleteSection = /* GraphQL */ `
                   createdAt
                   updatedAt
                 }
+                group {
+                  id
+                  name
+                  sort
+                  createdAt
+                  updatedAt
+                }
                 companyId
+                createdAt
+                updatedAt
+                company {
+                  id
+                  name
+                  shortName
+                  url
+                  createdAt
+                  updatedAt
+                }
+              }
+              group {
+                id
+                group {
+                  id
+                  name
+                  sort
+                  createdAt
+                  updatedAt
+                }
+                name
+                sort
                 createdAt
                 updatedAt
                 company {
@@ -3028,10 +5164,12 @@ export const onCreateObjective = /* GraphQL */ `
                 group {
                   id
                   name
+                  sort
                   createdAt
                   updatedAt
                 }
                 name
+                sort
                 createdAt
                 updatedAt
                 company {
@@ -3044,6 +5182,7 @@ export const onCreateObjective = /* GraphQL */ `
                 }
               }
               name
+              sort
               createdAt
               updatedAt
               company {
@@ -3056,6 +5195,7 @@ export const onCreateObjective = /* GraphQL */ `
               }
             }
             name
+            sort
             createdAt
             updatedAt
             company {
@@ -3068,6 +5208,7 @@ export const onCreateObjective = /* GraphQL */ `
             }
           }
           name
+          sort
           createdAt
           updatedAt
           company {
@@ -3126,7 +5267,36 @@ export const onCreateObjective = /* GraphQL */ `
                   createdAt
                   updatedAt
                 }
+                group {
+                  id
+                  name
+                  sort
+                  createdAt
+                  updatedAt
+                }
                 companyId
+                createdAt
+                updatedAt
+                company {
+                  id
+                  name
+                  shortName
+                  url
+                  createdAt
+                  updatedAt
+                }
+              }
+              group {
+                id
+                group {
+                  id
+                  name
+                  sort
+                  createdAt
+                  updatedAt
+                }
+                name
+                sort
                 createdAt
                 updatedAt
                 company {
@@ -3150,7 +5320,96 @@ export const onCreateObjective = /* GraphQL */ `
                 updatedAt
               }
             }
+            group {
+              id
+              group {
+                id
+                group {
+                  id
+                  name
+                  sort
+                  createdAt
+                  updatedAt
+                }
+                name
+                sort
+                createdAt
+                updatedAt
+                company {
+                  id
+                  name
+                  shortName
+                  url
+                  createdAt
+                  updatedAt
+                }
+              }
+              name
+              sort
+              createdAt
+              updatedAt
+              company {
+                id
+                name
+                shortName
+                url
+                createdAt
+                updatedAt
+              }
+            }
             companyId
+            createdAt
+            updatedAt
+            company {
+              id
+              name
+              shortName
+              url
+              createdAt
+              updatedAt
+            }
+          }
+          group {
+            id
+            group {
+              id
+              group {
+                id
+                group {
+                  id
+                  name
+                  sort
+                  createdAt
+                  updatedAt
+                }
+                name
+                sort
+                createdAt
+                updatedAt
+                company {
+                  id
+                  name
+                  shortName
+                  url
+                  createdAt
+                  updatedAt
+                }
+              }
+              name
+              sort
+              createdAt
+              updatedAt
+              company {
+                id
+                name
+                shortName
+                url
+                createdAt
+                updatedAt
+              }
+            }
+            name
+            sort
             createdAt
             updatedAt
             company {
@@ -3208,7 +5467,36 @@ export const onCreateObjective = /* GraphQL */ `
                   createdAt
                   updatedAt
                 }
+                group {
+                  id
+                  name
+                  sort
+                  createdAt
+                  updatedAt
+                }
                 companyId
+                createdAt
+                updatedAt
+                company {
+                  id
+                  name
+                  shortName
+                  url
+                  createdAt
+                  updatedAt
+                }
+              }
+              group {
+                id
+                group {
+                  id
+                  name
+                  sort
+                  createdAt
+                  updatedAt
+                }
+                name
+                sort
                 createdAt
                 updatedAt
                 company {
@@ -3232,7 +5520,96 @@ export const onCreateObjective = /* GraphQL */ `
                 updatedAt
               }
             }
+            group {
+              id
+              group {
+                id
+                group {
+                  id
+                  name
+                  sort
+                  createdAt
+                  updatedAt
+                }
+                name
+                sort
+                createdAt
+                updatedAt
+                company {
+                  id
+                  name
+                  shortName
+                  url
+                  createdAt
+                  updatedAt
+                }
+              }
+              name
+              sort
+              createdAt
+              updatedAt
+              company {
+                id
+                name
+                shortName
+                url
+                createdAt
+                updatedAt
+              }
+            }
             companyId
+            createdAt
+            updatedAt
+            company {
+              id
+              name
+              shortName
+              url
+              createdAt
+              updatedAt
+            }
+          }
+          group {
+            id
+            group {
+              id
+              group {
+                id
+                group {
+                  id
+                  name
+                  sort
+                  createdAt
+                  updatedAt
+                }
+                name
+                sort
+                createdAt
+                updatedAt
+                company {
+                  id
+                  name
+                  shortName
+                  url
+                  createdAt
+                  updatedAt
+                }
+              }
+              name
+              sort
+              createdAt
+              updatedAt
+              company {
+                id
+                name
+                shortName
+                url
+                createdAt
+                updatedAt
+              }
+            }
+            name
+            sort
             createdAt
             updatedAt
             company {
@@ -3380,10 +5757,12 @@ export const onCreateObjective = /* GraphQL */ `
                 group {
                   id
                   name
+                  sort
                   createdAt
                   updatedAt
                 }
                 name
+                sort
                 createdAt
                 updatedAt
                 company {
@@ -3424,6 +5803,13 @@ export const onCreateObjective = /* GraphQL */ `
                   createdAt
                   updatedAt
                 }
+                group {
+                  id
+                  name
+                  sort
+                  createdAt
+                  updatedAt
+                }
                 companyId
                 createdAt
                 updatedAt
@@ -3449,6 +5835,13 @@ export const onCreateObjective = /* GraphQL */ `
                   lastName
                   grade
                   companyId
+                  createdAt
+                  updatedAt
+                }
+                group {
+                  id
+                  name
+                  sort
                   createdAt
                   updatedAt
                 }
@@ -3601,10 +5994,12 @@ export const onUpdateObjective = /* GraphQL */ `
                 group {
                   id
                   name
+                  sort
                   createdAt
                   updatedAt
                 }
                 name
+                sort
                 createdAt
                 updatedAt
                 company {
@@ -3617,6 +6012,7 @@ export const onUpdateObjective = /* GraphQL */ `
                 }
               }
               name
+              sort
               createdAt
               updatedAt
               company {
@@ -3629,6 +6025,7 @@ export const onUpdateObjective = /* GraphQL */ `
               }
             }
             name
+            sort
             createdAt
             updatedAt
             company {
@@ -3641,6 +6038,7 @@ export const onUpdateObjective = /* GraphQL */ `
             }
           }
           name
+          sort
           createdAt
           updatedAt
           company {
@@ -3699,7 +6097,36 @@ export const onUpdateObjective = /* GraphQL */ `
                   createdAt
                   updatedAt
                 }
+                group {
+                  id
+                  name
+                  sort
+                  createdAt
+                  updatedAt
+                }
                 companyId
+                createdAt
+                updatedAt
+                company {
+                  id
+                  name
+                  shortName
+                  url
+                  createdAt
+                  updatedAt
+                }
+              }
+              group {
+                id
+                group {
+                  id
+                  name
+                  sort
+                  createdAt
+                  updatedAt
+                }
+                name
+                sort
                 createdAt
                 updatedAt
                 company {
@@ -3723,7 +6150,96 @@ export const onUpdateObjective = /* GraphQL */ `
                 updatedAt
               }
             }
+            group {
+              id
+              group {
+                id
+                group {
+                  id
+                  name
+                  sort
+                  createdAt
+                  updatedAt
+                }
+                name
+                sort
+                createdAt
+                updatedAt
+                company {
+                  id
+                  name
+                  shortName
+                  url
+                  createdAt
+                  updatedAt
+                }
+              }
+              name
+              sort
+              createdAt
+              updatedAt
+              company {
+                id
+                name
+                shortName
+                url
+                createdAt
+                updatedAt
+              }
+            }
             companyId
+            createdAt
+            updatedAt
+            company {
+              id
+              name
+              shortName
+              url
+              createdAt
+              updatedAt
+            }
+          }
+          group {
+            id
+            group {
+              id
+              group {
+                id
+                group {
+                  id
+                  name
+                  sort
+                  createdAt
+                  updatedAt
+                }
+                name
+                sort
+                createdAt
+                updatedAt
+                company {
+                  id
+                  name
+                  shortName
+                  url
+                  createdAt
+                  updatedAt
+                }
+              }
+              name
+              sort
+              createdAt
+              updatedAt
+              company {
+                id
+                name
+                shortName
+                url
+                createdAt
+                updatedAt
+              }
+            }
+            name
+            sort
             createdAt
             updatedAt
             company {
@@ -3781,7 +6297,36 @@ export const onUpdateObjective = /* GraphQL */ `
                   createdAt
                   updatedAt
                 }
+                group {
+                  id
+                  name
+                  sort
+                  createdAt
+                  updatedAt
+                }
                 companyId
+                createdAt
+                updatedAt
+                company {
+                  id
+                  name
+                  shortName
+                  url
+                  createdAt
+                  updatedAt
+                }
+              }
+              group {
+                id
+                group {
+                  id
+                  name
+                  sort
+                  createdAt
+                  updatedAt
+                }
+                name
+                sort
                 createdAt
                 updatedAt
                 company {
@@ -3805,7 +6350,96 @@ export const onUpdateObjective = /* GraphQL */ `
                 updatedAt
               }
             }
+            group {
+              id
+              group {
+                id
+                group {
+                  id
+                  name
+                  sort
+                  createdAt
+                  updatedAt
+                }
+                name
+                sort
+                createdAt
+                updatedAt
+                company {
+                  id
+                  name
+                  shortName
+                  url
+                  createdAt
+                  updatedAt
+                }
+              }
+              name
+              sort
+              createdAt
+              updatedAt
+              company {
+                id
+                name
+                shortName
+                url
+                createdAt
+                updatedAt
+              }
+            }
             companyId
+            createdAt
+            updatedAt
+            company {
+              id
+              name
+              shortName
+              url
+              createdAt
+              updatedAt
+            }
+          }
+          group {
+            id
+            group {
+              id
+              group {
+                id
+                group {
+                  id
+                  name
+                  sort
+                  createdAt
+                  updatedAt
+                }
+                name
+                sort
+                createdAt
+                updatedAt
+                company {
+                  id
+                  name
+                  shortName
+                  url
+                  createdAt
+                  updatedAt
+                }
+              }
+              name
+              sort
+              createdAt
+              updatedAt
+              company {
+                id
+                name
+                shortName
+                url
+                createdAt
+                updatedAt
+              }
+            }
+            name
+            sort
             createdAt
             updatedAt
             company {
@@ -3953,10 +6587,12 @@ export const onUpdateObjective = /* GraphQL */ `
                 group {
                   id
                   name
+                  sort
                   createdAt
                   updatedAt
                 }
                 name
+                sort
                 createdAt
                 updatedAt
                 company {
@@ -3997,6 +6633,13 @@ export const onUpdateObjective = /* GraphQL */ `
                   createdAt
                   updatedAt
                 }
+                group {
+                  id
+                  name
+                  sort
+                  createdAt
+                  updatedAt
+                }
                 companyId
                 createdAt
                 updatedAt
@@ -4022,6 +6665,13 @@ export const onUpdateObjective = /* GraphQL */ `
                   lastName
                   grade
                   companyId
+                  createdAt
+                  updatedAt
+                }
+                group {
+                  id
+                  name
+                  sort
                   createdAt
                   updatedAt
                 }
@@ -4174,10 +6824,12 @@ export const onDeleteObjective = /* GraphQL */ `
                 group {
                   id
                   name
+                  sort
                   createdAt
                   updatedAt
                 }
                 name
+                sort
                 createdAt
                 updatedAt
                 company {
@@ -4190,6 +6842,7 @@ export const onDeleteObjective = /* GraphQL */ `
                 }
               }
               name
+              sort
               createdAt
               updatedAt
               company {
@@ -4202,6 +6855,7 @@ export const onDeleteObjective = /* GraphQL */ `
               }
             }
             name
+            sort
             createdAt
             updatedAt
             company {
@@ -4214,6 +6868,7 @@ export const onDeleteObjective = /* GraphQL */ `
             }
           }
           name
+          sort
           createdAt
           updatedAt
           company {
@@ -4272,7 +6927,36 @@ export const onDeleteObjective = /* GraphQL */ `
                   createdAt
                   updatedAt
                 }
+                group {
+                  id
+                  name
+                  sort
+                  createdAt
+                  updatedAt
+                }
                 companyId
+                createdAt
+                updatedAt
+                company {
+                  id
+                  name
+                  shortName
+                  url
+                  createdAt
+                  updatedAt
+                }
+              }
+              group {
+                id
+                group {
+                  id
+                  name
+                  sort
+                  createdAt
+                  updatedAt
+                }
+                name
+                sort
                 createdAt
                 updatedAt
                 company {
@@ -4296,7 +6980,96 @@ export const onDeleteObjective = /* GraphQL */ `
                 updatedAt
               }
             }
+            group {
+              id
+              group {
+                id
+                group {
+                  id
+                  name
+                  sort
+                  createdAt
+                  updatedAt
+                }
+                name
+                sort
+                createdAt
+                updatedAt
+                company {
+                  id
+                  name
+                  shortName
+                  url
+                  createdAt
+                  updatedAt
+                }
+              }
+              name
+              sort
+              createdAt
+              updatedAt
+              company {
+                id
+                name
+                shortName
+                url
+                createdAt
+                updatedAt
+              }
+            }
             companyId
+            createdAt
+            updatedAt
+            company {
+              id
+              name
+              shortName
+              url
+              createdAt
+              updatedAt
+            }
+          }
+          group {
+            id
+            group {
+              id
+              group {
+                id
+                group {
+                  id
+                  name
+                  sort
+                  createdAt
+                  updatedAt
+                }
+                name
+                sort
+                createdAt
+                updatedAt
+                company {
+                  id
+                  name
+                  shortName
+                  url
+                  createdAt
+                  updatedAt
+                }
+              }
+              name
+              sort
+              createdAt
+              updatedAt
+              company {
+                id
+                name
+                shortName
+                url
+                createdAt
+                updatedAt
+              }
+            }
+            name
+            sort
             createdAt
             updatedAt
             company {
@@ -4354,7 +7127,36 @@ export const onDeleteObjective = /* GraphQL */ `
                   createdAt
                   updatedAt
                 }
+                group {
+                  id
+                  name
+                  sort
+                  createdAt
+                  updatedAt
+                }
                 companyId
+                createdAt
+                updatedAt
+                company {
+                  id
+                  name
+                  shortName
+                  url
+                  createdAt
+                  updatedAt
+                }
+              }
+              group {
+                id
+                group {
+                  id
+                  name
+                  sort
+                  createdAt
+                  updatedAt
+                }
+                name
+                sort
                 createdAt
                 updatedAt
                 company {
@@ -4378,7 +7180,96 @@ export const onDeleteObjective = /* GraphQL */ `
                 updatedAt
               }
             }
+            group {
+              id
+              group {
+                id
+                group {
+                  id
+                  name
+                  sort
+                  createdAt
+                  updatedAt
+                }
+                name
+                sort
+                createdAt
+                updatedAt
+                company {
+                  id
+                  name
+                  shortName
+                  url
+                  createdAt
+                  updatedAt
+                }
+              }
+              name
+              sort
+              createdAt
+              updatedAt
+              company {
+                id
+                name
+                shortName
+                url
+                createdAt
+                updatedAt
+              }
+            }
             companyId
+            createdAt
+            updatedAt
+            company {
+              id
+              name
+              shortName
+              url
+              createdAt
+              updatedAt
+            }
+          }
+          group {
+            id
+            group {
+              id
+              group {
+                id
+                group {
+                  id
+                  name
+                  sort
+                  createdAt
+                  updatedAt
+                }
+                name
+                sort
+                createdAt
+                updatedAt
+                company {
+                  id
+                  name
+                  shortName
+                  url
+                  createdAt
+                  updatedAt
+                }
+              }
+              name
+              sort
+              createdAt
+              updatedAt
+              company {
+                id
+                name
+                shortName
+                url
+                createdAt
+                updatedAt
+              }
+            }
+            name
+            sort
             createdAt
             updatedAt
             company {
@@ -4526,10 +7417,12 @@ export const onDeleteObjective = /* GraphQL */ `
                 group {
                   id
                   name
+                  sort
                   createdAt
                   updatedAt
                 }
                 name
+                sort
                 createdAt
                 updatedAt
                 company {
@@ -4570,6 +7463,13 @@ export const onDeleteObjective = /* GraphQL */ `
                   createdAt
                   updatedAt
                 }
+                group {
+                  id
+                  name
+                  sort
+                  createdAt
+                  updatedAt
+                }
                 companyId
                 createdAt
                 updatedAt
@@ -4595,6 +7495,13 @@ export const onDeleteObjective = /* GraphQL */ `
                   lastName
                   grade
                   companyId
+                  createdAt
+                  updatedAt
+                }
+                group {
+                  id
+                  name
+                  sort
                   createdAt
                   updatedAt
                 }
