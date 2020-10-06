@@ -3,15 +3,15 @@ import { Container, Row, Col, Table, Button, Modal, Form } from 'react-bootstrap
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Link } from 'react-router-dom';
 import { GraphQLResult } from "@aws-amplify/api";
-import  {  API, graphqlOperation } from 'aws-amplify';
+import { API, graphqlOperation } from 'aws-amplify';
 //import {BrowserRouter, Route, Link, Switch } from "react-router-dom";
-import {getSheet, getSection} from 'graphql/queries'
+import { getSheet, getSection } from 'graphql/queries'
 import { Sheet, Section, Objective } from 'App';
-import {GetSheetQuery} from 'API';
+import { GetSheetQuery } from 'API';
 import * as APIt from 'API';
 import dateFormat from 'dateformat'
-import {updateObjective, updateSheet} 
-  from 'graphql/mutations';
+import { updateObjective, updateSheet }
+    from 'graphql/mutations';
 import { error } from 'console';
 
 type Props = {
@@ -38,122 +38,143 @@ function RevieweeSheetShow(props: Props) {
 
 
     const [changeObjectiveId, setObjectiveId] = useState<Array<any> | any>();
-    function HandleChange(event: any){
+    function HandleChange(event: any) {
         console.log(event.target.getAttribute('data-objectiveId'));
         setObjectiveId(event.target.getAttribute('data-objectiveId'));
         handleShowObjectiveUpdate();
 
     }
-    
+
     const [formInput, setFormInput] = useState<any>()
 
-    function handleChangeObjective(event:any){
+    function handleChangeObjective(event: any) {
         const target = event.target;
         const value = target.type === 'checkbox' ? target.checked : target.value;
         const name: string = target.name;
-        
+
         // const tmpInput: object = formInput as object;
         // tmpInput[name] = value;
         setFormInput({
             ...formInput, [name]: value
-          });
+        });
         console.log(formInput)
 
     }
 
     //objectiveの更新
-    function HandleUpdateObject(){
-        (async()=>{
-        const objectiveId = changeObjectiveId;
-        const selfEvaluationInput = parseInt(formInput.selfEvaluation);
-        //目標変更の目標、ステータス、自己評価、優先順位、実績を項目明細に上書き
-        const updateI: APIt.UpdateObjectiveInput = {
-            id:objectiveId, 
-            content: formInput.content, 
-            selfEvaluation: selfEvaluationInput, 
-            priority:formInput.priority,
-            result:formInput.result ,
-            expStartDate: formInput.expStartDate,
-            expDoneDate: formInput.expDoneDate
-        };
-        const updateMV: APIt.UpdateObjectiveMutationVariables = {
-            input: updateI,
-        };
-        const updateR: GraphQLResult<APIt.UpdateObjectiveMutation> = 
-        await API.graphql(graphqlOperation(updateObjective, updateMV)) as GraphQLResult<APIt.UpdateObjectiveMutation>;
+    function HandleUpdateObject() {
+        (async () => {
+            const objectiveId = changeObjectiveId;
+            const selfEvaluationInput = parseInt(formInput.selfEvaluation);
+            //目標変更の目標、ステータス、自己評価、優先順位、実績を項目明細に上書き
+            const updateI: APIt.UpdateObjectiveInput = {
+                id: objectiveId,
+                content: formInput.content,
+                selfEvaluation: selfEvaluationInput,
+                priority: formInput.priority,
+                result: formInput.result,
+                expStartDate: formInput.expStartDate,
+                expDoneDate: formInput.expDoneDate
+            };
+            const updateMV: APIt.UpdateObjectiveMutationVariables = {
+                input: updateI,
+            };
+            const updateR: GraphQLResult<APIt.UpdateObjectiveMutation> =
+                await API.graphql(graphqlOperation(updateObjective, updateMV)) as GraphQLResult<APIt.UpdateObjectiveMutation>;
 
-        if (updateR.data) {
-            const updateTM: APIt.UpdateObjectiveMutation = updateR.data;
-            if (updateTM.updateObjective) {
-                const objective: Objective = updateTM.updateObjective;
-                console.log('UpdateObjective:', objective);
+            if (updateR.data) {
+                const updateTM: APIt.UpdateObjectiveMutation = updateR.data;
+                if (updateTM.updateObjective) {
+                    const objective: Objective = updateTM.updateObjective;
+                    console.log('UpdateObjective:', objective);
+                }
             }
         }
-    }
         )()
         window.location.reload()
         handleCloseObjectiveUpdate();
     }
 
+    // Progress 更新
+    async function handleChangeProgress(event: any) {
+        // console.log(event.target.getAttribute('data-objective-id'));
+        const objectiveId = event.target.getAttribute('data-objective-id');
+        // console.log(event.currentTarget.value);
+        const objectiveProgress = parseInt(event.currentTarget.value);
+
+        const updateI: APIt.UpdateObjectiveInput = {
+            id: objectiveId,
+            progress: objectiveProgress,
+        };
+
+        const updateMV: APIt.UpdateObjectiveMutationVariables = {
+            input: updateI,
+        };
+        const updateR: GraphQLResult<APIt.UpdateObjectiveMutation> =
+            await API.graphql(graphqlOperation(updateObjective, updateMV)) as GraphQLResult<APIt.UpdateObjectiveMutation>;
+        // console.log("updateR", updateR);
+        // console.log("sheet", sheet)
+    }
+
 
     const [formInputCareerPlan, setFormInputCareerPlan] = useState<any>();
-    function handleChangeCareerPlan(event:any){
+    function handleChangeCareerPlan(event: any) {
         const target = event.target;
         const value = target.type === 'checkbox' ? target.checked : target.value;
         const name: string = target.name;
-        
+
         // const tmpInput: object = formInput as object;
         // tmpInput[name] = value;
         setFormInputCareerPlan({
             ...formInputCareerPlan, [name]: value
-          });
+        });
     }
-    async function HandleUpdateCareerPlan(e: any){
+    async function HandleUpdateCareerPlan(e: any) {
         const updateI: APIt.UpdateSheetInput = {
-            id: sheetId, 
+            id: sheetId,
             careerPlan: formInputCareerPlan.careerPlan || ""
         };
-      const updateMV: APIt.UpdateSheetMutationVariables = {
-        input: updateI,
-      };
-      const updateR: GraphQLResult<APIt.UpdateSheetMutation> = 
-        await API.graphql(graphqlOperation(updateSheet, updateMV)) as GraphQLResult<APIt.UpdateSheetMutation>;
-      if (updateR.data) {
-        const updateTM: APIt.UpdateSheetMutation = updateR.data;
-        if (updateTM.updateSheet) {
-            const updatedSheet: Sheet = updateTM.updateSheet;
-            let newSheet = sheet;
-            if(newSheet){
-                newSheet.careerPlan = updatedSheet.careerPlan;
-                setSheet(newSheet)
-            }else{
-                console.error("現在のシートが存在しません")
+        const updateMV: APIt.UpdateSheetMutationVariables = {
+            input: updateI,
+        };
+        const updateR: GraphQLResult<APIt.UpdateSheetMutation> =
+            await API.graphql(graphqlOperation(updateSheet, updateMV)) as GraphQLResult<APIt.UpdateSheetMutation>;
+        if (updateR.data) {
+            const updateTM: APIt.UpdateSheetMutation = updateR.data;
+            if (updateTM.updateSheet) {
+                const updatedSheet: Sheet = updateTM.updateSheet;
+                let newSheet = sheet;
+                if (newSheet) {
+                    newSheet.careerPlan = updatedSheet.careerPlan;
+                    setSheet(newSheet)
+                } else {
+                    console.error("現在のシートが存在しません")
+                }
+                console.log('UpdateSheet:', sheet);
+                handleCloseCareerPlanUpdate();
             }
-          console.log('UpdateSheet:', sheet);
-          handleCloseCareerPlanUpdate();
         }
-      }
     }
 
     //表示用データ
 
     useEffect(() => {
-        ;(async()=>{
+        ; (async () => {
             //URLのパラメータを取得
 
             const input: APIt.GetSheetQueryVariables = {
                 id: sheetId
             }
             const response = (await API.graphql(graphqlOperation(getSheet, input))
-            )as GraphQLResult<GetSheetQuery>;
+            ) as GraphQLResult<GetSheetQuery>;
             const sheet: Sheet = response.data?.getSheet as Sheet;
             setSheet(sheet);
             console.log(response);
         })()
-      },[]);
+    }, []);
 
-    if(sheet===undefined) return <p>Loading</p>
-    else if(sheet === null){
+    if (sheet === undefined) return <p>Loading</p>
+    else if (sheet === null) {
         console.log("sheet not found.");
         return <p>該当のシートは存在しません</p>
     }
@@ -164,12 +185,12 @@ function RevieweeSheetShow(props: Props) {
             <div>
                 <Modal show={objectiveUpdateShow} onHide={handleCloseObjectiveUpdate}>
                     <Modal.Header closeButton>
-                    <Modal.Title>目標変更</Modal.Title>
+                        <Modal.Title>目標変更</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
                         <Row>
                             <Col>目標</Col>
-                            <Col><input type="text" onChange={handleChangeObjective} name="content"/> </Col>
+                            <Col><input type="text" onChange={handleChangeObjective} name="content" /> </Col>
                         </Row>
                         <Row>
                             <Col md="2" lg="2" xl="2">開始予定日</Col>
@@ -217,22 +238,22 @@ function RevieweeSheetShow(props: Props) {
                         </Row>
                         <Row>
                             <Col>実績</Col>
-                            <Col><input type="text" onChange={handleChangeObjective} name="result"/> </Col>
+                            <Col><input type="text" onChange={handleChangeObjective} name="result" /> </Col>
                         </Row>
                     </Modal.Body>
                     <Modal.Footer>
-                    <Button variant="secondary" onClick={handleCloseObjectiveUpdate}>
-                        Close
+                        <Button variant="secondary" onClick={handleCloseObjectiveUpdate}>
+                            Close
                     </Button>
-                    <Button variant="primary" onClick={HandleUpdateObject}>
-                        Save Changes
+                        <Button variant="primary" onClick={HandleUpdateObject}>
+                            Save Changes
                     </Button>
                     </Modal.Footer>
                 </Modal>
 
                 <Modal show={careerPlanUpdateShow} onHide={handleCloseCareerPlanUpdate}>
                     <Modal.Header closeButton>
-                    <Modal.Title>キャリアプラン</Modal.Title>
+                        <Modal.Title>キャリアプラン</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
                         <Row>
@@ -241,11 +262,11 @@ function RevieweeSheetShow(props: Props) {
                         </Row>
                     </Modal.Body>
                     <Modal.Footer>
-                    <Button variant="secondary" onClick={handleCloseCareerPlanUpdate}>
-                        Close
+                        <Button variant="secondary" onClick={handleCloseCareerPlanUpdate}>
+                            Close
                     </Button>
-                    <Button variant="primary" onClick={HandleUpdateCareerPlan}>
-                        Save Changes
+                        <Button variant="primary" onClick={HandleUpdateCareerPlan}>
+                            Save Changes
                     </Button>
                     </Modal.Footer>
                 </Modal>
@@ -265,7 +286,7 @@ function RevieweeSheetShow(props: Props) {
                         return (
                             <div key={section.id}>
                                 <h4>{section.category?.name}</h4>
-                                <Table  striped bordered hover>
+                                <Table striped bordered hover>
                                     <thead>
                                         <tr>
                                             <td>#</td>
@@ -281,7 +302,7 @@ function RevieweeSheetShow(props: Props) {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {section.objective?.items?.map((arg: any)=>{
+                                        {section.objective?.items?.map((arg: any) => {
                                             const objective: Objective = arg;   //仮の型変換処理
                                             const date = new Date(objective.updatedAt);
                                             return (
@@ -291,14 +312,35 @@ function RevieweeSheetShow(props: Props) {
                                                     </td>
                                                     <td>{objective.content}</td>
                                                     <td>{objective.result}</td>
-                                                    <td>{objective.progress || 0}%</td>
+                                                    {(() => {
+                                                        // 進捗率が空の場合,下記を表示
+                                                        if (objective.progress === null || objective.progress === undefined) {
+                                                            return (
+                                                                <td>
+                                                                    <input name="progress" onChange={handleChangeProgress} data-objective-id={objective.id} type="number" min="0" max="100" step="10"></input>
+                                                                    <p>%</p>
+                                                                </td>
+                                                            )
+                                                        }
+                                                        // 進捗率が入力済みの場合,下記を表示 
+                                                        else {
+                                                            // progress 型変換
+                                                            const valueProgress = String(objective.progress);
+                                                            return (
+                                                                <td>
+                                                                    <input name="progress" onChange={handleChangeProgress} data-objective-id={objective.id} placeholder={valueProgress} type="number" min="0" max="100" step="10"></input>
+                                                                    <p>%</p>
+                                                                </td>
+                                                            );
+                                                        }
+                                                    })()}
                                                     <td>{objective.priority}</td>
-                                                    <td>{objective.expStartDate ? dateFormat(objective.expStartDate, "yyyy/mm/dd") : "" }</td>
-                                                    <td>{objective.expDoneDate ? dateFormat(objective.expDoneDate, "yyyy/mm/dd") : "" }</td>
+                                                    <td>{objective.expStartDate ? dateFormat(objective.expStartDate, "yyyy/mm/dd") : ""}</td>
+                                                    <td>{objective.expDoneDate ? dateFormat(objective.expDoneDate, "yyyy/mm/dd") : ""}</td>
                                                     <td>{objective.selfEvaluation}</td>
                                                     <td>{objective.lastEvaluation}</td>
                                                     <td>{dateFormat(date, "yyyy/mm/dd HH:MM")}</td>
-                                                </tr>                                            
+                                                </tr>
                                             )
                                         })}
                                     </tbody>
@@ -306,7 +348,7 @@ function RevieweeSheetShow(props: Props) {
                             </div>
                         )
                     })}
-          
+
                     <h4>キャリア計画</h4>
                     <Row>
                         <Col>
