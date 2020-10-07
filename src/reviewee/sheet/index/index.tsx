@@ -79,8 +79,14 @@ function RevieweeSheetShow(props: Props) {
             const updateMV: APIt.UpdateObjectiveMutationVariables = {
                 input: updateI,
             };
-            const updateR: GraphQLResult<APIt.UpdateObjectiveMutation> =
-                await API.graphql(graphqlOperation(updateObjective, updateMV)) as GraphQLResult<APIt.UpdateObjectiveMutation>;
+            let updateR: GraphQLResult<APIt.UpdateObjectiveMutation>
+            try{
+                updateR = await API.graphql(graphqlOperation(updateObjective, updateMV)) as GraphQLResult<APIt.UpdateObjectiveMutation>;
+            }catch(e){
+                console.error("エラーを無視しています", e)
+                console.error("データが不完全でないことを確認してください")
+                updateR = e;
+            }
 
             if (updateR.data) {
                 const updateTM: APIt.UpdateObjectiveMutation = updateR.data;

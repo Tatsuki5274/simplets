@@ -100,6 +100,7 @@ function ListPerformanceEvalution() {
                 createR = await API.graphql(graphqlOperation(createSheet, createMV)) as GraphQLResult<APIt.CreateSheetMutation>;
             }catch(e){
                 console.error("エラーを無視しています", e)
+                console.error("データが不完全でないことを確認してください")
                 createR = e;
             }
             if (createR.data) {
@@ -120,8 +121,14 @@ function ListPerformanceEvalution() {
             const createMV: APIt.CreateSectionMutationVariables = {
                 input: createI,
             };
-            const createR: GraphQLResult<APIt.CreateSectionMutation> =
-                await API.graphql(graphqlOperation(createSection, createMV)) as GraphQLResult<APIt.CreateSectionMutation>;
+            let createR: GraphQLResult<APIt.CreateSectionMutation>
+            try{
+                createR = await API.graphql(graphqlOperation(createSection, createMV)) as GraphQLResult<APIt.CreateSectionMutation>;
+            }catch(e){
+                console.error("エラーを無視しています", e)
+                console.error("データが不完全でないことを確認してください")
+                createR = e;
+            }
             if (createR.data) {
                 const createTM: APIt.CreateSectionMutation = createR.data;
                 if (createTM.createSection) {
@@ -133,8 +140,14 @@ function ListPerformanceEvalution() {
         }
         async function runListCategory(): Promise<Category[] | undefined> {
             const listQV: APIt.ListCategorysQueryVariables = {};
-            const listGQL: GraphQLResult<APIt.ListCategorysQuery> =
-                await API.graphql(graphqlOperation(listCategorys, listQV)) as GraphQLResult<APIt.ListCategorysQuery>;
+            let listGQL: GraphQLResult<APIt.ListCategorysQuery>
+            try{
+                listGQL = await API.graphql(graphqlOperation(listCategorys, listQV)) as GraphQLResult<APIt.ListCategorysQuery>;
+            }catch(e){
+                console.error("エラーを無視しています", e)
+                console.error("データが不完全でないことを確認してください")
+                listGQL = e;
+            }
             if (listGQL.data) {
                 const listQ: APIt.ListCategorysQuery = listGQL.data;
                 if (listQ.listCategorys && listQ.listCategorys.items) {
@@ -157,8 +170,14 @@ function ListPerformanceEvalution() {
             const createMV: APIt.CreateInterviewMutationVariables = {
                 input: createI,
             };
-            const createR: GraphQLResult<APIt.CreateInterviewMutation> =
-                await API.graphql(graphqlOperation(createInterview, createMV)) as GraphQLResult<APIt.CreateInterviewMutation>;
+            let createR: GraphQLResult<APIt.CreateInterviewMutation>
+            try{
+                createR = await API.graphql(graphqlOperation(createInterview, createMV)) as GraphQLResult<APIt.CreateInterviewMutation>;
+            }catch(e){
+                console.error("エラーを無視しています", e)
+                console.error("データが不完全でないことを確認してください")
+                createR = e;
+            }
             if (createR.data) {
                 const createTM: APIt.CreateInterviewMutation = createR.data;
                 if (createTM.createInterview) {

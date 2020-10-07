@@ -36,21 +36,19 @@ function EvalutionScreen(props: Props) {
         ; (async () => {
             //const sheetId = props.match.params.sheetId;
           
-            try {
-                const input: APIt.GetSheetQueryVariables = {
-                    id: sheetId
-                }
-                const response = (await API.graphql(graphqlOperation(getSheet, input))
-                ) as GraphQLResult<GetSheetQuery>;
-
-                const sheetItem: Sheet = response.data?.getSheet as Sheet;
-                setSheet(sheetItem);
-                console.log(sheetItem);
-                console.log(response);
-            } catch (e) {
-                console.log(e);
+            const input: APIt.GetSheetQueryVariables = {
+                id: sheetId
             }
-
+            let response;
+            try {
+                response = (await API.graphql(graphqlOperation(getSheet, input))
+                ) as GraphQLResult<GetSheetQuery>;
+            } catch (e) {
+                console.error("エラーを無視しています", e)
+                response = e;
+            }
+            const sheetItem: Sheet = response.data?.getSheet as Sheet;
+            setSheet(sheetItem);
         })()
     }, []);
 
