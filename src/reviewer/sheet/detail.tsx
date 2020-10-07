@@ -35,7 +35,7 @@ function EvalutionScreen(props: Props) {
     useEffect(() => {
         ; (async () => {
             //const sheetId = props.match.params.sheetId;
-          
+
             const input: APIt.GetSheetQueryVariables = {
                 id: sheetId
             }
@@ -52,31 +52,31 @@ function EvalutionScreen(props: Props) {
         })()
     }, []);
 
-    function handleChange(event: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>){
+    function handleChange(event: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>) {
         const target = event.target;
         const value = target.value;
         const name = target.name;
         setFormInput({ ...formInput, [name]: value });
         console.log(formInput)
     }
-    function handleChangeInterview(event: ChangeEvent<HTMLTextAreaElement>){
+    function handleChangeInterview(event: ChangeEvent<HTMLTextAreaElement>) {
         //入力処理
         const value = event.target.value;
         const interviewId = event.target.getAttribute('data-interview-id') || "";
 
         let inputInterviewArray: Interview[] = [];
-        if(formInput && formInput.interviews) inputInterviewArray =formInput.interviews
+        if (formInput && formInput.interviews) inputInterviewArray = formInput.interviews
 
         //加工処理
 
         //入力の調整
         let isExist: boolean = false
-        inputInterviewArray.forEach((interview: Interview)=>{
-            if(interview.id === interviewId){
+        inputInterviewArray.forEach((interview: Interview) => {
+            if (interview.id === interviewId) {
                 isExist = true
             }
         })
-        if(!isExist){
+        if (!isExist) {
             inputInterviewArray.push({
                 id: interviewId
             } as Interview)
@@ -84,9 +84,9 @@ function EvalutionScreen(props: Props) {
 
 
         //置き換え
-        const outputInterviewArray = inputInterviewArray.map((interview: Interview)=>{
-            let ret : Interview = interview;
-            if(ret.id === interviewId){
+        const outputInterviewArray = inputInterviewArray.map((interview: Interview) => {
+            let ret: Interview = interview;
+            if (ret.id === interviewId) {
                 ret.detail = value;
             }
             return ret;
@@ -98,15 +98,15 @@ function EvalutionScreen(props: Props) {
         // interviewArray.push(changedInterview)
 
         //出力処理
-        if(!formInput){
+        if (!formInput) {
             //一回目の入力時
             setFormInput({
                 interviews: outputInterviewArray
             })
-        }else{
+        } else {
             //二回目以降の入力時
             setFormInput({
-                 ...formInput, interviews: outputInterviewArray 
+                ...formInput, interviews: outputInterviewArray
             })
         }
     }
@@ -131,10 +131,10 @@ function EvalutionScreen(props: Props) {
         // }})()
         handleClose();
     }
-    async function handleClickSaveAndApprove(){
+    async function handleClickSaveAndApprove() {
         //保存して承認ボタンを押したときの処理
         runUpdateSheet(formInput);
-        formInput?.interviews?.forEach((interview: Interview)=> {
+        formInput?.interviews?.forEach((interview: Interview) => {
             runUpdateInterview(interview)
         })
         async function runUpdateSheet(sheet: Sheet) {
@@ -146,10 +146,10 @@ function EvalutionScreen(props: Props) {
                 overAllEvaluation: parseInt(sheet.overAllEvaluation as unknown as string)
             }
             const updateMV: APIt.UpdateSheetMutationVariables = {
-            input: updateI,
+                input: updateI,
             };
-            const updateR: GraphQLResult<APIt.UpdateSheetMutation> = 
-            await API.graphql(graphqlOperation(updateSheet, updateMV)) as GraphQLResult<APIt.UpdateSheetMutation>;
+            const updateR: GraphQLResult<APIt.UpdateSheetMutation> =
+                await API.graphql(graphqlOperation(updateSheet, updateMV)) as GraphQLResult<APIt.UpdateSheetMutation>;
             if (updateR.data) {
                 const updateTM: APIt.UpdateSheetMutation = updateR.data;
                 if (updateTM.updateSheet) {
@@ -158,7 +158,7 @@ function EvalutionScreen(props: Props) {
                 }
             }
         }
-        async function runUpdateInterview(inputInterview: Interview){
+        async function runUpdateInterview(inputInterview: Interview) {
             const updateI: APIt.UpdateInterviewInput = {
                 id: inputInterview.id,
                 detail: inputInterview.detail
@@ -166,7 +166,7 @@ function EvalutionScreen(props: Props) {
             const updateMV: APIt.UpdateInterviewMutationVariables = {
                 input: updateI,
             };
-            const updateR: GraphQLResult<APIt.UpdateInterviewMutation> = 
+            const updateR: GraphQLResult<APIt.UpdateInterviewMutation> =
                 await API.graphql(graphqlOperation(updateInterview, updateMV)) as GraphQLResult<APIt.UpdateInterviewMutation>;
             if (updateR.data) {
                 const updateTM: APIt.UpdateInterviewMutation = updateR.data;
@@ -310,45 +310,52 @@ function EvalutionScreen(props: Props) {
                             {/* ステータスによってボタンの出し分け */}
                             <Form.Group>
                                 {/* 承認ステータスが2または10の時に「保存して承認」ボタンを表示 */}
-                                {(() => {if(sheet.statusValue===2||sheet.statusValue===10){
-                                    return(
-                                        <span>
-                                            <Button onClick={handleClickSaveAndApprove}>保存して承認</Button>
-                                        </span>
-                                    )}
+                                {(() => {
+                                    if (sheet.statusValue === 2 || sheet.statusValue === 10) {
+                                        return (
+                                            <span>
+                                                <Button onClick={handleClickSaveAndApprove}>保存して承認</Button>
+                                            </span>
+                                        )
+                                    }
                                 })()}
                                 {/* 承認ステータスが2か3か10か12の時に「保存して承認」ボタンを表示 */}
-                                {(() => {if(sheet.statusValue===2||sheet.statusValue===3||sheet.statusValue===10||sheet.statusValue===12){
-                                    return(
-                                        <span>
-                                            <Button onClick={handleShow}>差し戻し</Button>
-                                        </span>
-                                    )}
+                                {(() => {
+                                    if (sheet.statusValue === 2 || sheet.statusValue === 3 || sheet.statusValue === 10 || sheet.statusValue === 12) {
+                                        return (
+                                            <span>
+                                                <Button onClick={handleShow}>差し戻し</Button>
+                                            </span>
+                                        )
+                                    }
                                 })()}
                                 {/* 承認ステータスが12かつ部門長が存在すれば「部門長承認依頼」ボタン、部門長が存在しなければ「最終承認」ボタンを表示 */}
-                                {(() => {if(sheet.statusValue===12){
-                                    if(sheet.secondEmployee?.superior){
-                                        return(
-                                            <span>
-                                                <Button >部門長承認依頼</Button>
-                                            </span>
-                                        ) 
-                                    }else{
-                                        return(
+                                {(() => {
+                                    if (sheet.statusValue === 12) {
+                                        if (sheet.secondEmployee?.superior) {
+                                            return (
+                                                <span>
+                                                    <Button >部門長承認依頼</Button>
+                                                </span>
+                                            )
+                                        } else {
+                                            return (
+                                                <span>
+                                                    <Button >最終承認</Button>
+                                                </span>
+                                            )
+                                        }
+                                    }
+                                })()}
+                                {/* 承認ステータスが13の時に「最終承認」ボタンを表示 */}
+                                {(() => {
+                                    if (sheet.statusValue === 13) {
+                                        return (
                                             <span>
                                                 <Button >最終承認</Button>
                                             </span>
                                         )
                                     }
-                                    }
-                                })()}
-                                {/* 承認ステータスが13の時に「最終承認」ボタンを表示 */}
-                                {(() => {if(sheet.statusValue===13){
-                                    return(
-                                        <span>
-                                            <Button >最終承認</Button>
-                                        </span>
-                                    )}
                                 })()}
                             </Form.Group>
                         </Form><br />
@@ -364,7 +371,7 @@ function EvalutionScreen(props: Props) {
                                             <tr>
                                                 <td>目標</td>
                                                 <td>実績</td>
-                                                <td>ステータス</td>
+                                                <td>進捗率</td>
                                                 <td>優先順位</td>
                                                 <td>自己評価</td>
                                                 <td>最終評価</td>
@@ -384,8 +391,8 @@ function EvalutionScreen(props: Props) {
                                                         {/* 実績 */}
                                                         <td>{objective.result}</td>
 
-                                                        {/* ステータス文字列 */}
-                                                        <td>{objective.status}</td>
+                                                        {/* 進捗率 */}
+                                                        <td>{objective.progress}</td>
 
                                                         {/* 優先順位 */}
                                                         <td>{objective.priority}</td>
