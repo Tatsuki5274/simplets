@@ -9,7 +9,7 @@ export const getCompany = /* GraphQL */ `
       name
       shortName
       url
-      companyGroup
+      companyReadGroup
       createdAt
       updatedAt
     }
@@ -27,7 +27,7 @@ export const listCompanys = /* GraphQL */ `
         name
         shortName
         url
-        companyGroup
+        companyReadGroup
         createdAt
         updatedAt
       }
@@ -79,7 +79,7 @@ export const getEmployee = /* GraphQL */ `
                   firstName
                   lastName
                   grade
-                  companyGroup
+                  companyReadGroup
                   createdAt
                   updatedAt
                 }
@@ -87,7 +87,8 @@ export const getEmployee = /* GraphQL */ `
                   id
                   name
                   sort
-                  companyGroup
+                  companyReadGroup
+                  companyAdminGroup
                   createdAt
                   updatedAt
                 }
@@ -96,11 +97,11 @@ export const getEmployee = /* GraphQL */ `
                   name
                   shortName
                   url
-                  companyGroup
+                  companyReadGroup
                   createdAt
                   updatedAt
                 }
-                companyGroup
+                companyReadGroup
                 createdAt
                 updatedAt
               }
@@ -108,7 +109,8 @@ export const getEmployee = /* GraphQL */ `
                 id
                 name
                 sort
-                companyGroup
+                companyReadGroup
+                companyAdminGroup
                 createdAt
                 updatedAt
               }
@@ -117,11 +119,11 @@ export const getEmployee = /* GraphQL */ `
                 name
                 shortName
                 url
-                companyGroup
+                companyReadGroup
                 createdAt
                 updatedAt
               }
-              companyGroup
+              companyReadGroup
               createdAt
               updatedAt
             }
@@ -129,7 +131,8 @@ export const getEmployee = /* GraphQL */ `
               id
               name
               sort
-              companyGroup
+              companyReadGroup
+              companyAdminGroup
               createdAt
               updatedAt
             }
@@ -138,11 +141,11 @@ export const getEmployee = /* GraphQL */ `
               name
               shortName
               url
-              companyGroup
+              companyReadGroup
               createdAt
               updatedAt
             }
-            companyGroup
+            companyReadGroup
             createdAt
             updatedAt
           }
@@ -150,7 +153,8 @@ export const getEmployee = /* GraphQL */ `
             id
             name
             sort
-            companyGroup
+            companyReadGroup
+            companyAdminGroup
             createdAt
             updatedAt
           }
@@ -159,11 +163,11 @@ export const getEmployee = /* GraphQL */ `
             name
             shortName
             url
-            companyGroup
+            companyReadGroup
             createdAt
             updatedAt
           }
-          companyGroup
+          companyReadGroup
           createdAt
           updatedAt
         }
@@ -171,7 +175,8 @@ export const getEmployee = /* GraphQL */ `
           id
           name
           sort
-          companyGroup
+          companyReadGroup
+          companyAdminGroup
           createdAt
           updatedAt
         }
@@ -180,11 +185,11 @@ export const getEmployee = /* GraphQL */ `
           name
           shortName
           url
-          companyGroup
+          companyReadGroup
           createdAt
           updatedAt
         }
-        companyGroup
+        companyReadGroup
         createdAt
         updatedAt
       }
@@ -192,7 +197,8 @@ export const getEmployee = /* GraphQL */ `
         id
         name
         sort
-        companyGroup
+        companyReadGroup
+        companyAdminGroup
         createdAt
         updatedAt
       }
@@ -201,11 +207,11 @@ export const getEmployee = /* GraphQL */ `
         name
         shortName
         url
-        companyGroup
+        companyReadGroup
         createdAt
         updatedAt
       }
-      companyGroup
+      companyReadGroup
       createdAt
       updatedAt
     }
@@ -254,7 +260,7 @@ export const listEmployees = /* GraphQL */ `
                   firstName
                   lastName
                   grade
-                  companyGroup
+                  companyReadGroup
                   createdAt
                   updatedAt
                 }
@@ -262,7 +268,8 @@ export const listEmployees = /* GraphQL */ `
                   id
                   name
                   sort
-                  companyGroup
+                  companyReadGroup
+                  companyAdminGroup
                   createdAt
                   updatedAt
                 }
@@ -271,11 +278,11 @@ export const listEmployees = /* GraphQL */ `
                   name
                   shortName
                   url
-                  companyGroup
+                  companyReadGroup
                   createdAt
                   updatedAt
                 }
-                companyGroup
+                companyReadGroup
                 createdAt
                 updatedAt
               }
@@ -283,7 +290,8 @@ export const listEmployees = /* GraphQL */ `
                 id
                 name
                 sort
-                companyGroup
+                companyReadGroup
+                companyAdminGroup
                 createdAt
                 updatedAt
               }
@@ -292,11 +300,11 @@ export const listEmployees = /* GraphQL */ `
                 name
                 shortName
                 url
-                companyGroup
+                companyReadGroup
                 createdAt
                 updatedAt
               }
-              companyGroup
+              companyReadGroup
               createdAt
               updatedAt
             }
@@ -304,7 +312,8 @@ export const listEmployees = /* GraphQL */ `
               id
               name
               sort
-              companyGroup
+              companyReadGroup
+              companyAdminGroup
               createdAt
               updatedAt
             }
@@ -313,11 +322,11 @@ export const listEmployees = /* GraphQL */ `
               name
               shortName
               url
-              companyGroup
+              companyReadGroup
               createdAt
               updatedAt
             }
-            companyGroup
+            companyReadGroup
             createdAt
             updatedAt
           }
@@ -325,7 +334,8 @@ export const listEmployees = /* GraphQL */ `
             id
             name
             sort
-            companyGroup
+            companyReadGroup
+            companyAdminGroup
             createdAt
             updatedAt
           }
@@ -334,11 +344,11 @@ export const listEmployees = /* GraphQL */ `
             name
             shortName
             url
-            companyGroup
+            companyReadGroup
             createdAt
             updatedAt
           }
-          companyGroup
+          companyReadGroup
           createdAt
           updatedAt
         }
@@ -346,7 +356,8 @@ export const listEmployees = /* GraphQL */ `
           id
           name
           sort
-          companyGroup
+          companyReadGroup
+          companyAdminGroup
           createdAt
           updatedAt
         }
@@ -355,11 +366,11 @@ export const listEmployees = /* GraphQL */ `
           name
           shortName
           url
-          companyGroup
+          companyReadGroup
           createdAt
           updatedAt
         }
-        companyGroup
+        companyReadGroup
         createdAt
         updatedAt
       }
@@ -373,7 +384,8 @@ export const getGroup = /* GraphQL */ `
       id
       name
       sort
-      companyGroup
+      companyReadGroup
+      companyAdminGroup
       createdAt
       updatedAt
     }
@@ -390,7 +402,8 @@ export const listGroups = /* GraphQL */ `
         id
         name
         sort
-        companyGroup
+        companyReadGroup
+        companyAdminGroup
         createdAt
         updatedAt
       }
@@ -407,12 +420,14 @@ export const getCategory = /* GraphQL */ `
         name
         shortName
         url
-        companyGroup
+        companyReadGroup
         createdAt
         updatedAt
       }
       no
       name
+      companyReadGroup
+      companyAdminGroup
       createdAt
       updatedAt
     }
@@ -432,12 +447,14 @@ export const listCategorys = /* GraphQL */ `
           name
           shortName
           url
-          companyGroup
+          companyReadGroup
           createdAt
           updatedAt
         }
         no
         name
+        companyReadGroup
+        companyAdminGroup
         createdAt
         updatedAt
       }
@@ -454,6 +471,7 @@ export const getInterview = /* GraphQL */ `
       purpose
       detail
       reviewee
+      reviewers
       createdAt
       updatedAt
     }
@@ -473,6 +491,7 @@ export const listInterviews = /* GraphQL */ `
         purpose
         detail
         reviewee
+        reviewers
         createdAt
         updatedAt
       }
@@ -502,7 +521,8 @@ export const getSheet = /* GraphQL */ `
         id
         name
         sort
-        companyGroup
+        companyReadGroup
+        companyAdminGroup
         createdAt
         updatedAt
       }
@@ -514,6 +534,7 @@ export const getSheet = /* GraphQL */ `
           purpose
           detail
           reviewee
+          reviewers
           createdAt
           updatedAt
         }
@@ -555,7 +576,7 @@ export const getSheet = /* GraphQL */ `
                   firstName
                   lastName
                   grade
-                  companyGroup
+                  companyReadGroup
                   createdAt
                   updatedAt
                 }
@@ -563,7 +584,8 @@ export const getSheet = /* GraphQL */ `
                   id
                   name
                   sort
-                  companyGroup
+                  companyReadGroup
+                  companyAdminGroup
                   createdAt
                   updatedAt
                 }
@@ -572,11 +594,11 @@ export const getSheet = /* GraphQL */ `
                   name
                   shortName
                   url
-                  companyGroup
+                  companyReadGroup
                   createdAt
                   updatedAt
                 }
-                companyGroup
+                companyReadGroup
                 createdAt
                 updatedAt
               }
@@ -584,7 +606,8 @@ export const getSheet = /* GraphQL */ `
                 id
                 name
                 sort
-                companyGroup
+                companyReadGroup
+                companyAdminGroup
                 createdAt
                 updatedAt
               }
@@ -593,11 +616,11 @@ export const getSheet = /* GraphQL */ `
                 name
                 shortName
                 url
-                companyGroup
+                companyReadGroup
                 createdAt
                 updatedAt
               }
-              companyGroup
+              companyReadGroup
               createdAt
               updatedAt
             }
@@ -605,7 +628,8 @@ export const getSheet = /* GraphQL */ `
               id
               name
               sort
-              companyGroup
+              companyReadGroup
+              companyAdminGroup
               createdAt
               updatedAt
             }
@@ -614,11 +638,11 @@ export const getSheet = /* GraphQL */ `
               name
               shortName
               url
-              companyGroup
+              companyReadGroup
               createdAt
               updatedAt
             }
-            companyGroup
+            companyReadGroup
             createdAt
             updatedAt
           }
@@ -626,7 +650,8 @@ export const getSheet = /* GraphQL */ `
             id
             name
             sort
-            companyGroup
+            companyReadGroup
+            companyAdminGroup
             createdAt
             updatedAt
           }
@@ -635,11 +660,11 @@ export const getSheet = /* GraphQL */ `
             name
             shortName
             url
-            companyGroup
+            companyReadGroup
             createdAt
             updatedAt
           }
-          companyGroup
+          companyReadGroup
           createdAt
           updatedAt
         }
@@ -647,7 +672,8 @@ export const getSheet = /* GraphQL */ `
           id
           name
           sort
-          companyGroup
+          companyReadGroup
+          companyAdminGroup
           createdAt
           updatedAt
         }
@@ -656,11 +682,11 @@ export const getSheet = /* GraphQL */ `
           name
           shortName
           url
-          companyGroup
+          companyReadGroup
           createdAt
           updatedAt
         }
-        companyGroup
+        companyReadGroup
         createdAt
         updatedAt
       }
@@ -700,7 +726,7 @@ export const getSheet = /* GraphQL */ `
                   firstName
                   lastName
                   grade
-                  companyGroup
+                  companyReadGroup
                   createdAt
                   updatedAt
                 }
@@ -708,7 +734,8 @@ export const getSheet = /* GraphQL */ `
                   id
                   name
                   sort
-                  companyGroup
+                  companyReadGroup
+                  companyAdminGroup
                   createdAt
                   updatedAt
                 }
@@ -717,11 +744,11 @@ export const getSheet = /* GraphQL */ `
                   name
                   shortName
                   url
-                  companyGroup
+                  companyReadGroup
                   createdAt
                   updatedAt
                 }
-                companyGroup
+                companyReadGroup
                 createdAt
                 updatedAt
               }
@@ -729,7 +756,8 @@ export const getSheet = /* GraphQL */ `
                 id
                 name
                 sort
-                companyGroup
+                companyReadGroup
+                companyAdminGroup
                 createdAt
                 updatedAt
               }
@@ -738,11 +766,11 @@ export const getSheet = /* GraphQL */ `
                 name
                 shortName
                 url
-                companyGroup
+                companyReadGroup
                 createdAt
                 updatedAt
               }
-              companyGroup
+              companyReadGroup
               createdAt
               updatedAt
             }
@@ -750,7 +778,8 @@ export const getSheet = /* GraphQL */ `
               id
               name
               sort
-              companyGroup
+              companyReadGroup
+              companyAdminGroup
               createdAt
               updatedAt
             }
@@ -759,11 +788,11 @@ export const getSheet = /* GraphQL */ `
               name
               shortName
               url
-              companyGroup
+              companyReadGroup
               createdAt
               updatedAt
             }
-            companyGroup
+            companyReadGroup
             createdAt
             updatedAt
           }
@@ -771,7 +800,8 @@ export const getSheet = /* GraphQL */ `
             id
             name
             sort
-            companyGroup
+            companyReadGroup
+            companyAdminGroup
             createdAt
             updatedAt
           }
@@ -780,11 +810,11 @@ export const getSheet = /* GraphQL */ `
             name
             shortName
             url
-            companyGroup
+            companyReadGroup
             createdAt
             updatedAt
           }
-          companyGroup
+          companyReadGroup
           createdAt
           updatedAt
         }
@@ -792,7 +822,8 @@ export const getSheet = /* GraphQL */ `
           id
           name
           sort
-          companyGroup
+          companyReadGroup
+          companyAdminGroup
           createdAt
           updatedAt
         }
@@ -801,11 +832,11 @@ export const getSheet = /* GraphQL */ `
           name
           shortName
           url
-          companyGroup
+          companyReadGroup
           createdAt
           updatedAt
         }
-        companyGroup
+        companyReadGroup
         createdAt
         updatedAt
       }
@@ -846,7 +877,8 @@ export const getSheet = /* GraphQL */ `
                   id
                   name
                   sort
-                  companyGroup
+                  companyReadGroup
+                  companyAdminGroup
                   createdAt
                   updatedAt
                 }
@@ -859,7 +891,7 @@ export const getSheet = /* GraphQL */ `
                   firstName
                   lastName
                   grade
-                  companyGroup
+                  companyReadGroup
                   createdAt
                   updatedAt
                 }
@@ -869,7 +901,7 @@ export const getSheet = /* GraphQL */ `
                   firstName
                   lastName
                   grade
-                  companyGroup
+                  companyReadGroup
                   createdAt
                   updatedAt
                 }
@@ -877,7 +909,8 @@ export const getSheet = /* GraphQL */ `
                   nextToken
                 }
                 reviewee
-                reviewer
+                reviewers
+                companyReadGroup
                 createdAt
                 updatedAt
               }
@@ -892,13 +925,18 @@ export const getSheet = /* GraphQL */ `
                   id
                   no
                   name
+                  companyReadGroup
+                  companyAdminGroup
                   createdAt
                   updatedAt
                 }
+                reviewee
+                reviewers
                 createdAt
                 updatedAt
               }
               reviewee
+              reviewers
               createdAt
               updatedAt
             }
@@ -911,22 +949,27 @@ export const getSheet = /* GraphQL */ `
               name
               shortName
               url
-              companyGroup
+              companyReadGroup
               createdAt
               updatedAt
             }
             no
             name
+            companyReadGroup
+            companyAdminGroup
             createdAt
             updatedAt
           }
+          reviewee
+          reviewers
           createdAt
           updatedAt
         }
         nextToken
       }
       reviewee
-      reviewer
+      reviewers
+      companyReadGroup
       createdAt
       updatedAt
     }
@@ -959,7 +1002,8 @@ export const listSheets = /* GraphQL */ `
           id
           name
           sort
-          companyGroup
+          companyReadGroup
+          companyAdminGroup
           createdAt
           updatedAt
         }
@@ -971,6 +1015,7 @@ export const listSheets = /* GraphQL */ `
             purpose
             detail
             reviewee
+            reviewers
             createdAt
             updatedAt
           }
@@ -1006,7 +1051,7 @@ export const listSheets = /* GraphQL */ `
                   firstName
                   lastName
                   grade
-                  companyGroup
+                  companyReadGroup
                   createdAt
                   updatedAt
                 }
@@ -1014,7 +1059,8 @@ export const listSheets = /* GraphQL */ `
                   id
                   name
                   sort
-                  companyGroup
+                  companyReadGroup
+                  companyAdminGroup
                   createdAt
                   updatedAt
                 }
@@ -1023,11 +1069,11 @@ export const listSheets = /* GraphQL */ `
                   name
                   shortName
                   url
-                  companyGroup
+                  companyReadGroup
                   createdAt
                   updatedAt
                 }
-                companyGroup
+                companyReadGroup
                 createdAt
                 updatedAt
               }
@@ -1035,7 +1081,8 @@ export const listSheets = /* GraphQL */ `
                 id
                 name
                 sort
-                companyGroup
+                companyReadGroup
+                companyAdminGroup
                 createdAt
                 updatedAt
               }
@@ -1044,11 +1091,11 @@ export const listSheets = /* GraphQL */ `
                 name
                 shortName
                 url
-                companyGroup
+                companyReadGroup
                 createdAt
                 updatedAt
               }
-              companyGroup
+              companyReadGroup
               createdAt
               updatedAt
             }
@@ -1056,7 +1103,8 @@ export const listSheets = /* GraphQL */ `
               id
               name
               sort
-              companyGroup
+              companyReadGroup
+              companyAdminGroup
               createdAt
               updatedAt
             }
@@ -1065,11 +1113,11 @@ export const listSheets = /* GraphQL */ `
               name
               shortName
               url
-              companyGroup
+              companyReadGroup
               createdAt
               updatedAt
             }
-            companyGroup
+            companyReadGroup
             createdAt
             updatedAt
           }
@@ -1077,7 +1125,8 @@ export const listSheets = /* GraphQL */ `
             id
             name
             sort
-            companyGroup
+            companyReadGroup
+            companyAdminGroup
             createdAt
             updatedAt
           }
@@ -1086,11 +1135,11 @@ export const listSheets = /* GraphQL */ `
             name
             shortName
             url
-            companyGroup
+            companyReadGroup
             createdAt
             updatedAt
           }
-          companyGroup
+          companyReadGroup
           createdAt
           updatedAt
         }
@@ -1124,7 +1173,7 @@ export const listSheets = /* GraphQL */ `
                   firstName
                   lastName
                   grade
-                  companyGroup
+                  companyReadGroup
                   createdAt
                   updatedAt
                 }
@@ -1132,7 +1181,8 @@ export const listSheets = /* GraphQL */ `
                   id
                   name
                   sort
-                  companyGroup
+                  companyReadGroup
+                  companyAdminGroup
                   createdAt
                   updatedAt
                 }
@@ -1141,11 +1191,11 @@ export const listSheets = /* GraphQL */ `
                   name
                   shortName
                   url
-                  companyGroup
+                  companyReadGroup
                   createdAt
                   updatedAt
                 }
-                companyGroup
+                companyReadGroup
                 createdAt
                 updatedAt
               }
@@ -1153,7 +1203,8 @@ export const listSheets = /* GraphQL */ `
                 id
                 name
                 sort
-                companyGroup
+                companyReadGroup
+                companyAdminGroup
                 createdAt
                 updatedAt
               }
@@ -1162,11 +1213,11 @@ export const listSheets = /* GraphQL */ `
                 name
                 shortName
                 url
-                companyGroup
+                companyReadGroup
                 createdAt
                 updatedAt
               }
-              companyGroup
+              companyReadGroup
               createdAt
               updatedAt
             }
@@ -1174,7 +1225,8 @@ export const listSheets = /* GraphQL */ `
               id
               name
               sort
-              companyGroup
+              companyReadGroup
+              companyAdminGroup
               createdAt
               updatedAt
             }
@@ -1183,11 +1235,11 @@ export const listSheets = /* GraphQL */ `
               name
               shortName
               url
-              companyGroup
+              companyReadGroup
               createdAt
               updatedAt
             }
-            companyGroup
+            companyReadGroup
             createdAt
             updatedAt
           }
@@ -1195,7 +1247,8 @@ export const listSheets = /* GraphQL */ `
             id
             name
             sort
-            companyGroup
+            companyReadGroup
+            companyAdminGroup
             createdAt
             updatedAt
           }
@@ -1204,11 +1257,11 @@ export const listSheets = /* GraphQL */ `
             name
             shortName
             url
-            companyGroup
+            companyReadGroup
             createdAt
             updatedAt
           }
-          companyGroup
+          companyReadGroup
           createdAt
           updatedAt
         }
@@ -1246,7 +1299,8 @@ export const listSheets = /* GraphQL */ `
                   statusValue
                   sheetGroupId
                   reviewee
-                  reviewer
+                  reviewers
+                  companyReadGroup
                   createdAt
                   updatedAt
                 }
@@ -1254,10 +1308,13 @@ export const listSheets = /* GraphQL */ `
                 section {
                   id
                   sectionSheetId
+                  reviewee
+                  reviewers
                   createdAt
                   updatedAt
                 }
                 reviewee
+                reviewers
                 createdAt
                 updatedAt
               }
@@ -1270,22 +1327,27 @@ export const listSheets = /* GraphQL */ `
                 name
                 shortName
                 url
-                companyGroup
+                companyReadGroup
                 createdAt
                 updatedAt
               }
               no
               name
+              companyReadGroup
+              companyAdminGroup
               createdAt
               updatedAt
             }
+            reviewee
+            reviewers
             createdAt
             updatedAt
           }
           nextToken
         }
         reviewee
-        reviewer
+        reviewers
+        companyReadGroup
         createdAt
         updatedAt
       }
@@ -1331,7 +1393,8 @@ export const getSection = /* GraphQL */ `
               id
               name
               sort
-              companyGroup
+              companyReadGroup
+              companyAdminGroup
               createdAt
               updatedAt
             }
@@ -1343,6 +1406,7 @@ export const getSection = /* GraphQL */ `
                 purpose
                 detail
                 reviewee
+                reviewers
                 createdAt
                 updatedAt
               }
@@ -1366,7 +1430,7 @@ export const getSection = /* GraphQL */ `
                   firstName
                   lastName
                   grade
-                  companyGroup
+                  companyReadGroup
                   createdAt
                   updatedAt
                 }
@@ -1374,7 +1438,8 @@ export const getSection = /* GraphQL */ `
                   id
                   name
                   sort
-                  companyGroup
+                  companyReadGroup
+                  companyAdminGroup
                   createdAt
                   updatedAt
                 }
@@ -1383,11 +1448,11 @@ export const getSection = /* GraphQL */ `
                   name
                   shortName
                   url
-                  companyGroup
+                  companyReadGroup
                   createdAt
                   updatedAt
                 }
-                companyGroup
+                companyReadGroup
                 createdAt
                 updatedAt
               }
@@ -1395,7 +1460,8 @@ export const getSection = /* GraphQL */ `
                 id
                 name
                 sort
-                companyGroup
+                companyReadGroup
+                companyAdminGroup
                 createdAt
                 updatedAt
               }
@@ -1404,11 +1470,11 @@ export const getSection = /* GraphQL */ `
                 name
                 shortName
                 url
-                companyGroup
+                companyReadGroup
                 createdAt
                 updatedAt
               }
-              companyGroup
+              companyReadGroup
               createdAt
               updatedAt
             }
@@ -1430,7 +1496,7 @@ export const getSection = /* GraphQL */ `
                   firstName
                   lastName
                   grade
-                  companyGroup
+                  companyReadGroup
                   createdAt
                   updatedAt
                 }
@@ -1438,7 +1504,8 @@ export const getSection = /* GraphQL */ `
                   id
                   name
                   sort
-                  companyGroup
+                  companyReadGroup
+                  companyAdminGroup
                   createdAt
                   updatedAt
                 }
@@ -1447,11 +1514,11 @@ export const getSection = /* GraphQL */ `
                   name
                   shortName
                   url
-                  companyGroup
+                  companyReadGroup
                   createdAt
                   updatedAt
                 }
-                companyGroup
+                companyReadGroup
                 createdAt
                 updatedAt
               }
@@ -1459,7 +1526,8 @@ export const getSection = /* GraphQL */ `
                 id
                 name
                 sort
-                companyGroup
+                companyReadGroup
+                companyAdminGroup
                 createdAt
                 updatedAt
               }
@@ -1468,11 +1536,11 @@ export const getSection = /* GraphQL */ `
                 name
                 shortName
                 url
-                companyGroup
+                companyReadGroup
                 createdAt
                 updatedAt
               }
-              companyGroup
+              companyReadGroup
               createdAt
               updatedAt
             }
@@ -1487,16 +1555,21 @@ export const getSection = /* GraphQL */ `
                   id
                   no
                   name
+                  companyReadGroup
+                  companyAdminGroup
                   createdAt
                   updatedAt
                 }
+                reviewee
+                reviewers
                 createdAt
                 updatedAt
               }
               nextToken
             }
             reviewee
-            reviewer
+            reviewers
+            companyReadGroup
             createdAt
             updatedAt
           }
@@ -1534,7 +1607,8 @@ export const getSection = /* GraphQL */ `
                   statusValue
                   sheetGroupId
                   reviewee
-                  reviewer
+                  reviewers
+                  companyReadGroup
                   createdAt
                   updatedAt
                 }
@@ -1542,10 +1616,13 @@ export const getSection = /* GraphQL */ `
                 section {
                   id
                   sectionSheetId
+                  reviewee
+                  reviewers
                   createdAt
                   updatedAt
                 }
                 reviewee
+                reviewers
                 createdAt
                 updatedAt
               }
@@ -1558,19 +1635,24 @@ export const getSection = /* GraphQL */ `
                 name
                 shortName
                 url
-                companyGroup
+                companyReadGroup
                 createdAt
                 updatedAt
               }
               no
               name
+              companyReadGroup
+              companyAdminGroup
               createdAt
               updatedAt
             }
+            reviewee
+            reviewers
             createdAt
             updatedAt
           }
           reviewee
+          reviewers
           createdAt
           updatedAt
         }
@@ -1583,15 +1665,19 @@ export const getSection = /* GraphQL */ `
           name
           shortName
           url
-          companyGroup
+          companyReadGroup
           createdAt
           updatedAt
         }
         no
         name
+        companyReadGroup
+        companyAdminGroup
         createdAt
         updatedAt
       }
+      reviewee
+      reviewers
       createdAt
       updatedAt
     }
@@ -1640,7 +1726,8 @@ export const listSections = /* GraphQL */ `
                 id
                 name
                 sort
-                companyGroup
+                companyReadGroup
+                companyAdminGroup
                 createdAt
                 updatedAt
               }
@@ -1652,6 +1739,7 @@ export const listSections = /* GraphQL */ `
                   purpose
                   detail
                   reviewee
+                  reviewers
                   createdAt
                   updatedAt
                 }
@@ -1669,7 +1757,7 @@ export const listSections = /* GraphQL */ `
                   firstName
                   lastName
                   grade
-                  companyGroup
+                  companyReadGroup
                   createdAt
                   updatedAt
                 }
@@ -1677,7 +1765,8 @@ export const listSections = /* GraphQL */ `
                   id
                   name
                   sort
-                  companyGroup
+                  companyReadGroup
+                  companyAdminGroup
                   createdAt
                   updatedAt
                 }
@@ -1686,11 +1775,11 @@ export const listSections = /* GraphQL */ `
                   name
                   shortName
                   url
-                  companyGroup
+                  companyReadGroup
                   createdAt
                   updatedAt
                 }
-                companyGroup
+                companyReadGroup
                 createdAt
                 updatedAt
               }
@@ -1706,7 +1795,7 @@ export const listSections = /* GraphQL */ `
                   firstName
                   lastName
                   grade
-                  companyGroup
+                  companyReadGroup
                   createdAt
                   updatedAt
                 }
@@ -1714,7 +1803,8 @@ export const listSections = /* GraphQL */ `
                   id
                   name
                   sort
-                  companyGroup
+                  companyReadGroup
+                  companyAdminGroup
                   createdAt
                   updatedAt
                 }
@@ -1723,11 +1813,11 @@ export const listSections = /* GraphQL */ `
                   name
                   shortName
                   url
-                  companyGroup
+                  companyReadGroup
                   createdAt
                   updatedAt
                 }
-                companyGroup
+                companyReadGroup
                 createdAt
                 updatedAt
               }
@@ -1735,13 +1825,16 @@ export const listSections = /* GraphQL */ `
                 items {
                   id
                   sectionSheetId
+                  reviewee
+                  reviewers
                   createdAt
                   updatedAt
                 }
                 nextToken
               }
               reviewee
-              reviewer
+              reviewers
+              companyReadGroup
               createdAt
               updatedAt
             }
@@ -1764,6 +1857,7 @@ export const listSections = /* GraphQL */ `
                   expDoneDate
                   objectiveSectionId
                   reviewee
+                  reviewers
                   createdAt
                   updatedAt
                 }
@@ -1776,19 +1870,24 @@ export const listSections = /* GraphQL */ `
                   name
                   shortName
                   url
-                  companyGroup
+                  companyReadGroup
                   createdAt
                   updatedAt
                 }
                 no
                 name
+                companyReadGroup
+                companyAdminGroup
                 createdAt
                 updatedAt
               }
+              reviewee
+              reviewers
               createdAt
               updatedAt
             }
             reviewee
+            reviewers
             createdAt
             updatedAt
           }
@@ -1801,15 +1900,19 @@ export const listSections = /* GraphQL */ `
             name
             shortName
             url
-            companyGroup
+            companyReadGroup
             createdAt
             updatedAt
           }
           no
           name
+          companyReadGroup
+          companyAdminGroup
           createdAt
           updatedAt
         }
+        reviewee
+        reviewers
         createdAt
         updatedAt
       }
@@ -1851,7 +1954,8 @@ export const getObjective = /* GraphQL */ `
           id
           name
           sort
-          companyGroup
+          companyReadGroup
+          companyAdminGroup
           createdAt
           updatedAt
         }
@@ -1863,6 +1967,7 @@ export const getObjective = /* GraphQL */ `
             purpose
             detail
             reviewee
+            reviewers
             createdAt
             updatedAt
           }
@@ -1898,7 +2003,7 @@ export const getObjective = /* GraphQL */ `
                   firstName
                   lastName
                   grade
-                  companyGroup
+                  companyReadGroup
                   createdAt
                   updatedAt
                 }
@@ -1906,7 +2011,8 @@ export const getObjective = /* GraphQL */ `
                   id
                   name
                   sort
-                  companyGroup
+                  companyReadGroup
+                  companyAdminGroup
                   createdAt
                   updatedAt
                 }
@@ -1915,11 +2021,11 @@ export const getObjective = /* GraphQL */ `
                   name
                   shortName
                   url
-                  companyGroup
+                  companyReadGroup
                   createdAt
                   updatedAt
                 }
-                companyGroup
+                companyReadGroup
                 createdAt
                 updatedAt
               }
@@ -1927,7 +2033,8 @@ export const getObjective = /* GraphQL */ `
                 id
                 name
                 sort
-                companyGroup
+                companyReadGroup
+                companyAdminGroup
                 createdAt
                 updatedAt
               }
@@ -1936,11 +2043,11 @@ export const getObjective = /* GraphQL */ `
                 name
                 shortName
                 url
-                companyGroup
+                companyReadGroup
                 createdAt
                 updatedAt
               }
-              companyGroup
+              companyReadGroup
               createdAt
               updatedAt
             }
@@ -1948,7 +2055,8 @@ export const getObjective = /* GraphQL */ `
               id
               name
               sort
-              companyGroup
+              companyReadGroup
+              companyAdminGroup
               createdAt
               updatedAt
             }
@@ -1957,11 +2065,11 @@ export const getObjective = /* GraphQL */ `
               name
               shortName
               url
-              companyGroup
+              companyReadGroup
               createdAt
               updatedAt
             }
-            companyGroup
+            companyReadGroup
             createdAt
             updatedAt
           }
@@ -1969,7 +2077,8 @@ export const getObjective = /* GraphQL */ `
             id
             name
             sort
-            companyGroup
+            companyReadGroup
+            companyAdminGroup
             createdAt
             updatedAt
           }
@@ -1978,11 +2087,11 @@ export const getObjective = /* GraphQL */ `
             name
             shortName
             url
-            companyGroup
+            companyReadGroup
             createdAt
             updatedAt
           }
-          companyGroup
+          companyReadGroup
           createdAt
           updatedAt
         }
@@ -2016,7 +2125,7 @@ export const getObjective = /* GraphQL */ `
                   firstName
                   lastName
                   grade
-                  companyGroup
+                  companyReadGroup
                   createdAt
                   updatedAt
                 }
@@ -2024,7 +2133,8 @@ export const getObjective = /* GraphQL */ `
                   id
                   name
                   sort
-                  companyGroup
+                  companyReadGroup
+                  companyAdminGroup
                   createdAt
                   updatedAt
                 }
@@ -2033,11 +2143,11 @@ export const getObjective = /* GraphQL */ `
                   name
                   shortName
                   url
-                  companyGroup
+                  companyReadGroup
                   createdAt
                   updatedAt
                 }
-                companyGroup
+                companyReadGroup
                 createdAt
                 updatedAt
               }
@@ -2045,7 +2155,8 @@ export const getObjective = /* GraphQL */ `
                 id
                 name
                 sort
-                companyGroup
+                companyReadGroup
+                companyAdminGroup
                 createdAt
                 updatedAt
               }
@@ -2054,11 +2165,11 @@ export const getObjective = /* GraphQL */ `
                 name
                 shortName
                 url
-                companyGroup
+                companyReadGroup
                 createdAt
                 updatedAt
               }
-              companyGroup
+              companyReadGroup
               createdAt
               updatedAt
             }
@@ -2066,7 +2177,8 @@ export const getObjective = /* GraphQL */ `
               id
               name
               sort
-              companyGroup
+              companyReadGroup
+              companyAdminGroup
               createdAt
               updatedAt
             }
@@ -2075,11 +2187,11 @@ export const getObjective = /* GraphQL */ `
               name
               shortName
               url
-              companyGroup
+              companyReadGroup
               createdAt
               updatedAt
             }
-            companyGroup
+            companyReadGroup
             createdAt
             updatedAt
           }
@@ -2087,7 +2199,8 @@ export const getObjective = /* GraphQL */ `
             id
             name
             sort
-            companyGroup
+            companyReadGroup
+            companyAdminGroup
             createdAt
             updatedAt
           }
@@ -2096,11 +2209,11 @@ export const getObjective = /* GraphQL */ `
             name
             shortName
             url
-            companyGroup
+            companyReadGroup
             createdAt
             updatedAt
           }
-          companyGroup
+          companyReadGroup
           createdAt
           updatedAt
         }
@@ -2138,7 +2251,8 @@ export const getObjective = /* GraphQL */ `
                   statusValue
                   sheetGroupId
                   reviewee
-                  reviewer
+                  reviewers
+                  companyReadGroup
                   createdAt
                   updatedAt
                 }
@@ -2146,10 +2260,13 @@ export const getObjective = /* GraphQL */ `
                 section {
                   id
                   sectionSheetId
+                  reviewee
+                  reviewers
                   createdAt
                   updatedAt
                 }
                 reviewee
+                reviewers
                 createdAt
                 updatedAt
               }
@@ -2162,22 +2279,27 @@ export const getObjective = /* GraphQL */ `
                 name
                 shortName
                 url
-                companyGroup
+                companyReadGroup
                 createdAt
                 updatedAt
               }
               no
               name
+              companyReadGroup
+              companyAdminGroup
               createdAt
               updatedAt
             }
+            reviewee
+            reviewers
             createdAt
             updatedAt
           }
           nextToken
         }
         reviewee
-        reviewer
+        reviewers
+        companyReadGroup
         createdAt
         updatedAt
       }
@@ -2218,7 +2340,8 @@ export const getObjective = /* GraphQL */ `
                 id
                 name
                 sort
-                companyGroup
+                companyReadGroup
+                companyAdminGroup
                 createdAt
                 updatedAt
               }
@@ -2230,6 +2353,7 @@ export const getObjective = /* GraphQL */ `
                   purpose
                   detail
                   reviewee
+                  reviewers
                   createdAt
                   updatedAt
                 }
@@ -2247,7 +2371,7 @@ export const getObjective = /* GraphQL */ `
                   firstName
                   lastName
                   grade
-                  companyGroup
+                  companyReadGroup
                   createdAt
                   updatedAt
                 }
@@ -2255,7 +2379,8 @@ export const getObjective = /* GraphQL */ `
                   id
                   name
                   sort
-                  companyGroup
+                  companyReadGroup
+                  companyAdminGroup
                   createdAt
                   updatedAt
                 }
@@ -2264,11 +2389,11 @@ export const getObjective = /* GraphQL */ `
                   name
                   shortName
                   url
-                  companyGroup
+                  companyReadGroup
                   createdAt
                   updatedAt
                 }
-                companyGroup
+                companyReadGroup
                 createdAt
                 updatedAt
               }
@@ -2284,7 +2409,7 @@ export const getObjective = /* GraphQL */ `
                   firstName
                   lastName
                   grade
-                  companyGroup
+                  companyReadGroup
                   createdAt
                   updatedAt
                 }
@@ -2292,7 +2417,8 @@ export const getObjective = /* GraphQL */ `
                   id
                   name
                   sort
-                  companyGroup
+                  companyReadGroup
+                  companyAdminGroup
                   createdAt
                   updatedAt
                 }
@@ -2301,11 +2427,11 @@ export const getObjective = /* GraphQL */ `
                   name
                   shortName
                   url
-                  companyGroup
+                  companyReadGroup
                   createdAt
                   updatedAt
                 }
-                companyGroup
+                companyReadGroup
                 createdAt
                 updatedAt
               }
@@ -2313,13 +2439,16 @@ export const getObjective = /* GraphQL */ `
                 items {
                   id
                   sectionSheetId
+                  reviewee
+                  reviewers
                   createdAt
                   updatedAt
                 }
                 nextToken
               }
               reviewee
-              reviewer
+              reviewers
+              companyReadGroup
               createdAt
               updatedAt
             }
@@ -2342,6 +2471,7 @@ export const getObjective = /* GraphQL */ `
                   expDoneDate
                   objectiveSectionId
                   reviewee
+                  reviewers
                   createdAt
                   updatedAt
                 }
@@ -2354,19 +2484,24 @@ export const getObjective = /* GraphQL */ `
                   name
                   shortName
                   url
-                  companyGroup
+                  companyReadGroup
                   createdAt
                   updatedAt
                 }
                 no
                 name
+                companyReadGroup
+                companyAdminGroup
                 createdAt
                 updatedAt
               }
+              reviewee
+              reviewers
               createdAt
               updatedAt
             }
             reviewee
+            reviewers
             createdAt
             updatedAt
           }
@@ -2379,19 +2514,24 @@ export const getObjective = /* GraphQL */ `
             name
             shortName
             url
-            companyGroup
+            companyReadGroup
             createdAt
             updatedAt
           }
           no
           name
+          companyReadGroup
+          companyAdminGroup
           createdAt
           updatedAt
         }
+        reviewee
+        reviewers
         createdAt
         updatedAt
       }
       reviewee
+      reviewers
       createdAt
       updatedAt
     }
@@ -2436,7 +2576,8 @@ export const listObjectives = /* GraphQL */ `
             id
             name
             sort
-            companyGroup
+            companyReadGroup
+            companyAdminGroup
             createdAt
             updatedAt
           }
@@ -2448,6 +2589,7 @@ export const listObjectives = /* GraphQL */ `
               purpose
               detail
               reviewee
+              reviewers
               createdAt
               updatedAt
             }
@@ -2477,7 +2619,7 @@ export const listObjectives = /* GraphQL */ `
                   firstName
                   lastName
                   grade
-                  companyGroup
+                  companyReadGroup
                   createdAt
                   updatedAt
                 }
@@ -2485,7 +2627,8 @@ export const listObjectives = /* GraphQL */ `
                   id
                   name
                   sort
-                  companyGroup
+                  companyReadGroup
+                  companyAdminGroup
                   createdAt
                   updatedAt
                 }
@@ -2494,11 +2637,11 @@ export const listObjectives = /* GraphQL */ `
                   name
                   shortName
                   url
-                  companyGroup
+                  companyReadGroup
                   createdAt
                   updatedAt
                 }
-                companyGroup
+                companyReadGroup
                 createdAt
                 updatedAt
               }
@@ -2506,7 +2649,8 @@ export const listObjectives = /* GraphQL */ `
                 id
                 name
                 sort
-                companyGroup
+                companyReadGroup
+                companyAdminGroup
                 createdAt
                 updatedAt
               }
@@ -2515,11 +2659,11 @@ export const listObjectives = /* GraphQL */ `
                 name
                 shortName
                 url
-                companyGroup
+                companyReadGroup
                 createdAt
                 updatedAt
               }
-              companyGroup
+              companyReadGroup
               createdAt
               updatedAt
             }
@@ -2527,7 +2671,8 @@ export const listObjectives = /* GraphQL */ `
               id
               name
               sort
-              companyGroup
+              companyReadGroup
+              companyAdminGroup
               createdAt
               updatedAt
             }
@@ -2536,11 +2681,11 @@ export const listObjectives = /* GraphQL */ `
               name
               shortName
               url
-              companyGroup
+              companyReadGroup
               createdAt
               updatedAt
             }
-            companyGroup
+            companyReadGroup
             createdAt
             updatedAt
           }
@@ -2568,7 +2713,7 @@ export const listObjectives = /* GraphQL */ `
                   firstName
                   lastName
                   grade
-                  companyGroup
+                  companyReadGroup
                   createdAt
                   updatedAt
                 }
@@ -2576,7 +2721,8 @@ export const listObjectives = /* GraphQL */ `
                   id
                   name
                   sort
-                  companyGroup
+                  companyReadGroup
+                  companyAdminGroup
                   createdAt
                   updatedAt
                 }
@@ -2585,11 +2731,11 @@ export const listObjectives = /* GraphQL */ `
                   name
                   shortName
                   url
-                  companyGroup
+                  companyReadGroup
                   createdAt
                   updatedAt
                 }
-                companyGroup
+                companyReadGroup
                 createdAt
                 updatedAt
               }
@@ -2597,7 +2743,8 @@ export const listObjectives = /* GraphQL */ `
                 id
                 name
                 sort
-                companyGroup
+                companyReadGroup
+                companyAdminGroup
                 createdAt
                 updatedAt
               }
@@ -2606,11 +2753,11 @@ export const listObjectives = /* GraphQL */ `
                 name
                 shortName
                 url
-                companyGroup
+                companyReadGroup
                 createdAt
                 updatedAt
               }
-              companyGroup
+              companyReadGroup
               createdAt
               updatedAt
             }
@@ -2618,7 +2765,8 @@ export const listObjectives = /* GraphQL */ `
               id
               name
               sort
-              companyGroup
+              companyReadGroup
+              companyAdminGroup
               createdAt
               updatedAt
             }
@@ -2627,11 +2775,11 @@ export const listObjectives = /* GraphQL */ `
               name
               shortName
               url
-              companyGroup
+              companyReadGroup
               createdAt
               updatedAt
             }
-            companyGroup
+            companyReadGroup
             createdAt
             updatedAt
           }
@@ -2654,6 +2802,7 @@ export const listObjectives = /* GraphQL */ `
                   expDoneDate
                   objectiveSectionId
                   reviewee
+                  reviewers
                   createdAt
                   updatedAt
                 }
@@ -2666,22 +2815,27 @@ export const listObjectives = /* GraphQL */ `
                   name
                   shortName
                   url
-                  companyGroup
+                  companyReadGroup
                   createdAt
                   updatedAt
                 }
                 no
                 name
+                companyReadGroup
+                companyAdminGroup
                 createdAt
                 updatedAt
               }
+              reviewee
+              reviewers
               createdAt
               updatedAt
             }
             nextToken
           }
           reviewee
-          reviewer
+          reviewers
+          companyReadGroup
           createdAt
           updatedAt
         }
@@ -2722,7 +2876,8 @@ export const listObjectives = /* GraphQL */ `
                   id
                   name
                   sort
-                  companyGroup
+                  companyReadGroup
+                  companyAdminGroup
                   createdAt
                   updatedAt
                 }
@@ -2735,7 +2890,7 @@ export const listObjectives = /* GraphQL */ `
                   firstName
                   lastName
                   grade
-                  companyGroup
+                  companyReadGroup
                   createdAt
                   updatedAt
                 }
@@ -2745,7 +2900,7 @@ export const listObjectives = /* GraphQL */ `
                   firstName
                   lastName
                   grade
-                  companyGroup
+                  companyReadGroup
                   createdAt
                   updatedAt
                 }
@@ -2753,7 +2908,8 @@ export const listObjectives = /* GraphQL */ `
                   nextToken
                 }
                 reviewee
-                reviewer
+                reviewers
+                companyReadGroup
                 createdAt
                 updatedAt
               }
@@ -2768,13 +2924,18 @@ export const listObjectives = /* GraphQL */ `
                   id
                   no
                   name
+                  companyReadGroup
+                  companyAdminGroup
                   createdAt
                   updatedAt
                 }
+                reviewee
+                reviewers
                 createdAt
                 updatedAt
               }
               reviewee
+              reviewers
               createdAt
               updatedAt
             }
@@ -2787,19 +2948,24 @@ export const listObjectives = /* GraphQL */ `
               name
               shortName
               url
-              companyGroup
+              companyReadGroup
               createdAt
               updatedAt
             }
             no
             name
+            companyReadGroup
+            companyAdminGroup
             createdAt
             updatedAt
           }
+          reviewee
+          reviewers
           createdAt
           updatedAt
         }
         reviewee
+        reviewers
         createdAt
         updatedAt
       }

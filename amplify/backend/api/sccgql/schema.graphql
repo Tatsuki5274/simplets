@@ -3,7 +3,7 @@ type Company #会社
 @auth(
   rules: [
     {allow: groups, groups: ["Admin"]}
-    {allow: groups, groupsField: "companyGroup", operations: [read]}
+    {allow: groups, groupsField: "companyReadGroup", operations: [read]}
   ]
 )
 {
@@ -11,7 +11,9 @@ type Company #会社
   name: String!
   shortName: String
   url: AWSURL
-  companyGroup: String
+  
+  # グループフィールド
+  companyReadGroup: String
 }
 
 # ユーザーはcognitoで管理しています。
@@ -20,7 +22,7 @@ type Employee #社員
 @auth(
   rules:[
     {allow: groups, groups: ["Admin"]}
-    {allow: groups, groupsField: "companyGroup", operations: [read]}
+    {allow: groups, groupsField: "companyReadGroup", operations: [read]}
   ]
 )
 @model(timestamps:{createdAt: "createdAt", updatedAt: "updatedAt"})
@@ -36,7 +38,8 @@ type Employee #社員
   # companyId: ID!
   company: Company @connection #(fields: ["companyId"])
   
-  companyGroup: String
+  # グループフィールド
+  companyReadGroup: String
 }
 
 type Group #部門
@@ -45,7 +48,12 @@ type Group #部門
 @auth(
   rules: [
     {allow: groups, groups: ["Admin"]}
-    {allow: groups, groupsField: "companyGroup", operations: [read]}
+
+    #社員全員
+    {allow: groups, groupsField: "companyReadGroup", operations: [read]}
+
+    # 社内の管理者
+    {allow: groups, groupsField: "companyAdminGroup", operations: [create, update, delete, read]}
   ]
 )
 {
@@ -53,7 +61,10 @@ type Group #部門
   # company: Company @connection  グループフィールドに置き換え
   name: String! #部門名
   sort: Int  #ソート
-  companyGroup: String
+
+  # グループフィールド
+  companyReadGroup: String
+  companyAdminGroup: String
 }
 
 type Category
@@ -61,7 +72,12 @@ type Category
 @auth(
   rules: [
     {allow: groups, groups: ["Admin"]}
-    {allow: groups, groupsField: "companyGroup", operations: [read]}
+
+    #社員全員    
+    {allow: groups, groupsField: "companyReadGroup", operations: [read]}
+
+    # 社内の管理者
+    {allow: groups, groupsField: "companyAdminGroup", operations: [create, update, delete, read]}
   ]
 )
 {
@@ -69,6 +85,10 @@ type Category
   company: Company @connection
   no: Int
   name: String! #カテゴリ名
+
+  # グループフィールド
+  companyReadGroup: String
+  companyAdminGroup: String
 }
 
 type Interview
@@ -77,7 +97,15 @@ type Interview
 @auth(
   rules: [
     {allow: groups, groups: ["Admin"]}
-    {allow: groups, groupsField: "companyGroup", operations: [read]}
+
+    # 評価者
+    {allow: owner, ownerField: "reviewers", operations: [update, read]}
+
+    # 被評価者
+    {allow: owner, ownerField: "reviewee", operations: [create, update, read]}
+
+    # 社員が見る必要あり？
+    # {allow: groups, groupsField: "companyReadGroup", operations: [read]}
   ]
 )
 {
@@ -89,6 +117,7 @@ type Interview
   detail: String  #インタビュー内容
 
   reviewee: String #インタビューを受けた人
+  reviewers: [String] #評価者
 }
 
 type Sheet
@@ -96,8 +125,14 @@ type Sheet
 @auth(
   rules: [
     {allow: groups, groups: ["Admin"]}
-    # {allow: groups, groupsField: "companyGroup", operations: [read]}
-    {allow: owner, ownerField: "reviewer", operations: [update, read]}
+
+    # 社員が見る必要あり？
+    {allow: groups, groupsField: "companyReadGroup", operations: [read]}
+
+    # 評価者
+    {allow: owner, ownerField: "reviewers", operations: [update, read]}
+
+    # 被評価者
     {allow: owner, ownerField: "reviewee", operations: [create, update, read]}
     # {allow: private, operations: []}
     # {allow: public, operations: []}
@@ -131,7 +166,10 @@ type Sheet
 
   #　オーナーフィールド
   reviewee: String #被評価者
-  reviewer: [String] #評価者  
+  reviewers: [String] #評価者
+
+  # グループフィールド
+  companyReadGroup: String  #社員全員
 }
 
 type Section
@@ -140,13 +178,26 @@ type Section
 @auth(
   rules: [
     {allow: groups, groups: ["Admin"]}
-    {allow: groups, groupsField: "companyGroup", operations: [read]}  ]
+
+    # 社員が見る必要あり？
+    # {allow: groups, groupsField: "companyReadGroup", operations: [read]}
+
+    # 評価者
+    {allow: owner, ownerField: "reviewers", operations: [read]}
+
+    # 被評価者
+    {allow: owner, ownerField: "reviewee", operations: [create, read]}
+  ]
 )
 {
   id: ID!
   sectionSheetId: ID!
   objective: [Objective] @connection(keyName: "objectiveBySection", fields: ["id"])
   category: Category @connection
+
+  #　オーナーフィールド
+  reviewee: String #被評価者
+  reviewers: [String] #評価者
 }
 
 type Objective
@@ -155,7 +206,12 @@ type Objective
 @auth(
   rules: [
     {allow: groups, groups: ["Admin"]}
-    {allow: groups, groupsField: "companyGroup", operations: [read]}
+
+    # 評価者
+    {allow: owner, ownerField: "reviewers", operations: [update, read]}
+
+    # 被評価者
+    {allow: owner, ownerField: "reviewee", operations: [create, update, read]}
   ]
 )
 {
@@ -178,7 +234,9 @@ type Objective
   objectiveSectionId: ID!
   section: Section @connection(fields: ["objectiveSectionId"])
   
-  reviewee: String #社員ID(被評価者)
+  #　オーナーフィールド
+  reviewee: String #被評価者
+  reviewers: [String] #評価者
 }
 
 # type Query {
