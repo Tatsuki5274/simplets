@@ -66,42 +66,49 @@ export const createEmployee = /* GraphQL */ `
       firstName
       lastName
       grade
+      email
       superior {
         id
         no
         firstName
         lastName
         grade
+        email
         superior {
           id
           no
           firstName
           lastName
           grade
+          email
           superior {
             id
             no
             firstName
             lastName
             grade
+            email
             superior {
               id
               no
               firstName
               lastName
               grade
+              email
               superior {
                 id
                 no
                 firstName
                 lastName
                 grade
+                email
                 superior {
                   id
                   no
                   firstName
                   lastName
                   grade
+                  email
                   companyReadGroup
                   createdAt
                   updatedAt
@@ -251,42 +258,49 @@ export const updateEmployee = /* GraphQL */ `
       firstName
       lastName
       grade
+      email
       superior {
         id
         no
         firstName
         lastName
         grade
+        email
         superior {
           id
           no
           firstName
           lastName
           grade
+          email
           superior {
             id
             no
             firstName
             lastName
             grade
+            email
             superior {
               id
               no
               firstName
               lastName
               grade
+              email
               superior {
                 id
                 no
                 firstName
                 lastName
                 grade
+                email
                 superior {
                   id
                   no
                   firstName
                   lastName
                   grade
+                  email
                   companyReadGroup
                   createdAt
                   updatedAt
@@ -436,42 +450,49 @@ export const deleteEmployee = /* GraphQL */ `
       firstName
       lastName
       grade
+      email
       superior {
         id
         no
         firstName
         lastName
         grade
+        email
         superior {
           id
           no
           firstName
           lastName
           grade
+          email
           superior {
             id
             no
             firstName
             lastName
             grade
+            email
             superior {
               id
               no
               firstName
               lastName
               grade
+              email
               superior {
                 id
                 no
                 firstName
                 lastName
                 grade
+                email
                 superior {
                   id
                   no
                   firstName
                   lastName
                   grade
+                  email
                   companyReadGroup
                   createdAt
                   updatedAt
@@ -837,36 +858,42 @@ export const createSheet = /* GraphQL */ `
         firstName
         lastName
         grade
+        email
         superior {
           id
           no
           firstName
           lastName
           grade
+          email
           superior {
             id
             no
             firstName
             lastName
             grade
+            email
             superior {
               id
               no
               firstName
               lastName
               grade
+              email
               superior {
                 id
                 no
                 firstName
                 lastName
                 grade
+                email
                 superior {
                   id
                   no
                   firstName
                   lastName
                   grade
+                  email
                   companyReadGroup
                   createdAt
                   updatedAt
@@ -987,36 +1014,42 @@ export const createSheet = /* GraphQL */ `
         firstName
         lastName
         grade
+        email
         superior {
           id
           no
           firstName
           lastName
           grade
+          email
           superior {
             id
             no
             firstName
             lastName
             grade
+            email
             superior {
               id
               no
               firstName
               lastName
               grade
+              email
               superior {
                 id
                 no
                 firstName
                 lastName
                 grade
+                email
                 superior {
                   id
                   no
                   firstName
                   lastName
                   grade
+                  email
                   companyReadGroup
                   createdAt
                   updatedAt
@@ -1182,6 +1215,7 @@ export const createSheet = /* GraphQL */ `
                   firstName
                   lastName
                   grade
+                  email
                   companyReadGroup
                   createdAt
                   updatedAt
@@ -1192,6 +1226,7 @@ export const createSheet = /* GraphQL */ `
                   firstName
                   lastName
                   grade
+                  email
                   companyReadGroup
                   createdAt
                   updatedAt
@@ -1316,36 +1351,42 @@ export const updateSheet = /* GraphQL */ `
         firstName
         lastName
         grade
+        email
         superior {
           id
           no
           firstName
           lastName
           grade
+          email
           superior {
             id
             no
             firstName
             lastName
             grade
+            email
             superior {
               id
               no
               firstName
               lastName
               grade
+              email
               superior {
                 id
                 no
                 firstName
                 lastName
                 grade
+                email
                 superior {
                   id
                   no
                   firstName
                   lastName
                   grade
+                  email
                   companyReadGroup
                   createdAt
                   updatedAt
@@ -1466,36 +1507,42 @@ export const updateSheet = /* GraphQL */ `
         firstName
         lastName
         grade
+        email
         superior {
           id
           no
           firstName
           lastName
           grade
+          email
           superior {
             id
             no
             firstName
             lastName
             grade
+            email
             superior {
               id
               no
               firstName
               lastName
               grade
+              email
               superior {
                 id
                 no
                 firstName
                 lastName
                 grade
+                email
                 superior {
                   id
                   no
                   firstName
                   lastName
                   grade
+                  email
                   companyReadGroup
                   createdAt
                   updatedAt
@@ -1661,6 +1708,7 @@ export const updateSheet = /* GraphQL */ `
                   firstName
                   lastName
                   grade
+                  email
                   companyReadGroup
                   createdAt
                   updatedAt
@@ -1671,6 +1719,7 @@ export const updateSheet = /* GraphQL */ `
                   firstName
                   lastName
                   grade
+                  email
                   companyReadGroup
                   createdAt
                   updatedAt
@@ -1795,36 +1844,42 @@ export const deleteSheet = /* GraphQL */ `
         firstName
         lastName
         grade
+        email
         superior {
           id
           no
           firstName
           lastName
           grade
+          email
           superior {
             id
             no
             firstName
             lastName
             grade
+            email
             superior {
               id
               no
               firstName
               lastName
               grade
+              email
               superior {
                 id
                 no
                 firstName
                 lastName
                 grade
+                email
                 superior {
                   id
                   no
                   firstName
                   lastName
                   grade
+                  email
                   companyReadGroup
                   createdAt
                   updatedAt
@@ -1945,36 +2000,42 @@ export const deleteSheet = /* GraphQL */ `
         firstName
         lastName
         grade
+        email
         superior {
           id
           no
           firstName
           lastName
           grade
+          email
           superior {
             id
             no
             firstName
             lastName
             grade
+            email
             superior {
               id
               no
               firstName
               lastName
               grade
+              email
               superior {
                 id
                 no
                 firstName
                 lastName
                 grade
+                email
                 superior {
                   id
                   no
                   firstName
                   lastName
                   grade
+                  email
                   companyReadGroup
                   createdAt
                   updatedAt
@@ -2140,6 +2201,7 @@ export const deleteSheet = /* GraphQL */ `
                   firstName
                   lastName
                   grade
+                  email
                   companyReadGroup
                   createdAt
                   updatedAt
@@ -2150,6 +2212,7 @@ export const deleteSheet = /* GraphQL */ `
                   firstName
                   lastName
                   grade
+                  email
                   companyReadGroup
                   createdAt
                   updatedAt
@@ -2290,18 +2353,21 @@ export const createSection = /* GraphQL */ `
               firstName
               lastName
               grade
+              email
               superior {
                 id
                 no
                 firstName
                 lastName
                 grade
+                email
                 superior {
                   id
                   no
                   firstName
                   lastName
                   grade
+                  email
                   companyReadGroup
                   createdAt
                   updatedAt
@@ -2356,18 +2422,21 @@ export const createSection = /* GraphQL */ `
               firstName
               lastName
               grade
+              email
               superior {
                 id
                 no
                 firstName
                 lastName
                 grade
+                email
                 superior {
                   id
                   no
                   firstName
                   lastName
                   grade
+                  email
                   companyReadGroup
                   createdAt
                   updatedAt
@@ -2621,18 +2690,21 @@ export const updateSection = /* GraphQL */ `
               firstName
               lastName
               grade
+              email
               superior {
                 id
                 no
                 firstName
                 lastName
                 grade
+                email
                 superior {
                   id
                   no
                   firstName
                   lastName
                   grade
+                  email
                   companyReadGroup
                   createdAt
                   updatedAt
@@ -2687,18 +2759,21 @@ export const updateSection = /* GraphQL */ `
               firstName
               lastName
               grade
+              email
               superior {
                 id
                 no
                 firstName
                 lastName
                 grade
+                email
                 superior {
                   id
                   no
                   firstName
                   lastName
                   grade
+                  email
                   companyReadGroup
                   createdAt
                   updatedAt
@@ -2952,18 +3027,21 @@ export const deleteSection = /* GraphQL */ `
               firstName
               lastName
               grade
+              email
               superior {
                 id
                 no
                 firstName
                 lastName
                 grade
+                email
                 superior {
                   id
                   no
                   firstName
                   lastName
                   grade
+                  email
                   companyReadGroup
                   createdAt
                   updatedAt
@@ -3018,18 +3096,21 @@ export const deleteSection = /* GraphQL */ `
               firstName
               lastName
               grade
+              email
               superior {
                 id
                 no
                 firstName
                 lastName
                 grade
+                email
                 superior {
                   id
                   no
                   firstName
                   lastName
                   grade
+                  email
                   companyReadGroup
                   createdAt
                   updatedAt
@@ -3279,30 +3360,35 @@ export const createObjective = /* GraphQL */ `
           firstName
           lastName
           grade
+          email
           superior {
             id
             no
             firstName
             lastName
             grade
+            email
             superior {
               id
               no
               firstName
               lastName
               grade
+              email
               superior {
                 id
                 no
                 firstName
                 lastName
                 grade
+                email
                 superior {
                   id
                   no
                   firstName
                   lastName
                   grade
+                  email
                   companyReadGroup
                   createdAt
                   updatedAt
@@ -3401,30 +3487,35 @@ export const createObjective = /* GraphQL */ `
           firstName
           lastName
           grade
+          email
           superior {
             id
             no
             firstName
             lastName
             grade
+            email
             superior {
               id
               no
               firstName
               lastName
               grade
+              email
               superior {
                 id
                 no
                 firstName
                 lastName
                 grade
+                email
                 superior {
                   id
                   no
                   firstName
                   lastName
                   grade
+                  email
                   companyReadGroup
                   createdAt
                   updatedAt
@@ -3665,12 +3756,14 @@ export const createObjective = /* GraphQL */ `
                 firstName
                 lastName
                 grade
+                email
                 superior {
                   id
                   no
                   firstName
                   lastName
                   grade
+                  email
                   companyReadGroup
                   createdAt
                   updatedAt
@@ -3703,12 +3796,14 @@ export const createObjective = /* GraphQL */ `
                 firstName
                 lastName
                 grade
+                email
                 superior {
                   id
                   no
                   firstName
                   lastName
                   grade
+                  email
                   companyReadGroup
                   createdAt
                   updatedAt
@@ -3899,30 +3994,35 @@ export const updateObjective = /* GraphQL */ `
           firstName
           lastName
           grade
+          email
           superior {
             id
             no
             firstName
             lastName
             grade
+            email
             superior {
               id
               no
               firstName
               lastName
               grade
+              email
               superior {
                 id
                 no
                 firstName
                 lastName
                 grade
+                email
                 superior {
                   id
                   no
                   firstName
                   lastName
                   grade
+                  email
                   companyReadGroup
                   createdAt
                   updatedAt
@@ -4021,30 +4121,35 @@ export const updateObjective = /* GraphQL */ `
           firstName
           lastName
           grade
+          email
           superior {
             id
             no
             firstName
             lastName
             grade
+            email
             superior {
               id
               no
               firstName
               lastName
               grade
+              email
               superior {
                 id
                 no
                 firstName
                 lastName
                 grade
+                email
                 superior {
                   id
                   no
                   firstName
                   lastName
                   grade
+                  email
                   companyReadGroup
                   createdAt
                   updatedAt
@@ -4285,12 +4390,14 @@ export const updateObjective = /* GraphQL */ `
                 firstName
                 lastName
                 grade
+                email
                 superior {
                   id
                   no
                   firstName
                   lastName
                   grade
+                  email
                   companyReadGroup
                   createdAt
                   updatedAt
@@ -4323,12 +4430,14 @@ export const updateObjective = /* GraphQL */ `
                 firstName
                 lastName
                 grade
+                email
                 superior {
                   id
                   no
                   firstName
                   lastName
                   grade
+                  email
                   companyReadGroup
                   createdAt
                   updatedAt
@@ -4519,30 +4628,35 @@ export const deleteObjective = /* GraphQL */ `
           firstName
           lastName
           grade
+          email
           superior {
             id
             no
             firstName
             lastName
             grade
+            email
             superior {
               id
               no
               firstName
               lastName
               grade
+              email
               superior {
                 id
                 no
                 firstName
                 lastName
                 grade
+                email
                 superior {
                   id
                   no
                   firstName
                   lastName
                   grade
+                  email
                   companyReadGroup
                   createdAt
                   updatedAt
@@ -4641,30 +4755,35 @@ export const deleteObjective = /* GraphQL */ `
           firstName
           lastName
           grade
+          email
           superior {
             id
             no
             firstName
             lastName
             grade
+            email
             superior {
               id
               no
               firstName
               lastName
               grade
+              email
               superior {
                 id
                 no
                 firstName
                 lastName
                 grade
+                email
                 superior {
                   id
                   no
                   firstName
                   lastName
                   grade
+                  email
                   companyReadGroup
                   createdAt
                   updatedAt
@@ -4905,12 +5024,14 @@ export const deleteObjective = /* GraphQL */ `
                 firstName
                 lastName
                 grade
+                email
                 superior {
                   id
                   no
                   firstName
                   lastName
                   grade
+                  email
                   companyReadGroup
                   createdAt
                   updatedAt
@@ -4943,12 +5064,14 @@ export const deleteObjective = /* GraphQL */ `
                 firstName
                 lastName
                 grade
+                email
                 superior {
                   id
                   no
                   firstName
                   lastName
                   grade
+                  email
                   companyReadGroup
                   createdAt
                   updatedAt

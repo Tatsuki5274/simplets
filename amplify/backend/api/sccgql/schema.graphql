@@ -32,6 +32,7 @@ type Employee #社員
   firstName: String!
   lastName: String!
   grade: Int! #等級
+  email: String!
   superior: Employee @connection  #上司(所属長や部門長)
   group: Group @connection  #所属部門
 

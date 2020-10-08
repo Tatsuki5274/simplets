@@ -77,6 +77,7 @@ export type CreateEmployeeInput = {
   firstName: string,
   lastName: string,
   grade: number,
+  email: string,
   companyReadGroup?: string | null,
   employeeSuperiorId?: string | null,
   employeeGroupId?: string | null,
@@ -88,6 +89,7 @@ export type ModelEmployeeConditionInput = {
   firstName?: ModelStringInput | null,
   lastName?: ModelStringInput | null,
   grade?: ModelIntInput | null,
+  email?: ModelStringInput | null,
   and?: Array< ModelEmployeeConditionInput | null > | null,
   or?: Array< ModelEmployeeConditionInput | null > | null,
   not?: ModelEmployeeConditionInput | null,
@@ -111,6 +113,7 @@ export type UpdateEmployeeInput = {
   firstName?: string | null,
   lastName?: string | null,
   grade?: number | null,
+  email?: string | null,
   companyReadGroup?: string | null,
   employeeSuperiorId?: string | null,
   employeeGroupId?: string | null,
@@ -400,6 +403,7 @@ export type ModelEmployeeFilterInput = {
   firstName?: ModelStringInput | null,
   lastName?: ModelStringInput | null,
   grade?: ModelIntInput | null,
+  email?: ModelStringInput | null,
   companyReadGroup?: ModelStringInput | null,
   and?: Array< ModelEmployeeFilterInput | null > | null,
   or?: Array< ModelEmployeeFilterInput | null > | null,
@@ -571,6 +575,7 @@ export type CreateEmployeeMutation = {
     firstName: string,
     lastName: string,
     grade: number,
+    email: string,
     superior:  {
       __typename: "Employee",
       id: string,
@@ -578,6 +583,7 @@ export type CreateEmployeeMutation = {
       firstName: string,
       lastName: string,
       grade: number,
+      email: string,
       superior:  {
         __typename: "Employee",
         id: string,
@@ -585,6 +591,7 @@ export type CreateEmployeeMutation = {
         firstName: string,
         lastName: string,
         grade: number,
+        email: string,
         superior:  {
           __typename: "Employee",
           id: string,
@@ -592,6 +599,7 @@ export type CreateEmployeeMutation = {
           firstName: string,
           lastName: string,
           grade: number,
+          email: string,
           superior:  {
             __typename: "Employee",
             id: string,
@@ -599,6 +607,7 @@ export type CreateEmployeeMutation = {
             firstName: string,
             lastName: string,
             grade: number,
+            email: string,
             superior:  {
               __typename: "Employee",
               id: string,
@@ -606,6 +615,7 @@ export type CreateEmployeeMutation = {
               firstName: string,
               lastName: string,
               grade: number,
+              email: string,
               superior:  {
                 __typename: "Employee",
                 id: string,
@@ -613,6 +623,7 @@ export type CreateEmployeeMutation = {
                 firstName: string,
                 lastName: string,
                 grade: number,
+                email: string,
                 companyReadGroup: string | null,
                 createdAt: string,
                 updatedAt: string,
@@ -776,6 +787,7 @@ export type UpdateEmployeeMutation = {
     firstName: string,
     lastName: string,
     grade: number,
+    email: string,
     superior:  {
       __typename: "Employee",
       id: string,
@@ -783,6 +795,7 @@ export type UpdateEmployeeMutation = {
       firstName: string,
       lastName: string,
       grade: number,
+      email: string,
       superior:  {
         __typename: "Employee",
         id: string,
@@ -790,6 +803,7 @@ export type UpdateEmployeeMutation = {
         firstName: string,
         lastName: string,
         grade: number,
+        email: string,
         superior:  {
           __typename: "Employee",
           id: string,
@@ -797,6 +811,7 @@ export type UpdateEmployeeMutation = {
           firstName: string,
           lastName: string,
           grade: number,
+          email: string,
           superior:  {
             __typename: "Employee",
             id: string,
@@ -804,6 +819,7 @@ export type UpdateEmployeeMutation = {
             firstName: string,
             lastName: string,
             grade: number,
+            email: string,
             superior:  {
               __typename: "Employee",
               id: string,
@@ -811,6 +827,7 @@ export type UpdateEmployeeMutation = {
               firstName: string,
               lastName: string,
               grade: number,
+              email: string,
               superior:  {
                 __typename: "Employee",
                 id: string,
@@ -818,6 +835,7 @@ export type UpdateEmployeeMutation = {
                 firstName: string,
                 lastName: string,
                 grade: number,
+                email: string,
                 companyReadGroup: string | null,
                 createdAt: string,
                 updatedAt: string,
@@ -981,6 +999,7 @@ export type DeleteEmployeeMutation = {
     firstName: string,
     lastName: string,
     grade: number,
+    email: string,
     superior:  {
       __typename: "Employee",
       id: string,
@@ -988,6 +1007,7 @@ export type DeleteEmployeeMutation = {
       firstName: string,
       lastName: string,
       grade: number,
+      email: string,
       superior:  {
         __typename: "Employee",
         id: string,
@@ -995,6 +1015,7 @@ export type DeleteEmployeeMutation = {
         firstName: string,
         lastName: string,
         grade: number,
+        email: string,
         superior:  {
           __typename: "Employee",
           id: string,
@@ -1002,6 +1023,7 @@ export type DeleteEmployeeMutation = {
           firstName: string,
           lastName: string,
           grade: number,
+          email: string,
           superior:  {
             __typename: "Employee",
             id: string,
@@ -1009,6 +1031,7 @@ export type DeleteEmployeeMutation = {
             firstName: string,
             lastName: string,
             grade: number,
+            email: string,
             superior:  {
               __typename: "Employee",
               id: string,
@@ -1016,6 +1039,7 @@ export type DeleteEmployeeMutation = {
               firstName: string,
               lastName: string,
               grade: number,
+              email: string,
               superior:  {
                 __typename: "Employee",
                 id: string,
@@ -1023,6 +1047,7 @@ export type DeleteEmployeeMutation = {
                 firstName: string,
                 lastName: string,
                 grade: number,
+                email: string,
                 companyReadGroup: string | null,
                 createdAt: string,
                 updatedAt: string,
@@ -1427,6 +1452,7 @@ export type CreateSheetMutation = {
       firstName: string,
       lastName: string,
       grade: number,
+      email: string,
       superior:  {
         __typename: "Employee",
         id: string,
@@ -1434,6 +1460,7 @@ export type CreateSheetMutation = {
         firstName: string,
         lastName: string,
         grade: number,
+        email: string,
         superior:  {
           __typename: "Employee",
           id: string,
@@ -1441,6 +1468,7 @@ export type CreateSheetMutation = {
           firstName: string,
           lastName: string,
           grade: number,
+          email: string,
           superior:  {
             __typename: "Employee",
             id: string,
@@ -1448,6 +1476,7 @@ export type CreateSheetMutation = {
             firstName: string,
             lastName: string,
             grade: number,
+            email: string,
             superior:  {
               __typename: "Employee",
               id: string,
@@ -1455,6 +1484,7 @@ export type CreateSheetMutation = {
               firstName: string,
               lastName: string,
               grade: number,
+              email: string,
               superior:  {
                 __typename: "Employee",
                 id: string,
@@ -1462,6 +1492,7 @@ export type CreateSheetMutation = {
                 firstName: string,
                 lastName: string,
                 grade: number,
+                email: string,
                 companyReadGroup: string | null,
                 createdAt: string,
                 updatedAt: string,
@@ -1593,6 +1624,7 @@ export type CreateSheetMutation = {
       firstName: string,
       lastName: string,
       grade: number,
+      email: string,
       superior:  {
         __typename: "Employee",
         id: string,
@@ -1600,6 +1632,7 @@ export type CreateSheetMutation = {
         firstName: string,
         lastName: string,
         grade: number,
+        email: string,
         superior:  {
           __typename: "Employee",
           id: string,
@@ -1607,6 +1640,7 @@ export type CreateSheetMutation = {
           firstName: string,
           lastName: string,
           grade: number,
+          email: string,
           superior:  {
             __typename: "Employee",
             id: string,
@@ -1614,6 +1648,7 @@ export type CreateSheetMutation = {
             firstName: string,
             lastName: string,
             grade: number,
+            email: string,
             superior:  {
               __typename: "Employee",
               id: string,
@@ -1621,6 +1656,7 @@ export type CreateSheetMutation = {
               firstName: string,
               lastName: string,
               grade: number,
+              email: string,
               superior:  {
                 __typename: "Employee",
                 id: string,
@@ -1628,6 +1664,7 @@ export type CreateSheetMutation = {
                 firstName: string,
                 lastName: string,
                 grade: number,
+                email: string,
                 companyReadGroup: string | null,
                 createdAt: string,
                 updatedAt: string,
@@ -1811,6 +1848,7 @@ export type CreateSheetMutation = {
                 firstName: string,
                 lastName: string,
                 grade: number,
+                email: string,
                 companyReadGroup: string | null,
                 createdAt: string,
                 updatedAt: string,
@@ -1822,6 +1860,7 @@ export type CreateSheetMutation = {
                 firstName: string,
                 lastName: string,
                 grade: number,
+                email: string,
                 companyReadGroup: string | null,
                 createdAt: string,
                 updatedAt: string,
@@ -1958,6 +1997,7 @@ export type UpdateSheetMutation = {
       firstName: string,
       lastName: string,
       grade: number,
+      email: string,
       superior:  {
         __typename: "Employee",
         id: string,
@@ -1965,6 +2005,7 @@ export type UpdateSheetMutation = {
         firstName: string,
         lastName: string,
         grade: number,
+        email: string,
         superior:  {
           __typename: "Employee",
           id: string,
@@ -1972,6 +2013,7 @@ export type UpdateSheetMutation = {
           firstName: string,
           lastName: string,
           grade: number,
+          email: string,
           superior:  {
             __typename: "Employee",
             id: string,
@@ -1979,6 +2021,7 @@ export type UpdateSheetMutation = {
             firstName: string,
             lastName: string,
             grade: number,
+            email: string,
             superior:  {
               __typename: "Employee",
               id: string,
@@ -1986,6 +2029,7 @@ export type UpdateSheetMutation = {
               firstName: string,
               lastName: string,
               grade: number,
+              email: string,
               superior:  {
                 __typename: "Employee",
                 id: string,
@@ -1993,6 +2037,7 @@ export type UpdateSheetMutation = {
                 firstName: string,
                 lastName: string,
                 grade: number,
+                email: string,
                 companyReadGroup: string | null,
                 createdAt: string,
                 updatedAt: string,
@@ -2124,6 +2169,7 @@ export type UpdateSheetMutation = {
       firstName: string,
       lastName: string,
       grade: number,
+      email: string,
       superior:  {
         __typename: "Employee",
         id: string,
@@ -2131,6 +2177,7 @@ export type UpdateSheetMutation = {
         firstName: string,
         lastName: string,
         grade: number,
+        email: string,
         superior:  {
           __typename: "Employee",
           id: string,
@@ -2138,6 +2185,7 @@ export type UpdateSheetMutation = {
           firstName: string,
           lastName: string,
           grade: number,
+          email: string,
           superior:  {
             __typename: "Employee",
             id: string,
@@ -2145,6 +2193,7 @@ export type UpdateSheetMutation = {
             firstName: string,
             lastName: string,
             grade: number,
+            email: string,
             superior:  {
               __typename: "Employee",
               id: string,
@@ -2152,6 +2201,7 @@ export type UpdateSheetMutation = {
               firstName: string,
               lastName: string,
               grade: number,
+              email: string,
               superior:  {
                 __typename: "Employee",
                 id: string,
@@ -2159,6 +2209,7 @@ export type UpdateSheetMutation = {
                 firstName: string,
                 lastName: string,
                 grade: number,
+                email: string,
                 companyReadGroup: string | null,
                 createdAt: string,
                 updatedAt: string,
@@ -2342,6 +2393,7 @@ export type UpdateSheetMutation = {
                 firstName: string,
                 lastName: string,
                 grade: number,
+                email: string,
                 companyReadGroup: string | null,
                 createdAt: string,
                 updatedAt: string,
@@ -2353,6 +2405,7 @@ export type UpdateSheetMutation = {
                 firstName: string,
                 lastName: string,
                 grade: number,
+                email: string,
                 companyReadGroup: string | null,
                 createdAt: string,
                 updatedAt: string,
@@ -2489,6 +2542,7 @@ export type DeleteSheetMutation = {
       firstName: string,
       lastName: string,
       grade: number,
+      email: string,
       superior:  {
         __typename: "Employee",
         id: string,
@@ -2496,6 +2550,7 @@ export type DeleteSheetMutation = {
         firstName: string,
         lastName: string,
         grade: number,
+        email: string,
         superior:  {
           __typename: "Employee",
           id: string,
@@ -2503,6 +2558,7 @@ export type DeleteSheetMutation = {
           firstName: string,
           lastName: string,
           grade: number,
+          email: string,
           superior:  {
             __typename: "Employee",
             id: string,
@@ -2510,6 +2566,7 @@ export type DeleteSheetMutation = {
             firstName: string,
             lastName: string,
             grade: number,
+            email: string,
             superior:  {
               __typename: "Employee",
               id: string,
@@ -2517,6 +2574,7 @@ export type DeleteSheetMutation = {
               firstName: string,
               lastName: string,
               grade: number,
+              email: string,
               superior:  {
                 __typename: "Employee",
                 id: string,
@@ -2524,6 +2582,7 @@ export type DeleteSheetMutation = {
                 firstName: string,
                 lastName: string,
                 grade: number,
+                email: string,
                 companyReadGroup: string | null,
                 createdAt: string,
                 updatedAt: string,
@@ -2655,6 +2714,7 @@ export type DeleteSheetMutation = {
       firstName: string,
       lastName: string,
       grade: number,
+      email: string,
       superior:  {
         __typename: "Employee",
         id: string,
@@ -2662,6 +2722,7 @@ export type DeleteSheetMutation = {
         firstName: string,
         lastName: string,
         grade: number,
+        email: string,
         superior:  {
           __typename: "Employee",
           id: string,
@@ -2669,6 +2730,7 @@ export type DeleteSheetMutation = {
           firstName: string,
           lastName: string,
           grade: number,
+          email: string,
           superior:  {
             __typename: "Employee",
             id: string,
@@ -2676,6 +2738,7 @@ export type DeleteSheetMutation = {
             firstName: string,
             lastName: string,
             grade: number,
+            email: string,
             superior:  {
               __typename: "Employee",
               id: string,
@@ -2683,6 +2746,7 @@ export type DeleteSheetMutation = {
               firstName: string,
               lastName: string,
               grade: number,
+              email: string,
               superior:  {
                 __typename: "Employee",
                 id: string,
@@ -2690,6 +2754,7 @@ export type DeleteSheetMutation = {
                 firstName: string,
                 lastName: string,
                 grade: number,
+                email: string,
                 companyReadGroup: string | null,
                 createdAt: string,
                 updatedAt: string,
@@ -2873,6 +2938,7 @@ export type DeleteSheetMutation = {
                 firstName: string,
                 lastName: string,
                 grade: number,
+                email: string,
                 companyReadGroup: string | null,
                 createdAt: string,
                 updatedAt: string,
@@ -2884,6 +2950,7 @@ export type DeleteSheetMutation = {
                 firstName: string,
                 lastName: string,
                 grade: number,
+                email: string,
                 companyReadGroup: string | null,
                 createdAt: string,
                 updatedAt: string,
@@ -3039,6 +3106,7 @@ export type CreateSectionMutation = {
             firstName: string,
             lastName: string,
             grade: number,
+            email: string,
             superior:  {
               __typename: "Employee",
               id: string,
@@ -3046,6 +3114,7 @@ export type CreateSectionMutation = {
               firstName: string,
               lastName: string,
               grade: number,
+              email: string,
               superior:  {
                 __typename: "Employee",
                 id: string,
@@ -3053,6 +3122,7 @@ export type CreateSectionMutation = {
                 firstName: string,
                 lastName: string,
                 grade: number,
+                email: string,
                 companyReadGroup: string | null,
                 createdAt: string,
                 updatedAt: string,
@@ -3112,6 +3182,7 @@ export type CreateSectionMutation = {
             firstName: string,
             lastName: string,
             grade: number,
+            email: string,
             superior:  {
               __typename: "Employee",
               id: string,
@@ -3119,6 +3190,7 @@ export type CreateSectionMutation = {
               firstName: string,
               lastName: string,
               grade: number,
+              email: string,
               superior:  {
                 __typename: "Employee",
                 id: string,
@@ -3126,6 +3198,7 @@ export type CreateSectionMutation = {
                 firstName: string,
                 lastName: string,
                 grade: number,
+                email: string,
                 companyReadGroup: string | null,
                 createdAt: string,
                 updatedAt: string,
@@ -3405,6 +3478,7 @@ export type UpdateSectionMutation = {
             firstName: string,
             lastName: string,
             grade: number,
+            email: string,
             superior:  {
               __typename: "Employee",
               id: string,
@@ -3412,6 +3486,7 @@ export type UpdateSectionMutation = {
               firstName: string,
               lastName: string,
               grade: number,
+              email: string,
               superior:  {
                 __typename: "Employee",
                 id: string,
@@ -3419,6 +3494,7 @@ export type UpdateSectionMutation = {
                 firstName: string,
                 lastName: string,
                 grade: number,
+                email: string,
                 companyReadGroup: string | null,
                 createdAt: string,
                 updatedAt: string,
@@ -3478,6 +3554,7 @@ export type UpdateSectionMutation = {
             firstName: string,
             lastName: string,
             grade: number,
+            email: string,
             superior:  {
               __typename: "Employee",
               id: string,
@@ -3485,6 +3562,7 @@ export type UpdateSectionMutation = {
               firstName: string,
               lastName: string,
               grade: number,
+              email: string,
               superior:  {
                 __typename: "Employee",
                 id: string,
@@ -3492,6 +3570,7 @@ export type UpdateSectionMutation = {
                 firstName: string,
                 lastName: string,
                 grade: number,
+                email: string,
                 companyReadGroup: string | null,
                 createdAt: string,
                 updatedAt: string,
@@ -3771,6 +3850,7 @@ export type DeleteSectionMutation = {
             firstName: string,
             lastName: string,
             grade: number,
+            email: string,
             superior:  {
               __typename: "Employee",
               id: string,
@@ -3778,6 +3858,7 @@ export type DeleteSectionMutation = {
               firstName: string,
               lastName: string,
               grade: number,
+              email: string,
               superior:  {
                 __typename: "Employee",
                 id: string,
@@ -3785,6 +3866,7 @@ export type DeleteSectionMutation = {
                 firstName: string,
                 lastName: string,
                 grade: number,
+                email: string,
                 companyReadGroup: string | null,
                 createdAt: string,
                 updatedAt: string,
@@ -3844,6 +3926,7 @@ export type DeleteSectionMutation = {
             firstName: string,
             lastName: string,
             grade: number,
+            email: string,
             superior:  {
               __typename: "Employee",
               id: string,
@@ -3851,6 +3934,7 @@ export type DeleteSectionMutation = {
               firstName: string,
               lastName: string,
               grade: number,
+              email: string,
               superior:  {
                 __typename: "Employee",
                 id: string,
@@ -3858,6 +3942,7 @@ export type DeleteSectionMutation = {
                 firstName: string,
                 lastName: string,
                 grade: number,
+                email: string,
                 companyReadGroup: string | null,
                 createdAt: string,
                 updatedAt: string,
@@ -4131,6 +4216,7 @@ export type CreateObjectiveMutation = {
         firstName: string,
         lastName: string,
         grade: number,
+        email: string,
         superior:  {
           __typename: "Employee",
           id: string,
@@ -4138,6 +4224,7 @@ export type CreateObjectiveMutation = {
           firstName: string,
           lastName: string,
           grade: number,
+          email: string,
           superior:  {
             __typename: "Employee",
             id: string,
@@ -4145,6 +4232,7 @@ export type CreateObjectiveMutation = {
             firstName: string,
             lastName: string,
             grade: number,
+            email: string,
             superior:  {
               __typename: "Employee",
               id: string,
@@ -4152,6 +4240,7 @@ export type CreateObjectiveMutation = {
               firstName: string,
               lastName: string,
               grade: number,
+              email: string,
               superior:  {
                 __typename: "Employee",
                 id: string,
@@ -4159,6 +4248,7 @@ export type CreateObjectiveMutation = {
                 firstName: string,
                 lastName: string,
                 grade: number,
+                email: string,
                 companyReadGroup: string | null,
                 createdAt: string,
                 updatedAt: string,
@@ -4266,6 +4356,7 @@ export type CreateObjectiveMutation = {
         firstName: string,
         lastName: string,
         grade: number,
+        email: string,
         superior:  {
           __typename: "Employee",
           id: string,
@@ -4273,6 +4364,7 @@ export type CreateObjectiveMutation = {
           firstName: string,
           lastName: string,
           grade: number,
+          email: string,
           superior:  {
             __typename: "Employee",
             id: string,
@@ -4280,6 +4372,7 @@ export type CreateObjectiveMutation = {
             firstName: string,
             lastName: string,
             grade: number,
+            email: string,
             superior:  {
               __typename: "Employee",
               id: string,
@@ -4287,6 +4380,7 @@ export type CreateObjectiveMutation = {
               firstName: string,
               lastName: string,
               grade: number,
+              email: string,
               superior:  {
                 __typename: "Employee",
                 id: string,
@@ -4294,6 +4388,7 @@ export type CreateObjectiveMutation = {
                 firstName: string,
                 lastName: string,
                 grade: number,
+                email: string,
                 companyReadGroup: string | null,
                 createdAt: string,
                 updatedAt: string,
@@ -4558,6 +4653,7 @@ export type CreateObjectiveMutation = {
               firstName: string,
               lastName: string,
               grade: number,
+              email: string,
               superior:  {
                 __typename: "Employee",
                 id: string,
@@ -4565,6 +4661,7 @@ export type CreateObjectiveMutation = {
                 firstName: string,
                 lastName: string,
                 grade: number,
+                email: string,
                 companyReadGroup: string | null,
                 createdAt: string,
                 updatedAt: string,
@@ -4600,6 +4697,7 @@ export type CreateObjectiveMutation = {
               firstName: string,
               lastName: string,
               grade: number,
+              email: string,
               superior:  {
                 __typename: "Employee",
                 id: string,
@@ -4607,6 +4705,7 @@ export type CreateObjectiveMutation = {
                 firstName: string,
                 lastName: string,
                 grade: number,
+                email: string,
                 companyReadGroup: string | null,
                 createdAt: string,
                 updatedAt: string,
@@ -4815,6 +4914,7 @@ export type UpdateObjectiveMutation = {
         firstName: string,
         lastName: string,
         grade: number,
+        email: string,
         superior:  {
           __typename: "Employee",
           id: string,
@@ -4822,6 +4922,7 @@ export type UpdateObjectiveMutation = {
           firstName: string,
           lastName: string,
           grade: number,
+          email: string,
           superior:  {
             __typename: "Employee",
             id: string,
@@ -4829,6 +4930,7 @@ export type UpdateObjectiveMutation = {
             firstName: string,
             lastName: string,
             grade: number,
+            email: string,
             superior:  {
               __typename: "Employee",
               id: string,
@@ -4836,6 +4938,7 @@ export type UpdateObjectiveMutation = {
               firstName: string,
               lastName: string,
               grade: number,
+              email: string,
               superior:  {
                 __typename: "Employee",
                 id: string,
@@ -4843,6 +4946,7 @@ export type UpdateObjectiveMutation = {
                 firstName: string,
                 lastName: string,
                 grade: number,
+                email: string,
                 companyReadGroup: string | null,
                 createdAt: string,
                 updatedAt: string,
@@ -4950,6 +5054,7 @@ export type UpdateObjectiveMutation = {
         firstName: string,
         lastName: string,
         grade: number,
+        email: string,
         superior:  {
           __typename: "Employee",
           id: string,
@@ -4957,6 +5062,7 @@ export type UpdateObjectiveMutation = {
           firstName: string,
           lastName: string,
           grade: number,
+          email: string,
           superior:  {
             __typename: "Employee",
             id: string,
@@ -4964,6 +5070,7 @@ export type UpdateObjectiveMutation = {
             firstName: string,
             lastName: string,
             grade: number,
+            email: string,
             superior:  {
               __typename: "Employee",
               id: string,
@@ -4971,6 +5078,7 @@ export type UpdateObjectiveMutation = {
               firstName: string,
               lastName: string,
               grade: number,
+              email: string,
               superior:  {
                 __typename: "Employee",
                 id: string,
@@ -4978,6 +5086,7 @@ export type UpdateObjectiveMutation = {
                 firstName: string,
                 lastName: string,
                 grade: number,
+                email: string,
                 companyReadGroup: string | null,
                 createdAt: string,
                 updatedAt: string,
@@ -5242,6 +5351,7 @@ export type UpdateObjectiveMutation = {
               firstName: string,
               lastName: string,
               grade: number,
+              email: string,
               superior:  {
                 __typename: "Employee",
                 id: string,
@@ -5249,6 +5359,7 @@ export type UpdateObjectiveMutation = {
                 firstName: string,
                 lastName: string,
                 grade: number,
+                email: string,
                 companyReadGroup: string | null,
                 createdAt: string,
                 updatedAt: string,
@@ -5284,6 +5395,7 @@ export type UpdateObjectiveMutation = {
               firstName: string,
               lastName: string,
               grade: number,
+              email: string,
               superior:  {
                 __typename: "Employee",
                 id: string,
@@ -5291,6 +5403,7 @@ export type UpdateObjectiveMutation = {
                 firstName: string,
                 lastName: string,
                 grade: number,
+                email: string,
                 companyReadGroup: string | null,
                 createdAt: string,
                 updatedAt: string,
@@ -5499,6 +5612,7 @@ export type DeleteObjectiveMutation = {
         firstName: string,
         lastName: string,
         grade: number,
+        email: string,
         superior:  {
           __typename: "Employee",
           id: string,
@@ -5506,6 +5620,7 @@ export type DeleteObjectiveMutation = {
           firstName: string,
           lastName: string,
           grade: number,
+          email: string,
           superior:  {
             __typename: "Employee",
             id: string,
@@ -5513,6 +5628,7 @@ export type DeleteObjectiveMutation = {
             firstName: string,
             lastName: string,
             grade: number,
+            email: string,
             superior:  {
               __typename: "Employee",
               id: string,
@@ -5520,6 +5636,7 @@ export type DeleteObjectiveMutation = {
               firstName: string,
               lastName: string,
               grade: number,
+              email: string,
               superior:  {
                 __typename: "Employee",
                 id: string,
@@ -5527,6 +5644,7 @@ export type DeleteObjectiveMutation = {
                 firstName: string,
                 lastName: string,
                 grade: number,
+                email: string,
                 companyReadGroup: string | null,
                 createdAt: string,
                 updatedAt: string,
@@ -5634,6 +5752,7 @@ export type DeleteObjectiveMutation = {
         firstName: string,
         lastName: string,
         grade: number,
+        email: string,
         superior:  {
           __typename: "Employee",
           id: string,
@@ -5641,6 +5760,7 @@ export type DeleteObjectiveMutation = {
           firstName: string,
           lastName: string,
           grade: number,
+          email: string,
           superior:  {
             __typename: "Employee",
             id: string,
@@ -5648,6 +5768,7 @@ export type DeleteObjectiveMutation = {
             firstName: string,
             lastName: string,
             grade: number,
+            email: string,
             superior:  {
               __typename: "Employee",
               id: string,
@@ -5655,6 +5776,7 @@ export type DeleteObjectiveMutation = {
               firstName: string,
               lastName: string,
               grade: number,
+              email: string,
               superior:  {
                 __typename: "Employee",
                 id: string,
@@ -5662,6 +5784,7 @@ export type DeleteObjectiveMutation = {
                 firstName: string,
                 lastName: string,
                 grade: number,
+                email: string,
                 companyReadGroup: string | null,
                 createdAt: string,
                 updatedAt: string,
@@ -5926,6 +6049,7 @@ export type DeleteObjectiveMutation = {
               firstName: string,
               lastName: string,
               grade: number,
+              email: string,
               superior:  {
                 __typename: "Employee",
                 id: string,
@@ -5933,6 +6057,7 @@ export type DeleteObjectiveMutation = {
                 firstName: string,
                 lastName: string,
                 grade: number,
+                email: string,
                 companyReadGroup: string | null,
                 createdAt: string,
                 updatedAt: string,
@@ -5968,6 +6093,7 @@ export type DeleteObjectiveMutation = {
               firstName: string,
               lastName: string,
               grade: number,
+              email: string,
               superior:  {
                 __typename: "Employee",
                 id: string,
@@ -5975,6 +6101,7 @@ export type DeleteObjectiveMutation = {
                 firstName: string,
                 lastName: string,
                 grade: number,
+                email: string,
                 companyReadGroup: string | null,
                 createdAt: string,
                 updatedAt: string,
@@ -6166,6 +6293,7 @@ export type GetEmployeeQuery = {
     firstName: string,
     lastName: string,
     grade: number,
+    email: string,
     superior:  {
       __typename: "Employee",
       id: string,
@@ -6173,6 +6301,7 @@ export type GetEmployeeQuery = {
       firstName: string,
       lastName: string,
       grade: number,
+      email: string,
       superior:  {
         __typename: "Employee",
         id: string,
@@ -6180,6 +6309,7 @@ export type GetEmployeeQuery = {
         firstName: string,
         lastName: string,
         grade: number,
+        email: string,
         superior:  {
           __typename: "Employee",
           id: string,
@@ -6187,6 +6317,7 @@ export type GetEmployeeQuery = {
           firstName: string,
           lastName: string,
           grade: number,
+          email: string,
           superior:  {
             __typename: "Employee",
             id: string,
@@ -6194,6 +6325,7 @@ export type GetEmployeeQuery = {
             firstName: string,
             lastName: string,
             grade: number,
+            email: string,
             superior:  {
               __typename: "Employee",
               id: string,
@@ -6201,6 +6333,7 @@ export type GetEmployeeQuery = {
               firstName: string,
               lastName: string,
               grade: number,
+              email: string,
               superior:  {
                 __typename: "Employee",
                 id: string,
@@ -6208,6 +6341,7 @@ export type GetEmployeeQuery = {
                 firstName: string,
                 lastName: string,
                 grade: number,
+                email: string,
                 companyReadGroup: string | null,
                 createdAt: string,
                 updatedAt: string,
@@ -6374,6 +6508,7 @@ export type ListEmployeesQuery = {
       firstName: string,
       lastName: string,
       grade: number,
+      email: string,
       superior:  {
         __typename: "Employee",
         id: string,
@@ -6381,6 +6516,7 @@ export type ListEmployeesQuery = {
         firstName: string,
         lastName: string,
         grade: number,
+        email: string,
         superior:  {
           __typename: "Employee",
           id: string,
@@ -6388,6 +6524,7 @@ export type ListEmployeesQuery = {
           firstName: string,
           lastName: string,
           grade: number,
+          email: string,
           superior:  {
             __typename: "Employee",
             id: string,
@@ -6395,6 +6532,7 @@ export type ListEmployeesQuery = {
             firstName: string,
             lastName: string,
             grade: number,
+            email: string,
             superior:  {
               __typename: "Employee",
               id: string,
@@ -6402,6 +6540,7 @@ export type ListEmployeesQuery = {
               firstName: string,
               lastName: string,
               grade: number,
+              email: string,
               superior:  {
                 __typename: "Employee",
                 id: string,
@@ -6409,6 +6548,7 @@ export type ListEmployeesQuery = {
                 firstName: string,
                 lastName: string,
                 grade: number,
+                email: string,
                 companyReadGroup: string | null,
                 createdAt: string,
                 updatedAt: string,
@@ -6736,6 +6876,7 @@ export type GetSheetQuery = {
       firstName: string,
       lastName: string,
       grade: number,
+      email: string,
       superior:  {
         __typename: "Employee",
         id: string,
@@ -6743,6 +6884,7 @@ export type GetSheetQuery = {
         firstName: string,
         lastName: string,
         grade: number,
+        email: string,
         superior:  {
           __typename: "Employee",
           id: string,
@@ -6750,6 +6892,7 @@ export type GetSheetQuery = {
           firstName: string,
           lastName: string,
           grade: number,
+          email: string,
           superior:  {
             __typename: "Employee",
             id: string,
@@ -6757,6 +6900,7 @@ export type GetSheetQuery = {
             firstName: string,
             lastName: string,
             grade: number,
+            email: string,
             superior:  {
               __typename: "Employee",
               id: string,
@@ -6764,6 +6908,7 @@ export type GetSheetQuery = {
               firstName: string,
               lastName: string,
               grade: number,
+              email: string,
               superior:  {
                 __typename: "Employee",
                 id: string,
@@ -6771,6 +6916,7 @@ export type GetSheetQuery = {
                 firstName: string,
                 lastName: string,
                 grade: number,
+                email: string,
                 companyReadGroup: string | null,
                 createdAt: string,
                 updatedAt: string,
@@ -6902,6 +7048,7 @@ export type GetSheetQuery = {
       firstName: string,
       lastName: string,
       grade: number,
+      email: string,
       superior:  {
         __typename: "Employee",
         id: string,
@@ -6909,6 +7056,7 @@ export type GetSheetQuery = {
         firstName: string,
         lastName: string,
         grade: number,
+        email: string,
         superior:  {
           __typename: "Employee",
           id: string,
@@ -6916,6 +7064,7 @@ export type GetSheetQuery = {
           firstName: string,
           lastName: string,
           grade: number,
+          email: string,
           superior:  {
             __typename: "Employee",
             id: string,
@@ -6923,6 +7072,7 @@ export type GetSheetQuery = {
             firstName: string,
             lastName: string,
             grade: number,
+            email: string,
             superior:  {
               __typename: "Employee",
               id: string,
@@ -6930,6 +7080,7 @@ export type GetSheetQuery = {
               firstName: string,
               lastName: string,
               grade: number,
+              email: string,
               superior:  {
                 __typename: "Employee",
                 id: string,
@@ -6937,6 +7088,7 @@ export type GetSheetQuery = {
                 firstName: string,
                 lastName: string,
                 grade: number,
+                email: string,
                 companyReadGroup: string | null,
                 createdAt: string,
                 updatedAt: string,
@@ -7120,6 +7272,7 @@ export type GetSheetQuery = {
                 firstName: string,
                 lastName: string,
                 grade: number,
+                email: string,
                 companyReadGroup: string | null,
                 createdAt: string,
                 updatedAt: string,
@@ -7131,6 +7284,7 @@ export type GetSheetQuery = {
                 firstName: string,
                 lastName: string,
                 grade: number,
+                email: string,
                 companyReadGroup: string | null,
                 createdAt: string,
                 updatedAt: string,
@@ -7270,6 +7424,7 @@ export type ListSheetsQuery = {
         firstName: string,
         lastName: string,
         grade: number,
+        email: string,
         superior:  {
           __typename: "Employee",
           id: string,
@@ -7277,6 +7432,7 @@ export type ListSheetsQuery = {
           firstName: string,
           lastName: string,
           grade: number,
+          email: string,
           superior:  {
             __typename: "Employee",
             id: string,
@@ -7284,6 +7440,7 @@ export type ListSheetsQuery = {
             firstName: string,
             lastName: string,
             grade: number,
+            email: string,
             superior:  {
               __typename: "Employee",
               id: string,
@@ -7291,6 +7448,7 @@ export type ListSheetsQuery = {
               firstName: string,
               lastName: string,
               grade: number,
+              email: string,
               superior:  {
                 __typename: "Employee",
                 id: string,
@@ -7298,6 +7456,7 @@ export type ListSheetsQuery = {
                 firstName: string,
                 lastName: string,
                 grade: number,
+                email: string,
                 companyReadGroup: string | null,
                 createdAt: string,
                 updatedAt: string,
@@ -7405,6 +7564,7 @@ export type ListSheetsQuery = {
         firstName: string,
         lastName: string,
         grade: number,
+        email: string,
         superior:  {
           __typename: "Employee",
           id: string,
@@ -7412,6 +7572,7 @@ export type ListSheetsQuery = {
           firstName: string,
           lastName: string,
           grade: number,
+          email: string,
           superior:  {
             __typename: "Employee",
             id: string,
@@ -7419,6 +7580,7 @@ export type ListSheetsQuery = {
             firstName: string,
             lastName: string,
             grade: number,
+            email: string,
             superior:  {
               __typename: "Employee",
               id: string,
@@ -7426,6 +7588,7 @@ export type ListSheetsQuery = {
               firstName: string,
               lastName: string,
               grade: number,
+              email: string,
               superior:  {
                 __typename: "Employee",
                 id: string,
@@ -7433,6 +7596,7 @@ export type ListSheetsQuery = {
                 firstName: string,
                 lastName: string,
                 grade: number,
+                email: string,
                 companyReadGroup: string | null,
                 createdAt: string,
                 updatedAt: string,
@@ -7705,6 +7869,7 @@ export type GetSectionQuery = {
             firstName: string,
             lastName: string,
             grade: number,
+            email: string,
             superior:  {
               __typename: "Employee",
               id: string,
@@ -7712,6 +7877,7 @@ export type GetSectionQuery = {
               firstName: string,
               lastName: string,
               grade: number,
+              email: string,
               superior:  {
                 __typename: "Employee",
                 id: string,
@@ -7719,6 +7885,7 @@ export type GetSectionQuery = {
                 firstName: string,
                 lastName: string,
                 grade: number,
+                email: string,
                 companyReadGroup: string | null,
                 createdAt: string,
                 updatedAt: string,
@@ -7778,6 +7945,7 @@ export type GetSectionQuery = {
             firstName: string,
             lastName: string,
             grade: number,
+            email: string,
             superior:  {
               __typename: "Employee",
               id: string,
@@ -7785,6 +7953,7 @@ export type GetSectionQuery = {
               firstName: string,
               lastName: string,
               grade: number,
+              email: string,
               superior:  {
                 __typename: "Employee",
                 id: string,
@@ -7792,6 +7961,7 @@ export type GetSectionQuery = {
                 firstName: string,
                 lastName: string,
                 grade: number,
+                email: string,
                 companyReadGroup: string | null,
                 createdAt: string,
                 updatedAt: string,
@@ -8074,6 +8244,7 @@ export type ListSectionsQuery = {
               firstName: string,
               lastName: string,
               grade: number,
+              email: string,
               superior:  {
                 __typename: "Employee",
                 id: string,
@@ -8081,6 +8252,7 @@ export type ListSectionsQuery = {
                 firstName: string,
                 lastName: string,
                 grade: number,
+                email: string,
                 companyReadGroup: string | null,
                 createdAt: string,
                 updatedAt: string,
@@ -8116,6 +8288,7 @@ export type ListSectionsQuery = {
               firstName: string,
               lastName: string,
               grade: number,
+              email: string,
               superior:  {
                 __typename: "Employee",
                 id: string,
@@ -8123,6 +8296,7 @@ export type ListSectionsQuery = {
                 firstName: string,
                 lastName: string,
                 grade: number,
+                email: string,
                 companyReadGroup: string | null,
                 createdAt: string,
                 updatedAt: string,
@@ -8327,6 +8501,7 @@ export type GetObjectiveQuery = {
         firstName: string,
         lastName: string,
         grade: number,
+        email: string,
         superior:  {
           __typename: "Employee",
           id: string,
@@ -8334,6 +8509,7 @@ export type GetObjectiveQuery = {
           firstName: string,
           lastName: string,
           grade: number,
+          email: string,
           superior:  {
             __typename: "Employee",
             id: string,
@@ -8341,6 +8517,7 @@ export type GetObjectiveQuery = {
             firstName: string,
             lastName: string,
             grade: number,
+            email: string,
             superior:  {
               __typename: "Employee",
               id: string,
@@ -8348,6 +8525,7 @@ export type GetObjectiveQuery = {
               firstName: string,
               lastName: string,
               grade: number,
+              email: string,
               superior:  {
                 __typename: "Employee",
                 id: string,
@@ -8355,6 +8533,7 @@ export type GetObjectiveQuery = {
                 firstName: string,
                 lastName: string,
                 grade: number,
+                email: string,
                 companyReadGroup: string | null,
                 createdAt: string,
                 updatedAt: string,
@@ -8462,6 +8641,7 @@ export type GetObjectiveQuery = {
         firstName: string,
         lastName: string,
         grade: number,
+        email: string,
         superior:  {
           __typename: "Employee",
           id: string,
@@ -8469,6 +8649,7 @@ export type GetObjectiveQuery = {
           firstName: string,
           lastName: string,
           grade: number,
+          email: string,
           superior:  {
             __typename: "Employee",
             id: string,
@@ -8476,6 +8657,7 @@ export type GetObjectiveQuery = {
             firstName: string,
             lastName: string,
             grade: number,
+            email: string,
             superior:  {
               __typename: "Employee",
               id: string,
@@ -8483,6 +8665,7 @@ export type GetObjectiveQuery = {
               firstName: string,
               lastName: string,
               grade: number,
+              email: string,
               superior:  {
                 __typename: "Employee",
                 id: string,
@@ -8490,6 +8673,7 @@ export type GetObjectiveQuery = {
                 firstName: string,
                 lastName: string,
                 grade: number,
+                email: string,
                 companyReadGroup: string | null,
                 createdAt: string,
                 updatedAt: string,
@@ -8754,6 +8938,7 @@ export type GetObjectiveQuery = {
               firstName: string,
               lastName: string,
               grade: number,
+              email: string,
               superior:  {
                 __typename: "Employee",
                 id: string,
@@ -8761,6 +8946,7 @@ export type GetObjectiveQuery = {
                 firstName: string,
                 lastName: string,
                 grade: number,
+                email: string,
                 companyReadGroup: string | null,
                 createdAt: string,
                 updatedAt: string,
@@ -8796,6 +8982,7 @@ export type GetObjectiveQuery = {
               firstName: string,
               lastName: string,
               grade: number,
+              email: string,
               superior:  {
                 __typename: "Employee",
                 id: string,
@@ -8803,6 +8990,7 @@ export type GetObjectiveQuery = {
                 firstName: string,
                 lastName: string,
                 grade: number,
+                email: string,
                 companyReadGroup: string | null,
                 createdAt: string,
                 updatedAt: string,
@@ -9014,6 +9202,7 @@ export type ListObjectivesQuery = {
           firstName: string,
           lastName: string,
           grade: number,
+          email: string,
           superior:  {
             __typename: "Employee",
             id: string,
@@ -9021,6 +9210,7 @@ export type ListObjectivesQuery = {
             firstName: string,
             lastName: string,
             grade: number,
+            email: string,
             superior:  {
               __typename: "Employee",
               id: string,
@@ -9028,6 +9218,7 @@ export type ListObjectivesQuery = {
               firstName: string,
               lastName: string,
               grade: number,
+              email: string,
               superior:  {
                 __typename: "Employee",
                 id: string,
@@ -9035,6 +9226,7 @@ export type ListObjectivesQuery = {
                 firstName: string,
                 lastName: string,
                 grade: number,
+                email: string,
                 companyReadGroup: string | null,
                 createdAt: string,
                 updatedAt: string,
@@ -9118,6 +9310,7 @@ export type ListObjectivesQuery = {
           firstName: string,
           lastName: string,
           grade: number,
+          email: string,
           superior:  {
             __typename: "Employee",
             id: string,
@@ -9125,6 +9318,7 @@ export type ListObjectivesQuery = {
             firstName: string,
             lastName: string,
             grade: number,
+            email: string,
             superior:  {
               __typename: "Employee",
               id: string,
@@ -9132,6 +9326,7 @@ export type ListObjectivesQuery = {
               firstName: string,
               lastName: string,
               grade: number,
+              email: string,
               superior:  {
                 __typename: "Employee",
                 id: string,
@@ -9139,6 +9334,7 @@ export type ListObjectivesQuery = {
                 firstName: string,
                 lastName: string,
                 grade: number,
+                email: string,
                 companyReadGroup: string | null,
                 createdAt: string,
                 updatedAt: string,
@@ -9335,6 +9531,7 @@ export type ListObjectivesQuery = {
                 firstName: string,
                 lastName: string,
                 grade: number,
+                email: string,
                 companyReadGroup: string | null,
                 createdAt: string,
                 updatedAt: string,
@@ -9346,6 +9543,7 @@ export type ListObjectivesQuery = {
                 firstName: string,
                 lastName: string,
                 grade: number,
+                email: string,
                 companyReadGroup: string | null,
                 createdAt: string,
                 updatedAt: string,
@@ -9472,6 +9670,7 @@ export type OnCreateEmployeeSubscription = {
     firstName: string,
     lastName: string,
     grade: number,
+    email: string,
     superior:  {
       __typename: "Employee",
       id: string,
@@ -9479,6 +9678,7 @@ export type OnCreateEmployeeSubscription = {
       firstName: string,
       lastName: string,
       grade: number,
+      email: string,
       superior:  {
         __typename: "Employee",
         id: string,
@@ -9486,6 +9686,7 @@ export type OnCreateEmployeeSubscription = {
         firstName: string,
         lastName: string,
         grade: number,
+        email: string,
         superior:  {
           __typename: "Employee",
           id: string,
@@ -9493,6 +9694,7 @@ export type OnCreateEmployeeSubscription = {
           firstName: string,
           lastName: string,
           grade: number,
+          email: string,
           superior:  {
             __typename: "Employee",
             id: string,
@@ -9500,6 +9702,7 @@ export type OnCreateEmployeeSubscription = {
             firstName: string,
             lastName: string,
             grade: number,
+            email: string,
             superior:  {
               __typename: "Employee",
               id: string,
@@ -9507,6 +9710,7 @@ export type OnCreateEmployeeSubscription = {
               firstName: string,
               lastName: string,
               grade: number,
+              email: string,
               superior:  {
                 __typename: "Employee",
                 id: string,
@@ -9514,6 +9718,7 @@ export type OnCreateEmployeeSubscription = {
                 firstName: string,
                 lastName: string,
                 grade: number,
+                email: string,
                 companyReadGroup: string | null,
                 createdAt: string,
                 updatedAt: string,
@@ -9672,6 +9877,7 @@ export type OnUpdateEmployeeSubscription = {
     firstName: string,
     lastName: string,
     grade: number,
+    email: string,
     superior:  {
       __typename: "Employee",
       id: string,
@@ -9679,6 +9885,7 @@ export type OnUpdateEmployeeSubscription = {
       firstName: string,
       lastName: string,
       grade: number,
+      email: string,
       superior:  {
         __typename: "Employee",
         id: string,
@@ -9686,6 +9893,7 @@ export type OnUpdateEmployeeSubscription = {
         firstName: string,
         lastName: string,
         grade: number,
+        email: string,
         superior:  {
           __typename: "Employee",
           id: string,
@@ -9693,6 +9901,7 @@ export type OnUpdateEmployeeSubscription = {
           firstName: string,
           lastName: string,
           grade: number,
+          email: string,
           superior:  {
             __typename: "Employee",
             id: string,
@@ -9700,6 +9909,7 @@ export type OnUpdateEmployeeSubscription = {
             firstName: string,
             lastName: string,
             grade: number,
+            email: string,
             superior:  {
               __typename: "Employee",
               id: string,
@@ -9707,6 +9917,7 @@ export type OnUpdateEmployeeSubscription = {
               firstName: string,
               lastName: string,
               grade: number,
+              email: string,
               superior:  {
                 __typename: "Employee",
                 id: string,
@@ -9714,6 +9925,7 @@ export type OnUpdateEmployeeSubscription = {
                 firstName: string,
                 lastName: string,
                 grade: number,
+                email: string,
                 companyReadGroup: string | null,
                 createdAt: string,
                 updatedAt: string,
@@ -9872,6 +10084,7 @@ export type OnDeleteEmployeeSubscription = {
     firstName: string,
     lastName: string,
     grade: number,
+    email: string,
     superior:  {
       __typename: "Employee",
       id: string,
@@ -9879,6 +10092,7 @@ export type OnDeleteEmployeeSubscription = {
       firstName: string,
       lastName: string,
       grade: number,
+      email: string,
       superior:  {
         __typename: "Employee",
         id: string,
@@ -9886,6 +10100,7 @@ export type OnDeleteEmployeeSubscription = {
         firstName: string,
         lastName: string,
         grade: number,
+        email: string,
         superior:  {
           __typename: "Employee",
           id: string,
@@ -9893,6 +10108,7 @@ export type OnDeleteEmployeeSubscription = {
           firstName: string,
           lastName: string,
           grade: number,
+          email: string,
           superior:  {
             __typename: "Employee",
             id: string,
@@ -9900,6 +10116,7 @@ export type OnDeleteEmployeeSubscription = {
             firstName: string,
             lastName: string,
             grade: number,
+            email: string,
             superior:  {
               __typename: "Employee",
               id: string,
@@ -9907,6 +10124,7 @@ export type OnDeleteEmployeeSubscription = {
               firstName: string,
               lastName: string,
               grade: number,
+              email: string,
               superior:  {
                 __typename: "Employee",
                 id: string,
@@ -9914,6 +10132,7 @@ export type OnDeleteEmployeeSubscription = {
                 firstName: string,
                 lastName: string,
                 grade: number,
+                email: string,
                 companyReadGroup: string | null,
                 createdAt: string,
                 updatedAt: string,
@@ -10288,6 +10507,7 @@ export type OnCreateSheetSubscription = {
       firstName: string,
       lastName: string,
       grade: number,
+      email: string,
       superior:  {
         __typename: "Employee",
         id: string,
@@ -10295,6 +10515,7 @@ export type OnCreateSheetSubscription = {
         firstName: string,
         lastName: string,
         grade: number,
+        email: string,
         superior:  {
           __typename: "Employee",
           id: string,
@@ -10302,6 +10523,7 @@ export type OnCreateSheetSubscription = {
           firstName: string,
           lastName: string,
           grade: number,
+          email: string,
           superior:  {
             __typename: "Employee",
             id: string,
@@ -10309,6 +10531,7 @@ export type OnCreateSheetSubscription = {
             firstName: string,
             lastName: string,
             grade: number,
+            email: string,
             superior:  {
               __typename: "Employee",
               id: string,
@@ -10316,6 +10539,7 @@ export type OnCreateSheetSubscription = {
               firstName: string,
               lastName: string,
               grade: number,
+              email: string,
               superior:  {
                 __typename: "Employee",
                 id: string,
@@ -10323,6 +10547,7 @@ export type OnCreateSheetSubscription = {
                 firstName: string,
                 lastName: string,
                 grade: number,
+                email: string,
                 companyReadGroup: string | null,
                 createdAt: string,
                 updatedAt: string,
@@ -10454,6 +10679,7 @@ export type OnCreateSheetSubscription = {
       firstName: string,
       lastName: string,
       grade: number,
+      email: string,
       superior:  {
         __typename: "Employee",
         id: string,
@@ -10461,6 +10687,7 @@ export type OnCreateSheetSubscription = {
         firstName: string,
         lastName: string,
         grade: number,
+        email: string,
         superior:  {
           __typename: "Employee",
           id: string,
@@ -10468,6 +10695,7 @@ export type OnCreateSheetSubscription = {
           firstName: string,
           lastName: string,
           grade: number,
+          email: string,
           superior:  {
             __typename: "Employee",
             id: string,
@@ -10475,6 +10703,7 @@ export type OnCreateSheetSubscription = {
             firstName: string,
             lastName: string,
             grade: number,
+            email: string,
             superior:  {
               __typename: "Employee",
               id: string,
@@ -10482,6 +10711,7 @@ export type OnCreateSheetSubscription = {
               firstName: string,
               lastName: string,
               grade: number,
+              email: string,
               superior:  {
                 __typename: "Employee",
                 id: string,
@@ -10489,6 +10719,7 @@ export type OnCreateSheetSubscription = {
                 firstName: string,
                 lastName: string,
                 grade: number,
+                email: string,
                 companyReadGroup: string | null,
                 createdAt: string,
                 updatedAt: string,
@@ -10672,6 +10903,7 @@ export type OnCreateSheetSubscription = {
                 firstName: string,
                 lastName: string,
                 grade: number,
+                email: string,
                 companyReadGroup: string | null,
                 createdAt: string,
                 updatedAt: string,
@@ -10683,6 +10915,7 @@ export type OnCreateSheetSubscription = {
                 firstName: string,
                 lastName: string,
                 grade: number,
+                email: string,
                 companyReadGroup: string | null,
                 createdAt: string,
                 updatedAt: string,
@@ -10819,6 +11052,7 @@ export type OnUpdateSheetSubscription = {
       firstName: string,
       lastName: string,
       grade: number,
+      email: string,
       superior:  {
         __typename: "Employee",
         id: string,
@@ -10826,6 +11060,7 @@ export type OnUpdateSheetSubscription = {
         firstName: string,
         lastName: string,
         grade: number,
+        email: string,
         superior:  {
           __typename: "Employee",
           id: string,
@@ -10833,6 +11068,7 @@ export type OnUpdateSheetSubscription = {
           firstName: string,
           lastName: string,
           grade: number,
+          email: string,
           superior:  {
             __typename: "Employee",
             id: string,
@@ -10840,6 +11076,7 @@ export type OnUpdateSheetSubscription = {
             firstName: string,
             lastName: string,
             grade: number,
+            email: string,
             superior:  {
               __typename: "Employee",
               id: string,
@@ -10847,6 +11084,7 @@ export type OnUpdateSheetSubscription = {
               firstName: string,
               lastName: string,
               grade: number,
+              email: string,
               superior:  {
                 __typename: "Employee",
                 id: string,
@@ -10854,6 +11092,7 @@ export type OnUpdateSheetSubscription = {
                 firstName: string,
                 lastName: string,
                 grade: number,
+                email: string,
                 companyReadGroup: string | null,
                 createdAt: string,
                 updatedAt: string,
@@ -10985,6 +11224,7 @@ export type OnUpdateSheetSubscription = {
       firstName: string,
       lastName: string,
       grade: number,
+      email: string,
       superior:  {
         __typename: "Employee",
         id: string,
@@ -10992,6 +11232,7 @@ export type OnUpdateSheetSubscription = {
         firstName: string,
         lastName: string,
         grade: number,
+        email: string,
         superior:  {
           __typename: "Employee",
           id: string,
@@ -10999,6 +11240,7 @@ export type OnUpdateSheetSubscription = {
           firstName: string,
           lastName: string,
           grade: number,
+          email: string,
           superior:  {
             __typename: "Employee",
             id: string,
@@ -11006,6 +11248,7 @@ export type OnUpdateSheetSubscription = {
             firstName: string,
             lastName: string,
             grade: number,
+            email: string,
             superior:  {
               __typename: "Employee",
               id: string,
@@ -11013,6 +11256,7 @@ export type OnUpdateSheetSubscription = {
               firstName: string,
               lastName: string,
               grade: number,
+              email: string,
               superior:  {
                 __typename: "Employee",
                 id: string,
@@ -11020,6 +11264,7 @@ export type OnUpdateSheetSubscription = {
                 firstName: string,
                 lastName: string,
                 grade: number,
+                email: string,
                 companyReadGroup: string | null,
                 createdAt: string,
                 updatedAt: string,
@@ -11203,6 +11448,7 @@ export type OnUpdateSheetSubscription = {
                 firstName: string,
                 lastName: string,
                 grade: number,
+                email: string,
                 companyReadGroup: string | null,
                 createdAt: string,
                 updatedAt: string,
@@ -11214,6 +11460,7 @@ export type OnUpdateSheetSubscription = {
                 firstName: string,
                 lastName: string,
                 grade: number,
+                email: string,
                 companyReadGroup: string | null,
                 createdAt: string,
                 updatedAt: string,
@@ -11350,6 +11597,7 @@ export type OnDeleteSheetSubscription = {
       firstName: string,
       lastName: string,
       grade: number,
+      email: string,
       superior:  {
         __typename: "Employee",
         id: string,
@@ -11357,6 +11605,7 @@ export type OnDeleteSheetSubscription = {
         firstName: string,
         lastName: string,
         grade: number,
+        email: string,
         superior:  {
           __typename: "Employee",
           id: string,
@@ -11364,6 +11613,7 @@ export type OnDeleteSheetSubscription = {
           firstName: string,
           lastName: string,
           grade: number,
+          email: string,
           superior:  {
             __typename: "Employee",
             id: string,
@@ -11371,6 +11621,7 @@ export type OnDeleteSheetSubscription = {
             firstName: string,
             lastName: string,
             grade: number,
+            email: string,
             superior:  {
               __typename: "Employee",
               id: string,
@@ -11378,6 +11629,7 @@ export type OnDeleteSheetSubscription = {
               firstName: string,
               lastName: string,
               grade: number,
+              email: string,
               superior:  {
                 __typename: "Employee",
                 id: string,
@@ -11385,6 +11637,7 @@ export type OnDeleteSheetSubscription = {
                 firstName: string,
                 lastName: string,
                 grade: number,
+                email: string,
                 companyReadGroup: string | null,
                 createdAt: string,
                 updatedAt: string,
@@ -11516,6 +11769,7 @@ export type OnDeleteSheetSubscription = {
       firstName: string,
       lastName: string,
       grade: number,
+      email: string,
       superior:  {
         __typename: "Employee",
         id: string,
@@ -11523,6 +11777,7 @@ export type OnDeleteSheetSubscription = {
         firstName: string,
         lastName: string,
         grade: number,
+        email: string,
         superior:  {
           __typename: "Employee",
           id: string,
@@ -11530,6 +11785,7 @@ export type OnDeleteSheetSubscription = {
           firstName: string,
           lastName: string,
           grade: number,
+          email: string,
           superior:  {
             __typename: "Employee",
             id: string,
@@ -11537,6 +11793,7 @@ export type OnDeleteSheetSubscription = {
             firstName: string,
             lastName: string,
             grade: number,
+            email: string,
             superior:  {
               __typename: "Employee",
               id: string,
@@ -11544,6 +11801,7 @@ export type OnDeleteSheetSubscription = {
               firstName: string,
               lastName: string,
               grade: number,
+              email: string,
               superior:  {
                 __typename: "Employee",
                 id: string,
@@ -11551,6 +11809,7 @@ export type OnDeleteSheetSubscription = {
                 firstName: string,
                 lastName: string,
                 grade: number,
+                email: string,
                 companyReadGroup: string | null,
                 createdAt: string,
                 updatedAt: string,
@@ -11734,6 +11993,7 @@ export type OnDeleteSheetSubscription = {
                 firstName: string,
                 lastName: string,
                 grade: number,
+                email: string,
                 companyReadGroup: string | null,
                 createdAt: string,
                 updatedAt: string,
@@ -11745,6 +12005,7 @@ export type OnDeleteSheetSubscription = {
                 firstName: string,
                 lastName: string,
                 grade: number,
+                email: string,
                 companyReadGroup: string | null,
                 createdAt: string,
                 updatedAt: string,
@@ -11900,6 +12161,7 @@ export type OnCreateSectionSubscription = {
             firstName: string,
             lastName: string,
             grade: number,
+            email: string,
             superior:  {
               __typename: "Employee",
               id: string,
@@ -11907,6 +12169,7 @@ export type OnCreateSectionSubscription = {
               firstName: string,
               lastName: string,
               grade: number,
+              email: string,
               superior:  {
                 __typename: "Employee",
                 id: string,
@@ -11914,6 +12177,7 @@ export type OnCreateSectionSubscription = {
                 firstName: string,
                 lastName: string,
                 grade: number,
+                email: string,
                 companyReadGroup: string | null,
                 createdAt: string,
                 updatedAt: string,
@@ -11973,6 +12237,7 @@ export type OnCreateSectionSubscription = {
             firstName: string,
             lastName: string,
             grade: number,
+            email: string,
             superior:  {
               __typename: "Employee",
               id: string,
@@ -11980,6 +12245,7 @@ export type OnCreateSectionSubscription = {
               firstName: string,
               lastName: string,
               grade: number,
+              email: string,
               superior:  {
                 __typename: "Employee",
                 id: string,
@@ -11987,6 +12253,7 @@ export type OnCreateSectionSubscription = {
                 firstName: string,
                 lastName: string,
                 grade: number,
+                email: string,
                 companyReadGroup: string | null,
                 createdAt: string,
                 updatedAt: string,
@@ -12266,6 +12533,7 @@ export type OnUpdateSectionSubscription = {
             firstName: string,
             lastName: string,
             grade: number,
+            email: string,
             superior:  {
               __typename: "Employee",
               id: string,
@@ -12273,6 +12541,7 @@ export type OnUpdateSectionSubscription = {
               firstName: string,
               lastName: string,
               grade: number,
+              email: string,
               superior:  {
                 __typename: "Employee",
                 id: string,
@@ -12280,6 +12549,7 @@ export type OnUpdateSectionSubscription = {
                 firstName: string,
                 lastName: string,
                 grade: number,
+                email: string,
                 companyReadGroup: string | null,
                 createdAt: string,
                 updatedAt: string,
@@ -12339,6 +12609,7 @@ export type OnUpdateSectionSubscription = {
             firstName: string,
             lastName: string,
             grade: number,
+            email: string,
             superior:  {
               __typename: "Employee",
               id: string,
@@ -12346,6 +12617,7 @@ export type OnUpdateSectionSubscription = {
               firstName: string,
               lastName: string,
               grade: number,
+              email: string,
               superior:  {
                 __typename: "Employee",
                 id: string,
@@ -12353,6 +12625,7 @@ export type OnUpdateSectionSubscription = {
                 firstName: string,
                 lastName: string,
                 grade: number,
+                email: string,
                 companyReadGroup: string | null,
                 createdAt: string,
                 updatedAt: string,
@@ -12632,6 +12905,7 @@ export type OnDeleteSectionSubscription = {
             firstName: string,
             lastName: string,
             grade: number,
+            email: string,
             superior:  {
               __typename: "Employee",
               id: string,
@@ -12639,6 +12913,7 @@ export type OnDeleteSectionSubscription = {
               firstName: string,
               lastName: string,
               grade: number,
+              email: string,
               superior:  {
                 __typename: "Employee",
                 id: string,
@@ -12646,6 +12921,7 @@ export type OnDeleteSectionSubscription = {
                 firstName: string,
                 lastName: string,
                 grade: number,
+                email: string,
                 companyReadGroup: string | null,
                 createdAt: string,
                 updatedAt: string,
@@ -12705,6 +12981,7 @@ export type OnDeleteSectionSubscription = {
             firstName: string,
             lastName: string,
             grade: number,
+            email: string,
             superior:  {
               __typename: "Employee",
               id: string,
@@ -12712,6 +12989,7 @@ export type OnDeleteSectionSubscription = {
               firstName: string,
               lastName: string,
               grade: number,
+              email: string,
               superior:  {
                 __typename: "Employee",
                 id: string,
@@ -12719,6 +12997,7 @@ export type OnDeleteSectionSubscription = {
                 firstName: string,
                 lastName: string,
                 grade: number,
+                email: string,
                 companyReadGroup: string | null,
                 createdAt: string,
                 updatedAt: string,
@@ -12992,6 +13271,7 @@ export type OnCreateObjectiveSubscription = {
         firstName: string,
         lastName: string,
         grade: number,
+        email: string,
         superior:  {
           __typename: "Employee",
           id: string,
@@ -12999,6 +13279,7 @@ export type OnCreateObjectiveSubscription = {
           firstName: string,
           lastName: string,
           grade: number,
+          email: string,
           superior:  {
             __typename: "Employee",
             id: string,
@@ -13006,6 +13287,7 @@ export type OnCreateObjectiveSubscription = {
             firstName: string,
             lastName: string,
             grade: number,
+            email: string,
             superior:  {
               __typename: "Employee",
               id: string,
@@ -13013,6 +13295,7 @@ export type OnCreateObjectiveSubscription = {
               firstName: string,
               lastName: string,
               grade: number,
+              email: string,
               superior:  {
                 __typename: "Employee",
                 id: string,
@@ -13020,6 +13303,7 @@ export type OnCreateObjectiveSubscription = {
                 firstName: string,
                 lastName: string,
                 grade: number,
+                email: string,
                 companyReadGroup: string | null,
                 createdAt: string,
                 updatedAt: string,
@@ -13127,6 +13411,7 @@ export type OnCreateObjectiveSubscription = {
         firstName: string,
         lastName: string,
         grade: number,
+        email: string,
         superior:  {
           __typename: "Employee",
           id: string,
@@ -13134,6 +13419,7 @@ export type OnCreateObjectiveSubscription = {
           firstName: string,
           lastName: string,
           grade: number,
+          email: string,
           superior:  {
             __typename: "Employee",
             id: string,
@@ -13141,6 +13427,7 @@ export type OnCreateObjectiveSubscription = {
             firstName: string,
             lastName: string,
             grade: number,
+            email: string,
             superior:  {
               __typename: "Employee",
               id: string,
@@ -13148,6 +13435,7 @@ export type OnCreateObjectiveSubscription = {
               firstName: string,
               lastName: string,
               grade: number,
+              email: string,
               superior:  {
                 __typename: "Employee",
                 id: string,
@@ -13155,6 +13443,7 @@ export type OnCreateObjectiveSubscription = {
                 firstName: string,
                 lastName: string,
                 grade: number,
+                email: string,
                 companyReadGroup: string | null,
                 createdAt: string,
                 updatedAt: string,
@@ -13419,6 +13708,7 @@ export type OnCreateObjectiveSubscription = {
               firstName: string,
               lastName: string,
               grade: number,
+              email: string,
               superior:  {
                 __typename: "Employee",
                 id: string,
@@ -13426,6 +13716,7 @@ export type OnCreateObjectiveSubscription = {
                 firstName: string,
                 lastName: string,
                 grade: number,
+                email: string,
                 companyReadGroup: string | null,
                 createdAt: string,
                 updatedAt: string,
@@ -13461,6 +13752,7 @@ export type OnCreateObjectiveSubscription = {
               firstName: string,
               lastName: string,
               grade: number,
+              email: string,
               superior:  {
                 __typename: "Employee",
                 id: string,
@@ -13468,6 +13760,7 @@ export type OnCreateObjectiveSubscription = {
                 firstName: string,
                 lastName: string,
                 grade: number,
+                email: string,
                 companyReadGroup: string | null,
                 createdAt: string,
                 updatedAt: string,
@@ -13676,6 +13969,7 @@ export type OnUpdateObjectiveSubscription = {
         firstName: string,
         lastName: string,
         grade: number,
+        email: string,
         superior:  {
           __typename: "Employee",
           id: string,
@@ -13683,6 +13977,7 @@ export type OnUpdateObjectiveSubscription = {
           firstName: string,
           lastName: string,
           grade: number,
+          email: string,
           superior:  {
             __typename: "Employee",
             id: string,
@@ -13690,6 +13985,7 @@ export type OnUpdateObjectiveSubscription = {
             firstName: string,
             lastName: string,
             grade: number,
+            email: string,
             superior:  {
               __typename: "Employee",
               id: string,
@@ -13697,6 +13993,7 @@ export type OnUpdateObjectiveSubscription = {
               firstName: string,
               lastName: string,
               grade: number,
+              email: string,
               superior:  {
                 __typename: "Employee",
                 id: string,
@@ -13704,6 +14001,7 @@ export type OnUpdateObjectiveSubscription = {
                 firstName: string,
                 lastName: string,
                 grade: number,
+                email: string,
                 companyReadGroup: string | null,
                 createdAt: string,
                 updatedAt: string,
@@ -13811,6 +14109,7 @@ export type OnUpdateObjectiveSubscription = {
         firstName: string,
         lastName: string,
         grade: number,
+        email: string,
         superior:  {
           __typename: "Employee",
           id: string,
@@ -13818,6 +14117,7 @@ export type OnUpdateObjectiveSubscription = {
           firstName: string,
           lastName: string,
           grade: number,
+          email: string,
           superior:  {
             __typename: "Employee",
             id: string,
@@ -13825,6 +14125,7 @@ export type OnUpdateObjectiveSubscription = {
             firstName: string,
             lastName: string,
             grade: number,
+            email: string,
             superior:  {
               __typename: "Employee",
               id: string,
@@ -13832,6 +14133,7 @@ export type OnUpdateObjectiveSubscription = {
               firstName: string,
               lastName: string,
               grade: number,
+              email: string,
               superior:  {
                 __typename: "Employee",
                 id: string,
@@ -13839,6 +14141,7 @@ export type OnUpdateObjectiveSubscription = {
                 firstName: string,
                 lastName: string,
                 grade: number,
+                email: string,
                 companyReadGroup: string | null,
                 createdAt: string,
                 updatedAt: string,
@@ -14103,6 +14406,7 @@ export type OnUpdateObjectiveSubscription = {
               firstName: string,
               lastName: string,
               grade: number,
+              email: string,
               superior:  {
                 __typename: "Employee",
                 id: string,
@@ -14110,6 +14414,7 @@ export type OnUpdateObjectiveSubscription = {
                 firstName: string,
                 lastName: string,
                 grade: number,
+                email: string,
                 companyReadGroup: string | null,
                 createdAt: string,
                 updatedAt: string,
@@ -14145,6 +14450,7 @@ export type OnUpdateObjectiveSubscription = {
               firstName: string,
               lastName: string,
               grade: number,
+              email: string,
               superior:  {
                 __typename: "Employee",
                 id: string,
@@ -14152,6 +14458,7 @@ export type OnUpdateObjectiveSubscription = {
                 firstName: string,
                 lastName: string,
                 grade: number,
+                email: string,
                 companyReadGroup: string | null,
                 createdAt: string,
                 updatedAt: string,
@@ -14360,6 +14667,7 @@ export type OnDeleteObjectiveSubscription = {
         firstName: string,
         lastName: string,
         grade: number,
+        email: string,
         superior:  {
           __typename: "Employee",
           id: string,
@@ -14367,6 +14675,7 @@ export type OnDeleteObjectiveSubscription = {
           firstName: string,
           lastName: string,
           grade: number,
+          email: string,
           superior:  {
             __typename: "Employee",
             id: string,
@@ -14374,6 +14683,7 @@ export type OnDeleteObjectiveSubscription = {
             firstName: string,
             lastName: string,
             grade: number,
+            email: string,
             superior:  {
               __typename: "Employee",
               id: string,
@@ -14381,6 +14691,7 @@ export type OnDeleteObjectiveSubscription = {
               firstName: string,
               lastName: string,
               grade: number,
+              email: string,
               superior:  {
                 __typename: "Employee",
                 id: string,
@@ -14388,6 +14699,7 @@ export type OnDeleteObjectiveSubscription = {
                 firstName: string,
                 lastName: string,
                 grade: number,
+                email: string,
                 companyReadGroup: string | null,
                 createdAt: string,
                 updatedAt: string,
@@ -14495,6 +14807,7 @@ export type OnDeleteObjectiveSubscription = {
         firstName: string,
         lastName: string,
         grade: number,
+        email: string,
         superior:  {
           __typename: "Employee",
           id: string,
@@ -14502,6 +14815,7 @@ export type OnDeleteObjectiveSubscription = {
           firstName: string,
           lastName: string,
           grade: number,
+          email: string,
           superior:  {
             __typename: "Employee",
             id: string,
@@ -14509,6 +14823,7 @@ export type OnDeleteObjectiveSubscription = {
             firstName: string,
             lastName: string,
             grade: number,
+            email: string,
             superior:  {
               __typename: "Employee",
               id: string,
@@ -14516,6 +14831,7 @@ export type OnDeleteObjectiveSubscription = {
               firstName: string,
               lastName: string,
               grade: number,
+              email: string,
               superior:  {
                 __typename: "Employee",
                 id: string,
@@ -14523,6 +14839,7 @@ export type OnDeleteObjectiveSubscription = {
                 firstName: string,
                 lastName: string,
                 grade: number,
+                email: string,
                 companyReadGroup: string | null,
                 createdAt: string,
                 updatedAt: string,
@@ -14787,6 +15104,7 @@ export type OnDeleteObjectiveSubscription = {
               firstName: string,
               lastName: string,
               grade: number,
+              email: string,
               superior:  {
                 __typename: "Employee",
                 id: string,
@@ -14794,6 +15112,7 @@ export type OnDeleteObjectiveSubscription = {
                 firstName: string,
                 lastName: string,
                 grade: number,
+                email: string,
                 companyReadGroup: string | null,
                 createdAt: string,
                 updatedAt: string,
@@ -14829,6 +15148,7 @@ export type OnDeleteObjectiveSubscription = {
               firstName: string,
               lastName: string,
               grade: number,
+              email: string,
               superior:  {
                 __typename: "Employee",
                 id: string,
@@ -14836,6 +15156,7 @@ export type OnDeleteObjectiveSubscription = {
                 firstName: string,
                 lastName: string,
                 grade: number,
+                email: string,
                 companyReadGroup: string | null,
                 createdAt: string,
                 updatedAt: string,
