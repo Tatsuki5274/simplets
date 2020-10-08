@@ -13,6 +13,7 @@ import dateFormat from 'dateformat'
 import { updateObjective, updateSheet }
     from 'graphql/mutations';
 import { error } from 'console';
+import Style from './indexStyle.module.scss'
 
 type Props = {
     match: {
@@ -327,6 +328,15 @@ function RevieweeSheetShow(props: Props) {
                                         {section.objective?.items?.map((arg: any) => {
                                             const objective: Objective = arg;   //仮の型変換処理
                                             const date = new Date(objective.updatedAt);
+                                            var expDoneDateStyle: string; //完了予定日のクラス名
+                                            var currentDate = new Date().getTime();
+                                            var doneDate = new Date(objective.expDoneDate!).getTime();
+                                            if(doneDate > currentDate) {
+                                                expDoneDateStyle = Style.indexExpDoneDateExpired;
+                                            } else {
+                                                expDoneDateStyle = Style.indexExpDoneDateInProgress;
+                                            }
+
                                             return (
                                                 <tr key={objective.id}>
                                                     <td>
@@ -358,7 +368,7 @@ function RevieweeSheetShow(props: Props) {
                                                     })()}
                                                     <td>{objective.priority}</td>
                                                     <td>{objective.expStartDate ? dateFormat(objective.expStartDate, "yyyy/mm/dd") : ""}</td>
-                                                    <td>{objective.expDoneDate ? dateFormat(objective.expDoneDate, "yyyy/mm/dd") : ""}</td>
+                                                    <td className={expDoneDateStyle}>{objective.expDoneDate ? dateFormat(objective.expDoneDate, "yyyy/mm/dd") : ""}</td>
                                                     <td>{objective.selfEvaluation}</td>
                                                     <td>{objective.lastEvaluation}</td>
                                                     <td>{dateFormat(date, "yyyy/mm/dd HH:MM")}</td>
