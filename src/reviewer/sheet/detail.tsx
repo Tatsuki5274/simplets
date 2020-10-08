@@ -10,6 +10,7 @@ import { updateInterview, updateObjective, updateSheet } from 'graphql/mutations
 import * as APIt from 'API';
 import { listSheets, getSheet } from 'graphql/queries';
 import dateFormat from 'dateformat';
+import style from './detailStyle.module.scss';
 
 //propsの型を指定
 type Props = {
@@ -252,7 +253,7 @@ function EvalutionScreen(props: Props) {
 
 
                         <h4>話し合い結果</h4>
-                        <textarea name="careerPlanComment" onChange={handleChange}>{sheet.careerPlanComment}</textarea>
+                        <textarea className={style.detailTextarea} name="careerPlanComment" onChange={handleChange}>{sheet.careerPlanComment}</textarea>
 
                         {/* インタビュー実施記録 */}
                         <h4>インタビュー実施記録</h4>
@@ -274,7 +275,7 @@ function EvalutionScreen(props: Props) {
                                         <tr key={interviews.id}>
                                             <td>{interviews.purpose}</td>
                                             <td>{dateFormat(date, "yyyy/mm/dd")}</td>
-                                            <td><textarea name="interviewDetail" data-interview-id={interviews.id} onChange={handleChangeInterview}>{interviews.detail}</textarea></td>
+                                            <td><textarea className={style.detailTextarea} name="interviewDetail" data-interview-id={interviews.id} onChange={handleChangeInterview}>{interviews.detail}</textarea></td>
                                         </tr>
                                     );
                                 })}
@@ -288,7 +289,7 @@ function EvalutionScreen(props: Props) {
                         <Form>
                             <Form.Group>
                                 <Form.Label>所属長コメント</Form.Label>
-                                <Form.Control type="textarea" onChange={handleChange} name="secondComment" defaultValue={sheet.secondComment || ""}></Form.Control>
+                                <Form.Control type="textarea" className={style.detailTextarea} onChange={handleChange} name="secondComment" defaultValue={sheet.secondComment || ""}></Form.Control>
                             </Form.Group>
 
                             <Form.Group>
@@ -304,7 +305,7 @@ function EvalutionScreen(props: Props) {
 
                             <Form.Group>
                                 <Form.Label>部門長コメント</Form.Label>
-                                <Form.Control type="textarea" onChange={handleChange} name="firstComment" defaultValue={sheet.firstComment || ""}></Form.Control>
+                                <Form.Control type="textarea" className={style.detailTextarea} onChange={handleChange} name="firstComment" defaultValue={sheet.firstComment || ""}></Form.Control>
                             </Form.Group>
 
                             {/* ステータスによってボタンの出し分け */}
@@ -382,8 +383,16 @@ function EvalutionScreen(props: Props) {
                                             {section.objective?.items?.map((arg: any) => {
                                                 const objective: Objective = arg;   //仮の型変換処理
                                                 const date = new Date(objective.updatedAt);
+                                                var styleObjective: string;
+                                                if (objective.progress === 100) {
+                                                    styleObjective = style.detailObjectiveProgressHigh;
+                                                } else if (objective.progress! >= 10 && objective.progress! < 100) {
+                                                    styleObjective = style.detailObjectiveProgressMiddle;
+                                                } else {
+                                                    styleObjective = "";
+                                                }
                                                 return (
-                                                    <tr key={objective.id}>
+                                                    <tr key={objective.id} className={styleObjective}>
 
                                                         {/* 目標本文 */}
                                                         <td>{objective.content}</td>
@@ -401,7 +410,7 @@ function EvalutionScreen(props: Props) {
                                                         <td>{objective.selfEvaluation}</td>
 
                                                         {/* 最終評価 */}
-                                                        <td>
+                                                        <td className={style.detailSelect}>
                                                             <select name="lastEvaluation" data-objective-id={objective.id} onChange={handleChangeObjective}>
                                                                 <option value=""></option>
                                                                 {[5, 4, 3, 2, 1].map((number: number) => {
