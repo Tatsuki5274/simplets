@@ -10,6 +10,7 @@ import { updateInterview, updateObjective, updateSheet } from 'graphql/mutations
 import * as APIt from 'API';
 import { listSheets, getSheet } from 'graphql/queries';
 import dateFormat from 'dateformat';
+import HeaderComponents from 'common/header';
 import style from './detailStyle.module.scss';
 
 //propsの型を指定
@@ -241,6 +242,8 @@ function EvalutionScreen(props: Props) {
             </div>
 
             {/* 評価画面 */}
+            {/* ヘッダーの表示 */}
+            <HeaderComponents />
             <div>
                 <Container>
                     <h3>今後のキャリア計画</h3><br />

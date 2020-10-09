@@ -10,6 +10,7 @@ import { ListSectionsQuery, ListSectionsQueryVariables, ModelSectionFilterInput 
 import CategoryInput from "./categoryInput"
 import { createObjective } from 'graphql/mutations';
 import { Redirect } from 'react-router-dom';
+import HeaderComponents from 'common/header';
 
 type Props = {
     match: {
@@ -87,6 +88,9 @@ function RevieweeSheetNew(props: Props){
     if(isRedirect) return <Redirect to={`/reviewee/sheet/${sheetId}`} />
     return (
         <div>
+            {/* ヘッダーの表示 */}
+            <HeaderComponents />
+            
             <Container>
                 <Form onSubmit={onSubmit}>
                     <div>

@@ -23,7 +23,8 @@ export type Section = Omit<Exclude<APIt.GetSectionQuery['getSection'], null>, '_
 export type Interview = Omit<Exclude<APIt.GetInterviewQuery['getInterview'], null>, '__typename'>;
 export type Group = Omit<Exclude<APIt.GetGroupQuery['getGroup'], null>, '__typename'>;
 export type Category = Omit<Exclude<APIt.GetCategoryQuery['getCategory'], null>, '__typename'>
-
+export type Employee = Omit<Exclude<APIt.GetEmployeeQuery['getEmployee'], null>, '__typename'>;
+ 
 //approvalStatusManagerの引数の型
 export type approvalStatusManagerMutationVariables = {
   // proceed = ステータスを次へ移動   remand = 差し戻し   reference = ステータスの参照

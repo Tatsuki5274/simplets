@@ -11,6 +11,7 @@ import { listCategorys, listSheets } from 'graphql/queries'
 import * as APIt from 'API';
 import { createInterview, createSection, createSheet, updateSheet } from 'graphql/mutations';
 import SidebarComponents from 'common/Sidebar';
+import HeaderComponents from 'common/header';
 
 
 // const listSheets = /* GraphQL */ `
@@ -206,6 +207,8 @@ function ListPerformanceEvalution() {
     if (sheets === undefined) return <div>Loading</div>
     return (
         <div>
+            {/* ヘッダーの表示 */}
+            <HeaderComponents />
             {/* サイドバーコンポーネント 表示 */}
             <SidebarComponents />
 

@@ -3,7 +3,7 @@ import { Container, Row, Col, Table, Button, Modal, Form } from 'react-bootstrap
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Link } from 'react-router-dom';
 import { GraphQLResult } from "@aws-amplify/api";
-import { API, graphqlOperation } from 'aws-amplify';
+import { API, Auth, graphqlOperation } from 'aws-amplify';
 //import {BrowserRouter, Route, Link, Switch } from "react-router-dom";
 import { getSheet, getSection } from 'graphql/queries'
 import { Sheet, Section, Objective } from 'App';
@@ -13,6 +13,7 @@ import dateFormat from 'dateformat'
 import { updateObjective, updateSheet }
     from 'graphql/mutations';
 import { error } from 'console';
+import HeaderComponents from 'common/header';//ヘッダーの表示
 import Style from './indexStyle.module.scss'
 
 type Props = {
@@ -25,8 +26,9 @@ type Props = {
 
 
 function RevieweeSheetShow(props: Props) {
+    
     const sheetId = props.match.params.sheetId;
-    const [sheet, setSheet] = useState<Sheet>()
+    const [sheet, setSheet] = useState<Sheet>();
 
     //モーダル
     const [objectiveUpdateShow, setObjectiveUpdateShow] = useState(false);
@@ -174,7 +176,6 @@ function RevieweeSheetShow(props: Props) {
     }
 
     //表示用データ
-
     useEffect(() => {
         ; (async () => {
             //URLのパラメータを取得
@@ -294,6 +295,8 @@ function RevieweeSheetShow(props: Props) {
                     </Modal.Footer>
                 </Modal>
             </div>
+            {/* ヘッダーの表示 */}
+            <HeaderComponents />
             <div>
                 <Container>
                     <h2>メイン</h2>

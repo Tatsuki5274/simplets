@@ -9,7 +9,7 @@ import * as APIt from 'API';
 import { Group, Objective, Section, Sheet } from 'App';
 import { getEmployee } from 'graphql/queries'
 import SidebarComponents from 'common/Sidebar';
-
+import HeaderComponents from 'common/header';//ヘッダーの表示
 
 function ProgressReferenceList() {
     //今日の日付を取得
@@ -96,8 +96,11 @@ function ProgressReferenceList() {
     return (
 
         <div>
+            {/* ヘッダーの表示 */}
+            <HeaderComponents />
             {/* サイドバーコンポーネント 表示 */}
             <SidebarComponents />
+            
 
             <Container>
                 <h2>進捗参照</h2><br />
