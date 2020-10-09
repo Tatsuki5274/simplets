@@ -9,7 +9,7 @@ import { Category, Interview, Section, Sheet } from 'App';
 import { ApprovalStatus, getStatusValue } from 'lib/getStatusValue'
 import { listCategorys, listSheets } from 'graphql/queries'
 import * as APIt from 'API';
-import { createInterview, createSection, createSheet } from 'graphql/mutations';
+import { createInterview, createSection, createSheet, updateSheet } from 'graphql/mutations';
 import SidebarComponents from 'common/Sidebar';
 
 
@@ -78,6 +78,7 @@ function ListPerformanceEvalution() {
                 //レンダリング要素の追加
                 addSheets(createdSheet);
                 console.log("Done!", sheets);
+
             } else {
                 console.error("error");
             }
@@ -87,10 +88,16 @@ function ListPerformanceEvalution() {
         async function runCreateSheet(): Promise<Sheet | undefined>{
             //シートを作成
             let sheetId: string = '';
+
+            //ログインユーザ情報取得
+            const currentUser = await Auth.currentAuthenticatedUser();
+            const revieweeEmployeeID:string = currentUser.username;
+
             const createI: APIt.CreateSheetInput = {
                 grade: 0,
                 sheetGroupId: "0",
-                year: today.getFullYear()
+                year: today.getFullYear(),
+                sheetRevieweeEmployeeId: revieweeEmployeeID 
             };
             const createMV: APIt.CreateSheetMutationVariables = {
                 input: createI,
@@ -187,6 +194,7 @@ function ListPerformanceEvalution() {
                 }
             }
         }
+
         function addSheets(newSheet: Sheet) {
             //現在のステートへ適用
             const newSheetState = sheets?.concat();
