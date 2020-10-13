@@ -12,6 +12,7 @@ import { listSheets, getSheet } from 'graphql/queries';
 import dateFormat from 'dateformat';
 import HeaderComponents from 'common/header';
 import style from './detailStyle.module.scss';
+import * as statusManager from 'lib/statusManager'
 
 //propsの型を指定
 type Props = {
@@ -28,7 +29,7 @@ function EvalutionScreen(props: Props) {
     const handleShow = () => setShow(true);
 
     //画面内のフォームデータの管理ステート
-    const [formInput, setFormInput] = useState<any>();
+    const [formInput, setFormInput] = useState<any>({});
 
     const sheetId = props.match.params.sheetId;
 
@@ -135,10 +136,16 @@ function EvalutionScreen(props: Props) {
     }
     async function handleClickSaveAndApprove() {
         //保存して承認ボタンを押したときの処理
-        runUpdateSheet(formInput);
-        formInput?.interviews?.forEach((interview: Interview) => {
-            runUpdateInterview(interview)
-        })
+        if(sheet){
+            const updatedSheet = await statusManager.exec(sheet, "proceed");
+            console.log("statusManager", updatedSheet)
+
+            runUpdateSheet(formInput);
+            formInput?.interviews?.forEach((interview: Interview)=> {
+                runUpdateInterview(interview)
+            })
+        }
+
         async function runUpdateSheet(sheet: Sheet) {
             const updateI: APIt.UpdateSheetInput = {
                 id: sheetId,
@@ -361,6 +368,18 @@ function EvalutionScreen(props: Props) {
                                         )
                                     }
                                 })()}
+                                <Button onClick={async ()=>{
+                                    // ステータスを進める場合のサンプルコード
+                                    const updatedSheet = await statusManager.exec(sheet, "proceed");
+                                    console.log("proceed実行", updatedSheet)
+                                }}>[テスト用]proceed</Button>
+
+                                <Button onClick={async ()=>{
+                                    // ステータスを差し戻しで戻す場合のサンプルコード
+                                    const updatedSheet = await statusManager.exec(sheet, "remand");
+                                    console.log("remand実行", updatedSheet)
+                                }}>[テスト用]remand</Button>
+                                
                             </Form.Group>
                         </Form><br />
 

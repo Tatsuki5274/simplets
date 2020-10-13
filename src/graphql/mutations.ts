@@ -7,6 +7,11 @@ export const approvalStatusManager = /* GraphQL */ `
     approvalStatusManager(action: $action, sheetId: $sheetId)
   }
 `;
+export const sendEmail = /* GraphQL */ `
+  mutation SendEmail($input: sendEmailInput) {
+    sendEmail(input: $input)
+  }
+`;
 export const createCompany = /* GraphQL */ `
   mutation CreateCompany(
     $input: CreateCompanyInput!
@@ -67,162 +72,6 @@ export const createEmployee = /* GraphQL */ `
       lastName
       grade
       email
-      superior {
-        id
-        no
-        firstName
-        lastName
-        grade
-        email
-        superior {
-          id
-          no
-          firstName
-          lastName
-          grade
-          email
-          superior {
-            id
-            no
-            firstName
-            lastName
-            grade
-            email
-            superior {
-              id
-              no
-              firstName
-              lastName
-              grade
-              email
-              superior {
-                id
-                no
-                firstName
-                lastName
-                grade
-                email
-                superior {
-                  id
-                  no
-                  firstName
-                  lastName
-                  grade
-                  email
-                  companyReadGroup
-                  createdAt
-                  updatedAt
-                }
-                group {
-                  id
-                  name
-                  sort
-                  companyReadGroup
-                  companyAdminGroup
-                  createdAt
-                  updatedAt
-                }
-                company {
-                  id
-                  name
-                  shortName
-                  url
-                  companyReadGroup
-                  createdAt
-                  updatedAt
-                }
-                companyReadGroup
-                createdAt
-                updatedAt
-              }
-              group {
-                id
-                name
-                sort
-                companyReadGroup
-                companyAdminGroup
-                createdAt
-                updatedAt
-              }
-              company {
-                id
-                name
-                shortName
-                url
-                companyReadGroup
-                createdAt
-                updatedAt
-              }
-              companyReadGroup
-              createdAt
-              updatedAt
-            }
-            group {
-              id
-              name
-              sort
-              companyReadGroup
-              companyAdminGroup
-              createdAt
-              updatedAt
-            }
-            company {
-              id
-              name
-              shortName
-              url
-              companyReadGroup
-              createdAt
-              updatedAt
-            }
-            companyReadGroup
-            createdAt
-            updatedAt
-          }
-          group {
-            id
-            name
-            sort
-            companyReadGroup
-            companyAdminGroup
-            createdAt
-            updatedAt
-          }
-          company {
-            id
-            name
-            shortName
-            url
-            companyReadGroup
-            createdAt
-            updatedAt
-          }
-          companyReadGroup
-          createdAt
-          updatedAt
-        }
-        group {
-          id
-          name
-          sort
-          companyReadGroup
-          companyAdminGroup
-          createdAt
-          updatedAt
-        }
-        company {
-          id
-          name
-          shortName
-          url
-          companyReadGroup
-          createdAt
-          updatedAt
-        }
-        companyReadGroup
-        createdAt
-        updatedAt
-      }
       group {
         id
         name
@@ -244,6 +93,162 @@ export const createEmployee = /* GraphQL */ `
       companyReadGroup
       createdAt
       updatedAt
+      superior {
+        id
+        no
+        firstName
+        lastName
+        grade
+        email
+        group {
+          id
+          name
+          sort
+          companyReadGroup
+          companyAdminGroup
+          createdAt
+          updatedAt
+        }
+        company {
+          id
+          name
+          shortName
+          url
+          companyReadGroup
+          createdAt
+          updatedAt
+        }
+        companyReadGroup
+        createdAt
+        updatedAt
+        superior {
+          id
+          no
+          firstName
+          lastName
+          grade
+          email
+          group {
+            id
+            name
+            sort
+            companyReadGroup
+            companyAdminGroup
+            createdAt
+            updatedAt
+          }
+          company {
+            id
+            name
+            shortName
+            url
+            companyReadGroup
+            createdAt
+            updatedAt
+          }
+          companyReadGroup
+          createdAt
+          updatedAt
+          superior {
+            id
+            no
+            firstName
+            lastName
+            grade
+            email
+            group {
+              id
+              name
+              sort
+              companyReadGroup
+              companyAdminGroup
+              createdAt
+              updatedAt
+            }
+            company {
+              id
+              name
+              shortName
+              url
+              companyReadGroup
+              createdAt
+              updatedAt
+            }
+            companyReadGroup
+            createdAt
+            updatedAt
+            superior {
+              id
+              no
+              firstName
+              lastName
+              grade
+              email
+              group {
+                id
+                name
+                sort
+                companyReadGroup
+                companyAdminGroup
+                createdAt
+                updatedAt
+              }
+              company {
+                id
+                name
+                shortName
+                url
+                companyReadGroup
+                createdAt
+                updatedAt
+              }
+              companyReadGroup
+              createdAt
+              updatedAt
+              superior {
+                id
+                no
+                firstName
+                lastName
+                grade
+                email
+                group {
+                  id
+                  name
+                  sort
+                  companyReadGroup
+                  companyAdminGroup
+                  createdAt
+                  updatedAt
+                }
+                company {
+                  id
+                  name
+                  shortName
+                  url
+                  companyReadGroup
+                  createdAt
+                  updatedAt
+                }
+                companyReadGroup
+                createdAt
+                updatedAt
+                superior {
+                  id
+                  no
+                  firstName
+                  lastName
+                  grade
+                  email
+                  companyReadGroup
+                  createdAt
+                  updatedAt
+                }
+              }
+            }
+          }
+        }
+      }
     }
   }
 `;
@@ -259,162 +264,6 @@ export const updateEmployee = /* GraphQL */ `
       lastName
       grade
       email
-      superior {
-        id
-        no
-        firstName
-        lastName
-        grade
-        email
-        superior {
-          id
-          no
-          firstName
-          lastName
-          grade
-          email
-          superior {
-            id
-            no
-            firstName
-            lastName
-            grade
-            email
-            superior {
-              id
-              no
-              firstName
-              lastName
-              grade
-              email
-              superior {
-                id
-                no
-                firstName
-                lastName
-                grade
-                email
-                superior {
-                  id
-                  no
-                  firstName
-                  lastName
-                  grade
-                  email
-                  companyReadGroup
-                  createdAt
-                  updatedAt
-                }
-                group {
-                  id
-                  name
-                  sort
-                  companyReadGroup
-                  companyAdminGroup
-                  createdAt
-                  updatedAt
-                }
-                company {
-                  id
-                  name
-                  shortName
-                  url
-                  companyReadGroup
-                  createdAt
-                  updatedAt
-                }
-                companyReadGroup
-                createdAt
-                updatedAt
-              }
-              group {
-                id
-                name
-                sort
-                companyReadGroup
-                companyAdminGroup
-                createdAt
-                updatedAt
-              }
-              company {
-                id
-                name
-                shortName
-                url
-                companyReadGroup
-                createdAt
-                updatedAt
-              }
-              companyReadGroup
-              createdAt
-              updatedAt
-            }
-            group {
-              id
-              name
-              sort
-              companyReadGroup
-              companyAdminGroup
-              createdAt
-              updatedAt
-            }
-            company {
-              id
-              name
-              shortName
-              url
-              companyReadGroup
-              createdAt
-              updatedAt
-            }
-            companyReadGroup
-            createdAt
-            updatedAt
-          }
-          group {
-            id
-            name
-            sort
-            companyReadGroup
-            companyAdminGroup
-            createdAt
-            updatedAt
-          }
-          company {
-            id
-            name
-            shortName
-            url
-            companyReadGroup
-            createdAt
-            updatedAt
-          }
-          companyReadGroup
-          createdAt
-          updatedAt
-        }
-        group {
-          id
-          name
-          sort
-          companyReadGroup
-          companyAdminGroup
-          createdAt
-          updatedAt
-        }
-        company {
-          id
-          name
-          shortName
-          url
-          companyReadGroup
-          createdAt
-          updatedAt
-        }
-        companyReadGroup
-        createdAt
-        updatedAt
-      }
       group {
         id
         name
@@ -436,6 +285,162 @@ export const updateEmployee = /* GraphQL */ `
       companyReadGroup
       createdAt
       updatedAt
+      superior {
+        id
+        no
+        firstName
+        lastName
+        grade
+        email
+        group {
+          id
+          name
+          sort
+          companyReadGroup
+          companyAdminGroup
+          createdAt
+          updatedAt
+        }
+        company {
+          id
+          name
+          shortName
+          url
+          companyReadGroup
+          createdAt
+          updatedAt
+        }
+        companyReadGroup
+        createdAt
+        updatedAt
+        superior {
+          id
+          no
+          firstName
+          lastName
+          grade
+          email
+          group {
+            id
+            name
+            sort
+            companyReadGroup
+            companyAdminGroup
+            createdAt
+            updatedAt
+          }
+          company {
+            id
+            name
+            shortName
+            url
+            companyReadGroup
+            createdAt
+            updatedAt
+          }
+          companyReadGroup
+          createdAt
+          updatedAt
+          superior {
+            id
+            no
+            firstName
+            lastName
+            grade
+            email
+            group {
+              id
+              name
+              sort
+              companyReadGroup
+              companyAdminGroup
+              createdAt
+              updatedAt
+            }
+            company {
+              id
+              name
+              shortName
+              url
+              companyReadGroup
+              createdAt
+              updatedAt
+            }
+            companyReadGroup
+            createdAt
+            updatedAt
+            superior {
+              id
+              no
+              firstName
+              lastName
+              grade
+              email
+              group {
+                id
+                name
+                sort
+                companyReadGroup
+                companyAdminGroup
+                createdAt
+                updatedAt
+              }
+              company {
+                id
+                name
+                shortName
+                url
+                companyReadGroup
+                createdAt
+                updatedAt
+              }
+              companyReadGroup
+              createdAt
+              updatedAt
+              superior {
+                id
+                no
+                firstName
+                lastName
+                grade
+                email
+                group {
+                  id
+                  name
+                  sort
+                  companyReadGroup
+                  companyAdminGroup
+                  createdAt
+                  updatedAt
+                }
+                company {
+                  id
+                  name
+                  shortName
+                  url
+                  companyReadGroup
+                  createdAt
+                  updatedAt
+                }
+                companyReadGroup
+                createdAt
+                updatedAt
+                superior {
+                  id
+                  no
+                  firstName
+                  lastName
+                  grade
+                  email
+                  companyReadGroup
+                  createdAt
+                  updatedAt
+                }
+              }
+            }
+          }
+        }
+      }
     }
   }
 `;
@@ -451,162 +456,6 @@ export const deleteEmployee = /* GraphQL */ `
       lastName
       grade
       email
-      superior {
-        id
-        no
-        firstName
-        lastName
-        grade
-        email
-        superior {
-          id
-          no
-          firstName
-          lastName
-          grade
-          email
-          superior {
-            id
-            no
-            firstName
-            lastName
-            grade
-            email
-            superior {
-              id
-              no
-              firstName
-              lastName
-              grade
-              email
-              superior {
-                id
-                no
-                firstName
-                lastName
-                grade
-                email
-                superior {
-                  id
-                  no
-                  firstName
-                  lastName
-                  grade
-                  email
-                  companyReadGroup
-                  createdAt
-                  updatedAt
-                }
-                group {
-                  id
-                  name
-                  sort
-                  companyReadGroup
-                  companyAdminGroup
-                  createdAt
-                  updatedAt
-                }
-                company {
-                  id
-                  name
-                  shortName
-                  url
-                  companyReadGroup
-                  createdAt
-                  updatedAt
-                }
-                companyReadGroup
-                createdAt
-                updatedAt
-              }
-              group {
-                id
-                name
-                sort
-                companyReadGroup
-                companyAdminGroup
-                createdAt
-                updatedAt
-              }
-              company {
-                id
-                name
-                shortName
-                url
-                companyReadGroup
-                createdAt
-                updatedAt
-              }
-              companyReadGroup
-              createdAt
-              updatedAt
-            }
-            group {
-              id
-              name
-              sort
-              companyReadGroup
-              companyAdminGroup
-              createdAt
-              updatedAt
-            }
-            company {
-              id
-              name
-              shortName
-              url
-              companyReadGroup
-              createdAt
-              updatedAt
-            }
-            companyReadGroup
-            createdAt
-            updatedAt
-          }
-          group {
-            id
-            name
-            sort
-            companyReadGroup
-            companyAdminGroup
-            createdAt
-            updatedAt
-          }
-          company {
-            id
-            name
-            shortName
-            url
-            companyReadGroup
-            createdAt
-            updatedAt
-          }
-          companyReadGroup
-          createdAt
-          updatedAt
-        }
-        group {
-          id
-          name
-          sort
-          companyReadGroup
-          companyAdminGroup
-          createdAt
-          updatedAt
-        }
-        company {
-          id
-          name
-          shortName
-          url
-          companyReadGroup
-          createdAt
-          updatedAt
-        }
-        companyReadGroup
-        createdAt
-        updatedAt
-      }
       group {
         id
         name
@@ -628,6 +477,162 @@ export const deleteEmployee = /* GraphQL */ `
       companyReadGroup
       createdAt
       updatedAt
+      superior {
+        id
+        no
+        firstName
+        lastName
+        grade
+        email
+        group {
+          id
+          name
+          sort
+          companyReadGroup
+          companyAdminGroup
+          createdAt
+          updatedAt
+        }
+        company {
+          id
+          name
+          shortName
+          url
+          companyReadGroup
+          createdAt
+          updatedAt
+        }
+        companyReadGroup
+        createdAt
+        updatedAt
+        superior {
+          id
+          no
+          firstName
+          lastName
+          grade
+          email
+          group {
+            id
+            name
+            sort
+            companyReadGroup
+            companyAdminGroup
+            createdAt
+            updatedAt
+          }
+          company {
+            id
+            name
+            shortName
+            url
+            companyReadGroup
+            createdAt
+            updatedAt
+          }
+          companyReadGroup
+          createdAt
+          updatedAt
+          superior {
+            id
+            no
+            firstName
+            lastName
+            grade
+            email
+            group {
+              id
+              name
+              sort
+              companyReadGroup
+              companyAdminGroup
+              createdAt
+              updatedAt
+            }
+            company {
+              id
+              name
+              shortName
+              url
+              companyReadGroup
+              createdAt
+              updatedAt
+            }
+            companyReadGroup
+            createdAt
+            updatedAt
+            superior {
+              id
+              no
+              firstName
+              lastName
+              grade
+              email
+              group {
+                id
+                name
+                sort
+                companyReadGroup
+                companyAdminGroup
+                createdAt
+                updatedAt
+              }
+              company {
+                id
+                name
+                shortName
+                url
+                companyReadGroup
+                createdAt
+                updatedAt
+              }
+              companyReadGroup
+              createdAt
+              updatedAt
+              superior {
+                id
+                no
+                firstName
+                lastName
+                grade
+                email
+                group {
+                  id
+                  name
+                  sort
+                  companyReadGroup
+                  companyAdminGroup
+                  createdAt
+                  updatedAt
+                }
+                company {
+                  id
+                  name
+                  shortName
+                  url
+                  companyReadGroup
+                  createdAt
+                  updatedAt
+                }
+                companyReadGroup
+                createdAt
+                updatedAt
+                superior {
+                  id
+                  no
+                  firstName
+                  lastName
+                  grade
+                  email
+                  companyReadGroup
+                  createdAt
+                  updatedAt
+                }
+              }
+            }
+          }
+        }
+      }
     }
   }
 `;
@@ -852,318 +857,6 @@ export const createSheet = /* GraphQL */ `
         }
         nextToken
       }
-      revieweeEmployee {
-        id
-        no
-        firstName
-        lastName
-        grade
-        email
-        superior {
-          id
-          no
-          firstName
-          lastName
-          grade
-          email
-          superior {
-            id
-            no
-            firstName
-            lastName
-            grade
-            email
-            superior {
-              id
-              no
-              firstName
-              lastName
-              grade
-              email
-              superior {
-                id
-                no
-                firstName
-                lastName
-                grade
-                email
-                superior {
-                  id
-                  no
-                  firstName
-                  lastName
-                  grade
-                  email
-                  companyReadGroup
-                  createdAt
-                  updatedAt
-                }
-                group {
-                  id
-                  name
-                  sort
-                  companyReadGroup
-                  companyAdminGroup
-                  createdAt
-                  updatedAt
-                }
-                company {
-                  id
-                  name
-                  shortName
-                  url
-                  companyReadGroup
-                  createdAt
-                  updatedAt
-                }
-                companyReadGroup
-                createdAt
-                updatedAt
-              }
-              group {
-                id
-                name
-                sort
-                companyReadGroup
-                companyAdminGroup
-                createdAt
-                updatedAt
-              }
-              company {
-                id
-                name
-                shortName
-                url
-                companyReadGroup
-                createdAt
-                updatedAt
-              }
-              companyReadGroup
-              createdAt
-              updatedAt
-            }
-            group {
-              id
-              name
-              sort
-              companyReadGroup
-              companyAdminGroup
-              createdAt
-              updatedAt
-            }
-            company {
-              id
-              name
-              shortName
-              url
-              companyReadGroup
-              createdAt
-              updatedAt
-            }
-            companyReadGroup
-            createdAt
-            updatedAt
-          }
-          group {
-            id
-            name
-            sort
-            companyReadGroup
-            companyAdminGroup
-            createdAt
-            updatedAt
-          }
-          company {
-            id
-            name
-            shortName
-            url
-            companyReadGroup
-            createdAt
-            updatedAt
-          }
-          companyReadGroup
-          createdAt
-          updatedAt
-        }
-        group {
-          id
-          name
-          sort
-          companyReadGroup
-          companyAdminGroup
-          createdAt
-          updatedAt
-        }
-        company {
-          id
-          name
-          shortName
-          url
-          companyReadGroup
-          createdAt
-          updatedAt
-        }
-        companyReadGroup
-        createdAt
-        updatedAt
-      }
-      secondEmployee {
-        id
-        no
-        firstName
-        lastName
-        grade
-        email
-        superior {
-          id
-          no
-          firstName
-          lastName
-          grade
-          email
-          superior {
-            id
-            no
-            firstName
-            lastName
-            grade
-            email
-            superior {
-              id
-              no
-              firstName
-              lastName
-              grade
-              email
-              superior {
-                id
-                no
-                firstName
-                lastName
-                grade
-                email
-                superior {
-                  id
-                  no
-                  firstName
-                  lastName
-                  grade
-                  email
-                  companyReadGroup
-                  createdAt
-                  updatedAt
-                }
-                group {
-                  id
-                  name
-                  sort
-                  companyReadGroup
-                  companyAdminGroup
-                  createdAt
-                  updatedAt
-                }
-                company {
-                  id
-                  name
-                  shortName
-                  url
-                  companyReadGroup
-                  createdAt
-                  updatedAt
-                }
-                companyReadGroup
-                createdAt
-                updatedAt
-              }
-              group {
-                id
-                name
-                sort
-                companyReadGroup
-                companyAdminGroup
-                createdAt
-                updatedAt
-              }
-              company {
-                id
-                name
-                shortName
-                url
-                companyReadGroup
-                createdAt
-                updatedAt
-              }
-              companyReadGroup
-              createdAt
-              updatedAt
-            }
-            group {
-              id
-              name
-              sort
-              companyReadGroup
-              companyAdminGroup
-              createdAt
-              updatedAt
-            }
-            company {
-              id
-              name
-              shortName
-              url
-              companyReadGroup
-              createdAt
-              updatedAt
-            }
-            companyReadGroup
-            createdAt
-            updatedAt
-          }
-          group {
-            id
-            name
-            sort
-            companyReadGroup
-            companyAdminGroup
-            createdAt
-            updatedAt
-          }
-          company {
-            id
-            name
-            shortName
-            url
-            companyReadGroup
-            createdAt
-            updatedAt
-          }
-          companyReadGroup
-          createdAt
-          updatedAt
-        }
-        group {
-          id
-          name
-          sort
-          companyReadGroup
-          companyAdminGroup
-          createdAt
-          updatedAt
-        }
-        company {
-          id
-          name
-          shortName
-          url
-          companyReadGroup
-          createdAt
-          updatedAt
-        }
-        companyReadGroup
-        createdAt
-        updatedAt
-      }
       section {
         items {
           id
@@ -1181,6 +874,31 @@ export const createSheet = /* GraphQL */ `
               status
               expStartDate
               expDoneDate
+              objectiveSectionId
+              section {
+                id
+                sectionSheetId
+                objective {
+                  nextToken
+                }
+                category {
+                  id
+                  no
+                  name
+                  companyReadGroup
+                  companyAdminGroup
+                  createdAt
+                  updatedAt
+                }
+                reviewee
+                reviewers
+                createdAt
+                updatedAt
+              }
+              reviewee
+              reviewers
+              createdAt
+              updatedAt
               sheet {
                 id
                 year
@@ -1209,6 +927,14 @@ export const createSheet = /* GraphQL */ `
                 interviews {
                   nextToken
                 }
+                section {
+                  nextToken
+                }
+                reviewee
+                reviewers
+                companyReadGroup
+                createdAt
+                updatedAt
                 revieweeEmployee {
                   id
                   no
@@ -1231,40 +957,7 @@ export const createSheet = /* GraphQL */ `
                   createdAt
                   updatedAt
                 }
-                section {
-                  nextToken
-                }
-                reviewee
-                reviewers
-                companyReadGroup
-                createdAt
-                updatedAt
               }
-              objectiveSectionId
-              section {
-                id
-                sectionSheetId
-                objective {
-                  nextToken
-                }
-                category {
-                  id
-                  no
-                  name
-                  companyReadGroup
-                  companyAdminGroup
-                  createdAt
-                  updatedAt
-                }
-                reviewee
-                reviewers
-                createdAt
-                updatedAt
-              }
-              reviewee
-              reviewers
-              createdAt
-              updatedAt
             }
             nextToken
           }
@@ -1298,53 +991,6 @@ export const createSheet = /* GraphQL */ `
       companyReadGroup
       createdAt
       updatedAt
-    }
-  }
-`;
-export const updateSheet = /* GraphQL */ `
-  mutation UpdateSheet(
-    $input: UpdateSheetInput!
-    $condition: ModelSheetConditionInput
-  ) {
-    updateSheet(input: $input, condition: $condition) {
-      id
-      year
-      grade
-      careerPlan
-      careerPlanComment
-      reviewComment
-      reviewDate
-      selfCheckDate
-      firstComment
-      firstCheckDate
-      secondComment
-      secondCheckDate
-      overAllEvaluation
-      statusValue
-      sheetGroupId
-      group {
-        id
-        name
-        sort
-        companyReadGroup
-        companyAdminGroup
-        createdAt
-        updatedAt
-      }
-      interviews {
-        items {
-          id
-          sheetId
-          interviewDate
-          purpose
-          detail
-          reviewee
-          reviewers
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
       revieweeEmployee {
         id
         no
@@ -1352,133 +998,6 @@ export const updateSheet = /* GraphQL */ `
         lastName
         grade
         email
-        superior {
-          id
-          no
-          firstName
-          lastName
-          grade
-          email
-          superior {
-            id
-            no
-            firstName
-            lastName
-            grade
-            email
-            superior {
-              id
-              no
-              firstName
-              lastName
-              grade
-              email
-              superior {
-                id
-                no
-                firstName
-                lastName
-                grade
-                email
-                superior {
-                  id
-                  no
-                  firstName
-                  lastName
-                  grade
-                  email
-                  companyReadGroup
-                  createdAt
-                  updatedAt
-                }
-                group {
-                  id
-                  name
-                  sort
-                  companyReadGroup
-                  companyAdminGroup
-                  createdAt
-                  updatedAt
-                }
-                company {
-                  id
-                  name
-                  shortName
-                  url
-                  companyReadGroup
-                  createdAt
-                  updatedAt
-                }
-                companyReadGroup
-                createdAt
-                updatedAt
-              }
-              group {
-                id
-                name
-                sort
-                companyReadGroup
-                companyAdminGroup
-                createdAt
-                updatedAt
-              }
-              company {
-                id
-                name
-                shortName
-                url
-                companyReadGroup
-                createdAt
-                updatedAt
-              }
-              companyReadGroup
-              createdAt
-              updatedAt
-            }
-            group {
-              id
-              name
-              sort
-              companyReadGroup
-              companyAdminGroup
-              createdAt
-              updatedAt
-            }
-            company {
-              id
-              name
-              shortName
-              url
-              companyReadGroup
-              createdAt
-              updatedAt
-            }
-            companyReadGroup
-            createdAt
-            updatedAt
-          }
-          group {
-            id
-            name
-            sort
-            companyReadGroup
-            companyAdminGroup
-            createdAt
-            updatedAt
-          }
-          company {
-            id
-            name
-            shortName
-            url
-            companyReadGroup
-            createdAt
-            updatedAt
-          }
-          companyReadGroup
-          createdAt
-          updatedAt
-        }
         group {
           id
           name
@@ -1500,6 +1019,133 @@ export const updateSheet = /* GraphQL */ `
         companyReadGroup
         createdAt
         updatedAt
+        superior {
+          id
+          no
+          firstName
+          lastName
+          grade
+          email
+          group {
+            id
+            name
+            sort
+            companyReadGroup
+            companyAdminGroup
+            createdAt
+            updatedAt
+          }
+          company {
+            id
+            name
+            shortName
+            url
+            companyReadGroup
+            createdAt
+            updatedAt
+          }
+          companyReadGroup
+          createdAt
+          updatedAt
+          superior {
+            id
+            no
+            firstName
+            lastName
+            grade
+            email
+            group {
+              id
+              name
+              sort
+              companyReadGroup
+              companyAdminGroup
+              createdAt
+              updatedAt
+            }
+            company {
+              id
+              name
+              shortName
+              url
+              companyReadGroup
+              createdAt
+              updatedAt
+            }
+            companyReadGroup
+            createdAt
+            updatedAt
+            superior {
+              id
+              no
+              firstName
+              lastName
+              grade
+              email
+              group {
+                id
+                name
+                sort
+                companyReadGroup
+                companyAdminGroup
+                createdAt
+                updatedAt
+              }
+              company {
+                id
+                name
+                shortName
+                url
+                companyReadGroup
+                createdAt
+                updatedAt
+              }
+              companyReadGroup
+              createdAt
+              updatedAt
+              superior {
+                id
+                no
+                firstName
+                lastName
+                grade
+                email
+                group {
+                  id
+                  name
+                  sort
+                  companyReadGroup
+                  companyAdminGroup
+                  createdAt
+                  updatedAt
+                }
+                company {
+                  id
+                  name
+                  shortName
+                  url
+                  companyReadGroup
+                  createdAt
+                  updatedAt
+                }
+                companyReadGroup
+                createdAt
+                updatedAt
+                superior {
+                  id
+                  no
+                  firstName
+                  lastName
+                  grade
+                  email
+                  companyReadGroup
+                  createdAt
+                  updatedAt
+                }
+              }
+            }
+          }
+        }
       }
       secondEmployee {
         id
@@ -1508,133 +1154,6 @@ export const updateSheet = /* GraphQL */ `
         lastName
         grade
         email
-        superior {
-          id
-          no
-          firstName
-          lastName
-          grade
-          email
-          superior {
-            id
-            no
-            firstName
-            lastName
-            grade
-            email
-            superior {
-              id
-              no
-              firstName
-              lastName
-              grade
-              email
-              superior {
-                id
-                no
-                firstName
-                lastName
-                grade
-                email
-                superior {
-                  id
-                  no
-                  firstName
-                  lastName
-                  grade
-                  email
-                  companyReadGroup
-                  createdAt
-                  updatedAt
-                }
-                group {
-                  id
-                  name
-                  sort
-                  companyReadGroup
-                  companyAdminGroup
-                  createdAt
-                  updatedAt
-                }
-                company {
-                  id
-                  name
-                  shortName
-                  url
-                  companyReadGroup
-                  createdAt
-                  updatedAt
-                }
-                companyReadGroup
-                createdAt
-                updatedAt
-              }
-              group {
-                id
-                name
-                sort
-                companyReadGroup
-                companyAdminGroup
-                createdAt
-                updatedAt
-              }
-              company {
-                id
-                name
-                shortName
-                url
-                companyReadGroup
-                createdAt
-                updatedAt
-              }
-              companyReadGroup
-              createdAt
-              updatedAt
-            }
-            group {
-              id
-              name
-              sort
-              companyReadGroup
-              companyAdminGroup
-              createdAt
-              updatedAt
-            }
-            company {
-              id
-              name
-              shortName
-              url
-              companyReadGroup
-              createdAt
-              updatedAt
-            }
-            companyReadGroup
-            createdAt
-            updatedAt
-          }
-          group {
-            id
-            name
-            sort
-            companyReadGroup
-            companyAdminGroup
-            createdAt
-            updatedAt
-          }
-          company {
-            id
-            name
-            shortName
-            url
-            companyReadGroup
-            createdAt
-            updatedAt
-          }
-          companyReadGroup
-          createdAt
-          updatedAt
-        }
         group {
           id
           name
@@ -1656,113 +1175,50 @@ export const updateSheet = /* GraphQL */ `
         companyReadGroup
         createdAt
         updatedAt
-      }
-      section {
-        items {
+        superior {
           id
-          sectionSheetId
-          objective {
-            items {
+          no
+          firstName
+          lastName
+          grade
+          email
+          group {
+            id
+            name
+            sort
+            companyReadGroup
+            companyAdminGroup
+            createdAt
+            updatedAt
+          }
+          company {
+            id
+            name
+            shortName
+            url
+            companyReadGroup
+            createdAt
+            updatedAt
+          }
+          companyReadGroup
+          createdAt
+          updatedAt
+          superior {
+            id
+            no
+            firstName
+            lastName
+            grade
+            email
+            group {
               id
-              content
-              result
-              priority
-              selfEvaluation
-              firstEvaluation
-              lastEvaluation
-              progress
-              status
-              expStartDate
-              expDoneDate
-              sheet {
-                id
-                year
-                grade
-                careerPlan
-                careerPlanComment
-                reviewComment
-                reviewDate
-                selfCheckDate
-                firstComment
-                firstCheckDate
-                secondComment
-                secondCheckDate
-                overAllEvaluation
-                statusValue
-                sheetGroupId
-                group {
-                  id
-                  name
-                  sort
-                  companyReadGroup
-                  companyAdminGroup
-                  createdAt
-                  updatedAt
-                }
-                interviews {
-                  nextToken
-                }
-                revieweeEmployee {
-                  id
-                  no
-                  firstName
-                  lastName
-                  grade
-                  email
-                  companyReadGroup
-                  createdAt
-                  updatedAt
-                }
-                secondEmployee {
-                  id
-                  no
-                  firstName
-                  lastName
-                  grade
-                  email
-                  companyReadGroup
-                  createdAt
-                  updatedAt
-                }
-                section {
-                  nextToken
-                }
-                reviewee
-                reviewers
-                companyReadGroup
-                createdAt
-                updatedAt
-              }
-              objectiveSectionId
-              section {
-                id
-                sectionSheetId
-                objective {
-                  nextToken
-                }
-                category {
-                  id
-                  no
-                  name
-                  companyReadGroup
-                  companyAdminGroup
-                  createdAt
-                  updatedAt
-                }
-                reviewee
-                reviewers
-                createdAt
-                updatedAt
-              }
-              reviewee
-              reviewers
+              name
+              sort
+              companyReadGroup
+              companyAdminGroup
               createdAt
               updatedAt
             }
-            nextToken
-          }
-          category {
-            id
             company {
               id
               name
@@ -1772,25 +1228,81 @@ export const updateSheet = /* GraphQL */ `
               createdAt
               updatedAt
             }
-            no
-            name
             companyReadGroup
-            companyAdminGroup
             createdAt
             updatedAt
+            superior {
+              id
+              no
+              firstName
+              lastName
+              grade
+              email
+              group {
+                id
+                name
+                sort
+                companyReadGroup
+                companyAdminGroup
+                createdAt
+                updatedAt
+              }
+              company {
+                id
+                name
+                shortName
+                url
+                companyReadGroup
+                createdAt
+                updatedAt
+              }
+              companyReadGroup
+              createdAt
+              updatedAt
+              superior {
+                id
+                no
+                firstName
+                lastName
+                grade
+                email
+                group {
+                  id
+                  name
+                  sort
+                  companyReadGroup
+                  companyAdminGroup
+                  createdAt
+                  updatedAt
+                }
+                company {
+                  id
+                  name
+                  shortName
+                  url
+                  companyReadGroup
+                  createdAt
+                  updatedAt
+                }
+                companyReadGroup
+                createdAt
+                updatedAt
+                superior {
+                  id
+                  no
+                  firstName
+                  lastName
+                  grade
+                  email
+                  companyReadGroup
+                  createdAt
+                  updatedAt
+                }
+              }
+            }
           }
-          reviewee
-          reviewers
-          createdAt
-          updatedAt
         }
-        nextToken
       }
-      reviewee
-      reviewers
-      companyReadGroup
-      createdAt
-      updatedAt
     }
   }
 `;
@@ -1838,318 +1350,6 @@ export const deleteSheet = /* GraphQL */ `
         }
         nextToken
       }
-      revieweeEmployee {
-        id
-        no
-        firstName
-        lastName
-        grade
-        email
-        superior {
-          id
-          no
-          firstName
-          lastName
-          grade
-          email
-          superior {
-            id
-            no
-            firstName
-            lastName
-            grade
-            email
-            superior {
-              id
-              no
-              firstName
-              lastName
-              grade
-              email
-              superior {
-                id
-                no
-                firstName
-                lastName
-                grade
-                email
-                superior {
-                  id
-                  no
-                  firstName
-                  lastName
-                  grade
-                  email
-                  companyReadGroup
-                  createdAt
-                  updatedAt
-                }
-                group {
-                  id
-                  name
-                  sort
-                  companyReadGroup
-                  companyAdminGroup
-                  createdAt
-                  updatedAt
-                }
-                company {
-                  id
-                  name
-                  shortName
-                  url
-                  companyReadGroup
-                  createdAt
-                  updatedAt
-                }
-                companyReadGroup
-                createdAt
-                updatedAt
-              }
-              group {
-                id
-                name
-                sort
-                companyReadGroup
-                companyAdminGroup
-                createdAt
-                updatedAt
-              }
-              company {
-                id
-                name
-                shortName
-                url
-                companyReadGroup
-                createdAt
-                updatedAt
-              }
-              companyReadGroup
-              createdAt
-              updatedAt
-            }
-            group {
-              id
-              name
-              sort
-              companyReadGroup
-              companyAdminGroup
-              createdAt
-              updatedAt
-            }
-            company {
-              id
-              name
-              shortName
-              url
-              companyReadGroup
-              createdAt
-              updatedAt
-            }
-            companyReadGroup
-            createdAt
-            updatedAt
-          }
-          group {
-            id
-            name
-            sort
-            companyReadGroup
-            companyAdminGroup
-            createdAt
-            updatedAt
-          }
-          company {
-            id
-            name
-            shortName
-            url
-            companyReadGroup
-            createdAt
-            updatedAt
-          }
-          companyReadGroup
-          createdAt
-          updatedAt
-        }
-        group {
-          id
-          name
-          sort
-          companyReadGroup
-          companyAdminGroup
-          createdAt
-          updatedAt
-        }
-        company {
-          id
-          name
-          shortName
-          url
-          companyReadGroup
-          createdAt
-          updatedAt
-        }
-        companyReadGroup
-        createdAt
-        updatedAt
-      }
-      secondEmployee {
-        id
-        no
-        firstName
-        lastName
-        grade
-        email
-        superior {
-          id
-          no
-          firstName
-          lastName
-          grade
-          email
-          superior {
-            id
-            no
-            firstName
-            lastName
-            grade
-            email
-            superior {
-              id
-              no
-              firstName
-              lastName
-              grade
-              email
-              superior {
-                id
-                no
-                firstName
-                lastName
-                grade
-                email
-                superior {
-                  id
-                  no
-                  firstName
-                  lastName
-                  grade
-                  email
-                  companyReadGroup
-                  createdAt
-                  updatedAt
-                }
-                group {
-                  id
-                  name
-                  sort
-                  companyReadGroup
-                  companyAdminGroup
-                  createdAt
-                  updatedAt
-                }
-                company {
-                  id
-                  name
-                  shortName
-                  url
-                  companyReadGroup
-                  createdAt
-                  updatedAt
-                }
-                companyReadGroup
-                createdAt
-                updatedAt
-              }
-              group {
-                id
-                name
-                sort
-                companyReadGroup
-                companyAdminGroup
-                createdAt
-                updatedAt
-              }
-              company {
-                id
-                name
-                shortName
-                url
-                companyReadGroup
-                createdAt
-                updatedAt
-              }
-              companyReadGroup
-              createdAt
-              updatedAt
-            }
-            group {
-              id
-              name
-              sort
-              companyReadGroup
-              companyAdminGroup
-              createdAt
-              updatedAt
-            }
-            company {
-              id
-              name
-              shortName
-              url
-              companyReadGroup
-              createdAt
-              updatedAt
-            }
-            companyReadGroup
-            createdAt
-            updatedAt
-          }
-          group {
-            id
-            name
-            sort
-            companyReadGroup
-            companyAdminGroup
-            createdAt
-            updatedAt
-          }
-          company {
-            id
-            name
-            shortName
-            url
-            companyReadGroup
-            createdAt
-            updatedAt
-          }
-          companyReadGroup
-          createdAt
-          updatedAt
-        }
-        group {
-          id
-          name
-          sort
-          companyReadGroup
-          companyAdminGroup
-          createdAt
-          updatedAt
-        }
-        company {
-          id
-          name
-          shortName
-          url
-          companyReadGroup
-          createdAt
-          updatedAt
-        }
-        companyReadGroup
-        createdAt
-        updatedAt
-      }
       section {
         items {
           id
@@ -2167,6 +1367,31 @@ export const deleteSheet = /* GraphQL */ `
               status
               expStartDate
               expDoneDate
+              objectiveSectionId
+              section {
+                id
+                sectionSheetId
+                objective {
+                  nextToken
+                }
+                category {
+                  id
+                  no
+                  name
+                  companyReadGroup
+                  companyAdminGroup
+                  createdAt
+                  updatedAt
+                }
+                reviewee
+                reviewers
+                createdAt
+                updatedAt
+              }
+              reviewee
+              reviewers
+              createdAt
+              updatedAt
               sheet {
                 id
                 year
@@ -2195,6 +1420,14 @@ export const deleteSheet = /* GraphQL */ `
                 interviews {
                   nextToken
                 }
+                section {
+                  nextToken
+                }
+                reviewee
+                reviewers
+                companyReadGroup
+                createdAt
+                updatedAt
                 revieweeEmployee {
                   id
                   no
@@ -2217,40 +1450,7 @@ export const deleteSheet = /* GraphQL */ `
                   createdAt
                   updatedAt
                 }
-                section {
-                  nextToken
-                }
-                reviewee
-                reviewers
-                companyReadGroup
-                createdAt
-                updatedAt
               }
-              objectiveSectionId
-              section {
-                id
-                sectionSheetId
-                objective {
-                  nextToken
-                }
-                category {
-                  id
-                  no
-                  name
-                  companyReadGroup
-                  companyAdminGroup
-                  createdAt
-                  updatedAt
-                }
-                reviewee
-                reviewers
-                createdAt
-                updatedAt
-              }
-              reviewee
-              reviewers
-              createdAt
-              updatedAt
             }
             nextToken
           }
@@ -2284,6 +1484,318 @@ export const deleteSheet = /* GraphQL */ `
       companyReadGroup
       createdAt
       updatedAt
+      revieweeEmployee {
+        id
+        no
+        firstName
+        lastName
+        grade
+        email
+        group {
+          id
+          name
+          sort
+          companyReadGroup
+          companyAdminGroup
+          createdAt
+          updatedAt
+        }
+        company {
+          id
+          name
+          shortName
+          url
+          companyReadGroup
+          createdAt
+          updatedAt
+        }
+        companyReadGroup
+        createdAt
+        updatedAt
+        superior {
+          id
+          no
+          firstName
+          lastName
+          grade
+          email
+          group {
+            id
+            name
+            sort
+            companyReadGroup
+            companyAdminGroup
+            createdAt
+            updatedAt
+          }
+          company {
+            id
+            name
+            shortName
+            url
+            companyReadGroup
+            createdAt
+            updatedAt
+          }
+          companyReadGroup
+          createdAt
+          updatedAt
+          superior {
+            id
+            no
+            firstName
+            lastName
+            grade
+            email
+            group {
+              id
+              name
+              sort
+              companyReadGroup
+              companyAdminGroup
+              createdAt
+              updatedAt
+            }
+            company {
+              id
+              name
+              shortName
+              url
+              companyReadGroup
+              createdAt
+              updatedAt
+            }
+            companyReadGroup
+            createdAt
+            updatedAt
+            superior {
+              id
+              no
+              firstName
+              lastName
+              grade
+              email
+              group {
+                id
+                name
+                sort
+                companyReadGroup
+                companyAdminGroup
+                createdAt
+                updatedAt
+              }
+              company {
+                id
+                name
+                shortName
+                url
+                companyReadGroup
+                createdAt
+                updatedAt
+              }
+              companyReadGroup
+              createdAt
+              updatedAt
+              superior {
+                id
+                no
+                firstName
+                lastName
+                grade
+                email
+                group {
+                  id
+                  name
+                  sort
+                  companyReadGroup
+                  companyAdminGroup
+                  createdAt
+                  updatedAt
+                }
+                company {
+                  id
+                  name
+                  shortName
+                  url
+                  companyReadGroup
+                  createdAt
+                  updatedAt
+                }
+                companyReadGroup
+                createdAt
+                updatedAt
+                superior {
+                  id
+                  no
+                  firstName
+                  lastName
+                  grade
+                  email
+                  companyReadGroup
+                  createdAt
+                  updatedAt
+                }
+              }
+            }
+          }
+        }
+      }
+      secondEmployee {
+        id
+        no
+        firstName
+        lastName
+        grade
+        email
+        group {
+          id
+          name
+          sort
+          companyReadGroup
+          companyAdminGroup
+          createdAt
+          updatedAt
+        }
+        company {
+          id
+          name
+          shortName
+          url
+          companyReadGroup
+          createdAt
+          updatedAt
+        }
+        companyReadGroup
+        createdAt
+        updatedAt
+        superior {
+          id
+          no
+          firstName
+          lastName
+          grade
+          email
+          group {
+            id
+            name
+            sort
+            companyReadGroup
+            companyAdminGroup
+            createdAt
+            updatedAt
+          }
+          company {
+            id
+            name
+            shortName
+            url
+            companyReadGroup
+            createdAt
+            updatedAt
+          }
+          companyReadGroup
+          createdAt
+          updatedAt
+          superior {
+            id
+            no
+            firstName
+            lastName
+            grade
+            email
+            group {
+              id
+              name
+              sort
+              companyReadGroup
+              companyAdminGroup
+              createdAt
+              updatedAt
+            }
+            company {
+              id
+              name
+              shortName
+              url
+              companyReadGroup
+              createdAt
+              updatedAt
+            }
+            companyReadGroup
+            createdAt
+            updatedAt
+            superior {
+              id
+              no
+              firstName
+              lastName
+              grade
+              email
+              group {
+                id
+                name
+                sort
+                companyReadGroup
+                companyAdminGroup
+                createdAt
+                updatedAt
+              }
+              company {
+                id
+                name
+                shortName
+                url
+                companyReadGroup
+                createdAt
+                updatedAt
+              }
+              companyReadGroup
+              createdAt
+              updatedAt
+              superior {
+                id
+                no
+                firstName
+                lastName
+                grade
+                email
+                group {
+                  id
+                  name
+                  sort
+                  companyReadGroup
+                  companyAdminGroup
+                  createdAt
+                  updatedAt
+                }
+                company {
+                  id
+                  name
+                  shortName
+                  url
+                  companyReadGroup
+                  createdAt
+                  updatedAt
+                }
+                companyReadGroup
+                createdAt
+                updatedAt
+                superior {
+                  id
+                  no
+                  firstName
+                  lastName
+                  grade
+                  email
+                  companyReadGroup
+                  createdAt
+                  updatedAt
+                }
+              }
+            }
+          }
+        }
+      }
     }
   }
 `;
@@ -2308,6 +1820,88 @@ export const createSection = /* GraphQL */ `
           status
           expStartDate
           expDoneDate
+          objectiveSectionId
+          section {
+            id
+            sectionSheetId
+            objective {
+              items {
+                id
+                content
+                result
+                priority
+                selfEvaluation
+                firstEvaluation
+                lastEvaluation
+                progress
+                status
+                expStartDate
+                expDoneDate
+                objectiveSectionId
+                section {
+                  id
+                  sectionSheetId
+                  reviewee
+                  reviewers
+                  createdAt
+                  updatedAt
+                }
+                reviewee
+                reviewers
+                createdAt
+                updatedAt
+                sheet {
+                  id
+                  year
+                  grade
+                  careerPlan
+                  careerPlanComment
+                  reviewComment
+                  reviewDate
+                  selfCheckDate
+                  firstComment
+                  firstCheckDate
+                  secondComment
+                  secondCheckDate
+                  overAllEvaluation
+                  statusValue
+                  sheetGroupId
+                  reviewee
+                  reviewers
+                  companyReadGroup
+                  createdAt
+                  updatedAt
+                }
+              }
+              nextToken
+            }
+            category {
+              id
+              company {
+                id
+                name
+                shortName
+                url
+                companyReadGroup
+                createdAt
+                updatedAt
+              }
+              no
+              name
+              companyReadGroup
+              companyAdminGroup
+              createdAt
+              updatedAt
+            }
+            reviewee
+            reviewers
+            createdAt
+            updatedAt
+          }
+          reviewee
+          reviewers
+          createdAt
+          updatedAt
           sheet {
             id
             year
@@ -2347,144 +1941,6 @@ export const createSection = /* GraphQL */ `
               }
               nextToken
             }
-            revieweeEmployee {
-              id
-              no
-              firstName
-              lastName
-              grade
-              email
-              superior {
-                id
-                no
-                firstName
-                lastName
-                grade
-                email
-                superior {
-                  id
-                  no
-                  firstName
-                  lastName
-                  grade
-                  email
-                  companyReadGroup
-                  createdAt
-                  updatedAt
-                }
-                group {
-                  id
-                  name
-                  sort
-                  companyReadGroup
-                  companyAdminGroup
-                  createdAt
-                  updatedAt
-                }
-                company {
-                  id
-                  name
-                  shortName
-                  url
-                  companyReadGroup
-                  createdAt
-                  updatedAt
-                }
-                companyReadGroup
-                createdAt
-                updatedAt
-              }
-              group {
-                id
-                name
-                sort
-                companyReadGroup
-                companyAdminGroup
-                createdAt
-                updatedAt
-              }
-              company {
-                id
-                name
-                shortName
-                url
-                companyReadGroup
-                createdAt
-                updatedAt
-              }
-              companyReadGroup
-              createdAt
-              updatedAt
-            }
-            secondEmployee {
-              id
-              no
-              firstName
-              lastName
-              grade
-              email
-              superior {
-                id
-                no
-                firstName
-                lastName
-                grade
-                email
-                superior {
-                  id
-                  no
-                  firstName
-                  lastName
-                  grade
-                  email
-                  companyReadGroup
-                  createdAt
-                  updatedAt
-                }
-                group {
-                  id
-                  name
-                  sort
-                  companyReadGroup
-                  companyAdminGroup
-                  createdAt
-                  updatedAt
-                }
-                company {
-                  id
-                  name
-                  shortName
-                  url
-                  companyReadGroup
-                  createdAt
-                  updatedAt
-                }
-                companyReadGroup
-                createdAt
-                updatedAt
-              }
-              group {
-                id
-                name
-                sort
-                companyReadGroup
-                companyAdminGroup
-                createdAt
-                updatedAt
-              }
-              company {
-                id
-                name
-                shortName
-                url
-                companyReadGroup
-                createdAt
-                updatedAt
-              }
-              companyReadGroup
-              createdAt
-              updatedAt
-            }
             section {
               items {
                 id
@@ -2513,64 +1969,22 @@ export const createSection = /* GraphQL */ `
             companyReadGroup
             createdAt
             updatedAt
-          }
-          objectiveSectionId
-          section {
-            id
-            sectionSheetId
-            objective {
-              items {
+            revieweeEmployee {
+              id
+              no
+              firstName
+              lastName
+              grade
+              email
+              group {
                 id
-                content
-                result
-                priority
-                selfEvaluation
-                firstEvaluation
-                lastEvaluation
-                progress
-                status
-                expStartDate
-                expDoneDate
-                sheet {
-                  id
-                  year
-                  grade
-                  careerPlan
-                  careerPlanComment
-                  reviewComment
-                  reviewDate
-                  selfCheckDate
-                  firstComment
-                  firstCheckDate
-                  secondComment
-                  secondCheckDate
-                  overAllEvaluation
-                  statusValue
-                  sheetGroupId
-                  reviewee
-                  reviewers
-                  companyReadGroup
-                  createdAt
-                  updatedAt
-                }
-                objectiveSectionId
-                section {
-                  id
-                  sectionSheetId
-                  reviewee
-                  reviewers
-                  createdAt
-                  updatedAt
-                }
-                reviewee
-                reviewers
+                name
+                sort
+                companyReadGroup
+                companyAdminGroup
                 createdAt
                 updatedAt
               }
-              nextToken
-            }
-            category {
-              id
               company {
                 id
                 name
@@ -2580,22 +1994,120 @@ export const createSection = /* GraphQL */ `
                 createdAt
                 updatedAt
               }
-              no
-              name
               companyReadGroup
-              companyAdminGroup
               createdAt
               updatedAt
+              superior {
+                id
+                no
+                firstName
+                lastName
+                grade
+                email
+                group {
+                  id
+                  name
+                  sort
+                  companyReadGroup
+                  companyAdminGroup
+                  createdAt
+                  updatedAt
+                }
+                company {
+                  id
+                  name
+                  shortName
+                  url
+                  companyReadGroup
+                  createdAt
+                  updatedAt
+                }
+                companyReadGroup
+                createdAt
+                updatedAt
+                superior {
+                  id
+                  no
+                  firstName
+                  lastName
+                  grade
+                  email
+                  companyReadGroup
+                  createdAt
+                  updatedAt
+                }
+              }
             }
-            reviewee
-            reviewers
-            createdAt
-            updatedAt
+            secondEmployee {
+              id
+              no
+              firstName
+              lastName
+              grade
+              email
+              group {
+                id
+                name
+                sort
+                companyReadGroup
+                companyAdminGroup
+                createdAt
+                updatedAt
+              }
+              company {
+                id
+                name
+                shortName
+                url
+                companyReadGroup
+                createdAt
+                updatedAt
+              }
+              companyReadGroup
+              createdAt
+              updatedAt
+              superior {
+                id
+                no
+                firstName
+                lastName
+                grade
+                email
+                group {
+                  id
+                  name
+                  sort
+                  companyReadGroup
+                  companyAdminGroup
+                  createdAt
+                  updatedAt
+                }
+                company {
+                  id
+                  name
+                  shortName
+                  url
+                  companyReadGroup
+                  createdAt
+                  updatedAt
+                }
+                companyReadGroup
+                createdAt
+                updatedAt
+                superior {
+                  id
+                  no
+                  firstName
+                  lastName
+                  grade
+                  email
+                  companyReadGroup
+                  createdAt
+                  updatedAt
+                }
+              }
+            }
           }
-          reviewee
-          reviewers
-          createdAt
-          updatedAt
         }
         nextToken
       }
@@ -2645,6 +2157,88 @@ export const updateSection = /* GraphQL */ `
           status
           expStartDate
           expDoneDate
+          objectiveSectionId
+          section {
+            id
+            sectionSheetId
+            objective {
+              items {
+                id
+                content
+                result
+                priority
+                selfEvaluation
+                firstEvaluation
+                lastEvaluation
+                progress
+                status
+                expStartDate
+                expDoneDate
+                objectiveSectionId
+                section {
+                  id
+                  sectionSheetId
+                  reviewee
+                  reviewers
+                  createdAt
+                  updatedAt
+                }
+                reviewee
+                reviewers
+                createdAt
+                updatedAt
+                sheet {
+                  id
+                  year
+                  grade
+                  careerPlan
+                  careerPlanComment
+                  reviewComment
+                  reviewDate
+                  selfCheckDate
+                  firstComment
+                  firstCheckDate
+                  secondComment
+                  secondCheckDate
+                  overAllEvaluation
+                  statusValue
+                  sheetGroupId
+                  reviewee
+                  reviewers
+                  companyReadGroup
+                  createdAt
+                  updatedAt
+                }
+              }
+              nextToken
+            }
+            category {
+              id
+              company {
+                id
+                name
+                shortName
+                url
+                companyReadGroup
+                createdAt
+                updatedAt
+              }
+              no
+              name
+              companyReadGroup
+              companyAdminGroup
+              createdAt
+              updatedAt
+            }
+            reviewee
+            reviewers
+            createdAt
+            updatedAt
+          }
+          reviewee
+          reviewers
+          createdAt
+          updatedAt
           sheet {
             id
             year
@@ -2684,144 +2278,6 @@ export const updateSection = /* GraphQL */ `
               }
               nextToken
             }
-            revieweeEmployee {
-              id
-              no
-              firstName
-              lastName
-              grade
-              email
-              superior {
-                id
-                no
-                firstName
-                lastName
-                grade
-                email
-                superior {
-                  id
-                  no
-                  firstName
-                  lastName
-                  grade
-                  email
-                  companyReadGroup
-                  createdAt
-                  updatedAt
-                }
-                group {
-                  id
-                  name
-                  sort
-                  companyReadGroup
-                  companyAdminGroup
-                  createdAt
-                  updatedAt
-                }
-                company {
-                  id
-                  name
-                  shortName
-                  url
-                  companyReadGroup
-                  createdAt
-                  updatedAt
-                }
-                companyReadGroup
-                createdAt
-                updatedAt
-              }
-              group {
-                id
-                name
-                sort
-                companyReadGroup
-                companyAdminGroup
-                createdAt
-                updatedAt
-              }
-              company {
-                id
-                name
-                shortName
-                url
-                companyReadGroup
-                createdAt
-                updatedAt
-              }
-              companyReadGroup
-              createdAt
-              updatedAt
-            }
-            secondEmployee {
-              id
-              no
-              firstName
-              lastName
-              grade
-              email
-              superior {
-                id
-                no
-                firstName
-                lastName
-                grade
-                email
-                superior {
-                  id
-                  no
-                  firstName
-                  lastName
-                  grade
-                  email
-                  companyReadGroup
-                  createdAt
-                  updatedAt
-                }
-                group {
-                  id
-                  name
-                  sort
-                  companyReadGroup
-                  companyAdminGroup
-                  createdAt
-                  updatedAt
-                }
-                company {
-                  id
-                  name
-                  shortName
-                  url
-                  companyReadGroup
-                  createdAt
-                  updatedAt
-                }
-                companyReadGroup
-                createdAt
-                updatedAt
-              }
-              group {
-                id
-                name
-                sort
-                companyReadGroup
-                companyAdminGroup
-                createdAt
-                updatedAt
-              }
-              company {
-                id
-                name
-                shortName
-                url
-                companyReadGroup
-                createdAt
-                updatedAt
-              }
-              companyReadGroup
-              createdAt
-              updatedAt
-            }
             section {
               items {
                 id
@@ -2850,64 +2306,22 @@ export const updateSection = /* GraphQL */ `
             companyReadGroup
             createdAt
             updatedAt
-          }
-          objectiveSectionId
-          section {
-            id
-            sectionSheetId
-            objective {
-              items {
+            revieweeEmployee {
+              id
+              no
+              firstName
+              lastName
+              grade
+              email
+              group {
                 id
-                content
-                result
-                priority
-                selfEvaluation
-                firstEvaluation
-                lastEvaluation
-                progress
-                status
-                expStartDate
-                expDoneDate
-                sheet {
-                  id
-                  year
-                  grade
-                  careerPlan
-                  careerPlanComment
-                  reviewComment
-                  reviewDate
-                  selfCheckDate
-                  firstComment
-                  firstCheckDate
-                  secondComment
-                  secondCheckDate
-                  overAllEvaluation
-                  statusValue
-                  sheetGroupId
-                  reviewee
-                  reviewers
-                  companyReadGroup
-                  createdAt
-                  updatedAt
-                }
-                objectiveSectionId
-                section {
-                  id
-                  sectionSheetId
-                  reviewee
-                  reviewers
-                  createdAt
-                  updatedAt
-                }
-                reviewee
-                reviewers
+                name
+                sort
+                companyReadGroup
+                companyAdminGroup
                 createdAt
                 updatedAt
               }
-              nextToken
-            }
-            category {
-              id
               company {
                 id
                 name
@@ -2917,22 +2331,120 @@ export const updateSection = /* GraphQL */ `
                 createdAt
                 updatedAt
               }
-              no
-              name
               companyReadGroup
-              companyAdminGroup
               createdAt
               updatedAt
+              superior {
+                id
+                no
+                firstName
+                lastName
+                grade
+                email
+                group {
+                  id
+                  name
+                  sort
+                  companyReadGroup
+                  companyAdminGroup
+                  createdAt
+                  updatedAt
+                }
+                company {
+                  id
+                  name
+                  shortName
+                  url
+                  companyReadGroup
+                  createdAt
+                  updatedAt
+                }
+                companyReadGroup
+                createdAt
+                updatedAt
+                superior {
+                  id
+                  no
+                  firstName
+                  lastName
+                  grade
+                  email
+                  companyReadGroup
+                  createdAt
+                  updatedAt
+                }
+              }
             }
-            reviewee
-            reviewers
-            createdAt
-            updatedAt
+            secondEmployee {
+              id
+              no
+              firstName
+              lastName
+              grade
+              email
+              group {
+                id
+                name
+                sort
+                companyReadGroup
+                companyAdminGroup
+                createdAt
+                updatedAt
+              }
+              company {
+                id
+                name
+                shortName
+                url
+                companyReadGroup
+                createdAt
+                updatedAt
+              }
+              companyReadGroup
+              createdAt
+              updatedAt
+              superior {
+                id
+                no
+                firstName
+                lastName
+                grade
+                email
+                group {
+                  id
+                  name
+                  sort
+                  companyReadGroup
+                  companyAdminGroup
+                  createdAt
+                  updatedAt
+                }
+                company {
+                  id
+                  name
+                  shortName
+                  url
+                  companyReadGroup
+                  createdAt
+                  updatedAt
+                }
+                companyReadGroup
+                createdAt
+                updatedAt
+                superior {
+                  id
+                  no
+                  firstName
+                  lastName
+                  grade
+                  email
+                  companyReadGroup
+                  createdAt
+                  updatedAt
+                }
+              }
+            }
           }
-          reviewee
-          reviewers
-          createdAt
-          updatedAt
         }
         nextToken
       }
@@ -2982,6 +2494,88 @@ export const deleteSection = /* GraphQL */ `
           status
           expStartDate
           expDoneDate
+          objectiveSectionId
+          section {
+            id
+            sectionSheetId
+            objective {
+              items {
+                id
+                content
+                result
+                priority
+                selfEvaluation
+                firstEvaluation
+                lastEvaluation
+                progress
+                status
+                expStartDate
+                expDoneDate
+                objectiveSectionId
+                section {
+                  id
+                  sectionSheetId
+                  reviewee
+                  reviewers
+                  createdAt
+                  updatedAt
+                }
+                reviewee
+                reviewers
+                createdAt
+                updatedAt
+                sheet {
+                  id
+                  year
+                  grade
+                  careerPlan
+                  careerPlanComment
+                  reviewComment
+                  reviewDate
+                  selfCheckDate
+                  firstComment
+                  firstCheckDate
+                  secondComment
+                  secondCheckDate
+                  overAllEvaluation
+                  statusValue
+                  sheetGroupId
+                  reviewee
+                  reviewers
+                  companyReadGroup
+                  createdAt
+                  updatedAt
+                }
+              }
+              nextToken
+            }
+            category {
+              id
+              company {
+                id
+                name
+                shortName
+                url
+                companyReadGroup
+                createdAt
+                updatedAt
+              }
+              no
+              name
+              companyReadGroup
+              companyAdminGroup
+              createdAt
+              updatedAt
+            }
+            reviewee
+            reviewers
+            createdAt
+            updatedAt
+          }
+          reviewee
+          reviewers
+          createdAt
+          updatedAt
           sheet {
             id
             year
@@ -3021,144 +2615,6 @@ export const deleteSection = /* GraphQL */ `
               }
               nextToken
             }
-            revieweeEmployee {
-              id
-              no
-              firstName
-              lastName
-              grade
-              email
-              superior {
-                id
-                no
-                firstName
-                lastName
-                grade
-                email
-                superior {
-                  id
-                  no
-                  firstName
-                  lastName
-                  grade
-                  email
-                  companyReadGroup
-                  createdAt
-                  updatedAt
-                }
-                group {
-                  id
-                  name
-                  sort
-                  companyReadGroup
-                  companyAdminGroup
-                  createdAt
-                  updatedAt
-                }
-                company {
-                  id
-                  name
-                  shortName
-                  url
-                  companyReadGroup
-                  createdAt
-                  updatedAt
-                }
-                companyReadGroup
-                createdAt
-                updatedAt
-              }
-              group {
-                id
-                name
-                sort
-                companyReadGroup
-                companyAdminGroup
-                createdAt
-                updatedAt
-              }
-              company {
-                id
-                name
-                shortName
-                url
-                companyReadGroup
-                createdAt
-                updatedAt
-              }
-              companyReadGroup
-              createdAt
-              updatedAt
-            }
-            secondEmployee {
-              id
-              no
-              firstName
-              lastName
-              grade
-              email
-              superior {
-                id
-                no
-                firstName
-                lastName
-                grade
-                email
-                superior {
-                  id
-                  no
-                  firstName
-                  lastName
-                  grade
-                  email
-                  companyReadGroup
-                  createdAt
-                  updatedAt
-                }
-                group {
-                  id
-                  name
-                  sort
-                  companyReadGroup
-                  companyAdminGroup
-                  createdAt
-                  updatedAt
-                }
-                company {
-                  id
-                  name
-                  shortName
-                  url
-                  companyReadGroup
-                  createdAt
-                  updatedAt
-                }
-                companyReadGroup
-                createdAt
-                updatedAt
-              }
-              group {
-                id
-                name
-                sort
-                companyReadGroup
-                companyAdminGroup
-                createdAt
-                updatedAt
-              }
-              company {
-                id
-                name
-                shortName
-                url
-                companyReadGroup
-                createdAt
-                updatedAt
-              }
-              companyReadGroup
-              createdAt
-              updatedAt
-            }
             section {
               items {
                 id
@@ -3187,64 +2643,22 @@ export const deleteSection = /* GraphQL */ `
             companyReadGroup
             createdAt
             updatedAt
-          }
-          objectiveSectionId
-          section {
-            id
-            sectionSheetId
-            objective {
-              items {
+            revieweeEmployee {
+              id
+              no
+              firstName
+              lastName
+              grade
+              email
+              group {
                 id
-                content
-                result
-                priority
-                selfEvaluation
-                firstEvaluation
-                lastEvaluation
-                progress
-                status
-                expStartDate
-                expDoneDate
-                sheet {
-                  id
-                  year
-                  grade
-                  careerPlan
-                  careerPlanComment
-                  reviewComment
-                  reviewDate
-                  selfCheckDate
-                  firstComment
-                  firstCheckDate
-                  secondComment
-                  secondCheckDate
-                  overAllEvaluation
-                  statusValue
-                  sheetGroupId
-                  reviewee
-                  reviewers
-                  companyReadGroup
-                  createdAt
-                  updatedAt
-                }
-                objectiveSectionId
-                section {
-                  id
-                  sectionSheetId
-                  reviewee
-                  reviewers
-                  createdAt
-                  updatedAt
-                }
-                reviewee
-                reviewers
+                name
+                sort
+                companyReadGroup
+                companyAdminGroup
                 createdAt
                 updatedAt
               }
-              nextToken
-            }
-            category {
-              id
               company {
                 id
                 name
@@ -3254,22 +2668,120 @@ export const deleteSection = /* GraphQL */ `
                 createdAt
                 updatedAt
               }
-              no
-              name
               companyReadGroup
-              companyAdminGroup
               createdAt
               updatedAt
+              superior {
+                id
+                no
+                firstName
+                lastName
+                grade
+                email
+                group {
+                  id
+                  name
+                  sort
+                  companyReadGroup
+                  companyAdminGroup
+                  createdAt
+                  updatedAt
+                }
+                company {
+                  id
+                  name
+                  shortName
+                  url
+                  companyReadGroup
+                  createdAt
+                  updatedAt
+                }
+                companyReadGroup
+                createdAt
+                updatedAt
+                superior {
+                  id
+                  no
+                  firstName
+                  lastName
+                  grade
+                  email
+                  companyReadGroup
+                  createdAt
+                  updatedAt
+                }
+              }
             }
-            reviewee
-            reviewers
-            createdAt
-            updatedAt
+            secondEmployee {
+              id
+              no
+              firstName
+              lastName
+              grade
+              email
+              group {
+                id
+                name
+                sort
+                companyReadGroup
+                companyAdminGroup
+                createdAt
+                updatedAt
+              }
+              company {
+                id
+                name
+                shortName
+                url
+                companyReadGroup
+                createdAt
+                updatedAt
+              }
+              companyReadGroup
+              createdAt
+              updatedAt
+              superior {
+                id
+                no
+                firstName
+                lastName
+                grade
+                email
+                group {
+                  id
+                  name
+                  sort
+                  companyReadGroup
+                  companyAdminGroup
+                  createdAt
+                  updatedAt
+                }
+                company {
+                  id
+                  name
+                  shortName
+                  url
+                  companyReadGroup
+                  createdAt
+                  updatedAt
+                }
+                companyReadGroup
+                createdAt
+                updatedAt
+                superior {
+                  id
+                  no
+                  firstName
+                  lastName
+                  grade
+                  email
+                  companyReadGroup
+                  createdAt
+                  updatedAt
+                }
+              }
+            }
           }
-          reviewee
-          reviewers
-          createdAt
-          updatedAt
         }
         nextToken
       }
@@ -3315,385 +2827,6 @@ export const createObjective = /* GraphQL */ `
       status
       expStartDate
       expDoneDate
-      sheet {
-        id
-        year
-        grade
-        careerPlan
-        careerPlanComment
-        reviewComment
-        reviewDate
-        selfCheckDate
-        firstComment
-        firstCheckDate
-        secondComment
-        secondCheckDate
-        overAllEvaluation
-        statusValue
-        sheetGroupId
-        group {
-          id
-          name
-          sort
-          companyReadGroup
-          companyAdminGroup
-          createdAt
-          updatedAt
-        }
-        interviews {
-          items {
-            id
-            sheetId
-            interviewDate
-            purpose
-            detail
-            reviewee
-            reviewers
-            createdAt
-            updatedAt
-          }
-          nextToken
-        }
-        revieweeEmployee {
-          id
-          no
-          firstName
-          lastName
-          grade
-          email
-          superior {
-            id
-            no
-            firstName
-            lastName
-            grade
-            email
-            superior {
-              id
-              no
-              firstName
-              lastName
-              grade
-              email
-              superior {
-                id
-                no
-                firstName
-                lastName
-                grade
-                email
-                superior {
-                  id
-                  no
-                  firstName
-                  lastName
-                  grade
-                  email
-                  companyReadGroup
-                  createdAt
-                  updatedAt
-                }
-                group {
-                  id
-                  name
-                  sort
-                  companyReadGroup
-                  companyAdminGroup
-                  createdAt
-                  updatedAt
-                }
-                company {
-                  id
-                  name
-                  shortName
-                  url
-                  companyReadGroup
-                  createdAt
-                  updatedAt
-                }
-                companyReadGroup
-                createdAt
-                updatedAt
-              }
-              group {
-                id
-                name
-                sort
-                companyReadGroup
-                companyAdminGroup
-                createdAt
-                updatedAt
-              }
-              company {
-                id
-                name
-                shortName
-                url
-                companyReadGroup
-                createdAt
-                updatedAt
-              }
-              companyReadGroup
-              createdAt
-              updatedAt
-            }
-            group {
-              id
-              name
-              sort
-              companyReadGroup
-              companyAdminGroup
-              createdAt
-              updatedAt
-            }
-            company {
-              id
-              name
-              shortName
-              url
-              companyReadGroup
-              createdAt
-              updatedAt
-            }
-            companyReadGroup
-            createdAt
-            updatedAt
-          }
-          group {
-            id
-            name
-            sort
-            companyReadGroup
-            companyAdminGroup
-            createdAt
-            updatedAt
-          }
-          company {
-            id
-            name
-            shortName
-            url
-            companyReadGroup
-            createdAt
-            updatedAt
-          }
-          companyReadGroup
-          createdAt
-          updatedAt
-        }
-        secondEmployee {
-          id
-          no
-          firstName
-          lastName
-          grade
-          email
-          superior {
-            id
-            no
-            firstName
-            lastName
-            grade
-            email
-            superior {
-              id
-              no
-              firstName
-              lastName
-              grade
-              email
-              superior {
-                id
-                no
-                firstName
-                lastName
-                grade
-                email
-                superior {
-                  id
-                  no
-                  firstName
-                  lastName
-                  grade
-                  email
-                  companyReadGroup
-                  createdAt
-                  updatedAt
-                }
-                group {
-                  id
-                  name
-                  sort
-                  companyReadGroup
-                  companyAdminGroup
-                  createdAt
-                  updatedAt
-                }
-                company {
-                  id
-                  name
-                  shortName
-                  url
-                  companyReadGroup
-                  createdAt
-                  updatedAt
-                }
-                companyReadGroup
-                createdAt
-                updatedAt
-              }
-              group {
-                id
-                name
-                sort
-                companyReadGroup
-                companyAdminGroup
-                createdAt
-                updatedAt
-              }
-              company {
-                id
-                name
-                shortName
-                url
-                companyReadGroup
-                createdAt
-                updatedAt
-              }
-              companyReadGroup
-              createdAt
-              updatedAt
-            }
-            group {
-              id
-              name
-              sort
-              companyReadGroup
-              companyAdminGroup
-              createdAt
-              updatedAt
-            }
-            company {
-              id
-              name
-              shortName
-              url
-              companyReadGroup
-              createdAt
-              updatedAt
-            }
-            companyReadGroup
-            createdAt
-            updatedAt
-          }
-          group {
-            id
-            name
-            sort
-            companyReadGroup
-            companyAdminGroup
-            createdAt
-            updatedAt
-          }
-          company {
-            id
-            name
-            shortName
-            url
-            companyReadGroup
-            createdAt
-            updatedAt
-          }
-          companyReadGroup
-          createdAt
-          updatedAt
-        }
-        section {
-          items {
-            id
-            sectionSheetId
-            objective {
-              items {
-                id
-                content
-                result
-                priority
-                selfEvaluation
-                firstEvaluation
-                lastEvaluation
-                progress
-                status
-                expStartDate
-                expDoneDate
-                sheet {
-                  id
-                  year
-                  grade
-                  careerPlan
-                  careerPlanComment
-                  reviewComment
-                  reviewDate
-                  selfCheckDate
-                  firstComment
-                  firstCheckDate
-                  secondComment
-                  secondCheckDate
-                  overAllEvaluation
-                  statusValue
-                  sheetGroupId
-                  reviewee
-                  reviewers
-                  companyReadGroup
-                  createdAt
-                  updatedAt
-                }
-                objectiveSectionId
-                section {
-                  id
-                  sectionSheetId
-                  reviewee
-                  reviewers
-                  createdAt
-                  updatedAt
-                }
-                reviewee
-                reviewers
-                createdAt
-                updatedAt
-              }
-              nextToken
-            }
-            category {
-              id
-              company {
-                id
-                name
-                shortName
-                url
-                companyReadGroup
-                createdAt
-                updatedAt
-              }
-              no
-              name
-              companyReadGroup
-              companyAdminGroup
-              createdAt
-              updatedAt
-            }
-            reviewee
-            reviewers
-            createdAt
-            updatedAt
-          }
-          nextToken
-        }
-        reviewee
-        reviewers
-        companyReadGroup
-        createdAt
-        updatedAt
-      }
       objectiveSectionId
       section {
         id
@@ -3711,142 +2844,6 @@ export const createObjective = /* GraphQL */ `
             status
             expStartDate
             expDoneDate
-            sheet {
-              id
-              year
-              grade
-              careerPlan
-              careerPlanComment
-              reviewComment
-              reviewDate
-              selfCheckDate
-              firstComment
-              firstCheckDate
-              secondComment
-              secondCheckDate
-              overAllEvaluation
-              statusValue
-              sheetGroupId
-              group {
-                id
-                name
-                sort
-                companyReadGroup
-                companyAdminGroup
-                createdAt
-                updatedAt
-              }
-              interviews {
-                items {
-                  id
-                  sheetId
-                  interviewDate
-                  purpose
-                  detail
-                  reviewee
-                  reviewers
-                  createdAt
-                  updatedAt
-                }
-                nextToken
-              }
-              revieweeEmployee {
-                id
-                no
-                firstName
-                lastName
-                grade
-                email
-                superior {
-                  id
-                  no
-                  firstName
-                  lastName
-                  grade
-                  email
-                  companyReadGroup
-                  createdAt
-                  updatedAt
-                }
-                group {
-                  id
-                  name
-                  sort
-                  companyReadGroup
-                  companyAdminGroup
-                  createdAt
-                  updatedAt
-                }
-                company {
-                  id
-                  name
-                  shortName
-                  url
-                  companyReadGroup
-                  createdAt
-                  updatedAt
-                }
-                companyReadGroup
-                createdAt
-                updatedAt
-              }
-              secondEmployee {
-                id
-                no
-                firstName
-                lastName
-                grade
-                email
-                superior {
-                  id
-                  no
-                  firstName
-                  lastName
-                  grade
-                  email
-                  companyReadGroup
-                  createdAt
-                  updatedAt
-                }
-                group {
-                  id
-                  name
-                  sort
-                  companyReadGroup
-                  companyAdminGroup
-                  createdAt
-                  updatedAt
-                }
-                company {
-                  id
-                  name
-                  shortName
-                  url
-                  companyReadGroup
-                  createdAt
-                  updatedAt
-                }
-                companyReadGroup
-                createdAt
-                updatedAt
-              }
-              section {
-                items {
-                  id
-                  sectionSheetId
-                  reviewee
-                  reviewers
-                  createdAt
-                  updatedAt
-                }
-                nextToken
-              }
-              reviewee
-              reviewers
-              companyReadGroup
-              createdAt
-              updatedAt
-            }
             objectiveSectionId
             section {
               id
@@ -3899,6 +2896,142 @@ export const createObjective = /* GraphQL */ `
             reviewers
             createdAt
             updatedAt
+            sheet {
+              id
+              year
+              grade
+              careerPlan
+              careerPlanComment
+              reviewComment
+              reviewDate
+              selfCheckDate
+              firstComment
+              firstCheckDate
+              secondComment
+              secondCheckDate
+              overAllEvaluation
+              statusValue
+              sheetGroupId
+              group {
+                id
+                name
+                sort
+                companyReadGroup
+                companyAdminGroup
+                createdAt
+                updatedAt
+              }
+              interviews {
+                items {
+                  id
+                  sheetId
+                  interviewDate
+                  purpose
+                  detail
+                  reviewee
+                  reviewers
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              section {
+                items {
+                  id
+                  sectionSheetId
+                  reviewee
+                  reviewers
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              reviewee
+              reviewers
+              companyReadGroup
+              createdAt
+              updatedAt
+              revieweeEmployee {
+                id
+                no
+                firstName
+                lastName
+                grade
+                email
+                group {
+                  id
+                  name
+                  sort
+                  companyReadGroup
+                  companyAdminGroup
+                  createdAt
+                  updatedAt
+                }
+                company {
+                  id
+                  name
+                  shortName
+                  url
+                  companyReadGroup
+                  createdAt
+                  updatedAt
+                }
+                companyReadGroup
+                createdAt
+                updatedAt
+                superior {
+                  id
+                  no
+                  firstName
+                  lastName
+                  grade
+                  email
+                  companyReadGroup
+                  createdAt
+                  updatedAt
+                }
+              }
+              secondEmployee {
+                id
+                no
+                firstName
+                lastName
+                grade
+                email
+                group {
+                  id
+                  name
+                  sort
+                  companyReadGroup
+                  companyAdminGroup
+                  createdAt
+                  updatedAt
+                }
+                company {
+                  id
+                  name
+                  shortName
+                  url
+                  companyReadGroup
+                  createdAt
+                  updatedAt
+                }
+                companyReadGroup
+                createdAt
+                updatedAt
+                superior {
+                  id
+                  no
+                  firstName
+                  lastName
+                  grade
+                  email
+                  companyReadGroup
+                  createdAt
+                  updatedAt
+                }
+              }
+            }
           }
           nextToken
         }
@@ -3929,6 +3062,385 @@ export const createObjective = /* GraphQL */ `
       reviewers
       createdAt
       updatedAt
+      sheet {
+        id
+        year
+        grade
+        careerPlan
+        careerPlanComment
+        reviewComment
+        reviewDate
+        selfCheckDate
+        firstComment
+        firstCheckDate
+        secondComment
+        secondCheckDate
+        overAllEvaluation
+        statusValue
+        sheetGroupId
+        group {
+          id
+          name
+          sort
+          companyReadGroup
+          companyAdminGroup
+          createdAt
+          updatedAt
+        }
+        interviews {
+          items {
+            id
+            sheetId
+            interviewDate
+            purpose
+            detail
+            reviewee
+            reviewers
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        section {
+          items {
+            id
+            sectionSheetId
+            objective {
+              items {
+                id
+                content
+                result
+                priority
+                selfEvaluation
+                firstEvaluation
+                lastEvaluation
+                progress
+                status
+                expStartDate
+                expDoneDate
+                objectiveSectionId
+                section {
+                  id
+                  sectionSheetId
+                  reviewee
+                  reviewers
+                  createdAt
+                  updatedAt
+                }
+                reviewee
+                reviewers
+                createdAt
+                updatedAt
+                sheet {
+                  id
+                  year
+                  grade
+                  careerPlan
+                  careerPlanComment
+                  reviewComment
+                  reviewDate
+                  selfCheckDate
+                  firstComment
+                  firstCheckDate
+                  secondComment
+                  secondCheckDate
+                  overAllEvaluation
+                  statusValue
+                  sheetGroupId
+                  reviewee
+                  reviewers
+                  companyReadGroup
+                  createdAt
+                  updatedAt
+                }
+              }
+              nextToken
+            }
+            category {
+              id
+              company {
+                id
+                name
+                shortName
+                url
+                companyReadGroup
+                createdAt
+                updatedAt
+              }
+              no
+              name
+              companyReadGroup
+              companyAdminGroup
+              createdAt
+              updatedAt
+            }
+            reviewee
+            reviewers
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        reviewee
+        reviewers
+        companyReadGroup
+        createdAt
+        updatedAt
+        revieweeEmployee {
+          id
+          no
+          firstName
+          lastName
+          grade
+          email
+          group {
+            id
+            name
+            sort
+            companyReadGroup
+            companyAdminGroup
+            createdAt
+            updatedAt
+          }
+          company {
+            id
+            name
+            shortName
+            url
+            companyReadGroup
+            createdAt
+            updatedAt
+          }
+          companyReadGroup
+          createdAt
+          updatedAt
+          superior {
+            id
+            no
+            firstName
+            lastName
+            grade
+            email
+            group {
+              id
+              name
+              sort
+              companyReadGroup
+              companyAdminGroup
+              createdAt
+              updatedAt
+            }
+            company {
+              id
+              name
+              shortName
+              url
+              companyReadGroup
+              createdAt
+              updatedAt
+            }
+            companyReadGroup
+            createdAt
+            updatedAt
+            superior {
+              id
+              no
+              firstName
+              lastName
+              grade
+              email
+              group {
+                id
+                name
+                sort
+                companyReadGroup
+                companyAdminGroup
+                createdAt
+                updatedAt
+              }
+              company {
+                id
+                name
+                shortName
+                url
+                companyReadGroup
+                createdAt
+                updatedAt
+              }
+              companyReadGroup
+              createdAt
+              updatedAt
+              superior {
+                id
+                no
+                firstName
+                lastName
+                grade
+                email
+                group {
+                  id
+                  name
+                  sort
+                  companyReadGroup
+                  companyAdminGroup
+                  createdAt
+                  updatedAt
+                }
+                company {
+                  id
+                  name
+                  shortName
+                  url
+                  companyReadGroup
+                  createdAt
+                  updatedAt
+                }
+                companyReadGroup
+                createdAt
+                updatedAt
+                superior {
+                  id
+                  no
+                  firstName
+                  lastName
+                  grade
+                  email
+                  companyReadGroup
+                  createdAt
+                  updatedAt
+                }
+              }
+            }
+          }
+        }
+        secondEmployee {
+          id
+          no
+          firstName
+          lastName
+          grade
+          email
+          group {
+            id
+            name
+            sort
+            companyReadGroup
+            companyAdminGroup
+            createdAt
+            updatedAt
+          }
+          company {
+            id
+            name
+            shortName
+            url
+            companyReadGroup
+            createdAt
+            updatedAt
+          }
+          companyReadGroup
+          createdAt
+          updatedAt
+          superior {
+            id
+            no
+            firstName
+            lastName
+            grade
+            email
+            group {
+              id
+              name
+              sort
+              companyReadGroup
+              companyAdminGroup
+              createdAt
+              updatedAt
+            }
+            company {
+              id
+              name
+              shortName
+              url
+              companyReadGroup
+              createdAt
+              updatedAt
+            }
+            companyReadGroup
+            createdAt
+            updatedAt
+            superior {
+              id
+              no
+              firstName
+              lastName
+              grade
+              email
+              group {
+                id
+                name
+                sort
+                companyReadGroup
+                companyAdminGroup
+                createdAt
+                updatedAt
+              }
+              company {
+                id
+                name
+                shortName
+                url
+                companyReadGroup
+                createdAt
+                updatedAt
+              }
+              companyReadGroup
+              createdAt
+              updatedAt
+              superior {
+                id
+                no
+                firstName
+                lastName
+                grade
+                email
+                group {
+                  id
+                  name
+                  sort
+                  companyReadGroup
+                  companyAdminGroup
+                  createdAt
+                  updatedAt
+                }
+                company {
+                  id
+                  name
+                  shortName
+                  url
+                  companyReadGroup
+                  createdAt
+                  updatedAt
+                }
+                companyReadGroup
+                createdAt
+                updatedAt
+                superior {
+                  id
+                  no
+                  firstName
+                  lastName
+                  grade
+                  email
+                  companyReadGroup
+                  createdAt
+                  updatedAt
+                }
+              }
+            }
+          }
+        }
+      }
     }
   }
 `;
@@ -3949,385 +3461,6 @@ export const updateObjective = /* GraphQL */ `
       status
       expStartDate
       expDoneDate
-      sheet {
-        id
-        year
-        grade
-        careerPlan
-        careerPlanComment
-        reviewComment
-        reviewDate
-        selfCheckDate
-        firstComment
-        firstCheckDate
-        secondComment
-        secondCheckDate
-        overAllEvaluation
-        statusValue
-        sheetGroupId
-        group {
-          id
-          name
-          sort
-          companyReadGroup
-          companyAdminGroup
-          createdAt
-          updatedAt
-        }
-        interviews {
-          items {
-            id
-            sheetId
-            interviewDate
-            purpose
-            detail
-            reviewee
-            reviewers
-            createdAt
-            updatedAt
-          }
-          nextToken
-        }
-        revieweeEmployee {
-          id
-          no
-          firstName
-          lastName
-          grade
-          email
-          superior {
-            id
-            no
-            firstName
-            lastName
-            grade
-            email
-            superior {
-              id
-              no
-              firstName
-              lastName
-              grade
-              email
-              superior {
-                id
-                no
-                firstName
-                lastName
-                grade
-                email
-                superior {
-                  id
-                  no
-                  firstName
-                  lastName
-                  grade
-                  email
-                  companyReadGroup
-                  createdAt
-                  updatedAt
-                }
-                group {
-                  id
-                  name
-                  sort
-                  companyReadGroup
-                  companyAdminGroup
-                  createdAt
-                  updatedAt
-                }
-                company {
-                  id
-                  name
-                  shortName
-                  url
-                  companyReadGroup
-                  createdAt
-                  updatedAt
-                }
-                companyReadGroup
-                createdAt
-                updatedAt
-              }
-              group {
-                id
-                name
-                sort
-                companyReadGroup
-                companyAdminGroup
-                createdAt
-                updatedAt
-              }
-              company {
-                id
-                name
-                shortName
-                url
-                companyReadGroup
-                createdAt
-                updatedAt
-              }
-              companyReadGroup
-              createdAt
-              updatedAt
-            }
-            group {
-              id
-              name
-              sort
-              companyReadGroup
-              companyAdminGroup
-              createdAt
-              updatedAt
-            }
-            company {
-              id
-              name
-              shortName
-              url
-              companyReadGroup
-              createdAt
-              updatedAt
-            }
-            companyReadGroup
-            createdAt
-            updatedAt
-          }
-          group {
-            id
-            name
-            sort
-            companyReadGroup
-            companyAdminGroup
-            createdAt
-            updatedAt
-          }
-          company {
-            id
-            name
-            shortName
-            url
-            companyReadGroup
-            createdAt
-            updatedAt
-          }
-          companyReadGroup
-          createdAt
-          updatedAt
-        }
-        secondEmployee {
-          id
-          no
-          firstName
-          lastName
-          grade
-          email
-          superior {
-            id
-            no
-            firstName
-            lastName
-            grade
-            email
-            superior {
-              id
-              no
-              firstName
-              lastName
-              grade
-              email
-              superior {
-                id
-                no
-                firstName
-                lastName
-                grade
-                email
-                superior {
-                  id
-                  no
-                  firstName
-                  lastName
-                  grade
-                  email
-                  companyReadGroup
-                  createdAt
-                  updatedAt
-                }
-                group {
-                  id
-                  name
-                  sort
-                  companyReadGroup
-                  companyAdminGroup
-                  createdAt
-                  updatedAt
-                }
-                company {
-                  id
-                  name
-                  shortName
-                  url
-                  companyReadGroup
-                  createdAt
-                  updatedAt
-                }
-                companyReadGroup
-                createdAt
-                updatedAt
-              }
-              group {
-                id
-                name
-                sort
-                companyReadGroup
-                companyAdminGroup
-                createdAt
-                updatedAt
-              }
-              company {
-                id
-                name
-                shortName
-                url
-                companyReadGroup
-                createdAt
-                updatedAt
-              }
-              companyReadGroup
-              createdAt
-              updatedAt
-            }
-            group {
-              id
-              name
-              sort
-              companyReadGroup
-              companyAdminGroup
-              createdAt
-              updatedAt
-            }
-            company {
-              id
-              name
-              shortName
-              url
-              companyReadGroup
-              createdAt
-              updatedAt
-            }
-            companyReadGroup
-            createdAt
-            updatedAt
-          }
-          group {
-            id
-            name
-            sort
-            companyReadGroup
-            companyAdminGroup
-            createdAt
-            updatedAt
-          }
-          company {
-            id
-            name
-            shortName
-            url
-            companyReadGroup
-            createdAt
-            updatedAt
-          }
-          companyReadGroup
-          createdAt
-          updatedAt
-        }
-        section {
-          items {
-            id
-            sectionSheetId
-            objective {
-              items {
-                id
-                content
-                result
-                priority
-                selfEvaluation
-                firstEvaluation
-                lastEvaluation
-                progress
-                status
-                expStartDate
-                expDoneDate
-                sheet {
-                  id
-                  year
-                  grade
-                  careerPlan
-                  careerPlanComment
-                  reviewComment
-                  reviewDate
-                  selfCheckDate
-                  firstComment
-                  firstCheckDate
-                  secondComment
-                  secondCheckDate
-                  overAllEvaluation
-                  statusValue
-                  sheetGroupId
-                  reviewee
-                  reviewers
-                  companyReadGroup
-                  createdAt
-                  updatedAt
-                }
-                objectiveSectionId
-                section {
-                  id
-                  sectionSheetId
-                  reviewee
-                  reviewers
-                  createdAt
-                  updatedAt
-                }
-                reviewee
-                reviewers
-                createdAt
-                updatedAt
-              }
-              nextToken
-            }
-            category {
-              id
-              company {
-                id
-                name
-                shortName
-                url
-                companyReadGroup
-                createdAt
-                updatedAt
-              }
-              no
-              name
-              companyReadGroup
-              companyAdminGroup
-              createdAt
-              updatedAt
-            }
-            reviewee
-            reviewers
-            createdAt
-            updatedAt
-          }
-          nextToken
-        }
-        reviewee
-        reviewers
-        companyReadGroup
-        createdAt
-        updatedAt
-      }
       objectiveSectionId
       section {
         id
@@ -4345,142 +3478,6 @@ export const updateObjective = /* GraphQL */ `
             status
             expStartDate
             expDoneDate
-            sheet {
-              id
-              year
-              grade
-              careerPlan
-              careerPlanComment
-              reviewComment
-              reviewDate
-              selfCheckDate
-              firstComment
-              firstCheckDate
-              secondComment
-              secondCheckDate
-              overAllEvaluation
-              statusValue
-              sheetGroupId
-              group {
-                id
-                name
-                sort
-                companyReadGroup
-                companyAdminGroup
-                createdAt
-                updatedAt
-              }
-              interviews {
-                items {
-                  id
-                  sheetId
-                  interviewDate
-                  purpose
-                  detail
-                  reviewee
-                  reviewers
-                  createdAt
-                  updatedAt
-                }
-                nextToken
-              }
-              revieweeEmployee {
-                id
-                no
-                firstName
-                lastName
-                grade
-                email
-                superior {
-                  id
-                  no
-                  firstName
-                  lastName
-                  grade
-                  email
-                  companyReadGroup
-                  createdAt
-                  updatedAt
-                }
-                group {
-                  id
-                  name
-                  sort
-                  companyReadGroup
-                  companyAdminGroup
-                  createdAt
-                  updatedAt
-                }
-                company {
-                  id
-                  name
-                  shortName
-                  url
-                  companyReadGroup
-                  createdAt
-                  updatedAt
-                }
-                companyReadGroup
-                createdAt
-                updatedAt
-              }
-              secondEmployee {
-                id
-                no
-                firstName
-                lastName
-                grade
-                email
-                superior {
-                  id
-                  no
-                  firstName
-                  lastName
-                  grade
-                  email
-                  companyReadGroup
-                  createdAt
-                  updatedAt
-                }
-                group {
-                  id
-                  name
-                  sort
-                  companyReadGroup
-                  companyAdminGroup
-                  createdAt
-                  updatedAt
-                }
-                company {
-                  id
-                  name
-                  shortName
-                  url
-                  companyReadGroup
-                  createdAt
-                  updatedAt
-                }
-                companyReadGroup
-                createdAt
-                updatedAt
-              }
-              section {
-                items {
-                  id
-                  sectionSheetId
-                  reviewee
-                  reviewers
-                  createdAt
-                  updatedAt
-                }
-                nextToken
-              }
-              reviewee
-              reviewers
-              companyReadGroup
-              createdAt
-              updatedAt
-            }
             objectiveSectionId
             section {
               id
@@ -4533,6 +3530,142 @@ export const updateObjective = /* GraphQL */ `
             reviewers
             createdAt
             updatedAt
+            sheet {
+              id
+              year
+              grade
+              careerPlan
+              careerPlanComment
+              reviewComment
+              reviewDate
+              selfCheckDate
+              firstComment
+              firstCheckDate
+              secondComment
+              secondCheckDate
+              overAllEvaluation
+              statusValue
+              sheetGroupId
+              group {
+                id
+                name
+                sort
+                companyReadGroup
+                companyAdminGroup
+                createdAt
+                updatedAt
+              }
+              interviews {
+                items {
+                  id
+                  sheetId
+                  interviewDate
+                  purpose
+                  detail
+                  reviewee
+                  reviewers
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              section {
+                items {
+                  id
+                  sectionSheetId
+                  reviewee
+                  reviewers
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              reviewee
+              reviewers
+              companyReadGroup
+              createdAt
+              updatedAt
+              revieweeEmployee {
+                id
+                no
+                firstName
+                lastName
+                grade
+                email
+                group {
+                  id
+                  name
+                  sort
+                  companyReadGroup
+                  companyAdminGroup
+                  createdAt
+                  updatedAt
+                }
+                company {
+                  id
+                  name
+                  shortName
+                  url
+                  companyReadGroup
+                  createdAt
+                  updatedAt
+                }
+                companyReadGroup
+                createdAt
+                updatedAt
+                superior {
+                  id
+                  no
+                  firstName
+                  lastName
+                  grade
+                  email
+                  companyReadGroup
+                  createdAt
+                  updatedAt
+                }
+              }
+              secondEmployee {
+                id
+                no
+                firstName
+                lastName
+                grade
+                email
+                group {
+                  id
+                  name
+                  sort
+                  companyReadGroup
+                  companyAdminGroup
+                  createdAt
+                  updatedAt
+                }
+                company {
+                  id
+                  name
+                  shortName
+                  url
+                  companyReadGroup
+                  createdAt
+                  updatedAt
+                }
+                companyReadGroup
+                createdAt
+                updatedAt
+                superior {
+                  id
+                  no
+                  firstName
+                  lastName
+                  grade
+                  email
+                  companyReadGroup
+                  createdAt
+                  updatedAt
+                }
+              }
+            }
           }
           nextToken
         }
@@ -4563,6 +3696,385 @@ export const updateObjective = /* GraphQL */ `
       reviewers
       createdAt
       updatedAt
+      sheet {
+        id
+        year
+        grade
+        careerPlan
+        careerPlanComment
+        reviewComment
+        reviewDate
+        selfCheckDate
+        firstComment
+        firstCheckDate
+        secondComment
+        secondCheckDate
+        overAllEvaluation
+        statusValue
+        sheetGroupId
+        group {
+          id
+          name
+          sort
+          companyReadGroup
+          companyAdminGroup
+          createdAt
+          updatedAt
+        }
+        interviews {
+          items {
+            id
+            sheetId
+            interviewDate
+            purpose
+            detail
+            reviewee
+            reviewers
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        section {
+          items {
+            id
+            sectionSheetId
+            objective {
+              items {
+                id
+                content
+                result
+                priority
+                selfEvaluation
+                firstEvaluation
+                lastEvaluation
+                progress
+                status
+                expStartDate
+                expDoneDate
+                objectiveSectionId
+                section {
+                  id
+                  sectionSheetId
+                  reviewee
+                  reviewers
+                  createdAt
+                  updatedAt
+                }
+                reviewee
+                reviewers
+                createdAt
+                updatedAt
+                sheet {
+                  id
+                  year
+                  grade
+                  careerPlan
+                  careerPlanComment
+                  reviewComment
+                  reviewDate
+                  selfCheckDate
+                  firstComment
+                  firstCheckDate
+                  secondComment
+                  secondCheckDate
+                  overAllEvaluation
+                  statusValue
+                  sheetGroupId
+                  reviewee
+                  reviewers
+                  companyReadGroup
+                  createdAt
+                  updatedAt
+                }
+              }
+              nextToken
+            }
+            category {
+              id
+              company {
+                id
+                name
+                shortName
+                url
+                companyReadGroup
+                createdAt
+                updatedAt
+              }
+              no
+              name
+              companyReadGroup
+              companyAdminGroup
+              createdAt
+              updatedAt
+            }
+            reviewee
+            reviewers
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        reviewee
+        reviewers
+        companyReadGroup
+        createdAt
+        updatedAt
+        revieweeEmployee {
+          id
+          no
+          firstName
+          lastName
+          grade
+          email
+          group {
+            id
+            name
+            sort
+            companyReadGroup
+            companyAdminGroup
+            createdAt
+            updatedAt
+          }
+          company {
+            id
+            name
+            shortName
+            url
+            companyReadGroup
+            createdAt
+            updatedAt
+          }
+          companyReadGroup
+          createdAt
+          updatedAt
+          superior {
+            id
+            no
+            firstName
+            lastName
+            grade
+            email
+            group {
+              id
+              name
+              sort
+              companyReadGroup
+              companyAdminGroup
+              createdAt
+              updatedAt
+            }
+            company {
+              id
+              name
+              shortName
+              url
+              companyReadGroup
+              createdAt
+              updatedAt
+            }
+            companyReadGroup
+            createdAt
+            updatedAt
+            superior {
+              id
+              no
+              firstName
+              lastName
+              grade
+              email
+              group {
+                id
+                name
+                sort
+                companyReadGroup
+                companyAdminGroup
+                createdAt
+                updatedAt
+              }
+              company {
+                id
+                name
+                shortName
+                url
+                companyReadGroup
+                createdAt
+                updatedAt
+              }
+              companyReadGroup
+              createdAt
+              updatedAt
+              superior {
+                id
+                no
+                firstName
+                lastName
+                grade
+                email
+                group {
+                  id
+                  name
+                  sort
+                  companyReadGroup
+                  companyAdminGroup
+                  createdAt
+                  updatedAt
+                }
+                company {
+                  id
+                  name
+                  shortName
+                  url
+                  companyReadGroup
+                  createdAt
+                  updatedAt
+                }
+                companyReadGroup
+                createdAt
+                updatedAt
+                superior {
+                  id
+                  no
+                  firstName
+                  lastName
+                  grade
+                  email
+                  companyReadGroup
+                  createdAt
+                  updatedAt
+                }
+              }
+            }
+          }
+        }
+        secondEmployee {
+          id
+          no
+          firstName
+          lastName
+          grade
+          email
+          group {
+            id
+            name
+            sort
+            companyReadGroup
+            companyAdminGroup
+            createdAt
+            updatedAt
+          }
+          company {
+            id
+            name
+            shortName
+            url
+            companyReadGroup
+            createdAt
+            updatedAt
+          }
+          companyReadGroup
+          createdAt
+          updatedAt
+          superior {
+            id
+            no
+            firstName
+            lastName
+            grade
+            email
+            group {
+              id
+              name
+              sort
+              companyReadGroup
+              companyAdminGroup
+              createdAt
+              updatedAt
+            }
+            company {
+              id
+              name
+              shortName
+              url
+              companyReadGroup
+              createdAt
+              updatedAt
+            }
+            companyReadGroup
+            createdAt
+            updatedAt
+            superior {
+              id
+              no
+              firstName
+              lastName
+              grade
+              email
+              group {
+                id
+                name
+                sort
+                companyReadGroup
+                companyAdminGroup
+                createdAt
+                updatedAt
+              }
+              company {
+                id
+                name
+                shortName
+                url
+                companyReadGroup
+                createdAt
+                updatedAt
+              }
+              companyReadGroup
+              createdAt
+              updatedAt
+              superior {
+                id
+                no
+                firstName
+                lastName
+                grade
+                email
+                group {
+                  id
+                  name
+                  sort
+                  companyReadGroup
+                  companyAdminGroup
+                  createdAt
+                  updatedAt
+                }
+                company {
+                  id
+                  name
+                  shortName
+                  url
+                  companyReadGroup
+                  createdAt
+                  updatedAt
+                }
+                companyReadGroup
+                createdAt
+                updatedAt
+                superior {
+                  id
+                  no
+                  firstName
+                  lastName
+                  grade
+                  email
+                  companyReadGroup
+                  createdAt
+                  updatedAt
+                }
+              }
+            }
+          }
+        }
+      }
     }
   }
 `;
@@ -4583,385 +4095,6 @@ export const deleteObjective = /* GraphQL */ `
       status
       expStartDate
       expDoneDate
-      sheet {
-        id
-        year
-        grade
-        careerPlan
-        careerPlanComment
-        reviewComment
-        reviewDate
-        selfCheckDate
-        firstComment
-        firstCheckDate
-        secondComment
-        secondCheckDate
-        overAllEvaluation
-        statusValue
-        sheetGroupId
-        group {
-          id
-          name
-          sort
-          companyReadGroup
-          companyAdminGroup
-          createdAt
-          updatedAt
-        }
-        interviews {
-          items {
-            id
-            sheetId
-            interviewDate
-            purpose
-            detail
-            reviewee
-            reviewers
-            createdAt
-            updatedAt
-          }
-          nextToken
-        }
-        revieweeEmployee {
-          id
-          no
-          firstName
-          lastName
-          grade
-          email
-          superior {
-            id
-            no
-            firstName
-            lastName
-            grade
-            email
-            superior {
-              id
-              no
-              firstName
-              lastName
-              grade
-              email
-              superior {
-                id
-                no
-                firstName
-                lastName
-                grade
-                email
-                superior {
-                  id
-                  no
-                  firstName
-                  lastName
-                  grade
-                  email
-                  companyReadGroup
-                  createdAt
-                  updatedAt
-                }
-                group {
-                  id
-                  name
-                  sort
-                  companyReadGroup
-                  companyAdminGroup
-                  createdAt
-                  updatedAt
-                }
-                company {
-                  id
-                  name
-                  shortName
-                  url
-                  companyReadGroup
-                  createdAt
-                  updatedAt
-                }
-                companyReadGroup
-                createdAt
-                updatedAt
-              }
-              group {
-                id
-                name
-                sort
-                companyReadGroup
-                companyAdminGroup
-                createdAt
-                updatedAt
-              }
-              company {
-                id
-                name
-                shortName
-                url
-                companyReadGroup
-                createdAt
-                updatedAt
-              }
-              companyReadGroup
-              createdAt
-              updatedAt
-            }
-            group {
-              id
-              name
-              sort
-              companyReadGroup
-              companyAdminGroup
-              createdAt
-              updatedAt
-            }
-            company {
-              id
-              name
-              shortName
-              url
-              companyReadGroup
-              createdAt
-              updatedAt
-            }
-            companyReadGroup
-            createdAt
-            updatedAt
-          }
-          group {
-            id
-            name
-            sort
-            companyReadGroup
-            companyAdminGroup
-            createdAt
-            updatedAt
-          }
-          company {
-            id
-            name
-            shortName
-            url
-            companyReadGroup
-            createdAt
-            updatedAt
-          }
-          companyReadGroup
-          createdAt
-          updatedAt
-        }
-        secondEmployee {
-          id
-          no
-          firstName
-          lastName
-          grade
-          email
-          superior {
-            id
-            no
-            firstName
-            lastName
-            grade
-            email
-            superior {
-              id
-              no
-              firstName
-              lastName
-              grade
-              email
-              superior {
-                id
-                no
-                firstName
-                lastName
-                grade
-                email
-                superior {
-                  id
-                  no
-                  firstName
-                  lastName
-                  grade
-                  email
-                  companyReadGroup
-                  createdAt
-                  updatedAt
-                }
-                group {
-                  id
-                  name
-                  sort
-                  companyReadGroup
-                  companyAdminGroup
-                  createdAt
-                  updatedAt
-                }
-                company {
-                  id
-                  name
-                  shortName
-                  url
-                  companyReadGroup
-                  createdAt
-                  updatedAt
-                }
-                companyReadGroup
-                createdAt
-                updatedAt
-              }
-              group {
-                id
-                name
-                sort
-                companyReadGroup
-                companyAdminGroup
-                createdAt
-                updatedAt
-              }
-              company {
-                id
-                name
-                shortName
-                url
-                companyReadGroup
-                createdAt
-                updatedAt
-              }
-              companyReadGroup
-              createdAt
-              updatedAt
-            }
-            group {
-              id
-              name
-              sort
-              companyReadGroup
-              companyAdminGroup
-              createdAt
-              updatedAt
-            }
-            company {
-              id
-              name
-              shortName
-              url
-              companyReadGroup
-              createdAt
-              updatedAt
-            }
-            companyReadGroup
-            createdAt
-            updatedAt
-          }
-          group {
-            id
-            name
-            sort
-            companyReadGroup
-            companyAdminGroup
-            createdAt
-            updatedAt
-          }
-          company {
-            id
-            name
-            shortName
-            url
-            companyReadGroup
-            createdAt
-            updatedAt
-          }
-          companyReadGroup
-          createdAt
-          updatedAt
-        }
-        section {
-          items {
-            id
-            sectionSheetId
-            objective {
-              items {
-                id
-                content
-                result
-                priority
-                selfEvaluation
-                firstEvaluation
-                lastEvaluation
-                progress
-                status
-                expStartDate
-                expDoneDate
-                sheet {
-                  id
-                  year
-                  grade
-                  careerPlan
-                  careerPlanComment
-                  reviewComment
-                  reviewDate
-                  selfCheckDate
-                  firstComment
-                  firstCheckDate
-                  secondComment
-                  secondCheckDate
-                  overAllEvaluation
-                  statusValue
-                  sheetGroupId
-                  reviewee
-                  reviewers
-                  companyReadGroup
-                  createdAt
-                  updatedAt
-                }
-                objectiveSectionId
-                section {
-                  id
-                  sectionSheetId
-                  reviewee
-                  reviewers
-                  createdAt
-                  updatedAt
-                }
-                reviewee
-                reviewers
-                createdAt
-                updatedAt
-              }
-              nextToken
-            }
-            category {
-              id
-              company {
-                id
-                name
-                shortName
-                url
-                companyReadGroup
-                createdAt
-                updatedAt
-              }
-              no
-              name
-              companyReadGroup
-              companyAdminGroup
-              createdAt
-              updatedAt
-            }
-            reviewee
-            reviewers
-            createdAt
-            updatedAt
-          }
-          nextToken
-        }
-        reviewee
-        reviewers
-        companyReadGroup
-        createdAt
-        updatedAt
-      }
       objectiveSectionId
       section {
         id
@@ -4979,142 +4112,6 @@ export const deleteObjective = /* GraphQL */ `
             status
             expStartDate
             expDoneDate
-            sheet {
-              id
-              year
-              grade
-              careerPlan
-              careerPlanComment
-              reviewComment
-              reviewDate
-              selfCheckDate
-              firstComment
-              firstCheckDate
-              secondComment
-              secondCheckDate
-              overAllEvaluation
-              statusValue
-              sheetGroupId
-              group {
-                id
-                name
-                sort
-                companyReadGroup
-                companyAdminGroup
-                createdAt
-                updatedAt
-              }
-              interviews {
-                items {
-                  id
-                  sheetId
-                  interviewDate
-                  purpose
-                  detail
-                  reviewee
-                  reviewers
-                  createdAt
-                  updatedAt
-                }
-                nextToken
-              }
-              revieweeEmployee {
-                id
-                no
-                firstName
-                lastName
-                grade
-                email
-                superior {
-                  id
-                  no
-                  firstName
-                  lastName
-                  grade
-                  email
-                  companyReadGroup
-                  createdAt
-                  updatedAt
-                }
-                group {
-                  id
-                  name
-                  sort
-                  companyReadGroup
-                  companyAdminGroup
-                  createdAt
-                  updatedAt
-                }
-                company {
-                  id
-                  name
-                  shortName
-                  url
-                  companyReadGroup
-                  createdAt
-                  updatedAt
-                }
-                companyReadGroup
-                createdAt
-                updatedAt
-              }
-              secondEmployee {
-                id
-                no
-                firstName
-                lastName
-                grade
-                email
-                superior {
-                  id
-                  no
-                  firstName
-                  lastName
-                  grade
-                  email
-                  companyReadGroup
-                  createdAt
-                  updatedAt
-                }
-                group {
-                  id
-                  name
-                  sort
-                  companyReadGroup
-                  companyAdminGroup
-                  createdAt
-                  updatedAt
-                }
-                company {
-                  id
-                  name
-                  shortName
-                  url
-                  companyReadGroup
-                  createdAt
-                  updatedAt
-                }
-                companyReadGroup
-                createdAt
-                updatedAt
-              }
-              section {
-                items {
-                  id
-                  sectionSheetId
-                  reviewee
-                  reviewers
-                  createdAt
-                  updatedAt
-                }
-                nextToken
-              }
-              reviewee
-              reviewers
-              companyReadGroup
-              createdAt
-              updatedAt
-            }
             objectiveSectionId
             section {
               id
@@ -5167,6 +4164,142 @@ export const deleteObjective = /* GraphQL */ `
             reviewers
             createdAt
             updatedAt
+            sheet {
+              id
+              year
+              grade
+              careerPlan
+              careerPlanComment
+              reviewComment
+              reviewDate
+              selfCheckDate
+              firstComment
+              firstCheckDate
+              secondComment
+              secondCheckDate
+              overAllEvaluation
+              statusValue
+              sheetGroupId
+              group {
+                id
+                name
+                sort
+                companyReadGroup
+                companyAdminGroup
+                createdAt
+                updatedAt
+              }
+              interviews {
+                items {
+                  id
+                  sheetId
+                  interviewDate
+                  purpose
+                  detail
+                  reviewee
+                  reviewers
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              section {
+                items {
+                  id
+                  sectionSheetId
+                  reviewee
+                  reviewers
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              reviewee
+              reviewers
+              companyReadGroup
+              createdAt
+              updatedAt
+              revieweeEmployee {
+                id
+                no
+                firstName
+                lastName
+                grade
+                email
+                group {
+                  id
+                  name
+                  sort
+                  companyReadGroup
+                  companyAdminGroup
+                  createdAt
+                  updatedAt
+                }
+                company {
+                  id
+                  name
+                  shortName
+                  url
+                  companyReadGroup
+                  createdAt
+                  updatedAt
+                }
+                companyReadGroup
+                createdAt
+                updatedAt
+                superior {
+                  id
+                  no
+                  firstName
+                  lastName
+                  grade
+                  email
+                  companyReadGroup
+                  createdAt
+                  updatedAt
+                }
+              }
+              secondEmployee {
+                id
+                no
+                firstName
+                lastName
+                grade
+                email
+                group {
+                  id
+                  name
+                  sort
+                  companyReadGroup
+                  companyAdminGroup
+                  createdAt
+                  updatedAt
+                }
+                company {
+                  id
+                  name
+                  shortName
+                  url
+                  companyReadGroup
+                  createdAt
+                  updatedAt
+                }
+                companyReadGroup
+                createdAt
+                updatedAt
+                superior {
+                  id
+                  no
+                  firstName
+                  lastName
+                  grade
+                  email
+                  companyReadGroup
+                  createdAt
+                  updatedAt
+                }
+              }
+            }
           }
           nextToken
         }
@@ -5197,6 +4330,878 @@ export const deleteObjective = /* GraphQL */ `
       reviewers
       createdAt
       updatedAt
+      sheet {
+        id
+        year
+        grade
+        careerPlan
+        careerPlanComment
+        reviewComment
+        reviewDate
+        selfCheckDate
+        firstComment
+        firstCheckDate
+        secondComment
+        secondCheckDate
+        overAllEvaluation
+        statusValue
+        sheetGroupId
+        group {
+          id
+          name
+          sort
+          companyReadGroup
+          companyAdminGroup
+          createdAt
+          updatedAt
+        }
+        interviews {
+          items {
+            id
+            sheetId
+            interviewDate
+            purpose
+            detail
+            reviewee
+            reviewers
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        section {
+          items {
+            id
+            sectionSheetId
+            objective {
+              items {
+                id
+                content
+                result
+                priority
+                selfEvaluation
+                firstEvaluation
+                lastEvaluation
+                progress
+                status
+                expStartDate
+                expDoneDate
+                objectiveSectionId
+                section {
+                  id
+                  sectionSheetId
+                  reviewee
+                  reviewers
+                  createdAt
+                  updatedAt
+                }
+                reviewee
+                reviewers
+                createdAt
+                updatedAt
+                sheet {
+                  id
+                  year
+                  grade
+                  careerPlan
+                  careerPlanComment
+                  reviewComment
+                  reviewDate
+                  selfCheckDate
+                  firstComment
+                  firstCheckDate
+                  secondComment
+                  secondCheckDate
+                  overAllEvaluation
+                  statusValue
+                  sheetGroupId
+                  reviewee
+                  reviewers
+                  companyReadGroup
+                  createdAt
+                  updatedAt
+                }
+              }
+              nextToken
+            }
+            category {
+              id
+              company {
+                id
+                name
+                shortName
+                url
+                companyReadGroup
+                createdAt
+                updatedAt
+              }
+              no
+              name
+              companyReadGroup
+              companyAdminGroup
+              createdAt
+              updatedAt
+            }
+            reviewee
+            reviewers
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        reviewee
+        reviewers
+        companyReadGroup
+        createdAt
+        updatedAt
+        revieweeEmployee {
+          id
+          no
+          firstName
+          lastName
+          grade
+          email
+          group {
+            id
+            name
+            sort
+            companyReadGroup
+            companyAdminGroup
+            createdAt
+            updatedAt
+          }
+          company {
+            id
+            name
+            shortName
+            url
+            companyReadGroup
+            createdAt
+            updatedAt
+          }
+          companyReadGroup
+          createdAt
+          updatedAt
+          superior {
+            id
+            no
+            firstName
+            lastName
+            grade
+            email
+            group {
+              id
+              name
+              sort
+              companyReadGroup
+              companyAdminGroup
+              createdAt
+              updatedAt
+            }
+            company {
+              id
+              name
+              shortName
+              url
+              companyReadGroup
+              createdAt
+              updatedAt
+            }
+            companyReadGroup
+            createdAt
+            updatedAt
+            superior {
+              id
+              no
+              firstName
+              lastName
+              grade
+              email
+              group {
+                id
+                name
+                sort
+                companyReadGroup
+                companyAdminGroup
+                createdAt
+                updatedAt
+              }
+              company {
+                id
+                name
+                shortName
+                url
+                companyReadGroup
+                createdAt
+                updatedAt
+              }
+              companyReadGroup
+              createdAt
+              updatedAt
+              superior {
+                id
+                no
+                firstName
+                lastName
+                grade
+                email
+                group {
+                  id
+                  name
+                  sort
+                  companyReadGroup
+                  companyAdminGroup
+                  createdAt
+                  updatedAt
+                }
+                company {
+                  id
+                  name
+                  shortName
+                  url
+                  companyReadGroup
+                  createdAt
+                  updatedAt
+                }
+                companyReadGroup
+                createdAt
+                updatedAt
+                superior {
+                  id
+                  no
+                  firstName
+                  lastName
+                  grade
+                  email
+                  companyReadGroup
+                  createdAt
+                  updatedAt
+                }
+              }
+            }
+          }
+        }
+        secondEmployee {
+          id
+          no
+          firstName
+          lastName
+          grade
+          email
+          group {
+            id
+            name
+            sort
+            companyReadGroup
+            companyAdminGroup
+            createdAt
+            updatedAt
+          }
+          company {
+            id
+            name
+            shortName
+            url
+            companyReadGroup
+            createdAt
+            updatedAt
+          }
+          companyReadGroup
+          createdAt
+          updatedAt
+          superior {
+            id
+            no
+            firstName
+            lastName
+            grade
+            email
+            group {
+              id
+              name
+              sort
+              companyReadGroup
+              companyAdminGroup
+              createdAt
+              updatedAt
+            }
+            company {
+              id
+              name
+              shortName
+              url
+              companyReadGroup
+              createdAt
+              updatedAt
+            }
+            companyReadGroup
+            createdAt
+            updatedAt
+            superior {
+              id
+              no
+              firstName
+              lastName
+              grade
+              email
+              group {
+                id
+                name
+                sort
+                companyReadGroup
+                companyAdminGroup
+                createdAt
+                updatedAt
+              }
+              company {
+                id
+                name
+                shortName
+                url
+                companyReadGroup
+                createdAt
+                updatedAt
+              }
+              companyReadGroup
+              createdAt
+              updatedAt
+              superior {
+                id
+                no
+                firstName
+                lastName
+                grade
+                email
+                group {
+                  id
+                  name
+                  sort
+                  companyReadGroup
+                  companyAdminGroup
+                  createdAt
+                  updatedAt
+                }
+                company {
+                  id
+                  name
+                  shortName
+                  url
+                  companyReadGroup
+                  createdAt
+                  updatedAt
+                }
+                companyReadGroup
+                createdAt
+                updatedAt
+                superior {
+                  id
+                  no
+                  firstName
+                  lastName
+                  grade
+                  email
+                  companyReadGroup
+                  createdAt
+                  updatedAt
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`;
+export const updateSheet = /* GraphQL */ `
+  mutation UpdateSheet(
+    $input: UpdateSheetInput!
+    $condition: ModelSheetConditionInput
+  ) {
+    updateSheet(input: $input, condition: $condition) {
+      id
+      year
+      grade
+      careerPlan
+      careerPlanComment
+      reviewComment
+      reviewDate
+      selfCheckDate
+      firstComment
+      firstCheckDate
+      secondComment
+      secondCheckDate
+      overAllEvaluation
+      statusValue
+      sheetGroupId
+      group {
+        id
+        name
+        sort
+        companyReadGroup
+        companyAdminGroup
+        createdAt
+        updatedAt
+      }
+      interviews {
+        items {
+          id
+          sheetId
+          interviewDate
+          purpose
+          detail
+          reviewee
+          reviewers
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      section {
+        items {
+          id
+          sectionSheetId
+          objective {
+            items {
+              id
+              content
+              result
+              priority
+              selfEvaluation
+              firstEvaluation
+              lastEvaluation
+              progress
+              status
+              expStartDate
+              expDoneDate
+              objectiveSectionId
+              section {
+                id
+                sectionSheetId
+                objective {
+                  nextToken
+                }
+                category {
+                  id
+                  no
+                  name
+                  companyReadGroup
+                  companyAdminGroup
+                  createdAt
+                  updatedAt
+                }
+                reviewee
+                reviewers
+                createdAt
+                updatedAt
+              }
+              reviewee
+              reviewers
+              createdAt
+              updatedAt
+              sheet {
+                id
+                year
+                grade
+                careerPlan
+                careerPlanComment
+                reviewComment
+                reviewDate
+                selfCheckDate
+                firstComment
+                firstCheckDate
+                secondComment
+                secondCheckDate
+                overAllEvaluation
+                statusValue
+                sheetGroupId
+                group {
+                  id
+                  name
+                  sort
+                  companyReadGroup
+                  companyAdminGroup
+                  createdAt
+                  updatedAt
+                }
+                interviews {
+                  nextToken
+                }
+                section {
+                  nextToken
+                }
+                reviewee
+                reviewers
+                companyReadGroup
+                createdAt
+                updatedAt
+                revieweeEmployee {
+                  id
+                  no
+                  firstName
+                  lastName
+                  grade
+                  email
+                  companyReadGroup
+                  createdAt
+                  updatedAt
+                }
+                secondEmployee {
+                  id
+                  no
+                  firstName
+                  lastName
+                  grade
+                  email
+                  companyReadGroup
+                  createdAt
+                  updatedAt
+                }
+              }
+            }
+            nextToken
+          }
+          category {
+            id
+            company {
+              id
+              name
+              shortName
+              url
+              companyReadGroup
+              createdAt
+              updatedAt
+            }
+            no
+            name
+            companyReadGroup
+            companyAdminGroup
+            createdAt
+            updatedAt
+          }
+          reviewee
+          reviewers
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      reviewee
+      reviewers
+      companyReadGroup
+      createdAt
+      updatedAt
+      revieweeEmployee {
+        id
+        no
+        firstName
+        lastName
+        grade
+        email
+        group {
+          id
+          name
+          sort
+          companyReadGroup
+          companyAdminGroup
+          createdAt
+          updatedAt
+        }
+        company {
+          id
+          name
+          shortName
+          url
+          companyReadGroup
+          createdAt
+          updatedAt
+        }
+        companyReadGroup
+        createdAt
+        updatedAt
+        superior {
+          id
+          no
+          firstName
+          lastName
+          grade
+          email
+          group {
+            id
+            name
+            sort
+            companyReadGroup
+            companyAdminGroup
+            createdAt
+            updatedAt
+          }
+          company {
+            id
+            name
+            shortName
+            url
+            companyReadGroup
+            createdAt
+            updatedAt
+          }
+          companyReadGroup
+          createdAt
+          updatedAt
+          superior {
+            id
+            no
+            firstName
+            lastName
+            grade
+            email
+            group {
+              id
+              name
+              sort
+              companyReadGroup
+              companyAdminGroup
+              createdAt
+              updatedAt
+            }
+            company {
+              id
+              name
+              shortName
+              url
+              companyReadGroup
+              createdAt
+              updatedAt
+            }
+            companyReadGroup
+            createdAt
+            updatedAt
+            superior {
+              id
+              no
+              firstName
+              lastName
+              grade
+              email
+              group {
+                id
+                name
+                sort
+                companyReadGroup
+                companyAdminGroup
+                createdAt
+                updatedAt
+              }
+              company {
+                id
+                name
+                shortName
+                url
+                companyReadGroup
+                createdAt
+                updatedAt
+              }
+              companyReadGroup
+              createdAt
+              updatedAt
+              superior {
+                id
+                no
+                firstName
+                lastName
+                grade
+                email
+                group {
+                  id
+                  name
+                  sort
+                  companyReadGroup
+                  companyAdminGroup
+                  createdAt
+                  updatedAt
+                }
+                company {
+                  id
+                  name
+                  shortName
+                  url
+                  companyReadGroup
+                  createdAt
+                  updatedAt
+                }
+                companyReadGroup
+                createdAt
+                updatedAt
+                superior {
+                  id
+                  no
+                  firstName
+                  lastName
+                  grade
+                  email
+                  companyReadGroup
+                  createdAt
+                  updatedAt
+                }
+              }
+            }
+          }
+        }
+      }
+      secondEmployee {
+        id
+        no
+        firstName
+        lastName
+        grade
+        email
+        group {
+          id
+          name
+          sort
+          companyReadGroup
+          companyAdminGroup
+          createdAt
+          updatedAt
+        }
+        company {
+          id
+          name
+          shortName
+          url
+          companyReadGroup
+          createdAt
+          updatedAt
+        }
+        companyReadGroup
+        createdAt
+        updatedAt
+        superior {
+          id
+          no
+          firstName
+          lastName
+          grade
+          email
+          group {
+            id
+            name
+            sort
+            companyReadGroup
+            companyAdminGroup
+            createdAt
+            updatedAt
+          }
+          company {
+            id
+            name
+            shortName
+            url
+            companyReadGroup
+            createdAt
+            updatedAt
+          }
+          companyReadGroup
+          createdAt
+          updatedAt
+          superior {
+            id
+            no
+            firstName
+            lastName
+            grade
+            email
+            group {
+              id
+              name
+              sort
+              companyReadGroup
+              companyAdminGroup
+              createdAt
+              updatedAt
+            }
+            company {
+              id
+              name
+              shortName
+              url
+              companyReadGroup
+              createdAt
+              updatedAt
+            }
+            companyReadGroup
+            createdAt
+            updatedAt
+            superior {
+              id
+              no
+              firstName
+              lastName
+              grade
+              email
+              group {
+                id
+                name
+                sort
+                companyReadGroup
+                companyAdminGroup
+                createdAt
+                updatedAt
+              }
+              company {
+                id
+                name
+                shortName
+                url
+                companyReadGroup
+                createdAt
+                updatedAt
+              }
+              companyReadGroup
+              createdAt
+              updatedAt
+              superior {
+                id
+                no
+                firstName
+                lastName
+                grade
+                email
+                group {
+                  id
+                  name
+                  sort
+                  companyReadGroup
+                  companyAdminGroup
+                  createdAt
+                  updatedAt
+                }
+                company {
+                  id
+                  name
+                  shortName
+                  url
+                  companyReadGroup
+                  createdAt
+                  updatedAt
+                }
+                companyReadGroup
+                createdAt
+                updatedAt
+                superior {
+                  id
+                  no
+                  firstName
+                  lastName
+                  grade
+                  email
+                  companyReadGroup
+                  createdAt
+                  updatedAt
+                }
+              }
+            }
+          }
+        }
+      }
     }
   }
 `;

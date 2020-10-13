@@ -6,6 +6,7 @@ Amplify Params - DO NOT EDIT */
 
 const ses = require('./ses')
 const cgql = require('./customGraphql')
+const message = require('./message')
 
 exports.handler = async (event) => {
     const action = event.arguments.action   // "proceed", "remand"
@@ -18,25 +19,31 @@ exports.handler = async (event) => {
         action !== "remand"
     ) return Error(ErrorType.ACTION_NOT_DEFINED)
 
+
+
     const sheet = await cgql.getSheet(sheetId);
+    // return sheet;
+
+    const mailObject = await message.getMessage(sheetId);
+    return mailObject;
 
     if(sheet == null) return Error(ErrorType.SHEET_NOT_EXIST);
 
-    const stepResult = steps(sheet, action)
+    const stepResult = await steps(sheet, action)
+    return stepResult;
     const updateResult = await cgql.updateSheetValue(sheetId, stepResult.afterStatusValue);
 
-    // const response = {
-    //     statusCode: 200,
-    //     message: "正常なパラメータです。機能は未実装です。",
-    //     result: "success"
-    // };
     return stepResult;
 };
 
 // sheet: Sheet, action: String
-function steps(sheet, action){
+async function steps(sheet, action){
     const statusValue = sheet.statusValue;
     let value = statusValue;
+
+    const mailObject = await message.getMessage(sheetId);
+    return mailObject;
+
     let response = {
         beforeStatusValue: statusValue,
         afterStatusValue: undefined,
@@ -93,6 +100,9 @@ function steps(sheet, action){
                 }
                 break;
             case 14:
+                throw new Error();
+                break;
+            default :
                 throw new Error();
                 break;
         }

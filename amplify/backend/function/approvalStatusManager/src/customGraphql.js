@@ -95,3 +95,40 @@ exports.updateSheetValue = async (sheetId, statusValue) => {
     const res = await graphqlClient.mutate(updateInput);
     return res;
 }
+
+exports.getEmployeesEmail = async (sheetId) => {
+    const getSheetQuery = /* GraphQL */ `
+        query getSheet(
+            $id: ID!
+        ) {
+        getSheet(id: $id) {
+            revieweeEmployee {
+                email
+                id
+                superior {
+                    email
+                    superior {
+                        email
+                    }
+                }
+            }
+        }
+    }
+    `;
+
+    const queryInput = {
+        id: sheetId
+    }
+    let result;
+    try{
+        result = await graphqlClient.query({
+            query: gql(getSheetQuery),
+            fetchPolicy: 'network-only',
+            variables: queryInput,
+        });
+    }catch(e){
+        result = e;
+    }
+    //return result.data.getSheet.revieweeEmployee;
+    return result.data.getSheet;
+}

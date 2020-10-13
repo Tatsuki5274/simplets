@@ -23,6 +23,7 @@ type Employee #社員
   rules:[
     {allow: groups, groups: ["Admin"]}
     {allow: groups, groupsField: "companyReadGroup", operations: [read]}
+    { allow: private, provider: iam, operations: [read] }
   ]
 )
 @model(timestamps:{createdAt: "createdAt", updatedAt: "updatedAt"})
@@ -137,6 +138,9 @@ type Sheet
     {allow: owner, ownerField: "reviewee", operations: [create, update, read]}
     # {allow: private, operations: []}
     # {allow: public, operations: []}
+
+    { allow: private, provider: iam, operations: [read, update] }
+    
   ]
 )
 {
@@ -253,9 +257,25 @@ type Objective
 #   #   ])
 # }
 
+input sendEmailInput{
+  to: [String]!
+  cc: [String]
+  bcc: [String]
+  subject: String!
+  body: String!
+}
+
 
 type Mutation{
+  # 廃止
   approvalStatusManager(action: String, sheetId: String): String @function(name: "approvalStatusManager-${env}")
+    @auth(rules:[
+      {allow: private}
+    ])
+  
+  # メールを送信する関数を呼び出す
+  sendEmail(input: sendEmailInput): String
+    @function(name: "sendEmail-${env}")
     @auth(rules:[
       {allow: private}
     ])
