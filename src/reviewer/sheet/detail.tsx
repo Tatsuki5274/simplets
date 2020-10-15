@@ -134,19 +134,52 @@ function EvalutionScreen(props: Props) {
         // }})()
         handleClose();
     }
-    async function handleClickSaveAndApprove() {
-        //保存して承認ボタンを押したときの処理
-        if (sheet) {
-            const updatedSheet = await statusManager.exec(sheet, "proceed");
-            console.log("statusManager", updatedSheet)
 
-            runUpdateSheet(formInput);
-            formInput?.interviews?.forEach((interview: Interview) => {
+    async function handleClickSave() {
+        if(sheet){
+            let updatedSheet = await updateSheetInput();
+        }else{
+            console.error("sheetの読み込みに失敗しています")
+        }
+    }
+    async function handleClickStatusRemand() {
+        if(sheet){
+            let updatedSheet = await updateSheetInput();
+            if(updatedSheet){
+                updatedSheet = await statusManager.exec(updatedSheet, "remand");
+                setSheet(updatedSheet);
+            }else{
+                console.error("フォームデータの登録に失敗しました")
+            }
+        }else{
+            console.error("sheetの読み込みに失敗しています")
+        }
+        handleClose();
+    }
+    async function handleClickStatusProceed() {
+        if(sheet){
+            let updatedSheet = await updateSheetInput();
+            if(updatedSheet){
+                updatedSheet = await statusManager.exec(updatedSheet, "proceed");
+                setSheet(updatedSheet);
+            }else{
+                console.error("フォームデータの登録に失敗しました")
+            }
+        }else{
+            console.error("sheetの読み込みに失敗しています")
+        }
+    }
+
+    async function updateSheetInput(): Promise<Sheet | undefined>{
+        if(sheet){
+            const updatedSheet = await runUpdateSheet(formInput);
+            formInput?.interviews?.forEach((interview: Interview)=> {
                 runUpdateInterview(interview)
             })
+            return updatedSheet;
         }
 
-        async function runUpdateSheet(sheet: Sheet) {
+        async function runUpdateSheet(sheet: Sheet): Promise<Sheet | undefined> {
             const updateI: APIt.UpdateSheetInput = {
                 id: sheetId,
                 careerPlanComment: sheet.careerPlanComment,
@@ -157,13 +190,19 @@ function EvalutionScreen(props: Props) {
             const updateMV: APIt.UpdateSheetMutationVariables = {
                 input: updateI,
             };
-            const updateR: GraphQLResult<APIt.UpdateSheetMutation> =
-                await API.graphql(graphqlOperation(updateSheet, updateMV)) as GraphQLResult<APIt.UpdateSheetMutation>;
+            let updateR: GraphQLResult<APIt.UpdateSheetMutation>
+            try{
+                updateR = await API.graphql(graphqlOperation(updateSheet, updateMV)) as GraphQLResult<APIt.UpdateSheetMutation>;
+            }catch(e){
+                console.error("エラーを無視しています", e);
+                updateR = e;
+            }
             if (updateR.data) {
                 const updateTM: APIt.UpdateSheetMutation = updateR.data;
                 if (updateTM.updateSheet) {
                     const updatedSheet: Sheet = updateTM.updateSheet;
                     console.log('UpdateSheet:', updatedSheet);
+                    return updatedSheet;
                 }
             }
         }
@@ -236,7 +275,7 @@ function EvalutionScreen(props: Props) {
                     </Modal.Body>
                     <Modal.Footer>
                         {/* <Button variant="primary" onClick={handleClose}> */}
-                        <Button variant="primary" onClick={HandleUpdateStatus}>
+                        <Button variant="primary" onClick={handleClickStatusRemand}>
                             差し戻し
                         </Button>
                         <Button variant="secondary" onClick={handleClose}>
@@ -320,17 +359,18 @@ function EvalutionScreen(props: Props) {
 
                             {/* ステータスによってボタンの出し分け */}
                             <Form.Group>
+                                <Button onClick={handleClickSave}>保存</Button>
                                 {/* 承認ステータスが2または10の時に「保存して承認」ボタンを表示 */}
                                 {(() => {
                                     if (sheet.statusValue === 2 || sheet.statusValue === 10) {
                                         return (
                                             <span>
-                                                <Button onClick={handleClickSaveAndApprove}>保存して承認</Button>
+                                                <Button onClick={handleClickStatusProceed}>保存して承認</Button>
                                             </span>
                                         )
                                     }
                                 })()}
-                                {/* 承認ステータスが2か3か10か12の時に「保存して承認」ボタンを表示 */}
+                                {/* 承認ステータスが2か3か10か12の時に「差し戻し」ボタンを表示 */}
                                 {(() => {
                                     if (sheet.statusValue === 2 || sheet.statusValue === 3 || sheet.statusValue === 10 || sheet.statusValue === 12) {
                                         return (
@@ -346,13 +386,13 @@ function EvalutionScreen(props: Props) {
                                         if (sheet.secondEmployee?.superior) {
                                             return (
                                                 <span>
-                                                    <Button >部門長承認依頼</Button>
+                                                    <Button onClick={handleClickStatusProceed}>部門長承認依頼</Button>
                                                 </span>
                                             )
                                         } else {
                                             return (
                                                 <span>
-                                                    <Button >最終承認</Button>
+                                                    <Button onClick={handleClickStatusProceed}>最終承認</Button>
                                                 </span>
                                             )
                                         }
@@ -363,24 +403,11 @@ function EvalutionScreen(props: Props) {
                                     if (sheet.statusValue === 13) {
                                         return (
                                             <span>
-                                                <Button >最終承認</Button>
+                                                <Button onClick={handleClickStatusProceed}>最終承認</Button>
                                             </span>
                                         )
                                     }
-                                })()}
-                                <Button onClick={async () => {
-                                    // ステータスを進める場合のサンプルコード
-                                    const updatedSheet = await statusManager.exec(sheet, "proceed");
-                                    console.log("proceed実行", updatedSheet);
-
-                                }}>[テスト用]proceed</Button>
-
-                                <Button onClick={async () => {
-                                    // ステータスを差し戻しで戻す場合のサンプルコード
-                                    const updatedSheet = await statusManager.exec(sheet, "remand");
-                                    console.log("remand実行", updatedSheet)
-                                }}>[テスト用]remand</Button>
-
+                                })()}                                
                             </Form.Group>
                         </Form><br />
 

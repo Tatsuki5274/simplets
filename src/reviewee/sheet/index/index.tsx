@@ -176,6 +176,16 @@ function RevieweeSheetShow(props: Props) {
       }
     }
 
+    async function handleClickStatusProceed(){
+        if(sheet){
+            const updatedSheet: Sheet = await statusManager.exec(sheet, "proceed");
+            console.log("setSheet", updatedSheet)
+            const updatedNewSheet = Object.create(updatedSheet);
+
+            setSheet(updatedNewSheet);
+        }
+    }
+
     //表示用データ
     useEffect(() => {
         ; (async () => {
@@ -410,6 +420,20 @@ function RevieweeSheetShow(props: Props) {
                         </Col>
                     </Row>
                     <h4>総合評価 {sheet.overAllEvaluation}</h4>
+                    {(() => {
+                        if(sheet.statusValue == 1 || sheet.statusValue == 3){
+                            return (
+                                <Button onClick={handleClickStatusProceed}>所属長提出</Button>
+                            )
+                        }
+                    })()}
+                    {(() => {
+                        if(sheet.statusValue == 11){
+                            return (
+                                <Button onClick={handleClickStatusProceed}>内容確認</Button>
+                            )
+                        }
+                    })()}
                 </Container>
             </div>
         </div>
