@@ -4,15 +4,15 @@ import { API, graphqlOperation } from 'aws-amplify';
 import { GraphQLResult } from "@aws-amplify/api";
 // import DropdownItem from 'react-bootstrap/esm/DropdownItem';
 import { RouteComponentProps } from 'react-router';
-import { Sheet, Section, Objective, Interview } from 'App';
+import { Sheet, Section, Objective, Interview, Employee } from 'App';
 import { GetSheetQuery, ListSheetsQuery } from 'API';
-import { updateInterview, updateObjective, updateSheet } from 'graphql/mutations';
+import { sendEmail, updateInterview, updateObjective, updateSheet } from 'graphql/mutations';
 import * as APIt from 'API';
 import { listSheets, getSheet } from 'graphql/queries';
 import dateFormat from 'dateformat';
 import HeaderComponents from 'common/header';
 import style from './detailStyle.module.scss';
-import * as statusManager from 'lib/statusManager'
+import * as statusManager from 'lib/statusManager';
 
 //propsの型を指定
 type Props = {
@@ -136,12 +136,12 @@ function EvalutionScreen(props: Props) {
     }
     async function handleClickSaveAndApprove() {
         //保存して承認ボタンを押したときの処理
-        if(sheet){
+        if (sheet) {
             const updatedSheet = await statusManager.exec(sheet, "proceed");
             console.log("statusManager", updatedSheet)
 
             runUpdateSheet(formInput);
-            formInput?.interviews?.forEach((interview: Interview)=> {
+            formInput?.interviews?.forEach((interview: Interview) => {
                 runUpdateInterview(interview)
             })
         }
@@ -368,18 +368,19 @@ function EvalutionScreen(props: Props) {
                                         )
                                     }
                                 })()}
-                                <Button onClick={async ()=>{
+                                <Button onClick={async () => {
                                     // ステータスを進める場合のサンプルコード
                                     const updatedSheet = await statusManager.exec(sheet, "proceed");
-                                    console.log("proceed実行", updatedSheet)
+                                    console.log("proceed実行", updatedSheet);
+
                                 }}>[テスト用]proceed</Button>
 
-                                <Button onClick={async ()=>{
+                                <Button onClick={async () => {
                                     // ステータスを差し戻しで戻す場合のサンプルコード
                                     const updatedSheet = await statusManager.exec(sheet, "remand");
                                     console.log("remand実行", updatedSheet)
                                 }}>[テスト用]remand</Button>
-                                
+
                             </Form.Group>
                         </Form><br />
 

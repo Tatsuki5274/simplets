@@ -10,11 +10,12 @@ import { Sheet, Section, Objective } from 'App';
 import { GetSheetQuery } from 'API';
 import * as APIt from 'API';
 import dateFormat from 'dateformat'
-import { updateObjective, updateSheet }
+import { approvalStatusManager, updateObjective, updateSheet }
     from 'graphql/mutations';
 import { error } from 'console';
 import HeaderComponents from 'common/header';//ヘッダーの表示
-import Style from './indexStyle.module.scss'
+import Style from './indexStyle.module.scss';
+import * as statusManager from 'lib/statusManager';
 
 type Props = {
     match: {
