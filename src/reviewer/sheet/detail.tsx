@@ -12,7 +12,8 @@ import { listSheets, getSheet } from 'graphql/queries';
 import dateFormat from 'dateformat';
 import HeaderComponents from 'common/header';
 import style from './detailStyle.module.scss';
-import * as statusManager from 'lib/statusManager';
+import * as statusManager from 'lib/statusManager'
+import ApprovalStatusBox from 'common/approvalStatusBox';
 
 //propsの型を指定
 type Props = {
@@ -292,6 +293,7 @@ function EvalutionScreen(props: Props) {
             <HeaderComponents />
             <div>
                 <Container>
+                    <ApprovalStatusBox statusValue={sheet.statusValue || -1}/>
                     <h3>今後のキャリア計画</h3><br />
 
                     <div>

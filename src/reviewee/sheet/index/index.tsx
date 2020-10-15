@@ -16,6 +16,7 @@ import { error } from 'console';
 import HeaderComponents from 'common/header';//ヘッダーの表示
 import Style from './indexStyle.module.scss';
 import * as statusManager from 'lib/statusManager';
+import ApprovalStatusBox from 'common/approvalStatusBox';
 
 type Props = {
     match: {
@@ -310,6 +311,7 @@ function RevieweeSheetShow(props: Props) {
             <HeaderComponents />
             <div>
                 <Container>
+                    <ApprovalStatusBox statusValue={sheet.statusValue || -1}/>
                     <h2>メイン</h2>
                     <h3>目標一覧</h3>
                     <Link to={`/reviewee/objective/new/${sheetId}`}>
