@@ -9,7 +9,11 @@ export const onCreateCompany = /* GraphQL */ `
       name
       shortName
       url
-      companyReadGroup
+      companyGroupName
+      companyManagerGroupName
+      companyAdminGroupName
+      readGroups
+      updateGroups
       createdAt
       updatedAt
     }
@@ -22,7 +26,11 @@ export const onUpdateCompany = /* GraphQL */ `
       name
       shortName
       url
-      companyReadGroup
+      companyGroupName
+      companyManagerGroupName
+      companyAdminGroupName
+      readGroups
+      updateGroups
       createdAt
       updatedAt
     }
@@ -35,7 +43,11 @@ export const onDeleteCompany = /* GraphQL */ `
       name
       shortName
       url
-      companyReadGroup
+      companyGroupName
+      companyManagerGroupName
+      companyAdminGroupName
+      readGroups
+      updateGroups
       createdAt
       updatedAt
     }
@@ -47,8 +59,8 @@ export const onCreateGroup = /* GraphQL */ `
       id
       name
       sort
-      companyReadGroup
-      companyAdminGroup
+      readGroups
+      updateGroups
       createdAt
       updatedAt
     }
@@ -60,8 +72,8 @@ export const onUpdateGroup = /* GraphQL */ `
       id
       name
       sort
-      companyReadGroup
-      companyAdminGroup
+      readGroups
+      updateGroups
       createdAt
       updatedAt
     }
@@ -73,8 +85,8 @@ export const onDeleteGroup = /* GraphQL */ `
       id
       name
       sort
-      companyReadGroup
-      companyAdminGroup
+      readGroups
+      updateGroups
       createdAt
       updatedAt
     }
@@ -84,19 +96,10 @@ export const onCreateCategory = /* GraphQL */ `
   subscription OnCreateCategory {
     onCreateCategory {
       id
-      company {
-        id
-        name
-        shortName
-        url
-        companyReadGroup
-        createdAt
-        updatedAt
-      }
       no
       name
-      companyReadGroup
-      companyAdminGroup
+      readGroups
+      updateGroups
       createdAt
       updatedAt
     }
@@ -106,19 +109,10 @@ export const onUpdateCategory = /* GraphQL */ `
   subscription OnUpdateCategory {
     onUpdateCategory {
       id
-      company {
-        id
-        name
-        shortName
-        url
-        companyReadGroup
-        createdAt
-        updatedAt
-      }
       no
       name
-      companyReadGroup
-      companyAdminGroup
+      readGroups
+      updateGroups
       createdAt
       updatedAt
     }
@@ -128,19 +122,10 @@ export const onDeleteCategory = /* GraphQL */ `
   subscription OnDeleteCategory {
     onDeleteCategory {
       id
-      company {
-        id
-        name
-        shortName
-        url
-        companyReadGroup
-        createdAt
-        updatedAt
-      }
       no
       name
-      companyReadGroup
-      companyAdminGroup
+      readGroups
+      updateGroups
       createdAt
       updatedAt
     }
@@ -156,6 +141,8 @@ export const onCreateInterview = /* GraphQL */ `
       detail
       reviewee
       reviewers
+      readGroups
+      updateGroups
       createdAt
       updatedAt
     }
@@ -171,6 +158,8 @@ export const onUpdateInterview = /* GraphQL */ `
       detail
       reviewee
       reviewers
+      readGroups
+      updateGroups
       createdAt
       updatedAt
     }
@@ -186,6 +175,8 @@ export const onDeleteInterview = /* GraphQL */ `
       detail
       reviewee
       reviewers
+      readGroups
+      updateGroups
       createdAt
       updatedAt
     }
@@ -232,11 +223,15 @@ export const onCreateSection = /* GraphQL */ `
                   sectionSheetId
                   reviewee
                   reviewers
+                  readGroups
+                  updateGroups
                   createdAt
                   updatedAt
                 }
                 reviewee
                 reviewers
+                readGroups
+                updateGroups
                 createdAt
                 updatedAt
                 sheet {
@@ -257,7 +252,8 @@ export const onCreateSection = /* GraphQL */ `
                   sheetGroupId
                   reviewee
                   reviewers
-                  companyReadGroup
+                  readGroups
+                  updateGroups
                   createdAt
                   updatedAt
                 }
@@ -266,29 +262,24 @@ export const onCreateSection = /* GraphQL */ `
             }
             category {
               id
-              company {
-                id
-                name
-                shortName
-                url
-                companyReadGroup
-                createdAt
-                updatedAt
-              }
               no
               name
-              companyReadGroup
-              companyAdminGroup
+              readGroups
+              updateGroups
               createdAt
               updatedAt
             }
             reviewee
             reviewers
+            readGroups
+            updateGroups
             createdAt
             updatedAt
           }
           reviewee
           reviewers
+          readGroups
+          updateGroups
           createdAt
           updatedAt
           sheet {
@@ -311,8 +302,8 @@ export const onCreateSection = /* GraphQL */ `
               id
               name
               sort
-              companyReadGroup
-              companyAdminGroup
+              readGroups
+              updateGroups
               createdAt
               updatedAt
             }
@@ -325,6 +316,8 @@ export const onCreateSection = /* GraphQL */ `
                 detail
                 reviewee
                 reviewers
+                readGroups
+                updateGroups
                 createdAt
                 updatedAt
               }
@@ -341,13 +334,15 @@ export const onCreateSection = /* GraphQL */ `
                   id
                   no
                   name
-                  companyReadGroup
-                  companyAdminGroup
+                  readGroups
+                  updateGroups
                   createdAt
                   updatedAt
                 }
                 reviewee
                 reviewers
+                readGroups
+                updateGroups
                 createdAt
                 updatedAt
               }
@@ -355,7 +350,8 @@ export const onCreateSection = /* GraphQL */ `
             }
             reviewee
             reviewers
-            companyReadGroup
+            readGroups
+            updateGroups
             createdAt
             updatedAt
             revieweeEmployee {
@@ -369,8 +365,8 @@ export const onCreateSection = /* GraphQL */ `
                 id
                 name
                 sort
-                companyReadGroup
-                companyAdminGroup
+                readGroups
+                updateGroups
                 createdAt
                 updatedAt
               }
@@ -379,11 +375,17 @@ export const onCreateSection = /* GraphQL */ `
                 name
                 shortName
                 url
-                companyReadGroup
+                companyGroupName
+                companyManagerGroupName
+                companyAdminGroupName
+                readGroups
+                updateGroups
                 createdAt
                 updatedAt
               }
-              companyReadGroup
+              owner
+              readGroups
+              updateGroups
               createdAt
               updatedAt
               superior {
@@ -397,8 +399,8 @@ export const onCreateSection = /* GraphQL */ `
                   id
                   name
                   sort
-                  companyReadGroup
-                  companyAdminGroup
+                  readGroups
+                  updateGroups
                   createdAt
                   updatedAt
                 }
@@ -407,11 +409,17 @@ export const onCreateSection = /* GraphQL */ `
                   name
                   shortName
                   url
-                  companyReadGroup
+                  companyGroupName
+                  companyManagerGroupName
+                  companyAdminGroupName
+                  readGroups
+                  updateGroups
                   createdAt
                   updatedAt
                 }
-                companyReadGroup
+                owner
+                readGroups
+                updateGroups
                 createdAt
                 updatedAt
                 superior {
@@ -421,7 +429,9 @@ export const onCreateSection = /* GraphQL */ `
                   lastName
                   grade
                   email
-                  companyReadGroup
+                  owner
+                  readGroups
+                  updateGroups
                   createdAt
                   updatedAt
                 }
@@ -438,8 +448,8 @@ export const onCreateSection = /* GraphQL */ `
                 id
                 name
                 sort
-                companyReadGroup
-                companyAdminGroup
+                readGroups
+                updateGroups
                 createdAt
                 updatedAt
               }
@@ -448,11 +458,17 @@ export const onCreateSection = /* GraphQL */ `
                 name
                 shortName
                 url
-                companyReadGroup
+                companyGroupName
+                companyManagerGroupName
+                companyAdminGroupName
+                readGroups
+                updateGroups
                 createdAt
                 updatedAt
               }
-              companyReadGroup
+              owner
+              readGroups
+              updateGroups
               createdAt
               updatedAt
               superior {
@@ -466,8 +482,8 @@ export const onCreateSection = /* GraphQL */ `
                   id
                   name
                   sort
-                  companyReadGroup
-                  companyAdminGroup
+                  readGroups
+                  updateGroups
                   createdAt
                   updatedAt
                 }
@@ -476,11 +492,17 @@ export const onCreateSection = /* GraphQL */ `
                   name
                   shortName
                   url
-                  companyReadGroup
+                  companyGroupName
+                  companyManagerGroupName
+                  companyAdminGroupName
+                  readGroups
+                  updateGroups
                   createdAt
                   updatedAt
                 }
-                companyReadGroup
+                owner
+                readGroups
+                updateGroups
                 createdAt
                 updatedAt
                 superior {
@@ -490,7 +512,9 @@ export const onCreateSection = /* GraphQL */ `
                   lastName
                   grade
                   email
-                  companyReadGroup
+                  owner
+                  readGroups
+                  updateGroups
                   createdAt
                   updatedAt
                 }
@@ -502,24 +526,17 @@ export const onCreateSection = /* GraphQL */ `
       }
       category {
         id
-        company {
-          id
-          name
-          shortName
-          url
-          companyReadGroup
-          createdAt
-          updatedAt
-        }
         no
         name
-        companyReadGroup
-        companyAdminGroup
+        readGroups
+        updateGroups
         createdAt
         updatedAt
       }
       reviewee
       reviewers
+      readGroups
+      updateGroups
       createdAt
       updatedAt
     }
@@ -566,11 +583,15 @@ export const onUpdateSection = /* GraphQL */ `
                   sectionSheetId
                   reviewee
                   reviewers
+                  readGroups
+                  updateGroups
                   createdAt
                   updatedAt
                 }
                 reviewee
                 reviewers
+                readGroups
+                updateGroups
                 createdAt
                 updatedAt
                 sheet {
@@ -591,7 +612,8 @@ export const onUpdateSection = /* GraphQL */ `
                   sheetGroupId
                   reviewee
                   reviewers
-                  companyReadGroup
+                  readGroups
+                  updateGroups
                   createdAt
                   updatedAt
                 }
@@ -600,29 +622,24 @@ export const onUpdateSection = /* GraphQL */ `
             }
             category {
               id
-              company {
-                id
-                name
-                shortName
-                url
-                companyReadGroup
-                createdAt
-                updatedAt
-              }
               no
               name
-              companyReadGroup
-              companyAdminGroup
+              readGroups
+              updateGroups
               createdAt
               updatedAt
             }
             reviewee
             reviewers
+            readGroups
+            updateGroups
             createdAt
             updatedAt
           }
           reviewee
           reviewers
+          readGroups
+          updateGroups
           createdAt
           updatedAt
           sheet {
@@ -645,8 +662,8 @@ export const onUpdateSection = /* GraphQL */ `
               id
               name
               sort
-              companyReadGroup
-              companyAdminGroup
+              readGroups
+              updateGroups
               createdAt
               updatedAt
             }
@@ -659,6 +676,8 @@ export const onUpdateSection = /* GraphQL */ `
                 detail
                 reviewee
                 reviewers
+                readGroups
+                updateGroups
                 createdAt
                 updatedAt
               }
@@ -675,13 +694,15 @@ export const onUpdateSection = /* GraphQL */ `
                   id
                   no
                   name
-                  companyReadGroup
-                  companyAdminGroup
+                  readGroups
+                  updateGroups
                   createdAt
                   updatedAt
                 }
                 reviewee
                 reviewers
+                readGroups
+                updateGroups
                 createdAt
                 updatedAt
               }
@@ -689,7 +710,8 @@ export const onUpdateSection = /* GraphQL */ `
             }
             reviewee
             reviewers
-            companyReadGroup
+            readGroups
+            updateGroups
             createdAt
             updatedAt
             revieweeEmployee {
@@ -703,8 +725,8 @@ export const onUpdateSection = /* GraphQL */ `
                 id
                 name
                 sort
-                companyReadGroup
-                companyAdminGroup
+                readGroups
+                updateGroups
                 createdAt
                 updatedAt
               }
@@ -713,11 +735,17 @@ export const onUpdateSection = /* GraphQL */ `
                 name
                 shortName
                 url
-                companyReadGroup
+                companyGroupName
+                companyManagerGroupName
+                companyAdminGroupName
+                readGroups
+                updateGroups
                 createdAt
                 updatedAt
               }
-              companyReadGroup
+              owner
+              readGroups
+              updateGroups
               createdAt
               updatedAt
               superior {
@@ -731,8 +759,8 @@ export const onUpdateSection = /* GraphQL */ `
                   id
                   name
                   sort
-                  companyReadGroup
-                  companyAdminGroup
+                  readGroups
+                  updateGroups
                   createdAt
                   updatedAt
                 }
@@ -741,11 +769,17 @@ export const onUpdateSection = /* GraphQL */ `
                   name
                   shortName
                   url
-                  companyReadGroup
+                  companyGroupName
+                  companyManagerGroupName
+                  companyAdminGroupName
+                  readGroups
+                  updateGroups
                   createdAt
                   updatedAt
                 }
-                companyReadGroup
+                owner
+                readGroups
+                updateGroups
                 createdAt
                 updatedAt
                 superior {
@@ -755,7 +789,9 @@ export const onUpdateSection = /* GraphQL */ `
                   lastName
                   grade
                   email
-                  companyReadGroup
+                  owner
+                  readGroups
+                  updateGroups
                   createdAt
                   updatedAt
                 }
@@ -772,8 +808,8 @@ export const onUpdateSection = /* GraphQL */ `
                 id
                 name
                 sort
-                companyReadGroup
-                companyAdminGroup
+                readGroups
+                updateGroups
                 createdAt
                 updatedAt
               }
@@ -782,11 +818,17 @@ export const onUpdateSection = /* GraphQL */ `
                 name
                 shortName
                 url
-                companyReadGroup
+                companyGroupName
+                companyManagerGroupName
+                companyAdminGroupName
+                readGroups
+                updateGroups
                 createdAt
                 updatedAt
               }
-              companyReadGroup
+              owner
+              readGroups
+              updateGroups
               createdAt
               updatedAt
               superior {
@@ -800,8 +842,8 @@ export const onUpdateSection = /* GraphQL */ `
                   id
                   name
                   sort
-                  companyReadGroup
-                  companyAdminGroup
+                  readGroups
+                  updateGroups
                   createdAt
                   updatedAt
                 }
@@ -810,11 +852,17 @@ export const onUpdateSection = /* GraphQL */ `
                   name
                   shortName
                   url
-                  companyReadGroup
+                  companyGroupName
+                  companyManagerGroupName
+                  companyAdminGroupName
+                  readGroups
+                  updateGroups
                   createdAt
                   updatedAt
                 }
-                companyReadGroup
+                owner
+                readGroups
+                updateGroups
                 createdAt
                 updatedAt
                 superior {
@@ -824,7 +872,9 @@ export const onUpdateSection = /* GraphQL */ `
                   lastName
                   grade
                   email
-                  companyReadGroup
+                  owner
+                  readGroups
+                  updateGroups
                   createdAt
                   updatedAt
                 }
@@ -836,24 +886,17 @@ export const onUpdateSection = /* GraphQL */ `
       }
       category {
         id
-        company {
-          id
-          name
-          shortName
-          url
-          companyReadGroup
-          createdAt
-          updatedAt
-        }
         no
         name
-        companyReadGroup
-        companyAdminGroup
+        readGroups
+        updateGroups
         createdAt
         updatedAt
       }
       reviewee
       reviewers
+      readGroups
+      updateGroups
       createdAt
       updatedAt
     }
@@ -900,11 +943,15 @@ export const onDeleteSection = /* GraphQL */ `
                   sectionSheetId
                   reviewee
                   reviewers
+                  readGroups
+                  updateGroups
                   createdAt
                   updatedAt
                 }
                 reviewee
                 reviewers
+                readGroups
+                updateGroups
                 createdAt
                 updatedAt
                 sheet {
@@ -925,7 +972,8 @@ export const onDeleteSection = /* GraphQL */ `
                   sheetGroupId
                   reviewee
                   reviewers
-                  companyReadGroup
+                  readGroups
+                  updateGroups
                   createdAt
                   updatedAt
                 }
@@ -934,29 +982,24 @@ export const onDeleteSection = /* GraphQL */ `
             }
             category {
               id
-              company {
-                id
-                name
-                shortName
-                url
-                companyReadGroup
-                createdAt
-                updatedAt
-              }
               no
               name
-              companyReadGroup
-              companyAdminGroup
+              readGroups
+              updateGroups
               createdAt
               updatedAt
             }
             reviewee
             reviewers
+            readGroups
+            updateGroups
             createdAt
             updatedAt
           }
           reviewee
           reviewers
+          readGroups
+          updateGroups
           createdAt
           updatedAt
           sheet {
@@ -979,8 +1022,8 @@ export const onDeleteSection = /* GraphQL */ `
               id
               name
               sort
-              companyReadGroup
-              companyAdminGroup
+              readGroups
+              updateGroups
               createdAt
               updatedAt
             }
@@ -993,6 +1036,8 @@ export const onDeleteSection = /* GraphQL */ `
                 detail
                 reviewee
                 reviewers
+                readGroups
+                updateGroups
                 createdAt
                 updatedAt
               }
@@ -1009,13 +1054,15 @@ export const onDeleteSection = /* GraphQL */ `
                   id
                   no
                   name
-                  companyReadGroup
-                  companyAdminGroup
+                  readGroups
+                  updateGroups
                   createdAt
                   updatedAt
                 }
                 reviewee
                 reviewers
+                readGroups
+                updateGroups
                 createdAt
                 updatedAt
               }
@@ -1023,7 +1070,8 @@ export const onDeleteSection = /* GraphQL */ `
             }
             reviewee
             reviewers
-            companyReadGroup
+            readGroups
+            updateGroups
             createdAt
             updatedAt
             revieweeEmployee {
@@ -1037,8 +1085,8 @@ export const onDeleteSection = /* GraphQL */ `
                 id
                 name
                 sort
-                companyReadGroup
-                companyAdminGroup
+                readGroups
+                updateGroups
                 createdAt
                 updatedAt
               }
@@ -1047,11 +1095,17 @@ export const onDeleteSection = /* GraphQL */ `
                 name
                 shortName
                 url
-                companyReadGroup
+                companyGroupName
+                companyManagerGroupName
+                companyAdminGroupName
+                readGroups
+                updateGroups
                 createdAt
                 updatedAt
               }
-              companyReadGroup
+              owner
+              readGroups
+              updateGroups
               createdAt
               updatedAt
               superior {
@@ -1065,8 +1119,8 @@ export const onDeleteSection = /* GraphQL */ `
                   id
                   name
                   sort
-                  companyReadGroup
-                  companyAdminGroup
+                  readGroups
+                  updateGroups
                   createdAt
                   updatedAt
                 }
@@ -1075,11 +1129,17 @@ export const onDeleteSection = /* GraphQL */ `
                   name
                   shortName
                   url
-                  companyReadGroup
+                  companyGroupName
+                  companyManagerGroupName
+                  companyAdminGroupName
+                  readGroups
+                  updateGroups
                   createdAt
                   updatedAt
                 }
-                companyReadGroup
+                owner
+                readGroups
+                updateGroups
                 createdAt
                 updatedAt
                 superior {
@@ -1089,7 +1149,9 @@ export const onDeleteSection = /* GraphQL */ `
                   lastName
                   grade
                   email
-                  companyReadGroup
+                  owner
+                  readGroups
+                  updateGroups
                   createdAt
                   updatedAt
                 }
@@ -1106,8 +1168,8 @@ export const onDeleteSection = /* GraphQL */ `
                 id
                 name
                 sort
-                companyReadGroup
-                companyAdminGroup
+                readGroups
+                updateGroups
                 createdAt
                 updatedAt
               }
@@ -1116,11 +1178,17 @@ export const onDeleteSection = /* GraphQL */ `
                 name
                 shortName
                 url
-                companyReadGroup
+                companyGroupName
+                companyManagerGroupName
+                companyAdminGroupName
+                readGroups
+                updateGroups
                 createdAt
                 updatedAt
               }
-              companyReadGroup
+              owner
+              readGroups
+              updateGroups
               createdAt
               updatedAt
               superior {
@@ -1134,8 +1202,8 @@ export const onDeleteSection = /* GraphQL */ `
                   id
                   name
                   sort
-                  companyReadGroup
-                  companyAdminGroup
+                  readGroups
+                  updateGroups
                   createdAt
                   updatedAt
                 }
@@ -1144,11 +1212,17 @@ export const onDeleteSection = /* GraphQL */ `
                   name
                   shortName
                   url
-                  companyReadGroup
+                  companyGroupName
+                  companyManagerGroupName
+                  companyAdminGroupName
+                  readGroups
+                  updateGroups
                   createdAt
                   updatedAt
                 }
-                companyReadGroup
+                owner
+                readGroups
+                updateGroups
                 createdAt
                 updatedAt
                 superior {
@@ -1158,7 +1232,9 @@ export const onDeleteSection = /* GraphQL */ `
                   lastName
                   grade
                   email
-                  companyReadGroup
+                  owner
+                  readGroups
+                  updateGroups
                   createdAt
                   updatedAt
                 }
@@ -1170,24 +1246,17 @@ export const onDeleteSection = /* GraphQL */ `
       }
       category {
         id
-        company {
-          id
-          name
-          shortName
-          url
-          companyReadGroup
-          createdAt
-          updatedAt
-        }
         no
         name
-        companyReadGroup
-        companyAdminGroup
+        readGroups
+        updateGroups
         createdAt
         updatedAt
       }
       reviewee
       reviewers
+      readGroups
+      updateGroups
       createdAt
       updatedAt
     }
@@ -1244,6 +1313,8 @@ export const onCreateObjective = /* GraphQL */ `
                   objectiveSectionId
                   reviewee
                   reviewers
+                  readGroups
+                  updateGroups
                   createdAt
                   updatedAt
                 }
@@ -1251,29 +1322,24 @@ export const onCreateObjective = /* GraphQL */ `
               }
               category {
                 id
-                company {
-                  id
-                  name
-                  shortName
-                  url
-                  companyReadGroup
-                  createdAt
-                  updatedAt
-                }
                 no
                 name
-                companyReadGroup
-                companyAdminGroup
+                readGroups
+                updateGroups
                 createdAt
                 updatedAt
               }
               reviewee
               reviewers
+              readGroups
+              updateGroups
               createdAt
               updatedAt
             }
             reviewee
             reviewers
+            readGroups
+            updateGroups
             createdAt
             updatedAt
             sheet {
@@ -1296,8 +1362,8 @@ export const onCreateObjective = /* GraphQL */ `
                 id
                 name
                 sort
-                companyReadGroup
-                companyAdminGroup
+                readGroups
+                updateGroups
                 createdAt
                 updatedAt
               }
@@ -1310,6 +1376,8 @@ export const onCreateObjective = /* GraphQL */ `
                   detail
                   reviewee
                   reviewers
+                  readGroups
+                  updateGroups
                   createdAt
                   updatedAt
                 }
@@ -1321,6 +1389,8 @@ export const onCreateObjective = /* GraphQL */ `
                   sectionSheetId
                   reviewee
                   reviewers
+                  readGroups
+                  updateGroups
                   createdAt
                   updatedAt
                 }
@@ -1328,7 +1398,8 @@ export const onCreateObjective = /* GraphQL */ `
               }
               reviewee
               reviewers
-              companyReadGroup
+              readGroups
+              updateGroups
               createdAt
               updatedAt
               revieweeEmployee {
@@ -1342,8 +1413,8 @@ export const onCreateObjective = /* GraphQL */ `
                   id
                   name
                   sort
-                  companyReadGroup
-                  companyAdminGroup
+                  readGroups
+                  updateGroups
                   createdAt
                   updatedAt
                 }
@@ -1352,11 +1423,17 @@ export const onCreateObjective = /* GraphQL */ `
                   name
                   shortName
                   url
-                  companyReadGroup
+                  companyGroupName
+                  companyManagerGroupName
+                  companyAdminGroupName
+                  readGroups
+                  updateGroups
                   createdAt
                   updatedAt
                 }
-                companyReadGroup
+                owner
+                readGroups
+                updateGroups
                 createdAt
                 updatedAt
                 superior {
@@ -1366,7 +1443,9 @@ export const onCreateObjective = /* GraphQL */ `
                   lastName
                   grade
                   email
-                  companyReadGroup
+                  owner
+                  readGroups
+                  updateGroups
                   createdAt
                   updatedAt
                 }
@@ -1382,8 +1461,8 @@ export const onCreateObjective = /* GraphQL */ `
                   id
                   name
                   sort
-                  companyReadGroup
-                  companyAdminGroup
+                  readGroups
+                  updateGroups
                   createdAt
                   updatedAt
                 }
@@ -1392,11 +1471,17 @@ export const onCreateObjective = /* GraphQL */ `
                   name
                   shortName
                   url
-                  companyReadGroup
+                  companyGroupName
+                  companyManagerGroupName
+                  companyAdminGroupName
+                  readGroups
+                  updateGroups
                   createdAt
                   updatedAt
                 }
-                companyReadGroup
+                owner
+                readGroups
+                updateGroups
                 createdAt
                 updatedAt
                 superior {
@@ -1406,7 +1491,9 @@ export const onCreateObjective = /* GraphQL */ `
                   lastName
                   grade
                   email
-                  companyReadGroup
+                  owner
+                  readGroups
+                  updateGroups
                   createdAt
                   updatedAt
                 }
@@ -1417,29 +1504,24 @@ export const onCreateObjective = /* GraphQL */ `
         }
         category {
           id
-          company {
-            id
-            name
-            shortName
-            url
-            companyReadGroup
-            createdAt
-            updatedAt
-          }
           no
           name
-          companyReadGroup
-          companyAdminGroup
+          readGroups
+          updateGroups
           createdAt
           updatedAt
         }
         reviewee
         reviewers
+        readGroups
+        updateGroups
         createdAt
         updatedAt
       }
       reviewee
       reviewers
+      readGroups
+      updateGroups
       createdAt
       updatedAt
       sheet {
@@ -1462,8 +1544,8 @@ export const onCreateObjective = /* GraphQL */ `
           id
           name
           sort
-          companyReadGroup
-          companyAdminGroup
+          readGroups
+          updateGroups
           createdAt
           updatedAt
         }
@@ -1476,6 +1558,8 @@ export const onCreateObjective = /* GraphQL */ `
             detail
             reviewee
             reviewers
+            readGroups
+            updateGroups
             createdAt
             updatedAt
           }
@@ -1504,11 +1588,15 @@ export const onCreateObjective = /* GraphQL */ `
                   sectionSheetId
                   reviewee
                   reviewers
+                  readGroups
+                  updateGroups
                   createdAt
                   updatedAt
                 }
                 reviewee
                 reviewers
+                readGroups
+                updateGroups
                 createdAt
                 updatedAt
                 sheet {
@@ -1529,7 +1617,8 @@ export const onCreateObjective = /* GraphQL */ `
                   sheetGroupId
                   reviewee
                   reviewers
-                  companyReadGroup
+                  readGroups
+                  updateGroups
                   createdAt
                   updatedAt
                 }
@@ -1538,24 +1627,17 @@ export const onCreateObjective = /* GraphQL */ `
             }
             category {
               id
-              company {
-                id
-                name
-                shortName
-                url
-                companyReadGroup
-                createdAt
-                updatedAt
-              }
               no
               name
-              companyReadGroup
-              companyAdminGroup
+              readGroups
+              updateGroups
               createdAt
               updatedAt
             }
             reviewee
             reviewers
+            readGroups
+            updateGroups
             createdAt
             updatedAt
           }
@@ -1563,7 +1645,8 @@ export const onCreateObjective = /* GraphQL */ `
         }
         reviewee
         reviewers
-        companyReadGroup
+        readGroups
+        updateGroups
         createdAt
         updatedAt
         revieweeEmployee {
@@ -1577,8 +1660,8 @@ export const onCreateObjective = /* GraphQL */ `
             id
             name
             sort
-            companyReadGroup
-            companyAdminGroup
+            readGroups
+            updateGroups
             createdAt
             updatedAt
           }
@@ -1587,11 +1670,17 @@ export const onCreateObjective = /* GraphQL */ `
             name
             shortName
             url
-            companyReadGroup
+            companyGroupName
+            companyManagerGroupName
+            companyAdminGroupName
+            readGroups
+            updateGroups
             createdAt
             updatedAt
           }
-          companyReadGroup
+          owner
+          readGroups
+          updateGroups
           createdAt
           updatedAt
           superior {
@@ -1605,8 +1694,8 @@ export const onCreateObjective = /* GraphQL */ `
               id
               name
               sort
-              companyReadGroup
-              companyAdminGroup
+              readGroups
+              updateGroups
               createdAt
               updatedAt
             }
@@ -1615,11 +1704,17 @@ export const onCreateObjective = /* GraphQL */ `
               name
               shortName
               url
-              companyReadGroup
+              companyGroupName
+              companyManagerGroupName
+              companyAdminGroupName
+              readGroups
+              updateGroups
               createdAt
               updatedAt
             }
-            companyReadGroup
+            owner
+            readGroups
+            updateGroups
             createdAt
             updatedAt
             superior {
@@ -1633,8 +1728,8 @@ export const onCreateObjective = /* GraphQL */ `
                 id
                 name
                 sort
-                companyReadGroup
-                companyAdminGroup
+                readGroups
+                updateGroups
                 createdAt
                 updatedAt
               }
@@ -1643,11 +1738,17 @@ export const onCreateObjective = /* GraphQL */ `
                 name
                 shortName
                 url
-                companyReadGroup
+                companyGroupName
+                companyManagerGroupName
+                companyAdminGroupName
+                readGroups
+                updateGroups
                 createdAt
                 updatedAt
               }
-              companyReadGroup
+              owner
+              readGroups
+              updateGroups
               createdAt
               updatedAt
               superior {
@@ -1661,8 +1762,8 @@ export const onCreateObjective = /* GraphQL */ `
                   id
                   name
                   sort
-                  companyReadGroup
-                  companyAdminGroup
+                  readGroups
+                  updateGroups
                   createdAt
                   updatedAt
                 }
@@ -1671,11 +1772,17 @@ export const onCreateObjective = /* GraphQL */ `
                   name
                   shortName
                   url
-                  companyReadGroup
+                  companyGroupName
+                  companyManagerGroupName
+                  companyAdminGroupName
+                  readGroups
+                  updateGroups
                   createdAt
                   updatedAt
                 }
-                companyReadGroup
+                owner
+                readGroups
+                updateGroups
                 createdAt
                 updatedAt
                 superior {
@@ -1685,7 +1792,9 @@ export const onCreateObjective = /* GraphQL */ `
                   lastName
                   grade
                   email
-                  companyReadGroup
+                  owner
+                  readGroups
+                  updateGroups
                   createdAt
                   updatedAt
                 }
@@ -1704,8 +1813,8 @@ export const onCreateObjective = /* GraphQL */ `
             id
             name
             sort
-            companyReadGroup
-            companyAdminGroup
+            readGroups
+            updateGroups
             createdAt
             updatedAt
           }
@@ -1714,11 +1823,17 @@ export const onCreateObjective = /* GraphQL */ `
             name
             shortName
             url
-            companyReadGroup
+            companyGroupName
+            companyManagerGroupName
+            companyAdminGroupName
+            readGroups
+            updateGroups
             createdAt
             updatedAt
           }
-          companyReadGroup
+          owner
+          readGroups
+          updateGroups
           createdAt
           updatedAt
           superior {
@@ -1732,8 +1847,8 @@ export const onCreateObjective = /* GraphQL */ `
               id
               name
               sort
-              companyReadGroup
-              companyAdminGroup
+              readGroups
+              updateGroups
               createdAt
               updatedAt
             }
@@ -1742,11 +1857,17 @@ export const onCreateObjective = /* GraphQL */ `
               name
               shortName
               url
-              companyReadGroup
+              companyGroupName
+              companyManagerGroupName
+              companyAdminGroupName
+              readGroups
+              updateGroups
               createdAt
               updatedAt
             }
-            companyReadGroup
+            owner
+            readGroups
+            updateGroups
             createdAt
             updatedAt
             superior {
@@ -1760,8 +1881,8 @@ export const onCreateObjective = /* GraphQL */ `
                 id
                 name
                 sort
-                companyReadGroup
-                companyAdminGroup
+                readGroups
+                updateGroups
                 createdAt
                 updatedAt
               }
@@ -1770,11 +1891,17 @@ export const onCreateObjective = /* GraphQL */ `
                 name
                 shortName
                 url
-                companyReadGroup
+                companyGroupName
+                companyManagerGroupName
+                companyAdminGroupName
+                readGroups
+                updateGroups
                 createdAt
                 updatedAt
               }
-              companyReadGroup
+              owner
+              readGroups
+              updateGroups
               createdAt
               updatedAt
               superior {
@@ -1788,8 +1915,8 @@ export const onCreateObjective = /* GraphQL */ `
                   id
                   name
                   sort
-                  companyReadGroup
-                  companyAdminGroup
+                  readGroups
+                  updateGroups
                   createdAt
                   updatedAt
                 }
@@ -1798,11 +1925,17 @@ export const onCreateObjective = /* GraphQL */ `
                   name
                   shortName
                   url
-                  companyReadGroup
+                  companyGroupName
+                  companyManagerGroupName
+                  companyAdminGroupName
+                  readGroups
+                  updateGroups
                   createdAt
                   updatedAt
                 }
-                companyReadGroup
+                owner
+                readGroups
+                updateGroups
                 createdAt
                 updatedAt
                 superior {
@@ -1812,7 +1945,9 @@ export const onCreateObjective = /* GraphQL */ `
                   lastName
                   grade
                   email
-                  companyReadGroup
+                  owner
+                  readGroups
+                  updateGroups
                   createdAt
                   updatedAt
                 }
@@ -1875,6 +2010,8 @@ export const onUpdateObjective = /* GraphQL */ `
                   objectiveSectionId
                   reviewee
                   reviewers
+                  readGroups
+                  updateGroups
                   createdAt
                   updatedAt
                 }
@@ -1882,29 +2019,24 @@ export const onUpdateObjective = /* GraphQL */ `
               }
               category {
                 id
-                company {
-                  id
-                  name
-                  shortName
-                  url
-                  companyReadGroup
-                  createdAt
-                  updatedAt
-                }
                 no
                 name
-                companyReadGroup
-                companyAdminGroup
+                readGroups
+                updateGroups
                 createdAt
                 updatedAt
               }
               reviewee
               reviewers
+              readGroups
+              updateGroups
               createdAt
               updatedAt
             }
             reviewee
             reviewers
+            readGroups
+            updateGroups
             createdAt
             updatedAt
             sheet {
@@ -1927,8 +2059,8 @@ export const onUpdateObjective = /* GraphQL */ `
                 id
                 name
                 sort
-                companyReadGroup
-                companyAdminGroup
+                readGroups
+                updateGroups
                 createdAt
                 updatedAt
               }
@@ -1941,6 +2073,8 @@ export const onUpdateObjective = /* GraphQL */ `
                   detail
                   reviewee
                   reviewers
+                  readGroups
+                  updateGroups
                   createdAt
                   updatedAt
                 }
@@ -1952,6 +2086,8 @@ export const onUpdateObjective = /* GraphQL */ `
                   sectionSheetId
                   reviewee
                   reviewers
+                  readGroups
+                  updateGroups
                   createdAt
                   updatedAt
                 }
@@ -1959,7 +2095,8 @@ export const onUpdateObjective = /* GraphQL */ `
               }
               reviewee
               reviewers
-              companyReadGroup
+              readGroups
+              updateGroups
               createdAt
               updatedAt
               revieweeEmployee {
@@ -1973,8 +2110,8 @@ export const onUpdateObjective = /* GraphQL */ `
                   id
                   name
                   sort
-                  companyReadGroup
-                  companyAdminGroup
+                  readGroups
+                  updateGroups
                   createdAt
                   updatedAt
                 }
@@ -1983,11 +2120,17 @@ export const onUpdateObjective = /* GraphQL */ `
                   name
                   shortName
                   url
-                  companyReadGroup
+                  companyGroupName
+                  companyManagerGroupName
+                  companyAdminGroupName
+                  readGroups
+                  updateGroups
                   createdAt
                   updatedAt
                 }
-                companyReadGroup
+                owner
+                readGroups
+                updateGroups
                 createdAt
                 updatedAt
                 superior {
@@ -1997,7 +2140,9 @@ export const onUpdateObjective = /* GraphQL */ `
                   lastName
                   grade
                   email
-                  companyReadGroup
+                  owner
+                  readGroups
+                  updateGroups
                   createdAt
                   updatedAt
                 }
@@ -2013,8 +2158,8 @@ export const onUpdateObjective = /* GraphQL */ `
                   id
                   name
                   sort
-                  companyReadGroup
-                  companyAdminGroup
+                  readGroups
+                  updateGroups
                   createdAt
                   updatedAt
                 }
@@ -2023,11 +2168,17 @@ export const onUpdateObjective = /* GraphQL */ `
                   name
                   shortName
                   url
-                  companyReadGroup
+                  companyGroupName
+                  companyManagerGroupName
+                  companyAdminGroupName
+                  readGroups
+                  updateGroups
                   createdAt
                   updatedAt
                 }
-                companyReadGroup
+                owner
+                readGroups
+                updateGroups
                 createdAt
                 updatedAt
                 superior {
@@ -2037,7 +2188,9 @@ export const onUpdateObjective = /* GraphQL */ `
                   lastName
                   grade
                   email
-                  companyReadGroup
+                  owner
+                  readGroups
+                  updateGroups
                   createdAt
                   updatedAt
                 }
@@ -2048,29 +2201,24 @@ export const onUpdateObjective = /* GraphQL */ `
         }
         category {
           id
-          company {
-            id
-            name
-            shortName
-            url
-            companyReadGroup
-            createdAt
-            updatedAt
-          }
           no
           name
-          companyReadGroup
-          companyAdminGroup
+          readGroups
+          updateGroups
           createdAt
           updatedAt
         }
         reviewee
         reviewers
+        readGroups
+        updateGroups
         createdAt
         updatedAt
       }
       reviewee
       reviewers
+      readGroups
+      updateGroups
       createdAt
       updatedAt
       sheet {
@@ -2093,8 +2241,8 @@ export const onUpdateObjective = /* GraphQL */ `
           id
           name
           sort
-          companyReadGroup
-          companyAdminGroup
+          readGroups
+          updateGroups
           createdAt
           updatedAt
         }
@@ -2107,6 +2255,8 @@ export const onUpdateObjective = /* GraphQL */ `
             detail
             reviewee
             reviewers
+            readGroups
+            updateGroups
             createdAt
             updatedAt
           }
@@ -2135,11 +2285,15 @@ export const onUpdateObjective = /* GraphQL */ `
                   sectionSheetId
                   reviewee
                   reviewers
+                  readGroups
+                  updateGroups
                   createdAt
                   updatedAt
                 }
                 reviewee
                 reviewers
+                readGroups
+                updateGroups
                 createdAt
                 updatedAt
                 sheet {
@@ -2160,7 +2314,8 @@ export const onUpdateObjective = /* GraphQL */ `
                   sheetGroupId
                   reviewee
                   reviewers
-                  companyReadGroup
+                  readGroups
+                  updateGroups
                   createdAt
                   updatedAt
                 }
@@ -2169,24 +2324,17 @@ export const onUpdateObjective = /* GraphQL */ `
             }
             category {
               id
-              company {
-                id
-                name
-                shortName
-                url
-                companyReadGroup
-                createdAt
-                updatedAt
-              }
               no
               name
-              companyReadGroup
-              companyAdminGroup
+              readGroups
+              updateGroups
               createdAt
               updatedAt
             }
             reviewee
             reviewers
+            readGroups
+            updateGroups
             createdAt
             updatedAt
           }
@@ -2194,7 +2342,8 @@ export const onUpdateObjective = /* GraphQL */ `
         }
         reviewee
         reviewers
-        companyReadGroup
+        readGroups
+        updateGroups
         createdAt
         updatedAt
         revieweeEmployee {
@@ -2208,8 +2357,8 @@ export const onUpdateObjective = /* GraphQL */ `
             id
             name
             sort
-            companyReadGroup
-            companyAdminGroup
+            readGroups
+            updateGroups
             createdAt
             updatedAt
           }
@@ -2218,11 +2367,17 @@ export const onUpdateObjective = /* GraphQL */ `
             name
             shortName
             url
-            companyReadGroup
+            companyGroupName
+            companyManagerGroupName
+            companyAdminGroupName
+            readGroups
+            updateGroups
             createdAt
             updatedAt
           }
-          companyReadGroup
+          owner
+          readGroups
+          updateGroups
           createdAt
           updatedAt
           superior {
@@ -2236,8 +2391,8 @@ export const onUpdateObjective = /* GraphQL */ `
               id
               name
               sort
-              companyReadGroup
-              companyAdminGroup
+              readGroups
+              updateGroups
               createdAt
               updatedAt
             }
@@ -2246,11 +2401,17 @@ export const onUpdateObjective = /* GraphQL */ `
               name
               shortName
               url
-              companyReadGroup
+              companyGroupName
+              companyManagerGroupName
+              companyAdminGroupName
+              readGroups
+              updateGroups
               createdAt
               updatedAt
             }
-            companyReadGroup
+            owner
+            readGroups
+            updateGroups
             createdAt
             updatedAt
             superior {
@@ -2264,8 +2425,8 @@ export const onUpdateObjective = /* GraphQL */ `
                 id
                 name
                 sort
-                companyReadGroup
-                companyAdminGroup
+                readGroups
+                updateGroups
                 createdAt
                 updatedAt
               }
@@ -2274,11 +2435,17 @@ export const onUpdateObjective = /* GraphQL */ `
                 name
                 shortName
                 url
-                companyReadGroup
+                companyGroupName
+                companyManagerGroupName
+                companyAdminGroupName
+                readGroups
+                updateGroups
                 createdAt
                 updatedAt
               }
-              companyReadGroup
+              owner
+              readGroups
+              updateGroups
               createdAt
               updatedAt
               superior {
@@ -2292,8 +2459,8 @@ export const onUpdateObjective = /* GraphQL */ `
                   id
                   name
                   sort
-                  companyReadGroup
-                  companyAdminGroup
+                  readGroups
+                  updateGroups
                   createdAt
                   updatedAt
                 }
@@ -2302,11 +2469,17 @@ export const onUpdateObjective = /* GraphQL */ `
                   name
                   shortName
                   url
-                  companyReadGroup
+                  companyGroupName
+                  companyManagerGroupName
+                  companyAdminGroupName
+                  readGroups
+                  updateGroups
                   createdAt
                   updatedAt
                 }
-                companyReadGroup
+                owner
+                readGroups
+                updateGroups
                 createdAt
                 updatedAt
                 superior {
@@ -2316,7 +2489,9 @@ export const onUpdateObjective = /* GraphQL */ `
                   lastName
                   grade
                   email
-                  companyReadGroup
+                  owner
+                  readGroups
+                  updateGroups
                   createdAt
                   updatedAt
                 }
@@ -2335,8 +2510,8 @@ export const onUpdateObjective = /* GraphQL */ `
             id
             name
             sort
-            companyReadGroup
-            companyAdminGroup
+            readGroups
+            updateGroups
             createdAt
             updatedAt
           }
@@ -2345,11 +2520,17 @@ export const onUpdateObjective = /* GraphQL */ `
             name
             shortName
             url
-            companyReadGroup
+            companyGroupName
+            companyManagerGroupName
+            companyAdminGroupName
+            readGroups
+            updateGroups
             createdAt
             updatedAt
           }
-          companyReadGroup
+          owner
+          readGroups
+          updateGroups
           createdAt
           updatedAt
           superior {
@@ -2363,8 +2544,8 @@ export const onUpdateObjective = /* GraphQL */ `
               id
               name
               sort
-              companyReadGroup
-              companyAdminGroup
+              readGroups
+              updateGroups
               createdAt
               updatedAt
             }
@@ -2373,11 +2554,17 @@ export const onUpdateObjective = /* GraphQL */ `
               name
               shortName
               url
-              companyReadGroup
+              companyGroupName
+              companyManagerGroupName
+              companyAdminGroupName
+              readGroups
+              updateGroups
               createdAt
               updatedAt
             }
-            companyReadGroup
+            owner
+            readGroups
+            updateGroups
             createdAt
             updatedAt
             superior {
@@ -2391,8 +2578,8 @@ export const onUpdateObjective = /* GraphQL */ `
                 id
                 name
                 sort
-                companyReadGroup
-                companyAdminGroup
+                readGroups
+                updateGroups
                 createdAt
                 updatedAt
               }
@@ -2401,11 +2588,17 @@ export const onUpdateObjective = /* GraphQL */ `
                 name
                 shortName
                 url
-                companyReadGroup
+                companyGroupName
+                companyManagerGroupName
+                companyAdminGroupName
+                readGroups
+                updateGroups
                 createdAt
                 updatedAt
               }
-              companyReadGroup
+              owner
+              readGroups
+              updateGroups
               createdAt
               updatedAt
               superior {
@@ -2419,8 +2612,8 @@ export const onUpdateObjective = /* GraphQL */ `
                   id
                   name
                   sort
-                  companyReadGroup
-                  companyAdminGroup
+                  readGroups
+                  updateGroups
                   createdAt
                   updatedAt
                 }
@@ -2429,11 +2622,17 @@ export const onUpdateObjective = /* GraphQL */ `
                   name
                   shortName
                   url
-                  companyReadGroup
+                  companyGroupName
+                  companyManagerGroupName
+                  companyAdminGroupName
+                  readGroups
+                  updateGroups
                   createdAt
                   updatedAt
                 }
-                companyReadGroup
+                owner
+                readGroups
+                updateGroups
                 createdAt
                 updatedAt
                 superior {
@@ -2443,7 +2642,9 @@ export const onUpdateObjective = /* GraphQL */ `
                   lastName
                   grade
                   email
-                  companyReadGroup
+                  owner
+                  readGroups
+                  updateGroups
                   createdAt
                   updatedAt
                 }
@@ -2506,6 +2707,8 @@ export const onDeleteObjective = /* GraphQL */ `
                   objectiveSectionId
                   reviewee
                   reviewers
+                  readGroups
+                  updateGroups
                   createdAt
                   updatedAt
                 }
@@ -2513,29 +2716,24 @@ export const onDeleteObjective = /* GraphQL */ `
               }
               category {
                 id
-                company {
-                  id
-                  name
-                  shortName
-                  url
-                  companyReadGroup
-                  createdAt
-                  updatedAt
-                }
                 no
                 name
-                companyReadGroup
-                companyAdminGroup
+                readGroups
+                updateGroups
                 createdAt
                 updatedAt
               }
               reviewee
               reviewers
+              readGroups
+              updateGroups
               createdAt
               updatedAt
             }
             reviewee
             reviewers
+            readGroups
+            updateGroups
             createdAt
             updatedAt
             sheet {
@@ -2558,8 +2756,8 @@ export const onDeleteObjective = /* GraphQL */ `
                 id
                 name
                 sort
-                companyReadGroup
-                companyAdminGroup
+                readGroups
+                updateGroups
                 createdAt
                 updatedAt
               }
@@ -2572,6 +2770,8 @@ export const onDeleteObjective = /* GraphQL */ `
                   detail
                   reviewee
                   reviewers
+                  readGroups
+                  updateGroups
                   createdAt
                   updatedAt
                 }
@@ -2583,6 +2783,8 @@ export const onDeleteObjective = /* GraphQL */ `
                   sectionSheetId
                   reviewee
                   reviewers
+                  readGroups
+                  updateGroups
                   createdAt
                   updatedAt
                 }
@@ -2590,7 +2792,8 @@ export const onDeleteObjective = /* GraphQL */ `
               }
               reviewee
               reviewers
-              companyReadGroup
+              readGroups
+              updateGroups
               createdAt
               updatedAt
               revieweeEmployee {
@@ -2604,8 +2807,8 @@ export const onDeleteObjective = /* GraphQL */ `
                   id
                   name
                   sort
-                  companyReadGroup
-                  companyAdminGroup
+                  readGroups
+                  updateGroups
                   createdAt
                   updatedAt
                 }
@@ -2614,11 +2817,17 @@ export const onDeleteObjective = /* GraphQL */ `
                   name
                   shortName
                   url
-                  companyReadGroup
+                  companyGroupName
+                  companyManagerGroupName
+                  companyAdminGroupName
+                  readGroups
+                  updateGroups
                   createdAt
                   updatedAt
                 }
-                companyReadGroup
+                owner
+                readGroups
+                updateGroups
                 createdAt
                 updatedAt
                 superior {
@@ -2628,7 +2837,9 @@ export const onDeleteObjective = /* GraphQL */ `
                   lastName
                   grade
                   email
-                  companyReadGroup
+                  owner
+                  readGroups
+                  updateGroups
                   createdAt
                   updatedAt
                 }
@@ -2644,8 +2855,8 @@ export const onDeleteObjective = /* GraphQL */ `
                   id
                   name
                   sort
-                  companyReadGroup
-                  companyAdminGroup
+                  readGroups
+                  updateGroups
                   createdAt
                   updatedAt
                 }
@@ -2654,11 +2865,17 @@ export const onDeleteObjective = /* GraphQL */ `
                   name
                   shortName
                   url
-                  companyReadGroup
+                  companyGroupName
+                  companyManagerGroupName
+                  companyAdminGroupName
+                  readGroups
+                  updateGroups
                   createdAt
                   updatedAt
                 }
-                companyReadGroup
+                owner
+                readGroups
+                updateGroups
                 createdAt
                 updatedAt
                 superior {
@@ -2668,7 +2885,9 @@ export const onDeleteObjective = /* GraphQL */ `
                   lastName
                   grade
                   email
-                  companyReadGroup
+                  owner
+                  readGroups
+                  updateGroups
                   createdAt
                   updatedAt
                 }
@@ -2679,29 +2898,24 @@ export const onDeleteObjective = /* GraphQL */ `
         }
         category {
           id
-          company {
-            id
-            name
-            shortName
-            url
-            companyReadGroup
-            createdAt
-            updatedAt
-          }
           no
           name
-          companyReadGroup
-          companyAdminGroup
+          readGroups
+          updateGroups
           createdAt
           updatedAt
         }
         reviewee
         reviewers
+        readGroups
+        updateGroups
         createdAt
         updatedAt
       }
       reviewee
       reviewers
+      readGroups
+      updateGroups
       createdAt
       updatedAt
       sheet {
@@ -2724,8 +2938,8 @@ export const onDeleteObjective = /* GraphQL */ `
           id
           name
           sort
-          companyReadGroup
-          companyAdminGroup
+          readGroups
+          updateGroups
           createdAt
           updatedAt
         }
@@ -2738,6 +2952,8 @@ export const onDeleteObjective = /* GraphQL */ `
             detail
             reviewee
             reviewers
+            readGroups
+            updateGroups
             createdAt
             updatedAt
           }
@@ -2766,11 +2982,15 @@ export const onDeleteObjective = /* GraphQL */ `
                   sectionSheetId
                   reviewee
                   reviewers
+                  readGroups
+                  updateGroups
                   createdAt
                   updatedAt
                 }
                 reviewee
                 reviewers
+                readGroups
+                updateGroups
                 createdAt
                 updatedAt
                 sheet {
@@ -2791,7 +3011,8 @@ export const onDeleteObjective = /* GraphQL */ `
                   sheetGroupId
                   reviewee
                   reviewers
-                  companyReadGroup
+                  readGroups
+                  updateGroups
                   createdAt
                   updatedAt
                 }
@@ -2800,24 +3021,17 @@ export const onDeleteObjective = /* GraphQL */ `
             }
             category {
               id
-              company {
-                id
-                name
-                shortName
-                url
-                companyReadGroup
-                createdAt
-                updatedAt
-              }
               no
               name
-              companyReadGroup
-              companyAdminGroup
+              readGroups
+              updateGroups
               createdAt
               updatedAt
             }
             reviewee
             reviewers
+            readGroups
+            updateGroups
             createdAt
             updatedAt
           }
@@ -2825,7 +3039,8 @@ export const onDeleteObjective = /* GraphQL */ `
         }
         reviewee
         reviewers
-        companyReadGroup
+        readGroups
+        updateGroups
         createdAt
         updatedAt
         revieweeEmployee {
@@ -2839,8 +3054,8 @@ export const onDeleteObjective = /* GraphQL */ `
             id
             name
             sort
-            companyReadGroup
-            companyAdminGroup
+            readGroups
+            updateGroups
             createdAt
             updatedAt
           }
@@ -2849,11 +3064,17 @@ export const onDeleteObjective = /* GraphQL */ `
             name
             shortName
             url
-            companyReadGroup
+            companyGroupName
+            companyManagerGroupName
+            companyAdminGroupName
+            readGroups
+            updateGroups
             createdAt
             updatedAt
           }
-          companyReadGroup
+          owner
+          readGroups
+          updateGroups
           createdAt
           updatedAt
           superior {
@@ -2867,8 +3088,8 @@ export const onDeleteObjective = /* GraphQL */ `
               id
               name
               sort
-              companyReadGroup
-              companyAdminGroup
+              readGroups
+              updateGroups
               createdAt
               updatedAt
             }
@@ -2877,11 +3098,17 @@ export const onDeleteObjective = /* GraphQL */ `
               name
               shortName
               url
-              companyReadGroup
+              companyGroupName
+              companyManagerGroupName
+              companyAdminGroupName
+              readGroups
+              updateGroups
               createdAt
               updatedAt
             }
-            companyReadGroup
+            owner
+            readGroups
+            updateGroups
             createdAt
             updatedAt
             superior {
@@ -2895,8 +3122,8 @@ export const onDeleteObjective = /* GraphQL */ `
                 id
                 name
                 sort
-                companyReadGroup
-                companyAdminGroup
+                readGroups
+                updateGroups
                 createdAt
                 updatedAt
               }
@@ -2905,11 +3132,17 @@ export const onDeleteObjective = /* GraphQL */ `
                 name
                 shortName
                 url
-                companyReadGroup
+                companyGroupName
+                companyManagerGroupName
+                companyAdminGroupName
+                readGroups
+                updateGroups
                 createdAt
                 updatedAt
               }
-              companyReadGroup
+              owner
+              readGroups
+              updateGroups
               createdAt
               updatedAt
               superior {
@@ -2923,8 +3156,8 @@ export const onDeleteObjective = /* GraphQL */ `
                   id
                   name
                   sort
-                  companyReadGroup
-                  companyAdminGroup
+                  readGroups
+                  updateGroups
                   createdAt
                   updatedAt
                 }
@@ -2933,11 +3166,17 @@ export const onDeleteObjective = /* GraphQL */ `
                   name
                   shortName
                   url
-                  companyReadGroup
+                  companyGroupName
+                  companyManagerGroupName
+                  companyAdminGroupName
+                  readGroups
+                  updateGroups
                   createdAt
                   updatedAt
                 }
-                companyReadGroup
+                owner
+                readGroups
+                updateGroups
                 createdAt
                 updatedAt
                 superior {
@@ -2947,7 +3186,9 @@ export const onDeleteObjective = /* GraphQL */ `
                   lastName
                   grade
                   email
-                  companyReadGroup
+                  owner
+                  readGroups
+                  updateGroups
                   createdAt
                   updatedAt
                 }
@@ -2966,8 +3207,8 @@ export const onDeleteObjective = /* GraphQL */ `
             id
             name
             sort
-            companyReadGroup
-            companyAdminGroup
+            readGroups
+            updateGroups
             createdAt
             updatedAt
           }
@@ -2976,11 +3217,17 @@ export const onDeleteObjective = /* GraphQL */ `
             name
             shortName
             url
-            companyReadGroup
+            companyGroupName
+            companyManagerGroupName
+            companyAdminGroupName
+            readGroups
+            updateGroups
             createdAt
             updatedAt
           }
-          companyReadGroup
+          owner
+          readGroups
+          updateGroups
           createdAt
           updatedAt
           superior {
@@ -2994,8 +3241,8 @@ export const onDeleteObjective = /* GraphQL */ `
               id
               name
               sort
-              companyReadGroup
-              companyAdminGroup
+              readGroups
+              updateGroups
               createdAt
               updatedAt
             }
@@ -3004,11 +3251,17 @@ export const onDeleteObjective = /* GraphQL */ `
               name
               shortName
               url
-              companyReadGroup
+              companyGroupName
+              companyManagerGroupName
+              companyAdminGroupName
+              readGroups
+              updateGroups
               createdAt
               updatedAt
             }
-            companyReadGroup
+            owner
+            readGroups
+            updateGroups
             createdAt
             updatedAt
             superior {
@@ -3022,8 +3275,8 @@ export const onDeleteObjective = /* GraphQL */ `
                 id
                 name
                 sort
-                companyReadGroup
-                companyAdminGroup
+                readGroups
+                updateGroups
                 createdAt
                 updatedAt
               }
@@ -3032,11 +3285,17 @@ export const onDeleteObjective = /* GraphQL */ `
                 name
                 shortName
                 url
-                companyReadGroup
+                companyGroupName
+                companyManagerGroupName
+                companyAdminGroupName
+                readGroups
+                updateGroups
                 createdAt
                 updatedAt
               }
-              companyReadGroup
+              owner
+              readGroups
+              updateGroups
               createdAt
               updatedAt
               superior {
@@ -3050,8 +3309,8 @@ export const onDeleteObjective = /* GraphQL */ `
                   id
                   name
                   sort
-                  companyReadGroup
-                  companyAdminGroup
+                  readGroups
+                  updateGroups
                   createdAt
                   updatedAt
                 }
@@ -3060,11 +3319,17 @@ export const onDeleteObjective = /* GraphQL */ `
                   name
                   shortName
                   url
-                  companyReadGroup
+                  companyGroupName
+                  companyManagerGroupName
+                  companyAdminGroupName
+                  readGroups
+                  updateGroups
                   createdAt
                   updatedAt
                 }
-                companyReadGroup
+                owner
+                readGroups
+                updateGroups
                 createdAt
                 updatedAt
                 superior {
@@ -3074,7 +3339,9 @@ export const onDeleteObjective = /* GraphQL */ `
                   lastName
                   grade
                   email
-                  companyReadGroup
+                  owner
+                  readGroups
+                  updateGroups
                   createdAt
                   updatedAt
                 }
@@ -3087,8 +3354,8 @@ export const onDeleteObjective = /* GraphQL */ `
   }
 `;
 export const onCreateEmployee = /* GraphQL */ `
-  subscription OnCreateEmployee {
-    onCreateEmployee {
+  subscription OnCreateEmployee($owner: String) {
+    onCreateEmployee(owner: $owner) {
       id
       no
       firstName
@@ -3099,8 +3366,8 @@ export const onCreateEmployee = /* GraphQL */ `
         id
         name
         sort
-        companyReadGroup
-        companyAdminGroup
+        readGroups
+        updateGroups
         createdAt
         updatedAt
       }
@@ -3109,11 +3376,17 @@ export const onCreateEmployee = /* GraphQL */ `
         name
         shortName
         url
-        companyReadGroup
+        companyGroupName
+        companyManagerGroupName
+        companyAdminGroupName
+        readGroups
+        updateGroups
         createdAt
         updatedAt
       }
-      companyReadGroup
+      owner
+      readGroups
+      updateGroups
       createdAt
       updatedAt
       superior {
@@ -3127,8 +3400,8 @@ export const onCreateEmployee = /* GraphQL */ `
           id
           name
           sort
-          companyReadGroup
-          companyAdminGroup
+          readGroups
+          updateGroups
           createdAt
           updatedAt
         }
@@ -3137,11 +3410,17 @@ export const onCreateEmployee = /* GraphQL */ `
           name
           shortName
           url
-          companyReadGroup
+          companyGroupName
+          companyManagerGroupName
+          companyAdminGroupName
+          readGroups
+          updateGroups
           createdAt
           updatedAt
         }
-        companyReadGroup
+        owner
+        readGroups
+        updateGroups
         createdAt
         updatedAt
         superior {
@@ -3155,8 +3434,8 @@ export const onCreateEmployee = /* GraphQL */ `
             id
             name
             sort
-            companyReadGroup
-            companyAdminGroup
+            readGroups
+            updateGroups
             createdAt
             updatedAt
           }
@@ -3165,11 +3444,17 @@ export const onCreateEmployee = /* GraphQL */ `
             name
             shortName
             url
-            companyReadGroup
+            companyGroupName
+            companyManagerGroupName
+            companyAdminGroupName
+            readGroups
+            updateGroups
             createdAt
             updatedAt
           }
-          companyReadGroup
+          owner
+          readGroups
+          updateGroups
           createdAt
           updatedAt
           superior {
@@ -3183,8 +3468,8 @@ export const onCreateEmployee = /* GraphQL */ `
               id
               name
               sort
-              companyReadGroup
-              companyAdminGroup
+              readGroups
+              updateGroups
               createdAt
               updatedAt
             }
@@ -3193,11 +3478,17 @@ export const onCreateEmployee = /* GraphQL */ `
               name
               shortName
               url
-              companyReadGroup
+              companyGroupName
+              companyManagerGroupName
+              companyAdminGroupName
+              readGroups
+              updateGroups
               createdAt
               updatedAt
             }
-            companyReadGroup
+            owner
+            readGroups
+            updateGroups
             createdAt
             updatedAt
             superior {
@@ -3211,8 +3502,8 @@ export const onCreateEmployee = /* GraphQL */ `
                 id
                 name
                 sort
-                companyReadGroup
-                companyAdminGroup
+                readGroups
+                updateGroups
                 createdAt
                 updatedAt
               }
@@ -3221,11 +3512,17 @@ export const onCreateEmployee = /* GraphQL */ `
                 name
                 shortName
                 url
-                companyReadGroup
+                companyGroupName
+                companyManagerGroupName
+                companyAdminGroupName
+                readGroups
+                updateGroups
                 createdAt
                 updatedAt
               }
-              companyReadGroup
+              owner
+              readGroups
+              updateGroups
               createdAt
               updatedAt
               superior {
@@ -3239,8 +3536,8 @@ export const onCreateEmployee = /* GraphQL */ `
                   id
                   name
                   sort
-                  companyReadGroup
-                  companyAdminGroup
+                  readGroups
+                  updateGroups
                   createdAt
                   updatedAt
                 }
@@ -3249,11 +3546,17 @@ export const onCreateEmployee = /* GraphQL */ `
                   name
                   shortName
                   url
-                  companyReadGroup
+                  companyGroupName
+                  companyManagerGroupName
+                  companyAdminGroupName
+                  readGroups
+                  updateGroups
                   createdAt
                   updatedAt
                 }
-                companyReadGroup
+                owner
+                readGroups
+                updateGroups
                 createdAt
                 updatedAt
                 superior {
@@ -3263,7 +3566,9 @@ export const onCreateEmployee = /* GraphQL */ `
                   lastName
                   grade
                   email
-                  companyReadGroup
+                  owner
+                  readGroups
+                  updateGroups
                   createdAt
                   updatedAt
                 }
@@ -3276,8 +3581,8 @@ export const onCreateEmployee = /* GraphQL */ `
   }
 `;
 export const onUpdateEmployee = /* GraphQL */ `
-  subscription OnUpdateEmployee {
-    onUpdateEmployee {
+  subscription OnUpdateEmployee($owner: String) {
+    onUpdateEmployee(owner: $owner) {
       id
       no
       firstName
@@ -3288,8 +3593,8 @@ export const onUpdateEmployee = /* GraphQL */ `
         id
         name
         sort
-        companyReadGroup
-        companyAdminGroup
+        readGroups
+        updateGroups
         createdAt
         updatedAt
       }
@@ -3298,11 +3603,17 @@ export const onUpdateEmployee = /* GraphQL */ `
         name
         shortName
         url
-        companyReadGroup
+        companyGroupName
+        companyManagerGroupName
+        companyAdminGroupName
+        readGroups
+        updateGroups
         createdAt
         updatedAt
       }
-      companyReadGroup
+      owner
+      readGroups
+      updateGroups
       createdAt
       updatedAt
       superior {
@@ -3316,8 +3627,8 @@ export const onUpdateEmployee = /* GraphQL */ `
           id
           name
           sort
-          companyReadGroup
-          companyAdminGroup
+          readGroups
+          updateGroups
           createdAt
           updatedAt
         }
@@ -3326,11 +3637,17 @@ export const onUpdateEmployee = /* GraphQL */ `
           name
           shortName
           url
-          companyReadGroup
+          companyGroupName
+          companyManagerGroupName
+          companyAdminGroupName
+          readGroups
+          updateGroups
           createdAt
           updatedAt
         }
-        companyReadGroup
+        owner
+        readGroups
+        updateGroups
         createdAt
         updatedAt
         superior {
@@ -3344,8 +3661,8 @@ export const onUpdateEmployee = /* GraphQL */ `
             id
             name
             sort
-            companyReadGroup
-            companyAdminGroup
+            readGroups
+            updateGroups
             createdAt
             updatedAt
           }
@@ -3354,11 +3671,17 @@ export const onUpdateEmployee = /* GraphQL */ `
             name
             shortName
             url
-            companyReadGroup
+            companyGroupName
+            companyManagerGroupName
+            companyAdminGroupName
+            readGroups
+            updateGroups
             createdAt
             updatedAt
           }
-          companyReadGroup
+          owner
+          readGroups
+          updateGroups
           createdAt
           updatedAt
           superior {
@@ -3372,8 +3695,8 @@ export const onUpdateEmployee = /* GraphQL */ `
               id
               name
               sort
-              companyReadGroup
-              companyAdminGroup
+              readGroups
+              updateGroups
               createdAt
               updatedAt
             }
@@ -3382,11 +3705,17 @@ export const onUpdateEmployee = /* GraphQL */ `
               name
               shortName
               url
-              companyReadGroup
+              companyGroupName
+              companyManagerGroupName
+              companyAdminGroupName
+              readGroups
+              updateGroups
               createdAt
               updatedAt
             }
-            companyReadGroup
+            owner
+            readGroups
+            updateGroups
             createdAt
             updatedAt
             superior {
@@ -3400,8 +3729,8 @@ export const onUpdateEmployee = /* GraphQL */ `
                 id
                 name
                 sort
-                companyReadGroup
-                companyAdminGroup
+                readGroups
+                updateGroups
                 createdAt
                 updatedAt
               }
@@ -3410,11 +3739,17 @@ export const onUpdateEmployee = /* GraphQL */ `
                 name
                 shortName
                 url
-                companyReadGroup
+                companyGroupName
+                companyManagerGroupName
+                companyAdminGroupName
+                readGroups
+                updateGroups
                 createdAt
                 updatedAt
               }
-              companyReadGroup
+              owner
+              readGroups
+              updateGroups
               createdAt
               updatedAt
               superior {
@@ -3428,8 +3763,8 @@ export const onUpdateEmployee = /* GraphQL */ `
                   id
                   name
                   sort
-                  companyReadGroup
-                  companyAdminGroup
+                  readGroups
+                  updateGroups
                   createdAt
                   updatedAt
                 }
@@ -3438,11 +3773,17 @@ export const onUpdateEmployee = /* GraphQL */ `
                   name
                   shortName
                   url
-                  companyReadGroup
+                  companyGroupName
+                  companyManagerGroupName
+                  companyAdminGroupName
+                  readGroups
+                  updateGroups
                   createdAt
                   updatedAt
                 }
-                companyReadGroup
+                owner
+                readGroups
+                updateGroups
                 createdAt
                 updatedAt
                 superior {
@@ -3452,7 +3793,9 @@ export const onUpdateEmployee = /* GraphQL */ `
                   lastName
                   grade
                   email
-                  companyReadGroup
+                  owner
+                  readGroups
+                  updateGroups
                   createdAt
                   updatedAt
                 }
@@ -3465,8 +3808,8 @@ export const onUpdateEmployee = /* GraphQL */ `
   }
 `;
 export const onDeleteEmployee = /* GraphQL */ `
-  subscription OnDeleteEmployee {
-    onDeleteEmployee {
+  subscription OnDeleteEmployee($owner: String) {
+    onDeleteEmployee(owner: $owner) {
       id
       no
       firstName
@@ -3477,8 +3820,8 @@ export const onDeleteEmployee = /* GraphQL */ `
         id
         name
         sort
-        companyReadGroup
-        companyAdminGroup
+        readGroups
+        updateGroups
         createdAt
         updatedAt
       }
@@ -3487,11 +3830,17 @@ export const onDeleteEmployee = /* GraphQL */ `
         name
         shortName
         url
-        companyReadGroup
+        companyGroupName
+        companyManagerGroupName
+        companyAdminGroupName
+        readGroups
+        updateGroups
         createdAt
         updatedAt
       }
-      companyReadGroup
+      owner
+      readGroups
+      updateGroups
       createdAt
       updatedAt
       superior {
@@ -3505,8 +3854,8 @@ export const onDeleteEmployee = /* GraphQL */ `
           id
           name
           sort
-          companyReadGroup
-          companyAdminGroup
+          readGroups
+          updateGroups
           createdAt
           updatedAt
         }
@@ -3515,11 +3864,17 @@ export const onDeleteEmployee = /* GraphQL */ `
           name
           shortName
           url
-          companyReadGroup
+          companyGroupName
+          companyManagerGroupName
+          companyAdminGroupName
+          readGroups
+          updateGroups
           createdAt
           updatedAt
         }
-        companyReadGroup
+        owner
+        readGroups
+        updateGroups
         createdAt
         updatedAt
         superior {
@@ -3533,8 +3888,8 @@ export const onDeleteEmployee = /* GraphQL */ `
             id
             name
             sort
-            companyReadGroup
-            companyAdminGroup
+            readGroups
+            updateGroups
             createdAt
             updatedAt
           }
@@ -3543,11 +3898,17 @@ export const onDeleteEmployee = /* GraphQL */ `
             name
             shortName
             url
-            companyReadGroup
+            companyGroupName
+            companyManagerGroupName
+            companyAdminGroupName
+            readGroups
+            updateGroups
             createdAt
             updatedAt
           }
-          companyReadGroup
+          owner
+          readGroups
+          updateGroups
           createdAt
           updatedAt
           superior {
@@ -3561,8 +3922,8 @@ export const onDeleteEmployee = /* GraphQL */ `
               id
               name
               sort
-              companyReadGroup
-              companyAdminGroup
+              readGroups
+              updateGroups
               createdAt
               updatedAt
             }
@@ -3571,11 +3932,17 @@ export const onDeleteEmployee = /* GraphQL */ `
               name
               shortName
               url
-              companyReadGroup
+              companyGroupName
+              companyManagerGroupName
+              companyAdminGroupName
+              readGroups
+              updateGroups
               createdAt
               updatedAt
             }
-            companyReadGroup
+            owner
+            readGroups
+            updateGroups
             createdAt
             updatedAt
             superior {
@@ -3589,8 +3956,8 @@ export const onDeleteEmployee = /* GraphQL */ `
                 id
                 name
                 sort
-                companyReadGroup
-                companyAdminGroup
+                readGroups
+                updateGroups
                 createdAt
                 updatedAt
               }
@@ -3599,11 +3966,17 @@ export const onDeleteEmployee = /* GraphQL */ `
                 name
                 shortName
                 url
-                companyReadGroup
+                companyGroupName
+                companyManagerGroupName
+                companyAdminGroupName
+                readGroups
+                updateGroups
                 createdAt
                 updatedAt
               }
-              companyReadGroup
+              owner
+              readGroups
+              updateGroups
               createdAt
               updatedAt
               superior {
@@ -3617,8 +3990,8 @@ export const onDeleteEmployee = /* GraphQL */ `
                   id
                   name
                   sort
-                  companyReadGroup
-                  companyAdminGroup
+                  readGroups
+                  updateGroups
                   createdAt
                   updatedAt
                 }
@@ -3627,11 +4000,17 @@ export const onDeleteEmployee = /* GraphQL */ `
                   name
                   shortName
                   url
-                  companyReadGroup
+                  companyGroupName
+                  companyManagerGroupName
+                  companyAdminGroupName
+                  readGroups
+                  updateGroups
                   createdAt
                   updatedAt
                 }
-                companyReadGroup
+                owner
+                readGroups
+                updateGroups
                 createdAt
                 updatedAt
                 superior {
@@ -3641,7 +4020,9 @@ export const onDeleteEmployee = /* GraphQL */ `
                   lastName
                   grade
                   email
-                  companyReadGroup
+                  owner
+                  readGroups
+                  updateGroups
                   createdAt
                   updatedAt
                 }
@@ -3675,8 +4056,8 @@ export const onCreateSheet = /* GraphQL */ `
         id
         name
         sort
-        companyReadGroup
-        companyAdminGroup
+        readGroups
+        updateGroups
         createdAt
         updatedAt
       }
@@ -3689,6 +4070,8 @@ export const onCreateSheet = /* GraphQL */ `
           detail
           reviewee
           reviewers
+          readGroups
+          updateGroups
           createdAt
           updatedAt
         }
@@ -3722,18 +4105,22 @@ export const onCreateSheet = /* GraphQL */ `
                   id
                   no
                   name
-                  companyReadGroup
-                  companyAdminGroup
+                  readGroups
+                  updateGroups
                   createdAt
                   updatedAt
                 }
                 reviewee
                 reviewers
+                readGroups
+                updateGroups
                 createdAt
                 updatedAt
               }
               reviewee
               reviewers
+              readGroups
+              updateGroups
               createdAt
               updatedAt
               sheet {
@@ -3756,8 +4143,8 @@ export const onCreateSheet = /* GraphQL */ `
                   id
                   name
                   sort
-                  companyReadGroup
-                  companyAdminGroup
+                  readGroups
+                  updateGroups
                   createdAt
                   updatedAt
                 }
@@ -3769,7 +4156,8 @@ export const onCreateSheet = /* GraphQL */ `
                 }
                 reviewee
                 reviewers
-                companyReadGroup
+                readGroups
+                updateGroups
                 createdAt
                 updatedAt
                 revieweeEmployee {
@@ -3779,7 +4167,9 @@ export const onCreateSheet = /* GraphQL */ `
                   lastName
                   grade
                   email
-                  companyReadGroup
+                  owner
+                  readGroups
+                  updateGroups
                   createdAt
                   updatedAt
                 }
@@ -3790,7 +4180,9 @@ export const onCreateSheet = /* GraphQL */ `
                   lastName
                   grade
                   email
-                  companyReadGroup
+                  owner
+                  readGroups
+                  updateGroups
                   createdAt
                   updatedAt
                 }
@@ -3800,24 +4192,17 @@ export const onCreateSheet = /* GraphQL */ `
           }
           category {
             id
-            company {
-              id
-              name
-              shortName
-              url
-              companyReadGroup
-              createdAt
-              updatedAt
-            }
             no
             name
-            companyReadGroup
-            companyAdminGroup
+            readGroups
+            updateGroups
             createdAt
             updatedAt
           }
           reviewee
           reviewers
+          readGroups
+          updateGroups
           createdAt
           updatedAt
         }
@@ -3825,7 +4210,8 @@ export const onCreateSheet = /* GraphQL */ `
       }
       reviewee
       reviewers
-      companyReadGroup
+      readGroups
+      updateGroups
       createdAt
       updatedAt
       revieweeEmployee {
@@ -3839,8 +4225,8 @@ export const onCreateSheet = /* GraphQL */ `
           id
           name
           sort
-          companyReadGroup
-          companyAdminGroup
+          readGroups
+          updateGroups
           createdAt
           updatedAt
         }
@@ -3849,11 +4235,17 @@ export const onCreateSheet = /* GraphQL */ `
           name
           shortName
           url
-          companyReadGroup
+          companyGroupName
+          companyManagerGroupName
+          companyAdminGroupName
+          readGroups
+          updateGroups
           createdAt
           updatedAt
         }
-        companyReadGroup
+        owner
+        readGroups
+        updateGroups
         createdAt
         updatedAt
         superior {
@@ -3867,8 +4259,8 @@ export const onCreateSheet = /* GraphQL */ `
             id
             name
             sort
-            companyReadGroup
-            companyAdminGroup
+            readGroups
+            updateGroups
             createdAt
             updatedAt
           }
@@ -3877,11 +4269,17 @@ export const onCreateSheet = /* GraphQL */ `
             name
             shortName
             url
-            companyReadGroup
+            companyGroupName
+            companyManagerGroupName
+            companyAdminGroupName
+            readGroups
+            updateGroups
             createdAt
             updatedAt
           }
-          companyReadGroup
+          owner
+          readGroups
+          updateGroups
           createdAt
           updatedAt
           superior {
@@ -3895,8 +4293,8 @@ export const onCreateSheet = /* GraphQL */ `
               id
               name
               sort
-              companyReadGroup
-              companyAdminGroup
+              readGroups
+              updateGroups
               createdAt
               updatedAt
             }
@@ -3905,11 +4303,17 @@ export const onCreateSheet = /* GraphQL */ `
               name
               shortName
               url
-              companyReadGroup
+              companyGroupName
+              companyManagerGroupName
+              companyAdminGroupName
+              readGroups
+              updateGroups
               createdAt
               updatedAt
             }
-            companyReadGroup
+            owner
+            readGroups
+            updateGroups
             createdAt
             updatedAt
             superior {
@@ -3923,8 +4327,8 @@ export const onCreateSheet = /* GraphQL */ `
                 id
                 name
                 sort
-                companyReadGroup
-                companyAdminGroup
+                readGroups
+                updateGroups
                 createdAt
                 updatedAt
               }
@@ -3933,11 +4337,17 @@ export const onCreateSheet = /* GraphQL */ `
                 name
                 shortName
                 url
-                companyReadGroup
+                companyGroupName
+                companyManagerGroupName
+                companyAdminGroupName
+                readGroups
+                updateGroups
                 createdAt
                 updatedAt
               }
-              companyReadGroup
+              owner
+              readGroups
+              updateGroups
               createdAt
               updatedAt
               superior {
@@ -3951,8 +4361,8 @@ export const onCreateSheet = /* GraphQL */ `
                   id
                   name
                   sort
-                  companyReadGroup
-                  companyAdminGroup
+                  readGroups
+                  updateGroups
                   createdAt
                   updatedAt
                 }
@@ -3961,11 +4371,17 @@ export const onCreateSheet = /* GraphQL */ `
                   name
                   shortName
                   url
-                  companyReadGroup
+                  companyGroupName
+                  companyManagerGroupName
+                  companyAdminGroupName
+                  readGroups
+                  updateGroups
                   createdAt
                   updatedAt
                 }
-                companyReadGroup
+                owner
+                readGroups
+                updateGroups
                 createdAt
                 updatedAt
                 superior {
@@ -3975,7 +4391,9 @@ export const onCreateSheet = /* GraphQL */ `
                   lastName
                   grade
                   email
-                  companyReadGroup
+                  owner
+                  readGroups
+                  updateGroups
                   createdAt
                   updatedAt
                 }
@@ -3995,8 +4413,8 @@ export const onCreateSheet = /* GraphQL */ `
           id
           name
           sort
-          companyReadGroup
-          companyAdminGroup
+          readGroups
+          updateGroups
           createdAt
           updatedAt
         }
@@ -4005,11 +4423,17 @@ export const onCreateSheet = /* GraphQL */ `
           name
           shortName
           url
-          companyReadGroup
+          companyGroupName
+          companyManagerGroupName
+          companyAdminGroupName
+          readGroups
+          updateGroups
           createdAt
           updatedAt
         }
-        companyReadGroup
+        owner
+        readGroups
+        updateGroups
         createdAt
         updatedAt
         superior {
@@ -4023,8 +4447,8 @@ export const onCreateSheet = /* GraphQL */ `
             id
             name
             sort
-            companyReadGroup
-            companyAdminGroup
+            readGroups
+            updateGroups
             createdAt
             updatedAt
           }
@@ -4033,11 +4457,17 @@ export const onCreateSheet = /* GraphQL */ `
             name
             shortName
             url
-            companyReadGroup
+            companyGroupName
+            companyManagerGroupName
+            companyAdminGroupName
+            readGroups
+            updateGroups
             createdAt
             updatedAt
           }
-          companyReadGroup
+          owner
+          readGroups
+          updateGroups
           createdAt
           updatedAt
           superior {
@@ -4051,8 +4481,8 @@ export const onCreateSheet = /* GraphQL */ `
               id
               name
               sort
-              companyReadGroup
-              companyAdminGroup
+              readGroups
+              updateGroups
               createdAt
               updatedAt
             }
@@ -4061,11 +4491,17 @@ export const onCreateSheet = /* GraphQL */ `
               name
               shortName
               url
-              companyReadGroup
+              companyGroupName
+              companyManagerGroupName
+              companyAdminGroupName
+              readGroups
+              updateGroups
               createdAt
               updatedAt
             }
-            companyReadGroup
+            owner
+            readGroups
+            updateGroups
             createdAt
             updatedAt
             superior {
@@ -4079,8 +4515,8 @@ export const onCreateSheet = /* GraphQL */ `
                 id
                 name
                 sort
-                companyReadGroup
-                companyAdminGroup
+                readGroups
+                updateGroups
                 createdAt
                 updatedAt
               }
@@ -4089,11 +4525,17 @@ export const onCreateSheet = /* GraphQL */ `
                 name
                 shortName
                 url
-                companyReadGroup
+                companyGroupName
+                companyManagerGroupName
+                companyAdminGroupName
+                readGroups
+                updateGroups
                 createdAt
                 updatedAt
               }
-              companyReadGroup
+              owner
+              readGroups
+              updateGroups
               createdAt
               updatedAt
               superior {
@@ -4107,8 +4549,8 @@ export const onCreateSheet = /* GraphQL */ `
                   id
                   name
                   sort
-                  companyReadGroup
-                  companyAdminGroup
+                  readGroups
+                  updateGroups
                   createdAt
                   updatedAt
                 }
@@ -4117,11 +4559,17 @@ export const onCreateSheet = /* GraphQL */ `
                   name
                   shortName
                   url
-                  companyReadGroup
+                  companyGroupName
+                  companyManagerGroupName
+                  companyAdminGroupName
+                  readGroups
+                  updateGroups
                   createdAt
                   updatedAt
                 }
-                companyReadGroup
+                owner
+                readGroups
+                updateGroups
                 createdAt
                 updatedAt
                 superior {
@@ -4131,7 +4579,9 @@ export const onCreateSheet = /* GraphQL */ `
                   lastName
                   grade
                   email
-                  companyReadGroup
+                  owner
+                  readGroups
+                  updateGroups
                   createdAt
                   updatedAt
                 }
@@ -4165,8 +4615,8 @@ export const onUpdateSheet = /* GraphQL */ `
         id
         name
         sort
-        companyReadGroup
-        companyAdminGroup
+        readGroups
+        updateGroups
         createdAt
         updatedAt
       }
@@ -4179,6 +4629,8 @@ export const onUpdateSheet = /* GraphQL */ `
           detail
           reviewee
           reviewers
+          readGroups
+          updateGroups
           createdAt
           updatedAt
         }
@@ -4212,18 +4664,22 @@ export const onUpdateSheet = /* GraphQL */ `
                   id
                   no
                   name
-                  companyReadGroup
-                  companyAdminGroup
+                  readGroups
+                  updateGroups
                   createdAt
                   updatedAt
                 }
                 reviewee
                 reviewers
+                readGroups
+                updateGroups
                 createdAt
                 updatedAt
               }
               reviewee
               reviewers
+              readGroups
+              updateGroups
               createdAt
               updatedAt
               sheet {
@@ -4246,8 +4702,8 @@ export const onUpdateSheet = /* GraphQL */ `
                   id
                   name
                   sort
-                  companyReadGroup
-                  companyAdminGroup
+                  readGroups
+                  updateGroups
                   createdAt
                   updatedAt
                 }
@@ -4259,7 +4715,8 @@ export const onUpdateSheet = /* GraphQL */ `
                 }
                 reviewee
                 reviewers
-                companyReadGroup
+                readGroups
+                updateGroups
                 createdAt
                 updatedAt
                 revieweeEmployee {
@@ -4269,7 +4726,9 @@ export const onUpdateSheet = /* GraphQL */ `
                   lastName
                   grade
                   email
-                  companyReadGroup
+                  owner
+                  readGroups
+                  updateGroups
                   createdAt
                   updatedAt
                 }
@@ -4280,7 +4739,9 @@ export const onUpdateSheet = /* GraphQL */ `
                   lastName
                   grade
                   email
-                  companyReadGroup
+                  owner
+                  readGroups
+                  updateGroups
                   createdAt
                   updatedAt
                 }
@@ -4290,24 +4751,17 @@ export const onUpdateSheet = /* GraphQL */ `
           }
           category {
             id
-            company {
-              id
-              name
-              shortName
-              url
-              companyReadGroup
-              createdAt
-              updatedAt
-            }
             no
             name
-            companyReadGroup
-            companyAdminGroup
+            readGroups
+            updateGroups
             createdAt
             updatedAt
           }
           reviewee
           reviewers
+          readGroups
+          updateGroups
           createdAt
           updatedAt
         }
@@ -4315,7 +4769,8 @@ export const onUpdateSheet = /* GraphQL */ `
       }
       reviewee
       reviewers
-      companyReadGroup
+      readGroups
+      updateGroups
       createdAt
       updatedAt
       revieweeEmployee {
@@ -4329,8 +4784,8 @@ export const onUpdateSheet = /* GraphQL */ `
           id
           name
           sort
-          companyReadGroup
-          companyAdminGroup
+          readGroups
+          updateGroups
           createdAt
           updatedAt
         }
@@ -4339,11 +4794,17 @@ export const onUpdateSheet = /* GraphQL */ `
           name
           shortName
           url
-          companyReadGroup
+          companyGroupName
+          companyManagerGroupName
+          companyAdminGroupName
+          readGroups
+          updateGroups
           createdAt
           updatedAt
         }
-        companyReadGroup
+        owner
+        readGroups
+        updateGroups
         createdAt
         updatedAt
         superior {
@@ -4357,8 +4818,8 @@ export const onUpdateSheet = /* GraphQL */ `
             id
             name
             sort
-            companyReadGroup
-            companyAdminGroup
+            readGroups
+            updateGroups
             createdAt
             updatedAt
           }
@@ -4367,11 +4828,17 @@ export const onUpdateSheet = /* GraphQL */ `
             name
             shortName
             url
-            companyReadGroup
+            companyGroupName
+            companyManagerGroupName
+            companyAdminGroupName
+            readGroups
+            updateGroups
             createdAt
             updatedAt
           }
-          companyReadGroup
+          owner
+          readGroups
+          updateGroups
           createdAt
           updatedAt
           superior {
@@ -4385,8 +4852,8 @@ export const onUpdateSheet = /* GraphQL */ `
               id
               name
               sort
-              companyReadGroup
-              companyAdminGroup
+              readGroups
+              updateGroups
               createdAt
               updatedAt
             }
@@ -4395,11 +4862,17 @@ export const onUpdateSheet = /* GraphQL */ `
               name
               shortName
               url
-              companyReadGroup
+              companyGroupName
+              companyManagerGroupName
+              companyAdminGroupName
+              readGroups
+              updateGroups
               createdAt
               updatedAt
             }
-            companyReadGroup
+            owner
+            readGroups
+            updateGroups
             createdAt
             updatedAt
             superior {
@@ -4413,8 +4886,8 @@ export const onUpdateSheet = /* GraphQL */ `
                 id
                 name
                 sort
-                companyReadGroup
-                companyAdminGroup
+                readGroups
+                updateGroups
                 createdAt
                 updatedAt
               }
@@ -4423,11 +4896,17 @@ export const onUpdateSheet = /* GraphQL */ `
                 name
                 shortName
                 url
-                companyReadGroup
+                companyGroupName
+                companyManagerGroupName
+                companyAdminGroupName
+                readGroups
+                updateGroups
                 createdAt
                 updatedAt
               }
-              companyReadGroup
+              owner
+              readGroups
+              updateGroups
               createdAt
               updatedAt
               superior {
@@ -4441,8 +4920,8 @@ export const onUpdateSheet = /* GraphQL */ `
                   id
                   name
                   sort
-                  companyReadGroup
-                  companyAdminGroup
+                  readGroups
+                  updateGroups
                   createdAt
                   updatedAt
                 }
@@ -4451,11 +4930,17 @@ export const onUpdateSheet = /* GraphQL */ `
                   name
                   shortName
                   url
-                  companyReadGroup
+                  companyGroupName
+                  companyManagerGroupName
+                  companyAdminGroupName
+                  readGroups
+                  updateGroups
                   createdAt
                   updatedAt
                 }
-                companyReadGroup
+                owner
+                readGroups
+                updateGroups
                 createdAt
                 updatedAt
                 superior {
@@ -4465,7 +4950,9 @@ export const onUpdateSheet = /* GraphQL */ `
                   lastName
                   grade
                   email
-                  companyReadGroup
+                  owner
+                  readGroups
+                  updateGroups
                   createdAt
                   updatedAt
                 }
@@ -4485,8 +4972,8 @@ export const onUpdateSheet = /* GraphQL */ `
           id
           name
           sort
-          companyReadGroup
-          companyAdminGroup
+          readGroups
+          updateGroups
           createdAt
           updatedAt
         }
@@ -4495,11 +4982,17 @@ export const onUpdateSheet = /* GraphQL */ `
           name
           shortName
           url
-          companyReadGroup
+          companyGroupName
+          companyManagerGroupName
+          companyAdminGroupName
+          readGroups
+          updateGroups
           createdAt
           updatedAt
         }
-        companyReadGroup
+        owner
+        readGroups
+        updateGroups
         createdAt
         updatedAt
         superior {
@@ -4513,8 +5006,8 @@ export const onUpdateSheet = /* GraphQL */ `
             id
             name
             sort
-            companyReadGroup
-            companyAdminGroup
+            readGroups
+            updateGroups
             createdAt
             updatedAt
           }
@@ -4523,11 +5016,17 @@ export const onUpdateSheet = /* GraphQL */ `
             name
             shortName
             url
-            companyReadGroup
+            companyGroupName
+            companyManagerGroupName
+            companyAdminGroupName
+            readGroups
+            updateGroups
             createdAt
             updatedAt
           }
-          companyReadGroup
+          owner
+          readGroups
+          updateGroups
           createdAt
           updatedAt
           superior {
@@ -4541,8 +5040,8 @@ export const onUpdateSheet = /* GraphQL */ `
               id
               name
               sort
-              companyReadGroup
-              companyAdminGroup
+              readGroups
+              updateGroups
               createdAt
               updatedAt
             }
@@ -4551,11 +5050,17 @@ export const onUpdateSheet = /* GraphQL */ `
               name
               shortName
               url
-              companyReadGroup
+              companyGroupName
+              companyManagerGroupName
+              companyAdminGroupName
+              readGroups
+              updateGroups
               createdAt
               updatedAt
             }
-            companyReadGroup
+            owner
+            readGroups
+            updateGroups
             createdAt
             updatedAt
             superior {
@@ -4569,8 +5074,8 @@ export const onUpdateSheet = /* GraphQL */ `
                 id
                 name
                 sort
-                companyReadGroup
-                companyAdminGroup
+                readGroups
+                updateGroups
                 createdAt
                 updatedAt
               }
@@ -4579,11 +5084,17 @@ export const onUpdateSheet = /* GraphQL */ `
                 name
                 shortName
                 url
-                companyReadGroup
+                companyGroupName
+                companyManagerGroupName
+                companyAdminGroupName
+                readGroups
+                updateGroups
                 createdAt
                 updatedAt
               }
-              companyReadGroup
+              owner
+              readGroups
+              updateGroups
               createdAt
               updatedAt
               superior {
@@ -4597,8 +5108,8 @@ export const onUpdateSheet = /* GraphQL */ `
                   id
                   name
                   sort
-                  companyReadGroup
-                  companyAdminGroup
+                  readGroups
+                  updateGroups
                   createdAt
                   updatedAt
                 }
@@ -4607,11 +5118,17 @@ export const onUpdateSheet = /* GraphQL */ `
                   name
                   shortName
                   url
-                  companyReadGroup
+                  companyGroupName
+                  companyManagerGroupName
+                  companyAdminGroupName
+                  readGroups
+                  updateGroups
                   createdAt
                   updatedAt
                 }
-                companyReadGroup
+                owner
+                readGroups
+                updateGroups
                 createdAt
                 updatedAt
                 superior {
@@ -4621,7 +5138,9 @@ export const onUpdateSheet = /* GraphQL */ `
                   lastName
                   grade
                   email
-                  companyReadGroup
+                  owner
+                  readGroups
+                  updateGroups
                   createdAt
                   updatedAt
                 }
@@ -4655,8 +5174,8 @@ export const onDeleteSheet = /* GraphQL */ `
         id
         name
         sort
-        companyReadGroup
-        companyAdminGroup
+        readGroups
+        updateGroups
         createdAt
         updatedAt
       }
@@ -4669,6 +5188,8 @@ export const onDeleteSheet = /* GraphQL */ `
           detail
           reviewee
           reviewers
+          readGroups
+          updateGroups
           createdAt
           updatedAt
         }
@@ -4702,18 +5223,22 @@ export const onDeleteSheet = /* GraphQL */ `
                   id
                   no
                   name
-                  companyReadGroup
-                  companyAdminGroup
+                  readGroups
+                  updateGroups
                   createdAt
                   updatedAt
                 }
                 reviewee
                 reviewers
+                readGroups
+                updateGroups
                 createdAt
                 updatedAt
               }
               reviewee
               reviewers
+              readGroups
+              updateGroups
               createdAt
               updatedAt
               sheet {
@@ -4736,8 +5261,8 @@ export const onDeleteSheet = /* GraphQL */ `
                   id
                   name
                   sort
-                  companyReadGroup
-                  companyAdminGroup
+                  readGroups
+                  updateGroups
                   createdAt
                   updatedAt
                 }
@@ -4749,7 +5274,8 @@ export const onDeleteSheet = /* GraphQL */ `
                 }
                 reviewee
                 reviewers
-                companyReadGroup
+                readGroups
+                updateGroups
                 createdAt
                 updatedAt
                 revieweeEmployee {
@@ -4759,7 +5285,9 @@ export const onDeleteSheet = /* GraphQL */ `
                   lastName
                   grade
                   email
-                  companyReadGroup
+                  owner
+                  readGroups
+                  updateGroups
                   createdAt
                   updatedAt
                 }
@@ -4770,7 +5298,9 @@ export const onDeleteSheet = /* GraphQL */ `
                   lastName
                   grade
                   email
-                  companyReadGroup
+                  owner
+                  readGroups
+                  updateGroups
                   createdAt
                   updatedAt
                 }
@@ -4780,24 +5310,17 @@ export const onDeleteSheet = /* GraphQL */ `
           }
           category {
             id
-            company {
-              id
-              name
-              shortName
-              url
-              companyReadGroup
-              createdAt
-              updatedAt
-            }
             no
             name
-            companyReadGroup
-            companyAdminGroup
+            readGroups
+            updateGroups
             createdAt
             updatedAt
           }
           reviewee
           reviewers
+          readGroups
+          updateGroups
           createdAt
           updatedAt
         }
@@ -4805,7 +5328,8 @@ export const onDeleteSheet = /* GraphQL */ `
       }
       reviewee
       reviewers
-      companyReadGroup
+      readGroups
+      updateGroups
       createdAt
       updatedAt
       revieweeEmployee {
@@ -4819,8 +5343,8 @@ export const onDeleteSheet = /* GraphQL */ `
           id
           name
           sort
-          companyReadGroup
-          companyAdminGroup
+          readGroups
+          updateGroups
           createdAt
           updatedAt
         }
@@ -4829,11 +5353,17 @@ export const onDeleteSheet = /* GraphQL */ `
           name
           shortName
           url
-          companyReadGroup
+          companyGroupName
+          companyManagerGroupName
+          companyAdminGroupName
+          readGroups
+          updateGroups
           createdAt
           updatedAt
         }
-        companyReadGroup
+        owner
+        readGroups
+        updateGroups
         createdAt
         updatedAt
         superior {
@@ -4847,8 +5377,8 @@ export const onDeleteSheet = /* GraphQL */ `
             id
             name
             sort
-            companyReadGroup
-            companyAdminGroup
+            readGroups
+            updateGroups
             createdAt
             updatedAt
           }
@@ -4857,11 +5387,17 @@ export const onDeleteSheet = /* GraphQL */ `
             name
             shortName
             url
-            companyReadGroup
+            companyGroupName
+            companyManagerGroupName
+            companyAdminGroupName
+            readGroups
+            updateGroups
             createdAt
             updatedAt
           }
-          companyReadGroup
+          owner
+          readGroups
+          updateGroups
           createdAt
           updatedAt
           superior {
@@ -4875,8 +5411,8 @@ export const onDeleteSheet = /* GraphQL */ `
               id
               name
               sort
-              companyReadGroup
-              companyAdminGroup
+              readGroups
+              updateGroups
               createdAt
               updatedAt
             }
@@ -4885,11 +5421,17 @@ export const onDeleteSheet = /* GraphQL */ `
               name
               shortName
               url
-              companyReadGroup
+              companyGroupName
+              companyManagerGroupName
+              companyAdminGroupName
+              readGroups
+              updateGroups
               createdAt
               updatedAt
             }
-            companyReadGroup
+            owner
+            readGroups
+            updateGroups
             createdAt
             updatedAt
             superior {
@@ -4903,8 +5445,8 @@ export const onDeleteSheet = /* GraphQL */ `
                 id
                 name
                 sort
-                companyReadGroup
-                companyAdminGroup
+                readGroups
+                updateGroups
                 createdAt
                 updatedAt
               }
@@ -4913,11 +5455,17 @@ export const onDeleteSheet = /* GraphQL */ `
                 name
                 shortName
                 url
-                companyReadGroup
+                companyGroupName
+                companyManagerGroupName
+                companyAdminGroupName
+                readGroups
+                updateGroups
                 createdAt
                 updatedAt
               }
-              companyReadGroup
+              owner
+              readGroups
+              updateGroups
               createdAt
               updatedAt
               superior {
@@ -4931,8 +5479,8 @@ export const onDeleteSheet = /* GraphQL */ `
                   id
                   name
                   sort
-                  companyReadGroup
-                  companyAdminGroup
+                  readGroups
+                  updateGroups
                   createdAt
                   updatedAt
                 }
@@ -4941,11 +5489,17 @@ export const onDeleteSheet = /* GraphQL */ `
                   name
                   shortName
                   url
-                  companyReadGroup
+                  companyGroupName
+                  companyManagerGroupName
+                  companyAdminGroupName
+                  readGroups
+                  updateGroups
                   createdAt
                   updatedAt
                 }
-                companyReadGroup
+                owner
+                readGroups
+                updateGroups
                 createdAt
                 updatedAt
                 superior {
@@ -4955,7 +5509,9 @@ export const onDeleteSheet = /* GraphQL */ `
                   lastName
                   grade
                   email
-                  companyReadGroup
+                  owner
+                  readGroups
+                  updateGroups
                   createdAt
                   updatedAt
                 }
@@ -4975,8 +5531,8 @@ export const onDeleteSheet = /* GraphQL */ `
           id
           name
           sort
-          companyReadGroup
-          companyAdminGroup
+          readGroups
+          updateGroups
           createdAt
           updatedAt
         }
@@ -4985,11 +5541,17 @@ export const onDeleteSheet = /* GraphQL */ `
           name
           shortName
           url
-          companyReadGroup
+          companyGroupName
+          companyManagerGroupName
+          companyAdminGroupName
+          readGroups
+          updateGroups
           createdAt
           updatedAt
         }
-        companyReadGroup
+        owner
+        readGroups
+        updateGroups
         createdAt
         updatedAt
         superior {
@@ -5003,8 +5565,8 @@ export const onDeleteSheet = /* GraphQL */ `
             id
             name
             sort
-            companyReadGroup
-            companyAdminGroup
+            readGroups
+            updateGroups
             createdAt
             updatedAt
           }
@@ -5013,11 +5575,17 @@ export const onDeleteSheet = /* GraphQL */ `
             name
             shortName
             url
-            companyReadGroup
+            companyGroupName
+            companyManagerGroupName
+            companyAdminGroupName
+            readGroups
+            updateGroups
             createdAt
             updatedAt
           }
-          companyReadGroup
+          owner
+          readGroups
+          updateGroups
           createdAt
           updatedAt
           superior {
@@ -5031,8 +5599,8 @@ export const onDeleteSheet = /* GraphQL */ `
               id
               name
               sort
-              companyReadGroup
-              companyAdminGroup
+              readGroups
+              updateGroups
               createdAt
               updatedAt
             }
@@ -5041,11 +5609,17 @@ export const onDeleteSheet = /* GraphQL */ `
               name
               shortName
               url
-              companyReadGroup
+              companyGroupName
+              companyManagerGroupName
+              companyAdminGroupName
+              readGroups
+              updateGroups
               createdAt
               updatedAt
             }
-            companyReadGroup
+            owner
+            readGroups
+            updateGroups
             createdAt
             updatedAt
             superior {
@@ -5059,8 +5633,8 @@ export const onDeleteSheet = /* GraphQL */ `
                 id
                 name
                 sort
-                companyReadGroup
-                companyAdminGroup
+                readGroups
+                updateGroups
                 createdAt
                 updatedAt
               }
@@ -5069,11 +5643,17 @@ export const onDeleteSheet = /* GraphQL */ `
                 name
                 shortName
                 url
-                companyReadGroup
+                companyGroupName
+                companyManagerGroupName
+                companyAdminGroupName
+                readGroups
+                updateGroups
                 createdAt
                 updatedAt
               }
-              companyReadGroup
+              owner
+              readGroups
+              updateGroups
               createdAt
               updatedAt
               superior {
@@ -5087,8 +5667,8 @@ export const onDeleteSheet = /* GraphQL */ `
                   id
                   name
                   sort
-                  companyReadGroup
-                  companyAdminGroup
+                  readGroups
+                  updateGroups
                   createdAt
                   updatedAt
                 }
@@ -5097,11 +5677,17 @@ export const onDeleteSheet = /* GraphQL */ `
                   name
                   shortName
                   url
-                  companyReadGroup
+                  companyGroupName
+                  companyManagerGroupName
+                  companyAdminGroupName
+                  readGroups
+                  updateGroups
                   createdAt
                   updatedAt
                 }
-                companyReadGroup
+                owner
+                readGroups
+                updateGroups
                 createdAt
                 updatedAt
                 superior {
@@ -5111,7 +5697,9 @@ export const onDeleteSheet = /* GraphQL */ `
                   lastName
                   grade
                   email
-                  companyReadGroup
+                  owner
+                  readGroups
+                  updateGroups
                   createdAt
                   updatedAt
                 }

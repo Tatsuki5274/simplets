@@ -3,17 +3,23 @@ type Company #会社
 @auth(
   rules: [
     {allow: groups, groups: ["Admin"]}
-    {allow: groups, groupsField: "companyReadGroup", operations: [read]}
-  ]
+
+    # グループに対する権限
+    {allow: groups, groupsField: "readGroups", operations: [read]}
+    {allow: groups, groupsField: "updateGroups", operations: [read, update]}  ]
 )
 {
   id: ID!
   name: String!
   shortName: String
   url: AWSURL
+  companyGroupName: String!   #社員全員が保持するグループ名 
+  companyManagerGroupName: String!    # 社内マネージャーが保持するグループ名
+  companyAdminGroupName: String!      # 社内管理者が保持するグループ名
   
   # グループフィールド
-  companyReadGroup: String
+  readGroups: [String]    #読み込みを許可するグループ
+  updateGroups: [String]  #変更を許可するグループ
 }
 
 # ユーザーはcognitoで管理しています。
@@ -22,7 +28,14 @@ type Employee #社員
 @auth(
   rules:[
     {allow: groups, groups: ["Admin"]}
-    {allow: groups, groupsField: "companyReadGroup", operations: [read]}
+
+    # グループに対する権限
+    {allow: groups, groupsField: "readGroups", operations: [read]}
+    {allow: groups, groupsField: "updateGroups", operations: [read, update]}
+
+    # 社員本人の持つ権限
+    {allow: owner, operations: [read]}
+
     { allow: private, provider: iam, operations: [read] }
   ]
 )
@@ -40,8 +53,12 @@ type Employee #社員
   # companyId: ID!
   company: Company @connection #(fields: ["companyId"])
   
+  # オーナーフィールド
+  owner: String   #社員本人
+
   # グループフィールド
-  companyReadGroup: String
+  readGroups: [String]    #読み込みを許可するグループ
+  updateGroups: [String]  #変更を許可するグループ
 }
 
 type Group #部門
@@ -51,11 +68,9 @@ type Group #部門
   rules: [
     {allow: groups, groups: ["Admin"]}
 
-    #社員全員
-    {allow: groups, groupsField: "companyReadGroup", operations: [read]}
-
-    # 社内の管理者
-    {allow: groups, groupsField: "companyAdminGroup", operations: [create, update, delete, read]}
+    # グループに対する権限
+    {allow: groups, groupsField: "readGroups", operations: [read]}
+    {allow: groups, groupsField: "updateGroups", operations: [read, update]}
   ]
 )
 {
@@ -65,8 +80,8 @@ type Group #部門
   sort: Int  #ソート
 
   # グループフィールド
-  companyReadGroup: String
-  companyAdminGroup: String
+  readGroups: [String]    #読み込みを許可するグループ
+  updateGroups: [String]  #変更を許可するグループ
 }
 
 type Category
@@ -75,22 +90,20 @@ type Category
   rules: [
     {allow: groups, groups: ["Admin"]}
 
-    #社員全員    
-    {allow: groups, groupsField: "companyReadGroup", operations: [read]}
-
-    # 社内の管理者
-    {allow: groups, groupsField: "companyAdminGroup", operations: [create, update, delete, read]}
+    # グループに対する権限
+    {allow: groups, groupsField: "readGroups", operations: [read]}
+    {allow: groups, groupsField: "updateGroups", operations: [read, update]}
   ]
 )
 {
   id: ID!
-  company: Company @connection
+  # company: Company @connection  # グループフィールドへ置き換え
   no: Int
   name: String! #カテゴリ名
 
   # グループフィールド
-  companyReadGroup: String
-  companyAdminGroup: String
+  readGroups: [String]    #読み込みを許可するグループ
+  updateGroups: [String]  #変更を許可するグループ
 }
 
 type Interview
@@ -100,14 +113,15 @@ type Interview
   rules: [
     {allow: groups, groups: ["Admin"]}
 
+    # グループに対する権限
+    {allow: groups, groupsField: "readGroups", operations: [read]}
+    {allow: groups, groupsField: "updateGroups", operations: [read, update]}
+
     # 評価者
     {allow: owner, ownerField: "reviewers", operations: [update, read]}
 
     # 被評価者
     {allow: owner, ownerField: "reviewee", operations: [create, update, read]}
-
-    # 社員が見る必要あり？
-    # {allow: groups, groupsField: "companyReadGroup", operations: [read]}
   ]
 )
 {
@@ -118,8 +132,13 @@ type Interview
   purpose: String #インタビュー目的
   detail: String  #インタビュー内容
 
+  # オーナーフィールド
   reviewee: String #インタビューを受けた人
   reviewers: [String] #評価者
+
+  # グループフィールド
+  readGroups: [String]    #読み込みを許可するグループ
+  updateGroups: [String]  #変更を許可するグループ
 }
 
 type Sheet
@@ -128,16 +147,15 @@ type Sheet
   rules: [
     {allow: groups, groups: ["Admin"]}
 
-    # 社員が見る必要あり？
-    {allow: groups, groupsField: "companyReadGroup", operations: [read]}
+    # グループに対する権限
+    {allow: groups, groupsField: "readGroups", operations: [read]}
+    {allow: groups, groupsField: "updateGroups", operations: [read, update]}
 
     # 評価者
     {allow: owner, ownerField: "reviewers", operations: [update, read]}
 
     # 被評価者
     {allow: owner, ownerField: "reviewee", operations: [create, update, read]}
-    # {allow: private, operations: []}
-    # {allow: public, operations: []}
 
     { allow: private, provider: iam, operations: [read, update] }
     
@@ -174,7 +192,8 @@ type Sheet
   reviewers: [String] #評価者
 
   # グループフィールド
-  companyReadGroup: String  #社員全員
+  readGroups: [String]    #読み込みを許可するグループ
+  updateGroups: [String]  #変更を許可するグループ
 }
 
 type Section
@@ -184,8 +203,9 @@ type Section
   rules: [
     {allow: groups, groups: ["Admin"]}
 
-    # 社員が見る必要あり？
-    # {allow: groups, groupsField: "companyReadGroup", operations: [read]}
+    # グループに対する権限
+    {allow: groups, groupsField: "readGroups", operations: [read]}
+    {allow: groups, groupsField: "updateGroups", operations: [read, update]}
 
     # 評価者
     {allow: owner, ownerField: "reviewers", operations: [read]}
@@ -203,6 +223,10 @@ type Section
   #　オーナーフィールド
   reviewee: String #被評価者
   reviewers: [String] #評価者
+
+  # グループフィールド
+  readGroups: [String]    #読み込みを許可するグループ
+  updateGroups: [String]  #変更を許可するグループ
 }
 
 type Objective
@@ -211,6 +235,10 @@ type Objective
 @auth(
   rules: [
     {allow: groups, groups: ["Admin"]}
+
+    # グループに対する権限
+    {allow: groups, groupsField: "readGroups", operations: [read]}
+    {allow: groups, groupsField: "updateGroups", operations: [read, update]}
 
     # 評価者
     {allow: owner, ownerField: "reviewers", operations: [update, read]}
@@ -242,6 +270,10 @@ type Objective
   #　オーナーフィールド
   reviewee: String #被評価者
   reviewers: [String] #評価者
+
+  # グループフィールド
+  readGroups: [String]    #読み込みを許可するグループ
+  updateGroups: [String]  #変更を許可するグループ
 }
 
 # type Query {

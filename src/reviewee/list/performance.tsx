@@ -58,12 +58,18 @@ function ListPerformanceEvalution() {
         const today: Date = new Date();
 
         // 社員情報取得
-        const revieweeEmployeeItems: Employee = await getQueryEmployee();
-        const revieweeEmployeeID = revieweeEmployeeItems.id; //社員ID取得
+        const revieweeEmployee: Employee = await getQueryEmployee();
+        const revieweeEmployeeID = revieweeEmployee.id; //社員ID取得
         //const revieweeEmployeeSuperior: any = [(await revieweeEmployeeItems).superior?.id, (await revieweeEmployeeItems).superior?.superior?.id];
         const revieweeEmployeeSuperior: Array<string | null> = 
-        [revieweeEmployeeItems.superior ? revieweeEmployeeItems.superior.id : "",
-        revieweeEmployeeItems.superior?.superior ? revieweeEmployeeItems.superior.superior?.id : ""]; //上司情報取得
+        [revieweeEmployee.superior ? revieweeEmployee.superior.id : "",
+        revieweeEmployee.superior?.superior ? revieweeEmployee.superior.superior?.id : ""]; //上司情報取得
+
+
+        // 権限グループ名の取得
+        const companyGroup = revieweeEmployee.company?.companyGroupName || "";
+        const companyManagerGroup = revieweeEmployee.company?.companyManagerGroupName || "";
+        const companyAdminGroup = revieweeEmployee.company?.companyAdminGroupName || "";
 
         //カテゴリを取得する
         const categorys = await runListCategory();
@@ -92,6 +98,9 @@ function ListPerformanceEvalution() {
                 console.error("error");
             }
         }
+
+
+
 
         async function getQueryEmployee() {
             //ログインユーザ情報取得
@@ -122,10 +131,13 @@ function ListPerformanceEvalution() {
 
             const createI: APIt.CreateSheetInput = {
                 grade: 0,
-                sheetGroupId: "0",
                 year: today.getFullYear(),
+                statusValue: 1,
+                sheetSecondEmployeeId: revieweeEmployee.superior?.id,
+                sheetGroupId: revieweeEmployee.group?.id || "",
                 sheetRevieweeEmployeeId: revieweeEmployeeID,
                 reviewers: revieweeEmployeeSuperior,
+                readGroups: [companyManagerGroup]
             };
             const createMV: APIt.CreateSheetMutationVariables = {
                 input: createI,
@@ -151,7 +163,9 @@ function ListPerformanceEvalution() {
         async function runCreateSection(categoryId: string, sheetId: string): Promise<Section | undefined> {
             const createI: APIt.CreateSectionInput = {
                 sectionSheetId: sheetId,
-                sectionCategoryId: categoryId
+                sectionCategoryId: categoryId,
+                reviewers: revieweeEmployeeSuperior,
+                readGroups: [companyManagerGroup]
             };
             const createMV: APIt.CreateSectionMutationVariables = {
                 input: createI,
@@ -202,7 +216,8 @@ function ListPerformanceEvalution() {
 
             const createI: APIt.CreateInterviewInput = {
                 sheetId: sheetId,
-                reviewers: revieweeEmployeeSuperior
+                reviewers: revieweeEmployeeSuperior,
+                readGroups: [companyManagerGroup]
             };
             const createMV: APIt.CreateInterviewMutationVariables = {
                 input: createI

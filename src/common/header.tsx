@@ -6,15 +6,14 @@ import { getEmployee } from 'graphql/queries';
 import { GetEmployeeQuery } from 'API';
 import { GraphQLResult } from "@aws-amplify/api";
 import style from './headerStyle.module.scss'
+import { Button } from 'react-bootstrap';
 
 
 
-function HeaderComponents() {
-
-    
-    
+function HeaderComponents() {    
     //所属する部署と社員名のデータを取得
     const [employee, setEmployee] = useState<Employee>()
+    
     
     //ログインユーザーデータ格納      
     useEffect(() => {
@@ -47,6 +46,11 @@ function HeaderComponents() {
         })()
     }, []);
 
+    function signOut() {
+        // const { onStateChange } = this.props;
+          Auth.signOut();
+    }
+
     //ヘッダー表示
     return (
       <header className={style.headerColorContents}> 
@@ -54,6 +58,7 @@ function HeaderComponents() {
             <p className={style.headerContents}>{employee?.company?.name}</p>
             <p className={style.headerContents}>{employee?.group?.name}</p>
             <p className={style.headerContents}>{employee?.lastName}{employee?.firstName}</p>
+            <Button onClick={signOut}>ログアウト</Button>
         </div>
       </header>
     );
