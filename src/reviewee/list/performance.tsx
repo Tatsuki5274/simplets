@@ -5,9 +5,9 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { GraphQLResult } from "@aws-amplify/api";
 import { ListSheetsQuery } from 'API';
 import { Link } from 'react-router-dom';
-import { Category, Interview, Section, Sheet } from 'App';
+import { Category, Employee, Interview, Section, Sheet } from 'App';
 import { ApprovalStatus, getStatusValue } from 'lib/getStatusValue'
-import { listCategorys, listSheets } from 'graphql/queries'
+import { getEmployee, listCategorys, listSheets } from 'graphql/queries'
 import * as APIt from 'API';
 import { createInterview, createSection, createSheet, updateSheet } from 'graphql/mutations';
 import SidebarComponents from 'common/Sidebar';
@@ -36,12 +36,12 @@ function ListPerformanceEvalution() {
     const [sheets, setSheets] = useState<Sheet[]>();
 
     useEffect(() => {
-        ;(async()=>{
+        ; (async () => {
             let response
-            try{
+            try {
                 response = (await API.graphql(graphqlOperation(listSheets))
-                )as GraphQLResult<ListSheetsQuery>;
-            }catch(e){
+                ) as GraphQLResult<ListSheetsQuery>;
+            } catch (e) {
                 console.error("エラーを無視しています", e)
                 response = e
             }
@@ -56,6 +56,14 @@ function ListPerformanceEvalution() {
     async function handleClickCreate() {
         //今日の日付を取得
         const today: Date = new Date();
+
+        // 社員情報取得
+        const revieweeEmployeeItems: Employee = await getQueryEmployee();
+        const revieweeEmployeeID = revieweeEmployeeItems.id; //社員ID取得
+        //const revieweeEmployeeSuperior: any = [(await revieweeEmployeeItems).superior?.id, (await revieweeEmployeeItems).superior?.superior?.id];
+        const revieweeEmployeeSuperior: Array<string | null> = 
+        [revieweeEmployeeItems.superior ? revieweeEmployeeItems.superior.id : "",
+        revieweeEmployeeItems.superior?.superior ? revieweeEmployeeItems.superior.superior?.id : ""]; //上司情報取得
 
         //カテゴリを取得する
         const categorys = await runListCategory();
@@ -85,28 +93,47 @@ function ListPerformanceEvalution() {
             }
         }
 
-
-        async function runCreateSheet(): Promise<Sheet | undefined>{
-            //シートを作成
-            let sheetId: string = '';
-
+        async function getQueryEmployee() {
             //ログインユーザ情報取得
             const currentUser = await Auth.currentAuthenticatedUser();
-            const revieweeEmployeeID:string = currentUser.username;
+            const revieweeEmployeeID: string = currentUser.username;
+
+            //所属長,部門長情報取得
+            const input: APIt.GetEmployeeQueryVariables = {
+                id: revieweeEmployeeID
+            }
+            let response;
+            try {
+                response = (await API.graphql(graphqlOperation(getEmployee, input))
+                ) as GraphQLResult<APIt.GetEmployeeQuery>;
+            } catch (e) {
+                console.error("エラーを無視しています", e)
+                response = e;
+            }
+
+            const employeeItem: Employee = response.data.getEmployee as Employee;
+            
+            return employeeItem;
+        }
+
+        async function runCreateSheet(): Promise<Sheet | undefined> {
+            //シートを作成
+            let sheetId: string = '';
 
             const createI: APIt.CreateSheetInput = {
                 grade: 0,
                 sheetGroupId: "0",
                 year: today.getFullYear(),
-                sheetRevieweeEmployeeId: revieweeEmployeeID 
+                sheetRevieweeEmployeeId: revieweeEmployeeID,
+                reviewers: revieweeEmployeeSuperior,
             };
             const createMV: APIt.CreateSheetMutationVariables = {
                 input: createI,
             };
             let createR: GraphQLResult<APIt.CreateSheetMutation>
-            try{
+            try {
                 createR = await API.graphql(graphqlOperation(createSheet, createMV)) as GraphQLResult<APIt.CreateSheetMutation>;
-            }catch(e){
+            } catch (e) {
                 console.error("エラーを無視しています", e)
                 console.error("データが不完全でないことを確認してください")
                 createR = e;
@@ -130,9 +157,9 @@ function ListPerformanceEvalution() {
                 input: createI,
             };
             let createR: GraphQLResult<APIt.CreateSectionMutation>
-            try{
+            try {
                 createR = await API.graphql(graphqlOperation(createSection, createMV)) as GraphQLResult<APIt.CreateSectionMutation>;
-            }catch(e){
+            } catch (e) {
                 console.error("エラーを無視しています", e)
                 console.error("データが不完全でないことを確認してください")
                 createR = e;
@@ -149,9 +176,9 @@ function ListPerformanceEvalution() {
         async function runListCategory(): Promise<Category[] | undefined> {
             const listQV: APIt.ListCategorysQueryVariables = {};
             let listGQL: GraphQLResult<APIt.ListCategorysQuery>
-            try{
+            try {
                 listGQL = await API.graphql(graphqlOperation(listCategorys, listQV)) as GraphQLResult<APIt.ListCategorysQuery>;
-            }catch(e){
+            } catch (e) {
                 console.error("エラーを無視しています", e)
                 console.error("データが不完全でないことを確認してください")
                 listGQL = e;
@@ -172,16 +199,18 @@ function ListPerformanceEvalution() {
         }
         async function runCreateInterview(sheetId: string): Promise<Interview | undefined> {
             let interviewId: string = '';
+
             const createI: APIt.CreateInterviewInput = {
-                sheetId: sheetId
+                sheetId: sheetId,
+                reviewers: revieweeEmployeeSuperior
             };
             const createMV: APIt.CreateInterviewMutationVariables = {
-                input: createI,
+                input: createI
             };
             let createR: GraphQLResult<APIt.CreateInterviewMutation>
-            try{
+            try {
                 createR = await API.graphql(graphqlOperation(createInterview, createMV)) as GraphQLResult<APIt.CreateInterviewMutation>;
-            }catch(e){
+            } catch (e) {
                 console.error("エラーを無視しています", e)
                 console.error("データが不完全でないことを確認してください")
                 createR = e;
