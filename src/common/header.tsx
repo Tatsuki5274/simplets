@@ -31,7 +31,7 @@ function HeaderComponents() {
                     response = (await API.graphql(graphqlOperation(getEmployee, employee))
                     ) as GraphQLResult<GetEmployeeQuery>;
                 }catch(e){
-                    console.error(e);
+                    console.log(e);
                     response = e;
                 }
 

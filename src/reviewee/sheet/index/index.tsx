@@ -88,8 +88,8 @@ function RevieweeSheetShow(props: Props) {
             try{
                 updateR = await API.graphql(graphqlOperation(updateObjective, updateMV)) as GraphQLResult<APIt.UpdateObjectiveMutation>;
             }catch(e){
-                console.error("エラーを無視しています", e)
-                console.error("データが不完全でないことを確認してください")
+                console.log("エラーを無視しています", e)
+                console.log("データが不完全でないことを確認してください")
                 updateR = e;
             }
 
@@ -126,7 +126,7 @@ function RevieweeSheetShow(props: Props) {
             updateR =
                 await API.graphql(graphqlOperation(updateObjective, updateMV)) as GraphQLResult<APIt.UpdateObjectiveMutation>;
         }catch(e){
-            console.error("エラーを無視しています", e)
+            console.log("エラーを無視しています", e)
             updateR = e;
         }
         // console.log("updateR", updateR);
@@ -159,7 +159,7 @@ function RevieweeSheetShow(props: Props) {
         updateR = 
             await API.graphql(graphqlOperation(updateSheet, updateMV)) as GraphQLResult<APIt.UpdateSheetMutation>;
       }catch(e){
-            console.error("エラーを無視しています", e)
+            console.log("エラーを無視しています", e)
             updateR = e;
       }
       if (updateR.data) {
@@ -200,7 +200,7 @@ function RevieweeSheetShow(props: Props) {
                 response = (await API.graphql(graphqlOperation(getSheet, input))
                 )as GraphQLResult<GetSheetQuery>;
             }catch(e){
-                console.error("エラーを無視しています", e)
+                console.log("エラーを無視しています", e)
                 response = e;
             }
             const sheet: Sheet = response.data?.getSheet as Sheet;

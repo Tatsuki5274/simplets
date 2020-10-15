@@ -48,7 +48,7 @@ function EvalutionScreen(props: Props) {
                 response = (await API.graphql(graphqlOperation(getSheet, input))
                 ) as GraphQLResult<GetSheetQuery>;
             } catch (e) {
-                console.error("エラーを無視しています", e)
+                console.log("エラーを無視しています", e)
                 response = e;
             }
             const sheetItem: Sheet = response.data?.getSheet as Sheet;
@@ -195,7 +195,7 @@ function EvalutionScreen(props: Props) {
             try{
                 updateR = await API.graphql(graphqlOperation(updateSheet, updateMV)) as GraphQLResult<APIt.UpdateSheetMutation>;
             }catch(e){
-                console.error("エラーを無視しています", e);
+                console.log("エラーを無視しています", e);
                 updateR = e;
             }
             if (updateR.data) {

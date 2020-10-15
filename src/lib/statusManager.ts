@@ -37,7 +37,7 @@ export async function exec(sheet: Sheet, action: "remand" | "proceed"): Promise<
         try {
             updateR = await API.graphql(graphqlOperation(updateSheet, updateMV)) as GraphQLResult<APIt.UpdateSheetMutation>;
         } catch (e) {
-            console.error("エラーを無視しています")
+            console.log("エラーを無視しています")
             updateR = e
         }
         if (updateR.data) {

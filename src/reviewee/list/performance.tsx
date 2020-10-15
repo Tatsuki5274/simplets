@@ -42,7 +42,7 @@ function ListPerformanceEvalution() {
                 response = (await API.graphql(graphqlOperation(listSheets))
                 ) as GraphQLResult<ListSheetsQuery>;
             } catch (e) {
-                console.error("エラーを無視しています", e)
+                console.log("エラーを無視しています", e)
                 response = e
             }
             const listItems = response.data?.listSheets?.items;
@@ -116,7 +116,7 @@ function ListPerformanceEvalution() {
                 response = (await API.graphql(graphqlOperation(getEmployee, input))
                 ) as GraphQLResult<APIt.GetEmployeeQuery>;
             } catch (e) {
-                console.error("エラーを無視しています", e)
+                console.log("エラーを無視しています", e)
                 response = e;
             }
 
@@ -146,8 +146,8 @@ function ListPerformanceEvalution() {
             try {
                 createR = await API.graphql(graphqlOperation(createSheet, createMV)) as GraphQLResult<APIt.CreateSheetMutation>;
             } catch (e) {
-                console.error("エラーを無視しています", e)
-                console.error("データが不完全でないことを確認してください")
+                console.log("エラーを無視しています", e)
+                console.log("データが不完全でないことを確認してください")
                 createR = e;
             }
             if (createR.data) {
@@ -174,8 +174,8 @@ function ListPerformanceEvalution() {
             try {
                 createR = await API.graphql(graphqlOperation(createSection, createMV)) as GraphQLResult<APIt.CreateSectionMutation>;
             } catch (e) {
-                console.error("エラーを無視しています", e)
-                console.error("データが不完全でないことを確認してください")
+                console.log("エラーを無視しています", e)
+                console.log("データが不完全でないことを確認してください")
                 createR = e;
             }
             if (createR.data) {
@@ -193,8 +193,8 @@ function ListPerformanceEvalution() {
             try {
                 listGQL = await API.graphql(graphqlOperation(listCategorys, listQV)) as GraphQLResult<APIt.ListCategorysQuery>;
             } catch (e) {
-                console.error("エラーを無視しています", e)
-                console.error("データが不完全でないことを確認してください")
+                console.log("エラーを無視しています", e)
+                console.log("データが不完全でないことを確認してください")
                 listGQL = e;
             }
             if (listGQL.data) {
@@ -226,8 +226,8 @@ function ListPerformanceEvalution() {
             try {
                 createR = await API.graphql(graphqlOperation(createInterview, createMV)) as GraphQLResult<APIt.CreateInterviewMutation>;
             } catch (e) {
-                console.error("エラーを無視しています", e)
-                console.error("データが不完全でないことを確認してください")
+                console.log("エラーを無視しています", e)
+                console.log("データが不完全でないことを確認してください")
                 createR = e;
             }
             if (createR.data) {

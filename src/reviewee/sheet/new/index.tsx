@@ -54,8 +54,8 @@ function RevieweeSheetNew(props: Props){
         try{
             createR = await API.graphql(graphqlOperation(createObjective, createMV)) as GraphQLResult<APIt.CreateObjectiveMutation>;
         }catch(e){
-            console.error("エラーを無視しています", e)
-            console.error("データが不完全でないことを確認してください")
+            console.log("エラーを無視しています", e)
+            console.log("データが不完全でないことを確認してください")
             createR = e;
         }
         if(createR.data){
