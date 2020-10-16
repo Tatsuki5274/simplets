@@ -347,10 +347,14 @@ function RevieweeSheetShow(props: Props) {
                                             var expDoneDateStyle: string; //完了予定日のクラス名
                                             var currentDate = new Date().getTime();
                                             var doneDate = new Date(objective.expDoneDate!).getTime();
-                                            if(doneDate > currentDate) {
+
+                                            //完了予定日のスタイルの分岐
+                                            if(doneDate < currentDate && doneDate != 0) {
                                                 expDoneDateStyle = Style.indexExpDoneDateExpired;
-                                            } else {
+                                            } else if(doneDate >= currentDate) {
                                                 expDoneDateStyle = Style.indexExpDoneDateInProgress;
+                                            } else {
+                                                expDoneDateStyle = "";
                                             }
 
                                             return (
