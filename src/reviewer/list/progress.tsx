@@ -10,6 +10,8 @@ import { Group, Objective, Section, Sheet } from 'App';
 import { getEmployee } from 'graphql/queries'
 import SidebarComponents from 'common/Sidebar';
 import HeaderComponents from 'common/header';//ヘッダーの表示
+import style from './progressStyle.module.scss';
+import { Link } from 'react-router-dom';
 
 function ProgressReferenceList() {
     //今日の日付を取得
@@ -47,8 +49,6 @@ function ProgressReferenceList() {
                     }
                 });
                 setGroupList(groupItem);
-                console.log(groupItem);
-                console.log(response);
             } catch (e) {
                 console.log(e);
             }
@@ -75,8 +75,13 @@ function ProgressReferenceList() {
         //部門の選択肢の中から「全て」が選択された場合
         if (formInput.groupId === "all") {
             const listQV: APIt.ListSheetsQueryVariables = { filter: { year: { eq: parseInt(formInput.year as string) } } };
-            const response = await (API.graphql(graphqlOperation(listSheets, listQV))
-            ) as GraphQLResult<ListSheetsQuery>;
+            let response;
+            try{
+                response = await (API.graphql(graphqlOperation(listSheets, listQV))) as GraphQLResult<ListSheetsQuery>;
+            }catch(e){
+                console.log("エラーを無視しています", e);
+                response = e;
+            }
             const listItems = response.data?.listSheets?.items;
             setSheets(listItems as Sheet[]);
             console.log(response);
@@ -84,8 +89,15 @@ function ProgressReferenceList() {
             //部門の選択肢の中から「全て」以外が選択された場合
         } else {
             const listQV: APIt.ListSheetsQueryVariables = { filter: { sheetGroupId: { eq: formInput.groupId }, year: { eq: parseInt(formInput.year as string) } } };
-            const response = await (API.graphql(graphqlOperation(listSheets, listQV))
-            ) as GraphQLResult<ListSheetsQuery>;
+
+            let response;
+            try{
+                response = await (API.graphql(graphqlOperation(listSheets, listQV))
+                ) as GraphQLResult<ListSheetsQuery>;
+            }catch(e){
+                console.log("エラーを無視しています", e);
+                response = e;
+            }
             const listItems = response.data?.listSheets?.items;
             setSheets(listItems as Sheet[]);
             console.log(response);
@@ -145,7 +157,8 @@ function ProgressReferenceList() {
                 {/* 取得したシートの数だけ社員毎の進捗を表示 */}
                 {sheets?.map((sheet: Sheet) => {
                     return (
-                        <Card>
+                        <Card className={style.linkbox}>
+                            <Link to={`/reviewer/sheet/${sheet.id}`} />
                             {/* 社員の姓名と部門名を表示 */}
                             <Card.Header>{sheet.revieweeEmployee?.lastName}{sheet.revieweeEmployee?.firstName}&nbsp;{sheet.group?.name}</Card.Header>
                             <Card.Body>

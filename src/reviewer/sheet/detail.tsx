@@ -14,6 +14,7 @@ import HeaderComponents from 'common/header';
 import style from './detailStyle.module.scss';
 import * as statusManager from 'lib/statusManager'
 import ApprovalStatusBox from 'common/approvalStatusBox';
+import { Link } from 'react-router-dom';
 
 //propsの型を指定
 type Props = {
@@ -293,6 +294,9 @@ function EvalutionScreen(props: Props) {
             <HeaderComponents />
             <div>
                 <Container>
+                    <Link to={`/reviewer/list`} >
+                        <Button >戻る</Button>
+                    </Link>
                     <ApprovalStatusBox statusValue={sheet.statusValue || -1}/>
                     <h3>今後のキャリア計画</h3><br />
 

@@ -17,6 +17,7 @@ import HeaderComponents from 'common/header';//ヘッダーの表示
 import Style from './indexStyle.module.scss';
 import * as statusManager from 'lib/statusManager';
 import ApprovalStatusBox from 'common/approvalStatusBox';
+import { RevieweeSidebar } from 'common/Sidebar';
 
 type Props = {
     match: {
@@ -310,6 +311,7 @@ function RevieweeSheetShow(props: Props) {
             {/* ヘッダーの表示 */}
             <HeaderComponents />
             <div>
+                <RevieweeSidebar />
                 <Container>
                     <ApprovalStatusBox statusValue={sheet.statusValue || -1}/>
                     <h2>メイン</h2>

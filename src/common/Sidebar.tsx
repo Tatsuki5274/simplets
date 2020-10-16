@@ -52,3 +52,11 @@ function SidebarComponents() {
 }
 
 export default SidebarComponents;
+
+export function RevieweeSidebar(){
+    return (
+        <div>
+            <Link to="/reviewee/list">一覧画面</Link>
+        </div>
+    )
+}
