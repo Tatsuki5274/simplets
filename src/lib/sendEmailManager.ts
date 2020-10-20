@@ -14,7 +14,9 @@ export default function emailParameterChange(sheet: Sheet, action: "remand" | "p
     const superior = employee?.superior;
     const revieweeEmail: string = employee?.email || "";
     const superiorEmail: Array<string | null> =
-        [superior ? superior.email : "", superior?.superior ? superior.superior.email : ""];
+        [superior ? superior.email : "", superior?.superior ? superior.superior.email : "", superior?.superior?.superior ? superior.superior.superior.email : ""];
+    const ceoEmail : string = superiorEmail[superiorEmail.length - 1 ] || "";
+
     let emailInput: SendEmail = {
         to: ["test"],
         // cc: [""],
@@ -184,7 +186,7 @@ export default function emailParameterChange(sheet: Sheet, action: "remand" | "p
             switch (emailAction) {
                 case "proceed":
                     emailInput = {
-                        to: [superiorEmail[superiorEmail.length - 1]],
+                        to: [ceoEmail,superiorEmail[0],revieweeEmail],
                         //cc: [""],
                         //bcc: [""],
                         subject: "13:承認",
