@@ -82,7 +82,7 @@ function ListPerformanceEvalution() {
                 console.log('CreateSheet', createdSheet);
                 //インタビューを作成
                 for (let i = 0; i < 4; i++) {
-                    const createdInterview = await runCreateInterview(createdSheet.id)
+                    const createdInterview = await runCreateInterview(createdSheet.id, i)
                     console.log('CreateInterview', createdInterview);
                 }
                 //取得したカテゴリを元にsectionを作成する
@@ -211,11 +211,14 @@ function ListPerformanceEvalution() {
                 }
             }
         }
-        async function runCreateInterview(sheetId: string): Promise<Interview | undefined> {
+        async function runCreateInterview(sheetId: string, itemNumber: number): Promise<Interview | undefined> {
             let interviewId: string = '';
+
+            const purposeItems:string[] = ["目標設定","中間#1","中間#2","中間#3"];
 
             const createI: APIt.CreateInterviewInput = {
                 sheetId: sheetId,
+                purpose: purposeItems[itemNumber],
                 reviewers: revieweeEmployeeSuperior,
                 readGroups: [companyManagerGroup]
             };

@@ -325,7 +325,7 @@ function EvalutionScreen(props: Props) {
                                 {/* インタビュー実施記録　情報表示 */}
                                 {sheet.interviews?.items?.map((arg: any) => {
                                     const interviews: Interview = arg;
-                                    const date = new Date(interviews.createdAt);
+                                    const date = new Date(interviews.updatedAt);
                                     return (
                                         <tr key={interviews.id}>
                                             <td>{interviews.purpose}</td>
