@@ -5,7 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { GraphQLResult } from "@aws-amplify/api";
 import { ListSheetsQuery } from 'API';
 import { Link } from 'react-router-dom';
-import { Category, Employee, Interview, Section, Sheet } from 'App';
+import { Category, Employee, Interview, Objective, Section, Sheet } from 'App';
 import { ApprovalStatus, getStatusValue } from 'lib/getStatusValue'
 import { getEmployee, listCategorys, listSheets } from 'graphql/queries'
 import * as APIt from 'API';
@@ -277,6 +277,7 @@ function ListPerformanceEvalution() {
                                 <td></td>
                                 <td>年度</td>
                                 <td>所属長</td>
+                                <td>平均達成率</td>
                                 <td>ステータス</td>
                                 <td>総合評価</td>
                                 <td></td>
@@ -289,11 +290,34 @@ function ListPerformanceEvalution() {
                                 if (sheet.statusValue === ApprovalStatus.DONE) {
                                     editName = "確認";
                                 }
+                                const progressList: number[] | undefined = sheet.section?.items?.map((arg: any)=>{
+                                    const section: Section = arg;
+                                    let sum = 0;
+                                    section.objective?.items?.forEach((arg: any) => {
+                                        const objective: Objective = arg;
+                                        sum += objective.progress || 0;
+                                    });
+                                    if(section && section.objective && section.objective.items){
+                                        return sum / section.objective?.items?.length;
+                                    }else{
+                                        return -1;
+                                    }
+                                })
+                                let sum: number = 0;
+                                let cnt: number = 0;
+                                progressList?.forEach((progress: number)=>{
+                                    if(progress !== -1){
+                                        sum += progress;
+                                        cnt ++;
+                                    }
+                                })
+                                const avg: number = cnt !== 0 ? sum / cnt : -1;
                                 return (
                                     <tr key={sheet.id}>
                                         <td><Link to={"/reviewee/sheet/" + sheet.id}>{editName}</Link></td>
                                         <td>{sheet.year}</td>
                                         <td>{sheet.secondEmployee ? sheet.secondEmployee.lastName : ""}{sheet.secondEmployee ? sheet.secondEmployee.firstName : ""}</td>
+                                        <td>{avg || "-"}%</td>
                                         <td>{getStatusValue(sheet.statusValue || -1)}</td>
                                         <td>{sheet.overAllEvaluation}</td>
                                         <td><a href="">プレビュー</a></td>
