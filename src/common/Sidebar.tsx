@@ -38,9 +38,8 @@ function SidebarComponents() {
 
         })()
     }, []);
-
+    // サイドバーを表示
     return (
-        // サイドバーを表示
         <div>
             <Link className={style.sidebarContents} to="/reviewee/list">業績評価一覧</Link><br />
 
