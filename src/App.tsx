@@ -65,7 +65,7 @@ function App() {
     <div>
       <BrowserRouter>
         <Switch>
-          <Route exact path="/" component={Portal} />
+          <Route exact path="/" component={ListPerformanceEvalution} />
           <Route exact path="/reviewee/objective/new/:sheetId" component={RevieweeSheetNew} />
           <Route exact path="/reviewee/sheet/:sheetId" component={RevieweeSheetShow} />
           <Route exact path="/reviewee/list" component={ListPerformanceEvalution} />
