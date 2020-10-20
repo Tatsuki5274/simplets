@@ -411,7 +411,7 @@ function RevieweeSheetShow(props: Props) {
                     <Row>
                         <Col>
                             <h5>本人希望</h5>
-                            <Button variant="info" onClick={handleShowCareerPlanUpdate}>変更</Button>
+                            <Button variant="info" onClick={handleShowCareerPlanUpdate}>編集</Button>
                             <p>{sheet.careerPlan}</p>
                         </Col>
                         <Col>
@@ -419,7 +419,6 @@ function RevieweeSheetShow(props: Props) {
                             <p>{sheet.careerPlanComment}</p>
                         </Col>
                     </Row>
-                    <Button variant="success">所属長提出</Button>
                     <h4>年度評価</h4>
                     <Row>
                         <Col>
