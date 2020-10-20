@@ -24,6 +24,8 @@ type InputForm = {
     section?: string
     content?: string
     priority?: string
+    expDoneDate?: string
+    expStartDate?: string
 }
 
 function RevieweeSheetNew(props: Props){
@@ -46,6 +48,8 @@ function RevieweeSheetNew(props: Props){
             content: input.content || "",
             priority: input.priority || "",
             objectiveSectionId: input.section || "",
+            expStartDate: input.expStartDate?.replace('T', '-') || "",
+            expDoneDate: input.expDoneDate?.replace('T', '-') || "",
         }
         const createMV: APIt.CreateObjectiveMutationVariables = {
             input: createI
@@ -112,6 +116,26 @@ function RevieweeSheetNew(props: Props){
                         <option>B</option>
                         <option>C</option>
                     </Form.Control>
+                    <Row>
+                        <Col md="2" lg="2" xl="2">開始予定日</Col>
+                        <Col md="4" lg="4" xl="4">
+                            <Form.Control
+                                required
+                                type="datetime-local"
+                                name="expStartDate"
+                                onChange={handleChange}
+                            />
+                        </Col>
+                        <Col md="2" lg="2" xl="2">完了予定日</Col>
+                        <Col md="4" lg="4" xl="4">
+                            <Form.Control
+                                required
+                                type="datetime-local"
+                                name="expDoneDate"
+                                onChange={handleChange}
+                            />
+                        </Col>
+                    </Row>
                     <Button variant="success" type="submit">目標登録</Button>{' '}
                 </Form>
 
