@@ -45,8 +45,16 @@ function ListPerformanceEvalution() {
                 console.log("エラーを無視しています", e)
                 response = e
             }
-            const listItems = response.data?.listSheets?.items;
-            setSheets(listItems as Sheet[]);
+            const listItems = response.data?.listSheets?.items as Sheet[];
+            //降順でソートしてlistItemsに保存
+            listItems?.sort(function (a, b) {
+                if (a.year < b.year) {
+                    return 1;
+                } else {
+                    return -1;
+                }
+            });
+            setSheets(listItems);
             console.log(response);
             console.log(listItems);
 
