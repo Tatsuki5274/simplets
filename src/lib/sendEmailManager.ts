@@ -15,8 +15,13 @@ export default function emailParameterChange(sheet: Sheet, action: "remand" | "p
     const revieweeEmail: string = employee?.email || "";
     const superiorEmail: Array<string | null> =
         [superior ? superior.email : "", superior?.superior ? superior.superior.email : "", superior?.superior?.superior ? superior.superior.superior.email : ""];
-    const ceoEmail : string = superiorEmail[superiorEmail.length - 1 ] || "";
-
+    var ceoEmail : string = "";
+    for(let i = 0 ;i<superiorEmail.length -1 ; i++) {
+        if(superiorEmail[i] === "") {
+            break;
+        }
+        ceoEmail = superiorEmail[i] || "";
+    }
     let emailInput: SendEmail = {
         to: ["test"],
         // cc: [""],
@@ -148,13 +153,13 @@ export default function emailParameterChange(sheet: Sheet, action: "remand" | "p
         case 12:
             switch (emailAction) {
                 case "proceed":
-                    if (superiorEmail[1] === superiorEmail[superiorEmail.length - 1]) {
+                    if (superiorEmail[0] == ceoEmail || superiorEmail[1] == ceoEmail) {
                         emailInput = {
-                            to: [superiorEmail[superiorEmail.length - 1]],
+                            to: [ceoEmail,superiorEmail[0],revieweeEmail],
                             //cc: [""],
                             //bcc: [""],
-                            subject: "12:承認",
-                            body: "承認"
+                            subject: "12:最終承認",
+                            body: "最終承認"
                         }
 
                     } else {

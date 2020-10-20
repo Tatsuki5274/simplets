@@ -17,8 +17,14 @@ import { resolve } from "dns";
 export async function exec(sheet: Sheet, action: "remand" | "proceed"): Promise<Sheet> {
     const response = emailParameterChange(sheet, action);
 
+    //承認依頼 確認
+    let approvalRequestFlag = false;
+    if (sheet.revieweeEmployee?.superior?.superior?.superior) {
+        approvalRequestFlag = true;
+    }
+
     let retSheet = sheet;
-    const changedStatusValue = step(sheet.statusValue || -1, action);
+    const changedStatusValue = step(sheet.statusValue || -1, action, approvalRequestFlag);
     retSheet.statusValue = changedStatusValue;
     console.log("email", response)
 
@@ -61,7 +67,7 @@ export async function exec(sheet: Sheet, action: "remand" | "proceed"): Promise<
  * @param action      ステータスに対する動作
  * @returns 変更後のステータス番号 存在しない場合は -1 を返す
  */
-function step(statusValue: number, action: "remand" | "proceed"): number {
+function step(statusValue: number, action: "remand" | "proceed", approveRequest: true | false): number {
     let value = -1;
     switch (statusValue) {
         case 1:
@@ -98,8 +104,10 @@ function step(statusValue: number, action: "remand" | "proceed"): number {
             }
             break;
         case 12:
-            if (action == "proceed") {
+            if (action == "proceed" && approveRequest == true) {
                 value = 13;
+            } else if (action == "proceed" && approveRequest == false){
+                value = 14;
             } else if (action == "remand") {
                 value = 1;
             }

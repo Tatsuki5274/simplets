@@ -389,7 +389,7 @@ function EvalutionScreen(props: Props) {
                                 {/* 承認ステータスが12かつ部門長が存在すれば「部門長承認依頼」ボタン、部門長が存在しなければ「最終承認」ボタンを表示 */}
                                 {(() => {
                                     if (sheet.statusValue === 12) {
-                                        if (sheet.secondEmployee?.superior) {
+                                        if (sheet.revieweeEmployee?.superior?.superior?.superior) {
                                             return (
                                                 <span>
                                                     <Button onClick={handleClickStatusProceed}>部門長承認依頼</Button>
