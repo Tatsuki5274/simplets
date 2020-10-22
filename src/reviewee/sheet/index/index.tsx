@@ -359,8 +359,7 @@ function RevieweeSheetShow(props: Props) {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {objectiveItems.map((arg: any) => {
-                                            const objective: Objective = arg;   //仮の型変換処理
+                                        {objectiveItems.map((objective: Objective) => {
                                             const date = new Date(objective.updatedAt);
                                             var expDoneDateStyle: string; //完了予定日のクラス名
                                             var currentDate = new Date().getTime();
