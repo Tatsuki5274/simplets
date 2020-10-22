@@ -111,7 +111,7 @@ function RevieweeSheetNew(props: Props){
 
                     <Form.Label>優先順位</Form.Label>
                     <Form.Control as="select" onChange={handleChange} name="priority">
-                        <option>未選択</option>
+                        <option></option>
                         <option>A</option>
                         <option>B</option>
                         <option>C</option>
