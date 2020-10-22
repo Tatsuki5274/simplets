@@ -84,6 +84,15 @@ function RevieweeSheetNew(props: Props){
             const response = (await API.graphql(graphqlOperation(listSections, queryInput))
             )as GraphQLResult<ListSectionsQuery>;
             const repsonseSection = response.data?.listSections?.items as Section[];
+            
+            //カテゴリ情報のnoを元にソート
+            repsonseSection?.sort(function (a, b) {
+                if (a.category?.no! > b.category?.no!) {
+                    return 1;
+                } else {
+                    return -1;
+                }
+            });
             setSections(repsonseSection);
             console.log("section", repsonseSection);
         })()
