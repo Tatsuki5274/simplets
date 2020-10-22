@@ -329,6 +329,17 @@ function RevieweeSheetShow(props: Props) {
 
                     {sheet.section?.items?.map((arg: any) => {
                         const section: Section = arg    //仮の型変換処理
+
+                        //作成日を元に項目明細をソート
+                        const objectiveItems = section.objective?.items as Objective[];
+                        objectiveItems?.sort(function (a, b) {
+                            if (a.createdAt > b.createdAt) {
+                                return 1;
+                            } else {
+                                return -1;
+                            }
+                        });
+
                         return (
                             <div key={section.id}>
                                 <h4>{section.category?.name}</h4>
@@ -348,7 +359,7 @@ function RevieweeSheetShow(props: Props) {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {section.objective?.items?.map((arg: any) => {
+                                        {objectiveItems.map((arg: any) => {
                                             const objective: Objective = arg;   //仮の型変換処理
                                             const date = new Date(objective.updatedAt);
                                             var expDoneDateStyle: string; //完了予定日のクラス名
