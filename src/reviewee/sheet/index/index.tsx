@@ -71,7 +71,10 @@ function RevieweeSheetShow(props: Props) {
     function HandleUpdateObject() {
         (async () => {
             const objectiveId = changeObjectiveId;
-            const selfEvaluationInput = parseInt(formInput.selfEvaluation);
+            let selfEvaluationInput:number | null | undefined = parseInt(formInput.selfEvaluation);
+            if(isNaN(selfEvaluationInput)) {
+                selfEvaluationInput = undefined;
+            }
             //目標変更の目標、ステータス、自己評価、優先順位、実績を項目明細に上書き
             const updateI: APIt.UpdateObjectiveInput = {
                 id: objectiveId,
@@ -82,9 +85,11 @@ function RevieweeSheetShow(props: Props) {
                 expStartDate: formInput.expStartDate,
                 expDoneDate: formInput.expDoneDate
             };
+            //console.log('updateI',updateI); //検証用
             const updateMV: APIt.UpdateObjectiveMutationVariables = {
                 input: updateI,
             };
+            //console.log('updateMV',updateMV); //検証用
             let updateR: GraphQLResult<APIt.UpdateObjectiveMutation>
             try{
                 updateR = await API.graphql(graphqlOperation(updateObjective, updateMV)) as GraphQLResult<APIt.UpdateObjectiveMutation>;
