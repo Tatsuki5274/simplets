@@ -257,6 +257,16 @@ function EvalutionScreen(props: Props) {
         console.log("sheet not found.");
         return <p>該当のシートは存在しません</p>
     }
+
+    //カテゴリ情報のnoを元に昇順でソート
+    const sectionItems = sheet.section?.items as Section[];
+    sectionItems?.sort(function (a, b) {
+        if (a?.category?.no! > b?.category?.no!) {
+            return 1;
+        } else {
+            return -1;
+        }
+    });
     return (
         <div>
 
@@ -418,8 +428,7 @@ function EvalutionScreen(props: Props) {
                         </Form><br />
 
                         {/* 目標コンポーネント */}
-                        {sheet.section?.items?.map((arg: any) => {
-                            const section: Section = arg    //仮の型変換処理
+                        {sectionItems.map((section: Section) => {
 
                             //項目明細情報の作成日を元に昇順へソート
                             const objectiveItems = section?.objective?.items as Objective[];
@@ -448,7 +457,6 @@ function EvalutionScreen(props: Props) {
                                         </thead>
                                         <tbody>
                                             {objectiveItems.map((objective: Objective) => {
-                                                // const objective: Objective = arg;   //仮の型変換処理
                                                 const date = new Date(objective.updatedAt);
                                                 var styleObjective: string;
                                                 if (objective.progress === 100) {
