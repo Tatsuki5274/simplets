@@ -420,6 +420,17 @@ function EvalutionScreen(props: Props) {
                         {/* 目標コンポーネント */}
                         {sheet.section?.items?.map((arg: any) => {
                             const section: Section = arg    //仮の型変換処理
+
+                            //項目明細情報の作成日を元に昇順へソート
+                            const objectiveItems = section?.objective?.items as Objective[];
+                            objectiveItems?.sort(function (a, b) {
+                                if (a.createdAt > b.createdAt) {
+                                    return 1;
+                                } else {
+                                    return -1;
+                                }
+                            });
+                            
                             return (
                                 <div key={section.id}>
                                     <h4>{section.category?.name}</h4>
@@ -436,8 +447,8 @@ function EvalutionScreen(props: Props) {
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            {section.objective?.items?.map((arg: any) => {
-                                                const objective: Objective = arg;   //仮の型変換処理
+                                            {objectiveItems.map((objective: Objective) => {
+                                                // const objective: Objective = arg;   //仮の型変換処理
                                                 const date = new Date(objective.updatedAt);
                                                 var styleObjective: string;
                                                 if (objective.progress === 100) {
