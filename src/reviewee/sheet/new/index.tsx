@@ -107,7 +107,7 @@ function RevieweeSheetNew(props: Props){
                         })}
                     </div>
                     <Form.Label>目標内容</Form.Label>
-                    <Form.Control placeholder="目標内容を入力" onChange={handleChange} name="content" />
+                    <Form.Control onChange={handleChange} name="content" />
 
                     <Form.Label>優先順位</Form.Label>
                     <Form.Control as="select" onChange={handleChange} name="priority">
