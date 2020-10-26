@@ -130,7 +130,7 @@ function RevieweeSheetNew(props: Props){
                         <Col md="4" lg="4" xl="4">
                             <Form.Control
                                 required
-                                type="datetime-local"
+                                type="date"
                                 name="expStartDate"
                                 onChange={handleChange}
                             />
@@ -139,7 +139,7 @@ function RevieweeSheetNew(props: Props){
                         <Col md="4" lg="4" xl="4">
                             <Form.Control
                                 required
-                                type="datetime-local"
+                                type="date"
                                 name="expDoneDate"
                                 onChange={handleChange}
                             />

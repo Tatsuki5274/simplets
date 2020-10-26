@@ -239,7 +239,7 @@ function RevieweeSheetShow(props: Props) {
                             <Col md="4" lg="4" xl="4">
                                 <Form.Control
                                     required
-                                    type="datetime-local"
+                                    type="date"
                                     name="expStartDate"
                                     onChange={handleChangeObjective}
                                 />
@@ -248,7 +248,7 @@ function RevieweeSheetShow(props: Props) {
                             <Col md="4" lg="4" xl="4">
                                 <Form.Control
                                     required
-                                    type="datetime-local"
+                                    type="date"
                                     name="expDoneDate"
                                     onChange={handleChangeObjective}
                                 />
@@ -404,8 +404,8 @@ function RevieweeSheetShow(props: Props) {
                                                         }
                                                     })()}
                                                     <td>{objective.priority}</td>
-                                                    <td>{objective.expStartDate}</td>
-                                                    <td>{objective.expDoneDate}</td>
+                                                    <td>{objective.expStartDate?.replace(/-/g,'/')}</td>
+                                                    <td>{objective.expDoneDate?.replace(/-/g,'/')}</td>
                                                     {/* 
                                                     <td>{expStartDate ? dateFormat(expStartDate, "yyyy/mm/dd") : ""}</td>
                                                     <td className={expDoneDateStyle}>{expDoneDate ? dateFormat(expDoneDate, "yyyy/mm/dd") : ""}</td>
