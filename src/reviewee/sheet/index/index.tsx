@@ -119,21 +119,23 @@ function RevieweeSheetShow(props: Props) {
         // console.log(event.currentTarget.value);
         const objectiveProgress = parseInt(event.currentTarget.value);
 
-        const updateI: APIt.UpdateObjectiveInput = {
-            id: objectiveId,
-            progress: objectiveProgress,
-        };
+        if (objectiveProgress >= 0 && objectiveProgress <= 100) {
+            const updateI: APIt.UpdateObjectiveInput = {
+                id: objectiveId,
+                progress: objectiveProgress,
+            };
 
-        const updateMV: APIt.UpdateObjectiveMutationVariables = {
-            input: updateI,
-        };
-        let updateR: GraphQLResult<APIt.UpdateObjectiveMutation>
-        try{
-            updateR =
-                await API.graphql(graphqlOperation(updateObjective, updateMV)) as GraphQLResult<APIt.UpdateObjectiveMutation>;
-        }catch(e){
-            console.log("エラーを無視しています", e)
-            updateR = e;
+            const updateMV: APIt.UpdateObjectiveMutationVariables = {
+                input: updateI,
+            };
+            let updateR: GraphQLResult<APIt.UpdateObjectiveMutation>
+            try {
+                updateR =
+                    await API.graphql(graphqlOperation(updateObjective, updateMV)) as GraphQLResult<APIt.UpdateObjectiveMutation>;
+            } catch (e) {
+                console.log("エラーを無視しています", e)
+                updateR = e;
+            }
         }
         // console.log("updateR", updateR);
         // console.log("sheet", sheet)
