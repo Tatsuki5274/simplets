@@ -360,6 +360,7 @@ function EvalutionScreen(props: Props) {
                             <Form.Group>
                                 <Form.Label>総合評価</Form.Label>
                                 <Form.Control onChange={handleChange} name="overAllEvaluation" as="select">
+                                    <option></option>
                                     <option>5</option>
                                     <option>4</option>
                                     <option>3</option>
