@@ -12,6 +12,7 @@ import * as APIt from 'API';
 import { createInterview, createSection, createSheet, updateSheet } from 'graphql/mutations';
 import SidebarComponents from 'common/Sidebar';
 import HeaderComponents from 'common/header';
+import Style from './performanceStyle.module.scss';
 
 
 // const listSheets = /* GraphQL */ `
@@ -34,7 +35,8 @@ import HeaderComponents from 'common/header';
 
 function ListPerformanceEvalution() {
     const [sheets, setSheets] = useState<Sheet[]>();
-
+    const [styleSheetButton, setStyleSheetButton] =useState<string>();
+    
     useEffect(() => {
         ; (async () => {
             let response
@@ -58,8 +60,28 @@ function ListPerformanceEvalution() {
             console.log(response);
             console.log(listItems);
 
+            // 今年に作成されたシートを確認
+            let result = false;
+            const currentYear:number = new Date().getFullYear();
+            let filteredSheet = listItems.filter((element)=>{
+                return element.year === currentYear ? true : false;
+            })
+            if(filteredSheet.length === 0) {
+                result = true;
+            }
+            setStyleSheetButton(changeCreateSheetButtonStyle(result));
+
         })()
     }, []);
+
+    // 新規作成ボタンのスタイルシートを制御
+    function changeCreateSheetButtonStyle(changeStatus:boolean) {
+        if(changeStatus) {
+            return Style.performanceCreateSheetButtonDisplay;
+        } else {
+            return Style.performanceCreateSheetButtonNone;
+        }
+    }
 
     async function handleClickCreate() {
         //今日の日付を取得
@@ -105,6 +127,8 @@ function ListPerformanceEvalution() {
             } else {
                 console.error("error");
             }
+            //画面更新
+            window.location.reload()
         }
 
 
@@ -270,7 +294,7 @@ function ListPerformanceEvalution() {
             <div>
                 <Container>
                     <h2>業績評価一覧</h2>
-                    <Button variant="primary" onClick={handleClickCreate}>新規作成</Button>
+                    <Button variant="primary" onClick={handleClickCreate} className={styleSheetButton}>新規作成</Button>
                     <Table bordered>
                         <thead>
                             <tr>
