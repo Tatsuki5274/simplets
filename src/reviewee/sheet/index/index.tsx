@@ -18,6 +18,7 @@ import Style from './indexStyle.module.scss';
 import * as statusManager from 'lib/statusManager';
 import ApprovalStatusBox from 'common/approvalStatusBox';
 import { RevieweeSidebar } from 'common/Sidebar';
+import { Formik } from 'formik';
 
 type Props = {
     match: {
@@ -28,10 +29,14 @@ type Props = {
 }
 
 
+
 function RevieweeSheetShow(props: Props) {
     
     const sheetId = props.match.params.sheetId;
     const [sheet, setSheet] = useState<Sheet>();
+
+    const [modalObjective, setModalObjective] = useState<Objective>();
+
 
     //モーダル
     const [objectiveUpdateShow, setObjectiveUpdateShow] = useState(false);
@@ -46,7 +51,24 @@ function RevieweeSheetShow(props: Props) {
     const [changeObjectiveId, setObjectiveId] = useState<Array<any> | any>();
     function HandleChange(event: any) {
         console.log(event.target.getAttribute('data-objectiveId'));
-        setObjectiveId(event.target.getAttribute('data-objectiveId'));
+        const objectiveId: string = event.target.getAttribute('data-objectiveId');
+        setObjectiveId(objectiveId);
+
+        let filteredObjective: Array<Objective>;
+        for(let i=0;i<sectionItems.length;i++){
+//        sectionItems.forEach((sections:Section) => {
+            const modalObjectiveItems = sectionItems[i].objective?.items as Objective[];
+            filteredObjective = modalObjectiveItems.filter((element)=>{
+                return element.id === objectiveId ? true : false
+            })
+            console.log("filter", filteredObjective)
+            const result = {...filteredObjective[0]};
+            setModalObjective(result);
+            if(filteredObjective.length > 0) {
+                break;
+            }
+    
+        } 
         handleShowObjectiveUpdate();
 
     }
@@ -68,49 +90,49 @@ function RevieweeSheetShow(props: Props) {
     }
 
     //objectiveの更新
-    function HandleUpdateObject() {
-        (async () => {
-            const objectiveId = changeObjectiveId;
-            let selfEvaluationInput:number | null | undefined = parseInt(formInput.selfEvaluation);
-            if(isNaN(selfEvaluationInput)) {
-                selfEvaluationInput = undefined;
-            }
-            //目標変更の目標、ステータス、自己評価、優先順位、実績を項目明細に上書き
-            const updateI: APIt.UpdateObjectiveInput = {
-                id: objectiveId,
-                content: formInput.content,
-                selfEvaluation: selfEvaluationInput,
-                priority: formInput.priority,
-                result: formInput.result,
-                expStartDate: formInput.expStartDate,
-                expDoneDate: formInput.expDoneDate
-            };
-            //console.log('updateI',updateI); //検証用
-            const updateMV: APIt.UpdateObjectiveMutationVariables = {
-                input: updateI,
-            };
-            //console.log('updateMV',updateMV); //検証用
-            let updateR: GraphQLResult<APIt.UpdateObjectiveMutation>
-            try{
-                updateR = await API.graphql(graphqlOperation(updateObjective, updateMV)) as GraphQLResult<APIt.UpdateObjectiveMutation>;
-            }catch(e){
-                console.log("エラーを無視しています", e)
-                console.log("データが不完全でないことを確認してください")
-                updateR = e;
-            }
+    // function HandleUpdateObject() {
+    //     (async () => {
+    //         const objectiveId = changeObjectiveId;
+    //         let selfEvaluationInput:number | null | undefined = parseInt(formInput.selfEvaluation);
+    //         if(isNaN(selfEvaluationInput)) {
+    //             selfEvaluationInput = undefined;
+    //         }
+    //         //目標変更の目標、ステータス、自己評価、優先順位、実績を項目明細に上書き
+    //         const updateI: APIt.UpdateObjectiveInput = {
+    //             id: objectiveId,
+    //             content: formInput.content,
+    //             selfEvaluation: selfEvaluationInput,
+    //             priority: formInput.priority,
+    //             result: formInput.result,
+    //             expStartDate: formInput.expStartDate,
+    //             expDoneDate: formInput.expDoneDate
+    //         };
+    //         //console.log('updateI',updateI); //検証用
+    //         const updateMV: APIt.UpdateObjectiveMutationVariables = {
+    //             input: updateI,
+    //         };
+    //         //console.log('updateMV',updateMV); //検証用
+    //         let updateR: GraphQLResult<APIt.UpdateObjectiveMutation>
+    //         try{
+    //             updateR = await API.graphql(graphqlOperation(updateObjective, updateMV)) as GraphQLResult<APIt.UpdateObjectiveMutation>;
+    //         }catch(e){
+    //             console.log("エラーを無視しています", e)
+    //             console.log("データが不完全でないことを確認してください")
+    //             updateR = e;
+    //         }
 
-            if (updateR.data) {
-                const updateTM: APIt.UpdateObjectiveMutation = updateR.data;
-                if (updateTM.updateObjective) {
-                    const objective: Objective = updateTM.updateObjective;
-                    console.log('UpdateObjective:', objective);
-                }
-            }
-        }
-        )()
-        window.location.reload()
-        handleCloseObjectiveUpdate();
-    }
+    //         if (updateR.data) {
+    //             const updateTM: APIt.UpdateObjectiveMutation = updateR.data;
+    //             if (updateTM.updateObjective) {
+    //                 const objective: Objective = updateTM.updateObjective;
+    //                 console.log('UpdateObjective:', objective);
+    //             }
+    //         }
+    //     }
+    //     )()
+    //     window.location.reload()
+    //     handleCloseObjectiveUpdate();
+    // }
 
     // Progress 更新
     async function handleChangeProgress(event: any) {
@@ -233,78 +255,143 @@ function RevieweeSheetShow(props: Props) {
         }
     });
 
+
     return (
         <div>
             {/* サイドバーのコンポーネントを配置する */}
 
             <div>
-                <Modal show={objectiveUpdateShow} onHide={handleCloseObjectiveUpdate}>
-                    <Modal.Header closeButton>
-                        <Modal.Title>目標変更</Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body>
-                        <Row>
-                            <Col>目標</Col>
-                            <Col><input type="text" onChange={handleChangeObjective} name="content" /> </Col>
-                        </Row>
-                        <Row>
-                            <Col md="2" lg="2" xl="2">開始予定日</Col>
-                            <Col md="4" lg="4" xl="4">
-                                <Form.Control
-                                    required
-                                    type="date"
-                                    name="expStartDate"
-                                    onChange={handleChangeObjective}
-                                />
-                            </Col>
-                            <Col md="2" lg="2" xl="2">完了予定日</Col>
-                            <Col md="4" lg="4" xl="4">
-                                <Form.Control
-                                    required
-                                    type="date"
-                                    name="expDoneDate"
-                                    onChange={handleChangeObjective}
-                                />
-                            </Col>
-                        </Row>
-                        <Row>
-                            <Col>自己評価</Col>
-                            <Col>
-                                <select onChange={handleChangeObjective} name="selfEvaluation">
-                                    <option></option>
-                                    <option value='1'>1</option>
-                                    <option value='2'>2</option>
-                                    <option value='3'>3</option>
-                                    <option value='4'>4</option>
-                                    <option value='5'>5</option>
-                                </select>
-                            </Col>
-                        </Row>
-                        <Row>
-                            <Col>優先順位</Col>
-                            <Col>
-                                <select onChange={handleChangeObjective} name="priority">
-                                    <option></option>
-                                    <option value="A">A</option>
-                                    <option value="B">B</option>
-                                    <option value="C">C</option>
-                                </select>
-                            </Col>
-                        </Row>
-                        <Row>
-                            <Col>実績</Col>
-                            <Col><input type="text" onChange={handleChangeObjective} name="result" /> </Col>
-                        </Row>
-                    </Modal.Body>
-                    <Modal.Footer>
-                        <Button variant="secondary" onClick={handleCloseObjectiveUpdate}>
-                            Close
-                    </Button>
-                        <Button variant="primary" onClick={HandleUpdateObject}>
-                            Save Changes
-                    </Button>
-                    </Modal.Footer>
-                </Modal>
+                {/* 目標変更モーダル */}
+                <Formik
+                    initialValues={{
+                        content: modalObjective?.content,
+                        expStartDate: modalObjective?.expDoneDate,
+                        expDoneDate: modalObjective?.expDoneDate,
+                        selfEvaluation: String(modalObjective?.selfEvaluation),
+                        priority: modalObjective?.priority,
+                        result: modalObjective?.result
+                    }}
+                    onSubmit={async (values, actions) => {
+                        console.log("values", values);
+
+                        //項目明細 情報更新
+                        const objectiveId = changeObjectiveId;
+                        let selfEvaluationInput:number | null | undefined = parseInt(values.selfEvaluation);
+                        if(isNaN(selfEvaluationInput)) {
+                            selfEvaluationInput = undefined;
+                        }
+                        //目標変更の目標、ステータス、自己評価、優先順位、実績を項目明細に上書き
+                        const updateI: APIt.UpdateObjectiveInput = {
+                            id: objectiveId,
+                            content: values.content,
+                            selfEvaluation: selfEvaluationInput,
+                            priority: values.priority,
+                            result: values.result,
+                            expStartDate: values.expStartDate,
+                            expDoneDate: values.expDoneDate
+                        };
+                        //console.log('updateI',updateI); //検証用
+                        const updateMV: APIt.UpdateObjectiveMutationVariables = {
+                            input: updateI,
+                        };
+                        console.log('updateMV',updateMV); //検証用
+                        let updateR: GraphQLResult<APIt.UpdateObjectiveMutation>
+                        try{
+                            updateR = await API.graphql(graphqlOperation(updateObjective, updateMV)) as GraphQLResult<APIt.UpdateObjectiveMutation>;
+                        }catch(e){
+                            console.log("エラーを無視しています", e)
+                            console.log("データが不完全でないことを確認してください")
+                            updateR = e;
+                        }
+
+                        if (updateR.data) {
+                            const updateTM: APIt.UpdateObjectiveMutation = updateR.data;
+                            if (updateTM.updateObjective) {
+                                const objective: Objective = updateTM.updateObjective;
+                                console.log('UpdateObjective:', objective);
+                            }
+                        }
+
+                        window.location.reload()
+                        handleCloseObjectiveUpdate();
+ 
+                    }}
+                >
+                    {props => (
+                        <Modal show={objectiveUpdateShow} onHide={handleCloseObjectiveUpdate}>
+                            <form onSubmit={props.handleSubmit}>
+                                <Modal.Header closeButton>
+                                    <Modal.Title>目標変更</Modal.Title>
+                                </Modal.Header>
+                                <Modal.Body>
+                                    <Row>
+                                        <Col>目標</Col>
+                                        <Col><input type="text" onChange={props.handleChange} name="content" defaultValue={modalObjective?.content} /> </Col>
+                                    </Row>
+                                    <Row>
+                                        <Col md="2" lg="2" xl="2">開始予定日</Col>
+                                        <Col md="4" lg="4" xl="4">
+                                            <Form.Control
+                                                required
+                                                type="date"
+                                                name="expStartDate"
+                                                onChange={props.handleChange}
+                                                defaultValue={modalObjective?.expStartDate || undefined}
+                                            />
+                                        </Col>
+                                        <Col md="2" lg="2" xl="2">完了予定日</Col>
+                                        <Col md="4" lg="4" xl="4">
+                                            <Form.Control
+                                                required
+                                                type="date"
+                                                name="expDoneDate"
+                                                onChange={props.handleChange}
+                                                defaultValue={modalObjective?.expDoneDate || undefined}
+                                            />
+                                        </Col>
+                                    </Row>
+                                    <Row>
+                                        <Col>自己評価</Col>
+                                        <Col>
+                                            <select onChange={props.handleChange} name="selfEvaluation" defaultValue={String(modalObjective?.selfEvaluation) || undefined}>
+                                                <option></option>
+                                                <option value='1'>1</option>
+                                                <option value='2'>2</option>
+                                                <option value='3'>3</option>
+                                                <option value='4'>4</option>
+                                                <option value='5'>5</option>
+                                            </select>
+                                        </Col>
+                                    </Row>
+                                    <Row>
+                                        <Col>優先順位</Col>
+                                        <Col>
+                                            <select onChange={props.handleChange} name="priority" defaultValue={modalObjective?.priority || undefined}>
+                                                <option></option>
+                                                <option value="A">A</option>
+                                                <option value="B">B</option>
+                                                <option value="C">C</option>
+                                            </select>
+                                        </Col>
+                                    </Row>
+                                    <Row>
+                                        <Col>実績</Col>
+                                        <Col><input type="text" onChange={props.handleChange} name="result" defaultValue={modalObjective?.result || undefined} /> </Col>
+                                    </Row>
+                                </Modal.Body>
+                                <Modal.Footer>
+                                    <Button variant="secondary" onClick={handleCloseObjectiveUpdate}>
+                                        キャンセル
+                            </Button>
+                                    <Button variant="primary" type="submit">
+                                        変更保存
+                            </Button>
+                                </Modal.Footer>
+                            </form>
+                        </Modal>
+
+                    )}
+                </Formik>
 
                 <Modal show={careerPlanUpdateShow} onHide={handleCloseCareerPlanUpdate}>
                     <Modal.Header closeButton>
