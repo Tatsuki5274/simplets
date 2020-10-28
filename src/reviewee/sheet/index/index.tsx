@@ -10,7 +10,7 @@ import { Sheet, Section, Objective } from 'App';
 import { GetSheetQuery } from 'API';
 import * as APIt from 'API';
 import dateFormat from 'dateformat'
-import { approvalStatusManager, updateObjective, updateSheet }
+import { approvalStatusManager, deleteObjective, updateObjective, updateSheet }
     from 'graphql/mutations';
 import { error } from 'console';
 import HeaderComponents from 'common/header';//ヘッダーの表示
@@ -215,6 +215,33 @@ function RevieweeSheetShow(props: Props) {
 
             setSheet(updatedNewSheet);
         }
+    }
+
+    //objectiveの削除
+    async function handleDeleteObjective(event: any) {
+        console.log(event.target.getAttribute('data-objective-id'));
+        const objectiveId = event.target.getAttribute('data-objective-id');
+
+        const deleteI: APIt.DeleteObjectiveInput = {
+            id: objectiveId
+        };
+        console.log('deleteI',deleteI);
+
+        const deleteMV: APIt.DeleteObjectiveMutationVariables = {
+            input: deleteI,
+        };
+
+        console.log('deleteMV',deleteMV);
+        let deleteR: GraphQLResult<APIt.DeleteObjectiveMutation>
+        try {
+            deleteR =
+                await API.graphql(graphqlOperation(deleteObjective, deleteMV)) as GraphQLResult<APIt.DeleteObjectiveMutation>;
+        } catch (e) {
+            console.log("エラーを無視しています", e)
+            deleteR = e;
+        }
+        console.log("deleteR", deleteR);
+        console.log("sheet", sheet)
     }
 
     //表示用データ
@@ -439,6 +466,7 @@ function RevieweeSheetShow(props: Props) {
                             }
                         });
 
+                        
                         return (
                             <div key={section.id}>
                                 <h4>{section.category?.name}</h4>
@@ -512,6 +540,15 @@ function RevieweeSheetShow(props: Props) {
                                                     <td>{objective.selfEvaluation}</td>
                                                     <td>{objective.lastEvaluation}</td>
                                                     <td>{dateFormat(date, "yyyy/mm/dd HH:MM")}</td>
+                                                    {(() => {
+                                                        if (sheet.statusValue === 1) {
+                                                            return (
+                                                                <td>
+                                                                    <Button onClick={handleDeleteObjective} data-objective-id={objective.id}>削除</Button>
+                                                                </td>
+                                                            );
+                                                        }
+                                                    })()}
                                                 </tr>
                                             )
                                         })}

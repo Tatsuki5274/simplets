@@ -244,7 +244,7 @@ type Objective
     {allow: owner, ownerField: "reviewers", operations: [update, read]}
 
     # 被評価者
-    {allow: owner, ownerField: "reviewee", operations: [create, update, read]}
+    {allow: owner, ownerField: "reviewee", operations: [create, update, read, delete]}
   ]
 )
 {
