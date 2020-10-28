@@ -326,7 +326,7 @@ function RevieweeSheetShow(props: Props) {
                                 <Modal.Body>
                                     <Row>
                                         <Col>目標</Col>
-                                        <Col><input type="text" onChange={props.handleChange} name="content" defaultValue={modalObjective?.content} /> </Col>
+                                        <Col><textarea onChange={props.handleChange} name="content" defaultValue={modalObjective?.content} /> </Col>
                                     </Row>
                                     <Row>
                                         <Col md="2" lg="2" xl="2">開始予定日</Col>
@@ -376,7 +376,7 @@ function RevieweeSheetShow(props: Props) {
                                     </Row>
                                     <Row>
                                         <Col>実績</Col>
-                                        <Col><input type="text" onChange={props.handleChange} name="result" defaultValue={modalObjective?.result || undefined} /> </Col>
+                                        <Col><textarea onChange={props.handleChange} name="result" defaultValue={modalObjective?.result || undefined} /> </Col>
                                     </Row>
                                 </Modal.Body>
                                 <Modal.Footer>
