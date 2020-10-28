@@ -448,11 +448,17 @@ function RevieweeSheetShow(props: Props) {
                     <ApprovalStatusBox statusValue={sheet.statusValue || -1}/>
                     <h2>メイン</h2>
                     <h3>目標一覧</h3>
-                    <Link to={`/reviewee/objective/new/${sheetId}`}>
-                        <Button variant="info">
-                            目標追加
+                    {(() => {
+                        if (sheet.statusValue === 1) {
+                            return (
+                                <Link to={`/reviewee/objective/new/${sheetId}`}>
+                                    <Button variant="info">
+                                        目標追加
                         </Button>
-                    </Link>
+                                </Link>
+                            );
+                        }
+                    })()}
 
                     {sectionItems.map((section: Section) => {
 
@@ -504,7 +510,17 @@ function RevieweeSheetShow(props: Props) {
                                             return (
                                                 <tr key={objective.id}>
                                                     <td>
-                                                        <Button variant="primary" data-objectiveId={objective.id} onClick={HandleChange}>変更</Button>
+                                                        {(() => {
+                                                            if (sheet.statusValue == 1 || sheet.statusValue == 2 || sheet.statusValue == 3) {
+                                                                return (
+                                                                    <Button variant="primary" data-objectiveId={objective.id} onClick={HandleChange}>変更</Button>
+                                                                );
+                                                            } else {
+                                                                return (
+                                                                    <Button variant="primary" disabled>変更</Button>
+                                                                );
+                                                            }
+                                                        })()} 
                                                     </td>
                                                     <td>{objective.content}</td>
                                                     <td>{objective.result}</td>
