@@ -11,7 +11,8 @@ import CategoryInput from "./categoryInput"
 import { createObjective } from 'graphql/mutations';
 import { Redirect } from 'react-router-dom';
 import HeaderComponents from 'common/header';
-import { Formik } from 'formik';
+import { ErrorMessage, Formik } from 'formik';
+import * as Yup from 'yup';
 
 type Props = {
     match: {
@@ -115,6 +116,13 @@ function RevieweeSheetNew(props: Props){
                         expDoneDate: '',
 
                     }}
+                    validationSchema={Yup.object({
+                        expStartDate: Yup.date().typeError('正しく入力してください').required('必須入力です'),
+                        expDoneDate: Yup.date().min(Yup.ref('expStartDate'),({ min }) => `開始予定日より後の日付を入力してください`,)
+                        .typeError('正しく入力してください')
+                        .required('必須入力です'),
+                    })}
+                    
                     onSubmit={async (values, actions) => {
                         console.log('values', values);
 
@@ -171,20 +179,22 @@ function RevieweeSheetNew(props: Props){
                                 <Col md="2" lg="2" xl="2">開始予定日</Col>
                                 <Col md="4" lg="4" xl="4">
                                     <Form.Control
-                                        required
+                                        //required
                                         type="date"
                                         name="expStartDate"
                                         onChange={props.handleChange}
                                     />
+                                    <ErrorMessage name="expStartDate" />
                                 </Col>
                                 <Col md="2" lg="2" xl="2">完了予定日</Col>
                                 <Col md="4" lg="4" xl="4">
                                     <Form.Control
-                                        required
+                                        //required
                                         type="date"
                                         name="expDoneDate"
                                         onChange={props.handleChange}
                                     />
+                                    <ErrorMessage name="expDoneDate" />
                                 </Col>
                             </Row>
                             <Button variant="success" type="submit">目標登録</Button>{' '}

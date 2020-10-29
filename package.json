@@ -13,6 +13,7 @@
     "@types/react": "^16.9.0",
     "@types/react-dom": "^16.9.0",
     "@types/react-router-dom": "^5.1.5",
+    "@types/yup": "^0.29.9",
     "aws-amplify": "^3.0.25",
     "bootstrap": "^4.5.2",
     "dateformat": "^3.0.3",
