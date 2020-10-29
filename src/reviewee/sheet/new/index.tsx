@@ -158,7 +158,7 @@ function RevieweeSheetNew(props: Props){
                                 })}
                             </div>
                             <Form.Label>目標内容</Form.Label>
-                            <Form.Control name="content" onChange={props.handleChange}/>
+                            <Form.Control as="textarea" name="content" onChange={props.handleChange}/>
 
                             <Form.Label>優先順位</Form.Label>
                             <Form.Control as="select" name="priority" onChange={props.handleChange}>
