@@ -131,57 +131,6 @@ export const onDeleteCategory = /* GraphQL */ `
     }
   }
 `;
-export const onCreateInterview = /* GraphQL */ `
-  subscription OnCreateInterview($reviewers: String, $reviewee: String) {
-    onCreateInterview(reviewers: $reviewers, reviewee: $reviewee) {
-      id
-      sheetId
-      interviewDate
-      purpose
-      detail
-      reviewee
-      reviewers
-      readGroups
-      updateGroups
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const onUpdateInterview = /* GraphQL */ `
-  subscription OnUpdateInterview($reviewers: String, $reviewee: String) {
-    onUpdateInterview(reviewers: $reviewers, reviewee: $reviewee) {
-      id
-      sheetId
-      interviewDate
-      purpose
-      detail
-      reviewee
-      reviewers
-      readGroups
-      updateGroups
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const onDeleteInterview = /* GraphQL */ `
-  subscription OnDeleteInterview($reviewers: String, $reviewee: String) {
-    onDeleteInterview(reviewers: $reviewers, reviewee: $reviewee) {
-      id
-      sheetId
-      interviewDate
-      purpose
-      detail
-      reviewee
-      reviewers
-      readGroups
-      updateGroups
-      createdAt
-      updatedAt
-    }
-  }
-`;
 export const onCreateSection = /* GraphQL */ `
   subscription OnCreateSection($reviewers: String, $reviewee: String) {
     onCreateSection(reviewers: $reviewers, reviewee: $reviewee) {
@@ -249,6 +198,14 @@ export const onCreateSection = /* GraphQL */ `
                   secondCheckDate
                   overAllEvaluation
                   statusValue
+                  interviewPlanDate
+                  interviewPlanComment
+                  InterviewMid1Date
+                  InterviewMid1Comment
+                  InterviewMid2Date
+                  InterviewMid2Comment
+                  InterviewMid3Date
+                  InterviewMid3Comment
                   sheetGroupId
                   reviewee
                   reviewers
@@ -297,6 +254,14 @@ export const onCreateSection = /* GraphQL */ `
             secondCheckDate
             overAllEvaluation
             statusValue
+            interviewPlanDate
+            interviewPlanComment
+            InterviewMid1Date
+            InterviewMid1Comment
+            InterviewMid2Date
+            InterviewMid2Comment
+            InterviewMid3Date
+            InterviewMid3Comment
             sheetGroupId
             group {
               id
@@ -306,22 +271,6 @@ export const onCreateSection = /* GraphQL */ `
               updateGroups
               createdAt
               updatedAt
-            }
-            interviews {
-              items {
-                id
-                sheetId
-                interviewDate
-                purpose
-                detail
-                reviewee
-                reviewers
-                readGroups
-                updateGroups
-                createdAt
-                updatedAt
-              }
-              nextToken
             }
             section {
               items {
@@ -609,6 +558,14 @@ export const onUpdateSection = /* GraphQL */ `
                   secondCheckDate
                   overAllEvaluation
                   statusValue
+                  interviewPlanDate
+                  interviewPlanComment
+                  InterviewMid1Date
+                  InterviewMid1Comment
+                  InterviewMid2Date
+                  InterviewMid2Comment
+                  InterviewMid3Date
+                  InterviewMid3Comment
                   sheetGroupId
                   reviewee
                   reviewers
@@ -657,6 +614,14 @@ export const onUpdateSection = /* GraphQL */ `
             secondCheckDate
             overAllEvaluation
             statusValue
+            interviewPlanDate
+            interviewPlanComment
+            InterviewMid1Date
+            InterviewMid1Comment
+            InterviewMid2Date
+            InterviewMid2Comment
+            InterviewMid3Date
+            InterviewMid3Comment
             sheetGroupId
             group {
               id
@@ -666,22 +631,6 @@ export const onUpdateSection = /* GraphQL */ `
               updateGroups
               createdAt
               updatedAt
-            }
-            interviews {
-              items {
-                id
-                sheetId
-                interviewDate
-                purpose
-                detail
-                reviewee
-                reviewers
-                readGroups
-                updateGroups
-                createdAt
-                updatedAt
-              }
-              nextToken
             }
             section {
               items {
@@ -969,6 +918,14 @@ export const onDeleteSection = /* GraphQL */ `
                   secondCheckDate
                   overAllEvaluation
                   statusValue
+                  interviewPlanDate
+                  interviewPlanComment
+                  InterviewMid1Date
+                  InterviewMid1Comment
+                  InterviewMid2Date
+                  InterviewMid2Comment
+                  InterviewMid3Date
+                  InterviewMid3Comment
                   sheetGroupId
                   reviewee
                   reviewers
@@ -1017,6 +974,14 @@ export const onDeleteSection = /* GraphQL */ `
             secondCheckDate
             overAllEvaluation
             statusValue
+            interviewPlanDate
+            interviewPlanComment
+            InterviewMid1Date
+            InterviewMid1Comment
+            InterviewMid2Date
+            InterviewMid2Comment
+            InterviewMid3Date
+            InterviewMid3Comment
             sheetGroupId
             group {
               id
@@ -1026,22 +991,6 @@ export const onDeleteSection = /* GraphQL */ `
               updateGroups
               createdAt
               updatedAt
-            }
-            interviews {
-              items {
-                id
-                sheetId
-                interviewDate
-                purpose
-                detail
-                reviewee
-                reviewers
-                readGroups
-                updateGroups
-                createdAt
-                updatedAt
-              }
-              nextToken
             }
             section {
               items {
@@ -1357,6 +1306,14 @@ export const onCreateObjective = /* GraphQL */ `
               secondCheckDate
               overAllEvaluation
               statusValue
+              interviewPlanDate
+              interviewPlanComment
+              InterviewMid1Date
+              InterviewMid1Comment
+              InterviewMid2Date
+              InterviewMid2Comment
+              InterviewMid3Date
+              InterviewMid3Comment
               sheetGroupId
               group {
                 id
@@ -1366,22 +1323,6 @@ export const onCreateObjective = /* GraphQL */ `
                 updateGroups
                 createdAt
                 updatedAt
-              }
-              interviews {
-                items {
-                  id
-                  sheetId
-                  interviewDate
-                  purpose
-                  detail
-                  reviewee
-                  reviewers
-                  readGroups
-                  updateGroups
-                  createdAt
-                  updatedAt
-                }
-                nextToken
               }
               section {
                 items {
@@ -1539,6 +1480,14 @@ export const onCreateObjective = /* GraphQL */ `
         secondCheckDate
         overAllEvaluation
         statusValue
+        interviewPlanDate
+        interviewPlanComment
+        InterviewMid1Date
+        InterviewMid1Comment
+        InterviewMid2Date
+        InterviewMid2Comment
+        InterviewMid3Date
+        InterviewMid3Comment
         sheetGroupId
         group {
           id
@@ -1548,22 +1497,6 @@ export const onCreateObjective = /* GraphQL */ `
           updateGroups
           createdAt
           updatedAt
-        }
-        interviews {
-          items {
-            id
-            sheetId
-            interviewDate
-            purpose
-            detail
-            reviewee
-            reviewers
-            readGroups
-            updateGroups
-            createdAt
-            updatedAt
-          }
-          nextToken
         }
         section {
           items {
@@ -1614,6 +1547,14 @@ export const onCreateObjective = /* GraphQL */ `
                   secondCheckDate
                   overAllEvaluation
                   statusValue
+                  interviewPlanDate
+                  interviewPlanComment
+                  InterviewMid1Date
+                  InterviewMid1Comment
+                  InterviewMid2Date
+                  InterviewMid2Comment
+                  InterviewMid3Date
+                  InterviewMid3Comment
                   sheetGroupId
                   reviewee
                   reviewers
@@ -2054,6 +1995,14 @@ export const onUpdateObjective = /* GraphQL */ `
               secondCheckDate
               overAllEvaluation
               statusValue
+              interviewPlanDate
+              interviewPlanComment
+              InterviewMid1Date
+              InterviewMid1Comment
+              InterviewMid2Date
+              InterviewMid2Comment
+              InterviewMid3Date
+              InterviewMid3Comment
               sheetGroupId
               group {
                 id
@@ -2063,22 +2012,6 @@ export const onUpdateObjective = /* GraphQL */ `
                 updateGroups
                 createdAt
                 updatedAt
-              }
-              interviews {
-                items {
-                  id
-                  sheetId
-                  interviewDate
-                  purpose
-                  detail
-                  reviewee
-                  reviewers
-                  readGroups
-                  updateGroups
-                  createdAt
-                  updatedAt
-                }
-                nextToken
               }
               section {
                 items {
@@ -2236,6 +2169,14 @@ export const onUpdateObjective = /* GraphQL */ `
         secondCheckDate
         overAllEvaluation
         statusValue
+        interviewPlanDate
+        interviewPlanComment
+        InterviewMid1Date
+        InterviewMid1Comment
+        InterviewMid2Date
+        InterviewMid2Comment
+        InterviewMid3Date
+        InterviewMid3Comment
         sheetGroupId
         group {
           id
@@ -2245,22 +2186,6 @@ export const onUpdateObjective = /* GraphQL */ `
           updateGroups
           createdAt
           updatedAt
-        }
-        interviews {
-          items {
-            id
-            sheetId
-            interviewDate
-            purpose
-            detail
-            reviewee
-            reviewers
-            readGroups
-            updateGroups
-            createdAt
-            updatedAt
-          }
-          nextToken
         }
         section {
           items {
@@ -2311,6 +2236,14 @@ export const onUpdateObjective = /* GraphQL */ `
                   secondCheckDate
                   overAllEvaluation
                   statusValue
+                  interviewPlanDate
+                  interviewPlanComment
+                  InterviewMid1Date
+                  InterviewMid1Comment
+                  InterviewMid2Date
+                  InterviewMid2Comment
+                  InterviewMid3Date
+                  InterviewMid3Comment
                   sheetGroupId
                   reviewee
                   reviewers
@@ -2751,6 +2684,14 @@ export const onDeleteObjective = /* GraphQL */ `
               secondCheckDate
               overAllEvaluation
               statusValue
+              interviewPlanDate
+              interviewPlanComment
+              InterviewMid1Date
+              InterviewMid1Comment
+              InterviewMid2Date
+              InterviewMid2Comment
+              InterviewMid3Date
+              InterviewMid3Comment
               sheetGroupId
               group {
                 id
@@ -2760,22 +2701,6 @@ export const onDeleteObjective = /* GraphQL */ `
                 updateGroups
                 createdAt
                 updatedAt
-              }
-              interviews {
-                items {
-                  id
-                  sheetId
-                  interviewDate
-                  purpose
-                  detail
-                  reviewee
-                  reviewers
-                  readGroups
-                  updateGroups
-                  createdAt
-                  updatedAt
-                }
-                nextToken
               }
               section {
                 items {
@@ -2933,6 +2858,14 @@ export const onDeleteObjective = /* GraphQL */ `
         secondCheckDate
         overAllEvaluation
         statusValue
+        interviewPlanDate
+        interviewPlanComment
+        InterviewMid1Date
+        InterviewMid1Comment
+        InterviewMid2Date
+        InterviewMid2Comment
+        InterviewMid3Date
+        InterviewMid3Comment
         sheetGroupId
         group {
           id
@@ -2942,22 +2875,6 @@ export const onDeleteObjective = /* GraphQL */ `
           updateGroups
           createdAt
           updatedAt
-        }
-        interviews {
-          items {
-            id
-            sheetId
-            interviewDate
-            purpose
-            detail
-            reviewee
-            reviewers
-            readGroups
-            updateGroups
-            createdAt
-            updatedAt
-          }
-          nextToken
         }
         section {
           items {
@@ -3008,6 +2925,14 @@ export const onDeleteObjective = /* GraphQL */ `
                   secondCheckDate
                   overAllEvaluation
                   statusValue
+                  interviewPlanDate
+                  interviewPlanComment
+                  InterviewMid1Date
+                  InterviewMid1Comment
+                  InterviewMid2Date
+                  InterviewMid2Comment
+                  InterviewMid3Date
+                  InterviewMid3Comment
                   sheetGroupId
                   reviewee
                   reviewers
@@ -4051,6 +3976,14 @@ export const onCreateSheet = /* GraphQL */ `
       secondCheckDate
       overAllEvaluation
       statusValue
+      interviewPlanDate
+      interviewPlanComment
+      InterviewMid1Date
+      InterviewMid1Comment
+      InterviewMid2Date
+      InterviewMid2Comment
+      InterviewMid3Date
+      InterviewMid3Comment
       sheetGroupId
       group {
         id
@@ -4060,22 +3993,6 @@ export const onCreateSheet = /* GraphQL */ `
         updateGroups
         createdAt
         updatedAt
-      }
-      interviews {
-        items {
-          id
-          sheetId
-          interviewDate
-          purpose
-          detail
-          reviewee
-          reviewers
-          readGroups
-          updateGroups
-          createdAt
-          updatedAt
-        }
-        nextToken
       }
       section {
         items {
@@ -4138,6 +4055,14 @@ export const onCreateSheet = /* GraphQL */ `
                 secondCheckDate
                 overAllEvaluation
                 statusValue
+                interviewPlanDate
+                interviewPlanComment
+                InterviewMid1Date
+                InterviewMid1Comment
+                InterviewMid2Date
+                InterviewMid2Comment
+                InterviewMid3Date
+                InterviewMid3Comment
                 sheetGroupId
                 group {
                   id
@@ -4147,9 +4072,6 @@ export const onCreateSheet = /* GraphQL */ `
                   updateGroups
                   createdAt
                   updatedAt
-                }
-                interviews {
-                  nextToken
                 }
                 section {
                   nextToken
@@ -4610,6 +4532,14 @@ export const onUpdateSheet = /* GraphQL */ `
       secondCheckDate
       overAllEvaluation
       statusValue
+      interviewPlanDate
+      interviewPlanComment
+      InterviewMid1Date
+      InterviewMid1Comment
+      InterviewMid2Date
+      InterviewMid2Comment
+      InterviewMid3Date
+      InterviewMid3Comment
       sheetGroupId
       group {
         id
@@ -4619,22 +4549,6 @@ export const onUpdateSheet = /* GraphQL */ `
         updateGroups
         createdAt
         updatedAt
-      }
-      interviews {
-        items {
-          id
-          sheetId
-          interviewDate
-          purpose
-          detail
-          reviewee
-          reviewers
-          readGroups
-          updateGroups
-          createdAt
-          updatedAt
-        }
-        nextToken
       }
       section {
         items {
@@ -4697,6 +4611,14 @@ export const onUpdateSheet = /* GraphQL */ `
                 secondCheckDate
                 overAllEvaluation
                 statusValue
+                interviewPlanDate
+                interviewPlanComment
+                InterviewMid1Date
+                InterviewMid1Comment
+                InterviewMid2Date
+                InterviewMid2Comment
+                InterviewMid3Date
+                InterviewMid3Comment
                 sheetGroupId
                 group {
                   id
@@ -4706,9 +4628,6 @@ export const onUpdateSheet = /* GraphQL */ `
                   updateGroups
                   createdAt
                   updatedAt
-                }
-                interviews {
-                  nextToken
                 }
                 section {
                   nextToken
@@ -5169,6 +5088,14 @@ export const onDeleteSheet = /* GraphQL */ `
       secondCheckDate
       overAllEvaluation
       statusValue
+      interviewPlanDate
+      interviewPlanComment
+      InterviewMid1Date
+      InterviewMid1Comment
+      InterviewMid2Date
+      InterviewMid2Comment
+      InterviewMid3Date
+      InterviewMid3Comment
       sheetGroupId
       group {
         id
@@ -5178,22 +5105,6 @@ export const onDeleteSheet = /* GraphQL */ `
         updateGroups
         createdAt
         updatedAt
-      }
-      interviews {
-        items {
-          id
-          sheetId
-          interviewDate
-          purpose
-          detail
-          reviewee
-          reviewers
-          readGroups
-          updateGroups
-          createdAt
-          updatedAt
-        }
-        nextToken
       }
       section {
         items {
@@ -5256,6 +5167,14 @@ export const onDeleteSheet = /* GraphQL */ `
                 secondCheckDate
                 overAllEvaluation
                 statusValue
+                interviewPlanDate
+                interviewPlanComment
+                InterviewMid1Date
+                InterviewMid1Comment
+                InterviewMid2Date
+                InterviewMid2Comment
+                InterviewMid3Date
+                InterviewMid3Comment
                 sheetGroupId
                 group {
                   id
@@ -5265,9 +5184,6 @@ export const onDeleteSheet = /* GraphQL */ `
                   updateGroups
                   createdAt
                   updatedAt
-                }
-                interviews {
-                  nextToken
                 }
                 section {
                   nextToken

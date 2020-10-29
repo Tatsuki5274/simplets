@@ -5,11 +5,11 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { GraphQLResult } from "@aws-amplify/api";
 import { ListSheetsQuery } from 'API';
 import { Link } from 'react-router-dom';
-import { Category, Employee, Interview, Objective, Section, Sheet } from 'App';
+import { Category, Employee, Objective, Section, Sheet } from 'App';
 import { ApprovalStatus, getStatusValue } from 'lib/getStatusValue'
 import { getEmployee, listCategorys, listSheets } from 'graphql/queries'
 import * as APIt from 'API';
-import { createInterview, createSection, createSheet, updateSheet } from 'graphql/mutations';
+import { createSection, createSheet, updateSheet } from 'graphql/mutations';
 import SidebarComponents from 'common/Sidebar';
 import HeaderComponents from 'common/header';
 import Style from './performanceStyle.module.scss';
@@ -110,11 +110,6 @@ function ListPerformanceEvalution() {
             const createdSheet = await runCreateSheet();
             if (createdSheet) {
                 console.log('CreateSheet', createdSheet);
-                //インタビューを作成
-                for (let i = 0; i < 4; i++) {
-                    const createdInterview = await runCreateInterview(createdSheet.id, i)
-                    console.log('CreateInterview', createdInterview);
-                }
                 //取得したカテゴリを元にsectionを作成する
                 categorys.forEach(async (category: Category) => {
                     const createdSection = await runCreateSection(category.id, createdSheet.id);
@@ -243,38 +238,6 @@ function ListPerformanceEvalution() {
                 }
             }
         }
-        async function runCreateInterview(sheetId: string, itemNumber: number): Promise<Interview | undefined> {
-            let interviewId: string = '';
-
-            const purposeItems:string[] = ["目標設定","中間#1","中間#2","中間#3"];
-
-            const createI: APIt.CreateInterviewInput = {
-                sheetId: sheetId,
-                purpose: purposeItems[itemNumber],
-                reviewers: revieweeEmployeeSuperior,
-                readGroups: [companyManagerGroup]
-            };
-            const createMV: APIt.CreateInterviewMutationVariables = {
-                input: createI
-            };
-            let createR: GraphQLResult<APIt.CreateInterviewMutation>
-            try {
-                createR = await API.graphql(graphqlOperation(createInterview, createMV)) as GraphQLResult<APIt.CreateInterviewMutation>;
-            } catch (e) {
-                console.log("エラーを無視しています", e)
-                console.log("データが不完全でないことを確認してください")
-                createR = e;
-            }
-            if (createR.data) {
-                const createTM: APIt.CreateInterviewMutation = createR.data;
-                if (createTM.createInterview) {
-                    const interview: Interview = createTM.createInterview;
-                    interviewId = createTM.createInterview.id;
-                    return interview;
-                }
-            }
-        }
-
         function addSheets(newSheet: Sheet) {
             //現在のステートへ適用
             const newSheetState = sheets?.concat();

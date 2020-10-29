@@ -106,40 +106,6 @@ type Category
   updateGroups: [String]  #変更を許可するグループ
 }
 
-type Interview
-@model(timestamps:{createdAt: "createdAt", updatedAt: "updatedAt"})
-@key(name: "bySheet", fields: ["sheetId"])
-@auth(
-  rules: [
-    {allow: groups, groups: ["Admin"]}
-
-    # グループに対する権限
-    {allow: groups, groupsField: "readGroups", operations: [read]}
-    {allow: groups, groupsField: "updateGroups", operations: [read, update]}
-
-    # 評価者
-    {allow: owner, ownerField: "reviewers", operations: [update, read]}
-
-    # 被評価者
-    {allow: owner, ownerField: "reviewee", operations: [create, update, read]}
-  ]
-)
-{
-  id: ID!
-  sheetId: ID
-  interviewDate: AWSDate
-  
-  purpose: String #インタビュー目的
-  detail: String  #インタビュー内容
-
-  # オーナーフィールド
-  reviewee: String #インタビューを受けた人
-  reviewers: [String] #評価者
-
-  # グループフィールド
-  readGroups: [String]    #読み込みを許可するグループ
-  updateGroups: [String]  #変更を許可するグループ
-}
 
 type Sheet
 @model(timestamps:{createdAt: "createdAt", updatedAt: "updatedAt"})
@@ -177,10 +143,20 @@ type Sheet
   overAllEvaluation: Int  #総合評価
   statusValue: Int  #承認ステータス値
 
+  # インタビュー情報
+  interviewPlanDate: AWSDate    # 目標設定
+  interviewPlanComment: String
+  InterviewMid1Date: AWSDate    # 中間1
+  InterviewMid1Comment: String
+  InterviewMid2Date: AWSDate    # 中間2
+  InterviewMid2Comment: String
+  InterviewMid3Date: AWSDate    # 中間3
+  InterviewMid3Comment: String
+
   # connection
   sheetGroupId: ID!
   group: Group @connection(fields: ["sheetGroupId"])
-  interviews: [Interview] @connection(keyName: "bySheet", fields: ["id"])
+  # interviews: [Interview] @connection(keyName: "bySheet", fields: ["id"])
   # company: Company @connection
   revieweeEmployee: Employee @connection  #被評価者
   secondEmployee: Employee @connection  #所属長
