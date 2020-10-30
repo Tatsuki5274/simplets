@@ -548,11 +548,7 @@ function RevieweeSheetShow(props: Props) {
                                                     })()}
                                                     <td>{objective.priority}</td>
                                                     <td>{objective.expStartDate?.replace(/-/g,'/')}</td>
-                                                    <td>{objective.expDoneDate?.replace(/-/g,'/')}</td>
-                                                    {/* 
-                                                    <td>{expStartDate ? dateFormat(expStartDate, "yyyy/mm/dd") : ""}</td>
-                                                    <td className={expDoneDateStyle}>{expDoneDate ? dateFormat(expDoneDate, "yyyy/mm/dd") : ""}</td>
-                                                     */}
+                                                    <td className={expDoneDateStyle}>{objective.expDoneDate?.replace(/-/g,'/')}</td>
                                                     <td>{objective.selfEvaluation}</td>
                                                     <td>{objective.lastEvaluation}</td>
                                                     <td>{dateFormat(date, "yyyy/mm/dd HH:MM")}</td>
