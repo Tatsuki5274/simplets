@@ -1,5 +1,5 @@
 import React, { ChangeEvent, useEffect, useState } from 'react';
-import { Container, Row, Col, Table, Button, Modal, Form } from 'react-bootstrap';
+import { Container, Row, Col, Table, Button, Modal, Form, Badge } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { API, graphqlOperation } from 'aws-amplify';
 import { Section } from 'App';
@@ -118,9 +118,9 @@ function RevieweeSheetNew(props: Props){
                     }}
                     validationSchema={Yup.object({
                         expStartDate: Yup.date().typeError('正しく入力してください').required('必須入力です'),
-                        expDoneDate: Yup.date().min(Yup.ref('expStartDate'),({ min }) => `開始予定日より後の日付を入力してください`,)
-                        .typeError('正しく入力してください')
-                        .required('必須入力です'),
+                        expDoneDate: Yup.date().min(Yup.ref('expStartDate'), ({ min }) => `開始予定日より後の日付を入力してください`,)
+                            .typeError('正しく入力してください')
+                            .required('必須入力です'),
                     })}
                     
                     onSubmit={async (values, actions) => {
@@ -176,7 +176,7 @@ function RevieweeSheetNew(props: Props){
                                 <option>C</option>
                             </Form.Control>
                             <Row>
-                                <Col md="2" lg="2" xl="2">開始予定日</Col>
+                                <Col md="2" lg="2" xl="2">開始予定日<Badge variant="danger">必須</Badge></Col>
                                 <Col md="4" lg="4" xl="4">
                                     <Form.Control
                                         //required
@@ -186,7 +186,7 @@ function RevieweeSheetNew(props: Props){
                                     />
                                     <ErrorMessage name="expStartDate" />
                                 </Col>
-                                <Col md="2" lg="2" xl="2">完了予定日</Col>
+                                <Col md="2" lg="2" xl="2">完了予定日<Badge variant="danger">必須</Badge></Col>
                                 <Col md="4" lg="4" xl="4">
                                     <Form.Control
                                         //required
