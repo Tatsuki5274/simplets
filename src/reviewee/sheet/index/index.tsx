@@ -515,7 +515,7 @@ function RevieweeSheetShow(props: Props) {
                                                                 return (
                                                                     <Button variant="primary" data-objectiveId={objective.id} onClick={HandleChange}>変更</Button>
                                                                 );
-                                                            } else {
+                                                            } else if (sheet.statusValue == 10 || sheet.statusValue == 11 || sheet.statusValue == 12 || sheet.statusValue == 13) {
                                                                 return (
                                                                     <Button variant="primary" disabled>変更</Button>
                                                                 );
@@ -578,7 +578,14 @@ function RevieweeSheetShow(props: Props) {
                     <Row>
                         <Col>
                             <h5>本人希望</h5>
-                            <Button variant="info" onClick={handleShowCareerPlanUpdate}>編集</Button>
+                            {(() => {
+                                //ステータス1,2,3の場合,編集ボタンを表示
+                                if (sheet.statusValue == 1 || sheet.statusValue == 2 || sheet.statusValue == 3) {
+                                    return (
+                                        <Button variant="info" onClick={handleShowCareerPlanUpdate}>編集</Button>
+                                    );
+                                }
+                            })()}
                             <p>{sheet.careerPlan}</p>
                         </Col>
                         <Col>
