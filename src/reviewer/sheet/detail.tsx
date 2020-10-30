@@ -387,7 +387,7 @@ function EvalutionScreen(props: Props) {
                                     <Form.Group>
                                         <Form.Label>所属長コメント</Form.Label>
                                         <Form.Control
-                                            type="textarea"
+                                            as="textarea"
                                             className={style.detailTextarea}
                                             onChange={props.handleChange}
                                             name="secondComment"
@@ -413,7 +413,7 @@ function EvalutionScreen(props: Props) {
                                     <Form.Group>
                                         <Form.Label>部門長コメント</Form.Label>
                                         <Form.Control
-                                            type="textarea"
+                                            as="textarea"
                                             className={style.detailTextarea}
                                             onChange={props.handleChange}
                                             name="firstComment"
