@@ -121,6 +121,7 @@ function RevieweeSheetNew(props: Props){
                         expDoneDate: Yup.date().min(Yup.ref('expStartDate'), ({ min }) => `開始予定日より後の日付を入力してください`,)
                             .typeError('正しく入力してください')
                             .required('必須入力です'),
+                            section: Yup.string().required('目標カテゴリを選択してください')
                     })}
                     
                     onSubmit={async (values, actions) => {
@@ -164,6 +165,7 @@ function RevieweeSheetNew(props: Props){
                                         console.log("エラー: カテゴリが設定されていない可能性があります。")
                                     }
                                 })}
+                                <ErrorMessage name="section" />
                             </div>
                             <Form.Label>目標内容</Form.Label>
                             <Form.Control as="textarea" name="content" onChange={props.handleChange}/>
