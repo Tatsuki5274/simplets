@@ -525,25 +525,31 @@ function RevieweeSheetShow(props: Props) {
                                                     <td>{objective.content}</td>
                                                     <td>{objective.result}</td>
                                                     {(() => {
-                                                        // 進捗率が空の場合,下記を表示
-                                                        if (objective.progress === null || objective.progress === undefined) {
-                                                            return (
-                                                                <td>
-                                                                    <input name="progress" onChange={handleChangeProgress} data-objective-id={objective.id} type="number" min="0" max="100" step="10"></input>
-                                                                    <p>%</p>
-                                                                </td>
-                                                            )
-                                                        }
-                                                        // 進捗率が入力済みの場合,下記を表示 
-                                                        else {
-                                                            // progress 型変換
-                                                            const valueProgress = String(objective.progress);
-                                                            return (
-                                                                <td>
-                                                                    <input name="progress" onChange={handleChangeProgress} data-objective-id={objective.id} placeholder={valueProgress} type="number" min="0" max="100" step="10"></input>
-                                                                    <p>%</p>
-                                                                </td>
-                                                            );
+                                                        // 承認ステータスが1の場合,数値入力フィールドを表示
+                                                        if (sheet.statusValue === 1) {
+                                                            // 進捗率が空の場合,下記を表示
+                                                            if (objective.progress === null || objective.progress === undefined) {
+                                                                return (
+                                                                    <td>
+                                                                        <input name="progress" onChange={handleChangeProgress} data-objective-id={objective.id} type="number" min="0" max="100" step="10"></input>
+                                                                        <p>%</p>
+                                                                    </td>
+                                                                )
+                                                            }
+                                                            // 進捗率が入力済みの場合,下記を表示 
+                                                            else {
+                                                                // progress 型変換
+                                                                const valueProgress = String(objective.progress);
+                                                                return (
+                                                                    <td>
+                                                                        <input name="progress" onChange={handleChangeProgress} data-objective-id={objective.id} placeholder={valueProgress} type="number" min="0" max="100" step="10"></input>
+                                                                        <p>%</p>
+                                                                    </td>
+                                                                );
+                                                            }
+                                                        } else {
+                                                            // 承認ステータスが1以外の場合,読み込み専用コンポーネントを表示
+                                                            return <td>{objective.progress}%</td>
                                                         }
                                                     })()}
                                                     <td>{objective.priority}</td>
