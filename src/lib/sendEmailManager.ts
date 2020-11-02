@@ -28,6 +28,17 @@ export default function emailParameterChange(sheet: Sheet, action: "remand" | "p
         subject: "subject",
         body: "body"
     }
+
+    //URL情報取得
+    const protocol = window.location.protocol;
+    const hostName = window.location.host;
+    const hostUrl = protocol + '//' + hostName;
+    const sheetId = sheet.id;
+    //console.log('hostURL', hostUrl);
+
+    const mainUrl = hostUrl + '/reviewee/sheet/' + sheetId; //メイン画面URL
+    const detailUrl = hostUrl + '/reviewer/sheet/' + sheetId; //評価画面URL
+
     console.log("statusVal", emailSheet.statusValue)
     switch (emailSheet.statusValue) {
         // 1.設定中
@@ -38,7 +49,7 @@ export default function emailParameterChange(sheet: Sheet, action: "remand" | "p
                     //cc: [""],
                     //bcc: [""],
                     subject: "1:目標設定中",
-                    body: "目標設定中"
+                    body: detailUrl.link(detailUrl),
                 }
             }
             break;
@@ -51,7 +62,7 @@ export default function emailParameterChange(sheet: Sheet, action: "remand" | "p
                         //cc: [""],
                         //bcc: [""],
                         subject: "2:承認",
-                        body: "承認"
+                        body: mainUrl.link(mainUrl),
                     }
                     break;
                 case "remand":
@@ -60,7 +71,7 @@ export default function emailParameterChange(sheet: Sheet, action: "remand" | "p
                         //cc: [""],
                         //bcc: [""],
                         subject: "2:差し戻し",
-                        body: "差し戻し"
+                        body: mainUrl.link(mainUrl),
                     }
                     break;
                 default:
@@ -76,7 +87,7 @@ export default function emailParameterChange(sheet: Sheet, action: "remand" | "p
                         //cc: [""],
                         //bcc: [""],
                         subject: "3:承認",
-                        body: "承認"
+                        body: detailUrl.link(detailUrl)
                     }
                     break;
                 case "remand":
@@ -85,7 +96,7 @@ export default function emailParameterChange(sheet: Sheet, action: "remand" | "p
                         //cc: [""],
                         //bcc: [""],
                         subject: "3:差し戻し",
-                        body: "差し戻し"
+                        body: mainUrl.link(mainUrl)
                     }
                     break;
                 default:
@@ -103,7 +114,7 @@ export default function emailParameterChange(sheet: Sheet, action: "remand" | "p
                         //cc: [""],
                         //bcc: [""],
                         subject: "10:承認",
-                        body: "承認"
+                        body: mainUrl.link(mainUrl)
                     }
                     break;
                 case "remand":
@@ -112,7 +123,7 @@ export default function emailParameterChange(sheet: Sheet, action: "remand" | "p
                         //cc: [""],
                         //bcc: [""],
                         subject: "10:差し戻し",
-                        body: "差し戻し"
+                        body: mainUrl.link(mainUrl)
                     }
                     break;
                 default:
@@ -130,7 +141,7 @@ export default function emailParameterChange(sheet: Sheet, action: "remand" | "p
                         //cc: [""],
                         //bcc: [""],
                         subject: "11:承認",
-                        body: "承認"
+                        body: detailUrl.link(detailUrl)
                     }
                     break;
                 case "remand":
@@ -139,7 +150,7 @@ export default function emailParameterChange(sheet: Sheet, action: "remand" | "p
                         //cc: [""],
                         //bcc: [""],
                         subject: "11:差し戻し",
-                        body: "差し戻し"
+                        body: mainUrl.link(mainUrl)
                     }
                     break;
                 default:
@@ -167,7 +178,7 @@ export default function emailParameterChange(sheet: Sheet, action: "remand" | "p
                             //cc: [""],
                             //bcc: [""],
                             subject: "12:承認依頼",
-                            body: "承認依頼"
+                            body: detailUrl.link(detailUrl)
                         }
                     }
                     break;
@@ -177,7 +188,7 @@ export default function emailParameterChange(sheet: Sheet, action: "remand" | "p
                         //cc: [""],
                         //bcc: [""],
                         subject: "12:差し戻し",
-                        body: "差し戻し"
+                        body: mainUrl.link(mainUrl)
                     }
                 default:
                     break;
