@@ -14,7 +14,7 @@ import RevieweeSheetShow from "reviewee/sheet/index/index"
 import RevieweeSheetNew from "reviewee/sheet/new/index"
 import ListPerformanceEvalution from 'reviewee/list/performance';
 import ProgressReferenceList from 'reviewer/list/progress';
-import EvaluationScreen from "reviewer/sheet/detail";
+import EvaluationScreen from "reviewer/sheet";
 Amplify.configure(awsconfig);
 
 export type Sheet = Omit<Exclude<APIt.GetSheetQuery['getSheet'], null>, '__typename'>;
