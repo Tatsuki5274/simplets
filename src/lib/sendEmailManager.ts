@@ -13,15 +13,14 @@ export default function emailParameterChange(sheet: Sheet, action: "remand" | "p
     const employee = emailSheet.revieweeEmployee;
     const superior = employee?.superior;
     const revieweeEmail: string = employee?.email || "";
-    const superiorEmail: Array<string | null> =
+    const superiors: Array<string | null> =
         [superior ? superior.email : "", superior?.superior ? superior.superior.email : "", superior?.superior?.superior ? superior.superior.superior.email : ""];
-    var ceoEmail : string = "";
-    for(let i = 0 ;i<superiorEmail.length -1 ; i++) {
-        if(superiorEmail[i] === "") {
-            break;
-        }
-        ceoEmail = superiorEmail[i] || "";
-    }
+    
+    //空要素を削除
+    const superiorEmail: Array<string | null> = superiors.filter(Boolean);
+    // ceoメール情報を定義
+    var ceoEmail: string | null = superiorEmail[superiorEmail.length - 1];
+    
     let emailInput: SendEmail = {
         to: ["test"],
         // cc: [""],
