@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import Amplify, { Storage, API, graphqlOperation, Auth } from 'aws-amplify';
 import { Button, Container, Table } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { GraphQLResult } from "@aws-amplify/api";
 import { ListSheetsQuery } from 'API';
 import { Link } from 'react-router-dom';
-import { Category, Employee, Objective, Section, Sheet } from 'App';
+import { Category, Employee, Objective, Section, Sheet, UserContext } from 'App';
 import { ApprovalStatus, getStatusValue } from 'lib/getStatusValue'
 import { getEmployee, listCategorys, listSheets } from 'graphql/queries'
 import * as APIt from 'API';
@@ -36,43 +36,52 @@ import Style from './performanceStyle.module.scss';
 function ListPerformanceEvalution() {
     const [sheets, setSheets] = useState<Sheet[]>();
     const [styleSheetButton, setStyleSheetButton] =useState<string>();
+
+    // ログインユーザを取得する
+    const currentUser = useContext(UserContext);
     
     useEffect(() => {
         ; (async () => {
-            let response
-            try {
-                response = (await API.graphql(graphqlOperation(listSheets))
-                ) as GraphQLResult<ListSheetsQuery>;
-            } catch (e) {
-                console.log("エラーを無視しています", e)
-                response = e
-            }
-            const listItems = response.data?.listSheets?.items as Sheet[];
-            //降順でソートしてlistItemsに保存
-            listItems?.sort(function (a, b) {
-                if (a.year < b.year) {
-                    return 1;
-                } else {
-                    return -1;
+            if(currentUser){
+                const listQV: APIt.ListSheetsQueryVariables = {
+                    filter: {
+                        reviewee: {
+                            eq: currentUser.username
+                        }
+                    }
+                };
+                let response
+                try {
+                    response = (await API.graphql(graphqlOperation(listSheets, listQV))
+                    ) as GraphQLResult<ListSheetsQuery>;
+                } catch (e) {
+                    console.log("エラーを無視しています", e)
+                    response = e
                 }
-            });
-            setSheets(listItems);
-            console.log(response);
-            console.log(listItems);
+                const listItems = response.data?.listSheets?.items as Sheet[];
+                //降順でソートしてlistItemsに保存
+                listItems?.sort(function (a, b) {
+                    if (a.year < b.year) {
+                        return 1;
+                    } else {
+                        return -1;
+                    }
+                });
+                setSheets(listItems);
 
-            // 今年に作成されたシートを確認
-            let result = false;
-            const currentYear:number = new Date().getFullYear();
-            let filteredSheet = listItems.filter((element)=>{
-                return element.year === currentYear ? true : false;
-            })
-            if(filteredSheet.length === 0) {
-                result = true;
+                // 今年に作成されたシートを確認
+                let result = false;
+                const currentYear:number = new Date().getFullYear();
+                let filteredSheet = listItems.filter((element)=>{
+                    return element.year === currentYear ? true : false;
+                })
+                if(filteredSheet.length === 0) {
+                    result = true;
+                }
+                setStyleSheetButton(changeCreateSheetButtonStyle(result));
             }
-            setStyleSheetButton(changeCreateSheetButtonStyle(result));
-
         })()
-    }, []);
+    }, [currentUser]);
 
     // 新規作成ボタンのスタイルシートを制御
     function changeCreateSheetButtonStyle(changeStatus:boolean) {

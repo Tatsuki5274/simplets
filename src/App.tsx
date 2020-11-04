@@ -1,5 +1,5 @@
 //React
-import React, { useEffect } from 'react';
+import React, { createContext, useEffect, useState } from 'react';
 import {BrowserRouter, Route, Switch, Link } from "react-router-dom";
 //Amplify
 import { withAuthenticator, AmplifySignOut, AmplifyAuthenticator } from '@aws-amplify/ui-react';
@@ -24,6 +24,8 @@ export type Group = Omit<Exclude<APIt.GetGroupQuery['getGroup'], null>, '__typen
 export type Category = Omit<Exclude<APIt.GetCategoryQuery['getCategory'], null>, '__typename'>;
 export type Employee = Omit<Exclude<APIt.GetEmployeeQuery['getEmployee'], null>, '__typename'>;
 export type SendEmail = Omit<Exclude<APIt.sendEmailInput, null>, '__typename'>;
+
+export const UserContext = createContext<any>(null)
  
 //approvalStatusManagerの引数の型
 export type approvalStatusManagerMutationVariables = {
@@ -53,25 +55,30 @@ function Portal(){
 }
 
 function App() {
+  const [user, setUser] = useState<any>(null);
+
   useEffect(() => {
     ;(async()=>{
       const user = await Auth.currentAuthenticatedUser()
+      setUser(user);
       console.log("user", user)
     })()
   },[]);
 
   return (
     <div>
-      <BrowserRouter>
-        <Switch>
-          <Route exact path="/" component={ListPerformanceEvalution} />
-          <Route exact path="/reviewee/objective/new/:sheetId" component={RevieweeSheetNew} />
-          <Route exact path="/reviewee/sheet/:sheetId" component={RevieweeSheetShow} />
-          <Route exact path="/reviewee/list" component={ListPerformanceEvalution} />
-          <Route exact path="/reviewer/list" component={ProgressReferenceList} />
-          <Route exact path="/reviewer/sheet/:sheetId" component={EvaluationScreen} />
-        </Switch>
-      </BrowserRouter>
+      <UserContext.Provider value={user}>
+        <BrowserRouter>
+          <Switch>
+            <Route exact path="/" component={ListPerformanceEvalution} />
+            <Route exact path="/reviewee/objective/new/:sheetId" component={RevieweeSheetNew} />
+            <Route exact path="/reviewee/sheet/:sheetId" component={RevieweeSheetShow} />
+            <Route exact path="/reviewee/list" component={ListPerformanceEvalution} />
+            <Route exact path="/reviewer/list" component={ProgressReferenceList} />
+            <Route exact path="/reviewer/sheet/:sheetId" component={EvaluationScreen} />
+          </Switch>
+        </BrowserRouter>
+      </UserContext.Provider>
     </div>
   );
 }
