@@ -1,10 +1,10 @@
 import React, { ChangeEvent, useEffect, useState } from 'react';
 import { Container, Row, Col, Table, Button, Modal, Form, Badge } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { API, graphqlOperation } from 'aws-amplify';
-import { Section } from 'App';
+import { API, Auth, graphqlOperation } from 'aws-amplify';
+import { Employee, Section } from 'App';
 import { GraphQLResult } from "@aws-amplify/api";
-import { listSections } from 'graphql/queries';
+import { getEmployee, listSections } from 'graphql/queries';
 import * as APIt from 'API';
 import { ListSectionsQuery, ListSectionsQueryVariables, ModelSectionFilterInput } from 'API';
 import CategoryInput from "./categoryInput"
@@ -36,6 +36,8 @@ function RevieweeSheetNew(props: Props){
     const [isRedirect, setIsRedirect] = useState<boolean>();
     const [sections, setSections] = useState<Section[]>();
     // const [input, setInput] = useState<InputForm>({});
+
+    const [companyGroups, setCompanyGroups] = useState<Array<string>>();
 
     // function handleChange(event: ChangeEvent<HTMLInputElement>){
     //     const target = event.target;
@@ -73,6 +75,40 @@ function RevieweeSheetNew(props: Props){
 
     // }
 
+    // 社員情報を取得
+    async function getQueryEmployee() {
+        //ログインユーザ情報取得
+        const currentUser = await Auth.currentAuthenticatedUser();
+        const revieweeEmployeeID: string = currentUser.username;
+
+        //所属長,部門長情報取得
+        const input: APIt.GetEmployeeQueryVariables = {
+            id: revieweeEmployeeID
+        }
+        let response;
+        try {
+            response = (await API.graphql(graphqlOperation(getEmployee, input))
+            ) as GraphQLResult<APIt.GetEmployeeQuery>;
+        } catch (e) {
+            console.log("エラーを無視しています", e)
+            response = e;
+        }
+
+        const employeeItem: Employee = response.data.getEmployee as Employee;
+        
+        return employeeItem;
+    }
+
+    // 会社グループ情報を取得
+    async function getCompanyGroup() {
+        const revieweeEmployee: Employee = await getQueryEmployee();
+        const companyGroup = revieweeEmployee.company?.companyGroupName || "";
+        const companyManagerGroup = revieweeEmployee.company?.companyManagerGroupName || "";
+        const companyAdminGroup = revieweeEmployee.company?.companyAdminGroupName || "";
+        const groupItems = [companyGroup, companyManagerGroup, companyAdminGroup];
+        setCompanyGroups(groupItems);
+    }
+
     useEffect(() => {
         ;(async()=>{
 
@@ -97,6 +133,9 @@ function RevieweeSheetNew(props: Props){
             });
             setSections(repsonseSection);
             console.log("section", repsonseSection);
+
+            // companyGroupsを取得
+            getCompanyGroup();
         })()
       },[]);
       
@@ -114,7 +153,6 @@ function RevieweeSheetNew(props: Props){
                         priority: '',
                         expStartDate: '',
                         expDoneDate: '',
-
                     }}
                     validationSchema={Yup.object({
                         expStartDate: Yup.date().typeError('正しく入力してください').required('必須入力です'),
@@ -127,30 +165,38 @@ function RevieweeSheetNew(props: Props){
                     onSubmit={async (values, actions) => {
                         console.log('values', values);
 
-                        const createI: APIt.CreateObjectiveInput = {
-                            content: values.content || "",
-                            priority: values.priority || "",
-                            objectiveSectionId: values.section || "",
-                            expStartDate: values.expStartDate?.replace('T', '-') || "",
-                            expDoneDate: values.expDoneDate?.replace('T', '-') || "",
-                        }
-                        console.log('createI',createI);
-                        const createMV: APIt.CreateObjectiveMutationVariables = {
-                            input: createI
-                        }
-                        let createR: GraphQLResult<APIt.CreateObjectiveMutation>
-                        try {
-                            createR = await API.graphql(graphqlOperation(createObjective, createMV)) as GraphQLResult<APIt.CreateObjectiveMutation>;
-                        } catch (e) {
-                            console.log("エラーを無視しています", e)
-                            console.log("データが不完全でないことを確認してください")
-                            createR = e;
-                        }
-                        if (createR.data) {
-                            const createTM: APIt.CreateObjectiveMutation = createR.data;
-                            setIsRedirect(true);
+                        //会社グループ権限が存在する場合,ミューテーション処理を実行
+                        if(companyGroups && companyGroups[0] && companyGroups[1] && companyGroups[2]) {
+
+                            const createI: APIt.CreateObjectiveInput = {
+                                content: values.content || "",
+                                priority: values.priority || "",
+                                objectiveSectionId: values.section || "",
+                                expStartDate: values.expStartDate?.replace('T', '-') || "",
+                                expDoneDate: values.expDoneDate?.replace('T', '-') || "",
+                                readGroups: [companyGroups[0]],
+                                updateGroups: [companyGroups[1], companyGroups[2]],
+                            }
+                            console.log('createI',createI);
+                            const createMV: APIt.CreateObjectiveMutationVariables = {
+                                input: createI
+                            }
+                            let createR: GraphQLResult<APIt.CreateObjectiveMutation>
+                            try {
+                                createR = await API.graphql(graphqlOperation(createObjective, createMV)) as GraphQLResult<APIt.CreateObjectiveMutation>;
+                            } catch (e) {
+                                console.log("エラーを無視しています", e)
+                                console.log("データが不完全でないことを確認してください")
+                                createR = e;
+                            }
+                            if (createR.data) {
+                                const createTM: APIt.CreateObjectiveMutation = createR.data;
+                                setIsRedirect(true);
+                            } else {
+                                console.log("保存に失敗しました")
+                            }
                         } else {
-                            console.log("保存に失敗しました")
+                            console.error("会社グループの取得に失敗しました",companyGroups);
                         }
 
                     }}
