@@ -602,16 +602,24 @@ function RevieweeSheetShow(props: Props) {
                     </Table>
 
                     <h4>年度評価</h4>
-                    <Row>
-                        <Col>
-                            <h5>所属長コメント</h5>
-                            <p>{sheet.secondComment || "なし"}</p>
-                        </Col>
-                        <Col>
-                            <h5>部門長コメント</h5>
-                            <p>{sheet.firstComment || "なし"}</p>
-                        </Col>
-                    </Row>
+                    <Table striped bordered hover>
+                        <thead>
+                            <tr>
+                                <td>■所属長コメント</td>
+                                <td>日付</td>
+                                <td>■部門長コメント</td>
+                                <td>日付</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>{sheet.secondComment || "なし"}</td>
+                                <td>{sheet.secondCheckDate || "-"}</td>
+                                <td>{sheet.firstComment || "なし"}</td>
+                                <td>{sheet.firstCheckDate || "-"}</td>
+                            </tr>
+                        </tbody>
+                    </Table>
                     <h4>総合評価 {sheet.overAllEvaluation}</h4>
                     {(() => {
                         if(sheet.statusValue == 1 || sheet.statusValue == 3){
