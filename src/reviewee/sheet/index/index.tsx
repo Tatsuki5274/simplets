@@ -432,10 +432,10 @@ function RevieweeSheetShow(props: Props) {
                     </Modal.Body>
                     <Modal.Footer>
                         <Button variant="secondary" onClick={handleCloseCareerPlanUpdate}>
-                            Close
+                            キャンセル
                     </Button>
                         <Button variant="primary" onClick={HandleUpdateCareerPlan}>
-                            Save Changes
+                            保存
                     </Button>
                     </Modal.Footer>
                 </Modal>
