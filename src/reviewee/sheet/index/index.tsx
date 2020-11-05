@@ -562,7 +562,7 @@ function RevieweeSheetShow(props: Props) {
                                                         if (sheet.statusValue === 1) {
                                                             return (
                                                                 <td>
-                                                                    <Button onClick={handleDeleteObjective} data-objective-id={objective.id}>削除</Button>
+                                                                    <Button variant="danger" onClick={handleDeleteObjective} data-objective-id={objective.id}>削除</Button>
                                                                 </td>
                                                             );
                                                         }
