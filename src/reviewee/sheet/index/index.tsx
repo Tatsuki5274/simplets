@@ -577,24 +577,30 @@ function RevieweeSheetShow(props: Props) {
                     })}
 
                     <h4>キャリア計画</h4>
-                    <Row>
-                        <Col>
-                            <h5>本人希望</h5>
-                            {(() => {
-                                //ステータス1,2,3の場合,編集ボタンを表示
-                                if (sheet.statusValue == 1 || sheet.statusValue == 2 || sheet.statusValue == 3) {
-                                    return (
-                                        <Button variant="info" onClick={handleShowCareerPlanUpdate}>編集</Button>
-                                    );
-                                }
-                            })()}
-                            <p>{sheet.careerPlan}</p>
-                        </Col>
-                        <Col>
-                            <h5>話し合い結果</h5>
-                            <p>{sheet.careerPlanComment}</p>
-                        </Col>
-                    </Row>
+                    <Table striped bordered hover>
+                        <thead>
+                            <tr>
+                                <td>本人希望
+                                {(() => {
+                                        //ステータス1,2,3の場合,編集ボタンを表示
+                                        if (sheet.statusValue == 1 || sheet.statusValue == 2 || sheet.statusValue == 3) {
+                                            return (
+                                                <Button variant="info" onClick={handleShowCareerPlanUpdate}>編集</Button>
+                                            );
+                                        }
+                                    })()}
+                                </td>
+                                <td>話し合い結果</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>{sheet.careerPlan}</td>
+                                <td>{sheet.careerPlanComment}</td>
+                            </tr>
+                        </tbody>
+                    </Table>
+
                     <h4>年度評価</h4>
                     <Row>
                         <Col>
