@@ -620,7 +620,23 @@ function RevieweeSheetShow(props: Props) {
                             </tr>
                         </tbody>
                     </Table>
-                    <h4>総合評価 {sheet.overAllEvaluation}</h4>
+                    <h4>総合評価</h4>
+                    <Table striped bordered hover>
+                        <thead>
+                            <tr>
+                                <td>前々期</td>
+                                <td>前期</td>
+                                <td>今期</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>-</td>
+                                <td>-</td>
+                                <td>{sheet.overAllEvaluation || "未評価"}</td>
+                            </tr>
+                        </tbody>
+                    </Table>
                     {(() => {
                         if(sheet.statusValue == 1 || sheet.statusValue == 3){
                             return (
