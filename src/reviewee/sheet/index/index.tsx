@@ -449,12 +449,12 @@ function RevieweeSheetShow(props: Props) {
                     <h2>メイン</h2>
                     <h3>目標一覧</h3>
                     {(() => {
-                        if (sheet.statusValue === 1) {
+                        if (sheet.statusValue === 1 || sheet.statusValue == 3) {
                             return (
                                 <Link to={`/reviewee/objective/new/${sheetId}`}>
                                     <Button variant="info">
                                         目標追加
-                        </Button>
+                                    </Button>
                                 </Link>
                             );
                         }
@@ -511,11 +511,11 @@ function RevieweeSheetShow(props: Props) {
                                                 <tr key={objective.id}>
                                                     <td>
                                                         {(() => {
-                                                            if (sheet.statusValue == 1 || sheet.statusValue == 2 || sheet.statusValue == 3) {
+                                                            if (sheet.statusValue == 1 || sheet.statusValue == 3) {
                                                                 return (
                                                                     <Button variant="primary" data-objectiveId={objective.id} onClick={HandleChange}>変更</Button>
                                                                 );
-                                                            } else if (sheet.statusValue == 10 || sheet.statusValue == 11 || sheet.statusValue == 12 || sheet.statusValue == 13) {
+                                                            } else if (sheet.statusValue == 2 || sheet.statusValue == 10 || sheet.statusValue == 11 || sheet.statusValue == 12 || sheet.statusValue == 13) {
                                                                 return (
                                                                     <Button variant="primary" disabled>変更</Button>
                                                                 );
@@ -525,8 +525,8 @@ function RevieweeSheetShow(props: Props) {
                                                     <td>{objective.content}</td>
                                                     <td>{objective.result}</td>
                                                     {(() => {
-                                                        // 承認ステータスが1の場合,数値入力フィールドを表示
-                                                        if (sheet.statusValue === 1) {
+                                                        // 承認ステータスが1,3の場合,数値入力フィールドを表示
+                                                        if (sheet.statusValue == 1 || sheet.statusValue == 3) {
                                                             // 進捗率が空の場合,下記を表示
                                                             if (objective.progress === null || objective.progress === undefined) {
                                                                 return (
@@ -549,7 +549,7 @@ function RevieweeSheetShow(props: Props) {
                                                             }
                                                         } else {
                                                             // 承認ステータスが1以外の場合,読み込み専用コンポーネントを表示
-                                                            return <td>{objective.progress}%</td>
+                                                            return <td>{objective.progress || "-"}%</td>
                                                         }
                                                     })()}
                                                     <td>{objective.priority}</td>
