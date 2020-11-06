@@ -33,6 +33,8 @@ export const ReviewerSheetDetailObjectiveReadonly = (props: Props) => {
                                 <td>実績</td>
                                 <td>進捗率</td>
                                 <td>優先順位</td>
+                                <td>開始予定日</td>
+                                <td>完了予定日</td>
                                 <td>自己評価</td>
                                 <td>最終評価</td>
                                 <td>更新日時</td>
@@ -63,6 +65,12 @@ export const ReviewerSheetDetailObjectiveReadonly = (props: Props) => {
 
                                         {/* 優先順位 */}
                                         <td>{objective.priority}</td>
+
+                                        {/* 開始予定日 */}
+                                        <td>{objective.expStartDate?.replace(/-/g,'/') || ""}</td>
+
+                                        {/* 完了予定日 */}
+                                        <td>{objective.expDoneDate?.replace(/-/g,'/') || ""}</td>
 
                                         {/* 自己評価 */}
                                         <td>{objective.selfEvaluation}</td>
