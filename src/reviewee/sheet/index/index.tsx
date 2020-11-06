@@ -614,9 +614,9 @@ function RevieweeSheetShow(props: Props) {
                         <tbody>
                             <tr>
                                 <td>{sheet.secondComment || "なし"}</td>
-                                <td>{sheet.secondCheckDate || "-"}</td>
+                                <td>{sheet.secondCheckDate?.replace(/-/g,'/') || "-"}</td>
                                 <td>{sheet.firstComment || "なし"}</td>
-                                <td>{sheet.firstCheckDate || "-"}</td>
+                                <td>{sheet.firstCheckDate?.replace(/-/g,'/') || "-"}</td>
                             </tr>
                         </tbody>
                     </Table>
