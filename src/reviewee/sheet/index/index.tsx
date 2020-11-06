@@ -244,6 +244,19 @@ function RevieweeSheetShow(props: Props) {
         console.log("sheet", sheet)
     }
 
+    //目標変更検知
+    function handleCheckObjectiveItems(inputItems: (string | null | undefined)[], objectiveItems: (string | null | undefined)[]) {
+        for (let i = 0; i < inputItems.length; i++) {
+            if (inputItems[i] !== undefined) {
+                if (inputItems[i] !== objectiveItems[i]) {
+                    // 承認ステータス更新処理を実行
+                    console.log("項目変更を検知しました");
+                    break;
+                }
+            }
+        }
+    }
+
     //表示用データ
     useEffect(() => {
         ; (async () => {
@@ -300,6 +313,13 @@ function RevieweeSheetShow(props: Props) {
                     }}
                     onSubmit={async (values, actions) => {
                         console.log("values", values);
+
+                        // 承認ステータス3の場合,実績と自己評価以外の項目を変更した場合の処理
+                        if (sheet.statusValue === 3) {
+                            const comparisonValues = [values.content, values.expStartDate, values.expDoneDate, values.priority, values.selfEvaluation];
+                            const comparisonObjectives = [modalObjective?.content, modalObjective?.expStartDate, modalObjective?.expDoneDate, modalObjective?.priority, (modalObjective?.selfEvaluation)?.toString()];
+                            handleCheckObjectiveItems(comparisonValues, comparisonObjectives);
+                        } 
 
                         //項目明細 情報更新
                         const objectiveId = changeObjectiveId;
