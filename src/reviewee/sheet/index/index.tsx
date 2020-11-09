@@ -211,8 +211,7 @@ function RevieweeSheetShow(props: Props) {
     }
 
     async function afterWorkFlow(sheet: Sheet, work:{sheet: Sheet, mailObject: SendEmail | null}){
-        const dao = new SheetDao();
-        let updatedSheet = await dao.update({
+        let updatedSheet = await SheetDao.update(updateSheet, {
             careerPlan: formInputCareerPlan ? formInputCareerPlan.careerPlan || "" : "",
             id: sheet.id,
             statusValue: sheet.statusValue

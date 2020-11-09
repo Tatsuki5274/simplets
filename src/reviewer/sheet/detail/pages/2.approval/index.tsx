@@ -11,6 +11,7 @@ import { ReviewerSheetDetailObjectiveEditable } from "../../components/objective
 import { RemandModal } from "../../components/remandModal";
 import { ReviewerSheetDetailYearlyEditableSecond } from "../../components/yearly/editable/second";
 import * as statusManager from 'lib/statusManager'
+import { updateSheet } from "graphql/mutations";
 import { Command, commandWorkFlow } from "lib/workflow";
 import { sendEmailMutation } from "lib/sendEmail";
 
@@ -30,10 +31,7 @@ export const ReviewerSheetPagesStatus2 = (props: Props)=>{
         console.log("onSubmit", values)
         if(props.sheet){
             const work = commandWorkFlow(Command.SUP1_APPLOVAL, props.sheet)
-
-            console.log("work", work)
-            const dao = new SheetDao();
-            let updatedSheet = await dao.update(values);
+            let updatedSheet = await SheetDao.update(updateSheet, values);
 
             if(updatedSheet){
                 if(work.mailObject){
@@ -99,8 +97,7 @@ export const ReviewerSheetPagesStatus2 = (props: Props)=>{
                                     {/* ステータスによってボタンの出し分け */}
                                     <Form.Group>
                                         <Button onClick={async ()=>{
-                                            const dao = new SheetDao();
-                                            const updatedSheet = await dao.update(formik.values)
+                                            const updatedSheet = await SheetDao.update(updateSheet ,formik.values)
 
                                             // const updatedSheet = runUpdateSheet(props.values);
                                             if(updatedSheet){
