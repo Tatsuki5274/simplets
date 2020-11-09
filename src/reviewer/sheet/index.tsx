@@ -10,6 +10,7 @@ import { getSheet } from 'graphql/queries';
 import HeaderComponents from 'common/header';
 import { ReviewerSheetPagesStatus2 } from './detail/pages/2.approval';
 import { ReviewerSheetPagesReadonly } from './detail/pages/readonly';
+import { ReviewerSheetPagesStatus3 } from './detail/pages/3.interview';
 
 export const SheetContext = createContext<Sheet | null>(null)
 
@@ -100,6 +101,9 @@ function EvalutionScreen(props: Props) {
                     if(sheet.statusValue === 2){
                         // 所属長が変更可能なコンポーネントを返却
                         return <ReviewerSheetPagesStatus2 sheet={sheet} sections={sectionItems} handleUpdateObjective={handleChangeObjective} />
+                    }else if(sheet.statusValue === 3){
+                        // 所属長が変更可能なコンポーネントを返却
+                        return <ReviewerSheetPagesStatus3 sheet={sheet} sections={sectionItems} handleUpdateObjective={handleChangeObjective} />
                     }else if(sheet.statusValue === 14){
                         // 読み取り専用のコンポーネントを返却
                         return <ReviewerSheetPagesReadonly sheet={sheet} sections={sectionItems} />
