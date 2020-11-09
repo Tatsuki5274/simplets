@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Container, Row, Col, Table, Button, Modal, Form, Card } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Link } from 'react-router-dom';
 import { GraphQLResult } from "@aws-amplify/api";
 import { API, Auth, graphqlOperation } from 'aws-amplify';
 //import {BrowserRouter, Route, Link, Switch } from "react-router-dom";
-import { getSheet, getSection } from 'graphql/queries'
-import { Sheet, Section, Objective, SendEmail } from 'App';
+import { getSheet, getSection, listSheets } from 'graphql/queries'
+import { Sheet, Section, Objective, SendEmail, UserContext } from 'App';
 import { GetSheetQuery, UpdateSheetInput } from 'API';
 import * as APIt from 'API';
 import dateFormat from 'dateformat'
@@ -36,7 +36,11 @@ type Props = {
 function RevieweeSheetShow(props: Props) {
     
     const sheetId = props.match.params.sheetId;
+    const currentUser = useContext(UserContext);
+
     const [sheet, setSheet] = useState<Sheet>();
+    const [previousPeriod, setPreviousPeriod] = useState<(number | null)[]>([null, null])
+
 
     const [modalObjective, setModalObjective] = useState<Objective>();
 
@@ -290,6 +294,55 @@ function RevieweeSheetShow(props: Props) {
             console.log(response);
         })()
     }, []);
+
+    useEffect(() => {
+        ; (async () => {
+            // 前期と前々期を取得
+            if(sheet){
+                const thisYear = sheet.year
+
+                const input: APIt.ListSheetsQueryVariables = {
+                    filter: {
+                        year: {
+                            between: [thisYear - 2, thisYear - 1]
+                        },
+                        reviewee:{
+                            eq: currentUser.username
+                        }
+                    }
+                }
+                let response: GraphQLResult<APIt.ListSheetsQuery> | null = null
+                try{
+                    response = (await API.graphql(graphqlOperation(listSheets, input))
+                    )as GraphQLResult<APIt.ListSheetsQuery>;
+                }catch(e){
+                    console.log("エラーを無視しています", e)
+                    response = e
+                }
+
+                if(response && response.data && response.data.listSheets && response.data.listSheets.items){
+                    const gotSheets = response.data.listSheets.items;
+                    if(gotSheets.length > 2){
+                        console.error("業績評価年度に重複があります。前期前々期の記録に想定されない値が格納される場合があります。", gotSheets)
+                    }
+                    console.log("between", gotSheets)
+                    let results: (number | null)[] = [null, null]
+
+                    // 前期の記録を取得
+                    results[0] = gotSheets.find((sheet)=>{
+                        return sheet?.year === thisYear - 1
+                    })?.overAllEvaluation || null
+                    // 前々期の記録を取得
+                    results[1] = gotSheets.find((sheet)=>{
+                        return sheet?.year === thisYear - 2
+                    })?.overAllEvaluation || null
+
+                    setPreviousPeriod(results)
+                }
+
+            }
+        })()
+    }, [sheet, currentUser]);
 
     if (sheet === undefined) return <p>Loading</p>
     else if (sheet === null) {
@@ -663,8 +716,8 @@ function RevieweeSheetShow(props: Props) {
                         </thead>
                         <tbody>
                             <tr>
-                                <td>-</td>
-                                <td>-</td>
+                                <td>{previousPeriod[1]}</td>
+                                <td>{previousPeriod[0]}</td>
                                 <td>{sheet.overAllEvaluation || "未評価"}</td>
                             </tr>
                         </tbody>
