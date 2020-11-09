@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, createContext } from 'react';
 import { API, graphqlOperation } from 'aws-amplify';
 import { GraphQLResult } from "@aws-amplify/api";
 import {  } from 'react-router';
@@ -10,6 +10,8 @@ import { getSheet } from 'graphql/queries';
 import HeaderComponents from 'common/header';
 import { ReviewerSheetPagesStatus2 } from './detail/pages/2.approval';
 import { ReviewerSheetPagesReadonly } from './detail/pages/readonly';
+
+export const SheetContext = createContext<Sheet | null>(null)
 
 //propsの型を指定
 type Props = {
@@ -91,20 +93,23 @@ function EvalutionScreen(props: Props) {
     });
     return (
         <div>
-            <HeaderComponents />            
+            <SheetContext.Provider value={sheet}>
+                <HeaderComponents />            
 
-            {(() => {
-                if(sheet.statusValue === 2){
-                    // 所属長が変更可能なコンポーネントを返却
-                    return <ReviewerSheetPagesStatus2 sheet={sheet} sections={sectionItems} handleUpdateObjective={handleChangeObjective} />
-                }else if(sheet.statusValue === 14){
-                    // 読み取り専用のコンポーネントを返却
-                    return <ReviewerSheetPagesReadonly sheet={sheet} sections={sectionItems} />
-                }else {
-                    // 想定してない承認ステータスの場合は読み取り専用コンポーネントを返却する
-                    return <ReviewerSheetPagesReadonly sheet={sheet} sections={sectionItems} />
-                }
-            })()}
+                {(() => {
+                    if(sheet.statusValue === 2){
+                        // 所属長が変更可能なコンポーネントを返却
+                        return <ReviewerSheetPagesStatus2 sheet={sheet} sections={sectionItems} handleUpdateObjective={handleChangeObjective} />
+                    }else if(sheet.statusValue === 14){
+                        // 読み取り専用のコンポーネントを返却
+                        return <ReviewerSheetPagesReadonly sheet={sheet} sections={sectionItems} />
+                    }else {
+                        // 想定してない承認ステータスの場合は読み取り専用コンポーネントを返却する
+                        return <ReviewerSheetPagesReadonly sheet={sheet} sections={sectionItems} />
+                    }
+                })()}
+            </SheetContext.Provider>
+
 
 
 

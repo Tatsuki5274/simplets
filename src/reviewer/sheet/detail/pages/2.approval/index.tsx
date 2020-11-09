@@ -11,6 +11,8 @@ import { ReviewerSheetDetailObjectiveEditable } from "../../components/objective
 import { RemandModal } from "../../components/remandModal";
 import { ReviewerSheetDetailYearlyEditableSecond } from "../../components/yearly/editable/second";
 import * as statusManager from 'lib/statusManager'
+import { Command, commandWorkFlow } from "lib/workflow";
+import { sendEmailMutation } from "lib/sendEmail";
 
 type Props = {
     sheet: Sheet,
@@ -27,12 +29,20 @@ export const ReviewerSheetPagesStatus2 = (props: Props)=>{
     const onSubmit = async (values: Sheet) => {
         console.log("onSubmit", values)
         if(props.sheet){
+            const work = commandWorkFlow(Command.SUP1_APPLOVAL, props.sheet)
+
+            console.log("work", work)
             const dao = new SheetDao();
             let updatedSheet = await dao.update(values);
 
             if(updatedSheet){
-                updatedSheet = await statusManager.exec(updatedSheet, "proceed");
-                // setSheet(updatedSheet);
+                if(work.mailObject){
+                    sendEmailMutation(work.mailObject)
+                }else{
+                    console.error("メールの作成に失敗しました")
+                }
+                // updatedSheet = await statusManager.exec(updatedSheet, "proceed");
+                // setSheet({...updatedSheet});
             }else{
                 console.error("フォームデータの登録に失敗しました")
             }

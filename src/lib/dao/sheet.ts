@@ -23,14 +23,20 @@ export class SheetDao implements daoInterface<Sheet>{
         }
         return null;
     }
-    async update(params: Sheet){
+    async update(params: APIt.UpdateSheetInput){
         const updateI: APIt.UpdateSheetInput = params;
         const updateMV: APIt.UpdateSheetMutationVariables = {
             input: updateI,
         };
-        const updateR: GraphQLResult<APIt.UpdateSheetMutation> = 
-        await API.graphql(graphqlOperation(updateSheet, updateMV)) as GraphQLResult<APIt.UpdateSheetMutation>;
-        if (updateR.data) {
+        let updateR: GraphQLResult<APIt.UpdateSheetMutation> | null = null
+        try{
+          updateR = 
+            await API.graphql(graphqlOperation(updateSheet, updateMV)) as GraphQLResult<APIt.UpdateSheetMutation>;
+        }catch(e){
+          updateR = e
+          console.log("無視しているエラー", e)
+        }
+        if (updateR && updateR.data) {
             const updateTM: APIt.UpdateSheetMutation = updateR.data;
             if (updateTM.updateSheet) {
             const sheet: Sheet = updateTM.updateSheet;

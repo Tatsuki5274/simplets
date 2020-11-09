@@ -6,8 +6,8 @@ import { GraphQLResult } from "@aws-amplify/api";
 import { API, Auth, graphqlOperation } from 'aws-amplify';
 //import {BrowserRouter, Route, Link, Switch } from "react-router-dom";
 import { getSheet, getSection } from 'graphql/queries'
-import { Sheet, Section, Objective } from 'App';
-import { GetSheetQuery } from 'API';
+import { Sheet, Section, Objective, SendEmail } from 'App';
+import { GetSheetQuery, UpdateSheetInput } from 'API';
 import * as APIt from 'API';
 import dateFormat from 'dateformat'
 import { approvalStatusManager, deleteObjective, updateObjective, updateSheet }
@@ -19,6 +19,9 @@ import * as statusManager from 'lib/statusManager';
 import ApprovalStatusBox from 'common/approvalStatusBox';
 import { RevieweeSidebar } from 'common/Sidebar';
 import { Formik } from 'formik';
+import { Command, commandWorkFlow } from 'lib/workflow';
+import { SheetDao } from 'lib/dao/sheet';
+import { sendEmailMutation } from 'lib/sendEmail';
 
 type Props = {
     match: {
@@ -207,13 +210,23 @@ function RevieweeSheetShow(props: Props) {
       }
     }
 
-    async function handleClickStatusProceed(){
-        if(sheet){
-            const updatedSheet: Sheet = await statusManager.exec(sheet, "proceed");
-            console.log("setSheet", updatedSheet)
-            const updatedNewSheet = Object.create(updatedSheet);
+    async function afterWorkFlow(sheet: Sheet, work:{sheet: Sheet, mailObject: SendEmail | null}){
+        const dao = new SheetDao();
+        let updatedSheet = await dao.update({
+            careerPlan: formInputCareerPlan ? formInputCareerPlan.careerPlan || "" : "",
+            id: sheet.id,
+            statusValue: sheet.statusValue
+        });
 
-            setSheet(updatedNewSheet);
+        if(updatedSheet){
+            setSheet({...updatedSheet})
+            if(work.mailObject){
+                sendEmailMutation(work.mailObject)
+            }else{
+                console.error("メールの作成に失敗しました")
+            }
+        }else{
+            console.error("フォームデータの登録に失敗しました")
         }
     }
 
@@ -667,20 +680,36 @@ function RevieweeSheetShow(props: Props) {
                             <p>1:成果は不十分であった</p>
                         </Card.Body>
                     </Card>
-                    {(() => {
-                        if(sheet.statusValue == 1 || sheet.statusValue == 3){
-                            return (
-                                <Button onClick={handleClickStatusProceed}>所属長提出</Button>
-                            )
-                        }
-                    })()}
-                    {(() => {
-                        if(sheet.statusValue == 11){
-                            return (
-                                <Button onClick={handleClickStatusProceed}>内容確認</Button>
-                            )
-                        }
-                    })()}
+                    {sheet.statusValue === 1 ? 
+                        <Button
+                            onClick={()=>{
+                                const work = commandWorkFlow(Command.REVIEWEE_SUBMIT, sheet)
+                                afterWorkFlow(sheet, work)
+                            }}
+                        >
+                            所属長提出
+                        </Button> 
+                    : null}
+                    {sheet.statusValue === 3 ? 
+                        <Button
+                            onClick={()=>{
+                                const work = commandWorkFlow(Command.REVIEWEE_INPUT_RESULT, sheet)
+                                afterWorkFlow(sheet, work)
+                            }}
+                        >
+                            所属長提出
+                        </Button> 
+                    : null}
+                    {sheet.statusValue === 11 ? 
+                        <Button
+                            onClick={()=>{
+                                const work = commandWorkFlow(Command.REVIEWEE_CONFIRM_SCORE, sheet)
+                                afterWorkFlow(sheet, work)
+                            }}
+                        >
+                            内容確認
+                        </Button> 
+                    : null}
                 </Container>
             </div>
         </div>
