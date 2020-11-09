@@ -22,6 +22,7 @@ import { Formik } from 'formik';
 import { Command, commandWorkFlow } from 'lib/workflow';
 import { SheetDao } from 'lib/dao/sheet';
 import { sendEmailMutation } from 'lib/sendEmail';
+import { ArcGauge } from '@progress/kendo-react-gauges';
 
 type Props = {
     match: {
@@ -31,6 +32,36 @@ type Props = {
     }
 }
 
+type Avg = {
+    sheetAvg: number,
+    sections: {
+        sectionId?: string,
+        avg: number
+    }[] | null
+}
+
+// // シートへ平均フィールドを追加
+// type SheetExt = Sheet & {
+//     avg: number
+//     section: {
+//         items: {
+//             avg: number
+//         }[]
+//     }
+// }
+
+// const calcSheetExt = (sheet: Sheet)=>{
+//     const result: SheetExt = {
+//         ...sheet,
+//         avg: -1,
+//         section: sheet.section?.items?.map(section=>{
+//             return {
+//                 ...section,
+//                 avg: -1
+//             }
+//         })
+//     }
+// }
 
 
 function RevieweeSheetShow(props: Props) {
@@ -39,11 +70,10 @@ function RevieweeSheetShow(props: Props) {
     const currentUser = useContext(UserContext);
 
     const [sheet, setSheet] = useState<Sheet>();
+    const [sheetAvg, setSheetAvg] = useState<Avg>()
     const [previousPeriod, setPreviousPeriod] = useState<(number | null)[]>([null, null])
 
-
     const [modalObjective, setModalObjective] = useState<Objective>();
-
 
     //モーダル
     const [objectiveUpdateShow, setObjectiveUpdateShow] = useState(false);
@@ -222,7 +252,7 @@ function RevieweeSheetShow(props: Props) {
         });
 
         if(updatedSheet){
-            setSheet({...updatedSheet})
+            setSheet({...(updatedSheet)})
             if(work.mailObject){
                 sendEmailMutation(work.mailObject)
             }else{
@@ -272,6 +302,28 @@ function RevieweeSheetShow(props: Props) {
             }
         }
     }
+
+    
+    const arcColors = [
+        {
+            to: 25,
+            color: '#0058e9'
+        }, {
+            from: 25,
+            to: 50,
+            color: '#f31700'
+        }, {
+            from: 50,
+            to: 75,
+            color: '#ffc000'
+        }, {
+            to: 75,
+            color: '#00ffff'
+        }, {
+            to: 100,
+            color: '#7fff00'
+        }
+    ];
 
     //表示用データ
     useEffect(() => {
@@ -343,6 +395,52 @@ function RevieweeSheetShow(props: Props) {
             }
         })()
     }, [sheet, currentUser]);
+
+    useEffect(() => {
+        const getAvg = (nums: number[]) =>{
+            let sum = 0;
+            let cnt = 0;
+            let ret = -1;
+
+            nums.forEach((num)=>{
+                if(num !== -1){
+                    sum += num;
+                    cnt++;
+                }
+            })
+            if(cnt > 0) ret = sum / cnt;
+            return ret;
+        }
+        if(sheet){
+            const objAvg: Avg = {
+                sheetAvg: -1,
+                sections: 
+                    sheet.section && sheet.section.items ?
+                    sheet.section.items.map(section=>{
+                        return {
+                            sectionId: section?.id,
+                            avg: section && section.objective && section.objective.items ?
+                            getAvg(section.objective.items.map(objective=>{
+                                return objective && objective.progress ? objective.progress : -1
+                            })) :
+                            -1
+                        }
+                    }) :
+                    null
+            }
+            const sheetAvg = {
+                ...objAvg,
+                sheetAvg: 
+                    objAvg.sections ?
+                    getAvg(objAvg.sections.map(section=>{
+                        return section.avg
+                    })) : 
+                    -1
+            }
+            setSheetAvg(sheetAvg)
+            console.log("平均", sheetAvg)
+        }
+    }, [sheet]);
 
     if (sheet === undefined) return <p>Loading</p>
     else if (sheet === null) {
@@ -544,6 +642,18 @@ function RevieweeSheetShow(props: Props) {
                             );
                         }
                     })()}
+                    <div>
+                    <ArcGauge
+                        {...{
+                            value: sheetAvg ? sheetAvg.sheetAvg : 0,
+                            colors: arcColors
+                        }} style={{
+                            width: '150px',
+                            height: '150px',
+                            display: 'inline-block'
+                        }} 
+                    />
+                    </div>
 
                     {sectionItems.map((section: Section) => {
 
@@ -560,7 +670,29 @@ function RevieweeSheetShow(props: Props) {
                         
                         return (
                             <div key={section.id}>
-                                <h4>{section.category?.name}</h4>
+                                <h4>
+                                    {section.category?.name}
+                                    {(() => {
+                                        if(sheetAvg && sheetAvg.sections){
+                                            const value = sheetAvg.sections.find(sectionAvg => {
+                                                return section.id === sectionAvg.sectionId
+                                            })?.avg
+                                            if(value){
+                                                return <ArcGauge
+                                                    {...{
+                                                        value: value,
+                                                        colors: arcColors
+                                                    }} style={{
+                                                        width: '50px',
+                                                        height: '50px',
+                                                        display: 'inline-block'
+                                                    }} 
+                                                />
+                                            }
+                                        }
+                                    })()} 
+
+                                </h4>
                                 <Table striped bordered hover>
                                     <thead>
                                         <tr>
