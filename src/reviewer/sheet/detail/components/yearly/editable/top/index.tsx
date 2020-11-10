@@ -12,28 +12,12 @@ export const ReviewerSheetDetailYearlyEditableTop = (props: Props) => {
     return <div>
         <Form.Group>
             <Form.Label>所属長コメント</Form.Label>
-            <Form.Control
-                as="textarea"
-                className={style.detailTextarea}
-                onChange={props.handleChange}
-                name="secondComment"
-                defaultValue={props.sheet.secondComment || ""}>
-            </Form.Control>
+            <div>{props.sheet.secondComment || "未設定"}</div>
         </Form.Group>
 
         <Form.Group>
             <Form.Label>総合評価</Form.Label>
-            <Form.Control
-                onChange={props.handleChange}
-                name="overAllEvaluation"
-                as="select">
-                <option></option>
-                <option>5</option>
-                <option>4</option>
-                <option>3</option>
-                <option>2</option>
-                <option>1</option>
-            </Form.Control>
+            <div>{props.sheet.overAllEvaluation || "未設定"}</div>
         </Form.Group>
 
         <Form.Group>

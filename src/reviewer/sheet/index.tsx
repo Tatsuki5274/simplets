@@ -14,6 +14,7 @@ import { ReviewerSheetPagesStatus3 } from './detail/pages/3.interview';
 import { ReviewerSheetPagesStatus10 } from './detail/pages/10.result';
 import { ReviewerSheetPagesStatus12Second } from './detail/pages/12.confirm/second';
 import { ReviewerSheetPagesStatus12Top } from './detail/pages/12.confirm/top';
+import { ReviewerSheetPagesStatus13 } from './detail/pages/13.firstComment';
 
 export const SheetContext = createContext<Sheet | null>(null)
 
@@ -118,6 +119,9 @@ function EvalutionScreen(props: Props) {
                             // 読み取り専用のコンポーネントを返却
                             return <ReviewerSheetPagesStatus12Top />
                         }
+                    }else if(sheet.statusValue === 13){
+                        // 部門長が変更可能なコンポーネントを返却
+                        return <ReviewerSheetPagesStatus13 />
                     }else if(sheet.statusValue === 14){
                         // 読み取り専用のコンポーネントを返却
                         return <ReviewerSheetPagesReadonly sheet={sheet} sections={sectionItems} />
