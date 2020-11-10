@@ -100,7 +100,7 @@ function EvalutionScreen(props: Props) {
                 {(() => {
                     if(sheet.statusValue === 2){
                         // 所属長が変更可能なコンポーネントを返却
-                        return <ReviewerSheetPagesStatus2 sheet={sheet} sections={sectionItems} handleUpdateObjective={handleChangeObjective} />
+                        return <ReviewerSheetPagesStatus2 />
                     }else if(sheet.statusValue === 3){
                         // 所属長が変更可能なコンポーネントを返却
                         return <ReviewerSheetPagesStatus3 sheet={sheet} sections={sectionItems} handleUpdateObjective={handleChangeObjective} />
