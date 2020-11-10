@@ -23,7 +23,8 @@ type ViewType = {
     groupName: string
     categorys: {
         name: string | undefined
-        avg: number
+        avg: number,
+        no: number | null | undefined
     }[] | undefined,
     avg: number
 }
@@ -163,7 +164,8 @@ function ProgressReferenceList() {
                 categorys: sheet.section?.items?.map((section)=>{
                     return {
                         name: section?.category?.name,
-                        avg: getAgvObjective(section as Section)
+                        avg: getAgvObjective(section as Section),
+                        no: section?.category?.no
                     }
                 }),
                 avg: -1
@@ -255,6 +257,13 @@ function ProgressReferenceList() {
                 <br />
 
                 {sheetsView?.map(view => {
+                    view.categorys?.sort(function (a, b) {
+                        if (a.no! > b.no!) {
+                            return 1;
+                        } else {
+                            return -1;
+                        }
+                    });
                    return (
                         <Card className={style.linkbox}>
                             <Link to={`/reviewer/sheet/${view.sheetId}`} />
