@@ -3,7 +3,7 @@ import { Section, Sheet } from "App";
 import ApprovalStatusBox from "common/approvalStatusBox";
 import { Formik } from "formik";
 import { updateSheet } from "graphql/mutations";
-import { SheetDao } from "lib/dao/sheet";
+import { SheetDao } from "lib/dao/sheetDao";
 import { sendEmailMutation } from "lib/sendEmail";
 import { commandWorkFlow, Command } from "lib/workflow";
 import React, { useContext, useState } from "react"
