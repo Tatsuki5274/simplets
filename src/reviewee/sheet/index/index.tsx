@@ -23,6 +23,7 @@ import { Command, commandWorkFlow } from 'lib/workflow';
 import { SheetDao } from 'lib/dao/sheetDao';
 import { sendEmailMutation } from 'lib/sendEmail';
 import { ArcGauge } from '@progress/kendo-react-gauges';
+import { inputFieldStyle } from 'common/inputFieldStyle.module.scss';
 
 type Props = {
     match: {
@@ -500,7 +501,7 @@ function RevieweeSheetShow(props: Props) {
                                 <Modal.Body>
                                     <Row>
                                         <Col>目標</Col>
-                                        <Col><textarea onChange={props.handleChange} name="content" defaultValue={modalObjective?.content} /> </Col>
+                                        <Col><textarea onChange={props.handleChange} name="content" defaultValue={modalObjective?.content} className={inputFieldStyle} /> </Col>
                                     </Row>
                                     <Row>
                                         <Col md="2" lg="2" xl="2">開始予定日</Col>
@@ -511,6 +512,7 @@ function RevieweeSheetShow(props: Props) {
                                                 name="expStartDate"
                                                 onChange={props.handleChange}
                                                 defaultValue={modalObjective?.expStartDate || undefined}
+                                                className={inputFieldStyle}
                                             />
                                         </Col>
                                         <Col md="2" lg="2" xl="2">完了予定日</Col>
@@ -521,13 +523,14 @@ function RevieweeSheetShow(props: Props) {
                                                 name="expDoneDate"
                                                 onChange={props.handleChange}
                                                 defaultValue={modalObjective?.expDoneDate || undefined}
+                                                className={inputFieldStyle}
                                             />
                                         </Col>
                                     </Row>
                                     <Row>
                                         <Col>自己評価</Col>
                                         <Col>
-                                            <select onChange={props.handleChange} name="selfEvaluation" defaultValue={String(modalObjective?.selfEvaluation) || undefined}>
+                                            <select onChange={props.handleChange} name="selfEvaluation" defaultValue={String(modalObjective?.selfEvaluation) || undefined} className={inputFieldStyle}>
                                                 <option></option>
                                                 <option value='1'>1</option>
                                                 <option value='2'>2</option>
@@ -540,7 +543,7 @@ function RevieweeSheetShow(props: Props) {
                                     <Row>
                                         <Col>優先順位</Col>
                                         <Col>
-                                            <select onChange={props.handleChange} name="priority" defaultValue={modalObjective?.priority || undefined}>
+                                            <select onChange={props.handleChange} name="priority" defaultValue={modalObjective?.priority || undefined} className={inputFieldStyle}>
                                                 <option></option>
                                                 <option value="A">A</option>
                                                 <option value="B">B</option>
@@ -550,7 +553,7 @@ function RevieweeSheetShow(props: Props) {
                                     </Row>
                                     <Row>
                                         <Col>実績</Col>
-                                        <Col><textarea onChange={props.handleChange} name="result" defaultValue={modalObjective?.result || undefined} /> </Col>
+                                        <Col><textarea onChange={props.handleChange} name="result" defaultValue={modalObjective?.result || undefined} className={inputFieldStyle} /> </Col>
                                     </Row>
                                 </Modal.Body>
                                 <Modal.Footer>
@@ -574,7 +577,7 @@ function RevieweeSheetShow(props: Props) {
                     <Modal.Body>
                         <Row>
                             <Col>キャリアプラン本人希望内容</Col>
-                            <Col><textarea rows={10} cols={60} name="careerPlan" onChange={handleChangeCareerPlan}>{sheet.careerPlan || ""}</textarea></Col>
+                            <Col><textarea rows={10} cols={60} name="careerPlan" onChange={handleChangeCareerPlan} className={inputFieldStyle}>{sheet.careerPlan || ""}</textarea></Col>
                         </Row>
                     </Modal.Body>
                     <Modal.Footer>
@@ -712,7 +715,7 @@ function RevieweeSheetShow(props: Props) {
                                                             if (objective.progress === null || objective.progress === undefined) {
                                                                 return (
                                                                     <td>
-                                                                        <input name="progress" onChange={handleChangeProgress} data-objective-id={objective.id} type="number" min="0" max="100" step="10"></input>
+                                                                        <input name="progress" onChange={handleChangeProgress} data-objective-id={objective.id} type="number" min="0" max="100" step="10" className={inputFieldStyle}></input>
                                                                         <p>%</p>
                                                                     </td>
                                                                 )
@@ -723,7 +726,7 @@ function RevieweeSheetShow(props: Props) {
                                                                 const valueProgress = String(objective.progress);
                                                                 return (
                                                                     <td>
-                                                                        <input name="progress" onChange={handleChangeProgress} data-objective-id={objective.id} placeholder={valueProgress} type="number" min="0" max="100" step="10"></input>
+                                                                        <input name="progress" onChange={handleChangeProgress} data-objective-id={objective.id} placeholder={valueProgress} type="number" min="0" max="100" step="10" className={inputFieldStyle}></input>
                                                                         <p>%</p>
                                                                     </td>
                                                                 );
