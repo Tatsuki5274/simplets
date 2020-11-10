@@ -20,7 +20,7 @@ import ApprovalStatusBox from 'common/approvalStatusBox';
 import { RevieweeSidebar } from 'common/Sidebar';
 import { Formik } from 'formik';
 import { Command, commandWorkFlow } from 'lib/workflow';
-import { SheetDao } from 'lib/dao/sheet';
+import { SheetDao } from 'lib/dao/sheetDao';
 import { sendEmailMutation } from 'lib/sendEmail';
 import { ArcGauge } from '@progress/kendo-react-gauges';
 
@@ -214,34 +214,19 @@ function RevieweeSheetShow(props: Props) {
         });
     }
     async function HandleUpdateCareerPlan(e: any) {
-        const updateI: APIt.UpdateSheetInput = {
-            id: sheetId,
-            careerPlan: formInputCareerPlan.careerPlan || ""
-        };
-      const updateMV: APIt.UpdateSheetMutationVariables = {
-        input: updateI,
-      };
-      let updateR: GraphQLResult<APIt.UpdateSheetMutation>
-      try{
-        updateR = 
-            await API.graphql(graphqlOperation(updateSheet, updateMV)) as GraphQLResult<APIt.UpdateSheetMutation>;
-      }catch(e){
-            console.log("エラーを無視しています", e)
-            updateR = e;
-      }
-      if (updateR.data) {
-        const updateTM: APIt.UpdateSheetMutation = updateR.data;
-        if (updateTM.updateSheet) {
-            const updatedSheet: Sheet = updateTM.updateSheet;
-            let newSheet = sheet;
-            if(newSheet){
-                newSheet.careerPlan = updatedSheet.careerPlan;
-                setSheet(newSheet)
-            }else{
-                console.error("現在のシートが存在しません")
+        if(formInputCareerPlan && formInputCareerPlan.careerPlan){
+            const updateI: APIt.UpdateSheetInput = {
+                id: sheetId,
+                careerPlan: formInputCareerPlan.careerPlan || ""
+            };
+            const updatedSheet = await SheetDao.update(updateSheet, updateI)
+    
+            if (updatedSheet) {
+                setSheet({...updatedSheet})
             }
         }
-      }
+
+        handleCloseCareerPlanUpdate()
     }
 
     async function afterWorkFlow(sheet: Sheet, work:{sheet: Sheet, mailObject: SendEmail | null}){
@@ -328,22 +313,10 @@ function RevieweeSheetShow(props: Props) {
     //表示用データ
     useEffect(() => {
         ; (async () => {
-            //URLのパラメータを取得
-
-            const input: APIt.GetSheetQueryVariables = {
-                id: sheetId
+            const sheet = await SheetDao.get(getSheet, {id: sheetId})
+            if(sheet){
+                setSheet(sheet);
             }
-            let response
-            try{
-                response = (await API.graphql(graphqlOperation(getSheet, input))
-                )as GraphQLResult<GetSheetQuery>;
-            }catch(e){
-                console.log("エラーを無視しています", e)
-                response = e;
-            }
-            const sheet: Sheet = response.data?.getSheet as Sheet;
-            setSheet(sheet);
-            console.log(response);
         })()
     }, []);
 
@@ -363,21 +336,12 @@ function RevieweeSheetShow(props: Props) {
                         }
                     }
                 }
-                let response: GraphQLResult<APIt.ListSheetsQuery> | null = null
-                try{
-                    response = (await API.graphql(graphqlOperation(listSheets, input))
-                    )as GraphQLResult<APIt.ListSheetsQuery>;
-                }catch(e){
-                    console.log("エラーを無視しています", e)
-                    response = e
-                }
+                const gotSheets = await SheetDao.list(listSheets, input)
 
-                if(response && response.data && response.data.listSheets && response.data.listSheets.items){
-                    const gotSheets = response.data.listSheets.items;
+                if(gotSheets){
                     if(gotSheets.length > 2){
                         console.error("業績評価年度に重複があります。前期前々期の記録に想定されない値が格納される場合があります。", gotSheets)
                     }
-                    console.log("between", gotSheets)
                     let results: (number | null)[] = [null, null]
 
                     // 前期の記録を取得

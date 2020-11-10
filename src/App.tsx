@@ -23,6 +23,7 @@ export type Section = Omit<Exclude<APIt.GetSectionQuery['getSection'], null>, '_
 export type Group = Omit<Exclude<APIt.GetGroupQuery['getGroup'], null>, '__typename'>;
 export type Category = Omit<Exclude<APIt.GetCategoryQuery['getCategory'], null>, '__typename'>;
 export type Employee = Omit<Exclude<APIt.GetEmployeeQuery['getEmployee'], null>, '__typename'>;
+export type Company = Omit<Exclude<APIt.GetCompanyQuery['getCompany'], null>, '__typename'>;
 export type SendEmail = Omit<Exclude<APIt.sendEmailInput, null>, '__typename'>;
 
 export const UserContext = createContext<any>(null)

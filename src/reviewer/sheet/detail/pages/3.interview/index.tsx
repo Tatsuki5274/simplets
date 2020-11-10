@@ -2,7 +2,7 @@ import { Section, Sheet } from "App";
 import ApprovalStatusBox from "common/approvalStatusBox";
 import { Formik } from "formik";
 import { updateSheet } from "graphql/mutations";
-import { SheetDao } from "lib/dao/sheet";
+import { SheetDao } from "lib/dao/sheetDao";
 import React, { useState } from "react"
 import { Container, Button, Form } from "react-bootstrap";
 import { Link } from "react-router-dom";

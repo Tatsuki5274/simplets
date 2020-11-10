@@ -13,6 +13,7 @@ import { createSection, createSheet, updateSheet } from 'graphql/mutations';
 import SidebarComponents from 'common/Sidebar';
 import HeaderComponents from 'common/header';
 import Style from './performanceStyle.module.scss';
+import { SheetDao } from 'lib/dao/sheetDao';
 
 
 // const listSheets = /* GraphQL */ `
@@ -34,7 +35,7 @@ import Style from './performanceStyle.module.scss';
 // }`;
 
 function ListPerformanceEvalution() {
-    const [sheets, setSheets] = useState<Sheet[]>();
+    const [sheets, setSheets] = useState<Sheet[] | null>(null);
     const [styleSheetButton, setStyleSheetButton] =useState<string>();
 
     // ログインユーザを取得する
@@ -50,34 +51,30 @@ function ListPerformanceEvalution() {
                         }
                     }
                 };
-                let response
-                try {
-                    response = (await API.graphql(graphqlOperation(listSheets, listQV))
-                    ) as GraphQLResult<ListSheetsQuery>;
-                } catch (e) {
-                    console.log("エラーを無視しています", e)
-                    response = e
-                }
-                const listItems = response.data?.listSheets?.items as Sheet[];
+                const items = await SheetDao.list(listSheets, listQV)
+
                 //降順でソートしてlistItemsに保存
-                listItems?.sort(function (a, b) {
+                items?.sort(function (a, b) {
                     if (a.year < b.year) {
                         return 1;
                     } else {
                         return -1;
                     }
                 });
-                setSheets(listItems);
+                setSheets(items);
 
                 // 今年に作成されたシートを確認
                 let result = false;
-                const currentYear:number = new Date().getFullYear();
-                let filteredSheet = listItems.filter((element)=>{
-                    return element.year === currentYear ? true : false;
-                })
-                if(filteredSheet.length === 0) {
-                    result = true;
+                if(items){
+                    const currentYear:number = new Date().getFullYear();
+                    let filteredSheet = items.filter((item)=>{
+                        return item.year === currentYear ? true : false;
+                    })
+                    if(filteredSheet.length === 0) {
+                        result = true;
+                    }
                 }
+
                 setStyleSheetButton(changeCreateSheetButtonStyle(result));
             }
         })()
@@ -249,9 +246,11 @@ function ListPerformanceEvalution() {
         }
         function addSheets(newSheet: Sheet) {
             //現在のステートへ適用
-            const newSheetState = sheets?.concat();
-            newSheetState?.push(newSheet)
-            setSheets(newSheetState);
+            if(sheets){
+                const newSheetState = sheets.concat();
+                newSheetState.push(newSheet)
+                setSheets(newSheetState);
+            }
         }
     }
 
@@ -281,7 +280,7 @@ function ListPerformanceEvalution() {
                         </thead>
 
                         <tbody>
-                            {sheets.map((sheet: Sheet) => {
+                            {sheets?.map((sheet: Sheet) => {
                                 let editName = "編集";
                                 if (sheet.statusValue === ApprovalStatus.DONE) {
                                     editName = "確認";
