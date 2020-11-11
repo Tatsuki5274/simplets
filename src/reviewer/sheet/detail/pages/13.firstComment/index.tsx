@@ -18,7 +18,9 @@ import { ReviewerSheetDetailYearlyEditableTop } from "../../components/yearly/ed
 
 
 export const ReviewerSheetPagesStatus13 = () => {
-    const sheet = useContext(SheetContext);
+    const context = useContext(SheetContext);
+    const sheet = context.sheet
+    const setSheet = context.setSheet
 
     if (sheet) {
         return (
@@ -56,8 +58,9 @@ export const ReviewerSheetPagesStatus13 = () => {
                                         } else {
                                             console.error("メールの作成に失敗しました")
                                         }
-                                        // updatedSheet = await statusManager.exec(updatedSheet, "proceed");
-                                        // setSheet({...updatedSheet});
+                                        if(setSheet){
+                                            setSheet({...updatedSheet})
+                                        }
                                     } else {
                                         console.error("フォームデータの登録に失敗しました")
                                     }

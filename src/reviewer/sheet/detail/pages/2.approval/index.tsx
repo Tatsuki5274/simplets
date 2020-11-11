@@ -24,7 +24,9 @@ type Props = {
 }
 
 export const ReviewerSheetPagesStatus2 = ()=>{
-    const sheet = useContext(SheetContext);
+    const context = useContext(SheetContext);
+    const sheet = context.sheet
+    const setSheet = context.setSheet
 
     const [isRemandModal, setIsRemandModal] = useState<boolean>(false);
     const handleClose = () => setIsRemandModal(false);
@@ -66,6 +68,9 @@ export const ReviewerSheetPagesStatus2 = ()=>{
                                             alert('承認が完了しました');
                                         }else{
                                             console.error("メールの作成に失敗しました")
+                                        }
+                                        if(setSheet){
+                                            setSheet({...updatedSheet})
                                         }
                                         // updatedSheet = await statusManager.exec(updatedSheet, "proceed");
                                         // setSheet({...updatedSheet});

@@ -16,7 +16,14 @@ import { ReviewerSheetPagesStatus12Second } from './detail/pages/12.confirm/seco
 import { ReviewerSheetPagesStatus12Top } from './detail/pages/12.confirm/top';
 import { ReviewerSheetPagesStatus13 } from './detail/pages/13.firstComment';
 
-export const SheetContext = createContext<Sheet | null>(null)
+export const SheetContext = createContext<
+    {
+        sheet: Sheet | null,
+        setSheet: 
+            (React.Dispatch<React.SetStateAction<Sheet | undefined>>)
+            | null | undefined 
+    }
+>({sheet: null, setSheet: null})
 
 //propsの型を指定
 type Props = {
@@ -98,7 +105,7 @@ function EvalutionScreen(props: Props) {
     });
     return (
         <div>
-            <SheetContext.Provider value={sheet}>
+            <SheetContext.Provider value={{sheet: sheet, setSheet: setSheet}}>
                 <HeaderComponents />            
 
                 {(() => {
