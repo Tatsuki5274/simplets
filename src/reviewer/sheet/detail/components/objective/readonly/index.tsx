@@ -61,7 +61,7 @@ export const ReviewerSheetDetailObjectiveReadonly = (props: Props) => {
                                         <td>{objective.result}</td>
 
                                         {/* 進捗率 */}
-                                        <td>{objective.progress}</td>
+                                        <td>{objective.progress || objective.progress === 0 ? objective.progress : "-"}%</td>
 
                                         {/* 優先順位 */}
                                         <td>{objective.priority}</td>
