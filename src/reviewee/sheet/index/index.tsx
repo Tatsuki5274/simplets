@@ -3,19 +3,15 @@ import { Container, Row, Col, Table, Button, Modal, Form, Card } from 'react-boo
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Link } from 'react-router-dom';
 import { GraphQLResult } from "@aws-amplify/api";
-import { API, Auth, graphqlOperation } from 'aws-amplify';
-//import {BrowserRouter, Route, Link, Switch } from "react-router-dom";
-import { getSheet, getSection, listSheets } from 'graphql/queries'
+import { API, graphqlOperation } from 'aws-amplify';
+import { getSheet, listSheets } from 'graphql/queries'
 import { Sheet, Section, Objective, SendEmail, UserContext } from 'App';
-import { GetSheetQuery, UpdateSheetInput } from 'API';
 import * as APIt from 'API';
 import dateFormat from 'dateformat'
-import { approvalStatusManager, deleteObjective, updateObjective, updateSheet }
+import {  deleteObjective, updateObjective, updateSheet }
     from 'graphql/mutations';
-import { error } from 'console';
 import HeaderComponents from 'common/header';//ヘッダーの表示
 import Style from './indexStyle.module.scss';
-import * as statusManager from 'lib/statusManager';
 import ApprovalStatusBox from 'common/approvalStatusBox';
 import { RevieweeSidebar } from 'common/Sidebar';
 import { Formik } from 'formik';
@@ -40,30 +36,6 @@ type Avg = {
         avg: number
     }[] | null
 }
-
-// // シートへ平均フィールドを追加
-// type SheetExt = Sheet & {
-//     avg: number
-//     section: {
-//         items: {
-//             avg: number
-//         }[]
-//     }
-// }
-
-// const calcSheetExt = (sheet: Sheet)=>{
-//     const result: SheetExt = {
-//         ...sheet,
-//         avg: -1,
-//         section: sheet.section?.items?.map(section=>{
-//             return {
-//                 ...section,
-//                 avg: -1
-//             }
-//         })
-//     }
-// }
-
 
 function RevieweeSheetShow(props: Props) {
     
@@ -111,67 +83,6 @@ function RevieweeSheetShow(props: Props) {
 
     }
 
-    const [formInput, setFormInput] = useState<any>()
-
-    function handleChangeObjective(event: any) {
-        const target = event.target;
-        const value = target.type === 'checkbox' ? target.checked : target.value;
-        const name: string = target.name;
-
-        // const tmpInput: object = formInput as object;
-        // tmpInput[name] = value;
-        setFormInput({
-            ...formInput, [name]: value
-        });
-        console.log(formInput)
-
-    }
-
-    //objectiveの更新
-    // function HandleUpdateObject() {
-    //     (async () => {
-    //         const objectiveId = changeObjectiveId;
-    //         let selfEvaluationInput:number | null | undefined = parseInt(formInput.selfEvaluation);
-    //         if(isNaN(selfEvaluationInput)) {
-    //             selfEvaluationInput = undefined;
-    //         }
-    //         //目標変更の目標、ステータス、自己評価、優先順位、実績を項目明細に上書き
-    //         const updateI: APIt.UpdateObjectiveInput = {
-    //             id: objectiveId,
-    //             content: formInput.content,
-    //             selfEvaluation: selfEvaluationInput,
-    //             priority: formInput.priority,
-    //             result: formInput.result,
-    //             expStartDate: formInput.expStartDate,
-    //             expDoneDate: formInput.expDoneDate
-    //         };
-    //         //console.log('updateI',updateI); //検証用
-    //         const updateMV: APIt.UpdateObjectiveMutationVariables = {
-    //             input: updateI,
-    //         };
-    //         //console.log('updateMV',updateMV); //検証用
-    //         let updateR: GraphQLResult<APIt.UpdateObjectiveMutation>
-    //         try{
-    //             updateR = await API.graphql(graphqlOperation(updateObjective, updateMV)) as GraphQLResult<APIt.UpdateObjectiveMutation>;
-    //         }catch(e){
-    //             console.log("エラーを無視しています", e)
-    //             console.log("データが不完全でないことを確認してください")
-    //             updateR = e;
-    //         }
-
-    //         if (updateR.data) {
-    //             const updateTM: APIt.UpdateObjectiveMutation = updateR.data;
-    //             if (updateTM.updateObjective) {
-    //                 const objective: Objective = updateTM.updateObjective;
-    //                 console.log('UpdateObjective:', objective);
-    //             }
-    //         }
-    //     }
-    //     )()
-    //     window.location.reload()
-    //     handleCloseObjectiveUpdate();
-    // }
-
     // Progress 更新
     async function handleChangeProgress(event: any) {
         // console.log(event.target.getAttribute('data-objective-id'));
@@ -197,8 +108,6 @@ function RevieweeSheetShow(props: Props) {
                 updateR = e;
             }
         }
-        // console.log("updateR", updateR);
-        // console.log("sheet", sheet)
     }
 
 
@@ -208,8 +117,6 @@ function RevieweeSheetShow(props: Props) {
         const value = target.type === 'checkbox' ? target.checked : target.value;
         const name: string = target.name;
 
-        // const tmpInput: object = formInput as object;
-        // tmpInput[name] = value;
         setFormInputCareerPlan({
             ...formInputCareerPlan, [name]: value
         });

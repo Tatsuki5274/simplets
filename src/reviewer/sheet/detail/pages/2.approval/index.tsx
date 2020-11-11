@@ -5,12 +5,7 @@ import { SheetDao } from "lib/dao/sheetDao";
 import React, { useContext, useState } from "react";
 import { Button, Container, Form } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { ReviewerSheetDetailCareerEditable } from "../../components/career/editable";
-import { ReviewerSheetDetailInterviewEditable } from "../../components/interview/editable";
-import { ReviewerSheetDetailObjectiveEditable } from "../../components/objective/editable";
 import { RemandModal } from "../../components/remandModal";
-import { ReviewerSheetDetailYearlyEditableSecond } from "../../components/yearly/editable/second";
-import * as statusManager from 'lib/statusManager'
 import { updateSheet } from "graphql/mutations";
 import { Command, commandWorkFlow } from "lib/workflow";
 import { sendEmailMutation } from "lib/sendEmail";

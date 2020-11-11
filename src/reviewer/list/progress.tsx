@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { Container, Form, Button, Table, Card, ToggleButton, ToggleButtonGroup, InputGroup } from 'react-bootstrap';
+import { Container, Form, Button, Card, InputGroup } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { API, graphqlOperation } from 'aws-amplify';
 import { listGroups, listSheets } from 'graphql/queries';
-import { GetEmployeeQuery, ListGroupsQuery, ListSheetsQuery } from 'API';
+import { ListGroupsQuery, ListSheetsQuery } from 'API';
 import { GraphQLResult } from "@aws-amplify/api";
 import * as APIt from 'API';
-import { Employee, Group, Objective, Section, Sheet } from 'App';
-import { getEmployee } from 'graphql/queries'
+import { Group, Section, Sheet } from 'App';
 import SidebarComponents from 'common/Sidebar';
 import HeaderComponents from 'common/header';//ヘッダーの表示
 import style from './progressStyle.module.scss';
@@ -39,14 +38,8 @@ function ProgressReferenceList() {
         yearList.push((thisYear - step));
     }
 
-    const [sheets, setSheets] = useState<Sheet[]>();
     const [sheetsView, setSheetsView] = useState<ViewType[]>();
     
-
-    const [groupValue, setGroupValue] = useState([]);
-    const handleChangeBottun = (val: any) => setGroupValue(val);
-    console.log(groupValue)
-
     //選択する部署のデータを取得して昇順でソートして表示する機能
     const [groupList, setGroupList] = useState<Group[]>()
     useEffect(() => {
@@ -103,9 +96,6 @@ function ProgressReferenceList() {
                 response = e;
             }
             listItems = response.data?.listSheets?.items;
-            setSheets(listItems as Sheet[]);
-            console.log(response);
-            console.log(listItems);
             //部門の選択肢の中から「全て」以外が選択された場合
         } else {
             const listQV: APIt.ListSheetsQueryVariables = { filter: { sheetGroupId: { eq: formInput.groupId }, year: { eq: parseInt(formInput.year as string) } } };
@@ -119,9 +109,6 @@ function ProgressReferenceList() {
                 response = e;
             }
             listItems = response.data?.listSheets?.items;
-            setSheets(listItems as Sheet[]);
-            console.log(response);
-            console.log(listItems);
         }
 
         // 平均値を算出する処理

@@ -1,38 +1,18 @@
-import React, { useContext, useEffect, useRef, useState } from 'react';
-import Amplify, { Storage, API, graphqlOperation, Auth } from 'aws-amplify';
+import React, { useContext, useEffect, useState } from 'react';
+import { API, graphqlOperation, Auth } from 'aws-amplify';
 import { Button, Container, Table } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { GraphQLResult } from "@aws-amplify/api";
-import { ListSheetsQuery } from 'API';
 import { Link } from 'react-router-dom';
 import { Category, Employee, Objective, Section, Sheet, UserContext } from 'App';
 import { ApprovalStatus, getStatusValue } from 'lib/getStatusValue'
 import { getEmployee, listCategorys, listSheets } from 'graphql/queries'
 import * as APIt from 'API';
-import { createSection, createSheet, updateSheet } from 'graphql/mutations';
+import { createSection, createSheet } from 'graphql/mutations';
 import SidebarComponents from 'common/Sidebar';
 import HeaderComponents from 'common/header';
 import Style from './performanceStyle.module.scss';
 import { SheetDao } from 'lib/dao/sheetDao';
-
-
-// const listSheets = /* GraphQL */ `
-// query ListSheets {
-//   listSheets {
-//     items {
-//       year
-//       overAllEvaluation
-//       id
-//       status {
-//         name
-//       }
-//       secondEmployee {
-//         lastName
-//         firstName
-//       }
-//     }
-//   }
-// }`;
 
 function ListPerformanceEvalution() {
     const [sheets, setSheets] = useState<Sheet[] | null>(null);
@@ -96,16 +76,15 @@ function ListPerformanceEvalution() {
         // 社員情報取得
         const revieweeEmployee: Employee = await getQueryEmployee();
         const revieweeEmployeeID = revieweeEmployee.id; //社員ID取得
-        //const revieweeEmployeeSuperior: any = [(await revieweeEmployeeItems).superior?.id, (await revieweeEmployeeItems).superior?.superior?.id];
         const revieweeEmployeeSuperior: Array<string | null> = 
         [revieweeEmployee.superior ? revieweeEmployee.superior.id : "",
         revieweeEmployee.superior?.superior ? revieweeEmployee.superior.superior?.id : ""]; //上司情報取得
 
 
         // 権限グループ名の取得
-        const companyGroup = revieweeEmployee.company?.companyGroupName || "";
+        // const companyGroup = revieweeEmployee.company?.companyGroupName || "";
         const companyManagerGroup = revieweeEmployee.company?.companyManagerGroupName || "";
-        const companyAdminGroup = revieweeEmployee.company?.companyAdminGroupName || "";
+        // const companyAdminGroup = revieweeEmployee.company?.companyAdminGroupName || "";
 
         //カテゴリを取得する
         const categorys = await runListCategory();
@@ -234,13 +213,6 @@ function ListPerformanceEvalution() {
                 const listQ: APIt.ListCategorysQuery = listGQL.data;
                 if (listQ.listCategorys && listQ.listCategorys.items) {
                     return listQ.listCategorys.items as Category[];
-
-                    // listQ.listCategorys.items.forEach((item: Todo | null) => {
-                    //     if (item) {
-                    //         const todo: Todo = item;
-                    //         console.log('ListTodo:', todo);
-                    //     }
-                    // });
                 }
             }
         }

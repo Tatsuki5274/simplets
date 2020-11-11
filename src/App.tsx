@@ -1,8 +1,8 @@
 //React
 import React, { createContext, useEffect, useState } from 'react';
-import {BrowserRouter, Route, Switch, Link } from "react-router-dom";
+import {BrowserRouter, Route, Switch } from "react-router-dom";
 //Amplify
-import { withAuthenticator, AmplifySignOut, AmplifyAuthenticator } from '@aws-amplify/ui-react';
+import { withAuthenticator } from '@aws-amplify/ui-react';
 import Amplify, { Auth } from 'aws-amplify';
 import awsconfig from './aws-exports';
 
@@ -39,20 +39,6 @@ export type approvalStatusManagerMutationResult = {
   statusCode: number  //通信のステータスコード 基本的に200
   message?: String
   error?: String  //エラー時のメッセージを格納
-}
-
-
-function Portal(){
-  //一時的な実装。将来的には置き換える。
-  return (
-    <div>
-      <Link to='/reviewee/sheet/1'>目標設定画面</Link><br />
-      <Link to='/reviewee/objective/new/:sheetId'>目標追加</Link><br />
-      <Link to='/reviewee/list'>業績評価一覧</Link><br />
-      <Link to='/reviewer/list'>進捗参照一覧</Link><br />
-      <Link to='/reviewer/sheet/1'>評価画面</Link>
-    </div>
-  );
 }
 
 function App() {

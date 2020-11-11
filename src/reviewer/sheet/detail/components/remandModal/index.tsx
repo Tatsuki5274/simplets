@@ -24,10 +24,6 @@ type Props = {
 export const RemandModal = (props: Props)=>{
     const sheet = useContext(SheetContext)
 
-    const handleRemand = ()=>{
-        console.log("差し戻しの処理が未実装です")
-    }
-
     return <div>
         <Modal show={props.isShow} onHide={props.handleClose}>
             <Formik

@@ -1,5 +1,5 @@
-import React, { ChangeEvent, useEffect, useState } from 'react';
-import { Container, Row, Col, Table, Button, Modal, Form, Badge } from 'react-bootstrap';
+import React, { useEffect, useState } from 'react';
+import { Container, Row, Col, Button, Form, Badge } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { API, Auth, graphqlOperation } from 'aws-amplify';
 import { Employee, Section } from 'App';
@@ -35,45 +35,9 @@ function RevieweeSheetNew(props: Props){
 
     const [isRedirect, setIsRedirect] = useState<boolean>();
     const [sections, setSections] = useState<Section[]>();
-    // const [input, setInput] = useState<InputForm>({});
 
     const [companyGroups, setCompanyGroups] = useState<Array<string>>();
 
-    // function handleChange(event: ChangeEvent<HTMLInputElement>){
-    //     const target = event.target;
-    //     const value = target.type === 'checkbox' ? target.checked : target.value;
-    //     const name = target.name;
-    //     setInput({ ...input, [name]: value });
-    // }
-
-    // async function onSubmit(event: ChangeEvent<HTMLInputElement>){
-    //     event.preventDefault();
-    //     const createI: APIt.CreateObjectiveInput = {
-    //         content: input.content || "",
-    //         priority: input.priority || "",
-    //         objectiveSectionId: input.section || "",
-    //         expStartDate: input.expStartDate?.replace('T', '-') || "",
-    //         expDoneDate: input.expDoneDate?.replace('T', '-') || "",
-    //     }
-    //     const createMV: APIt.CreateObjectiveMutationVariables = {
-    //         input: createI
-    //     }
-    //     let createR: GraphQLResult<APIt.CreateObjectiveMutation>
-    //     try{
-    //         createR = await API.graphql(graphqlOperation(createObjective, createMV)) as GraphQLResult<APIt.CreateObjectiveMutation>;
-    //     }catch(e){
-    //         console.log("エラーを無視しています", e)
-    //         console.log("データが不完全でないことを確認してください")
-    //         createR = e;
-    //     }
-    //     if(createR.data){
-    //         const createTM: APIt.CreateObjectiveMutation = createR.data;
-    //         setIsRedirect(true);
-    //     }else{
-    //         console.log("保存に失敗しました")
-    //     }
-
-    // }
 
     // 社員情報を取得
     async function getQueryEmployee() {
@@ -132,7 +96,6 @@ function RevieweeSheetNew(props: Props){
                 }
             });
             setSections(repsonseSection);
-            console.log("section", repsonseSection);
 
             // companyGroupsを取得
             getCompanyGroup();

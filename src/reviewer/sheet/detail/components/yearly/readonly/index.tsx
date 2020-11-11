@@ -1,8 +1,6 @@
 import { Sheet } from "App"
 import React from "react"
 import { Form } from "react-bootstrap"
-import style from '../../common/style.module.scss';
-
 
 type Props = {
     sheet: Sheet
