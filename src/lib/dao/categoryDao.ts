@@ -6,7 +6,6 @@ import { API, graphqlOperation } from "aws-amplify";
 export const CategoryDao = {
     create: async(mutation: string ,params: APIt.CreateCategoryInput): Promise<Category | null> => {
       try{
-        let id: string = ''
         const createI: APIt.CreateCategoryInput = params
         const createMV: APIt.CreateCategoryMutationVariables = {
           input: createI,
@@ -21,8 +20,12 @@ export const CategoryDao = {
           }else console.error("情報の作成に失敗しました")
         }else console.error("情報の作成に失敗しました")
       }catch(e){
-        console.error(e)
-      }
+        if(e && e.data && e.data.createCategory){
+          console.error("違反があります", e.errors)
+          return e.data.createCategory as Category
+        }else{
+          console.error(e)
+        }      }
       return null
     },
     update: async(mutation: string, params: APIt.UpdateCategoryInput): Promise<Category | null> => {
@@ -41,7 +44,12 @@ export const CategoryDao = {
           }else console.error("情報の更新に失敗しました")
         }else console.error("情報の更新に失敗しました")
       }catch(e){
-        console.error(e)
+        if(e && e.data && e.data.updateCategory){
+          console.error("違反があります", e.errors)
+          return e.data.updateCategory as Category
+        }else{
+          console.error(e)
+        }
       }
       return null
     },
@@ -62,7 +70,12 @@ export const CategoryDao = {
           }else console.error("情報の削除に失敗しました")
         }else console.error("情報の削除に失敗しました")
       }catch(e){
-        console.error(e)
+        if(e && e.data && e.data.deleteCategory){
+          console.error("違反があります", e.errors)
+          return e.data.deleteCategory as Category
+        }else{
+          console.error(e)
+        }
       }
       return null
     },
@@ -79,26 +92,36 @@ export const CategoryDao = {
           }else console.error("情報の取得に失敗しました")
         }else console.error("情報の取得に失敗しました")
       }catch(e){
-        console.error(e)
+        if(e && e.data && e.data.getCategory){
+          console.error("違反があります", e.errors)
+          return e.data.getCategory as Category
+        }else{
+          console.error(e)
+        }
       }
       return null
     },
 
     list: async(query: string, params: APIt.ListCategorysQueryVariables): Promise<Category[] | null> => {
-      try{
-        const listQV: APIt.ListCategorysQueryVariables = params
-        const listGQL: GraphQLResult<APIt.ListCategorysQuery> = 
-          await API.graphql(graphqlOperation(query, listQV)) as GraphQLResult<APIt.ListCategorysQuery>;
-        if (listGQL.data) {
-          const listQ: APIt.ListCategorysQuery = listGQL.data;
-          if (listQ.listCategorys && listQ.listCategorys.items) {
-            const gotCategorys = listQ.listCategorys.items as Category[]
-            return gotCategorys
-          }else console.error("情報の取得に失敗しました")
-        }else console.error("情報の取得に失敗しました")
-      }catch(e){
-        console.error(e)
-      }
-      return null
+        try{
+            const listQV: APIt.ListCategorysQueryVariables = params
+            const listGQL: GraphQLResult<APIt.ListCategorysQuery> = 
+            await API.graphql(graphqlOperation(query, listQV)) as GraphQLResult<APIt.ListCategorysQuery>;
+            if (listGQL.data) {
+              const listQ: APIt.ListCategorysQuery = listGQL.data;
+              if (listQ.listCategorys && listQ.listCategorys.items) {
+                  const gotCategorys = listQ.listCategorys.items as Category[]
+                  return gotCategorys
+              }else console.error("情報の取得に失敗しました")
+            }else console.error("情報の取得に失敗しました")
+        }catch(e){
+            if(e && e.data && e.data.listCategorys){
+                console.error("違反があります", e.errors)
+                return e.data.listCategorys.items as Category[]
+            }else{
+                console.error(e)
+            }
+        }
+        return null
     },
 }

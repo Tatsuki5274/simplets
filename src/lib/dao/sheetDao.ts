@@ -6,7 +6,6 @@ import { API, graphqlOperation } from "aws-amplify";
 export const SheetDao = {
     create: async(mutation: string ,params: APIt.CreateSheetInput): Promise<Sheet | null> => {
       try{
-        let id: string = ''
         const createI: APIt.CreateSheetInput = params
         const createMV: APIt.CreateSheetMutationVariables = {
           input: createI,
@@ -21,8 +20,12 @@ export const SheetDao = {
           }else console.error("情報の作成に失敗しました")
         }else console.error("情報の作成に失敗しました")
       }catch(e){
-        console.error(e)
-      }
+        if(e && e.data && e.data.createSheet){
+          console.error("違反があります", e.errors)
+          return e.data.createSheet as Sheet
+        }else{
+          console.error(e)
+        }      }
       return null
     },
     update: async(mutation: string, params: APIt.UpdateSheetInput): Promise<Sheet | null> => {
@@ -41,7 +44,12 @@ export const SheetDao = {
           }else console.error("情報の更新に失敗しました")
         }else console.error("情報の更新に失敗しました")
       }catch(e){
-        console.error(e)
+        if(e && e.data && e.data.updateSheet){
+          console.error("違反があります", e.errors)
+          return e.data.updateSheet as Sheet
+        }else{
+          console.error(e)
+        }
       }
       return null
     },
@@ -62,7 +70,12 @@ export const SheetDao = {
           }else console.error("情報の削除に失敗しました")
         }else console.error("情報の削除に失敗しました")
       }catch(e){
-        console.error(e)
+        if(e && e.data && e.data.deleteSheet){
+          console.error("違反があります", e.errors)
+          return e.data.deleteSheet as Sheet
+        }else{
+          console.error(e)
+        }
       }
       return null
     },
@@ -79,26 +92,36 @@ export const SheetDao = {
           }else console.error("情報の取得に失敗しました")
         }else console.error("情報の取得に失敗しました")
       }catch(e){
-        console.error(e)
+        if(e && e.data && e.data.getSheet){
+          console.error("違反があります", e.errors)
+          return e.data.getSheet as Sheet
+        }else{
+          console.error(e)
+        }
       }
       return null
     },
 
     list: async(query: string, params: APIt.ListSheetsQueryVariables): Promise<Sheet[] | null> => {
-      try{
-        const listQV: APIt.ListSheetsQueryVariables = params
-        const listGQL: GraphQLResult<APIt.ListSheetsQuery> = 
-          await API.graphql(graphqlOperation(query, listQV)) as GraphQLResult<APIt.ListSheetsQuery>;
-        if (listGQL.data) {
-          const listQ: APIt.ListSheetsQuery = listGQL.data;
-          if (listQ.listSheets && listQ.listSheets.items) {
-            const gotSheets = listQ.listSheets.items as Sheet[]
-            return gotSheets
-          }else console.error("情報の取得に失敗しました")
-        }else console.error("情報の取得に失敗しました")
-      }catch(e){
-        console.error(e)
-      }
-      return null
+        try{
+            const listQV: APIt.ListSheetsQueryVariables = params
+            const listGQL: GraphQLResult<APIt.ListSheetsQuery> = 
+            await API.graphql(graphqlOperation(query, listQV)) as GraphQLResult<APIt.ListSheetsQuery>;
+            if (listGQL.data) {
+              const listQ: APIt.ListSheetsQuery = listGQL.data;
+              if (listQ.listSheets && listQ.listSheets.items) {
+                  const gotSheets = listQ.listSheets.items as Sheet[]
+                  return gotSheets
+              }else console.error("情報の取得に失敗しました")
+            }else console.error("情報の取得に失敗しました")
+        }catch(e){
+            if(e && e.data && e.data.listSheets){
+                console.error("違反があります", e.errors)
+                return e.data.listSheets.items as Sheet[]
+            }else{
+                console.error(e)
+            }
+        }
+        return null
     },
 }

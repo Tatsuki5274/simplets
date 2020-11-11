@@ -6,7 +6,6 @@ import { API, graphqlOperation } from "aws-amplify";
 export const ObjectiveDao = {
     create: async(mutation: string ,params: APIt.CreateObjectiveInput): Promise<Objective | null> => {
       try{
-        let id: string = ''
         const createI: APIt.CreateObjectiveInput = params
         const createMV: APIt.CreateObjectiveMutationVariables = {
           input: createI,
@@ -21,8 +20,12 @@ export const ObjectiveDao = {
           }else console.error("情報の作成に失敗しました")
         }else console.error("情報の作成に失敗しました")
       }catch(e){
-        console.error(e)
-      }
+        if(e && e.data && e.data.createObjective){
+          console.error("違反があります", e.errors)
+          return e.data.createObjective as Objective
+        }else{
+          console.error(e)
+        }      }
       return null
     },
     update: async(mutation: string, params: APIt.UpdateObjectiveInput): Promise<Objective | null> => {
@@ -41,7 +44,12 @@ export const ObjectiveDao = {
           }else console.error("情報の更新に失敗しました")
         }else console.error("情報の更新に失敗しました")
       }catch(e){
-        console.error(e)
+        if(e && e.data && e.data.updateObjective){
+          console.error("違反があります", e.errors)
+          return e.data.updateObjective as Objective
+        }else{
+          console.error(e)
+        }
       }
       return null
     },
@@ -62,7 +70,12 @@ export const ObjectiveDao = {
           }else console.error("情報の削除に失敗しました")
         }else console.error("情報の削除に失敗しました")
       }catch(e){
-        console.error(e)
+        if(e && e.data && e.data.deleteObjective){
+          console.error("違反があります", e.errors)
+          return e.data.deleteObjective as Objective
+        }else{
+          console.error(e)
+        }
       }
       return null
     },
@@ -79,26 +92,36 @@ export const ObjectiveDao = {
           }else console.error("情報の取得に失敗しました")
         }else console.error("情報の取得に失敗しました")
       }catch(e){
-        console.error(e)
+        if(e && e.data && e.data.getObjective){
+          console.error("違反があります", e.errors)
+          return e.data.getObjective as Objective
+        }else{
+          console.error(e)
+        }
       }
       return null
     },
 
     list: async(query: string, params: APIt.ListObjectivesQueryVariables): Promise<Objective[] | null> => {
-      try{
-        const listQV: APIt.ListObjectivesQueryVariables = params
-        const listGQL: GraphQLResult<APIt.ListObjectivesQuery> = 
-          await API.graphql(graphqlOperation(query, listQV)) as GraphQLResult<APIt.ListObjectivesQuery>;
-        if (listGQL.data) {
-          const listQ: APIt.ListObjectivesQuery = listGQL.data;
-          if (listQ.listObjectives && listQ.listObjectives.items) {
-            const gotObjectives = listQ.listObjectives.items as Objective[]
-            return gotObjectives
-          }else console.error("情報の取得に失敗しました")
-        }else console.error("情報の取得に失敗しました")
-      }catch(e){
-        console.error(e)
-      }
-      return null
+        try{
+            const listQV: APIt.ListObjectivesQueryVariables = params
+            const listGQL: GraphQLResult<APIt.ListObjectivesQuery> = 
+            await API.graphql(graphqlOperation(query, listQV)) as GraphQLResult<APIt.ListObjectivesQuery>;
+            if (listGQL.data) {
+              const listQ: APIt.ListObjectivesQuery = listGQL.data;
+              if (listQ.listObjectives && listQ.listObjectives.items) {
+                  const gotObjectives = listQ.listObjectives.items as Objective[]
+                  return gotObjectives
+              }else console.error("情報の取得に失敗しました")
+            }else console.error("情報の取得に失敗しました")
+        }catch(e){
+            if(e && e.data && e.data.listObjectives){
+                console.error("違反があります", e.errors)
+                return e.data.listObjectives.items as Objective[]
+            }else{
+                console.error(e)
+            }
+        }
+        return null
     },
 }

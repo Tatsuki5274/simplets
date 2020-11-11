@@ -6,7 +6,6 @@ import { API, graphqlOperation } from "aws-amplify";
 export const CompanyDao = {
     create: async(mutation: string ,params: APIt.CreateCompanyInput): Promise<Company | null> => {
       try{
-        let id: string = ''
         const createI: APIt.CreateCompanyInput = params
         const createMV: APIt.CreateCompanyMutationVariables = {
           input: createI,
@@ -21,8 +20,12 @@ export const CompanyDao = {
           }else console.error("情報の作成に失敗しました")
         }else console.error("情報の作成に失敗しました")
       }catch(e){
-        console.error(e)
-      }
+        if(e && e.data && e.data.createCompany){
+          console.error("違反があります", e.errors)
+          return e.data.createCompany as Company
+        }else{
+          console.error(e)
+        }      }
       return null
     },
     update: async(mutation: string, params: APIt.UpdateCompanyInput): Promise<Company | null> => {
@@ -41,7 +44,12 @@ export const CompanyDao = {
           }else console.error("情報の更新に失敗しました")
         }else console.error("情報の更新に失敗しました")
       }catch(e){
-        console.error(e)
+        if(e && e.data && e.data.updateCompany){
+          console.error("違反があります", e.errors)
+          return e.data.updateCompany as Company
+        }else{
+          console.error(e)
+        }
       }
       return null
     },
@@ -62,7 +70,12 @@ export const CompanyDao = {
           }else console.error("情報の削除に失敗しました")
         }else console.error("情報の削除に失敗しました")
       }catch(e){
-        console.error(e)
+        if(e && e.data && e.data.deleteCompany){
+          console.error("違反があります", e.errors)
+          return e.data.deleteCompany as Company
+        }else{
+          console.error(e)
+        }
       }
       return null
     },
@@ -79,26 +92,36 @@ export const CompanyDao = {
           }else console.error("情報の取得に失敗しました")
         }else console.error("情報の取得に失敗しました")
       }catch(e){
-        console.error(e)
+        if(e && e.data && e.data.getCompany){
+          console.error("違反があります", e.errors)
+          return e.data.getCompany as Company
+        }else{
+          console.error(e)
+        }
       }
       return null
     },
 
     list: async(query: string, params: APIt.ListCompanysQueryVariables): Promise<Company[] | null> => {
-      try{
-        const listQV: APIt.ListCompanysQueryVariables = params
-        const listGQL: GraphQLResult<APIt.ListCompanysQuery> = 
-          await API.graphql(graphqlOperation(query, listQV)) as GraphQLResult<APIt.ListCompanysQuery>;
-        if (listGQL.data) {
-          const listQ: APIt.ListCompanysQuery = listGQL.data;
-          if (listQ.listCompanys && listQ.listCompanys.items) {
-            const gotCompanys = listQ.listCompanys.items as Company[]
-            return gotCompanys
-          }else console.error("情報の取得に失敗しました")
-        }else console.error("情報の取得に失敗しました")
-      }catch(e){
-        console.error(e)
-      }
-      return null
+        try{
+            const listQV: APIt.ListCompanysQueryVariables = params
+            const listGQL: GraphQLResult<APIt.ListCompanysQuery> = 
+            await API.graphql(graphqlOperation(query, listQV)) as GraphQLResult<APIt.ListCompanysQuery>;
+            if (listGQL.data) {
+              const listQ: APIt.ListCompanysQuery = listGQL.data;
+              if (listQ.listCompanys && listQ.listCompanys.items) {
+                  const gotCompanys = listQ.listCompanys.items as Company[]
+                  return gotCompanys
+              }else console.error("情報の取得に失敗しました")
+            }else console.error("情報の取得に失敗しました")
+        }catch(e){
+            if(e && e.data && e.data.listCompanys){
+                console.error("違反があります", e.errors)
+                return e.data.listCompanys.items as Company[]
+            }else{
+                console.error(e)
+            }
+        }
+        return null
     },
 }

@@ -6,7 +6,6 @@ import { API, graphqlOperation } from "aws-amplify";
 export const GroupDao = {
     create: async(mutation: string ,params: APIt.CreateGroupInput): Promise<Group | null> => {
       try{
-        let id: string = ''
         const createI: APIt.CreateGroupInput = params
         const createMV: APIt.CreateGroupMutationVariables = {
           input: createI,
@@ -21,8 +20,12 @@ export const GroupDao = {
           }else console.error("情報の作成に失敗しました")
         }else console.error("情報の作成に失敗しました")
       }catch(e){
-        console.error(e)
-      }
+        if(e && e.data && e.data.createGroup){
+          console.error("違反があります", e.errors)
+          return e.data.createGroup as Group
+        }else{
+          console.error(e)
+        }      }
       return null
     },
     update: async(mutation: string, params: APIt.UpdateGroupInput): Promise<Group | null> => {
@@ -41,7 +44,12 @@ export const GroupDao = {
           }else console.error("情報の更新に失敗しました")
         }else console.error("情報の更新に失敗しました")
       }catch(e){
-        console.error(e)
+        if(e && e.data && e.data.updateGroup){
+          console.error("違反があります", e.errors)
+          return e.data.updateGroup as Group
+        }else{
+          console.error(e)
+        }
       }
       return null
     },
@@ -62,7 +70,12 @@ export const GroupDao = {
           }else console.error("情報の削除に失敗しました")
         }else console.error("情報の削除に失敗しました")
       }catch(e){
-        console.error(e)
+        if(e && e.data && e.data.deleteGroup){
+          console.error("違反があります", e.errors)
+          return e.data.deleteGroup as Group
+        }else{
+          console.error(e)
+        }
       }
       return null
     },
@@ -79,26 +92,36 @@ export const GroupDao = {
           }else console.error("情報の取得に失敗しました")
         }else console.error("情報の取得に失敗しました")
       }catch(e){
-        console.error(e)
+        if(e && e.data && e.data.getGroup){
+          console.error("違反があります", e.errors)
+          return e.data.getGroup as Group
+        }else{
+          console.error(e)
+        }
       }
       return null
     },
 
     list: async(query: string, params: APIt.ListGroupsQueryVariables): Promise<Group[] | null> => {
-      try{
-        const listQV: APIt.ListGroupsQueryVariables = params
-        const listGQL: GraphQLResult<APIt.ListGroupsQuery> = 
-          await API.graphql(graphqlOperation(query, listQV)) as GraphQLResult<APIt.ListGroupsQuery>;
-        if (listGQL.data) {
-          const listQ: APIt.ListGroupsQuery = listGQL.data;
-          if (listQ.listGroups && listQ.listGroups.items) {
-            const gotGroups = listQ.listGroups.items as Group[]
-            return gotGroups
-          }else console.error("情報の取得に失敗しました")
-        }else console.error("情報の取得に失敗しました")
-      }catch(e){
-        console.error(e)
-      }
-      return null
+        try{
+            const listQV: APIt.ListGroupsQueryVariables = params
+            const listGQL: GraphQLResult<APIt.ListGroupsQuery> = 
+            await API.graphql(graphqlOperation(query, listQV)) as GraphQLResult<APIt.ListGroupsQuery>;
+            if (listGQL.data) {
+              const listQ: APIt.ListGroupsQuery = listGQL.data;
+              if (listQ.listGroups && listQ.listGroups.items) {
+                  const gotGroups = listQ.listGroups.items as Group[]
+                  return gotGroups
+              }else console.error("情報の取得に失敗しました")
+            }else console.error("情報の取得に失敗しました")
+        }catch(e){
+            if(e && e.data && e.data.listGroups){
+                console.error("違反があります", e.errors)
+                return e.data.listGroups.items as Group[]
+            }else{
+                console.error(e)
+            }
+        }
+        return null
     },
 }
