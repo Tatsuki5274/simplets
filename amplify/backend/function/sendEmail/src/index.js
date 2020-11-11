@@ -22,10 +22,10 @@ exports.handler = async (event) => {
         },
         Message: { /* required */
           Body: { /* required */
-            Html: {
-             Charset: "UTF-8",
-             Data: body
-            },
+            // Html: {
+            //  Charset: "UTF-8",
+            //  Data: body
+            // },
             Text: {
              Charset: "UTF-8",
              Data: body
