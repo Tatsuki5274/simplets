@@ -260,12 +260,16 @@ function ListPerformanceEvalution() {
                                 const progressList: number[] | undefined = sheet.section?.items?.map((arg: any)=>{
                                     const section: Section = arg;
                                     let sum = 0;
+                                    let cnt = 0;
                                     section.objective?.items?.forEach((arg: any) => {
                                         const objective: Objective = arg;
-                                        sum += objective.progress || 0;
+                                        if(objective && objective.progress){
+                                            sum += objective.progress || 0;
+                                            cnt++;
+                                        }
                                     });
                                     if(section && section.objective && section.objective.items){
-                                        return sum / section.objective?.items?.length;
+                                        return sum / cnt;
                                     }else{
                                         return -1;
                                     }
