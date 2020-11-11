@@ -8,11 +8,11 @@ function SidebarComponents() {
     //ユーザ情報取得
     //const groups: string[] = ["test","test2"];
 
-    const groups: string[] = [""];
     const [isManager, setIsManager] = useState<boolean>();
     useEffect(() => {
         ; (async () => {
             try {
+                const groups: string[] = [""];
                 const currentUser = await Auth.currentAuthenticatedUser()
                 console.log("currentUser", currentUser)
                 const currentUserGroups = currentUser.signInUserSession.idToken.payload["cognito:groups"];

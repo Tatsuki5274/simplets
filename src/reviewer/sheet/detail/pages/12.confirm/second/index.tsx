@@ -40,7 +40,7 @@ export const ReviewerSheetPagesStatus12Second = () => {
                         <Link to={`/reviewer/list`} >
                             <Button >戻る</Button>
                         </Link>
-                        <ApprovalStatusBox statusValue={sheet && sheet.statusValue || -1} />
+                        <ApprovalStatusBox statusValue={sheet && (sheet.statusValue || -1)} />
                         <h3>今後のキャリア計画</h3><br />
 
                         <Formik

@@ -51,7 +51,7 @@ function EvalutionScreen(props: Props) {
             const sheetItem: Sheet = response.data?.getSheet as Sheet;
             setSheet(sheetItem);
         })()
-    }, []);
+    }, [sheetId]);
 
     // lastEvalutation 更新
     async function handleChangeObjective(event: any) {

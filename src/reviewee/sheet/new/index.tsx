@@ -100,7 +100,7 @@ function RevieweeSheetNew(props: Props){
             // companyGroupsを取得
             getCompanyGroup();
         })()
-      },[]);
+      },[sheetId]);
       
     if(isRedirect) return <Redirect to={`/reviewee/sheet/${sheetId}`} />
     return (

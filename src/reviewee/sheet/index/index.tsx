@@ -226,7 +226,7 @@ function RevieweeSheetShow(props: Props) {
                 setSheet(sheet);
             }
         })()
-    }, []);
+    }, [sheetId]);
 
     useEffect(() => {
         ; (async () => {
@@ -506,7 +506,7 @@ function RevieweeSheetShow(props: Props) {
                     <h2>メイン</h2>
                     <h3>目標一覧</h3>
                     {(() => {
-                        if (sheet.statusValue === 1 || sheet.statusValue == 3) {
+                        if (sheet.statusValue === 1 || sheet.statusValue === 3) {
                             return (
                                 <Link to={`/reviewee/objective/new/${sheetId}`}>
                                     <Button variant="info">
@@ -590,7 +590,7 @@ function RevieweeSheetShow(props: Props) {
                                             var doneDate = new Date(objective.expDoneDate!).getTime();
 
                                             //完了予定日のスタイルの分岐
-                                            if(doneDate < currentDate && doneDate != 0) {
+                                            if(doneDate < currentDate && doneDate !== 0) {
                                                 expDoneDateStyle = Style.indexExpDoneDateExpired;
                                             } else if(doneDate >= currentDate) {
                                                 expDoneDateStyle = Style.indexExpDoneDateInProgress;
@@ -602,11 +602,11 @@ function RevieweeSheetShow(props: Props) {
                                                 <tr key={objective.id}>
                                                     <td>
                                                         {(() => {
-                                                            if (sheet.statusValue == 1 || sheet.statusValue == 3) {
+                                                            if (sheet.statusValue === 1 || sheet.statusValue === 3) {
                                                                 return (
                                                                     <Button variant="primary" data-objectiveId={objective.id} onClick={HandleChange}>変更</Button>
                                                                 );
-                                                            } else if (sheet.statusValue == 2 || sheet.statusValue == 10 || sheet.statusValue == 11 || sheet.statusValue == 12 || sheet.statusValue == 13) {
+                                                            } else if (sheet.statusValue === 2 || sheet.statusValue === 10 || sheet.statusValue === 11 || sheet.statusValue === 12 || sheet.statusValue === 13) {
                                                                 return (
                                                                     <Button variant="primary" disabled>変更</Button>
                                                                 );
@@ -617,7 +617,7 @@ function RevieweeSheetShow(props: Props) {
                                                     <td>{objective.result}</td>
                                                     {(() => {
                                                         // 承認ステータスが1,3の場合,数値入力フィールドを表示
-                                                        if (sheet.statusValue == 1 || sheet.statusValue == 3) {
+                                                        if (sheet.statusValue === 1 || sheet.statusValue === 3) {
                                                             // 進捗率が空の場合,下記を表示
                                                             if (objective.progress === null || objective.progress === undefined) {
                                                                 return (
@@ -674,7 +674,7 @@ function RevieweeSheetShow(props: Props) {
                                 <td>本人希望
                                 {(() => {
                                         //ステータス1,2,3の場合,編集ボタンを表示
-                                        if (sheet.statusValue == 1 || sheet.statusValue == 2 || sheet.statusValue == 3) {
+                                        if (sheet.statusValue === 1 || sheet.statusValue === 2 || sheet.statusValue === 3) {
                                             return (
                                                 <Button variant="info" onClick={handleShowCareerPlanUpdate}>編集</Button>
                                             );
