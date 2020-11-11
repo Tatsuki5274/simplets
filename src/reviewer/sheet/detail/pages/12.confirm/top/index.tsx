@@ -13,7 +13,6 @@ import { SheetContext } from "reviewer/sheet";
 import { ReviewerSheetDetailCareerReadonly } from "../../../components/career/readonly";
 import { ReviewerSheetDetailInterviewReadonly } from "../../../components/interview/readonly";
 import { ReviewerSheetDetailObjectiveReadonly } from "../../../components/objective/readonly";
-import { RemandModal } from "../../../components/remandModal";
 import { ReviewerSheetDetailYearlyReadonly } from "../../../components/yearly/readonly";
 
 type Props = {
@@ -26,15 +25,9 @@ export const ReviewerSheetPagesStatus12Top = () => {
     const sheet = context.sheet
     const setSheet = context.setSheet
 
-    const [isRemandModal, setIsRemandModal] = useState<boolean>(false);
-    const handleClose = () => setIsRemandModal(false);
-    const handleShow = () => setIsRemandModal(true);
-
     if (sheet) {
         return (
             <div>
-                {/* モーダルウィンドウ 差し戻しコメント */}
-                <RemandModal isShow={isRemandModal} handleClose={handleClose} />
 
                 {/* 評価画面 */}
                 <div>
@@ -94,7 +87,6 @@ export const ReviewerSheetPagesStatus12Top = () => {
                                         {/* ステータスによってボタンの出し分け */}
                                         <Form.Group>
                                             <Button type="submit">最終承認</Button>
-                                            <Button onClick={handleShow}>差し戻し</Button>
 
                                         </Form.Group>
                                     </Form><br />
