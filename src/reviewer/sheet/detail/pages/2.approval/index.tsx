@@ -10,11 +10,11 @@ import { updateSheet } from "graphql/mutations";
 import { Command, commandWorkFlow } from "lib/workflow";
 import { sendEmailMutation } from "lib/sendEmail";
 import { UpdateSheetInput } from "API";
-import { ReviewerSheetDetailCareerReadonly } from "../../components/career/readonly";
 import { ReviewerSheetDetailInterviewReadonly } from "../../components/interview/readonly";
 import { ReviewerSheetDetailObjectiveReadonly } from "../../components/objective/readonly";
 import { ReviewerSheetDetailYearlyReadonly } from "../../components/yearly/readonly";
 import { SheetContext } from "reviewer/sheet";
+import { ReviewerSheetDetailCareerEditable } from "../../components/career/editable";
 
 type Props = {
     sheet: Sheet,
@@ -50,14 +50,15 @@ export const ReviewerSheetPagesStatus2 = ()=>{
 
                         <Formik
                             initialValues={{
-                                // 入力項目空
+                                careerPlanComment: sheet.careerPlanComment
                             }}
-                            onSubmit={ async () => {
+                            onSubmit={ async (values) => {
                                 if(sheet){
                                     const work = commandWorkFlow(Command.SUP1_APPLOVAL, sheet)
                                     const data: UpdateSheetInput = {
                                         id: sheet.id,
-                                        statusValue: work.sheet.statusValue
+                                        statusValue: work.sheet.statusValue,
+                                        careerPlanComment: values.careerPlanComment,
                                     }
                                     let updatedSheet = await SheetDao.update(updateSheet, data);
                                     
@@ -84,7 +85,7 @@ export const ReviewerSheetPagesStatus2 = ()=>{
                         >
                         {formik => (
                                 <form onSubmit={formik.handleSubmit}>
-                                    <ReviewerSheetDetailCareerReadonly sheet={sheet}/>
+                                    <ReviewerSheetDetailCareerEditable sheet={sheet} handleChange={formik.handleChange} />
 
 
                                     {/* インタビュー実施記録 */}
