@@ -3,6 +3,7 @@ import { Section } from "App";
 import ApprovalStatusBox from "common/approvalStatusBox";
 import { Formik } from "formik";
 import { updateSheet } from "graphql/mutations";
+import { formatAWSDate } from "lib/awsdate";
 import { SheetDao } from "lib/dao/sheetDao";
 import { sendEmailMutation } from "lib/sendEmail";
 import { commandWorkFlow, Command } from "lib/workflow";
@@ -36,12 +37,14 @@ export const ReviewerSheetPagesStatus13 = () => {
                             initialValues={{
                                 firstComment: sheet.firstComment,
                             }}
-                            onSubmit={async () => {
+                            onSubmit={async (values) => {
                                 if (sheet) {
                                     const work = commandWorkFlow(Command.SUP2_DONE, sheet)
                                     const data: UpdateSheetInput = {
                                         id: sheet.id,
-                                        statusValue: work.sheet.statusValue
+                                        statusValue: work.sheet.statusValue,
+                                        firstComment: values.firstComment,
+                                        firstCheckDate: formatAWSDate(new Date()),
                                     }
                                     let updatedSheet = await SheetDao.update(updateSheet, data);
 
@@ -82,7 +85,8 @@ export const ReviewerSheetPagesStatus13 = () => {
                                             <Button onClick={async () => {
                                                 const formikData: UpdateSheetInput = {
                                                     id: sheet.id,
-                                                    firstComment: formik.values.firstComment
+                                                    firstComment: formik.values.firstComment,
+                                                    firstCheckDate: formatAWSDate(new Date()),
                                                 }
                                                 const updatedSheet = await SheetDao.update(updateSheet, formikData)
 

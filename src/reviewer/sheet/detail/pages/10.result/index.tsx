@@ -3,6 +3,7 @@ import { Section, Sheet } from "App";
 import ApprovalStatusBox from "common/approvalStatusBox";
 import { Formik } from "formik";
 import { updateSheet } from "graphql/mutations";
+import { formatAWSDate } from "lib/awsdate";
 import { SheetDao } from "lib/dao/sheetDao";
 import { sendEmailMutation } from "lib/sendEmail";
 import { commandWorkFlow, Command } from "lib/workflow";
@@ -48,28 +49,19 @@ export const ReviewerSheetPagesStatus10 = (props: Props) => {
 
                         <Formik
                             initialValues={{
-                                id: sheet?.id,
-                                careerPlanComment: sheet?.careerPlanComment,
-                                firstComment: sheet?.firstComment,
-                                secondComment: sheet?.secondComment,
-                                overAllEvaluation: sheet?.overAllEvaluation,
-                                interviewPlanComment: sheet?.interviewPlanComment,
-                                interviewPlanDate: sheet?.interviewPlanDate,
-                                InterviewMid1Comment: sheet?.InterviewMid1Comment,
-                                InterviewMid1Date: sheet?.InterviewMid1Date,
-                                InterviewMid2Comment: sheet?.InterviewMid2Comment,
-                                InterviewMid2Date: sheet?.InterviewMid2Date,
-                                InterviewMid3Comment: sheet?.InterviewMid3Comment,
-                                InterviewMid3Date: sheet?.InterviewMid3Date,
-                            } as Sheet}
-                            onSubmit={ async () => {
+                                secondComment: sheet.secondComment,
+                            }}
+                            onSubmit={ async (values) => {
                                 if(sheet){
                                     const work = commandWorkFlow(Command.SUP1_INPUT_SCORE, sheet)
                                     const data: UpdateSheetInput = {
                                         id: sheet.id,
+                                        secondComment: values.secondComment,
+                                        secondCheckDate: formatAWSDate(new Date()),
                                         statusValue: work.sheet.statusValue
                                     }
                                     let updatedSheet = await SheetDao.update(updateSheet, data);
+                                    console.log("10updated", updatedSheet)
                                     
                         
                                     if(updatedSheet){
@@ -106,11 +98,16 @@ export const ReviewerSheetPagesStatus10 = (props: Props) => {
                                         {/* ステータスによってボタンの出し分け */}
                                         <Form.Group>
                                             <Button onClick={async () => {
-                                                const updatedSheet = await SheetDao.update(updateSheet, formik.values)
+                                                const data: UpdateSheetInput = {
+                                                    id: sheet.id,
+                                                    secondComment: formik.values.secondComment,
+                                                    secondCheckDate: formatAWSDate(new Date()),
+                                                }
+                                                const updatedSheet = await SheetDao.update(updateSheet, data);
 
                                                 // const updatedSheet = runUpdateSheet(props.values);
                                                 if (updatedSheet) {
-                                                    console.log("保存成功")
+                                                    console.log("保存成功", updatedSheet)
                                                 } else {
                                                     console.error("保存失敗", updatedSheet)
                                                 }
