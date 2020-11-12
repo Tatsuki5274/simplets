@@ -1,10 +1,9 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { API, graphqlOperation, Auth } from 'aws-amplify';
+import { Auth } from 'aws-amplify';
 import { Button, Container, Table } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { GraphQLResult } from "@aws-amplify/api";
 import { Link } from 'react-router-dom';
-import { Category, Employee, Objective, Section, Sheet, UserContext } from 'App';
+import { Category, Objective, Section, Sheet, UserContext } from 'App';
 import { ApprovalStatus, getStatusValue } from 'lib/getStatusValue'
 import { getEmployee, listCategorys, listSheets } from 'graphql/queries'
 import * as APIt from 'API';
@@ -13,10 +12,23 @@ import SidebarComponents from 'common/Sidebar';
 import HeaderComponents from 'common/header';
 import Style from './performanceStyle.module.scss';
 import { SheetDao } from 'lib/dao/sheetDao';
+import { EmployeeDao } from 'lib/dao/employeeDao';
+import { CategoryDao } from 'lib/dao/categoryDao';
+import { SectionDao } from 'lib/dao/sectionDao';
+
+const sortSheet = (a: Sheet, b: Sheet) => {
+    if (a.year < b.year) {
+        return 1;
+    } else {
+        return -1;
+    }
+}
+
+//今日の日付を取得
+const today: Date = new Date();
 
 function ListPerformanceEvalution() {
     const [sheets, setSheets] = useState<Sheet[] | null>(null);
-    const [styleSheetButton, setStyleSheetButton] =useState<string>();
 
     // ログインユーザを取得する
     const currentUser = useContext(UserContext);
@@ -34,13 +46,7 @@ function ListPerformanceEvalution() {
                 const items = await SheetDao.list(listSheets, listQV)
 
                 //降順でソートしてlistItemsに保存
-                items?.sort(function (a, b) {
-                    if (a.year < b.year) {
-                        return 1;
-                    } else {
-                        return -1;
-                    }
-                });
+                items?.sort(sortSheet);
                 setSheets(items);
 
                 // 今年に作成されたシートを確認
@@ -54,173 +60,79 @@ function ListPerformanceEvalution() {
                         result = true;
                     }
                 }
-
-                setStyleSheetButton(changeCreateSheetButtonStyle(result));
             }
         })()
     }, [currentUser]);
 
-    // 新規作成ボタンのスタイルシートを制御
-    function changeCreateSheetButtonStyle(changeStatus:boolean) {
-        if(changeStatus) {
-            return Style.performanceCreateSheetButtonDisplay;
-        } else {
-            return Style.performanceCreateSheetButtonNone;
-        }
-    }
-
     async function handleClickCreate() {
-        //今日の日付を取得
-        const today: Date = new Date();
 
         // 社員情報取得
-        const revieweeEmployee: Employee = await getQueryEmployee();
-        const revieweeEmployeeID = revieweeEmployee.id; //社員ID取得
-        const revieweeEmployeeSuperior: Array<string | null> = 
-        [revieweeEmployee.superior ? revieweeEmployee.superior.id : "",
-        revieweeEmployee.superior?.superior ? revieweeEmployee.superior.superior?.id : ""]; //上司情報取得
+        const currentUser = await Auth.currentAuthenticatedUser();
+        const revieweeEmployeeID: string = currentUser.username;
+        const revieweeEmployee = await EmployeeDao.get(getEmployee, {id: revieweeEmployeeID})
+        if(revieweeEmployee){
+            const revieweeEmployeeSuperior: Array<string | null> = 
+                [revieweeEmployee.superior ? revieweeEmployee.superior.id : null,
+                revieweeEmployee.superior && revieweeEmployee.superior.superior ? revieweeEmployee.superior.superior.id : null]; //上司情報取得
+                    // 権限グループ名の取得
+            // const companyGroup = revieweeEmployee.company?.companyGroupName || "";
+            const companyManagerGroup = revieweeEmployee.company?.companyManagerGroupName || null;
+            const companyAdminGroup = revieweeEmployee.company?.companyAdminGroupName || null;
 
+            if(companyManagerGroup && companyAdminGroup){
+                //カテゴリを取得する
+                const categorys = await CategoryDao.list(listCategorys, {});
+                if (categorys) {
+                    console.log("categorys", categorys)
 
-        // 権限グループ名の取得
-        // const companyGroup = revieweeEmployee.company?.companyGroupName || "";
-        const companyManagerGroup = revieweeEmployee.company?.companyManagerGroupName || "";
-        // const companyAdminGroup = revieweeEmployee.company?.companyAdminGroupName || "";
-
-        //カテゴリを取得する
-        const categorys = await runListCategory();
-        if (categorys) {
-            console.log("categorys", categorys)
-
-            //シートを作成
-            const createdSheet = await runCreateSheet();
-            if (createdSheet) {
-                console.log('CreateSheet', createdSheet);
-                //取得したカテゴリを元にsectionを作成する
-                categorys.forEach(async (category: Category) => {
-                    const createdSection = await runCreateSection(category.id, createdSheet.id);
-                    console.log("CreatedSection", createdSection);
-                })
-                //レンダリング要素の追加
-                addSheets(createdSheet);
-                console.log("Done!", sheets);
-
-            } else {
-                console.error("error");
-            }
-            //画面更新
-            window.location.reload()
-        }
-
-
-
-
-        async function getQueryEmployee() {
-            //ログインユーザ情報取得
-            const currentUser = await Auth.currentAuthenticatedUser();
-            const revieweeEmployeeID: string = currentUser.username;
-
-            //所属長,部門長情報取得
-            const input: APIt.GetEmployeeQueryVariables = {
-                id: revieweeEmployeeID
-            }
-            let response;
-            try {
-                response = (await API.graphql(graphqlOperation(getEmployee, input))
-                ) as GraphQLResult<APIt.GetEmployeeQuery>;
-            } catch (e) {
-                console.log("エラーを無視しています", e)
-                response = e;
-            }
-
-            const employeeItem: Employee = response.data.getEmployee as Employee;
-            
-            return employeeItem;
-        }
-
-        async function runCreateSheet(): Promise<Sheet | undefined> {
-            //シートを作成
-            let sheetId: string = '';
-
-            const createI: APIt.CreateSheetInput = {
-                grade: 0,
-                year: today.getFullYear(),
-                statusValue: 1,
-                sheetSecondEmployeeId: revieweeEmployee.superior?.id,
-                sheetGroupId: revieweeEmployee.group?.id || "",
-                sheetRevieweeEmployeeId: revieweeEmployeeID,
-                reviewers: revieweeEmployeeSuperior,
-                readGroups: [companyManagerGroup]
-            };
-            const createMV: APIt.CreateSheetMutationVariables = {
-                input: createI,
-            };
-            let createR: GraphQLResult<APIt.CreateSheetMutation>
-            try {
-                createR = await API.graphql(graphqlOperation(createSheet, createMV)) as GraphQLResult<APIt.CreateSheetMutation>;
-            } catch (e) {
-                console.log("エラーを無視しています", e)
-                console.log("データが不完全でないことを確認してください")
-                createR = e;
-            }
-            if (createR.data) {
-                const createTM: APIt.CreateSheetMutation = createR.data;
-                if (createTM.createSheet) {
-                    const sheet: Sheet = createTM.createSheet;
-                    sheetId = createTM.createSheet.id;
-                    return sheet;
+                    //シートを作成
+                    const createdSheet = await SheetDao.create(createSheet, {
+                        grade: 0,
+                        year: today.getFullYear(),
+                        statusValue: 1,
+                        sheetSecondEmployeeId: revieweeEmployee.superior?.id,
+                        sheetGroupId: revieweeEmployee.group?.id || "",
+                        sheetRevieweeEmployeeId: revieweeEmployeeID,
+                        reviewers: revieweeEmployeeSuperior,
+                        readGroups: [companyManagerGroup],
+                        updateGroups: [companyAdminGroup]
+                    })
+                    if (createdSheet) {
+                        //取得したカテゴリを元にsectionを作成する
+                        let isSuccess = true
+                        categorys.forEach(async (category: Category) => {
+                            const createdSection = await SectionDao.create(createSection, {
+                                sectionSheetId: createdSheet.id,
+                                sectionCategoryId: category.id,
+                                reviewers: revieweeEmployeeSuperior,
+                                readGroups: [companyManagerGroup]
+                            })
+                            if(!createdSection){
+                                isSuccess = false
+                                console.log("カテゴリセクションの登録に失敗しました")
+                            }
+                        })
+                        //レンダリング要素の追加
+                        addSheets(createdSheet);
+                        if(isSuccess){
+                            console.log("シートの作成に成功しました", sheets);
+                        }
+                    } else {
+                        console.error("シートの作成に失敗しました");
+                    }
                 }
+            }else{
+                console.error("権限の取得に失敗しました")
             }
+
         }
 
-        async function runCreateSection(categoryId: string, sheetId: string): Promise<Section | undefined> {
-            const createI: APIt.CreateSectionInput = {
-                sectionSheetId: sheetId,
-                sectionCategoryId: categoryId,
-                reviewers: revieweeEmployeeSuperior,
-                readGroups: [companyManagerGroup]
-            };
-            const createMV: APIt.CreateSectionMutationVariables = {
-                input: createI,
-            };
-            let createR: GraphQLResult<APIt.CreateSectionMutation>
-            try {
-                createR = await API.graphql(graphqlOperation(createSection, createMV)) as GraphQLResult<APIt.CreateSectionMutation>;
-            } catch (e) {
-                console.log("エラーを無視しています", e)
-                console.log("データが不完全でないことを確認してください")
-                createR = e;
-            }
-            if (createR.data) {
-                const createTM: APIt.CreateSectionMutation = createR.data;
-                if (createTM.createSection) {
-                    const createdSection: Section = createTM.createSection;
-                    sheetId = createTM.createSection.id;
-                    return createdSection;
-                }
-            }
-        }
-        async function runListCategory(): Promise<Category[] | undefined> {
-            const listQV: APIt.ListCategorysQueryVariables = {};
-            let listGQL: GraphQLResult<APIt.ListCategorysQuery>
-            try {
-                listGQL = await API.graphql(graphqlOperation(listCategorys, listQV)) as GraphQLResult<APIt.ListCategorysQuery>;
-            } catch (e) {
-                console.log("エラーを無視しています", e)
-                console.log("データが不完全でないことを確認してください")
-                listGQL = e;
-            }
-            if (listGQL.data) {
-                const listQ: APIt.ListCategorysQuery = listGQL.data;
-                if (listQ.listCategorys && listQ.listCategorys.items) {
-                    return listQ.listCategorys.items as Category[];
-                }
-            }
-        }
         function addSheets(newSheet: Sheet) {
             //現在のステートへ適用
             if(sheets){
                 const newSheetState = sheets.concat();
                 newSheetState.push(newSheet)
+                newSheetState.sort(sortSheet);
                 setSheets(newSheetState);
             }
         }
@@ -237,7 +149,17 @@ function ListPerformanceEvalution() {
             <div>
                 <Container>
                     <h2>業績評価一覧</h2>
-                    <Button variant="primary" onClick={handleClickCreate} className={styleSheetButton}>新規作成</Button>
+                    {(sheets && sheets.find(sheet=>{
+                        return sheet.year === today.getFullYear()
+                    }))
+                    ? null : 
+                        <Button
+                            variant="primary"
+                            onClick={handleClickCreate}
+                        >
+                            新規作成
+                        </Button>
+                    }
                     <Table bordered>
                         <thead>
                             <tr>
