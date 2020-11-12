@@ -52,6 +52,7 @@ export const ReviewerSheetPagesStatus10 = (props: Props) => {
                         <Formik
                             initialValues={{
                                 secondComment: sheet.secondComment,
+                                overAllEvaluation: sheet.overAllEvaluation
                             }}
                             onSubmit={ async (values) => {
                                 if(sheet){
@@ -60,7 +61,8 @@ export const ReviewerSheetPagesStatus10 = (props: Props) => {
                                         id: sheet.id,
                                         secondComment: values.secondComment,
                                         secondCheckDate: formatAWSDate(new Date()),
-                                        statusValue: work.sheet.statusValue
+                                        statusValue: work.sheet.statusValue,
+                                        overAllEvaluation: work.sheet.overAllEvaluation
                                     }
                                     let updatedSheet = await SheetDao.update(updateSheet, data);
                                     console.log("10updated", updatedSheet)
@@ -105,6 +107,7 @@ export const ReviewerSheetPagesStatus10 = (props: Props) => {
                                                     id: sheet.id,
                                                     secondComment: formik.values.secondComment,
                                                     secondCheckDate: formatAWSDate(new Date()),
+                                                    overAllEvaluation: formik.values.overAllEvaluation
                                                 }
                                                 const updatedSheet = await SheetDao.update(updateSheet, data);
 

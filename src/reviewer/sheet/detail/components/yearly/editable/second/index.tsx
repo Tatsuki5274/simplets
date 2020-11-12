@@ -1,4 +1,5 @@
 import { Sheet } from "App"
+import { inputFieldStyle } from "common/inputFieldStyle.module.scss";
 import React from "react"
 import { Form } from "react-bootstrap"
 import style from '../../common/style.module.scss';
@@ -23,7 +24,19 @@ export const ReviewerSheetDetailYearlyEditableSecond = (props: Props) => {
 
         <Form.Group>
             <Form.Label>総合評価</Form.Label>
-            <div>{props.sheet.overAllEvaluation || "未設定"}</div>
+            <Form.Control
+                as="select"
+                name="overAllEvaluation"
+                onChange={props.handleChange}
+                defaultValue={props.sheet.overAllEvaluation || ""}
+                className={inputFieldStyle}>
+                <option></option>
+                <option>5</option>
+                <option>4</option>
+                <option>3</option>
+                <option>2</option>
+                <option>1</option>
+            </Form.Control>
         </Form.Group>
 
         <Form.Group>
