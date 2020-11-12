@@ -1,3 +1,4 @@
+import { UpdateSheetInput } from "API";
 import { Section, Sheet } from "App";
 import ApprovalStatusBox from "common/approvalStatusBox";
 import { Formik } from "formik";
@@ -6,7 +7,7 @@ import { SheetDao } from "lib/dao/sheetDao";
 import React, { useState } from "react"
 import { Container, Button, Form } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { ReviewerSheetDetailCareerReadonly } from "../../components/career/readonly";
+import { ReviewerSheetDetailCareerEditable } from "../../components/career/editable";
 import { ReviewerSheetDetailInterviewEditable } from "../../components/interview/editable";
 import { ReviewerSheetDetailObjectiveReadonly } from "../../components/objective/readonly";
 import { RemandModal } from "../../components/remandModal";
@@ -25,7 +26,19 @@ export const ReviewerSheetPagesStatus3 = (props: Props) => {
     const handleShow = () => setIsRemandModal(true);
 
     const onSubmit = async (values: Sheet) => {
-        const updatedSheet = await SheetDao.update(updateSheet, values)
+        const data: UpdateSheetInput = {
+            id: props.sheet.id,
+            careerPlanComment: values.careerPlanComment,
+            interviewPlanComment: values.interviewPlanComment,
+            interviewPlanDate: values.interviewPlanDate,
+            InterviewMid1Comment: values.InterviewMid1Comment,
+            InterviewMid1Date: values.InterviewMid1Date,
+            InterviewMid2Comment: values.InterviewMid2Comment,
+            InterviewMid2Date: values.InterviewMid2Date,
+            InterviewMid3Comment: values.InterviewMid3Comment,
+            InterviewMid3Date: values.InterviewMid3Date,
+        }
+        const updatedSheet = await SheetDao.update(updateSheet, data)
 
         // const updatedSheet = runUpdateSheet(props.values);
         if (updatedSheet) {
@@ -51,11 +64,7 @@ export const ReviewerSheetPagesStatus3 = (props: Props) => {
 
                     <Formik
                         initialValues={{
-                            id: props.sheet.id,
                             careerPlanComment: props.sheet.careerPlanComment,
-                            firstComment: props.sheet.firstComment,
-                            secondComment: props.sheet.secondComment,
-                            overAllEvaluation: props.sheet.overAllEvaluation,
                             interviewPlanComment: props.sheet.interviewPlanComment,
                             interviewPlanDate: props.sheet.interviewPlanDate,
                             InterviewMid1Comment: props.sheet.InterviewMid1Comment,
@@ -71,7 +80,7 @@ export const ReviewerSheetPagesStatus3 = (props: Props) => {
                     >
                         {formik => (
                             <form onSubmit={formik.handleSubmit}>
-                                <ReviewerSheetDetailCareerReadonly sheet={props.sheet} />
+                                <ReviewerSheetDetailCareerEditable sheet={props.sheet} handleChange={formik.handleChange}/>
 
 
                                 {/* インタビュー実施記録 */}
