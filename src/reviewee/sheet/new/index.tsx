@@ -122,7 +122,9 @@ function RevieweeSheetNew(props: Props){
                         expDoneDate: Yup.date().min(Yup.ref('expStartDate'), ({ min }) => `開始予定日より後の日付を入力してください`,)
                             .typeError('正しく入力してください')
                             .required('必須入力です'),
-                            section: Yup.string().required('目標カテゴリを選択してください')
+                        section: Yup.string().required('目標カテゴリを選択してください'),
+                        priority: Yup.string().required('必須入力です'),
+                        content: Yup.string().required('必須入力です')
                     })}
                     
                     onSubmit={async (values, actions) => {
@@ -139,6 +141,7 @@ function RevieweeSheetNew(props: Props){
                                 expDoneDate: values.expDoneDate?.replace('T', '-') || "",
                                 readGroups: [companyGroups[0]],
                                 updateGroups: [companyGroups[1], companyGroups[2]],
+                                progress: 0
                             }
                             console.log('createI',createI);
                             const createMV: APIt.CreateObjectiveMutationVariables = {
@@ -174,10 +177,11 @@ function RevieweeSheetNew(props: Props){
                                         console.log("エラー: カテゴリが設定されていない可能性があります。")
                                     }
                                 })}
-                                <ErrorMessage name="section" />
+                                <p><ErrorMessage name="section" /></p>
                             </div>
                             <Form.Label>目標内容</Form.Label>
                             <Form.Control as="textarea" name="content" onChange={props.handleChange}/>
+                            <p><ErrorMessage name="content" /></p>
 
                             <Form.Label>優先順位</Form.Label>
                             <Form.Control as="select" name="priority" onChange={props.handleChange}>
@@ -186,6 +190,7 @@ function RevieweeSheetNew(props: Props){
                                 <option>B</option>
                                 <option>C</option>
                             </Form.Control>
+                            <p><ErrorMessage name="priority" /></p>
                             <Row>
                                 <Col md="2" lg="2" xl="2">開始予定日<Badge variant="danger">必須</Badge></Col>
                                 <Col md="4" lg="4" xl="4">
