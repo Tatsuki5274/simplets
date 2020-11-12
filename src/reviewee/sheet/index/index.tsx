@@ -405,7 +405,7 @@ function RevieweeSheetShow(props: Props) {
                     }}
                 >
                     {props => (
-                        <Modal show={objectiveUpdateShow} onHide={handleCloseObjectiveUpdate}>
+                        <Modal show={objectiveUpdateShow} onHide={handleCloseObjectiveUpdate} size="xl">
                             <form onSubmit={props.handleSubmit}>
                                 <Modal.Header closeButton>
                                     <Modal.Title>目標変更</Modal.Title>
@@ -413,7 +413,17 @@ function RevieweeSheetShow(props: Props) {
                                 <Modal.Body>
                                     <Row>
                                         <Col>目標</Col>
-                                        <Col><textarea onChange={props.handleChange} name="content" defaultValue={modalObjective?.content} className={inputFieldStyle} /> </Col>
+                                        <Col>
+                                            <Form.Control
+                                                as="textarea"
+                                                name="content"
+                                                onChange={props.handleChange}
+                                                defaultValue={modalObjective?.content}
+                                                className={inputFieldStyle}
+                                                rows={5}
+                                            />
+                                            <p></p>
+                                        </Col>
                                     </Row>
                                     <Row>
                                         <Col md="2" lg="2" xl="2">開始予定日</Col>
@@ -426,6 +436,7 @@ function RevieweeSheetShow(props: Props) {
                                                 defaultValue={modalObjective?.expStartDate || undefined}
                                                 className={inputFieldStyle}
                                             />
+                                            <p></p>
                                         </Col>
                                         <Col md="2" lg="2" xl="2">完了予定日</Col>
                                         <Col md="4" lg="4" xl="4">
@@ -437,35 +448,57 @@ function RevieweeSheetShow(props: Props) {
                                                 defaultValue={modalObjective?.expDoneDate || undefined}
                                                 className={inputFieldStyle}
                                             />
+                                            <p></p>
                                         </Col>
                                     </Row>
                                     <Row>
                                         <Col>自己評価</Col>
                                         <Col>
-                                            <select onChange={props.handleChange} name="selfEvaluation" defaultValue={String(modalObjective?.selfEvaluation) || undefined} className={inputFieldStyle}>
+                                            <Form.Control
+                                                as="select"
+                                                name="selfEvaluation"
+                                                onChange={props.handleChange}
+                                                defaultValue={String(modalObjective?.selfEvaluation) || undefined}
+                                                className={inputFieldStyle} >
                                                 <option></option>
                                                 <option value='1'>1</option>
                                                 <option value='2'>2</option>
                                                 <option value='3'>3</option>
                                                 <option value='4'>4</option>
                                                 <option value='5'>5</option>
-                                            </select>
+                                            </Form.Control>
+                                            <p></p>
                                         </Col>
                                     </Row>
                                     <Row>
                                         <Col>優先順位</Col>
                                         <Col>
-                                            <select onChange={props.handleChange} name="priority" defaultValue={modalObjective?.priority || undefined} className={inputFieldStyle}>
+                                            <Form.Control
+                                                as="select"
+                                                name="priority"
+                                                onChange={props.handleChange}
+                                                defaultValue={modalObjective?.priority || undefined}
+                                                className={inputFieldStyle} >
                                                 <option></option>
                                                 <option value="A">A</option>
                                                 <option value="B">B</option>
                                                 <option value="C">C</option>
-                                            </select>
+                                            </Form.Control>
+                                            <p></p>
                                         </Col>
                                     </Row>
                                     <Row>
                                         <Col>実績</Col>
-                                        <Col><textarea onChange={props.handleChange} name="result" defaultValue={modalObjective?.result || undefined} className={inputFieldStyle} /> </Col>
+                                        <Col>
+                                            <Form.Control
+                                                as="textarea"
+                                                name="result"
+                                                onChange={props.handleChange}
+                                                defaultValue={modalObjective?.result || undefined}
+                                                className={inputFieldStyle}
+                                                rows={5}
+                                            />
+                                        </Col>
                                     </Row>
                                 </Modal.Body>
                                 <Modal.Footer>
