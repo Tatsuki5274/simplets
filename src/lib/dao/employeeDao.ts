@@ -53,7 +53,7 @@ export const EmployeeDao = {
       }
       return null
     },
-    delete: async(mutation: string, params: APIt.UpdateEmployeeInput): Promise<Employee | null> => {
+    delete: async(mutation: string, params: APIt.DeleteEmployeeInput): Promise<Employee | null> => {
       try{
         let deletedEmployee: Employee | null = null
         const deleteI: APIt.DeleteEmployeeInput = params

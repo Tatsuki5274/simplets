@@ -20,6 +20,7 @@ import { SheetDao } from 'lib/dao/sheetDao';
 import { sendEmailMutation } from 'lib/sendEmail';
 import { ArcGauge } from '@progress/kendo-react-gauges';
 import { inputFieldStyle } from 'common/inputFieldStyle.module.scss';
+import { ObjectiveDao } from 'lib/dao/objectiveDao';
 
 type Props = {
     match: {
@@ -158,29 +159,33 @@ function RevieweeSheetShow(props: Props) {
 
     //objectiveの削除
     async function handleDeleteObjective(event: any) {
-        console.log(event.target.getAttribute('data-objective-id'));
-        const objectiveId = event.target.getAttribute('data-objective-id');
-
-        const deleteI: APIt.DeleteObjectiveInput = {
-            id: objectiveId
-        };
-        console.log('deleteI',deleteI);
-
-        const deleteMV: APIt.DeleteObjectiveMutationVariables = {
-            input: deleteI,
-        };
-
-        console.log('deleteMV',deleteMV);
-        let deleteR: GraphQLResult<APIt.DeleteObjectiveMutation>
-        try {
-            deleteR =
-                await API.graphql(graphqlOperation(deleteObjective, deleteMV)) as GraphQLResult<APIt.DeleteObjectiveMutation>;
-        } catch (e) {
-            console.log("エラーを無視しています", e)
-            deleteR = e;
+        if(window.confirm("目標を削除しますか？")){
+            console.log(event.target.getAttribute('data-objective-id'));
+            const objectiveId = event.target.getAttribute('data-objective-id');
+    
+            const deleteI: APIt.DeleteObjectiveInput = {
+                id: objectiveId
+            };
+            const deletedObjective = await ObjectiveDao.delete(deleteObjective, deleteI)
+    
+            if(sheet && sheet.section && sheet.section.items){
+                sheet.section.items.forEach(section => {
+                    if(section && section.objective && section.objective.items){
+                        section.objective.items = section.objective.items.filter(objective => {
+                            if(objective){
+                                return objective.id !== objectiveId
+                            }
+                            return false
+                        })
+                    }
+                })
+                const newSheet = {...sheet}
+                setSheet(newSheet)
+            }
+    
+            console.log("delete", deletedObjective)
         }
-        console.log("deleteR", deleteR);
-        console.log("sheet", sheet)
+
     }
 
     //目標変更検知

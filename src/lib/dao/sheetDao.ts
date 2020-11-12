@@ -53,7 +53,7 @@ export const SheetDao = {
       }
       return null
     },
-    delete: async(mutation: string, params: APIt.UpdateSheetInput): Promise<Sheet | null> => {
+    delete: async(mutation: string, params: APIt.DeleteSheetInput): Promise<Sheet | null> => {
       try{
         let deletedSheet: Sheet | null = null
         const deleteI: APIt.DeleteSheetInput = params

@@ -53,7 +53,7 @@ export const GroupDao = {
       }
       return null
     },
-    delete: async(mutation: string, params: APIt.UpdateGroupInput): Promise<Group | null> => {
+    delete: async(mutation: string, params: APIt.DeleteGroupInput): Promise<Group | null> => {
       try{
         let deletedGroup: Group | null = null
         const deleteI: APIt.DeleteGroupInput = params

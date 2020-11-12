@@ -53,7 +53,7 @@ export const CompanyDao = {
       }
       return null
     },
-    delete: async(mutation: string, params: APIt.UpdateCompanyInput): Promise<Company | null> => {
+    delete: async(mutation: string, params: APIt.DeleteCompanyInput): Promise<Company | null> => {
       try{
         let deletedCompany: Company | null = null
         const deleteI: APIt.DeleteCompanyInput = params

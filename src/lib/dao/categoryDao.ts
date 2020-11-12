@@ -53,7 +53,7 @@ export const CategoryDao = {
       }
       return null
     },
-    delete: async(mutation: string, params: APIt.UpdateCategoryInput): Promise<Category | null> => {
+    delete: async(mutation: string, params: APIt.DeleteCategoryInput): Promise<Category | null> => {
       try{
         let deletedCategory: Category | null = null
         const deleteI: APIt.DeleteCategoryInput = params

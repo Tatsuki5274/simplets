@@ -53,7 +53,7 @@ export const SectionDao = {
       }
       return null
     },
-    delete: async(mutation: string, params: APIt.UpdateSectionInput): Promise<Section | null> => {
+    delete: async(mutation: string, params: APIt.DeleteSectionInput): Promise<Section | null> => {
       try{
         let deletedSection: Section | null = null
         const deleteI: APIt.DeleteSectionInput = params

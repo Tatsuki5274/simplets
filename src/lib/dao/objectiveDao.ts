@@ -53,7 +53,7 @@ export const ObjectiveDao = {
       }
       return null
     },
-    delete: async(mutation: string, params: APIt.UpdateObjectiveInput): Promise<Objective | null> => {
+    delete: async(mutation: string, params: APIt.DeleteObjectiveInput): Promise<Objective | null> => {
       try{
         let deletedObjective: Objective | null = null
         const deleteI: APIt.DeleteObjectiveInput = params
