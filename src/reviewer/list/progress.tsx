@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Container, Form, Button, Card, InputGroup } from 'react-bootstrap';
+import { Container, Button, Card, InputGroup } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { API, graphqlOperation } from 'aws-amplify';
 import { listGroups, listSheets } from 'graphql/queries';
@@ -12,6 +12,8 @@ import HeaderComponents from 'common/header';//ヘッダーの表示
 import style from './progressStyle.module.scss';
 import { Link } from 'react-router-dom';
 import { ArcGauge } from '@progress/kendo-react-gauges';
+import { Field, Form, Formik } from 'formik';
+import { SheetDao } from 'lib/dao/sheetDao';
 
 type ViewType = {
     sheetId: string
@@ -68,63 +70,18 @@ function ProgressReferenceList() {
         })()
     }, []);
 
-    //フォーム内で選択された部門と年度をformInputに保存する
-    const [formInput, setFormInput] = useState<any>({ year: thisYear })
-    function handleChange(event: any) {
-        const target = event.target;
-        const value = target.type === 'checkbox' ? target.checked : target.value;
-        const name: string = target.name;
-
-        setFormInput({
-            ...formInput, [name]: value
-        });
-        console.log(formInput)
-
-    }
-
-    //選択された部門と年度によって各社員の進捗情報を抽出する
-    async function handleClickSearch() {
-        let listItems: Sheet[];
-        //部門の選択肢の中から「全て」が選択された場合
-        if (formInput.groupId === "all") {
-            const listQV: APIt.ListSheetsQueryVariables = { filter: { year: { eq: parseInt(formInput.year as string) } } };
-            let response;
-            try{
-                response = await (API.graphql(graphqlOperation(listSheets, listQV))) as GraphQLResult<ListSheetsQuery>;
-            }catch(e){
-                console.log("エラーを無視しています", e);
-                response = e;
+    useEffect(()=>{
+        (async()=>{
+            const filter =  { filter: { year: { eq: today.getFullYear() } } }
+            const listItems = await SheetDao.list(listSheets, filter)
+            if(listItems){
+                setView(listItems)
             }
-            listItems = response.data?.listSheets?.items;
-            //部門の選択肢の中から「全て」以外が選択された場合
-        } else {
-            const listQV: APIt.ListSheetsQueryVariables = { filter: { sheetGroupId: { eq: formInput.groupId }, year: { eq: parseInt(formInput.year as string) } } };
+        })()
+    }, [])
 
-            let response;
-            try{
-                response = await (API.graphql(graphqlOperation(listSheets, listQV))
-                ) as GraphQLResult<ListSheetsQuery>;
-            }catch(e){
-                console.log("エラーを無視しています", e);
-                response = e;
-            }
-            listItems = response.data?.listSheets?.items;
-        }
-
+    const setView = (listItems: Sheet[])=>{
         // 平均値を算出する処理
-        const getAgvObjective = (section: Section)=>{
-            let sum = 0;
-            let cnt = 0;
-            let ret = -1;
-            section?.objective?.items?.forEach((objective)=>{
-                if(objective && objective.progress){
-                    sum += objective?.progress;
-                    cnt++;
-                }
-            })
-            if(cnt > 0) ret = sum / cnt;
-            return ret;
-        }
         const getAvg = (nums: number[]) =>{
             let sum = 0;
             let cnt = 0;
@@ -140,7 +97,7 @@ function ProgressReferenceList() {
             return ret;
         }
         // 画面表示に必要な情報を加工する処理
-        let viewTemp: ViewType[] = listItems.map((sheet: Sheet)=>{
+        let viewTemp: ViewType[] = listItems.map((sheet)=>{
             return {
                 sheetId: sheet.id,
                 groupName: sheet.group?.name || "",
@@ -151,7 +108,10 @@ function ProgressReferenceList() {
                 categorys: sheet.section?.items?.map((section)=>{
                     return {
                         name: section?.category?.name,
-                        avg: getAgvObjective(section as Section),
+                        avg: section && section.objective && section.objective.items ?
+                            getAvg(section.objective.items.map((obj)=>{
+                                return  obj && obj.progress ? obj.progress : -1
+                            })) : -1,
                         no: section?.category?.no
                     }
                 }),
@@ -204,43 +164,57 @@ function ProgressReferenceList() {
 
             <Container>
                 <h2>進捗参照</h2><br />
-                {/* 部門の選択肢を表示 */}
-                <InputGroup.Prepend>
-                    <span>
-                        <InputGroup.Radio value="all" name="groupId" onChange={handleChange} aria-label="Radio button for following text input" inline />
-                        <span>全て</span>
-                    </span>
-                    {groupList?.map((group: Group) => {
-                        return (
-                            <span>
-                                <InputGroup.Radio value={group.id} name="groupId" onChange={handleChange} aria-label="Radio button for following text input" inline />
-                                <span>{group.name}</span>
-                            </span>
-                        )
-                    }
+                <Formik
+                    initialValues={{
+                        year: today.getFullYear(),
+                        groupId: "",
+                    }}
+                    onSubmit={async (values)=>{
+                        let filter: APIt.ListSheetsQueryVariables =  { filter: { year: { eq: values.year } } }
+                        if(values.groupId !== "all") filter = { filter: { year: { eq: values.year }, sheetGroupId: {eq: values.groupId} } }
+                        const listItems = await SheetDao.list(listSheets, filter)
+                        console.log(listItems)
+
+                        if(listItems){
+                            setView(listItems)
+                        }
+                    }}
+                >
+                    {(formik) => (
+                        <Form>
+                            <div>
+                                {/* 部門の選択肢を表示 */}
+                                <span>
+                                    <Field type="radio" name="groupId" value="all" />
+                                    全て
+                                </span>
+                                {groupList?.map((group: Group) => {
+                                    return (
+                                        <span>
+                                            <Field type="radio" name="groupId" value={group.id} />
+                                            {group.name}
+                                        </span>
+                                    )
+                                })}
+                            </div>
+
+                            {/* 年度の選択肢を表示 */}
+                            <span>年度</span>
+                            <Field as="select" name="year">
+                                {yearList.map((year: number) => {
+                                    return (
+                                        <option value={year}>{year}</option>
+                                    )
+                                })}
+                            </Field>
+
+                            {/* 確認を表示 */}
+                            <Button type="submit">確認</Button>
+
+                        </Form>
                     )}
-                </InputGroup.Prepend>
+                </Formik>
 
-
-                <Form>
-                    {/* 年度の選択肢を表示 */}
-                    <Form.Group controlId="Form.Dropdown">
-                        <Form.Label>年度</Form.Label>
-                        <Form.Control as="select" onChange={handleChange} name="year">
-                            {yearList.map((year: number) => {
-                                return (
-                                    <option value={year}>{year}</option>
-                                )
-                            })}
-                        </Form.Control>
-                    </Form.Group>
-
-                    {/* 確認を表示 */}
-                    <Form.Group>
-                        <Button type="button" onClick={handleClickSearch}>確認</Button>
-                    </Form.Group>
-
-                </Form>
                 <br />
 
                 {sheetsView?.map(view => {
