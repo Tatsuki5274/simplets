@@ -803,7 +803,7 @@ function RevieweeSheetShow(props: Props) {
                                 afterWorkFlow(sheet, work)
                             }}
                         >
-                            内容確認
+                            評価依頼
                         </Button> 
                     : null}
                 </Container>
