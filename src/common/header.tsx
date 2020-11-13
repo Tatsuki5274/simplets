@@ -6,7 +6,8 @@ import { getEmployee } from 'graphql/queries';
 import { GetEmployeeQuery } from 'API';
 import { GraphQLResult } from "@aws-amplify/api";
 import style from './headerStyle.module.scss'
-import { Button, Navbar } from 'react-bootstrap';
+import { Navbar } from 'react-bootstrap';
+import { AmplifySignOut } from '@aws-amplify/ui-react';
 
 
 
@@ -37,19 +38,13 @@ function HeaderComponents() {
 
                 const employeeItem = response.data?.getEmployee as Employee;
                 setEmployee(employeeItem);
-                console.log(employeeItem);
-                console.log(response);
             } catch (e) {
-                console.log(e);
+                console.error(e);
             }
 
         })()
     }, []);
 
-    function signOut() {
-        // const { onStateChange } = this.props;
-          Auth.signOut();
-    }
 
     //ヘッダー表示
     return (
@@ -60,7 +55,7 @@ function HeaderComponents() {
                 <Navbar.Text className={style.headerContents}>{employee?.company?.name}</Navbar.Text>
                 <Navbar.Text className={style.headerContents}>{employee?.group?.name}</Navbar.Text>
                 <Navbar.Text className={style.headerContents}>{employee?.lastName}{employee?.firstName}</Navbar.Text>
-                <Button onClick={signOut}>ログアウト</Button>
+                <AmplifySignOut button-text="ログアウト"></AmplifySignOut>
             </Navbar.Collapse>
         </Navbar>
     );
