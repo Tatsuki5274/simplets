@@ -119,13 +119,22 @@ function EvalutionScreen(props: Props) {
                         // 所属長が変更可能なコンポーネントを返却
                         return <ReviewerSheetPagesStatus10 sections={sectionItems} handleUpdateObjective={handleChangeObjective} />
                     }else if(sheet.statusValue === 12){
-                        if(sheet.reviewers?.length === 3){
-                            // 読み取り専用のコンポーネントを返却
-                            return <ReviewerSheetPagesStatus12Second />
+                        if(sheet.reviewers){
+                            if(sheet.reviewers.length === 2){
+                                // 読み取り専用のコンポーネントを返却
+                                return <ReviewerSheetPagesStatus12Second />
+                            }else if(sheet.reviewers.length === 3){
+                                // 読み取り専用のコンポーネントを返却
+                                return <ReviewerSheetPagesStatus12Top />
+                            }else{
+                                console.error("評価者の数が不正です。読み取り専用を表示します。")
+                                return <ReviewerSheetPagesReadonly sheet={sheet} sections={sectionItems} />
+                            }
                         }else{
-                            // 読み取り専用のコンポーネントを返却
-                            return <ReviewerSheetPagesStatus12Top />
+                            console.error("評価者が登録されていません。読み取り専用を表示します。")
+                            return <ReviewerSheetPagesReadonly sheet={sheet} sections={sectionItems} />
                         }
+
                     }else if(sheet.statusValue === 13){
                         // 部門長が変更可能なコンポーネントを返却
                         return <ReviewerSheetPagesStatus13 />
