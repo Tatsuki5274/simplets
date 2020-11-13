@@ -15,6 +15,7 @@ import { ReviewerSheetPagesStatus10 } from './detail/pages/10.result';
 import { ReviewerSheetPagesStatus12Second } from './detail/pages/12.confirm/second';
 import { ReviewerSheetPagesStatus12Top } from './detail/pages/12.confirm/top';
 import { ReviewerSheetPagesStatus13 } from './detail/pages/13.firstComment';
+import { ObjectiveDao } from 'lib/dao/objectiveDao';
 
 export const SheetContext = createContext<
     {
@@ -66,22 +67,28 @@ function EvalutionScreen(props: Props) {
         // ObjectiveId 取得
         console.log(event.target.getAttribute('data-objective-id'));
         const objectiveId = event.target.getAttribute('data-objective-id');
+        const objectiveLastEvaluation = parseInt(event.currentTarget.value);
 
         // lastEvaluation value 取得
         console.log(event.currentTarget.value);
-        const objectiveLastEvaluation = parseInt(event.currentTarget.value);
 
         const updateI: APIt.UpdateObjectiveInput = {
             id: objectiveId,
             lastEvaluation: objectiveLastEvaluation,
         };
-        const updateMV: APIt.UpdateObjectiveMutationVariables = {
-            input: updateI,
-        };
-        const updateR: GraphQLResult<APIt.UpdateObjectiveMutation> =
-            await API.graphql(graphqlOperation(updateObjective, updateMV)) as GraphQLResult<APIt.UpdateObjectiveMutation>;
-        console.log("updateR", updateR);
-        console.log("sheet", sheet)
+        const updatedObjective = await ObjectiveDao.update(updateObjective, updateI)
+        if(updatedObjective && sheet){
+            const applyedSheet = {...sheet}
+            applyedSheet.section?.items?.forEach(section=>{
+                section?.objective?.items?.forEach(objective => {
+                    if(objective){
+                        if(objective.id === objectiveId){
+                            objective.lastEvaluation = objectiveLastEvaluation
+                        }
+                    }
+                });
+            })
+        }
     }
 
 
