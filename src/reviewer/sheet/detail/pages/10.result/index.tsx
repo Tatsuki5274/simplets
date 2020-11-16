@@ -54,49 +54,52 @@ export const ReviewerSheetPagesStatus10 = (props: Props) => {
                                 secondComment: sheet.secondComment,
                                 overAllEvaluation: sheet.overAllEvaluation
                             }}
-                            onSubmit={ async (values) => {
-                                if(sheet){
-                                    let isInputAllObjectiveEvaluation = true
-                                    sheet.section?.items?.forEach(section=>{
-                                        section?.objective?.items?.forEach(objective=>{
-                                            if(!objective?.lastEvaluation){
-                                                isInputAllObjectiveEvaluation = false
-                                            }
+                            onSubmit={async (values) => {
+                                if (sheet) {
+                                    if (window.confirm("承認しますか？")) {
+
+                                        let isInputAllObjectiveEvaluation = true
+                                        sheet.section?.items?.forEach(section => {
+                                            section?.objective?.items?.forEach(objective => {
+                                                if (!objective?.lastEvaluation) {
+                                                    isInputAllObjectiveEvaluation = false
+                                                }
+                                            })
                                         })
-                                    })
-                                    if(isInputAllObjectiveEvaluation){
-                                        //評価が入力済み
-                                        
-                                        const work = commandWorkFlow(Command.SUP1_INPUT_SCORE, sheet)
-                                        const data: UpdateSheetInput = {
-                                            id: sheet.id,
-                                            secondComment: values.secondComment,
-                                            secondCheckDate: formatAWSDate(new Date()),
-                                            statusValue: work.sheet.statusValue,
-                                            overAllEvaluation: work.sheet.overAllEvaluation
-                                        }
-                                        let updatedSheet = await SheetDao.update(updateSheet, data);
-                                        console.log("10updated", updatedSheet)
-                                        
-                            
-                                        if(updatedSheet){
-                                            if(work.mailObject){
-                                                sendEmailMutation(work.mailObject)
-                                                alert('承認が完了しました');
-                                            }else{
-                                                console.error("メールの作成に失敗しました")
+                                        if (isInputAllObjectiveEvaluation) {
+                                            //評価が入力済み
+
+                                            const work = commandWorkFlow(Command.SUP1_INPUT_SCORE, sheet)
+                                            const data: UpdateSheetInput = {
+                                                id: sheet.id,
+                                                secondComment: values.secondComment,
+                                                secondCheckDate: formatAWSDate(new Date()),
+                                                statusValue: work.sheet.statusValue,
+                                                overAllEvaluation: work.sheet.overAllEvaluation
                                             }
-                                            if(setSheet){
-                                                setSheet({...updatedSheet})
+                                            let updatedSheet = await SheetDao.update(updateSheet, data);
+                                            console.log("10updated", updatedSheet)
+
+
+                                            if (updatedSheet) {
+                                                if (work.mailObject) {
+                                                    sendEmailMutation(work.mailObject)
+                                                    alert('承認が完了しました');
+                                                } else {
+                                                    console.error("メールの作成に失敗しました")
+                                                }
+                                                if (setSheet) {
+                                                    setSheet({ ...updatedSheet })
+                                                }
+                                            } else {
+                                                console.error("フォームデータの登録に失敗しました")
                                             }
-                                        }else{
-                                            console.error("フォームデータの登録に失敗しました")
+                                        } else {
+                                            alert("評価をすべて入力してください")
                                         }
-                                    }else{
-                                        alert("評価をすべて入力してください")
+                                    } else {
+                                        console.error("sheetの読み込みに失敗しています")
                                     }
-                                }else{
-                                    console.error("sheetの読み込みに失敗しています")
                                 }
                             }}
                         >

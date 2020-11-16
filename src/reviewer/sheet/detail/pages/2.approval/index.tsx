@@ -54,30 +54,32 @@ export const ReviewerSheetPagesStatus2 = ()=>{
                             }}
                             onSubmit={ async (values) => {
                                 if(sheet){
-                                    const work = commandWorkFlow(Command.SUP1_APPLOVAL, sheet)
-                                    const data: UpdateSheetInput = {
-                                        id: sheet.id,
-                                        statusValue: work.sheet.statusValue,
-                                        careerPlanComment: values.careerPlanComment,
-                                    }
-                                    let updatedSheet = await SheetDao.update(updateSheet, data);
-                                    
-                        
-                                    if(updatedSheet){
-                                        if(work.mailObject){
-                                            sendEmailMutation(work.mailObject)
-                                            alert('承認が完了しました');
+                                    if(window.confirm("承認しますか？")){
+                                        const work = commandWorkFlow(Command.SUP1_APPLOVAL, sheet)
+                                        const data: UpdateSheetInput = {
+                                            id: sheet.id,
+                                            statusValue: work.sheet.statusValue,
+                                            careerPlanComment: values.careerPlanComment,
+                                        }
+                                        let updatedSheet = await SheetDao.update(updateSheet, data);
+                                        
+                            
+                                        if(updatedSheet){
+                                            if(work.mailObject){
+                                                sendEmailMutation(work.mailObject)
+                                            }else{
+                                                console.error("メールの作成に失敗しました")
+                                            }
+                                            if(setSheet){
+                                                setSheet({...updatedSheet})
+                                            }
+                                            // updatedSheet = await statusManager.exec(updatedSheet, "proceed");
+                                            // setSheet({...updatedSheet});
                                         }else{
-                                            console.error("メールの作成に失敗しました")
+                                            console.error("フォームデータの登録に失敗しました")
                                         }
-                                        if(setSheet){
-                                            setSheet({...updatedSheet})
-                                        }
-                                        // updatedSheet = await statusManager.exec(updatedSheet, "proceed");
-                                        // setSheet({...updatedSheet});
-                                    }else{
-                                        console.error("フォームデータの登録に失敗しました")
                                     }
+
                                 }else{
                                     console.error("sheetの読み込みに失敗しています")
                                 }
