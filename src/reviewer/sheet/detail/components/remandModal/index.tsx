@@ -36,7 +36,12 @@ export const RemandModal = (props: Props)=>{
                 onSubmit={async (values, actions) => {
                     if(sheet){
                         //ワークフローの実行
-                        const work = commandWorkFlow(Command.REMAND_FROM_SUBMIT, sheet, values.reason)
+                        let work
+                        if(sheet.statusValue === 2) {
+                            work = commandWorkFlow(Command.REMAND_FROM_SUBMIT, sheet, values.reason)
+                        } else {
+                            work = commandWorkFlow(Command.REMAND_FROM_SUR1_CONFIRM, sheet, values.reason)
+                        }
                         let updatedSheet: Sheet | null = null;
 
                         //sheet更新処理
