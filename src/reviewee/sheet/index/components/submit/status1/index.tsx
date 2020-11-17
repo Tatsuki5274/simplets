@@ -14,22 +14,24 @@ export const SubmitButtonStatus1 = () => {
     if(sheet && setSheet){
         return (
             <Button
-                onClick={async ()=>{
-                    const work = commandWorkFlow(Command.REVIEWEE_SUBMIT, sheet)
-                    let updatedSheet = await SheetDao.update(updateSheet, {
-                        id: sheet.id,
-                        statusValue: sheet.statusValue
-                    });
-            
-                    if(updatedSheet){
-                        setSheet({...(updatedSheet)})
-                        if(work.mailObject){
-                            sendEmailMutation(work.mailObject)
-                        }else{
-                            console.error("メールの作成に失敗しました")
+                onClick={async () => {
+                    if (window.confirm("目標を提出しますか？")) {
+                        const work = commandWorkFlow(Command.REVIEWEE_SUBMIT, sheet)
+                        let updatedSheet = await SheetDao.update(updateSheet, {
+                            id: sheet.id,
+                            statusValue: sheet.statusValue
+                        });
+
+                        if (updatedSheet) {
+                            setSheet({ ...(updatedSheet) })
+                            if (work.mailObject) {
+                                sendEmailMutation(work.mailObject)
+                            } else {
+                                console.error("メールの作成に失敗しました")
+                            }
+                        } else {
+                            console.error("フォームデータの登録に失敗しました")
                         }
-                    }else{
-                        console.error("フォームデータの登録に失敗しました")
                     }
                 }}
             >
