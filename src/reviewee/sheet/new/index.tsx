@@ -172,7 +172,14 @@ function RevieweeSheetNew(props: Props){
                             <div>
                                 {sections?.map((section: Section) => {
                                     if (section.category && section.category.name) {
-                                        return <CategoryInput key={section.id} handleChange={props.handleChange} sectionId={section.id} categoryName={section.category?.name}></CategoryInput>
+                                        return <div>
+                                            <CategoryInput
+                                                key={section.id}
+                                                handleChange={props.handleChange}
+                                                sectionId={section.id}
+                                                categoryName={section.category?.name}
+                                            ></CategoryInput>
+                                        </div>
                                     } else {
                                         console.log("エラー: カテゴリが設定されていない可能性があります。")
                                     }
