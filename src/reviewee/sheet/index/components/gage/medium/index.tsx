@@ -1,40 +1,22 @@
-import { ArcGauge } from "@progress/kendo-react-gauges";
 import React from "react"
+import GaugeChart from "react-gauge-chart";
 
 type Props = {
     value: number
+    id: string
 }
 
 export const MediumGage = (props: Props)=>{
-    const arcColors = [
-        {
-            to: 25,
-            color: '#0058e9'
-        }, {
-            from: 25,
-            to: 50,
-            color: '#f31700'
-        }, {
-            from: 50,
-            to: 75,
-            color: '#ffc000'
-        }, {
-            to: 75,
-            color: '#00ffff'
-        }, {
-            to: 100,
-            color: '#7fff00'
-        }
-    ];
-    
-    return <ArcGauge
-        {...{
-            value: props.value,
-            colors: arcColors
-        }} style={{
-            width: '150px',
-            height: '150px',
+    return <GaugeChart id={`chart-${props.id}`}
+        nrOfLevels={10}
+        colors={['#EA4228', '#F5CD19', '#5BE12C']}
+        percent={props.value / 100}
+        //hideText={true}
+        textColor={'#212529'}
+        style={{
+            width: '200px',
+            height: '100px',
             display: 'inline-block'
-        }} 
+        }}
     />
 }

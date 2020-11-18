@@ -163,7 +163,7 @@ function RevieweeSheetShow(props: Props) {
                         <AddObjectiveButton sheetId={sheetId} /> : null}
                         
                         <div>
-                            <MediumGage value={sheetAvg ? sheetAvg.sheetAvg : 0} />
+                            <MediumGage value={sheetAvg ? sheetAvg.sheetAvg : 0} id={sheet.id} />
                         </div>
 
                         {sectionItems.map((section: Section) => {
@@ -182,7 +182,9 @@ function RevieweeSheetShow(props: Props) {
                                                     return section.id === sectionAvg.sectionId
                                                 })?.avg
                                                 if(value){
-                                                    return <SmallGage value={value} />
+                                                    if (section.category?.id) {
+                                                        return <SmallGage value={value} id={section.category.id} />
+                                                    }
                                                 }
                                             }
                                         })()} 

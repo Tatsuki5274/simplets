@@ -14,6 +14,7 @@ import { Link } from 'react-router-dom';
 import { ArcGauge } from '@progress/kendo-react-gauges';
 import { Field, Form, Formik } from 'formik';
 import { SheetDao } from 'lib/dao/sheetDao';
+import GaugeChart from 'react-gauge-chart';
 
 type ViewType = {
     sheetId: string
@@ -25,7 +26,8 @@ type ViewType = {
     categorys: {
         name: string | undefined
         avg: number,
-        no: number | null | undefined
+        no: number | null | undefined,
+        id: string | undefined
     }[] | undefined,
     avg: number
 }
@@ -112,7 +114,8 @@ function ProgressReferenceList() {
                             getAvg(section.objective.items.map((obj)=>{
                                 return  obj && obj.progress ? obj.progress : -1
                             })) : -1,
-                        no: section?.category?.no
+                        no: section?.category?.no,
+                        id: section?.category?.id
                     }
                 }),
                 avg: -1
@@ -236,30 +239,35 @@ function ProgressReferenceList() {
                                {view.groupName}
                                &nbsp;
                                {view.avg !== -1 ? `${view.avg}%` : null}
-                               <ArcGauge
-                                    {...{
-                                        value: view.avg,
-                                        colors: arcColors
-                                    }} style={{
-                                        width: '50px',
-                                        height: '50px',
-                                        display: 'inline-block'
-                                    }} 
-                                />
+                               <GaugeChart id={`chart-${view.sheetId}`}
+                                   nrOfLevels={10}
+                                   colors={['#EA4228', '#F5CD19', '#5BE12C']}
+                                   percent={view.avg / 100}
+                                   hideText={true}
+                                   style={{
+                                       width: '100px',
+                                       height: '50px',
+                                       display: 'inline-block'
+                                   }}
+                               />
                             </Card.Header>
                             <Card.Body>
                                 {view.categorys?.map(category=>{
-                                    return <div>
-                                        {category.name}&nbsp;{category.avg === -1 ? "-" : category.avg}
-                                        <ArcGauge {...{
-                                            value: category.avg,
-                                            colors: arcColors
-                                        }} style={{
-                                            width: '50px',
-                                            height: '50px',
-                                            display: 'inline-block'
-                                        }} />
-                                    </div>
+                                    if (category.id) {
+                                        return <div id={category.id}>
+                                            {category.name}&nbsp;{category.avg === -1 ? "-" : category.avg}
+                                            <GaugeChart id={`chart-${category.id}`}
+                                                nrOfLevels={10}
+                                                colors={['#EA4228', '#F5CD19', '#5BE12C']}
+                                                percent={category.avg / 100}
+                                                style={{
+                                                    width: '50px',
+                                                    height: '50px',
+                                                    display: 'inline-block'
+                                                }}
+                                            />
+                                        </div>
+                                    }
                                 })}
                             </Card.Body>
                         </Card>
