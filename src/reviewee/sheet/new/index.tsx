@@ -185,20 +185,23 @@ function RevieweeSheetNew(props: Props){
                         {props => (
                             <form onSubmit={props.handleSubmit}>
                                 <div>
+                                    <Form.Label>目標カテゴリ<Badge variant="danger">必須</Badge></Form.Label>
                                     {sheet.section?.items?.map((section) => {
                                         if (section && section.category && section.category.name) {
-                                            return <CategoryInput key={section.id} handleChange={props.handleChange} sectionId={section.id} categoryName={section.category?.name}></CategoryInput>
+                                            return (
+                                                <CategoryInput key={section.id} handleChange={props.handleChange} sectionId={section.id} categoryName={section.category?.name}></CategoryInput>
+                                            );
                                         } else {
                                             console.log("エラー: カテゴリが設定されていない可能性があります。")
                                         }
                                     })}
                                     <p><ErrorMessage name="section" /></p>
                                 </div>
-                                <Form.Label>目標内容</Form.Label>
+                                <Form.Label>目標内容<Badge variant="danger">必須</Badge></Form.Label>
                                 <Form.Control as="textarea" name="content" onChange={props.handleChange}/>
                                 <p><ErrorMessage name="content" /></p>
 
-                                <Form.Label>優先順位</Form.Label>
+                                <Form.Label>優先順位<Badge variant="danger">必須</Badge></Form.Label>
                                 <Form.Control as="select" name="priority" onChange={props.handleChange}>
                                     <option></option>
                                     <option>A</option>
@@ -228,7 +231,7 @@ function RevieweeSheetNew(props: Props){
                                         <ErrorMessage name="expDoneDate" />
                                     </Col>
                                 </Row>
-                                <Button variant="success" type="submit">目標登録</Button>{' '}
+                                <Button type="submit">目標登録</Button>{' '}
                             </form>
                         )}
                     </Formik>
