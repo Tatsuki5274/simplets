@@ -130,7 +130,7 @@ function EvalutionScreen(props: Props) {
                             if(sheet.reviewers.length === 2){
                                 // 読み取り専用のコンポーネントを返却
                                 return <ReviewerSheetPagesStatus12Second />
-                            }else if(sheet.reviewers.length === 3){
+                            }else if(sheet.reviewers.length >= 3){
                                 // 読み取り専用のコンポーネントを返却
                                 return <ReviewerSheetPagesStatus12Top />
                             }else{
