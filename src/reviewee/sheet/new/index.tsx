@@ -186,11 +186,17 @@ function RevieweeSheetNew(props: Props){
                             <form onSubmit={props.handleSubmit}>
                                 <div>
                                     <Form.Label>目標カテゴリ<Badge variant="danger">必須</Badge></Form.Label>
-                                    {sheet.section?.items?.map((section) => {
+                                    {sheet.section?.items?.map((section, index) => {
                                         if (section && section.category && section.category.name) {
-                                            return (
-                                                <CategoryInput key={section.id} handleChange={props.handleChange} sectionId={section.id} categoryName={section.category?.name}></CategoryInput>
-                                            );
+                                            if (index === 0) {
+                                                return (
+                                                    <CategoryInput key={section.id} handleChange={props.handleChange} sectionId={section.id} categoryName={section.category?.name} defaultCheck={true}></CategoryInput>
+                                                );
+                                            } else {
+                                                return (
+                                                    <CategoryInput key={section.id} handleChange={props.handleChange} sectionId={section.id} categoryName={section.category?.name} defaultCheck={false}></CategoryInput>
+                                                );
+                                            }
                                         } else {
                                             console.log("エラー: カテゴリが設定されていない可能性があります。")
                                         }
