@@ -36,7 +36,6 @@ export const ReviewerSheetPagesStatus12Second = () => {
                             <Button >戻る</Button>
                         </Link>
                         <ApprovalStatusBox statusValue={sheet && (sheet.statusValue || -1)} />
-                        <h3>今後のキャリア計画</h3><br />
 
                         <Formik
                             initialValues={{
@@ -44,7 +43,7 @@ export const ReviewerSheetPagesStatus12Second = () => {
                             }}
                             onSubmit={async () => {
                                 if (sheet) {
-                                    if(window.confirm("承認依頼を行いますか？")){
+                                    if(window.confirm("部門長に確認依頼を送信しますか？")){
 
                                         const work = commandWorkFlow(Command.SUP1_CONFIRM, sheet)
                                         const data: UpdateSheetInput = {
@@ -75,6 +74,12 @@ export const ReviewerSheetPagesStatus12Second = () => {
                         >
                             {formik => (
                                 <form onSubmit={formik.handleSubmit}>
+                                    {/* 目標コンポーネント */}
+                                    {sheet && sheet.section && sheet.section.items ?
+                                        <ReviewerSheetDetailObjectiveReadonly sections={sheet.section.items as Section[]} />
+                                        : null}
+
+                                    <h3>今後のキャリア計画</h3><br />
                                     <ReviewerSheetDetailCareerReadonly sheet={sheet} />
 
 
@@ -93,11 +98,6 @@ export const ReviewerSheetPagesStatus12Second = () => {
 
                                         </Form.Group>
                                     </Form><br />
-
-                                    {/* 目標コンポーネント */}
-                                    {sheet && sheet.section && sheet.section.items ?
-                                        <ReviewerSheetDetailObjectiveReadonly sections={sheet.section.items as Section[]} />
-                                        : null}
 
                                 </form>
                             )}

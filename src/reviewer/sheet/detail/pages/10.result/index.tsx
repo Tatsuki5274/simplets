@@ -48,7 +48,6 @@ export const ReviewerSheetPagesStatus10 = (props: Props) => {
                             <Button >戻る</Button>
                         </Link>
                         <ApprovalStatusBox statusValue={sheet && (sheet.statusValue || -1)} />
-                        <h3>今後のキャリア計画</h3><br />
 
                         <Formik
                             initialValues={{
@@ -110,6 +109,11 @@ export const ReviewerSheetPagesStatus10 = (props: Props) => {
                         >
                             {formik => (
                                 <form onSubmit={formik.handleSubmit}>
+
+                                    {/* 目標コンポーネント */}
+                                    <ReviewerSheetDetailObjectiveEditable handleChange={props.handleUpdateObjective} sections={props.sections} />
+
+                                    <h3>今後のキャリア計画</h3><br />
                                     <ReviewerSheetDetailCareerReadonly sheet={sheet} />
 
 
@@ -146,9 +150,6 @@ export const ReviewerSheetPagesStatus10 = (props: Props) => {
 
                                         </Form.Group>
                                     </Form><br />
-
-                                    {/* 目標コンポーネント */}
-                                    <ReviewerSheetDetailObjectiveEditable handleChange={props.handleUpdateObjective} sections={props.sections} />
 
                                 </form>
                             )}

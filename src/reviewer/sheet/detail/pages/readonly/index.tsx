@@ -23,6 +23,10 @@ export const ReviewerSheetPagesReadonly = (props: Props)=>{
                         <Button >戻る</Button>
                     </Link>
                     <ApprovalStatusBox statusValue={props.sheet.statusValue || -1}/>
+
+                    {/* 目標コンポーネント */}
+                    <ReviewerSheetDetailObjectiveReadonly sections={props.sections} />
+                    
                     <h3>今後のキャリア計画</h3><br />
 
                     <ReviewerSheetDetailCareerReadonly sheet={props.sheet}/>
@@ -36,8 +40,6 @@ export const ReviewerSheetPagesReadonly = (props: Props)=>{
                     <h4>年度評価</h4>
                     <ReviewerSheetDetailYearlyReadonly sheet={props.sheet} />
 
-                    {/* 目標コンポーネント */}
-                    <ReviewerSheetDetailObjectiveReadonly sections={props.sections} />
                 </Container>
             </div>
 
