@@ -1,5 +1,5 @@
 import { Objective } from "App";
-import { inputFieldStyle } from "common/inputFieldStyle.module.scss";
+import { inputFieldStyle } from "common/globalStyle.module.scss";
 import dateFormat from "dateformat";
 import React, { useContext } from "react"
 import { Button } from "react-bootstrap";

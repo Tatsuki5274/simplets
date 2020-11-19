@@ -6,7 +6,7 @@ import * as APIt from 'API';
 import { Objective } from "App";
 import { ObjectiveDao } from "lib/dao/objectiveDao";
 import { updateObjective } from "graphql/mutations";
-import { inputFieldStyle } from "common/inputFieldStyle.module.scss";
+import { inputFieldStyle } from "common/globalStyle.module.scss";
 
 type Props = {
     objective: Objective,

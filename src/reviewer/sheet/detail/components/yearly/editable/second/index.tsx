@@ -1,5 +1,5 @@
 import { Sheet } from "App"
-import { inputFieldStyle } from "common/inputFieldStyle.module.scss";
+import { inputFieldStyle } from "common/globalStyle.module.scss";
 import React from "react"
 import { Form } from "react-bootstrap"
 import style from '../../common/style.module.scss';

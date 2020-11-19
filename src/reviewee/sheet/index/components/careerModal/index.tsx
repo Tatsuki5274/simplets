@@ -5,7 +5,7 @@ import { SheetContext } from "../..";
 import * as APIt from 'API';
 import { SheetDao } from "lib/dao/sheetDao";
 import { updateSheet } from "graphql/mutations";
-import { inputFieldStyle } from "common/inputFieldStyle.module.scss";
+import { inputFieldStyle } from "common/globalStyle.module.scss";
 
 type Props = {
     isShowModal: boolean,
