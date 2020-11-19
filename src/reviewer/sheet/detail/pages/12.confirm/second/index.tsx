@@ -89,7 +89,7 @@ export const ReviewerSheetPagesStatus12Second = () => {
 
                                         {/* ステータスによってボタンの出し分け */}
                                         <Form.Group>
-                                            <Button type="submit">部門長承認依頼</Button>
+                                            <Button type="submit">部門長確認依頼</Button>
 
                                         </Form.Group>
                                     </Form><br />

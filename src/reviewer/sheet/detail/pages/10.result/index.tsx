@@ -16,6 +16,7 @@ import { ReviewerSheetDetailInterviewReadonly } from "../../components/interview
 import { ReviewerSheetDetailObjectiveEditable } from "../../components/objective/editable";
 import { RemandModal } from "../../components/remandModal";
 import { ReviewerSheetDetailYearlyEditableSecond } from "../../components/yearly/editable/second";
+import * as Yup from 'yup';
 
 type Props = {
     //sheet: Sheet,
@@ -54,6 +55,10 @@ export const ReviewerSheetPagesStatus10 = (props: Props) => {
                                 secondComment: sheet.secondComment,
                                 overAllEvaluation: sheet.overAllEvaluation
                             }}
+                            validationSchema={Yup.object({
+                                secondComment: Yup.string().typeError('コメントを入力してください').required('コメントを入力してください'),
+                                overAllEvaluation: Yup.number().typeError('総合評価を入力してください').required('総合評価を入力してください'),
+                            })}
                             onSubmit={async (values) => {
                                 if (sheet) {
                                     if (window.confirm("承認しますか？")) {

@@ -1,6 +1,7 @@
 import { Sheet } from "App"
+import { ErrorMessage } from "formik";
 import React from "react"
-import { Form } from "react-bootstrap"
+import { Badge, Form, Table } from "react-bootstrap"
 import style from '../../common/style.module.scss';
 
 
@@ -11,24 +12,42 @@ type Props = {
 export const ReviewerSheetDetailYearlyEditableTop = (props: Props) => {
     return <div>
         <Form.Group>
-            <Form.Label>所属長コメント</Form.Label>
-            <div>{props.sheet.secondComment || "未設定"}</div>
-        </Form.Group>
-
-        <Form.Group>
-            <Form.Label>総合評価</Form.Label>
-            <div>{props.sheet.overAllEvaluation || "未設定"}</div>
-        </Form.Group>
-
-        <Form.Group>
-            <Form.Label>部門長コメント</Form.Label>
-            <Form.Control
-                as="textarea"
-                className={style.detailTextarea}
-                onChange={props.handleChange}
-                name="firstComment"
-                defaultValue={props.sheet.firstComment || ""}>
-            </Form.Control>
+            <Table bordered>
+                <thead></thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <Form.Label>所属長コメント</Form.Label>
+                        </td>
+                        <td>
+                            <div>{props.sheet.secondComment || "未設定"}</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <Form.Label>総合評価</Form.Label>
+                        </td>
+                        <td>
+                            <div>{props.sheet.overAllEvaluation || "未設定"}</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <Form.Label>部門長コメント<Badge variant="danger">必須</Badge></Form.Label>
+                        </td>
+                        <td>
+                            <Form.Control
+                                as="textarea"
+                                className={style.detailTextarea}
+                                onChange={props.handleChange}
+                                name="firstComment"
+                                defaultValue={props.sheet.firstComment || ""}>
+                            </Form.Control>
+                            <ErrorMessage name="firstComment" />
+                        </td>
+                    </tr>
+                </tbody>
+            </Table>
         </Form.Group>
 
     </div>

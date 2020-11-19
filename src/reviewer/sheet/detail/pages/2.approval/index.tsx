@@ -15,6 +15,7 @@ import { ReviewerSheetDetailObjectiveReadonly } from "../../components/objective
 import { ReviewerSheetDetailYearlyReadonly } from "../../components/yearly/readonly";
 import { SheetContext } from "reviewer/sheet";
 import { ReviewerSheetDetailCareerEditable } from "../../components/career/editable";
+import { ReviewerSheetDetailInterviewEditable } from "../../components/interview/editable";
 
 type Props = {
     sheet: Sheet,
@@ -50,7 +51,15 @@ export const ReviewerSheetPagesStatus2 = ()=>{
 
                         <Formik
                             initialValues={{
-                                careerPlanComment: sheet.careerPlanComment
+                                careerPlanComment: sheet.careerPlanComment,
+                                interviewPlanComment: sheet.interviewPlanComment,
+                                interviewPlanDate: sheet.interviewPlanDate,
+                                InterviewMid1Comment: sheet.InterviewMid1Comment,
+                                InterviewMid1Date: sheet.InterviewMid1Date,
+                                InterviewMid2Comment: sheet.InterviewMid2Comment,
+                                InterviewMid2Date: sheet.InterviewMid2Date,
+                                InterviewMid3Comment: sheet.InterviewMid3Comment,
+                                InterviewMid3Date: sheet.InterviewMid3Date,
                             }}
                             onSubmit={ async (values) => {
                                 if(sheet){
@@ -92,7 +101,7 @@ export const ReviewerSheetPagesStatus2 = ()=>{
 
                                     {/* インタビュー実施記録 */}
                                     <h4>インタビュー実施記録</h4>
-                                    <ReviewerSheetDetailInterviewReadonly sheet={sheet} />
+                                    <ReviewerSheetDetailInterviewEditable sheet={sheet} handleChange={formik.handleChange}/>
 
                                     {/* 年度評価 */}
                                     <h4>年度評価</h4>
