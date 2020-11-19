@@ -157,7 +157,7 @@ function RevieweeSheetShow(props: Props) {
                     <RevieweeSidebar />
                     <Container>
                         <ApprovalStatusBox statusValue={sheet.statusValue || -1}/>
-                        <h2>メイン</h2>
+                        <h2>業績評価</h2>
                         <h3>目標一覧</h3>
                         {sheet.statusValue === 1 || sheet.statusValue === 3 ?
                         <AddObjectiveButton sheetId={sheetId} /> : null}
