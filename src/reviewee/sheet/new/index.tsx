@@ -9,11 +9,12 @@ import * as APIt from 'API';
 import { ListSectionsQuery, ListSectionsQueryVariables, ModelSectionFilterInput } from 'API';
 import CategoryInput from "./categoryInput"
 import { createObjective } from 'graphql/mutations';
-import { Redirect } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import HeaderComponents from 'common/header';
 import { ErrorMessage, Formik } from 'formik';
 import * as Yup from 'yup';
 import { SheetDao } from 'lib/dao/sheetDao';
+import ApprovalStatusBox from 'common/approvalStatusBox';
 
 type Props = {
     match: {
@@ -124,6 +125,11 @@ function RevieweeSheetNew(props: Props){
                 <HeaderComponents />
                 
                 <Container>
+                    <Link to={`/reviewee/sheet/${sheetId}`} >
+                        <Button >戻る</Button>
+                    </Link>
+                    <ApprovalStatusBox statusValue={sheet.statusValue || -1} />
+                    <h2>業績目標設定</h2>
                     <Formik
                         initialValues={{
                             section: '',
