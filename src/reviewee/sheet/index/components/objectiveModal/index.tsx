@@ -102,8 +102,8 @@ export const RevieweeSheetObjectiveModal = (props: Props)=>{
                                     </Col>
                                 </Row>
                                 <Row>
-                                    <Col md="2" lg="2" xl="2">開始予定日</Col>
-                                    <Col md="4" lg="4" xl="4">
+                                    <Col md="6" lg="6" xl="6">開始予定日</Col>
+                                    <Col md="3" lg="3" xl="3">
                                         <Form.Control
                                             required
                                             type="date"
@@ -114,8 +114,10 @@ export const RevieweeSheetObjectiveModal = (props: Props)=>{
                                         />
                                         <p></p>
                                     </Col>
-                                    <Col md="2" lg="2" xl="2">完了予定日</Col>
-                                    <Col md="4" lg="4" xl="4">
+                                </Row>
+                                <Row>
+                                    <Col md="6" lg="6" xl="6">完了予定日</Col>
+                                    <Col md="3" lg="3" xl="3">
                                         <Form.Control
                                             required
                                             type="date"
@@ -128,8 +130,8 @@ export const RevieweeSheetObjectiveModal = (props: Props)=>{
                                     </Col>
                                 </Row>
                                 <Row>
-                                    <Col>自己評価</Col>
-                                    <Col>
+                                    <Col md="6" lg="6" xl="6">自己評価</Col>
+                                    <Col md="2" lg="2" xl="1">
                                         <Form.Control
                                             as="select"
                                             name="selfEvaluation"
@@ -147,8 +149,9 @@ export const RevieweeSheetObjectiveModal = (props: Props)=>{
                                     </Col>
                                 </Row>
                                 <Row>
-                                    <Col>優先順位</Col>
-                                    <Col>
+                                    <Col md="6" lg="6" xl="6">優先順位</Col>
+                                    {/* <Col md="1" lg="1" xl="1"> */}
+                                    <Col md="2" lg="2" xl="1">
                                         <Form.Control
                                             as="select"
                                             name="priority"
@@ -178,11 +181,11 @@ export const RevieweeSheetObjectiveModal = (props: Props)=>{
                                 </Row>
                             </Modal.Body>
                             <Modal.Footer>
+                            <Button variant="primary" type="submit">
+                                    変更保存
+                        </Button>
                                 <Button variant="secondary" onClick={props.handleClose}>
                                     キャンセル
-                        </Button>
-                                <Button variant="primary" type="submit">
-                                    変更保存
                         </Button>
                             </Modal.Footer>
                         </form>
