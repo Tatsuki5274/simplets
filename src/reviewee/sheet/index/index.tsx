@@ -158,7 +158,6 @@ function RevieweeSheetShow(props: Props) {
                     <Container>
                         <ApprovalStatusBox statusValue={sheet.statusValue || -1}/>
                         <h2>業績評価</h2>
-                        <h3>目標一覧</h3>
                         {sheet.statusValue === 1 || sheet.statusValue === 3 ?
                         <AddObjectiveButton sheetId={sheetId} /> : null}
                         
@@ -196,7 +195,7 @@ function RevieweeSheetShow(props: Props) {
                                                 <td>#</td>
                                                 <td>目標</td>
                                                 <td>実績</td>
-                                                <td>進捗率</td>
+                                                <td>進捗率(%)</td>
                                                 <td>優先順位</td>
                                                 <td>開始予定日</td>
                                                 <td>完了予定日</td>
