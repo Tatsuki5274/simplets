@@ -44,20 +44,20 @@ export const RevieweeSheetCareerModal = (props: Props) => {
                 <Modal show={props.isShowModal} onHide={props.handleClose}>
                     <Form>
                         <Modal.Header closeButton>
-                            <Modal.Title>キャリアプラン</Modal.Title>
+                            <Modal.Title>キャリア計画</Modal.Title>
                         </Modal.Header >
                         <Modal.Body>
                             <Row>
-                                <Col>キャリアプラン本人希望内容</Col>
+                                <Col>本人希望内容</Col>
                                 <Col><textarea rows={10} cols={60} name="careerPlan" onChange={formik.handleChange} className={inputFieldStyle}>{formik.values.careerPlan}</textarea></Col>
                             </Row>
                         </Modal.Body>
                         <Modal.Footer>
-                        <Button variant="secondary" onClick={props.handleClose}>
-                            キャンセル
-                        </Button>
                         <Button variant="primary" type="submit">
                             保存
+                        </Button>
+                        <Button variant="secondary" onClick={props.handleClose}>
+                            キャンセル
                         </Button>
                         </Modal.Footer>
                     </Form>
