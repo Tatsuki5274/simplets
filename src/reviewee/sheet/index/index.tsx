@@ -1,11 +1,9 @@
-import React, { useState, useEffect, useContext, createContext } from 'react';
-import { Container, Table, Card } from 'react-bootstrap';
+import React, { useState, useEffect, createContext } from 'react';
+import { Container, Table } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { getSheet, listSheets } from 'graphql/queries'
-import { Sheet, Section, Objective, UserContext } from 'App';
-import * as APIt from 'API';
+import { getSheet } from 'graphql/queries'
+import { Sheet, Section, Objective } from 'App';
 import HeaderComponents from 'common/header';//ヘッダーの表示
-import Style from './indexStyle.module.scss';
 import ApprovalStatusBox from 'common/approvalStatusBox';
 import { RevieweeSidebar } from 'common/Sidebar';
 import { SheetDao } from 'lib/dao/sheetDao';
@@ -14,8 +12,6 @@ import { RevieweeSheetObjectiveReadonly } from './components/objective/readonly'
 import { RevieweeSheetObjectiveEditable } from './components/objective/editable';
 import { RevieweeSheetCareerEditable } from './components/career/editable';
 import { RevieweeSheetCareerReadonly } from './components/career/readonly';
-import { SmallGage } from './components/gage/small';
-import { MediumGage } from './components/gage/medium';
 import { SubmitButtonStatus1 } from './components/submit/status1';
 import { SubmitButtonStatus3 } from './components/submit/status3';
 import { SubmitButtonStatus11 } from './components/submit/status11';
@@ -23,6 +19,8 @@ import { AddObjectiveButton } from './components/buttons/AddObjective';
 import { OverEvaluationTable } from './components/overEvaluation';
 import { BorderTable } from './components/border';
 import { YearlyTable } from './components/yearly';
+import { AverageSmallGaugeBox } from './components/averageGauge/small';
+import { AverageMediumGaugeBox } from './components/averageGauge/medium';
 
 export const SheetContext = createContext<
     {
@@ -41,20 +39,11 @@ type Props = {
     }
 }
 
-type Avg = {
-    sheetAvg: number,
-    sections: {
-        sectionId?: string,
-        avg: number
-    }[] | null
-}
-
 function RevieweeSheetShow(props: Props) {
     
     const sheetId = props.match.params.sheetId;
 
     const [sheet, setSheet] = useState<Sheet>();
-    const [sheetAvg, setSheetAvg] = useState<Avg>()
 
     const [modalObjective, setModalObjective] = useState<Objective>();
 
@@ -77,53 +66,6 @@ function RevieweeSheetShow(props: Props) {
             }
         })()
     }, [sheetId]);
-
-
-    useEffect(() => {
-        const getAvg = (nums: number[]) =>{
-            let sum = 0;
-            let cnt = 0;
-            let ret = -1;
-
-            nums.forEach((num)=>{
-                if(num !== -1){
-                    sum += num;
-                    cnt++;
-                }
-            })
-            if(cnt > 0) ret = sum / cnt;
-            return ret;
-        }
-        if(sheet){
-            const objAvg: Avg = {
-                sheetAvg: -1,
-                sections: 
-                    sheet.section && sheet.section.items ?
-                    sheet.section.items.map(section=>{
-                        return {
-                            sectionId: section?.id,
-                            avg: section && section.objective && section.objective.items ?
-                            getAvg(section.objective.items.map(objective=>{
-                                return objective && objective.progress ? objective.progress : -1
-                            })) :
-                            -1
-                        }
-                    }) :
-                    null
-            }
-            const sheetAvg = {
-                ...objAvg,
-                sheetAvg: 
-                    objAvg.sections ?
-                    getAvg(objAvg.sections.map(section=>{
-                        return section.avg
-                    })) : 
-                    -1
-            }
-            setSheetAvg(sheetAvg)
-            console.log("平均", sheetAvg)
-        }
-    }, [sheet]);
 
     if (sheet === undefined) return <p>Loading</p>
     else if (sheet === null) {
@@ -161,9 +103,7 @@ function RevieweeSheetShow(props: Props) {
                         {sheet.statusValue === 1 || sheet.statusValue === 3 ?
                         <AddObjectiveButton sheetId={sheetId} /> : null}
                         
-                        <div>
-                            <MediumGage value={sheetAvg ? sheetAvg.sheetAvg : 0} id={sheet.id} />
-                        </div>
+                        <AverageMediumGaugeBox sheet={sheet} />
 
                         {sectionItems.map((section: Section) => {
 
@@ -173,22 +113,7 @@ function RevieweeSheetShow(props: Props) {
                             
                             return (
                                 <div key={section.id}>
-                                    <h4>
-                                        {section.category?.name}
-                                        {(() => {
-                                            if(sheetAvg && sheetAvg.sections){
-                                                const value = sheetAvg.sections.find(sectionAvg => {
-                                                    return section.id === sectionAvg.sectionId
-                                                })?.avg
-                                                if(value){
-                                                    if (section.category?.id) {
-                                                        return <SmallGage value={value} id={section.category.id} />
-                                                    }
-                                                }
-                                            }
-                                        })()} 
-
-                                    </h4>
+                                    <AverageSmallGaugeBox section={section} />
                                     <Table striped bordered hover>
                                         <thead>
                                             <tr>
