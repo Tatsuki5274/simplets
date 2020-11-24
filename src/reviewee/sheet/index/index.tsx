@@ -1,5 +1,5 @@
 import React, { useState, useEffect, createContext } from 'react';
-import { Container, Table } from 'react-bootstrap';
+import { Button, Container, Table } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { getSheet } from 'graphql/queries'
 import { Sheet, Section, Objective } from 'App';
@@ -21,6 +21,7 @@ import { BorderTable } from './components/border';
 import { YearlyTable } from './components/yearly';
 import { AverageSmallGaugeBox } from './components/averageGauge/small';
 import { AverageMediumGaugeBox } from './components/averageGauge/medium';
+import { Link } from 'react-router-dom';
 
 export const SheetContext = createContext<
     {
@@ -98,6 +99,9 @@ function RevieweeSheetShow(props: Props) {
                 <div>
                     <RevieweeSidebar />
                     <Container>
+                        <Link to={`/reviewee/list`} >
+                            <Button >戻る</Button>
+                        </Link>
                         <ApprovalStatusBox statusValue={sheet.statusValue || -1}/>
                         <h2>業績評価</h2>
                         {sheet.statusValue === 1 || sheet.statusValue === 3 ?

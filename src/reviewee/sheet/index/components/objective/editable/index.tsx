@@ -31,8 +31,6 @@ export const RevieweeSheetObjectiveEditable = (props: Props) => {
     //完了予定日のスタイルの分岐
     if(doneDate < currentDate && doneDate !== 0) {
         expDoneDateStyle = Style.indexExpDoneDateExpired;
-    } else if(doneDate >= currentDate) {
-        expDoneDateStyle = Style.indexExpDoneDateInProgress;
     } else {
         expDoneDateStyle = "";
     }
