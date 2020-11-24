@@ -71,9 +71,17 @@ function ListPerformanceEvalution() {
         const revieweeEmployeeID: string = currentUser.username;
         const revieweeEmployee = await EmployeeDao.get(getEmployee, {id: revieweeEmployeeID})
         if(revieweeEmployee){
-            const revieweeEmployeeSuperior: Array<string | null> = 
-                [revieweeEmployee.superior ? revieweeEmployee.superior.id : null,
-                revieweeEmployee.superior && revieweeEmployee.superior.superior ? revieweeEmployee.superior.superior.id : null]; //上司情報取得
+            let revieweeEmployeeSuperior: Array<string> | null = null
+
+            //上司情報取得
+            if(revieweeEmployee.superior){
+                revieweeEmployeeSuperior = []
+                revieweeEmployeeSuperior.push(revieweeEmployee.superior.id)
+                if(revieweeEmployee.superior.superior){
+                    revieweeEmployeeSuperior.push(revieweeEmployee.superior.superior.id)
+                }
+            }
+            
                     // 権限グループ名の取得
             // const companyGroup = revieweeEmployee.company?.companyGroupName || "";
             const companyManagerGroup = revieweeEmployee.company?.companyManagerGroupName || null;
