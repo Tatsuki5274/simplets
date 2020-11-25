@@ -7,7 +7,6 @@ import HeaderComponents from 'common/header';//ヘッダーの表示
 import ApprovalStatusBox from 'common/approvalStatusBox';
 import { RevieweeSidebar } from 'common/Sidebar';
 import { SheetDao } from 'lib/dao/sheetDao';
-import { RevieweeSheetObjectiveModal } from './components/objectiveModal';
 import { RevieweeSheetObjectiveReadonly } from './components/objective/readonly';
 import { RevieweeSheetObjectiveEditable } from './components/objective/editable';
 import { RevieweeSheetCareerEditable } from './components/career/editable';
@@ -22,6 +21,8 @@ import { YearlyTable } from './components/yearly';
 import { AverageSmallGaugeBox } from './components/averageGauge/small';
 import { AverageMediumGaugeBox } from './components/averageGauge/medium';
 import { Link } from 'react-router-dom';
+import { RevieweeSheetObjectiveModalStatus1 } from './components/objectiveModal/status1';
+import { RevieweeSheetObjectiveModalStatus3 } from './components/objectiveModal/status3';
 
 export const SheetContext = createContext<
     {
@@ -92,8 +93,10 @@ function RevieweeSheetShow(props: Props) {
                 <HeaderComponents />
 
                 <div>
-                    {modalObjective ?
-                    <RevieweeSheetObjectiveModal objective={modalObjective} isShowModal={objectiveUpdateShow} handleClose={handleCloseObjectiveUpdate} /> :
+                    {modalObjective && sheet.statusValue === 1 ?
+                    <RevieweeSheetObjectiveModalStatus1 objective={modalObjective} isShowModal={objectiveUpdateShow} handleClose={handleCloseObjectiveUpdate} /> :
+                     modalObjective && sheet.statusValue === 3 ?
+                    <RevieweeSheetObjectiveModalStatus3 objective={modalObjective} isShowModal={objectiveUpdateShow} handleClose={handleCloseObjectiveUpdate} /> :
                     null}
                 </div>
                 <div>
