@@ -7,7 +7,7 @@ type Props = {
 }
 
 export const ReviewerSheetDetailInterviewReadonly = (props: Props)=>{
-    return <Table bordered>
+    return <Table bordered striped>
             <thead>
                 <tr>
                     <td>目的</td>
