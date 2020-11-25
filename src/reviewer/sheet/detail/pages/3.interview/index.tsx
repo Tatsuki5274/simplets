@@ -1,6 +1,7 @@
 import { UpdateSheetInput } from "API";
 import { Section, Sheet } from "App";
 import ApprovalStatusBox from "common/approvalStatusBox";
+import { buttonComponentStyle } from "common/globalStyle.module.scss";
 import { Formik } from "formik";
 import { updateSheet } from "graphql/mutations";
 import { SheetDao } from "lib/dao/sheetDao";
@@ -97,9 +98,9 @@ export const ReviewerSheetPagesStatus3 = (props: Props) => {
 
                                     {/* ステータスによってボタンの出し分け */}
                                     <Form.Group>
-                                        <Button type="submit">保存</Button>
+                                        <Button type="submit" className={buttonComponentStyle}>保存</Button>
 
-                                        <Button onClick={handleShow}>差し戻し</Button>
+                                        <Button onClick={handleShow} className={buttonComponentStyle}>差し戻し</Button>
 
                                     </Form.Group>
                                 </Form><br />

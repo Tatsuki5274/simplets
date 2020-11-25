@@ -16,6 +16,7 @@ import { ReviewerSheetDetailYearlyReadonly } from "../../components/yearly/reado
 import { SheetContext } from "reviewer/sheet";
 import { ReviewerSheetDetailCareerEditable } from "../../components/career/editable";
 import { ReviewerSheetDetailInterviewEditable } from "../../components/interview/editable";
+import { buttonComponentStyle } from "common/globalStyle.module.scss";
 
 type Props = {
     sheet: Sheet,
@@ -115,8 +116,8 @@ export const ReviewerSheetPagesStatus2 = ()=>{
 
                                         {/* ステータスによってボタンの出し分け */}
                                         <Form.Group>
-                                            <Button type="submit">保存して承認</Button>
-                                            <Button onClick={handleShow}>差し戻し</Button>
+                                            <Button type="submit" className={buttonComponentStyle}>保存して承認</Button>
+                                            <Button onClick={handleShow} className={buttonComponentStyle}>差し戻し</Button>
                             
                                         </Form.Group>
                                     </Form><br />                                    

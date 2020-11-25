@@ -1,6 +1,7 @@
 import { UpdateSheetInput } from "API";
 import { Sheet, Section } from "App";
 import ApprovalStatusBox from "common/approvalStatusBox";
+import { buttonComponentStyle } from "common/globalStyle.module.scss";
 import { Formik } from "formik";
 import { updateSheet } from "graphql/mutations";
 import { SheetDao } from "lib/dao/sheetDao";
@@ -94,7 +95,7 @@ export const ReviewerSheetPagesStatus12Top = () => {
 
                                         {/* ステータスによってボタンの出し分け */}
                                         <Form.Group>
-                                            <Button type="submit">最終承認</Button>
+                                            <Button type="submit" className={buttonComponentStyle}>最終承認</Button>
 
                                         </Form.Group>
                                     </Form><br />

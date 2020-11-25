@@ -17,6 +17,7 @@ import { ReviewerSheetDetailObjectiveEditable } from "../../components/objective
 import { RemandModal } from "../../components/remandModal";
 import { ReviewerSheetDetailYearlyEditableSecond } from "../../components/yearly/editable/second";
 import * as Yup from 'yup';
+import { buttonComponentStyle } from "common/globalStyle.module.scss";
 
 type Props = {
     //sheet: Sheet,
@@ -128,7 +129,7 @@ export const ReviewerSheetPagesStatus10 = (props: Props) => {
 
                                         {/* ステータスによってボタンの出し分け */}
                                         <Form.Group>
-                                            <Button onClick={async () => {
+                                            <Button className={buttonComponentStyle} onClick={async () => {
                                                 const data: UpdateSheetInput = {
                                                     id: sheet.id,
                                                     secondComment: formik.values.secondComment,
@@ -145,8 +146,8 @@ export const ReviewerSheetPagesStatus10 = (props: Props) => {
                                                 }
                                             }}>保存</Button>
 
-                                            <Button type="submit">保存して承認</Button>
-                                            <Button onClick={handleShow}>差し戻し</Button>
+                                            <Button type="submit" className={buttonComponentStyle}>保存して承認</Button>
+                                            <Button onClick={handleShow} className={buttonComponentStyle}>差し戻し</Button>
 
                                         </Form.Group>
                                     </Form><br />

@@ -16,6 +16,7 @@ import { ReviewerSheetDetailInterviewReadonly } from "../../components/interview
 import { ReviewerSheetDetailObjectiveReadonly } from "../../components/objective/readonly";
 import { ReviewerSheetDetailYearlyEditableTop } from "../../components/yearly/editable/top";
 import * as Yup from 'yup';
+import { buttonComponentStyle } from "common/globalStyle.module.scss";
 
 
 export const ReviewerSheetPagesStatus13 = () => {
@@ -96,7 +97,7 @@ export const ReviewerSheetPagesStatus13 = () => {
 
                                         {/* ステータスによってボタンの出し分け */}
                                         <Form.Group>
-                                            <Button onClick={async () => {
+                                            <Button className={buttonComponentStyle} onClick={async () => {
                                                 const formikData: UpdateSheetInput = {
                                                     id: sheet.id,
                                                     firstComment: formik.values.firstComment,
@@ -112,7 +113,7 @@ export const ReviewerSheetPagesStatus13 = () => {
                                                 }
                                             }}>保存</Button>
 
-                                            <Button type="submit">最終承認</Button>
+                                            <Button type="submit" className={buttonComponentStyle}>最終承認</Button>
 
                                         </Form.Group>
                                     </Form><br />
