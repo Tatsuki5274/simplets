@@ -42,5 +42,27 @@
         "sendEmail": {}
       }
     }
+  },
+  "prod": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-sccsystem-prod-92900-authRole",
+      "UnauthRoleArn": "arn:aws:iam::351683577075:role/amplify-sccsystem-prod-92900-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::351683577075:role/amplify-sccsystem-prod-92900-authRole",
+      "Region": "ap-northeast-1",
+      "DeploymentBucketName": "amplify-sccsystem-prod-92900-deployment",
+      "UnauthRoleName": "amplify-sccsystem-prod-92900-unauthRole",
+      "StackName": "amplify-sccsystem-prod-92900",
+      "StackId": "arn:aws:cloudformation:ap-northeast-1:351683577075:stack/amplify-sccsystem-prod-92900/624de930-2f7e-11eb-8d3e-0eaff5e45a0a",
+      "AmplifyAppId": "d1r1cj2q32qmfx"
+    },
+    "categories": {
+      "auth": {
+        "sccsysteme53c89f0": {}
+      },
+      "function": {
+        "approvalStatusManager": {},
+        "sendEmail": {}
+      }
+    }
   }
 }
