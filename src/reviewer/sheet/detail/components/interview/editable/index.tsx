@@ -1,6 +1,6 @@
 import { Sheet } from "App"
 import React from "react"
-import { Table } from "react-bootstrap"
+import { Form, Table } from "react-bootstrap"
 import style from '../common/style.module.scss';
 
 type Props = {
@@ -12,16 +12,16 @@ export const ReviewerSheetDetailInterviewEditable = (props: Props)=>{
     return <Table bordered striped>
             <thead>
                 <tr>
-                    <td>目的</td>
-                    <td>実施日時</td>
-                    <td>内容</td>
+                    <td className={style.interviewPurposeTableStyle}>目的</td>
+                    <td className={style.interviewPlanDateTableStyle}>実施日時</td>
+                    <td className={style.interviewPlanCommentTableStyle}>内容</td>
                 </tr>
             </thead>
             <tbody>
                 {/* インタビュー実施記録　情報表示 */}
                 <tr>
-                    <td>目標設定</td>
-                    <td>
+                    <td className={style.interviewPurposeTableStyle}>目標設定</td>
+                    <td className={style.interviewPlanDateTableStyle}>
                         <input
                             type="date"
                             name="interviewPlanDate"
@@ -30,19 +30,20 @@ export const ReviewerSheetDetailInterviewEditable = (props: Props)=>{
                         />
                     </td>
                     {/* <td>{dateFormat(new Date(sheet.interviewPlanDate || ""), "yyyy/mm/dd")}</td> */}
-                    <td>
-                        <textarea
+                    <td className={style.interviewPlanCommentTableStyle}>
+                        <Form.Control
+                            as="textarea"
                             className={style.detailTextarea}
                             name="interviewPlanComment" 
                             onChange={props.handleChange}
                         >
                             {props.sheet.interviewPlanComment}
-                        </textarea>
+                        </Form.Control>
                     </td>
                 </tr>
                 <tr>
-                    <td>中間#1</td>
-                    <td>
+                    <td className={style.interviewPurposeTableStyle}>中間#1</td>
+                    <td className={style.interviewPlanDateTableStyle}>
                         <input
                             type="date"
                             name="InterviewMid1Date"
@@ -51,19 +52,20 @@ export const ReviewerSheetDetailInterviewEditable = (props: Props)=>{
                         />
                     </td>
                     {/* <td>{dateFormat(new Date(sheet.InterviewMid1Date || ""), "yyyy/mm/dd")}</td> */}
-                    <td>
-                        <textarea
+                    <td className={style.interviewPlanCommentTableStyle}>
+                        <Form.Control
+                            as="textarea"
                             className={style.detailTextarea}
                             name="InterviewMid1Comment" 
                             onChange={props.handleChange}
                         >
                             {props.sheet.InterviewMid1Comment}
-                        </textarea>
+                        </Form.Control>
                     </td>
                 </tr>
                 <tr>
-                    <td>中間#2</td>
-                    <td>
+                    <td className={style.interviewPurposeTableStyle}>中間#2</td>
+                    <td className={style.interviewPlanDateTableStyle}>
                         <input
                             type="date"
                             name="InterviewMid2Date"
@@ -72,19 +74,20 @@ export const ReviewerSheetDetailInterviewEditable = (props: Props)=>{
                         />
                     </td>
                     {/* <td>{dateFormat(new Date(sheet.InterviewMid2Date || ""), "yyyy/mm/dd")}</td> */}
-                    <td>
-                        <textarea
+                    <td className={style.interviewPlanCommentTableStyle}>
+                        <Form.Control
+                            as="textarea"
                             className={style.detailTextarea}
                             name="InterviewMid2Comment" 
                             onChange={props.handleChange}
                         >
                             {props.sheet.InterviewMid2Comment}
-                        </textarea>
+                        </Form.Control>
                     </td>
                 </tr>
                 <tr>
-                    <td>中間#3</td>
-                    <td>
+                    <td className={style.interviewPurposeTableStyle}>中間#3</td>
+                    <td className={style.interviewPlanDateTableStyle}>
                         <input
                             type="date"
                             name="InterviewMid3Date"
@@ -93,14 +96,15 @@ export const ReviewerSheetDetailInterviewEditable = (props: Props)=>{
                         />
                     </td>
                     {/* <td>{dateFormat(new Date(sheet.InterviewMid3Date || ""), "yyyy/mm/dd")}</td> */}
-                    <td>
-                        <textarea
+                    <td className={style.interviewPlanCommentTableStyle}>
+                        <Form.Control
+                            as="textarea"
                             className={style.detailTextarea}
                             name="InterviewMid3Comment" 
                             onChange={props.handleChange}
                         >
                             {props.sheet.InterviewMid3Comment}
-                        </textarea>
+                        </Form.Control>
                     </td>
                 </tr>
             </tbody>

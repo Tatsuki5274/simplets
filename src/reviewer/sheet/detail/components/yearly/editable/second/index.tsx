@@ -17,10 +17,10 @@ export const ReviewerSheetDetailYearlyEditableSecond = (props: Props) => {
                 <thead></thead>
                 <tbody>
                     <tr>
-                        <td>
+                        <td className={style.yearlyLabelStyle}>
                             <Form.Label>所属長コメント<Badge variant="danger">必須</Badge></Form.Label>
                         </td>
-                        <td>
+                        <td className={style.yearlyInputStyle}>
                             <Form.Control
                                 as="textarea"
                                 className={style.detailTextarea}
@@ -32,10 +32,10 @@ export const ReviewerSheetDetailYearlyEditableSecond = (props: Props) => {
                         </td>
                     </tr>
                     <tr>
-                        <td>
+                        <td className={style.yearlyLabelStyle}>
                             <Form.Label>総合評価<Badge variant="danger">必須</Badge></Form.Label>
                         </td>
-                        <td>
+                        <td className={style.yearlyInputStyle}>
                             <Form.Control
                                 as="select"
                                 name="overAllEvaluation"
@@ -53,10 +53,10 @@ export const ReviewerSheetDetailYearlyEditableSecond = (props: Props) => {
                         </td>
                     </tr>
                     <tr>
-                        <td>
+                        <td className={style.yearlyLabelStyle}>
                             <Form.Label>部門長コメント</Form.Label>
                         </td>
-                        <td>
+                        <td className={style.yearlyInputStyle}>
                             <div>{props.sheet.firstComment || "未入力"}</div>
                         </td>
                     </tr>

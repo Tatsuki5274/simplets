@@ -1,5 +1,6 @@
 import { Sheet } from "App"
 import React from "react"
+import { Form } from "react-bootstrap";
 import style from '../common/style.module.scss';
 
 type Props = {
@@ -14,12 +15,13 @@ export const ReviewerSheetDetailCareerEditable = (props: Props)=>{
 
 
         <h4>話し合い結果</h4>
-        <textarea 
+        <Form.Control
+            as="textarea"
             className={style.detailTextarea}
             name="careerPlanComment"
             onChange={props.handleChange}
         >
             {props.sheet.careerPlanComment}
-        </textarea>
+        </Form.Control>
     </div>
 }
