@@ -1,17 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { Container, Button, Card, InputGroup } from 'react-bootstrap';
+import { Container, Button, Card } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { API, graphqlOperation } from 'aws-amplify';
 import { listGroups, listSheets } from 'graphql/queries';
-import { ListGroupsQuery, ListSheetsQuery } from 'API';
+import { ListGroupsQuery } from 'API';
 import { GraphQLResult } from "@aws-amplify/api";
 import * as APIt from 'API';
-import { Group, Section, Sheet } from 'App';
+import { Group, Sheet } from 'App';
 import SidebarComponents from 'common/Sidebar';
 import HeaderComponents from 'common/header';//ヘッダーの表示
 import style from './progressStyle.module.scss';
 import { Link } from 'react-router-dom';
-import { ArcGauge } from '@progress/kendo-react-gauges';
 import { Field, Form, Formik } from 'formik';
 import { SheetDao } from 'lib/dao/sheetDao';
 import GaugeChart from 'react-gauge-chart';
@@ -80,7 +79,7 @@ function ProgressReferenceList() {
                 setView(listItems)
             }
         })()
-    }, [])
+    }, [today])
 
     const setView = (listItems: Sheet[])=>{
         // 平均値を算出する処理
@@ -134,27 +133,6 @@ function ProgressReferenceList() {
 
         setSheetsView(view);
     }
-
-    const arcColors = [
-        {
-            to: 25,
-            color: '#0058e9'
-        }, {
-            from: 25,
-            to: 50,
-            color: '#f31700'
-        }, {
-            from: 50,
-            to: 75,
-            color: '#ffc000'
-        }, {
-            to: 75,
-            color: '#00ffff'
-        }, {
-            to: 100,
-            color: '#7fff00'
-        }
-    ];
 
     return (
         <div>

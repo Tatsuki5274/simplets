@@ -1,5 +1,5 @@
 import { UpdateSheetInput } from "API";
-import { Sheet, Section } from "App";
+import { Section } from "App";
 import ApprovalStatusBox from "common/approvalStatusBox";
 import { buttonComponentStyle } from "common/globalStyle.module.scss";
 import { Formik } from "formik";
@@ -7,7 +7,7 @@ import { updateSheet } from "graphql/mutations";
 import { SheetDao } from "lib/dao/sheetDao";
 import { sendEmailMutation } from "lib/sendEmail";
 import { commandWorkFlow, Command } from "lib/workflow";
-import React, { useContext, useState } from "react"
+import React, { useContext } from "react"
 import { Container, Button, Form } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { SheetContext } from "reviewer/sheet";
@@ -16,10 +16,10 @@ import { ReviewerSheetDetailInterviewReadonly } from "../../../components/interv
 import { ReviewerSheetDetailObjectiveReadonly } from "../../../components/objective/readonly";
 import { ReviewerSheetDetailYearlyReadonly } from "../../../components/yearly/readonly";
 
-type Props = {
-    sheet: Sheet,
-    sections: Section[]
-}
+// type Props = {
+//     sheet: Sheet,
+//     sections: Section[]
+// }
 
 export const ReviewerSheetPagesStatus12Top = () => {
     const context = useContext(SheetContext);

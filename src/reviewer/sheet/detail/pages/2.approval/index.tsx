@@ -1,4 +1,4 @@
-import { Section, Sheet } from "App";
+import { Section } from "App";
 import ApprovalStatusBox from "common/approvalStatusBox";
 import { Formik } from "formik";
 import { SheetDao } from "lib/dao/sheetDao";
@@ -10,7 +10,6 @@ import { updateSheet } from "graphql/mutations";
 import { Command, commandWorkFlow } from "lib/workflow";
 import { sendEmailMutation } from "lib/sendEmail";
 import { UpdateSheetInput } from "API";
-import { ReviewerSheetDetailInterviewReadonly } from "../../components/interview/readonly";
 import { ReviewerSheetDetailObjectiveReadonly } from "../../components/objective/readonly";
 import { ReviewerSheetDetailYearlyReadonly } from "../../components/yearly/readonly";
 import { SheetContext } from "reviewer/sheet";
@@ -18,12 +17,12 @@ import { ReviewerSheetDetailCareerEditable } from "../../components/career/edita
 import { ReviewerSheetDetailInterviewEditable } from "../../components/interview/editable";
 import { buttonComponentStyle } from "common/globalStyle.module.scss";
 
-type Props = {
-    sheet: Sheet,
-    sections: Section[]
+// type Props = {
+//     sheet: Sheet,
+//     sections: Section[]
 
-    handleUpdateObjective: (e: React.ChangeEvent<any>)=> void
-}
+//     handleUpdateObjective: (e: React.ChangeEvent<any>)=> void
+// }
 
 export const ReviewerSheetPagesStatus2 = ()=>{
     const context = useContext(SheetContext);

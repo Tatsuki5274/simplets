@@ -1,9 +1,8 @@
 import { Objective } from "App";
 import { inputFieldStyle } from "common/globalStyle.module.scss";
 import dateFormat from "dateformat";
-import React, { useContext, useState } from "react"
+import React, { useState } from "react"
 import { Button } from "react-bootstrap";
-import { SheetContext } from "reviewee/sheet/index";
 import * as APIt from 'API';
 import { ObjectiveDao } from "lib/dao/objectiveDao";
 import { deleteObjective, updateObjective } from "graphql/mutations";

@@ -2,11 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { Container, Row, Col, Button, Form, Badge } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { API, Auth, graphqlOperation } from 'aws-amplify';
-import { Employee, Section, Sheet } from 'App';
+import { Employee, Sheet } from 'App';
 import { GraphQLResult } from "@aws-amplify/api";
-import { getEmployee, getSheet, listSections } from 'graphql/queries';
+import { getEmployee, getSheet } from 'graphql/queries';
 import * as APIt from 'API';
-import { ListSectionsQuery, ListSectionsQueryVariables, ModelSectionFilterInput } from 'API';
 import CategoryInput from "./categoryInput"
 import { createObjective } from 'graphql/mutations';
 import { Link, Redirect } from 'react-router-dom';
@@ -22,14 +21,6 @@ type Props = {
             sheetId: string
         }
     }
-}
-
-type InputForm = {
-    section?: string
-    content?: string
-    priority?: string
-    expDoneDate?: string
-    expStartDate?: string
 }
 
 function RevieweeSheetNew(props: Props){
@@ -65,15 +56,6 @@ function RevieweeSheetNew(props: Props){
         return employeeItem;
     }
 
-    // 会社グループ情報を取得
-    async function getCompanyGroup() {
-        const revieweeEmployee: Employee = await getQueryEmployee();
-        const companyGroup = revieweeEmployee.company?.companyGroupName || "";
-        const companyManagerGroup = revieweeEmployee.company?.companyManagerGroupName || "";
-        const companyAdminGroup = revieweeEmployee.company?.companyAdminGroupName || "";
-        const groupItems = [companyGroup, companyManagerGroup, companyAdminGroup];
-        setCompanyGroups(groupItems);
-    }
 
     useEffect(() => {
         ;(async()=>{
@@ -89,31 +71,12 @@ function RevieweeSheetNew(props: Props){
                 setSheet(sheet)
             }
 
-
-            // const queryInput: ListSectionsQueryVariables = {
-            //     filter:{
-            //         sectionSheetId: {
-            //             eq: sheetId
-            //         }
-            //     } as ModelSectionFilterInput
-            // }
-            // const response = (await API.graphql(graphqlOperation(listSections, queryInput))
-            // )as GraphQLResult<ListSectionsQuery>;
-            // const repsonseSection = response.data?.listSections?.items as Section[];
-            
-            // //カテゴリ情報のnoを元にソート
-            // repsonseSection?.sort(function (a, b) {
-            //     if (a.category?.no! > b.category?.no!) {
-            //         return 1;
-            //     } else {
-            //         return -1;
-            //     }
-            // });
-            // setSections(repsonseSection);
-
-            // // companyGroupsを取得
-            getCompanyGroup();
-            // console.log(repsonseSection)
+            const revieweeEmployee: Employee = await getQueryEmployee();
+            const companyGroup = revieweeEmployee.company?.companyGroupName || "";
+            const companyManagerGroup = revieweeEmployee.company?.companyManagerGroupName || "";
+            const companyAdminGroup = revieweeEmployee.company?.companyAdminGroupName || "";
+            const groupItems = [companyGroup, companyManagerGroup, companyAdminGroup];
+            setCompanyGroups(groupItems);
         })()
       },[sheetId]);
       
@@ -177,7 +140,7 @@ function RevieweeSheetNew(props: Props){
                                     createR = e;
                                 }
                                 if (createR.data) {
-                                    const createTM: APIt.CreateObjectiveMutation = createR.data;
+                                    // const createTM: APIt.CreateObjectiveMutation = createR.data;
                                     setIsRedirect(true);
                                 } else {
                                     console.log("保存に失敗しました")

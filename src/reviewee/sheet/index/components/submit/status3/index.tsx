@@ -1,4 +1,4 @@
-import { Objective, Sheet } from "App";
+import { Sheet } from "App";
 import { buttonComponentStyle } from "common/globalStyle.module.scss";
 import { updateSheet } from "graphql/mutations";
 import { SheetDao } from "lib/dao/sheetDao";

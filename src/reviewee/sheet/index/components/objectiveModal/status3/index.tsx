@@ -1,9 +1,8 @@
 import { Formik } from "formik";
-import React, { useContext, useState } from "react"
+import React from "react"
 import { Button, Col, Form, Modal, Row } from "react-bootstrap";
-import { SheetContext } from "../../..";
 import * as APIt from 'API';
-import { Objective, Sheet } from "App";
+import { Objective } from "App";
 import { ObjectiveDao } from "lib/dao/objectiveDao";
 import { updateObjective } from "graphql/mutations";
 import { inputFieldStyle } from "common/globalStyle.module.scss";
@@ -15,9 +14,9 @@ type Props = {
 }
 
 export const RevieweeSheetObjectiveModalStatus3 = (props: Props)=>{
-    const context = useContext(SheetContext);
-    const sheet = context.sheet
-    const setSheet = context.setSheet
+    // const context = useContext(SheetContext);
+    // const sheet = context.sheet
+    // const setSheet = context.setSheet
 
     // //目標変更検知
     // function handleCheckObjectiveItems(inputItems: (string | null | undefined)[], objectiveItems: (string | null | undefined)[]) {
@@ -70,7 +69,7 @@ export const RevieweeSheetObjectiveModalStatus3 = (props: Props)=>{
                         expDoneDate: values.expDoneDate ? values.expDoneDate : undefined
                     };
                     const updatedObjective = await ObjectiveDao.update(updateObjective, updateI)
-                    if(updatedObjective && sheet){
+                    if(updatedObjective){
                         
                         // 暫定的な対応
                         // ファイルを読み直すためリロードが入り、通信量が多くなる。

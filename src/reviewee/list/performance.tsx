@@ -10,7 +10,6 @@ import * as APIt from 'API';
 import { createSection, createSheet } from 'graphql/mutations';
 import SidebarComponents from 'common/Sidebar';
 import HeaderComponents from 'common/header';
-import Style from './performanceStyle.module.scss';
 import { SheetDao } from 'lib/dao/sheetDao';
 import { EmployeeDao } from 'lib/dao/employeeDao';
 import { CategoryDao } from 'lib/dao/categoryDao';
@@ -50,16 +49,16 @@ function ListPerformanceEvalution() {
                 setSheets(items);
 
                 // 今年に作成されたシートを確認
-                let result = false;
-                if(items){
-                    const currentYear:number = new Date().getFullYear();
-                    let filteredSheet = items.filter((item)=>{
-                        return item.year === currentYear ? true : false;
-                    })
-                    if(filteredSheet.length === 0) {
-                        result = true;
-                    }
-                }
+                // let result = false;
+                // if(items){
+                //     const currentYear:number = new Date().getFullYear();
+                //     let filteredSheet = items.filter((item)=>{
+                //         return item.year === currentYear ? true : false;
+                //     })
+                //     if(filteredSheet.length === 0) {
+                //         result = true;
+                //     }
+                // }
             }
         })()
     }, [currentUser]);
@@ -215,13 +214,13 @@ function ListPerformanceEvalution() {
                                 const avg: number = cnt !== 0 ? sum / cnt : -1;
                                 return (
                                     <tr key={sheet.id}>
-                                        <td><Link to={"/reviewee/sheet/" + sheet.id}>{editName}</Link></td>
+                                        <td><Link to={`/reviewee/sheet/${sheet.id}`}>{editName}</Link></td>
                                         <td>{sheet.year}</td>
                                         <td>{sheet.secondEmployee ? sheet.secondEmployee.lastName : ""}{sheet.secondEmployee ? sheet.secondEmployee.firstName : ""}</td>
                                         <td>{avg || "-"}%</td>
                                         <td>{getStatusValue(sheet.statusValue || -1)}</td>
                                         <td>{sheet.overAllEvaluation}</td>
-                                        <td><a href="">プレビュー</a></td>
+                                        <td><a href="/#">プレビュー</a></td>
                                     </tr>
                                 )
                             })}

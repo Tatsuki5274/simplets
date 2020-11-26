@@ -1,7 +1,6 @@
 import { Formik } from "formik";
-import React, { useContext, useState } from "react"
+import React from "react"
 import { Button, Col, Form, Modal, Row } from "react-bootstrap";
-import { SheetContext } from "../../..";
 import * as APIt from 'API';
 import { Objective } from "App";
 import { ObjectiveDao } from "lib/dao/objectiveDao";
@@ -15,9 +14,9 @@ type Props = {
 }
 
 export const RevieweeSheetObjectiveModalStatus1 = (props: Props)=>{
-    const context = useContext(SheetContext);
-    const sheet = context.sheet
-    const setSheet = context.setSheet
+    // const context = useContext(SheetContext);
+    // const sheet = context.sheet
+    // const setSheet = context.setSheet
     
     if(props.objective){
         return (
@@ -51,7 +50,7 @@ export const RevieweeSheetObjectiveModalStatus1 = (props: Props)=>{
                     };
                     const updatedObjective = await ObjectiveDao.update(updateObjective, updateI)
                     if(updatedObjective){
-                        const newSheet = sheet
+                        // const newSheet = sheet
                         // newSheet?.section?.items?.find
                     }
     

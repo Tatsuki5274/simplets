@@ -1,5 +1,5 @@
 import { UpdateSheetInput } from "API";
-import { Section, Sheet } from "App";
+import { Section } from "App";
 import ApprovalStatusBox from "common/approvalStatusBox";
 import { Formik } from "formik";
 import { updateSheet } from "graphql/mutations";

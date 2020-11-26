@@ -24,10 +24,6 @@ type Props = {
 export const RemandModal = (props: Props)=>{
     const context = useContext(SheetContext);
     const sheet = context.sheet
-    
-    const handleRemand = ()=>{
-        console.log("差し戻しの処理が未実装です")
-    }
 
     return <div>
         <Modal show={props.isShow} onHide={props.handleClose}>
