@@ -66,8 +66,8 @@ export const OverEvaluationTable = () => {
                 </thead>
                 <tbody>
                     <tr>
-                        <td>{previousPeriod[1]}</td>
-                        <td>{previousPeriod[0]}</td>
+                        <td>{previousPeriod[1] || "-"}</td>
+                        <td>{previousPeriod[0] || "-"}</td>
                         <td>{sheet.overAllEvaluation || "未評価"}</td>
                     </tr>
                 </tbody>
