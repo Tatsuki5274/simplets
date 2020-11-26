@@ -3,7 +3,7 @@ import React, { useContext, useState } from "react"
 import { Button, Col, Form, Modal, Row } from "react-bootstrap";
 import { SheetContext } from "../../..";
 import * as APIt from 'API';
-import { Objective } from "App";
+import { Objective, Sheet } from "App";
 import { ObjectiveDao } from "lib/dao/objectiveDao";
 import { updateObjective } from "graphql/mutations";
 import { inputFieldStyle } from "common/globalStyle.module.scss";
@@ -70,12 +70,27 @@ export const RevieweeSheetObjectiveModalStatus3 = (props: Props)=>{
                         expDoneDate: values.expDoneDate ? values.expDoneDate : undefined
                     };
                     const updatedObjective = await ObjectiveDao.update(updateObjective, updateI)
-                    if(updatedObjective){
-                        const newSheet = sheet
-                        // newSheet?.section?.items?.find
+                    if(updatedObjective && sheet){
+                        
+                        // 暫定的な対応
+                        // ファイルを読み直すためリロードが入り、通信量が多くなる。
+                        window.location.reload()    
+                        // const newSheet: Sheet = {
+                        //     ...sheet,
+                        //     section: {
+                        //         ...sheet.section,
+                        //         items: [
+
+                        //         ]
+                        //     }
+                        // }
+                        // newSheet?.section?.items?.find(section => {
+                        //     return section?.objective?.items?.find(objective => {
+                        //         return true
+                        //     })
+                        // })
                     }
     
-                    // window.location.reload()
                     props.handleClose();
     
                 }}
