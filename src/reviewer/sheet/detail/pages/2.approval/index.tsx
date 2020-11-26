@@ -116,6 +116,29 @@ export const ReviewerSheetPagesStatus2 = ()=>{
 
                                         {/* ステータスによってボタンの出し分け */}
                                         <Form.Group>
+                                            <Button className={buttonComponentStyle} onClick={async () => {
+                                                const data: UpdateSheetInput = {
+                                                    id: sheet.id,
+                                                    careerPlanComment: formik.values.careerPlanComment,
+                                                    interviewPlanComment: formik.values.interviewPlanComment,
+                                                    interviewPlanDate: formik.values.interviewPlanDate,
+                                                    InterviewMid1Comment: formik.values.InterviewMid1Comment,
+                                                    InterviewMid1Date: formik.values.InterviewMid1Date,
+                                                    InterviewMid2Comment: formik.values.InterviewMid2Comment,
+                                                    InterviewMid2Date: formik.values.InterviewMid2Date,
+                                                    InterviewMid3Comment: formik.values.InterviewMid3Comment,
+                                                    InterviewMid3Date: formik.values.InterviewMid3Date,
+                                                }
+                                                const updatedSheet = await SheetDao.update(updateSheet, data);
+
+                                                // const updatedSheet = runUpdateSheet(props.values);
+                                                if (updatedSheet) {
+                                                    console.log("保存成功", updatedSheet)
+                                                } else {
+                                                    console.error("保存失敗", updatedSheet)
+                                                }
+                                            }}>保存</Button>
+                                            
                                             <Button type="submit" className={buttonComponentStyle}>保存して承認</Button>
                                             <Button onClick={handleShow} className={buttonComponentStyle}>差し戻し</Button>
                             
