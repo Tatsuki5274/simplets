@@ -30,8 +30,8 @@ export const ReviewerSheetDetailObjectiveEditable = (props: Props) => {
                 <Table bordered>
                     <thead>
                         <tr>
-                            <td>目標</td>
-                            <td>実績</td>
+                            <td className={style.objectiveContentStyle}>目標</td>
+                            <td className={style.objectiveContentStyle}>実績</td>
                             <td>進捗率</td>
                             <td>優先順位</td>
                             <td>開始予定日</td>
@@ -56,10 +56,10 @@ export const ReviewerSheetDetailObjectiveEditable = (props: Props) => {
                                 <tr key={objective.id} className={styleObjective}>
 
                                     {/* 目標本文 */}
-                                    <td>{objective.content}</td>
+                                    <td className={style.objectiveContentStyle}>{objective.content}</td>
 
                                     {/* 実績 */}
-                                    <td>{objective.result}</td>
+                                    <td className={style.objectiveContentStyle}>{objective.result}</td>
 
                                     {/* 進捗率 */}
                                     <td>{objective.progress}</td>
