@@ -44,8 +44,8 @@ export const SubmitButtonStatus3 = () => {
                         if (window.confirm("目標内容の差し戻しを行いますか？")) {
                             const work = commandWorkFlow(Command.REVIEWEE_CHANGE_OBJECTIVE, sheet)
                             let updatedSheet = await SheetDao.update(updateSheet, {
-                                id: sheet.id,
-                                statusValue: sheet.statusValue
+                                id: work.sheet.id,
+                                statusValue: work.sheet.statusValue
                             });
                             if (updatedSheet) {
                                 setSheet({ ...(updatedSheet) })
