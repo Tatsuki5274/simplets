@@ -6,7 +6,7 @@ import { listGroups, listSheets } from 'graphql/queries';
 import { ListGroupsQuery } from 'API';
 import { GraphQLResult } from "@aws-amplify/api";
 import * as APIt from 'API';
-import { Group, Sheet } from 'App';
+import { Group, Section, Sheet } from 'App';
 import SidebarComponents from 'common/Sidebar';
 import HeaderComponents from 'common/header';//ヘッダーの表示
 import style from './progressStyle.module.scss';
@@ -14,6 +14,8 @@ import { Link } from 'react-router-dom';
 import { Field, Form, Formik } from 'formik';
 import { SheetDao } from 'lib/dao/sheetDao';
 import GaugeChart from 'react-gauge-chart';
+import { calcAvg} from 'lib/util';
+
 
 type ViewType = {
     sheetId: string
@@ -24,11 +26,12 @@ type ViewType = {
     groupName: string
     categorys: {
         name: string | undefined
-        avg: number,
+        avg: number | null,
         no: number | null | undefined,
-        id: string | undefined
+        id: string | undefined,
+        sectionId?: string
     }[] | undefined,
-    avg: number
+    avg: number | null
 }
 
 
@@ -41,6 +44,7 @@ function ProgressReferenceList() {
         yearList.push((thisYear - step));
     }
 
+    // const [sheets, setSheets] = useState<Sheet[] | null>(null)
     const [sheetsView, setSheetsView] = useState<ViewType[]>();
     
     //選択する部署のデータを取得して昇順でソートして表示する機能
@@ -76,27 +80,13 @@ function ProgressReferenceList() {
             const filter =  { filter: { year: { eq: today.getFullYear() } } }
             const listItems = await SheetDao.list(listSheets, filter)
             if(listItems){
+                // setSheets(listItems)
                 setView(listItems)
             }
         })()
     }, [today])
 
     const setView = (listItems: Sheet[])=>{
-        // 平均値を算出する処理
-        const getAvg = (nums: number[]) =>{
-            let sum = 0;
-            let cnt = 0;
-            let ret = -1;
-
-            nums.forEach((num)=>{
-                if(num !== -1){
-                    sum += num;
-                    cnt++;
-                }
-            })
-            if(cnt > 0) ret = sum / cnt;
-            return ret;
-        }
         // 画面表示に必要な情報を加工する処理
         let viewTemp: ViewType[] = listItems.map((sheet)=>{
             return {
@@ -110,11 +100,12 @@ function ProgressReferenceList() {
                     return {
                         name: section?.category?.name,
                         avg: section && section.objective && section.objective.items ?
-                            getAvg(section.objective.items.map((obj)=>{
-                                return  obj && obj.progress ? obj.progress : -1
-                            })) : -1,
+                            calcAvg(section.objective.items.map((obj)=>{
+                                return  obj && obj.progress ? obj.progress : 0
+                            })) : null,
                         no: section?.category?.no,
-                        id: section?.category?.id
+                        id: section?.category?.id,
+                        sectionId: section?.id
                     }
                 }),
                 avg: -1
@@ -124,7 +115,7 @@ function ProgressReferenceList() {
             return {
                 ...item,
                 avg: item.categorys ? 
-                    getAvg(item.categorys.map(cat=>{
+                    calcAvg(item.categorys.map(cat=>{
                         return cat.avg;
                     })) 
                 : -1
@@ -197,6 +188,39 @@ function ProgressReferenceList() {
                 </Formik>
 
                 <br />
+                {/* {sheets?.map(sheet => {
+                    return (
+                        <Card className={style.linkbox}>
+                            <Link to={`/reviewer/sheet/${sheet.id}`} />
+                           <Card.Header>
+                                {sheet.revieweeEmployee?.lastName}
+                                {sheet.revieweeEmployee?.firstName}
+                                &nbsp;
+                                {sheet.revieweeEmployee?.group?.name}
+                                &nbsp;
+                                <OSheetAvgGauge
+                                    id={sheet.id}
+                                    progressLists={extProgressFromSheet(sheet)}
+                                />
+                                最新版
+                            </Card.Header>
+                            <Card.Body>
+                                {sheet.section?.items?.map(sec => {
+                                    const section = sec as Section
+                                    return section ? (
+                                        <div>
+                                            {section.category.name}&nbsp;{section.category.avg === -1 ? "-" : category.avg}
+                                            <OObjectiveAvgGauge
+                                                id={section.id}
+                                                progressList={extProgressFromSection(section)}
+                                            />
+                                        </div>
+                                    ) : null
+                                })}
+                            </Card.Body>
+                        </Card>
+                    )
+                })} */}
 
                 {sheetsView?.map(view => {
                     view.categorys?.sort(function (a, b) {
@@ -216,7 +240,9 @@ function ProgressReferenceList() {
                                &nbsp;
                                {view.groupName}
                                &nbsp;
-                               {view.avg !== -1 ? `${view.avg}%` : null}
+                               {view.avg ? `${view.avg}%` : null}
+
+                               {view.avg ?
                                <GaugeChart id={`chart-${view.sheetId}`}
                                    nrOfLevels={10}
                                    colors={['#EA4228', '#F5CD19', '#5BE12C']}
@@ -227,25 +253,27 @@ function ProgressReferenceList() {
                                        height: '50px',
                                        display: 'inline-block'
                                    }}
-                               />
+                               /> : null}
                             </Card.Header>
                             <Card.Body>
                                 {view.categorys?.map(category=>{
-                                    if (category.id) {
-                                        return <div id={category.id}>
-                                            {category.name}&nbsp;{category.avg === -1 ? "-" : category.avg}
-                                            <GaugeChart id={`chart-${category.id}`}
-                                                nrOfLevels={10}
-                                                colors={['#EA4228', '#F5CD19', '#5BE12C']}
-                                                percent={category.avg / 100}
-                                                style={{
-                                                    width: '50px',
-                                                    height: '50px',
-                                                    display: 'inline-block'
-                                                }}
-                                            />
-                                        </div>
-                                    }
+                                    return category.id && category.avg ?
+                                    <div id={category.id}>
+                                        {category.name}&nbsp;{category.avg}
+                                        <GaugeChart id={`chart-${category.sectionId}`}
+                                            nrOfLevels={10}
+                                            colors={['#EA4228', '#F5CD19', '#5BE12C']}
+                                            percent={category.avg / 100}
+                                            style={{
+                                                width: '50px',
+                                                height: '50px',
+                                                display: 'inline-block'
+                                            }}
+                                        />
+                                    </div> :
+                                    <div id={category.id}>
+                                        {category.name}&nbsp;-
+                                    </div>
                                 })}
                             </Card.Body>
                         </Card>

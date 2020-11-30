@@ -1,4 +1,4 @@
-import { Objective, Sheet } from "App";
+import { Objective, Section, Sheet } from "App";
 
 /**
  * 
@@ -18,6 +18,37 @@ export function calcAvg(nums: (number | null)[]): number | null{
     if(cnt > 0) ret = sum / cnt;
     return ret;
 }
+
+/**
+ * 
+ * @param sheet 進捗率を抽出したい元シート
+ * @returns カテゴリ毎の進捗率平均値
+ */
+// export function extProgressFromSheet(sheet: Sheet): ((number | null)[] | null)[] | null{
+//     const prg = sheet.section?.items?.map(section => {
+//         let ret = null
+//         if(section?.objective?.items){
+//             ret = section?.objective?.items?.map(objective => {
+//                 return objective?.progress ? objective.progress : null
+//             })
+//         }
+//         return ret   
+//     })
+//     const ret = prg ? prg : null
+//     return ret
+// }
+
+
+// export function extProgressFromSection(section: Pick<Section, "objective">): (number | null)[] | null{
+//     let ret: (number | null)[] | null = null 
+//     if(section.objective?.items){
+//         ret = section.objective.items.map(objective => {
+//             return objective?.progress ? objective.progress : null
+//         })
+//     }
+//     return ret
+// }
+
 
 /**
  * 
