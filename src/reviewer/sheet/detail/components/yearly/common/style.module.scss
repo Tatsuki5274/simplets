@@ -4,8 +4,12 @@
 .yearlyLabelStyle {
     width: 20%;
 }
-.yearlyInputStyle {
+.yearlyEditableInputStyle {
     width: 80%;
+}
+.yearlyReadonlyInputStyle {
+    width: 80%;
+    white-space: pre-line;
 }
 // .detailSelect {
 //     background-color: #bbdefb;

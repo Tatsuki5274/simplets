@@ -1,4 +1,5 @@
 import { Sheet } from "App"
+import { textareaDisplayStyle } from "common/globalStyle.module.scss"
 import React from "react"
 import { Table } from "react-bootstrap"
 
@@ -23,7 +24,7 @@ export const ReviewerSheetDetailInterviewReadonly = (props: Props)=>{
                         {props.sheet.interviewPlanDate}
                     </td>
                     {/* <td>{dateFormat(new Date(sheet.interviewPlanDate || ""), "yyyy/mm/dd")}</td> */}
-                    <td>
+                    <td className={textareaDisplayStyle}>
                         {props.sheet.interviewPlanComment}
                     </td>
                 </tr>
@@ -33,7 +34,7 @@ export const ReviewerSheetDetailInterviewReadonly = (props: Props)=>{
                         {props.sheet.InterviewMid1Date}
                     </td>
                     {/* <td>{dateFormat(new Date(sheet.InterviewMid1Date || ""), "yyyy/mm/dd")}</td> */}
-                    <td>
+                    <td className={textareaDisplayStyle}>
                         {props.sheet.InterviewMid1Comment}
                     </td>
                 </tr>
@@ -43,7 +44,7 @@ export const ReviewerSheetDetailInterviewReadonly = (props: Props)=>{
                         {props.sheet.InterviewMid2Date}
                     </td>
                     {/* <td>{dateFormat(new Date(sheet.InterviewMid2Date || ""), "yyyy/mm/dd")}</td> */}
-                    <td>
+                    <td className={textareaDisplayStyle}>
                         {props.sheet.InterviewMid2Comment}
                     </td>
                 </tr>
@@ -53,7 +54,7 @@ export const ReviewerSheetDetailInterviewReadonly = (props: Props)=>{
                         {props.sheet.InterviewMid3Date}
                     </td>
                     {/* <td>{dateFormat(new Date(sheet.InterviewMid3Date || ""), "yyyy/mm/dd")}</td> */}
-                    <td>
+                    <td className={textareaDisplayStyle}>
                         {props.sheet.InterviewMid3Comment}
                     </td>
                 </tr>

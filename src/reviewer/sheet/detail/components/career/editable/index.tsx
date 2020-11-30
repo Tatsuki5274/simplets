@@ -1,4 +1,5 @@
 import { Sheet } from "App"
+import { textareaDisplayStyle } from "common/globalStyle.module.scss";
 import React from "react"
 import { Form } from "react-bootstrap";
 import style from '../common/style.module.scss';
@@ -11,7 +12,7 @@ export const ReviewerSheetDetailCareerEditable = (props: Props)=>{
     return <div>
         <h4>本人希望</h4>
         {/* 本人希望　情報表示 */}
-        <p>{props.sheet.careerPlan}</p>
+        <p className={textareaDisplayStyle}>{props.sheet.careerPlan}</p>
 
 
         <h4>話し合い結果</h4>
