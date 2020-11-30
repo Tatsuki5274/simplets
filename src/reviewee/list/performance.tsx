@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Auth } from 'aws-amplify';
-import { Button, Container, Table } from 'react-bootstrap';
+import { Button, Col, Container, Row, Table } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Link } from 'react-router-dom';
 import { Category, Objective, Section, Sheet, UserContext } from 'App';
@@ -150,12 +150,24 @@ function ListPerformanceEvalution() {
         <div>
             {/* ヘッダーの表示 */}
             <HeaderComponents />
-            {/* サイドバーコンポーネント 表示 */}
-            <SidebarComponents />
-
-            <div>
-                <Container>
-                    <h2>業績評価一覧</h2>
+            <Row>
+                <Col
+                    xs={3}
+                    sm={3}
+                    md={3}
+                    lg={3}
+                    xl={3}
+                >
+                    <SidebarComponents />
+                </Col>
+                <Col
+                    xs={9}
+                    sm={9}
+                    md={9}
+                    lg={9}
+                    xl={9}
+                >
+                   <h2>業績評価一覧</h2>
                     {(sheets && sheets.find(sheet=>{
                         return sheet.year === today.getFullYear()
                     }))
@@ -226,6 +238,13 @@ function ListPerformanceEvalution() {
                             })}
                         </tbody>
                     </Table>
+                </Col>
+            </Row>
+            {/* サイドバーコンポーネント 表示 */}
+
+            <div>
+                <Container>
+ 
                 </Container>
             </div>
         </div>

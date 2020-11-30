@@ -1,5 +1,5 @@
 import { Auth } from 'aws-amplify';
-import React, { useEffect, useState } from 'react';
+import React, { CSSProperties, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import style from './sidebarStyle.module.scss'
 
@@ -40,7 +40,7 @@ function SidebarComponents() {
     }, []);
     // サイドバーを表示
     return (
-        <div>
+        <div style={boxStyle}>
             <Link className={style.sidebarContents} to="/reviewee/list">業績評価一覧</Link><br />
 
             {/* 進捗参照 表示条件 */}
@@ -54,8 +54,13 @@ export default SidebarComponents;
 
 export function RevieweeSidebar(){
     return (
-        <div>
+        <div style={boxStyle}>
             <Link to="/reviewee/list">一覧画面</Link>
         </div>
     )
+}
+
+const boxStyle: CSSProperties = {
+    position: "sticky",
+    top: "100px",
 }

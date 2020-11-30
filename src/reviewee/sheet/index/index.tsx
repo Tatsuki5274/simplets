@@ -1,5 +1,5 @@
 import React, { useState, useEffect, createContext } from 'react';
-import { Button, Container, Table } from 'react-bootstrap';
+import { Button, Col, Row, Table } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { getSheet } from 'graphql/queries'
 import { Sheet, Section, Objective } from 'App';
@@ -87,104 +87,117 @@ function RevieweeSheetShow(props: Props) {
 
     return (
         <SheetContext.Provider value={{sheet: sheet, setSheet: setSheet}}>
+            {/* 共通 */}
+            <HeaderComponents />
+            {/* <RevieweeSidebar /> */}
+
 
             <div>
-                {/* 共通 */}
-                <HeaderComponents />
-
-                <div>
-                    {modalObjective && sheet.statusValue === 1 ?
-                    <RevieweeSheetObjectiveModalStatus1 objective={modalObjective} isShowModal={objectiveUpdateShow} handleClose={handleCloseObjectiveUpdate} /> :
-                     modalObjective && sheet.statusValue === 3 ?
-                    <RevieweeSheetObjectiveModalStatus3 objective={modalObjective} isShowModal={objectiveUpdateShow} handleClose={handleCloseObjectiveUpdate} /> :
-                    null}
-                </div>
-                <div>
-                    <RevieweeSidebar />
-                    <Container>
-                        <Link to={`/reviewee/list`} >
-                            <Button >戻る</Button>
-                        </Link>
-                        <ApprovalStatusBox statusValue={sheet.statusValue || -1}/>
-                        <h2>業績評価</h2>
-                        {sheet.statusValue === 1 || sheet.statusValue === 3 ?
-                        <AddObjectiveButton sheetId={sheetId} /> : null}
-                        
-                        <AverageMediumGaugeBox sheet={sheet} />
-
-                        {sectionItems.map((section: Section) => {
-
-                            //作成日を元に項目明細をソート
-                            const objectiveItems = section.objective?.items as Objective[];
-
-                            
-                            return (
-                                <div key={section.id}>
-                                    <AverageSmallGaugeBox section={section} />
-                                    <Table striped bordered hover>
-                                        <thead>
-                                            <tr>
-                                                <td>#</td>
-                                                <td>目標</td>
-                                                <td>実績</td>
-                                                <td>進捗率(%)</td>
-                                                <td>優先順位</td>
-                                                <td>開始予定日</td>
-                                                <td>完了予定日</td>
-                                                <td>自己評価</td>
-                                                <td>最終評価</td>
-                                                <td>更新日時</td>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            {objectiveItems.map((objective: Objective) => {
-                                                return (
-                                                    sheet.statusValue === 1 || sheet.statusValue === 3 ?
-                                                    <RevieweeSheetObjectiveEditable
-                                                        handleOpenModal={handleShowObjectiveUpdate}
-                                                        objective={objective}
-                                                        setModalObjective={setModalObjective}
-                                                    /> :
-                                                    <RevieweeSheetObjectiveReadonly objective={objective} />
-                                                )
-
-                                              
-                                            })}
-                                        </tbody>
-                                    </Table>
-                                </div>
-                            )
-                        })}
-
-                        <h4>キャリア計画</h4>
-                        {sheet.statusValue === 1 || sheet.statusValue === 2 || sheet.statusValue === 3 ?
-                        <RevieweeSheetCareerEditable /> :
-                        <RevieweeSheetCareerReadonly />}
-
-                        <h4>年度評価</h4>
-                        <YearlyTable
-                            secondComment={sheet.secondComment}
-                            secondCheckDate={sheet.secondCheckDate}
-                            firstComment={sheet.firstComment}
-                            firstCheckDate={sheet.firstCheckDate}
-                        />
-
-                        <h4>総合評価</h4>
-                        <OverEvaluationTable />
-
-                        <BorderTable />
-                        
-                        {sheet.statusValue === 1 ? 
-                        <SubmitButtonStatus1 /> : null}
-
-                        {sheet.statusValue === 3 ?
-                        <SubmitButtonStatus3 /> : null}
-
-                        {sheet.statusValue === 11 ?
-                        <SubmitButtonStatus11 /> : null}
-                    </Container>
-                </div>
+                {modalObjective && sheet.statusValue === 1 ?
+                <RevieweeSheetObjectiveModalStatus1 objective={modalObjective} isShowModal={objectiveUpdateShow} handleClose={handleCloseObjectiveUpdate} /> :
+                    modalObjective && sheet.statusValue === 3 ?
+                <RevieweeSheetObjectiveModalStatus3 objective={modalObjective} isShowModal={objectiveUpdateShow} handleClose={handleCloseObjectiveUpdate} /> :
+                null}
             </div>
+            <Row>
+                <Col
+                    xs={3}
+                    sm={3}
+                    md={3}
+                    lg={3}
+                    xl={3}
+                >
+                    <RevieweeSidebar />
+                </Col>
+                <Col
+                    xs={9}
+                    sm={9}
+                    md={9}
+                    lg={9}
+                    xl={9}
+                >
+                    <Link to={`/reviewee/list`} >
+                        <Button >戻る</Button>
+                    </Link>
+                    <ApprovalStatusBox statusValue={sheet.statusValue || -1}/>
+                    <h2>業績評価</h2>
+                    {sheet.statusValue === 1 || sheet.statusValue === 3 ?
+                    <AddObjectiveButton sheetId={sheetId} /> : null}
+                    
+                    <AverageMediumGaugeBox sheet={sheet} />
+
+                    {sectionItems.map((section: Section) => {
+
+                        //作成日を元に項目明細をソート
+                        const objectiveItems = section.objective?.items as Objective[];
+
+                        
+                        return (
+                            <div key={section.id}>
+                                <AverageSmallGaugeBox section={section} />
+                                <Table striped bordered hover>
+                                    <thead>
+                                        <tr>
+                                            <td>#</td>
+                                            <td>目標</td>
+                                            <td>実績</td>
+                                            <td>進捗率(%)</td>
+                                            <td>優先順位</td>
+                                            <td>開始予定日</td>
+                                            <td>完了予定日</td>
+                                            <td>自己評価</td>
+                                            <td>最終評価</td>
+                                            <td>更新日時</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {objectiveItems.map((objective: Objective) => {
+                                            return (
+                                                sheet.statusValue === 1 || sheet.statusValue === 3 ?
+                                                <RevieweeSheetObjectiveEditable
+                                                    handleOpenModal={handleShowObjectiveUpdate}
+                                                    objective={objective}
+                                                    setModalObjective={setModalObjective}
+                                                /> :
+                                                <RevieweeSheetObjectiveReadonly objective={objective} />
+                                            )
+
+                                            
+                                        })}
+                                    </tbody>
+                                </Table>
+                            </div>
+                        )
+                    })}
+
+                    <h4>キャリア計画</h4>
+                    {sheet.statusValue === 1 || sheet.statusValue === 2 || sheet.statusValue === 3 ?
+                    <RevieweeSheetCareerEditable /> :
+                    <RevieweeSheetCareerReadonly />}
+
+                    <h4>年度評価</h4>
+                    <YearlyTable
+                        secondComment={sheet.secondComment}
+                        secondCheckDate={sheet.secondCheckDate}
+                        firstComment={sheet.firstComment}
+                        firstCheckDate={sheet.firstCheckDate}
+                    />
+
+                    <h4>総合評価</h4>
+                    <OverEvaluationTable />
+
+                    <BorderTable />
+                    
+                    {sheet.statusValue === 1 ? 
+                    <SubmitButtonStatus1 /> : null}
+
+                    {sheet.statusValue === 3 ?
+                    <SubmitButtonStatus3 /> : null}
+
+                    {sheet.statusValue === 11 ?
+                    <SubmitButtonStatus11 /> : null}
+                </Col>
+            </Row>
         </SheetContext.Provider>
     );
 }
