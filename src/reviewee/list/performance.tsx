@@ -3,7 +3,7 @@ import { Auth } from 'aws-amplify';
 import { Button, Col, Container, Row, Table } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Link } from 'react-router-dom';
-import { Category, Objective, Section, Sheet, UserContext } from 'App';
+import { Category, Sheet, UserContext } from 'App';
 import { ApprovalStatus, getStatusValue } from 'lib/getStatusValue'
 import { getEmployee, listCategorys, listSheets } from 'graphql/queries'
 import * as APIt from 'API';
@@ -14,6 +14,7 @@ import { SheetDao } from 'lib/dao/sheetDao';
 import { EmployeeDao } from 'lib/dao/employeeDao';
 import { CategoryDao } from 'lib/dao/categoryDao';
 import { SectionDao } from 'lib/dao/sectionDao';
+import { DisplaySheetAverage } from './components/average';
 
 const sortSheet = (a: Sheet, b: Sheet) => {
     if (a.year < b.year) {
@@ -198,38 +199,13 @@ function ListPerformanceEvalution() {
                                 if (sheet.statusValue === ApprovalStatus.DONE) {
                                     editName = "確認";
                                 }
-                                const progressList: number[] | undefined = sheet.section?.items?.map((arg: any)=>{
-                                    const section: Section = arg;
-                                    let sum = 0;
-                                    let cnt = 0;
-                                    section.objective?.items?.forEach((arg: any) => {
-                                        const objective: Objective = arg;
-                                        if(objective && objective.progress){
-                                            sum += objective.progress || 0;
-                                            cnt++;
-                                        }
-                                    });
-                                    if(section && section.objective && section.objective.items){
-                                        return sum / cnt;
-                                    }else{
-                                        return -1;
-                                    }
-                                })
-                                let sum: number = 0;
-                                let cnt: number = 0;
-                                progressList?.forEach((progress: number)=>{
-                                    if(progress !== -1){
-                                        sum += progress;
-                                        cnt ++;
-                                    }
-                                })
-                                const avg: number = cnt !== 0 ? sum / cnt : -1;
+
                                 return (
                                     <tr key={sheet.id}>
                                         <td><Link to={`/reviewee/sheet/${sheet.id}`}>{editName}</Link></td>
                                         <td>{sheet.year}</td>
                                         <td>{sheet.secondEmployee ? sheet.secondEmployee.lastName : ""}{sheet.secondEmployee ? sheet.secondEmployee.firstName : ""}</td>
-                                        <td>{avg || "-"}%</td>
+                                        <td><DisplaySheetAverage sheet={sheet} /></td>
                                         <td>{getStatusValue(sheet.statusValue || -1)}</td>
                                         <td>{sheet.overAllEvaluation}</td>
                                         <td><a href="/#">プレビュー</a></td>
