@@ -11,7 +11,6 @@ import * as APIt from 'API';
 
 //カスタムコンポーネント
 import RevieweeSheetShow from "reviewee/sheet/index/index"
-import RevieweeSheetNew from "reviewee/sheet/new/index"
 import ListPerformanceEvalution from 'reviewee/list/performance';
 import ProgressReferenceList from 'reviewer/list/progress';
 import EvaluationScreen from "reviewer/sheet";
@@ -52,13 +51,13 @@ function App() {
     })()
   },[]);
 
+  
   return (
     <div>
       <UserContext.Provider value={user}>
         <BrowserRouter>
           <Switch>
             <Route exact path="/" component={ListPerformanceEvalution} />
-            <Route exact path="/reviewee/objective/new/:sheetId" component={RevieweeSheetNew} />
             <Route exact path="/reviewee/sheet/:sheetId" component={RevieweeSheetShow} />
             <Route exact path="/reviewee/list" component={ListPerformanceEvalution} />
             <Route exact path="/reviewer/list" component={ProgressReferenceList} />

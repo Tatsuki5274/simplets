@@ -23,6 +23,7 @@ import { AverageMediumGaugeBox } from './components/averageGauge/medium';
 import { Link } from 'react-router-dom';
 import { RevieweeSheetObjectiveModalStatus1 } from './components/objectiveModal/status1';
 import { RevieweeSheetObjectiveModalStatus3 } from './components/objectiveModal/status3';
+import { ObjectiveCreateModal } from './components/objectiveCreateModal';
 import { tableHeaderStyle } from 'common/globalStyle.module.scss';
 
 export const SheetContext = createContext<
@@ -124,7 +125,9 @@ function RevieweeSheetShow(props: Props) {
                     <ApprovalStatusBox statusValue={sheet.statusValue || -1}/>
                     <h2>業績評価</h2>
                     {sheet.statusValue === 1 || sheet.statusValue === 3 ?
-                    <AddObjectiveButton sheetId={sheetId} /> : null}
+                    <ObjectiveCreateModal
+                        sheetId={sheet.id}
+                    /> : null}
                     
                     <AverageMediumGaugeBox sheet={sheet} />
 

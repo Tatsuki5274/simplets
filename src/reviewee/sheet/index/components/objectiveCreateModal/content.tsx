@@ -16,15 +16,11 @@ import { SheetDao } from 'lib/dao/sheetDao';
 import ApprovalStatusBox from 'common/approvalStatusBox';
 
 type Props = {
-    match: {
-        params: {
-            sheetId: string
-        }
-    }
+    sheetId: string
 }
 
-function RevieweeSheetNew(props: Props){
-    const sheetId = props.match.params.sheetId;
+export function ObjectiveCreateModalContent(props: Props){
+    const sheetId = props.sheetId;
     const [sheet, setSheet] = useState<Sheet | null>(null)
 
     const [isRedirect, setIsRedirect] = useState<boolean>();
@@ -85,14 +81,8 @@ function RevieweeSheetNew(props: Props){
         return (
             <div>
                 {/* ヘッダーの表示 */}
-                <HeaderComponents />
                 
                 <Container>
-                    <Link to={`/reviewee/sheet/${sheetId}`} >
-                        <Button >戻る</Button>
-                    </Link>
-                    <ApprovalStatusBox statusValue={sheet.statusValue || -1} />
-                    <h2>業績目標設定</h2>
                     <Formik
                         initialValues={{
                             section: '',
@@ -141,7 +131,7 @@ function RevieweeSheetNew(props: Props){
                                 }
                                 if (createR.data) {
                                     // const createTM: APIt.CreateObjectiveMutation = createR.data;
-                                    setIsRedirect(true);
+                                    window.location.reload()
                                 } else {
                                     console.log("保存に失敗しました")
                                 }
@@ -218,5 +208,3 @@ function RevieweeSheetNew(props: Props){
         return <span>表示にエラーが生じました</span>
     }
 }
-
-export default RevieweeSheetNew;
