@@ -1,5 +1,5 @@
 import { Sheet } from "App"
-import { textareaDisplayStyle } from "common/globalStyle.module.scss"
+import { tableHeaderStyle, textareaDisplayStyle } from "common/globalStyle.module.scss"
 import React from "react"
 import { Table } from "react-bootstrap"
 
@@ -8,8 +8,8 @@ type Props = {
 }
 
 export const ReviewerSheetDetailInterviewReadonly = (props: Props)=>{
-    return <Table bordered striped>
-            <thead>
+    return <Table bordered>
+            <thead className={tableHeaderStyle}>
                 <tr>
                     <td>目的</td>
                     <td>実施日時</td>

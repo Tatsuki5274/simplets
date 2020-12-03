@@ -1,4 +1,5 @@
 import { Sheet } from "App"
+import { tableHeaderStyle } from "common/globalStyle.module.scss";
 import React from "react"
 import { Form, Table } from "react-bootstrap"
 import style from '../common/style.module.scss';
@@ -9,8 +10,8 @@ type Props = {
 }
 
 export const ReviewerSheetDetailInterviewEditable = (props: Props)=>{
-    return <Table bordered striped>
-            <thead>
+    return <Table bordered>
+            <thead className={tableHeaderStyle}>
                 <tr>
                     <td className={style.interviewPurposeTableStyle}>目的</td>
                     <td className={style.interviewPlanDateTableStyle}>実施日時</td>
