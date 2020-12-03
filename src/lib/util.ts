@@ -21,6 +21,18 @@ export function calcAvg(nums: (number | null)[]): number | null{
 
 /**
  * 
+ * @param num 対象の値
+ * @param d 四捨五入の桁数
+ * @returns 四捨五入結果
+ */
+export function round(num: number, d: number){
+    const n = d - 1 ;	// 小数点第n位まで残す
+    const result = Math.round( num * Math.pow( 10, n ) ) / Math.pow( 10, n ) ;
+    return result
+}
+
+/**
+ * 
  * @param sheet 進捗率を抽出したい元シート
  * @returns カテゴリ毎の進捗率平均値
  */

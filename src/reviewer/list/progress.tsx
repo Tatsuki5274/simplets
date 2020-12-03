@@ -14,7 +14,7 @@ import { Link } from 'react-router-dom';
 import { Field, Form, Formik } from 'formik';
 import { SheetDao } from 'lib/dao/sheetDao';
 import GaugeChart from 'react-gauge-chart';
-import { calcAvg} from 'lib/util';
+import { calcAvg, round} from 'lib/util';
 
 
 type ViewType = {
@@ -254,7 +254,7 @@ function ProgressReferenceList() {
                                 &nbsp;
                                 {view.groupName}
                                 &nbsp;
-                                {view.avg ? `${view.avg}%` : null}
+                                {view.avg ? `${round(view.avg, 2).toFixed(1)}%` : null}
 
                                 {view.avg ?
                                 <GaugeChart id={`chart-${view.sheetId}`}

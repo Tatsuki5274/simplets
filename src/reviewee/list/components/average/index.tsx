@@ -1,5 +1,5 @@
 import { Sheet } from "App"
-import { calcAvg } from "lib/util"
+import { calcAvg, round } from "lib/util"
 import React from "react"
 
 type Props = {
@@ -10,6 +10,7 @@ export function DisplaySheetAverage(props: Props) {
     // カテゴリ別の平均算出処理
     let avg: number | null = null
     const sections = props.sheet.section?.items
+    let result = "-"
     if(sections){
         const data = sections.map(section=>{
             let ret: (number | null)[]= []
@@ -29,9 +30,13 @@ export function DisplaySheetAverage(props: Props) {
 
         //それぞれの平均を算出
         avg = calcAvg(data2)
+        
+        if(avg || avg === 0){
+            result = `${avg.toFixed(1)}%`
+        }
     }
 
     return (
-        <span>{avg || avg === 0 ? `${avg}%` : "-"}</span>
+        <span>{result}</span>
     )
 }
