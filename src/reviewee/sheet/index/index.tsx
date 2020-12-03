@@ -5,7 +5,7 @@ import { getSheet } from 'graphql/queries'
 import { Sheet, Section, Objective } from 'App';
 import HeaderComponents from 'common/header';//ヘッダーの表示
 import ApprovalStatusBox from 'common/approvalStatusBox';
-import { RevieweeSidebar } from 'common/Sidebar';
+import { RevieweeSidebar, sidebarBackgroundColor } from 'common/Sidebar';
 import { SheetDao } from 'lib/dao/sheetDao';
 import { RevieweeSheetObjectiveReadonly } from './components/objective/readonly';
 import { RevieweeSheetObjectiveEditable } from './components/objective/editable';
@@ -99,13 +99,14 @@ function RevieweeSheetShow(props: Props) {
                 <RevieweeSheetObjectiveModalStatus3 objective={modalObjective} isShowModal={objectiveUpdateShow} handleClose={handleCloseObjectiveUpdate} /> :
                 null}
             </div>
-            <Row>
+            <Row >
                 <Col
                     xs={3}
                     sm={3}
                     md={3}
                     lg={3}
                     xl={3}
+                    style={sidebarBackgroundColor}
                 >
                     <RevieweeSidebar />
                 </Col>

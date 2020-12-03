@@ -64,3 +64,11 @@ const boxStyle: CSSProperties = {
     position: "sticky",
     top: "100px",
 }
+export const sidebarBackgroundColor: CSSProperties = {
+    backgroundColor: "#8080804d",
+}
+
+export const performanceSidebarBackgroundColor: CSSProperties = {
+    backgroundColor: "#8080804d",
+    height: "100vh"
+}

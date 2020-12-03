@@ -7,7 +7,7 @@ import { ListGroupsQuery } from 'API';
 import { GraphQLResult } from "@aws-amplify/api";
 import * as APIt from 'API';
 import { Group, Section, Sheet } from 'App';
-import SidebarComponents from 'common/Sidebar';
+import SidebarComponents, { sidebarBackgroundColor } from 'common/Sidebar';
 import HeaderComponents from 'common/header';//ヘッダーの表示
 import style from './progressStyle.module.scss';
 import { Link } from 'react-router-dom';
@@ -137,6 +137,7 @@ function ProgressReferenceList() {
                     md={3}
                     lg={3}
                     xl={3}
+                    style={sidebarBackgroundColor}
                 >
                     {/* サイドバーコンポーネント 表示 */}
                     <SidebarComponents />

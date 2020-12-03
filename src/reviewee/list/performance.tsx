@@ -8,7 +8,7 @@ import { ApprovalStatus, getStatusValue } from 'lib/getStatusValue'
 import { getEmployee, listCategorys, listSheets } from 'graphql/queries'
 import * as APIt from 'API';
 import { createSection, createSheet } from 'graphql/mutations';
-import SidebarComponents from 'common/Sidebar';
+import SidebarComponents, { performanceSidebarBackgroundColor } from 'common/Sidebar';
 import HeaderComponents from 'common/header';
 import { SheetDao } from 'lib/dao/sheetDao';
 import { EmployeeDao } from 'lib/dao/employeeDao';
@@ -158,6 +158,7 @@ function ListPerformanceEvalution() {
                     md={3}
                     lg={3}
                     xl={3}
+                    style={performanceSidebarBackgroundColor}
                 >
                     <SidebarComponents />
                 </Col>
