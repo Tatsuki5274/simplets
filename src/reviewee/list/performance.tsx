@@ -15,6 +15,7 @@ import { EmployeeDao } from 'lib/dao/employeeDao';
 import { CategoryDao } from 'lib/dao/categoryDao';
 import { SectionDao } from 'lib/dao/sectionDao';
 import { DisplaySheetAverage } from './components/average';
+import { tableHeaderStyle } from 'common/globalStyle.module.scss';
 
 const sortSheet = (a: Sheet, b: Sheet) => {
     if (a.year < b.year) {
@@ -182,7 +183,7 @@ function ListPerformanceEvalution() {
                         </Button>
                     }
                     <Table bordered>
-                        <thead>
+                        <thead className={tableHeaderStyle}>
                             <tr>
                                 <td></td>
                                 <td>年度</td>
