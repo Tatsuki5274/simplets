@@ -23,6 +23,7 @@ import { AverageMediumGaugeBox } from './components/averageGauge/medium';
 import { Link } from 'react-router-dom';
 import { RevieweeSheetObjectiveModalStatus1 } from './components/objectiveModal/status1';
 import { RevieweeSheetObjectiveModalStatus3 } from './components/objectiveModal/status3';
+import { tableHeaderStyle } from 'common/globalStyle.module.scss';
 
 export const SheetContext = createContext<
     {
@@ -136,8 +137,8 @@ function RevieweeSheetShow(props: Props) {
                         return (
                             <div key={section.id}>
                                 <AverageSmallGaugeBox section={section} />
-                                <Table striped bordered hover>
-                                    <thead>
+                                <Table bordered hover>
+                                    <thead className={tableHeaderStyle}>
                                         <tr>
                                             <td>#</td>
                                             <td>目標</td>

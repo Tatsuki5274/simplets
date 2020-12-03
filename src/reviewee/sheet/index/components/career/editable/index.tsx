@@ -1,3 +1,4 @@
+import { tableHeaderStyle } from "common/globalStyle.module.scss";
 import React, { useContext, useState } from "react"
 import { Button, Table } from "react-bootstrap";
 import { SheetContext } from "reviewee/sheet/index";
@@ -14,9 +15,9 @@ export const RevieweeSheetCareerEditable = () => {
     
     if(sheet){
         return (
-            <Table striped bordered hover>
+            <Table bordered hover>
                 <RevieweeSheetCareerModal isShowModal={careerPlanUpdateShow} handleClose={handleCloseCareerPlanUpdate} />
-                <thead>
+                <thead className={tableHeaderStyle}>
                     <tr>
                         <td>
                             本人希望

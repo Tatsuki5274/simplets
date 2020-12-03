@@ -1,3 +1,4 @@
+import { tableHeaderStyle } from "common/globalStyle.module.scss";
 import React, { useContext } from "react"
 import { Table } from "react-bootstrap";
 import { SheetContext } from "reviewee/sheet/index";
@@ -9,8 +10,8 @@ export const RevieweeSheetCareerReadonly = () => {
     
     if(sheet){
         return (
-            <Table striped bordered hover>
-                <thead>
+            <Table bordered hover>
+                <thead className={tableHeaderStyle}>
                     <tr>
                         <td>
                             本人希望

@@ -1,3 +1,4 @@
+import { tableHeaderStyle } from "common/globalStyle.module.scss"
 import React from "react"
 import { Table } from "react-bootstrap"
 
@@ -10,8 +11,8 @@ type Props = {
 
 export const YearlyTable = (props: Props) => {
     return (
-        <Table striped bordered hover>
-            <thead>
+        <Table bordered hover>
+            <thead className={tableHeaderStyle}>
                 <tr>
                     <td>■所属長コメント</td>
                     <td>日付</td>

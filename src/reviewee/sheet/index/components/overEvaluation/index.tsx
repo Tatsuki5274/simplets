@@ -5,6 +5,7 @@ import { SheetContext } from "../..";
 import * as APIt from 'API';
 import { SheetDao } from "lib/dao/sheetDao";
 import { listSheets } from "graphql/queries";
+import { tableHeaderStyle } from "common/globalStyle.module.scss";
 
 export const OverEvaluationTable = () => {
     const currentUser = useContext(UserContext);
@@ -56,8 +57,8 @@ export const OverEvaluationTable = () => {
     
     if(sheet && setSheet){
         return (
-            <Table striped bordered hover>
-                <thead>
+            <Table bordered hover>
+                <thead className={tableHeaderStyle}>
                     <tr>
                         <td>前々期</td>
                         <td>前期</td>
