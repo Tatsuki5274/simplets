@@ -102,14 +102,14 @@ export const RevieweeSheetObjectiveModalStatus3 = (props: Props)=>{
                             </Modal.Header>
                             <Modal.Body>
                                 <Row>
-                                    <Col>目標</Col>
-                                    <Col>
+                                    <Col xs={3} sm={3} md={3} lg={3} xl={3}>目標</Col>
+                                    <Col xs={9} sm={9} md={9} lg={9} xl={9}>
                                         <p>{props.objective.content}</p>
                                     </Col>
                                 </Row>
                                 <Row>
-                                    <Col md="6" lg="6" xl="6">開始予定日</Col>
-                                    <Col md="3" lg="3" xl="3">
+                                    <Col xs={3} sm={3} md={3} lg={3} xl={3}>開始予定日</Col>
+                                    <Col xs={3} sm={3} md={3} lg={3} xl={3}>
                                         <Form.Control
                                             required
                                             type="date"
@@ -122,8 +122,8 @@ export const RevieweeSheetObjectiveModalStatus3 = (props: Props)=>{
                                     </Col>
                                 </Row>
                                 <Row>
-                                    <Col md="6" lg="6" xl="6">完了予定日</Col>
-                                    <Col md="3" lg="3" xl="3">
+                                    <Col xs={3} sm={3} md={3} lg={3} xl={3}>完了予定日</Col>
+                                    <Col xs={3} sm={3} md={3} lg={3} xl={3}>
                                         <Form.Control
                                             required
                                             type="date"
@@ -136,8 +136,8 @@ export const RevieweeSheetObjectiveModalStatus3 = (props: Props)=>{
                                     </Col>
                                 </Row>
                                 <Row>
-                                    <Col md="6" lg="6" xl="6">自己評価</Col>
-                                    <Col md="2" lg="2" xl="1">
+                                    <Col xs={3} sm={3} md={3} lg={3} xl={3}>自己評価</Col>
+                                    <Col xs={2} sm={2} md={2} lg={2} xl={1}>
                                         <Form.Control
                                             as="select"
                                             name="selfEvaluation"
@@ -155,9 +155,8 @@ export const RevieweeSheetObjectiveModalStatus3 = (props: Props)=>{
                                     </Col>
                                 </Row>
                                 <Row>
-                                    <Col md="6" lg="6" xl="6">優先順位</Col>
-                                    {/* <Col md="1" lg="1" xl="1"> */}
-                                    <Col md="2" lg="2" xl="1">
+                                    <Col xs={3} sm={3} md={3} lg={3} xl={3}>優先順位</Col>
+                                    <Col xs={2} sm={2} md={2} lg={2} xl={1}>
                                         <Form.Control
                                             as="select"
                                             name="priority"
@@ -173,8 +172,8 @@ export const RevieweeSheetObjectiveModalStatus3 = (props: Props)=>{
                                     </Col>
                                 </Row>
                                 <Row>
-                                    <Col>実績</Col>
-                                    <Col>
+                                    <Col xs={3} sm={3} md={3} lg={3} xl={3}>実績</Col>
+                                    <Col xs={9} sm={9} md={9} lg={9} xl={9}>
                                         <Form.Control
                                             as="textarea"
                                             name="result"
