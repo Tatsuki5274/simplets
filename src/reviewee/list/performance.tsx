@@ -153,21 +153,21 @@ function ListPerformanceEvalution() {
             <HeaderComponents />
             <Row>
                 <Col
-                    xs={3}
-                    sm={3}
-                    md={3}
-                    lg={3}
-                    xl={3}
+                    xs={2}
+                    sm={2}
+                    md={2}
+                    lg={2}
+                    xl={2}
                     style={performanceSidebarBackgroundColor}
                 >
                     <SidebarComponents />
                 </Col>
                 <Col
-                    xs={9}
-                    sm={9}
-                    md={9}
-                    lg={9}
-                    xl={9}
+                    xs={10}
+                    sm={10}
+                    md={10}
+                    lg={10}
+                    xl={10}
                 >
                    <h2>業績評価一覧</h2>
                     {(sheets && sheets.find(sheet=>{

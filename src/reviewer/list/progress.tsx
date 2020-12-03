@@ -132,22 +132,22 @@ function ProgressReferenceList() {
             <HeaderComponents />
             <Row>
                 <Col
-                    xs={3}
-                    sm={3}
-                    md={3}
-                    lg={3}
-                    xl={3}
+                    xs={2}
+                    sm={2}
+                    md={2}
+                    lg={2}
+                    xl={2}
                     style={sidebarBackgroundColor}
                 >
                     {/* サイドバーコンポーネント 表示 */}
                     <SidebarComponents />
                 </Col>
                 <Col
-                    xs={9}
-                    sm={9}
-                    md={9}
-                    lg={9}
-                    xl={9}
+                    xs={10}
+                    sm={10}
+                    md={10}
+                    lg={10}
+                    xl={10}
                 >
                     <h2>進捗参照</h2><br />
                     <Formik
