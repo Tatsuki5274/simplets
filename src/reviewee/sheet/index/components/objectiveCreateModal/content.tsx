@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { CSSProperties, useEffect, useState } from 'react';
 import { Container, Row, Col, Button, Form, Badge } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { API, Auth, graphqlOperation } from 'aws-amplify';
@@ -8,12 +8,11 @@ import { getEmployee, getSheet } from 'graphql/queries';
 import * as APIt from 'API';
 import CategoryInput from "./categoryInput"
 import { createObjective } from 'graphql/mutations';
-import { Link, Redirect } from 'react-router-dom';
-import HeaderComponents from 'common/header';
+import { Redirect } from 'react-router-dom';
 import { ErrorMessage, Formik } from 'formik';
 import * as Yup from 'yup';
 import { SheetDao } from 'lib/dao/sheetDao';
-import ApprovalStatusBox from 'common/approvalStatusBox';
+import { inputFieldStyle } from 'common/globalStyle.module.scss';
 
 type Props = {
     sheetId: string
@@ -149,11 +148,18 @@ export function ObjectiveCreateModalContent(props: Props){
                                         if (section && section.category && section.category.name) {
                                             if (index === 0) {
                                                 return (
-                                                    <CategoryInput key={section.id} handleChange={props.handleChange} sectionId={section.id} categoryName={section.category?.name} defaultCheck={true}></CategoryInput>
+                                                    <CategoryInput
+                                                        key={section.id}
+                                                        handleChange={props.handleChange}
+                                                        sectionId={section.id}
+                                                        categoryName={section.category?.name}
+                                                        defaultCheck={true}
+                                                        style={categoryInputStyle}
+                                                    ></CategoryInput>
                                                 );
                                             } else {
                                                 return (
-                                                    <CategoryInput key={section.id} handleChange={props.handleChange} sectionId={section.id} categoryName={section.category?.name} defaultCheck={false}></CategoryInput>
+                                                    <CategoryInput key={section.id} handleChange={props.handleChange} sectionId={section.id} categoryName={section.category?.name} defaultCheck={false} style={categoryInputStyle}></CategoryInput>
                                                 );
                                             }
                                         } else {
@@ -163,39 +169,40 @@ export function ObjectiveCreateModalContent(props: Props){
                                     <p><ErrorMessage name="section" /></p>
                                 </div>
                                 <Form.Label>目標内容<Badge variant="danger">必須</Badge></Form.Label>
-                                <Form.Control as="textarea" name="content" onChange={props.handleChange}/>
+                                <Form.Control as="textarea" name="content" onChange={props.handleChange} className={inputFieldStyle}/>
                                 <p><ErrorMessage name="content" /></p>
 
                                 <Form.Label>優先順位<Badge variant="danger">必須</Badge></Form.Label>
-                                <Form.Control as="select" name="priority" onChange={props.handleChange}>
+                                <Form.Control as="select" name="priority" onChange={props.handleChange} style={priorityStyle} className={inputFieldStyle}>
                                     <option></option>
                                     <option>A</option>
                                     <option>B</option>
                                     <option>C</option>
                                 </Form.Control>
                                 <p><ErrorMessage name="priority" /></p>
-                                <Row>
-                                    <Col md="2" lg="2" xl="2">開始予定日<Badge variant="danger">必須</Badge></Col>
-                                    <Col md="4" lg="4" xl="4">
-                                        <Form.Control
-                                            //required
-                                            type="date"
-                                            name="expStartDate"
-                                            onChange={props.handleChange}
-                                        />
-                                        <ErrorMessage name="expStartDate" />
-                                    </Col>
-                                    <Col md="2" lg="2" xl="2">完了予定日<Badge variant="danger">必須</Badge></Col>
-                                    <Col md="4" lg="4" xl="4">
-                                        <Form.Control
-                                            //required
-                                            type="date"
-                                            name="expDoneDate"
-                                            onChange={props.handleChange}
-                                        />
-                                        <ErrorMessage name="expDoneDate" />
-                                    </Col>
-                                </Row>
+                                
+                                <Form.Label>開始予定日<Badge variant="danger">必須</Badge></Form.Label>
+                                <Form.Control
+                                    //required
+                                    type="date"
+                                    name="expStartDate"
+                                    onChange={props.handleChange}
+                                    className={inputFieldStyle}
+                                    style={expDateInputStyle}
+                                />
+                                <p><ErrorMessage name="expStartDate" /></p>
+
+                                <Form.Label>完了予定日<Badge variant="danger">必須</Badge></Form.Label>
+                                <Form.Control
+                                    //required
+                                    type="date"
+                                    name="expDoneDate"
+                                    onChange={props.handleChange}
+                                    className={inputFieldStyle}
+                                    style={expDateInputStyle}
+                                />
+                                <p><ErrorMessage name="expDoneDate" /></p>
+
                                 <Button type="submit">目標登録</Button>{' '}
                             </form>
                         )}
@@ -207,4 +214,16 @@ export function ObjectiveCreateModalContent(props: Props){
         console.error("sheetが存在しません")
         return <span>表示にエラーが生じました</span>
     }
+}
+
+const priorityStyle: CSSProperties = {
+    width: "100px"
+}
+const categoryInputStyle: CSSProperties = {
+    fontSize: "24px",
+    lineHeight: "40px",
+    display: "inline"
+}
+const expDateInputStyle: CSSProperties = {
+    width: "150px"
 }

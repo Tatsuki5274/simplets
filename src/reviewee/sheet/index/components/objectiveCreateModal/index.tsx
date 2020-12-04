@@ -20,7 +20,7 @@ export function ObjectiveCreateModal(props: Props){
             <Modal
                 show={show}
                 onHide={handleClose}
-                size="lg"
+                size="xl"
             >
                 <Modal.Header closeButton>
                 <Modal.Title>業績目標設定</Modal.Title>
