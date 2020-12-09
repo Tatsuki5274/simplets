@@ -55,7 +55,7 @@ export default SidebarComponents;
 export function RevieweeSidebar(){
     return (
         <div style={boxStyle}>
-            <Link to="/reviewee/list">一覧画面</Link>
+            <Link to="/reviewee/list">業績評価一覧</Link>
         </div>
     )
 }
