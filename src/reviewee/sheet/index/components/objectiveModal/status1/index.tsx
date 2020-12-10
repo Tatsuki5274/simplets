@@ -54,7 +54,7 @@ export const RevieweeSheetObjectiveModalStatus1 = (props: Props)=>{
                         // newSheet?.section?.items?.find
                     }
     
-                    // window.location.reload()
+                    window.location.reload()
                     props.handleClose();
     
                 }}
