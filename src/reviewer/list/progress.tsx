@@ -170,13 +170,13 @@ function ProgressReferenceList() {
                             <Form>
                                 <div>
                                     {/* 部門の選択肢を表示 */}
-                                    <span>
+                                    <span className={`${style.selectionSize} ${style.selectionMargin}`}>
                                         <Field type="radio" name="groupId" value="all" />
                                         全て
                                     </span>
                                     {groupList?.map((group: Group) => {
                                         return (
-                                            <span>
+                                            <span className={`${style.selectionSize} ${style.selectionMargin}`}>
                                                 <Field type="radio" name="groupId" value={group.id} />
                                                 {group.name}
                                             </span>
