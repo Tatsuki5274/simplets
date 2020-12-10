@@ -81,6 +81,15 @@ function ProgressReferenceList() {
             const listItems = await SheetDao.list(listSheets, filter)
             if(listItems){
                 // setSheets(listItems)
+                listItems.sort(function (a, b){
+                    // 社員番号の昇順でソート
+                    if(a.revieweeEmployee?.no && b.revieweeEmployee?.no){
+                        if(a.revieweeEmployee.no > b.revieweeEmployee.no){
+                            return 1
+                        }
+                    }
+                    return -1
+                })
                 setView(listItems)
             }
         })()
