@@ -210,7 +210,7 @@ function ListPerformanceEvalution() {
                                         <td><DisplaySheetAverage sheet={sheet} /></td>
                                         <td>{getStatusValue(sheet.statusValue || -1)}</td>
                                         <td>{sheet.overAllEvaluation}</td>
-                                        <td><a href="/#">プレビュー</a></td>
+                                        <td><a href={`/preview/sheet/${sheet.id}`}>プレビュー</a></td>
                                     </tr>
                                 )
                             })}
