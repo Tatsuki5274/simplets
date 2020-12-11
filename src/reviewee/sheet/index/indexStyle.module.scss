@@ -1,3 +1,32 @@
 .indexExpDoneDateExpired {
     background-color: #f54337;
 }
+.objectiveTableView{
+    thead{
+        tr{ 
+            td{
+                vertical-align: middle!important;
+            }
+            :nth-child(1), :nth-child(2){
+                text-align: center;
+            }
+            :nth-child(5), :nth-child(4), :nth-child(7), :nth-child(8), :nth-child(9) {
+                width: 70px;
+            }
+        }
+    }
+    tbody{
+        tr{
+
+            :nth-child(2), :nth-child(3){
+                text-align: center;
+                white-space: pre-line; //改行を表示
+                max-width: 250px;
+                word-break : break-all;
+            }
+            // :nth-child(5), :nth-child(4), :nth-child(7), :nth-child(8){
+            //     width: 70px;
+            // }
+        }
+    }
+}
