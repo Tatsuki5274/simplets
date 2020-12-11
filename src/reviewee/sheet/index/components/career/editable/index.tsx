@@ -1,4 +1,4 @@
-import { tableHeaderStyle } from "common/globalStyle.module.scss";
+import { tableHeaderStyle, textareaDisplayStyle } from "common/globalStyle.module.scss";
 import React, { useContext, useState } from "react"
 import { Button, Table } from "react-bootstrap";
 import { SheetContext } from "reviewee/sheet/index";
@@ -28,8 +28,8 @@ export const RevieweeSheetCareerEditable = () => {
                 </thead>
                 <tbody>
                     <tr>
-                        <td>{sheet.careerPlan}</td>
-                        <td>{sheet.careerPlanComment}</td>
+                        <td className={textareaDisplayStyle}>{sheet.careerPlan}</td>
+                        <td className={textareaDisplayStyle}>{sheet.careerPlanComment}</td>
                     </tr>
                 </tbody>
             </Table>

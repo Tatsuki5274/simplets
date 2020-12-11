@@ -1,4 +1,4 @@
-import { tableHeaderStyle } from "common/globalStyle.module.scss"
+import { tableHeaderStyle, textareaDisplayStyle } from "common/globalStyle.module.scss"
 import React from "react"
 import { Table } from "react-bootstrap"
 
@@ -22,9 +22,9 @@ export const YearlyTable = (props: Props) => {
             </thead>
             <tbody>
                 <tr>
-                    <td>{props.secondComment || "なし"}</td>
+                    <td className={textareaDisplayStyle}>{props.secondComment || "なし"}</td>
                     <td>{props.secondCheckDate?.replace(/-/g,'/') || "-"}</td>
-                    <td>{props.firstComment || "なし"}</td>
+                    <td className={textareaDisplayStyle}>{props.firstComment || "なし"}</td>
                     <td>{props.firstCheckDate?.replace(/-/g,'/') || "-"}</td>
                 </tr>
             </tbody>

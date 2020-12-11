@@ -137,6 +137,13 @@ function RevieweeSheetShow(props: Props) {
 
                         //作成日を元に項目明細をソート
                         const objectiveItems = section.objective?.items as Objective[];
+                        objectiveItems?.sort(function (a, b) {
+                            if (a.createdAt > b.createdAt) {
+                                return 1;
+                            } else {
+                                return -1;
+                            }
+                        });
 
                         
                         return (
