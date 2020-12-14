@@ -282,7 +282,7 @@ function ProgressReferenceList() {
                                     {view.categorys?.map(category=>{
                                         return category.id && category.avg ?
                                         <div id={category.id}>
-                                            {category.name}&nbsp;{category.avg}
+                                            {category.name}&nbsp;{round(category.avg, 2).toFixed(1)}
                                             <GaugeChart id={`chart-${category.sectionId}`}
                                                 nrOfLevels={10}
                                                 colors={['#EA4228', '#F5CD19', '#5BE12C']}
