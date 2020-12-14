@@ -80,7 +80,7 @@ export const ReviewerSheetPagesStatus10 = (props: Props) => {
                                                 secondComment: values.secondComment,
                                                 secondCheckDate: formatAWSDate(new Date()),
                                                 statusValue: work.sheet.statusValue,
-                                                overAllEvaluation: work.sheet.overAllEvaluation
+                                                overAllEvaluation: values.overAllEvaluation
                                             }
                                             let updatedSheet = await SheetDao.update(updateSheet, data);
                                             console.log("10updated", updatedSheet)
