@@ -70,5 +70,5 @@ export const sidebarBackgroundColor: CSSProperties = {
 
 export const performanceSidebarBackgroundColor: CSSProperties = {
     backgroundColor: "#8080804d",
-    height: "100vh"
+    minHeight: "100vh"
 }

@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { Container, Button, Card, Row, Col } from 'react-bootstrap';
+import { Button, Card, Row, Col } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { API, graphqlOperation } from 'aws-amplify';
 import { listGroups, listSheets } from 'graphql/queries';
 import { ListGroupsQuery } from 'API';
 import { GraphQLResult } from "@aws-amplify/api";
 import * as APIt from 'API';
-import { Group, Section, Sheet } from 'App';
-import SidebarComponents, { sidebarBackgroundColor } from 'common/Sidebar';
+import { Group, Sheet } from 'App';
+import SidebarComponents, { performanceSidebarBackgroundColor } from 'common/Sidebar';
 import HeaderComponents from 'common/header';//ヘッダーの表示
 import style from './progressStyle.module.scss';
 import { Link } from 'react-router-dom';
@@ -146,7 +146,7 @@ function ProgressReferenceList() {
                     md={1}
                     lg={1}
                     xl={1}
-                    style={sidebarBackgroundColor}
+                    style={performanceSidebarBackgroundColor}
                 >
                     {/* サイドバーコンポーネント 表示 */}
                     <SidebarComponents />
