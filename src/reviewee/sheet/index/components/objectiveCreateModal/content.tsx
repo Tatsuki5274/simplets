@@ -225,5 +225,5 @@ const categoryInputStyle: CSSProperties = {
     display: "inline"
 }
 const expDateInputStyle: CSSProperties = {
-    width: "150px"
+    width: "170px"
 }
