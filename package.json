@@ -16,6 +16,7 @@
     "@types/react-router-dom": "^5.1.5",
     "@types/yup": "^0.29.9",
     "aws-amplify": "^3.0.25",
+    "aws-amplify-react": "^4.2.16",
     "bootstrap": "^4.5.2",
     "dateformat": "^3.0.3",
     "formik": "^2.2.0",

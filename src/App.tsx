@@ -1,8 +1,10 @@
 //React
 import React, { createContext, useEffect, useState } from 'react';
-import {BrowserRouter, Route, Switch } from "react-router-dom";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { ConfirmSignIn, ConfirmSignUp, ForgotPassword, RequireNewPassword, SignUp, VerifyContact, withAuthenticator } from 'aws-amplify-react';
+
 //Amplify
-import { withAuthenticator } from '@aws-amplify/ui-react';
+// import { withAuthenticator } from '@aws-amplify/ui-react';
 import Amplify, { Auth } from 'aws-amplify';
 import awsconfig from './aws-exports';
 
@@ -15,6 +17,7 @@ import ListPerformanceEvalution from 'reviewee/list/performance';
 import ProgressReferenceList from 'reviewer/list/progress';
 import EvaluationScreen from "reviewer/sheet";
 import { PDFPage } from 'views/pdf/page';
+import MySignIn from 'views/auth/signIn';
 Amplify.configure(awsconfig);
 
 export type Sheet = Omit<Exclude<APIt.GetSheetQuery['getSheet'], null>, '__typename'>;
@@ -27,7 +30,7 @@ export type Company = Omit<Exclude<APIt.GetCompanyQuery['getCompany'], null>, '_
 export type SendEmail = Omit<Exclude<APIt.sendEmailInput, null>, '__typename'>;
 
 export const UserContext = createContext<any>(null)
- 
+
 //approvalStatusManagerの引数の型
 export type approvalStatusManagerMutationVariables = {
   // proceed = ステータスを次へ移動   remand = 差し戻し   reference = ステータスの参照
@@ -45,14 +48,14 @@ function App() {
   const [user, setUser] = useState<any>(null);
 
   useEffect(() => {
-    ;(async()=>{
+    ; (async () => {
       const user = await Auth.currentAuthenticatedUser()
       setUser(user);
       console.log("user", user)
     })()
-  },[]);
+  }, []);
 
-  
+
   return (
     <div>
       <UserContext.Provider value={user}>
@@ -71,4 +74,12 @@ function App() {
   );
 }
 
-export default withAuthenticator(App);
+export default withAuthenticator(App, false, [
+  <MySignIn />,
+  <ConfirmSignIn />,
+  <VerifyContact />,
+  <SignUp />,
+  <ConfirmSignUp />,
+  <ForgotPassword />,
+  <RequireNewPassword />
+]);
