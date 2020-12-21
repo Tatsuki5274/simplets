@@ -93,7 +93,7 @@ function ProgressReferenceList() {
                 setView(listItems)
             }
         })()
-    }, [today])
+    }, [])
 
     const setView = (listItems: Sheet[])=>{
         // 画面表示に必要な情報を加工する処理
