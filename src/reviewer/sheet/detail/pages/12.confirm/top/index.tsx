@@ -48,7 +48,9 @@ export const ReviewerSheetPagesStatus12Top = () => {
 
                                         const work = commandWorkFlow(Command.SUP1_DONE, sheet)
                                         const data: UpdateSheetInput = {
-                                            id: sheet.id,
+                                            companyID: sheet.companyID,
+                                            reviewee: sheet.reviewee,
+                                            year: sheet.year,
                                             statusValue: work.sheet.statusValue
                                         }
                                         let updatedSheet = await SheetDao.update(updateSheet, data);

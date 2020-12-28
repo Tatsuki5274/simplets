@@ -37,5 +37,4 @@ amplifyconfiguration.json
 amplify-build-config.json
 amplify-gradle-config.json
 amplifytools.xcconfig
-amplify/backend/api/sccgql/resolvers/
 amplify/backend/api/sccgql/pipelineFunctions/

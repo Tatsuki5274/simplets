@@ -18,7 +18,9 @@ export const SubmitButtonStatus11 = () => {
                     if (window.confirm("評価確認を完了しますか？")) {
                         const work = commandWorkFlow(Command.REVIEWEE_CONFIRM_SCORE, sheet)
                         let updatedSheet = await SheetDao.update(updateSheet, {
-                            id: sheet.id,
+                            companyID: sheet.companyID,
+                            reviewee: sheet.reviewee,
+                            year: sheet.year,
                             statusValue: sheet.statusValue
                         });
 

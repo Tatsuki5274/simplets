@@ -48,9 +48,10 @@ export const RevieweeSheetObjectiveEditable = (props: Props) => {
         const objectiveId = event.target.getAttribute('data-objective-id');
         const objectiveProgress = parseInt(event.currentTarget.value);
 
-        if (objectiveProgress >= 0 && objectiveProgress <= 100) {
+        if (objective && objectiveProgress >= 0 && objectiveProgress <= 100) {
             const updateI: APIt.UpdateObjectiveInput = {
-                id: objectiveId,
+                sectionKeys: objective.sectionKeys,
+                createdAt: objective.createdAt,
                 progress: objectiveProgress,
             };
             const updatedObjective = await ObjectiveDao.update(updateObjective, updateI)
@@ -65,7 +66,8 @@ export const RevieweeSheetObjectiveEditable = (props: Props) => {
         if(objective){
             if(window.confirm("目標を削除しますか？")){    
                 const deleteI: APIt.DeleteObjectiveInput = {
-                    id: objective.id
+                    createdAt: objective.createdAt,
+                    sectionKeys: objective.sectionKeys
                 };
                 const deletedObjective = await ObjectiveDao.delete(deleteObjective, deleteI)
                 if(deletedObjective){
@@ -83,13 +85,13 @@ export const RevieweeSheetObjectiveEditable = (props: Props) => {
     if(objective){
         return (
             <tr>
-                <td><Button variant="primary" data-objectiveId={objective.id} onClick={HandleChange}>変更</Button></td>
+                <td><Button variant="primary" data-objectiveId={""} onClick={HandleChange}>変更</Button></td>
                 <td>{objective.content}</td>
                 <td>{objective.result}</td>
                 <input
                     name="progress"
                     onChange={handleChangeProgress}
-                    data-objective-id={props.objective.id}
+                    data-objective-id={""}
                     placeholder={progress}
                     type="number"
                     min="0"
@@ -107,7 +109,7 @@ export const RevieweeSheetObjectiveEditable = (props: Props) => {
                     <Button
                         variant="danger"
                         onClick={handleDeleteObjective}
-                        data-objective-id={objective.id}
+                        data-objective-id={""}
                     >削除</Button>
                 </td>
     

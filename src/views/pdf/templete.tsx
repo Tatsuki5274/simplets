@@ -175,7 +175,7 @@ export const PDFTemplete = (props: Props) => {
 
                         return (
                           section ?
-                            <tr key={section.id}>
+                            <tr key={section.sheetKeys + section.sectionCategoryLocalId}>
                               <td>
                                 <p>{section.category?.name}</p>
                                 <Table borderless>

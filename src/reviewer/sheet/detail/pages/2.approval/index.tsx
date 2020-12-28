@@ -65,7 +65,9 @@ export const ReviewerSheetPagesStatus2 = ()=>{
                                     if(window.confirm("承認しますか？")){
                                         const work = commandWorkFlow(Command.SUP1_APPLOVAL, sheet)
                                         const data: UpdateSheetInput = {
-                                            id: sheet.id,
+                                            companyID: sheet.companyID,
+                                            reviewee: sheet.reviewee,
+                                            year: sheet.year,
                                             statusValue: work.sheet.statusValue,
                                             careerPlanComment: values.careerPlanComment,
                                         }
@@ -117,7 +119,9 @@ export const ReviewerSheetPagesStatus2 = ()=>{
                                         <Form.Group>
                                             <Button className={buttonComponentStyle} onClick={async () => {
                                                 const data: UpdateSheetInput = {
-                                                    id: sheet.id,
+                                                    companyID: sheet.companyID,
+                                                    reviewee: sheet.reviewee,
+                                                    year: sheet.year,
                                                     careerPlanComment: formik.values.careerPlanComment,
                                                     interviewPlanComment: formik.values.interviewPlanComment,
                                                     interviewPlanDate: formik.values.interviewPlanDate,

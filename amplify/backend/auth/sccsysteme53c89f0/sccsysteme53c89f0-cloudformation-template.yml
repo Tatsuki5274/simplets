@@ -159,6 +159,11 @@ Resources:
           Name: employeeId
           Mutable: true
           AttributeDataType: String
+
+        -
+          Name: companyId
+          Mutable: true
+          AttributeDataType: String
       
       AutoVerifiedAttributes: !Ref autoVerifiedAttributes
       

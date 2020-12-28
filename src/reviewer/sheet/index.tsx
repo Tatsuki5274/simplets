@@ -1,8 +1,8 @@
-import React, { useState, useEffect, createContext } from 'react';
+import React, { useState, useEffect, createContext, useContext } from 'react';
 import { API, graphqlOperation } from 'aws-amplify';
 import { GraphQLResult } from "@aws-amplify/api";
 import {  } from 'react-router';
-import { Sheet, Section} from 'App';
+import { Sheet, Section, UserContext} from 'App';
 import { GetSheetQuery } from 'API';
 import { updateObjective } from 'graphql/mutations';
 import * as APIt from 'API';
@@ -30,15 +30,18 @@ export const SheetContext = createContext<
 type Props = {
     match: {
         params: {
-            sheetId: string
+            companyId: string
+            reviewee: string
+            year: string
         }
     }
 }
 
 function EvalutionScreen(props: Props) {
-    const sheetId = props.match.params.sheetId;
+    // const sheetId = props.match.params.sheetId;
 
     // sheet 情報取得
+    const currentUser = useContext(UserContext);
     const [sheet, setSheet] = useState<Sheet>()
 
     useEffect(() => {
@@ -46,7 +49,9 @@ function EvalutionScreen(props: Props) {
             //const sheetId = props.match.params.sheetId;
 
             const input: APIt.GetSheetQueryVariables = {
-                id: sheetId
+                companyID: props.match.params.companyId,
+                reviewee: props.match.params.reviewee,
+                year: parseInt(props.match.params.year),
             }
             let response;
             try {
@@ -59,7 +64,7 @@ function EvalutionScreen(props: Props) {
             const sheetItem: Sheet = response.data?.getSheet as Sheet;
             setSheet(sheetItem);
         })()
-    }, [sheetId]);
+    }, []);
 
     // lastEvalutation 更新
     async function handleChangeObjective(event: any) {
@@ -73,7 +78,9 @@ function EvalutionScreen(props: Props) {
         console.log(event.currentTarget.value);
 
         const updateI: APIt.UpdateObjectiveInput = {
-            id: objectiveId,
+            // id: objectiveId,
+            createdAt: "", //仮で空白を設定
+            sectionKeys: "", //仮で空白を設定
             lastEvaluation: objectiveLastEvaluation,
         };
         const updatedObjective = await ObjectiveDao.update(updateObjective, updateI)
@@ -82,7 +89,7 @@ function EvalutionScreen(props: Props) {
             applyedSheet.section?.items?.forEach(section=>{
                 section?.objective?.items?.forEach(objective => {
                     if(objective){
-                        if(objective.id === objectiveId){
+                        if(objective.sectionKeys === objectiveId){
                             objective.lastEvaluation = objectiveLastEvaluation
                         }
                     }
@@ -104,7 +111,7 @@ function EvalutionScreen(props: Props) {
     //カテゴリ情報のnoを元に昇順でソート
     const sectionItems = sheet.section?.items as Section[];
     sectionItems?.sort(function (a, b) {
-        if (a?.category?.no! > b?.category?.no!) {
+        if (a?.category && b?.category && a.category.localID > b.category.localID) {
             return 1;
         } else {
             return -1;
@@ -126,19 +133,14 @@ function EvalutionScreen(props: Props) {
                         // 所属長が変更可能なコンポーネントを返却
                         return <ReviewerSheetPagesStatus10 sections={sectionItems} handleUpdateObjective={handleChangeObjective} />
                     }else if(sheet.statusValue === 12){
-                        if(sheet.reviewers){
-                            if(sheet.reviewers.length === 1){
-                                return <ReviewerSheetPagesStatus12Top />
-                            }
-                            else if(sheet.reviewers.length >= 2){
-                                // 読み取り専用のコンポーネントを返却
-                                return <ReviewerSheetPagesStatus12Second />
-                            }else{
-                                console.error("評価者の数が不正です。読み取り専用を表示します。")
-                                return <ReviewerSheetPagesReadonly sheet={sheet} sections={sectionItems} />
-                            }
+                        if(currentUser && sheet.topReviewers?.includes(currentUser.username)){
+                            // 部門長のコンポーネントを返却
+                            return <ReviewerSheetPagesStatus12Top />
+                        }else if(currentUser && sheet.secondReviewers?.includes(currentUser.username)){
+                            // 所属長のコンポーネントを返却
+                            return <ReviewerSheetPagesStatus12Second />
                         }else{
-                            console.error("評価者が登録されていません。読み取り専用を表示します。")
+                            // 読み取り専用のコンポーネントを返却
                             return <ReviewerSheetPagesReadonly sheet={sheet} sections={sectionItems} />
                         }
 

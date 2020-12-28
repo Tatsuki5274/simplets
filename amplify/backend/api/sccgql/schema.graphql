@@ -1,135 +1,130 @@
 type Company #会社
-@model(timestamps:{createdAt: "createdAt", updatedAt: "updatedAt"})
+@model
 @auth(
   rules: [
     {allow: groups, groups: ["Admin"]}
-
-    # グループに対する権限
-    {allow: groups, groupsField: "readGroups", operations: [read]}
-    {allow: groups, groupsField: "updateGroups", operations: [read, update]}  ]
+    {allow: private}
+  ]
 )
 {
   id: ID!
+
   name: String!
   shortName: String
   url: AWSURL
-  companyGroupName: String!   #社員全員が保持するグループ名 
-  companyManagerGroupName: String!    # 社内マネージャーが保持するグループ名
-  companyAdminGroupName: String!      # 社内管理者が保持するグループ名
+
   
-  # グループフィールド
-  readGroups: [String]    #読み込みを許可するグループ
-  updateGroups: [String]  #変更を許可するグループ
+}
+
+enum EmployeeType {
+  OTHER #不明・その他
+  NORMAL  #通常社員
+  MANAGER #マネージャー
+  SUPER_MANAGER #特権マネージャー
 }
 
 # ユーザーはcognitoで管理しています。
 # このEmployeeは名簿として機能します。認証とは関係がありません。
 type Employee #社員
+@key(fields: ["companyID", "username"])
+@key(fields: ["companyID", "localID"], name: "employee-local-id", queryField: "listEmployeeLocalID")
+@key(fields: ["companyID", "manager"], name: "employee-manager", queryField: "listEmployeesManager")
+# @key(fields: ["companyID", "employeeGroupLocalId", "username"], name: "employee-manager-group", queryField: "listEmployeesManagerGroup")
 @auth(
   rules:[
     {allow: groups, groups: ["Admin"]}
 
-    # グループに対する権限
-    {allow: groups, groupsField: "readGroups", operations: [read]}
-    {allow: groups, groupsField: "updateGroups", operations: [read, update]}
-
     # 社員本人の持つ権限
-    {allow: owner, operations: [read]}
+    {allow: owner, ownerField: "username", operations: [read]}
 
     { allow: private, provider: iam, operations: [read] }
+
+    {allow: private}
   ]
 )
-@model(timestamps:{createdAt: "createdAt", updatedAt: "updatedAt"})
+@model
 {
-  id: ID! #cognito usernameを格納する
-  no: String #社員番号
+  companyID: ID!
+  username: ID! #cognito username
+
+  localID: ID! #社員番号などの社内ID・UUID
+  employeeGroupLocalId: ID!
+  superiorUsername: ID!
+
+  # no: String #社員番号
   firstName: String!
   lastName: String!
   grade: Int! #等級
   email: String!
-  superior: Employee @connection  #上司(所属長や部門長)
-  group: Group @connection  #所属部門
+  superior: Employee @connection(fields: ["companyID", "superiorUsername"])  #上司(所属長や部門長)
+  group: Group @connection(fields: ["companyID", "employeeGroupLocalId"])  #所属部門
+  company: Company @connection (fields: ["companyID"])
 
-  # companyId: ID!
-  company: Company @connection #(fields: ["companyId"])
-  
-  # オーナーフィールド
-  owner: String   #社員本人
-
-  # グループフィールド
-  readGroups: [String]    #読み込みを許可するグループ
-  updateGroups: [String]  #変更を許可するグループ
+  manager: EmployeeType  #マネージャー
 }
 
 type Group #部門
-@model(timestamps:{createdAt: "createdAt", updatedAt: "updatedAt"})
-# @key(name: "listGroupBySort", fields: ["id", "sort"], queryField: "listGroupBySort")
+@model
+@key(fields: ["companyID", "localID"])
 @auth(
   rules: [
     {allow: groups, groups: ["Admin"]}
-
-    # グループに対する権限
-    {allow: groups, groupsField: "readGroups", operations: [read]}
-    {allow: groups, groupsField: "updateGroups", operations: [read, update]}
+    {allow: private}
   ]
 )
 {
-  id: ID!
+  companyID: ID!
+  localID: ID!  #ソート
+  
   # company: Company @connection  グループフィールドに置き換え
   name: String! #部門名
-  sort: Int  #ソート
 
-  # グループフィールド
-  readGroups: [String]    #読み込みを許可するグループ
-  updateGroups: [String]  #変更を許可するグループ
+  createdAt: AWSDateTime!
 }
 
 type Category
-@model(timestamps:{createdAt: "createdAt", updatedAt: "updatedAt"})
+@model
+@key(fields: ["companyID", "localID"])
 @auth(
   rules: [
     {allow: groups, groups: ["Admin"]}
-
-    # グループに対する権限
-    {allow: groups, groupsField: "readGroups", operations: [read]}
-    {allow: groups, groupsField: "updateGroups", operations: [read, update]}
+    {allow: private}
   ]
 )
 {
-  id: ID!
+  companyID: ID!
+  localID: ID!  #ソート
   # company: Company @connection  # グループフィールドへ置き換え
-  no: Int
-  name: String! #カテゴリ名
 
-  # グループフィールド
-  readGroups: [String]    #読み込みを許可するグループ
-  updateGroups: [String]  #変更を許可するグループ
+  name: String! #カテゴリ名
 }
 
 
 type Sheet
-@model(timestamps:{createdAt: "createdAt", updatedAt: "updatedAt"})
+@model
+@key(fields: ["companyID", "reviewee", "year"])
+@key(fields: ["companyID", "reviewee"], name: "sheet-reviewee", queryField: "listSheetReviewee")
+@key(fields: ["companyID", "year"], name: "sheet-year", queryField: "listSheetYear")
+@key(fields: ["companyID", "sheetGroupLocalId"], name: "sheet-group", queryField: "listSheetGroup")
 @auth(
   rules: [
     {allow: groups, groups: ["Admin"]}
 
-    # グループに対する権限
-    {allow: groups, groupsField: "readGroups", operations: [read]}
-    {allow: groups, groupsField: "updateGroups", operations: [read, update]}
-
-    # 評価者
-    {allow: owner, ownerField: "reviewers", operations: [update, read]}
-
-    # 被評価者
+    # オーナーフィールド
+    {allow: owner, ownerField: "topReviewers", operations: [update, read]}
+    {allow: owner, ownerField: "secondReviewers", operations: [update, read]}
     {allow: owner, ownerField: "reviewee", operations: [create, update, read]}
+    {allow: owner, ownerField: "referencer", operations: [read]}
 
     { allow: private, provider: iam, operations: [read, update] }
     
   ]
 )
 {
-  id: ID!
+  companyID: ID!
   year: Int!  #実施年度
+  # sheetSectionKey: String!
+
   grade: Int! #等級
   careerPlan: String  #キャリア計画本人希望
   careerPlanComment: String #話し合い結果コメント
@@ -153,78 +148,76 @@ type Sheet
   InterviewMid3Date: AWSDate    # 中間3
   InterviewMid3Comment: String
 
-  # connection
-  sheetGroupId: ID!
-  group: Group @connection(fields: ["sheetGroupId"])
-  # interviews: [Interview] @connection(keyName: "bySheet", fields: ["id"])
-  # company: Company @connection
-  revieweeEmployee: Employee @connection  #被評価者
-  secondEmployee: Employee @connection  #所属長
-  section: [Section] @connection(keyName: "bySection", fields: ["id"])  #カテゴリセクション
+  revieweeUsername: ID!
+  secondUsername: ID!
 
+  # connection
+  sheetGroupLocalId: ID!
+  group: Group @connection(fields: ["companyID", "sheetGroupLocalId"])
+  revieweeEmployee: Employee @connection(fields: ["companyID", "revieweeUsername"])  #被評価者
+  secondEmployee: Employee @connection(fields: ["companyID", "secondUsername"])  #所属長
+  section: [Section] @connection(fields: ["companyID"]) # companyID.reviewee.year
 
   #　オーナーフィールド
-  reviewee: String #被評価者
-  reviewers: [String] #評価者
-
-  # グループフィールド
-  readGroups: [String]    #読み込みを許可するグループ
-  updateGroups: [String]  #変更を許可するグループ
+  referencer: [String!] #参照者
+  reviewee: String! #被評価者
+  topReviewers: [String!] #部門長権限
+  secondReviewers: [String!] #所属長権限
 }
 
 type Section
-@model(timestamps:{createdAt: "createdAt", updatedAt: "updatedAt"})
-@key(name: "bySection", fields: ["sectionSheetId"])
+@model
+@key(fields: ["sheetKeys", "sectionCategoryLocalId"])
 @auth(
   rules: [
     {allow: groups, groups: ["Admin"]}
 
-    # グループに対する権限
-    {allow: groups, groupsField: "readGroups", operations: [read]}
-    {allow: groups, groupsField: "updateGroups", operations: [read, update]}
-
-    # 評価者
-    {allow: owner, ownerField: "reviewers", operations: [read]}
-
-    # 被評価者
-    {allow: owner, ownerField: "reviewee", operations: [create, read]}
+    # オーナーフィールド
+    {allow: owner, ownerField: "topReviewers", operations: [read]}
+    {allow: owner, ownerField: "secondReviewers", operations: [read]}
+    {allow: owner, ownerField: "reviewee", operations: [create, update, read, delete]}
+    {allow: owner, ownerField: "referencer", operations: [read]}
   ]
 )
 {
-  id: ID!
-  sectionSheetId: ID!
-  objective: [Objective] @connection(keyName: "objectiveBySection", fields: ["id"])
-  category: Category @connection
+  sheetKeys: ID! # companyID.reviewee.year の形式として保持
+  sectionCategoryLocalId: ID!
+  # sectionCategoryId: ID!
+  companyID: ID!
+
+
+  objective: [Objective] @connection(fields: ["sheetKeys"]) # sheetKeys.sectionCategoryLocalId
+  category: Category @connection(fields: ["companyID", "sectionCategoryLocalId"])
 
   #　オーナーフィールド
   reviewee: String #被評価者
-  reviewers: [String] #評価者
-
-  # グループフィールド
-  readGroups: [String]    #読み込みを許可するグループ
-  updateGroups: [String]  #変更を許可するグループ
+  topReviewers: [String!] #部門長権限
+  secondReviewers: [String!] #所属長権限
+  referencer: [String!] #参照者
 }
 
 type Objective
-@model(timestamps:{createdAt: "createdAt", updatedAt: "updatedAt"})
-@key(name: "objectiveBySection", fields: ["objectiveSectionId"])
+@model
+@key(fields: ["sectionKeys", "createdAt"])
+# @key(fields: ["sectionKeys", "objectiveCategoryDate"], name: "objective-sheet-category")
 @auth(
   rules: [
     {allow: groups, groups: ["Admin"]}
 
-    # グループに対する権限
-    {allow: groups, groupsField: "readGroups", operations: [read]}
-    {allow: groups, groupsField: "updateGroups", operations: [read, update]}
-
-    # 評価者
-    {allow: owner, ownerField: "reviewers", operations: [update, read]}
-
-    # 被評価者
+    # オーナーフィールド
+    {allow: owner, ownerField: "topReviewers", operations: [update, read]}
+    {allow: owner, ownerField: "secondReviewers", operations: [update, read]}
     {allow: owner, ownerField: "reviewee", operations: [create, update, read, delete]}
+    {allow: owner, ownerField: "referencer", operations: [read]}
   ]
 )
 {
-  id: ID!
+  sectionKeys: ID!  # sheetKeys.sectionCategoryLocalId の形式で保持
+  createdAt: AWSDateTime!
+  
+  # objectiveCategoryLocalId: ID!
+  companyID: ID!
+
   content: String! #目標本文
   result: String  #実績
   priority: String #優先順位
@@ -233,23 +226,21 @@ type Objective
   lastEvaluation: Int #最終評価
 
   progress: Int #進捗率(%)
-  status: String #progressへ置き換えて廃止予定！
 
   #expected date
   expStartDate: AWSDate  #開始予定日
   expDoneDate: AWSDate  #完了予定日
 
-  sheet: Sheet @connection
-  objectiveSectionId: ID!
-  section: Section @connection(fields: ["objectiveSectionId"])
+  # sheet: Sheet @connection
+  # objectiveSectionId: ID!
+  # section: Section @connection(fields: ["objectiveSectionId"])
   
   #　オーナーフィールド
   reviewee: String #被評価者
-  reviewers: [String] #評価者
+  topReviewers: [String!] #部門長権限
+  secondReviewers: [String!] #所属長権限
+  referencer: [String!] #参照者
 
-  # グループフィールド
-  readGroups: [String]    #読み込みを許可するグループ
-  updateGroups: [String]  #変更を許可するグループ
 }
 
 # type Query {

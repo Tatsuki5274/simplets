@@ -33,61 +33,27 @@ export function round(num: number, d: number){
 
 /**
  * 
- * @param sheet 進捗率を抽出したい元シート
- * @returns カテゴリ毎の進捗率平均値
+ * @param sheet sheetKeysを作成するための元シート
+ * @returns 一つでsheetKeysを一意に表現するkey
  */
-// export function extProgressFromSheet(sheet: Sheet): ((number | null)[] | null)[] | null{
-//     const prg = sheet.section?.items?.map(section => {
-//         let ret = null
-//         if(section?.objective?.items){
-//             ret = section?.objective?.items?.map(objective => {
-//                 return objective?.progress ? objective.progress : null
-//             })
-//         }
-//         return ret   
-//     })
-//     const ret = prg ? prg : null
-//     return ret
-// }
-
-
-// export function extProgressFromSection(section: Pick<Section, "objective">): (number | null)[] | null{
-//     let ret: (number | null)[] | null = null 
-//     if(section.objective?.items){
-//         ret = section.objective.items.map(objective => {
-//             return objective?.progress ? objective.progress : null
-//         })
-//     }
-//     return ret
-// }
-
+export function getSheetKeys(sheet: Sheet): string{
+    return `${sheet.companyID}.${sheet.reviewee}.${sheet.year}`
+}
 
 /**
  * 
- * @param inputSheet 変更元のシート
- * @param updateObjective 変更後の目標
+ * @param section sectionKeysを作成するための元データ
+ * @returns 一つでsectionKeysを一意に表現するkey
  */
-export function updateObjectiveFromSheet(baseSheet: Sheet, updateObjective: Objective): Sheet{
-    // 現状未使用のコード。リアルタイムでの更新のために今後利用する予定。
-    const result: Sheet = {...baseSheet}
+export function getSectionKeys(section: Section): string{
+    return `${section.sheetKeys}.${section.sectionCategoryLocalId}`
+}
 
-    result.section?.items?.forEach((section) => {
-        section?.objective?.items?.forEach(objective => {
-            if(objective?.id === updateObjective.id){
-                // 型不一致のため参照の上書きができない
-                // objective = updateObjective
-            }
-        })
-    })
-
-    // const foundSection = result.section?.items?.find(section => {
-    //     return section?.objective?.items?.find(objective => {
-    //         return objective?.id === updateObjective.id
-    //     })
-    // })
-    // let foundObjective = foundSection?.objective?.items?.find(objective => {
-    //     return objective?.id === updateObjective.id
-    // })
-    // foundObjective = updateObjective
-    return result
+/**
+ * 
+ * @param objective objectiveKeysを作成するための元データ
+ * @returns 一つでobjectiveを一意に表現するkey
+ */
+export function getObjectiveKeys(objective: Objective): string{
+    return `${objective.sectionKeys}.${objective.createdAt}`
 }

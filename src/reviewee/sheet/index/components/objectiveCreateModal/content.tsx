@@ -1,142 +1,115 @@
-import React, { CSSProperties, useEffect, useState } from 'react';
-import { Container, Row, Col, Button, Form, Badge } from 'react-bootstrap';
+import React, { CSSProperties, useContext, useEffect, useState } from 'react';
+import { Container, Button, Form, Badge } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { API, Auth, graphqlOperation } from 'aws-amplify';
-import { Employee, Sheet } from 'App';
-import { GraphQLResult } from "@aws-amplify/api";
-import { getEmployee, getSheet } from 'graphql/queries';
+import { Sheet, UserContext } from 'App';
+import { getSheet } from 'graphql/queries';
 import * as APIt from 'API';
 import CategoryInput from "./categoryInput"
 import { createObjective } from 'graphql/mutations';
-import { Redirect } from 'react-router-dom';
 import { ErrorMessage, Formik } from 'formik';
 import * as Yup from 'yup';
 import { SheetDao } from 'lib/dao/sheetDao';
 import { inputFieldStyle } from 'common/globalStyle.module.scss';
+import { getSectionKeys } from 'lib/util';
+import { ObjectiveDao } from 'lib/dao/objectiveDao';
 
 type Props = {
     sheetId: string
 }
 
-export function ObjectiveCreateModalContent(props: Props){
+type TypeForm = {
+    sectionKeys: string | null,
+    content: string,
+    priority: string,
+    expStartDate: string,
+    expDoneDate: string,
+}
+
+export function ObjectiveCreateModalContent(props: Props) {
     const sheetId = props.sheetId;
     const [sheet, setSheet] = useState<Sheet | null>(null)
 
-    const [isRedirect, setIsRedirect] = useState<boolean>();
+    const [defaultSectionKeys, setDefaultSectionKeys] = useState<string | null>(null);
 
-    const [companyGroups, setCompanyGroups] = useState<Array<string>>();
-
-
+    const currentUser = useContext(UserContext);
     // 社員情報を取得
-    async function getQueryEmployee() {
-        //ログインユーザ情報取得
-        const currentUser = await Auth.currentAuthenticatedUser();
-        const revieweeEmployeeID: string = currentUser.username;
 
-        //所属長,部門長情報取得
-        const input: APIt.GetEmployeeQueryVariables = {
-            id: revieweeEmployeeID
-        }
-        let response;
-        try {
-            response = (await API.graphql(graphqlOperation(getEmployee, input))
-            ) as GraphQLResult<APIt.GetEmployeeQuery>;
-        } catch (e) {
-            console.log("エラーを無視しています", e)
-            response = e;
-        }
-
-        const employeeItem: Employee = response.data.getEmployee as Employee;
-        
-        return employeeItem;
-    }
-
+    const today: number = new Date().getFullYear()
 
     useEffect(() => {
-        ;(async()=>{
-            const sheet = await SheetDao.get(getSheet, {id: sheetId})
-            if(sheet && sheet.section && sheet.section.items){
+        ; (async () => {
+            const sheet = await SheetDao.get(getSheet, { companyID: currentUser?.attributes["custom:companyId"] || "", reviewee: currentUser?.username || "", year: today })
+            if (sheet && sheet.section && sheet.section.items) {
                 sheet.section.items.sort(function (a, b) {
-                    if (a?.category?.no! > b?.category?.no!) {
+                    if (a?.category && b?.category && a.category.localID > b.category.localID) {
                         return 1;
                     } else {
                         return -1;
                     }
                 });
                 setSheet(sheet)
-            }
 
-            const revieweeEmployee: Employee = await getQueryEmployee();
-            const companyGroup = revieweeEmployee.company?.companyGroupName || "";
-            const companyManagerGroup = revieweeEmployee.company?.companyManagerGroupName || "";
-            const companyAdminGroup = revieweeEmployee.company?.companyAdminGroupName || "";
-            const groupItems = [companyGroup, companyManagerGroup, companyAdminGroup];
-            setCompanyGroups(groupItems);
+                const defaultSectionKeys = sheet.section.items[0] ? getSectionKeys(sheet.section.items[0]) : null;
+                setDefaultSectionKeys(defaultSectionKeys)
+            }
         })()
-      },[sheetId]);
-      
-    if(isRedirect) return <Redirect to={`/reviewee/sheet/${sheetId}`} />
-    else if(sheet){
+    }, [sheetId]);
+
+    if (sheet && defaultSectionKeys) {
         return (
             <div>
                 {/* ヘッダーの表示 */}
-                
+
                 <Container>
                     <Formik
                         initialValues={{
-                            section: '',
+                            sectionKeys: defaultSectionKeys,
                             content: '',
                             priority: '',
                             expStartDate: '',
                             expDoneDate: '',
-                        }}
+                        } as TypeForm
+                        }
                         validationSchema={Yup.object({
                             expStartDate: Yup.date().typeError('正しく入力してください').required('必須入力です'),
-                            expDoneDate: Yup.date().min(Yup.ref('expStartDate'), ({ min }) => `開始予定日より後の日付を入力してください`,)
+                            expDoneDate: Yup.date().min(Yup.ref('expStartDate'), ({ }) => `開始予定日より後の日付を入力してください`,)
                                 .typeError('正しく入力してください')
                                 .required('必須入力です'),
-                            section: Yup.string().required('目標カテゴリを選択してください'),
+                            sectionKeys: Yup.string().required('目標カテゴリを選択してください').nullable(),
                             priority: Yup.string().required('必須入力です'),
                             content: Yup.string().required('必須入力です')
                         })}
-                        
-                        onSubmit={async (values, actions) => {
+
+                        onSubmit={async (values) => {
                             console.log('values', values);
 
                             //会社グループ権限が存在する場合,ミューテーション処理を実行
-                            if(companyGroups && companyGroups[0] && companyGroups[1] && companyGroups[2]) {
-
+                            // if(companyGroups && companyGroups[0] && companyGroups[1] && companyGroups[2]) {
+                            if (values.sectionKeys) {
                                 const createI: APIt.CreateObjectiveInput = {
+                                    companyID: sheet.companyID,
+                                    sectionKeys: values.sectionKeys,
                                     content: values.content || "",
                                     priority: values.priority || "",
-                                    objectiveSectionId: values.section || "",
                                     expStartDate: values.expStartDate?.replace('T', '-') || "",
                                     expDoneDate: values.expDoneDate?.replace('T', '-') || "",
-                                    readGroups: [companyGroups[0]],
-                                    updateGroups: [companyGroups[1], companyGroups[2]],
-                                    progress: 0
+                                    progress: 0,
+                                    topReviewers: sheet.topReviewers,
+                                    secondReviewers: sheet.secondReviewers,
+                                    referencer: sheet.referencer
                                 }
-                                console.log('createI',createI);
-                                const createMV: APIt.CreateObjectiveMutationVariables = {
-                                    input: createI
-                                }
-                                let createR: GraphQLResult<APIt.CreateObjectiveMutation>
-                                try {
-                                    createR = await API.graphql(graphqlOperation(createObjective, createMV)) as GraphQLResult<APIt.CreateObjectiveMutation>;
-                                } catch (e) {
-                                    console.log("エラーを無視しています", e)
-                                    console.log("データが不完全でないことを確認してください")
-                                    createR = e;
-                                }
-                                if (createR.data) {
+                                console.log('createI', createI);
+                                const createR = await ObjectiveDao.create(createObjective, createI)
+                                if (createR) {
                                     // const createTM: APIt.CreateObjectiveMutation = createR.data;
                                     window.location.reload()
                                 } else {
                                     console.log("保存に失敗しました")
                                 }
-                            } else {
-                                console.error("会社グループの取得に失敗しました",companyGroups);
                             }
+                            // } else {
+                            //     console.error("会社グループの取得に失敗しました",companyGroups);
+                            // }
 
                         }}
                     >
@@ -146,30 +119,25 @@ export function ObjectiveCreateModalContent(props: Props){
                                     <Form.Label>目標カテゴリ<Badge variant="danger">必須</Badge></Form.Label>
                                     {sheet.section?.items?.map((section, index) => {
                                         if (section && section.category && section.category.name) {
-                                            if (index === 0) {
-                                                return (
-                                                    <CategoryInput
-                                                        key={section.id}
-                                                        handleChange={props.handleChange}
-                                                        sectionId={section.id}
-                                                        categoryName={section.category?.name}
-                                                        defaultCheck={true}
-                                                        style={categoryInputStyle}
-                                                    ></CategoryInput>
-                                                );
-                                            } else {
-                                                return (
-                                                    <CategoryInput key={section.id} handleChange={props.handleChange} sectionId={section.id} categoryName={section.category?.name} defaultCheck={false} style={categoryInputStyle}></CategoryInput>
-                                                );
-                                            }
+                                            return (
+                                                <CategoryInput
+                                                    key={getSectionKeys(section)}
+                                                    handleChange={props.handleChange}
+                                                    sectionKeys={getSectionKeys(section)}
+                                                    categoryName={section.category?.name}
+                                                    defaultCheck={index === 0}
+                                                    style={categoryInputStyle}
+                                                ></CategoryInput>
+                                            );
+
                                         } else {
                                             console.log("エラー: カテゴリが設定されていない可能性があります。")
                                         }
                                     })}
-                                    <p><ErrorMessage name="section" /></p>
+                                    <p><ErrorMessage name="sectionKeys" /></p>
                                 </div>
                                 <Form.Label>目標内容<Badge variant="danger">必須</Badge></Form.Label>
-                                <Form.Control as="textarea" name="content" onChange={props.handleChange} className={inputFieldStyle}/>
+                                <Form.Control as="textarea" name="content" onChange={props.handleChange} className={inputFieldStyle} />
                                 <p><ErrorMessage name="content" /></p>
 
                                 <Form.Label>優先順位<Badge variant="danger">必須</Badge></Form.Label>
@@ -180,7 +148,7 @@ export function ObjectiveCreateModalContent(props: Props){
                                     <option>C</option>
                                 </Form.Control>
                                 <p><ErrorMessage name="priority" /></p>
-                                
+
                                 <Form.Label>開始予定日<Badge variant="danger">必須</Badge></Form.Label>
                                 <Form.Control
                                     //required
@@ -210,7 +178,7 @@ export function ObjectiveCreateModalContent(props: Props){
                 </Container>
             </div>
         )
-    }else{
+    } else {
         console.error("sheetが存在しません")
         return <span>表示にエラーが生じました</span>
     }

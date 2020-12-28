@@ -3,7 +3,7 @@ import { Form } from 'react-bootstrap';
 
 
 type Props = {
-    sectionId: string,
+    sectionKeys: string,
     categoryName: string,
     handleChange: any,
     defaultCheck: boolean,
@@ -13,10 +13,10 @@ function CategoryInput(props: Props){
     return (
         <div>
             <Form.Check
-                name="section"
+                name="sectionKeys"
                 type="radio"
                 inline
-                value={props.sectionId}
+                value={props.sectionKeys}
                 onChange={props.handleChange}
                 defaultChecked={props.defaultCheck}
             />

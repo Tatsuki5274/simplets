@@ -153,8 +153,8 @@ function getMailObject(key: number, sheet: Sheet, reason?: string): SendEmail | 
             const protocol = window.location.protocol;
             const hostName = window.location.host;
             const hostUrl = protocol + '//' + hostName;
-            const revieweeUrl = `${hostUrl}/reviewee/sheet/${sheet.id}`;
-            const reviewerUrl = `${hostUrl}/reviewer/sheet/${sheet.id}`;
+            const revieweeUrl = `${hostUrl}/reviewee/company/${sheet.companyID}/reviewee/${sheet.reviewee}/year/${sheet.year}`;
+            const reviewerUrl = `${hostUrl}/reviewer/company/${sheet.companyID}/reviewee/${sheet.reviewee}/year/${sheet.year}`;
 
 
             switch (key) {

@@ -14,7 +14,6 @@ import { RevieweeSheetCareerReadonly } from './components/career/readonly';
 import { SubmitButtonStatus1 } from './components/submit/status1';
 import { SubmitButtonStatus3 } from './components/submit/status3';
 import { SubmitButtonStatus11 } from './components/submit/status11';
-import { AddObjectiveButton } from './components/buttons/AddObjective';
 import { OverEvaluationTable } from './components/overEvaluation';
 import { BorderTable } from './components/border';
 import { YearlyTable } from './components/yearly';
@@ -40,14 +39,16 @@ export const SheetContext = createContext<
 type Props = {
     match: {
         params: {
-            sheetId: string
+            companyId: string
+            reviewee: string
+            year: string
         }
     }
 }
 
 function RevieweeSheetShow(props: Props) {
     
-    const sheetId = props.match.params.sheetId;
+    // const sheetId = props.match.params.sheetId;
 
     const [sheet, setSheet] = useState<Sheet>();
 
@@ -62,16 +63,15 @@ function RevieweeSheetShow(props: Props) {
     // const handleCloseCareerPlanUpdate = () => setCareerPlanUpdateShow(false);
     // const handleShowCareerPlanUpdate = () => setCareerPlanUpdateShow(true);
 
-
     //表示用データ
     useEffect(() => {
         ; (async () => {
-            const sheet = await SheetDao.get(getSheet, {id: sheetId})
+            const sheet = await SheetDao.get(getSheet, {companyID:props.match.params.companyId, reviewee:props.match.params.reviewee, year:parseInt(props.match.params.year)})
             if(sheet){
                 setSheet(sheet);
             }
         })()
-    }, [sheetId]);
+    }, []);
 
     if (sheet === undefined) return <p>Loading</p>
     else if (sheet === null) {
@@ -82,7 +82,7 @@ function RevieweeSheetShow(props: Props) {
     //カテゴリ情報のnoを元に昇順でソート
     const sectionItems = sheet.section?.items as Section[];
     sectionItems?.sort(function (a, b) {
-        if (a?.category?.no! > b?.category?.no!) {
+        if (a?.category && b?.category && a.category.localID > b.category.localID) {
             return 1;
         } else {
             return -1;
@@ -128,7 +128,7 @@ function RevieweeSheetShow(props: Props) {
                     <h2>業績評価</h2>
                     {sheet.statusValue === 1 || sheet.statusValue === 3 ?
                     <ObjectiveCreateModal
-                        sheetId={sheet.id}
+                        sheetId={sheet.sheetGroupLocalId}
                     /> : null}
                     
                     <AverageMediumGaugeBox sheet={sheet} />
@@ -147,7 +147,7 @@ function RevieweeSheetShow(props: Props) {
 
                         
                         return (
-                            <div key={section.id}>
+                            <div key={section.sheetKeys}>
                                 <AverageSmallGaugeBox section={section} />
                                 <Table bordered hover className={style.objectiveTableView}>
                                     <thead className={tableHeaderStyle}>

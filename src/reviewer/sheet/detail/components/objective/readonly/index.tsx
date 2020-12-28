@@ -1,6 +1,7 @@
 import { Objective, Section } from "App";
 import { tableHeaderStyle } from "common/globalStyle.module.scss";
 import dateFormat from "dateformat";
+import { getObjectiveKeys, getSectionKeys } from "lib/util";
 import React from "react"
 import { Table } from "react-bootstrap";
 import style from '../common/style.module.scss';
@@ -25,7 +26,7 @@ export const ReviewerSheetDetailObjectiveReadonly = (props: Props) => {
             });
 
             return (
-                <div key={section.id}>
+                <div key={getSectionKeys(section)}>
                     <h4>{section.category?.name}</h4>
                     <Table bordered className={style.ReviewerObjectiveTableView}>
                         <thead className={`${tableHeaderStyle}`}>
@@ -53,7 +54,7 @@ export const ReviewerSheetDetailObjectiveReadonly = (props: Props) => {
                                     styleObjective = "";
                                 }
                                 return (
-                                    <tr key={objective.id} className={styleObjective}>
+                                    <tr key={getObjectiveKeys(objective)} className={styleObjective}>
 
                                         {/* 目標本文 */}
                                         <td>{objective.content}</td>

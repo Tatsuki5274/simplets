@@ -1,11 +1,11 @@
 {
-    "AppSyncApiName": "sccgql",
-    "DynamoDBBillingMode": "PAY_PER_REQUEST",
-    "DynamoDBEnableServerSideEncryption": false,
-    "AuthCognitoUserPoolId": {
-        "Fn::GetAtt": [
-            "authsccsysteme53c89f0",
-            "Outputs.UserPoolId"
-        ]
-    }
+  "AppSyncApiName": "sccgql",
+  "DynamoDBBillingMode": "PAY_PER_REQUEST",
+  "DynamoDBEnableServerSideEncryption": false,
+  "AuthCognitoUserPoolId": {
+    "Fn::GetAtt": [
+      "authsccsysteme53c89f0",
+      "Outputs.UserPoolId"
+    ]
+  }
 }

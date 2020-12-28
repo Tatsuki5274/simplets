@@ -18,7 +18,9 @@ export const SubmitButtonStatus1 = () => {
                     if (window.confirm("目標を提出しますか？")) {
                         const work = commandWorkFlow(Command.REVIEWEE_SUBMIT, sheet)
                         let updatedSheet = await SheetDao.update(updateSheet, {
-                            id: sheet.id,
+                            companyID: sheet.companyID,
+                            reviewee: sheet.reviewee,
+                            year: sheet.year,
                             statusValue: sheet.statusValue
                         });
 

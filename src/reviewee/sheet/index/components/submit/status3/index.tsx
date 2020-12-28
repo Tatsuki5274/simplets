@@ -41,7 +41,9 @@ export const SubmitButtonStatus3 = () => {
                         if (window.confirm("実績と自己評価を提出しますか？")) {
                             const work = commandWorkFlow(Command.REVIEWEE_INPUT_RESULT, sheet)
                             let updatedSheet = await SheetDao.update(updateSheet, {
-                                id: sheet.id,
+                                companyID: sheet.companyID,
+                                reviewee: sheet.reviewee,
+                                year: sheet.year,
                                 statusValue: sheet.statusValue
                             });
 
@@ -68,7 +70,9 @@ export const SubmitButtonStatus3 = () => {
                         if (window.confirm("目標内容の差し戻しを行いますか？")) {
                             const work = commandWorkFlow(Command.REVIEWEE_CHANGE_OBJECTIVE, sheet)
                             let updatedSheet = await SheetDao.update(updateSheet, {
-                                id: work.sheet.id,
+                                companyID: work.sheet.companyID,
+                                reviewee: work.sheet.reviewee,
+                                year: work.sheet.year,
                                 statusValue: work.sheet.statusValue
                             });
                             if (updatedSheet) {

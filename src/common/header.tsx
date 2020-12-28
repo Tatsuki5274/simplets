@@ -1,5 +1,5 @@
-import { Employee } from 'App';
-import React, { useEffect, useState } from 'react';
+import { Employee, UserContext } from 'App';
+import React, { useContext, useEffect, useState } from 'react';
 import * as APIt from 'API';
 import  {  API, Auth, graphqlOperation } from 'aws-amplify';
 import { getEmployee } from 'graphql/queries';
@@ -14,36 +14,38 @@ import { AmplifySignOut } from '@aws-amplify/ui-react';
 function HeaderComponents() {    
     //所属する部署と社員名のデータを取得
     const [employee, setEmployee] = useState<Employee>()
-    
+    const currentUser = useContext(UserContext);
     
     //ログインユーザーデータ格納      
     useEffect(() => {
         ; (async () => {
 
-            try {
-                const currentUser = await Auth.currentAuthenticatedUser()
-                console.log("currentUser", currentUser)
+            if(currentUser){
+                try {
+                    console.log("currentUser", currentUser)
 
-                const employee: APIt.GetEmployeeQueryVariables = {
-                    id: currentUser.username
-                }
-                let response: GraphQLResult<GetEmployeeQuery>
-                try{
-                    response = (await API.graphql(graphqlOperation(getEmployee, employee))
-                    ) as GraphQLResult<GetEmployeeQuery>;
-                }catch(e){
-                    console.log(e);
-                    response = e;
-                }
+                    const employee: APIt.GetEmployeeQueryVariables = {
+                        username: currentUser?.username || "",
+                        companyID: currentUser?.attributes['custom:companyId'] || ""
+                    }
+                    let response: GraphQLResult<GetEmployeeQuery>
+                    try{
+                        response = (await API.graphql(graphqlOperation(getEmployee, employee))
+                        ) as GraphQLResult<GetEmployeeQuery>;
+                    }catch(e){
+                        console.log(e);
+                        response = e;
+                    }
 
-                const employeeItem = response.data?.getEmployee as Employee;
-                setEmployee(employeeItem);
-            } catch (e) {
-                console.error(e);
+                    const employeeItem = response.data?.getEmployee as Employee;
+                    setEmployee(employeeItem);
+                } catch (e) {
+                    console.error(e);
+                }
             }
 
         })()
-    }, []);
+    }, [currentUser]);
 
 
     //ヘッダー表示

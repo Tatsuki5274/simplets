@@ -64,5 +64,27 @@
         "sendEmail": {}
       }
     }
+  },
+  "refactor": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-sccsystem-refactor-102751-authRole",
+      "UnauthRoleArn": "arn:aws:iam::251893532135:role/amplify-sccsystem-refactor-102751-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::251893532135:role/amplify-sccsystem-refactor-102751-authRole",
+      "Region": "ap-northeast-1",
+      "DeploymentBucketName": "amplify-sccsystem-refactor-102751-deployment",
+      "UnauthRoleName": "amplify-sccsystem-refactor-102751-unauthRole",
+      "StackName": "amplify-sccsystem-refactor-102751",
+      "StackId": "arn:aws:cloudformation:ap-northeast-1:251893532135:stack/amplify-sccsystem-refactor-102751/e90963c0-43f4-11eb-9d42-0eaff5e45a0a",
+      "AmplifyAppId": "d5cvlroqr6enf"
+    },
+    "categories": {
+      "auth": {
+        "sccsysteme53c89f0": {}
+      },
+      "function": {
+        "approvalStatusManager": {},
+        "sendEmail": {}
+      }
+    }
   }
 }

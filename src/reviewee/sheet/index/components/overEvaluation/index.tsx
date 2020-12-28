@@ -21,34 +21,36 @@ export const OverEvaluationTable = () => {
             if(sheet){
                 const thisYear = sheet.year
 
-                const input: APIt.ListSheetsQueryVariables = {
-                    filter: {
-                        year: {
-                            between: [thisYear - 2, thisYear - 1]
-                        },
-                        reviewee:{
-                            eq: currentUser.username
+                if(currentUser){
+                    const input: APIt.ListSheetsQueryVariables = {
+                        filter: {
+                            year: {
+                                between: [thisYear - 2, thisYear - 1]
+                            },
+                            reviewee:{
+                                eq: currentUser.username
+                            }
                         }
                     }
-                }
-                const gotSheets = await SheetDao.list(listSheets, input)
+                    const gotSheets = await SheetDao.list(listSheets, input)
 
-                if(gotSheets){
-                    if(gotSheets.length > 2){
-                        console.error("業績評価年度に重複があります。前期前々期の記録に想定されない値が格納される場合があります。", gotSheets)
+                    if(gotSheets){
+                        if(gotSheets.length > 2){
+                            console.error("業績評価年度に重複があります。前期前々期の記録に想定されない値が格納される場合があります。", gotSheets)
+                        }
+                        let results: (number | null)[] = [null, null]
+
+                        // 前期の記録を取得
+                        results[0] = gotSheets.find((sheet)=>{
+                            return sheet?.year === thisYear - 1
+                        })?.overAllEvaluation || null
+                        // 前々期の記録を取得
+                        results[1] = gotSheets.find((sheet)=>{
+                            return sheet?.year === thisYear - 2
+                        })?.overAllEvaluation || null
+
+                        setPreviousPeriod(results)
                     }
-                    let results: (number | null)[] = [null, null]
-
-                    // 前期の記録を取得
-                    results[0] = gotSheets.find((sheet)=>{
-                        return sheet?.year === thisYear - 1
-                    })?.overAllEvaluation || null
-                    // 前々期の記録を取得
-                    results[1] = gotSheets.find((sheet)=>{
-                        return sheet?.year === thisYear - 2
-                    })?.overAllEvaluation || null
-
-                    setPreviousPeriod(results)
                 }
 
             }

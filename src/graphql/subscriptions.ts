@@ -9,11 +9,6 @@ export const onCreateCompany = /* GraphQL */ `
       name
       shortName
       url
-      companyGroupName
-      companyManagerGroupName
-      companyAdminGroupName
-      readGroups
-      updateGroups
       createdAt
       updatedAt
     }
@@ -26,11 +21,6 @@ export const onUpdateCompany = /* GraphQL */ `
       name
       shortName
       url
-      companyGroupName
-      companyManagerGroupName
-      companyAdminGroupName
-      readGroups
-      updateGroups
       createdAt
       updatedAt
     }
@@ -43,11 +33,6 @@ export const onDeleteCompany = /* GraphQL */ `
       name
       shortName
       url
-      companyGroupName
-      companyManagerGroupName
-      companyAdminGroupName
-      readGroups
-      updateGroups
       createdAt
       updatedAt
     }
@@ -56,11 +41,9 @@ export const onDeleteCompany = /* GraphQL */ `
 export const onCreateGroup = /* GraphQL */ `
   subscription OnCreateGroup {
     onCreateGroup {
-      id
+      companyID
+      localID
       name
-      sort
-      readGroups
-      updateGroups
       createdAt
       updatedAt
     }
@@ -69,11 +52,9 @@ export const onCreateGroup = /* GraphQL */ `
 export const onUpdateGroup = /* GraphQL */ `
   subscription OnUpdateGroup {
     onUpdateGroup {
-      id
+      companyID
+      localID
       name
-      sort
-      readGroups
-      updateGroups
       createdAt
       updatedAt
     }
@@ -82,11 +63,9 @@ export const onUpdateGroup = /* GraphQL */ `
 export const onDeleteGroup = /* GraphQL */ `
   subscription OnDeleteGroup {
     onDeleteGroup {
-      id
+      companyID
+      localID
       name
-      sort
-      readGroups
-      updateGroups
       createdAt
       updatedAt
     }
@@ -95,11 +74,9 @@ export const onDeleteGroup = /* GraphQL */ `
 export const onCreateCategory = /* GraphQL */ `
   subscription OnCreateCategory {
     onCreateCategory {
-      id
-      no
+      companyID
+      localID
       name
-      readGroups
-      updateGroups
       createdAt
       updatedAt
     }
@@ -108,11 +85,9 @@ export const onCreateCategory = /* GraphQL */ `
 export const onUpdateCategory = /* GraphQL */ `
   subscription OnUpdateCategory {
     onUpdateCategory {
-      id
-      no
+      companyID
+      localID
       name
-      readGroups
-      updateGroups
       createdAt
       updatedAt
     }
@@ -121,24 +96,35 @@ export const onUpdateCategory = /* GraphQL */ `
 export const onDeleteCategory = /* GraphQL */ `
   subscription OnDeleteCategory {
     onDeleteCategory {
-      id
-      no
+      companyID
+      localID
       name
-      readGroups
-      updateGroups
       createdAt
       updatedAt
     }
   }
 `;
 export const onCreateSection = /* GraphQL */ `
-  subscription OnCreateSection($reviewers: String, $reviewee: String) {
-    onCreateSection(reviewers: $reviewers, reviewee: $reviewee) {
-      id
-      sectionSheetId
+  subscription OnCreateSection(
+    $topReviewers: String
+    $secondReviewers: String
+    $reviewee: String
+    $referencer: String
+  ) {
+    onCreateSection(
+      topReviewers: $topReviewers
+      secondReviewers: $secondReviewers
+      reviewee: $reviewee
+      referencer: $referencer
+    ) {
+      sheetKeys
+      sectionCategoryLocalId
+      companyID
       objective {
         items {
-          id
+          sectionKeys
+          createdAt
+          companyID
           content
           result
           priority
@@ -146,359 +132,53 @@ export const onCreateSection = /* GraphQL */ `
           firstEvaluation
           lastEvaluation
           progress
-          status
           expStartDate
           expDoneDate
-          objectiveSectionId
-          section {
-            id
-            sectionSheetId
-            objective {
-              items {
-                id
-                content
-                result
-                priority
-                selfEvaluation
-                firstEvaluation
-                lastEvaluation
-                progress
-                status
-                expStartDate
-                expDoneDate
-                objectiveSectionId
-                section {
-                  id
-                  sectionSheetId
-                  reviewee
-                  reviewers
-                  readGroups
-                  updateGroups
-                  createdAt
-                  updatedAt
-                }
-                reviewee
-                reviewers
-                readGroups
-                updateGroups
-                createdAt
-                updatedAt
-                sheet {
-                  id
-                  year
-                  grade
-                  careerPlan
-                  careerPlanComment
-                  reviewComment
-                  reviewDate
-                  selfCheckDate
-                  firstComment
-                  firstCheckDate
-                  secondComment
-                  secondCheckDate
-                  overAllEvaluation
-                  statusValue
-                  interviewPlanDate
-                  interviewPlanComment
-                  InterviewMid1Date
-                  InterviewMid1Comment
-                  InterviewMid2Date
-                  InterviewMid2Comment
-                  InterviewMid3Date
-                  InterviewMid3Comment
-                  sheetGroupId
-                  reviewee
-                  reviewers
-                  readGroups
-                  updateGroups
-                  createdAt
-                  updatedAt
-                }
-              }
-              nextToken
-            }
-            category {
-              id
-              no
-              name
-              readGroups
-              updateGroups
-              createdAt
-              updatedAt
-            }
-            reviewee
-            reviewers
-            readGroups
-            updateGroups
-            createdAt
-            updatedAt
-          }
           reviewee
-          reviewers
-          readGroups
-          updateGroups
-          createdAt
+          topReviewers
+          secondReviewers
+          referencer
           updatedAt
-          sheet {
-            id
-            year
-            grade
-            careerPlan
-            careerPlanComment
-            reviewComment
-            reviewDate
-            selfCheckDate
-            firstComment
-            firstCheckDate
-            secondComment
-            secondCheckDate
-            overAllEvaluation
-            statusValue
-            interviewPlanDate
-            interviewPlanComment
-            InterviewMid1Date
-            InterviewMid1Comment
-            InterviewMid2Date
-            InterviewMid2Comment
-            InterviewMid3Date
-            InterviewMid3Comment
-            sheetGroupId
-            group {
-              id
-              name
-              sort
-              readGroups
-              updateGroups
-              createdAt
-              updatedAt
-            }
-            section {
-              items {
-                id
-                sectionSheetId
-                objective {
-                  nextToken
-                }
-                category {
-                  id
-                  no
-                  name
-                  readGroups
-                  updateGroups
-                  createdAt
-                  updatedAt
-                }
-                reviewee
-                reviewers
-                readGroups
-                updateGroups
-                createdAt
-                updatedAt
-              }
-              nextToken
-            }
-            reviewee
-            reviewers
-            readGroups
-            updateGroups
-            createdAt
-            updatedAt
-            revieweeEmployee {
-              id
-              no
-              firstName
-              lastName
-              grade
-              email
-              group {
-                id
-                name
-                sort
-                readGroups
-                updateGroups
-                createdAt
-                updatedAt
-              }
-              company {
-                id
-                name
-                shortName
-                url
-                companyGroupName
-                companyManagerGroupName
-                companyAdminGroupName
-                readGroups
-                updateGroups
-                createdAt
-                updatedAt
-              }
-              owner
-              readGroups
-              updateGroups
-              createdAt
-              updatedAt
-              superior {
-                id
-                no
-                firstName
-                lastName
-                grade
-                email
-                group {
-                  id
-                  name
-                  sort
-                  readGroups
-                  updateGroups
-                  createdAt
-                  updatedAt
-                }
-                company {
-                  id
-                  name
-                  shortName
-                  url
-                  companyGroupName
-                  companyManagerGroupName
-                  companyAdminGroupName
-                  readGroups
-                  updateGroups
-                  createdAt
-                  updatedAt
-                }
-                owner
-                readGroups
-                updateGroups
-                createdAt
-                updatedAt
-                superior {
-                  id
-                  no
-                  firstName
-                  lastName
-                  grade
-                  email
-                  owner
-                  readGroups
-                  updateGroups
-                  createdAt
-                  updatedAt
-                }
-              }
-            }
-            secondEmployee {
-              id
-              no
-              firstName
-              lastName
-              grade
-              email
-              group {
-                id
-                name
-                sort
-                readGroups
-                updateGroups
-                createdAt
-                updatedAt
-              }
-              company {
-                id
-                name
-                shortName
-                url
-                companyGroupName
-                companyManagerGroupName
-                companyAdminGroupName
-                readGroups
-                updateGroups
-                createdAt
-                updatedAt
-              }
-              owner
-              readGroups
-              updateGroups
-              createdAt
-              updatedAt
-              superior {
-                id
-                no
-                firstName
-                lastName
-                grade
-                email
-                group {
-                  id
-                  name
-                  sort
-                  readGroups
-                  updateGroups
-                  createdAt
-                  updatedAt
-                }
-                company {
-                  id
-                  name
-                  shortName
-                  url
-                  companyGroupName
-                  companyManagerGroupName
-                  companyAdminGroupName
-                  readGroups
-                  updateGroups
-                  createdAt
-                  updatedAt
-                }
-                owner
-                readGroups
-                updateGroups
-                createdAt
-                updatedAt
-                superior {
-                  id
-                  no
-                  firstName
-                  lastName
-                  grade
-                  email
-                  owner
-                  readGroups
-                  updateGroups
-                  createdAt
-                  updatedAt
-                }
-              }
-            }
-          }
         }
         nextToken
       }
       category {
-        id
-        no
+        companyID
+        localID
         name
-        readGroups
-        updateGroups
         createdAt
         updatedAt
       }
       reviewee
-      reviewers
-      readGroups
-      updateGroups
+      topReviewers
+      secondReviewers
+      referencer
       createdAt
       updatedAt
     }
   }
 `;
 export const onUpdateSection = /* GraphQL */ `
-  subscription OnUpdateSection($reviewers: String, $reviewee: String) {
-    onUpdateSection(reviewers: $reviewers, reviewee: $reviewee) {
-      id
-      sectionSheetId
+  subscription OnUpdateSection(
+    $topReviewers: String
+    $secondReviewers: String
+    $reviewee: String
+    $referencer: String
+  ) {
+    onUpdateSection(
+      topReviewers: $topReviewers
+      secondReviewers: $secondReviewers
+      reviewee: $reviewee
+      referencer: $referencer
+    ) {
+      sheetKeys
+      sectionCategoryLocalId
+      companyID
       objective {
         items {
-          id
+          sectionKeys
+          createdAt
+          companyID
           content
           result
           priority
@@ -506,359 +186,53 @@ export const onUpdateSection = /* GraphQL */ `
           firstEvaluation
           lastEvaluation
           progress
-          status
           expStartDate
           expDoneDate
-          objectiveSectionId
-          section {
-            id
-            sectionSheetId
-            objective {
-              items {
-                id
-                content
-                result
-                priority
-                selfEvaluation
-                firstEvaluation
-                lastEvaluation
-                progress
-                status
-                expStartDate
-                expDoneDate
-                objectiveSectionId
-                section {
-                  id
-                  sectionSheetId
-                  reviewee
-                  reviewers
-                  readGroups
-                  updateGroups
-                  createdAt
-                  updatedAt
-                }
-                reviewee
-                reviewers
-                readGroups
-                updateGroups
-                createdAt
-                updatedAt
-                sheet {
-                  id
-                  year
-                  grade
-                  careerPlan
-                  careerPlanComment
-                  reviewComment
-                  reviewDate
-                  selfCheckDate
-                  firstComment
-                  firstCheckDate
-                  secondComment
-                  secondCheckDate
-                  overAllEvaluation
-                  statusValue
-                  interviewPlanDate
-                  interviewPlanComment
-                  InterviewMid1Date
-                  InterviewMid1Comment
-                  InterviewMid2Date
-                  InterviewMid2Comment
-                  InterviewMid3Date
-                  InterviewMid3Comment
-                  sheetGroupId
-                  reviewee
-                  reviewers
-                  readGroups
-                  updateGroups
-                  createdAt
-                  updatedAt
-                }
-              }
-              nextToken
-            }
-            category {
-              id
-              no
-              name
-              readGroups
-              updateGroups
-              createdAt
-              updatedAt
-            }
-            reviewee
-            reviewers
-            readGroups
-            updateGroups
-            createdAt
-            updatedAt
-          }
           reviewee
-          reviewers
-          readGroups
-          updateGroups
-          createdAt
+          topReviewers
+          secondReviewers
+          referencer
           updatedAt
-          sheet {
-            id
-            year
-            grade
-            careerPlan
-            careerPlanComment
-            reviewComment
-            reviewDate
-            selfCheckDate
-            firstComment
-            firstCheckDate
-            secondComment
-            secondCheckDate
-            overAllEvaluation
-            statusValue
-            interviewPlanDate
-            interviewPlanComment
-            InterviewMid1Date
-            InterviewMid1Comment
-            InterviewMid2Date
-            InterviewMid2Comment
-            InterviewMid3Date
-            InterviewMid3Comment
-            sheetGroupId
-            group {
-              id
-              name
-              sort
-              readGroups
-              updateGroups
-              createdAt
-              updatedAt
-            }
-            section {
-              items {
-                id
-                sectionSheetId
-                objective {
-                  nextToken
-                }
-                category {
-                  id
-                  no
-                  name
-                  readGroups
-                  updateGroups
-                  createdAt
-                  updatedAt
-                }
-                reviewee
-                reviewers
-                readGroups
-                updateGroups
-                createdAt
-                updatedAt
-              }
-              nextToken
-            }
-            reviewee
-            reviewers
-            readGroups
-            updateGroups
-            createdAt
-            updatedAt
-            revieweeEmployee {
-              id
-              no
-              firstName
-              lastName
-              grade
-              email
-              group {
-                id
-                name
-                sort
-                readGroups
-                updateGroups
-                createdAt
-                updatedAt
-              }
-              company {
-                id
-                name
-                shortName
-                url
-                companyGroupName
-                companyManagerGroupName
-                companyAdminGroupName
-                readGroups
-                updateGroups
-                createdAt
-                updatedAt
-              }
-              owner
-              readGroups
-              updateGroups
-              createdAt
-              updatedAt
-              superior {
-                id
-                no
-                firstName
-                lastName
-                grade
-                email
-                group {
-                  id
-                  name
-                  sort
-                  readGroups
-                  updateGroups
-                  createdAt
-                  updatedAt
-                }
-                company {
-                  id
-                  name
-                  shortName
-                  url
-                  companyGroupName
-                  companyManagerGroupName
-                  companyAdminGroupName
-                  readGroups
-                  updateGroups
-                  createdAt
-                  updatedAt
-                }
-                owner
-                readGroups
-                updateGroups
-                createdAt
-                updatedAt
-                superior {
-                  id
-                  no
-                  firstName
-                  lastName
-                  grade
-                  email
-                  owner
-                  readGroups
-                  updateGroups
-                  createdAt
-                  updatedAt
-                }
-              }
-            }
-            secondEmployee {
-              id
-              no
-              firstName
-              lastName
-              grade
-              email
-              group {
-                id
-                name
-                sort
-                readGroups
-                updateGroups
-                createdAt
-                updatedAt
-              }
-              company {
-                id
-                name
-                shortName
-                url
-                companyGroupName
-                companyManagerGroupName
-                companyAdminGroupName
-                readGroups
-                updateGroups
-                createdAt
-                updatedAt
-              }
-              owner
-              readGroups
-              updateGroups
-              createdAt
-              updatedAt
-              superior {
-                id
-                no
-                firstName
-                lastName
-                grade
-                email
-                group {
-                  id
-                  name
-                  sort
-                  readGroups
-                  updateGroups
-                  createdAt
-                  updatedAt
-                }
-                company {
-                  id
-                  name
-                  shortName
-                  url
-                  companyGroupName
-                  companyManagerGroupName
-                  companyAdminGroupName
-                  readGroups
-                  updateGroups
-                  createdAt
-                  updatedAt
-                }
-                owner
-                readGroups
-                updateGroups
-                createdAt
-                updatedAt
-                superior {
-                  id
-                  no
-                  firstName
-                  lastName
-                  grade
-                  email
-                  owner
-                  readGroups
-                  updateGroups
-                  createdAt
-                  updatedAt
-                }
-              }
-            }
-          }
         }
         nextToken
       }
       category {
-        id
-        no
+        companyID
+        localID
         name
-        readGroups
-        updateGroups
         createdAt
         updatedAt
       }
       reviewee
-      reviewers
-      readGroups
-      updateGroups
+      topReviewers
+      secondReviewers
+      referencer
       createdAt
       updatedAt
     }
   }
 `;
 export const onDeleteSection = /* GraphQL */ `
-  subscription OnDeleteSection($reviewers: String, $reviewee: String) {
-    onDeleteSection(reviewers: $reviewers, reviewee: $reviewee) {
-      id
-      sectionSheetId
+  subscription OnDeleteSection(
+    $topReviewers: String
+    $secondReviewers: String
+    $reviewee: String
+    $referencer: String
+  ) {
+    onDeleteSection(
+      topReviewers: $topReviewers
+      secondReviewers: $secondReviewers
+      reviewee: $reviewee
+      referencer: $referencer
+    ) {
+      sheetKeys
+      sectionCategoryLocalId
+      companyID
       objective {
         items {
-          id
+          sectionKeys
+          createdAt
+          companyID
           content
           result
           priority
@@ -866,355 +240,48 @@ export const onDeleteSection = /* GraphQL */ `
           firstEvaluation
           lastEvaluation
           progress
-          status
           expStartDate
           expDoneDate
-          objectiveSectionId
-          section {
-            id
-            sectionSheetId
-            objective {
-              items {
-                id
-                content
-                result
-                priority
-                selfEvaluation
-                firstEvaluation
-                lastEvaluation
-                progress
-                status
-                expStartDate
-                expDoneDate
-                objectiveSectionId
-                section {
-                  id
-                  sectionSheetId
-                  reviewee
-                  reviewers
-                  readGroups
-                  updateGroups
-                  createdAt
-                  updatedAt
-                }
-                reviewee
-                reviewers
-                readGroups
-                updateGroups
-                createdAt
-                updatedAt
-                sheet {
-                  id
-                  year
-                  grade
-                  careerPlan
-                  careerPlanComment
-                  reviewComment
-                  reviewDate
-                  selfCheckDate
-                  firstComment
-                  firstCheckDate
-                  secondComment
-                  secondCheckDate
-                  overAllEvaluation
-                  statusValue
-                  interviewPlanDate
-                  interviewPlanComment
-                  InterviewMid1Date
-                  InterviewMid1Comment
-                  InterviewMid2Date
-                  InterviewMid2Comment
-                  InterviewMid3Date
-                  InterviewMid3Comment
-                  sheetGroupId
-                  reviewee
-                  reviewers
-                  readGroups
-                  updateGroups
-                  createdAt
-                  updatedAt
-                }
-              }
-              nextToken
-            }
-            category {
-              id
-              no
-              name
-              readGroups
-              updateGroups
-              createdAt
-              updatedAt
-            }
-            reviewee
-            reviewers
-            readGroups
-            updateGroups
-            createdAt
-            updatedAt
-          }
           reviewee
-          reviewers
-          readGroups
-          updateGroups
-          createdAt
+          topReviewers
+          secondReviewers
+          referencer
           updatedAt
-          sheet {
-            id
-            year
-            grade
-            careerPlan
-            careerPlanComment
-            reviewComment
-            reviewDate
-            selfCheckDate
-            firstComment
-            firstCheckDate
-            secondComment
-            secondCheckDate
-            overAllEvaluation
-            statusValue
-            interviewPlanDate
-            interviewPlanComment
-            InterviewMid1Date
-            InterviewMid1Comment
-            InterviewMid2Date
-            InterviewMid2Comment
-            InterviewMid3Date
-            InterviewMid3Comment
-            sheetGroupId
-            group {
-              id
-              name
-              sort
-              readGroups
-              updateGroups
-              createdAt
-              updatedAt
-            }
-            section {
-              items {
-                id
-                sectionSheetId
-                objective {
-                  nextToken
-                }
-                category {
-                  id
-                  no
-                  name
-                  readGroups
-                  updateGroups
-                  createdAt
-                  updatedAt
-                }
-                reviewee
-                reviewers
-                readGroups
-                updateGroups
-                createdAt
-                updatedAt
-              }
-              nextToken
-            }
-            reviewee
-            reviewers
-            readGroups
-            updateGroups
-            createdAt
-            updatedAt
-            revieweeEmployee {
-              id
-              no
-              firstName
-              lastName
-              grade
-              email
-              group {
-                id
-                name
-                sort
-                readGroups
-                updateGroups
-                createdAt
-                updatedAt
-              }
-              company {
-                id
-                name
-                shortName
-                url
-                companyGroupName
-                companyManagerGroupName
-                companyAdminGroupName
-                readGroups
-                updateGroups
-                createdAt
-                updatedAt
-              }
-              owner
-              readGroups
-              updateGroups
-              createdAt
-              updatedAt
-              superior {
-                id
-                no
-                firstName
-                lastName
-                grade
-                email
-                group {
-                  id
-                  name
-                  sort
-                  readGroups
-                  updateGroups
-                  createdAt
-                  updatedAt
-                }
-                company {
-                  id
-                  name
-                  shortName
-                  url
-                  companyGroupName
-                  companyManagerGroupName
-                  companyAdminGroupName
-                  readGroups
-                  updateGroups
-                  createdAt
-                  updatedAt
-                }
-                owner
-                readGroups
-                updateGroups
-                createdAt
-                updatedAt
-                superior {
-                  id
-                  no
-                  firstName
-                  lastName
-                  grade
-                  email
-                  owner
-                  readGroups
-                  updateGroups
-                  createdAt
-                  updatedAt
-                }
-              }
-            }
-            secondEmployee {
-              id
-              no
-              firstName
-              lastName
-              grade
-              email
-              group {
-                id
-                name
-                sort
-                readGroups
-                updateGroups
-                createdAt
-                updatedAt
-              }
-              company {
-                id
-                name
-                shortName
-                url
-                companyGroupName
-                companyManagerGroupName
-                companyAdminGroupName
-                readGroups
-                updateGroups
-                createdAt
-                updatedAt
-              }
-              owner
-              readGroups
-              updateGroups
-              createdAt
-              updatedAt
-              superior {
-                id
-                no
-                firstName
-                lastName
-                grade
-                email
-                group {
-                  id
-                  name
-                  sort
-                  readGroups
-                  updateGroups
-                  createdAt
-                  updatedAt
-                }
-                company {
-                  id
-                  name
-                  shortName
-                  url
-                  companyGroupName
-                  companyManagerGroupName
-                  companyAdminGroupName
-                  readGroups
-                  updateGroups
-                  createdAt
-                  updatedAt
-                }
-                owner
-                readGroups
-                updateGroups
-                createdAt
-                updatedAt
-                superior {
-                  id
-                  no
-                  firstName
-                  lastName
-                  grade
-                  email
-                  owner
-                  readGroups
-                  updateGroups
-                  createdAt
-                  updatedAt
-                }
-              }
-            }
-          }
         }
         nextToken
       }
       category {
-        id
-        no
+        companyID
+        localID
         name
-        readGroups
-        updateGroups
         createdAt
         updatedAt
       }
       reviewee
-      reviewers
-      readGroups
-      updateGroups
+      topReviewers
+      secondReviewers
+      referencer
       createdAt
       updatedAt
     }
   }
 `;
 export const onCreateObjective = /* GraphQL */ `
-  subscription OnCreateObjective($reviewers: String, $reviewee: String) {
-    onCreateObjective(reviewers: $reviewers, reviewee: $reviewee) {
-      id
+  subscription OnCreateObjective(
+    $topReviewers: String
+    $secondReviewers: String
+    $reviewee: String
+    $referencer: String
+  ) {
+    onCreateObjective(
+      topReviewers: $topReviewers
+      secondReviewers: $secondReviewers
+      reviewee: $reviewee
+      referencer: $referencer
+    ) {
+      sectionKeys
+      createdAt
+      companyID
       content
       result
       priority
@@ -1222,688 +289,32 @@ export const onCreateObjective = /* GraphQL */ `
       firstEvaluation
       lastEvaluation
       progress
-      status
       expStartDate
       expDoneDate
-      objectiveSectionId
-      section {
-        id
-        sectionSheetId
-        objective {
-          items {
-            id
-            content
-            result
-            priority
-            selfEvaluation
-            firstEvaluation
-            lastEvaluation
-            progress
-            status
-            expStartDate
-            expDoneDate
-            objectiveSectionId
-            section {
-              id
-              sectionSheetId
-              objective {
-                items {
-                  id
-                  content
-                  result
-                  priority
-                  selfEvaluation
-                  firstEvaluation
-                  lastEvaluation
-                  progress
-                  status
-                  expStartDate
-                  expDoneDate
-                  objectiveSectionId
-                  reviewee
-                  reviewers
-                  readGroups
-                  updateGroups
-                  createdAt
-                  updatedAt
-                }
-                nextToken
-              }
-              category {
-                id
-                no
-                name
-                readGroups
-                updateGroups
-                createdAt
-                updatedAt
-              }
-              reviewee
-              reviewers
-              readGroups
-              updateGroups
-              createdAt
-              updatedAt
-            }
-            reviewee
-            reviewers
-            readGroups
-            updateGroups
-            createdAt
-            updatedAt
-            sheet {
-              id
-              year
-              grade
-              careerPlan
-              careerPlanComment
-              reviewComment
-              reviewDate
-              selfCheckDate
-              firstComment
-              firstCheckDate
-              secondComment
-              secondCheckDate
-              overAllEvaluation
-              statusValue
-              interviewPlanDate
-              interviewPlanComment
-              InterviewMid1Date
-              InterviewMid1Comment
-              InterviewMid2Date
-              InterviewMid2Comment
-              InterviewMid3Date
-              InterviewMid3Comment
-              sheetGroupId
-              group {
-                id
-                name
-                sort
-                readGroups
-                updateGroups
-                createdAt
-                updatedAt
-              }
-              section {
-                items {
-                  id
-                  sectionSheetId
-                  reviewee
-                  reviewers
-                  readGroups
-                  updateGroups
-                  createdAt
-                  updatedAt
-                }
-                nextToken
-              }
-              reviewee
-              reviewers
-              readGroups
-              updateGroups
-              createdAt
-              updatedAt
-              revieweeEmployee {
-                id
-                no
-                firstName
-                lastName
-                grade
-                email
-                group {
-                  id
-                  name
-                  sort
-                  readGroups
-                  updateGroups
-                  createdAt
-                  updatedAt
-                }
-                company {
-                  id
-                  name
-                  shortName
-                  url
-                  companyGroupName
-                  companyManagerGroupName
-                  companyAdminGroupName
-                  readGroups
-                  updateGroups
-                  createdAt
-                  updatedAt
-                }
-                owner
-                readGroups
-                updateGroups
-                createdAt
-                updatedAt
-                superior {
-                  id
-                  no
-                  firstName
-                  lastName
-                  grade
-                  email
-                  owner
-                  readGroups
-                  updateGroups
-                  createdAt
-                  updatedAt
-                }
-              }
-              secondEmployee {
-                id
-                no
-                firstName
-                lastName
-                grade
-                email
-                group {
-                  id
-                  name
-                  sort
-                  readGroups
-                  updateGroups
-                  createdAt
-                  updatedAt
-                }
-                company {
-                  id
-                  name
-                  shortName
-                  url
-                  companyGroupName
-                  companyManagerGroupName
-                  companyAdminGroupName
-                  readGroups
-                  updateGroups
-                  createdAt
-                  updatedAt
-                }
-                owner
-                readGroups
-                updateGroups
-                createdAt
-                updatedAt
-                superior {
-                  id
-                  no
-                  firstName
-                  lastName
-                  grade
-                  email
-                  owner
-                  readGroups
-                  updateGroups
-                  createdAt
-                  updatedAt
-                }
-              }
-            }
-          }
-          nextToken
-        }
-        category {
-          id
-          no
-          name
-          readGroups
-          updateGroups
-          createdAt
-          updatedAt
-        }
-        reviewee
-        reviewers
-        readGroups
-        updateGroups
-        createdAt
-        updatedAt
-      }
       reviewee
-      reviewers
-      readGroups
-      updateGroups
-      createdAt
+      topReviewers
+      secondReviewers
+      referencer
       updatedAt
-      sheet {
-        id
-        year
-        grade
-        careerPlan
-        careerPlanComment
-        reviewComment
-        reviewDate
-        selfCheckDate
-        firstComment
-        firstCheckDate
-        secondComment
-        secondCheckDate
-        overAllEvaluation
-        statusValue
-        interviewPlanDate
-        interviewPlanComment
-        InterviewMid1Date
-        InterviewMid1Comment
-        InterviewMid2Date
-        InterviewMid2Comment
-        InterviewMid3Date
-        InterviewMid3Comment
-        sheetGroupId
-        group {
-          id
-          name
-          sort
-          readGroups
-          updateGroups
-          createdAt
-          updatedAt
-        }
-        section {
-          items {
-            id
-            sectionSheetId
-            objective {
-              items {
-                id
-                content
-                result
-                priority
-                selfEvaluation
-                firstEvaluation
-                lastEvaluation
-                progress
-                status
-                expStartDate
-                expDoneDate
-                objectiveSectionId
-                section {
-                  id
-                  sectionSheetId
-                  reviewee
-                  reviewers
-                  readGroups
-                  updateGroups
-                  createdAt
-                  updatedAt
-                }
-                reviewee
-                reviewers
-                readGroups
-                updateGroups
-                createdAt
-                updatedAt
-                sheet {
-                  id
-                  year
-                  grade
-                  careerPlan
-                  careerPlanComment
-                  reviewComment
-                  reviewDate
-                  selfCheckDate
-                  firstComment
-                  firstCheckDate
-                  secondComment
-                  secondCheckDate
-                  overAllEvaluation
-                  statusValue
-                  interviewPlanDate
-                  interviewPlanComment
-                  InterviewMid1Date
-                  InterviewMid1Comment
-                  InterviewMid2Date
-                  InterviewMid2Comment
-                  InterviewMid3Date
-                  InterviewMid3Comment
-                  sheetGroupId
-                  reviewee
-                  reviewers
-                  readGroups
-                  updateGroups
-                  createdAt
-                  updatedAt
-                }
-              }
-              nextToken
-            }
-            category {
-              id
-              no
-              name
-              readGroups
-              updateGroups
-              createdAt
-              updatedAt
-            }
-            reviewee
-            reviewers
-            readGroups
-            updateGroups
-            createdAt
-            updatedAt
-          }
-          nextToken
-        }
-        reviewee
-        reviewers
-        readGroups
-        updateGroups
-        createdAt
-        updatedAt
-        revieweeEmployee {
-          id
-          no
-          firstName
-          lastName
-          grade
-          email
-          group {
-            id
-            name
-            sort
-            readGroups
-            updateGroups
-            createdAt
-            updatedAt
-          }
-          company {
-            id
-            name
-            shortName
-            url
-            companyGroupName
-            companyManagerGroupName
-            companyAdminGroupName
-            readGroups
-            updateGroups
-            createdAt
-            updatedAt
-          }
-          owner
-          readGroups
-          updateGroups
-          createdAt
-          updatedAt
-          superior {
-            id
-            no
-            firstName
-            lastName
-            grade
-            email
-            group {
-              id
-              name
-              sort
-              readGroups
-              updateGroups
-              createdAt
-              updatedAt
-            }
-            company {
-              id
-              name
-              shortName
-              url
-              companyGroupName
-              companyManagerGroupName
-              companyAdminGroupName
-              readGroups
-              updateGroups
-              createdAt
-              updatedAt
-            }
-            owner
-            readGroups
-            updateGroups
-            createdAt
-            updatedAt
-            superior {
-              id
-              no
-              firstName
-              lastName
-              grade
-              email
-              group {
-                id
-                name
-                sort
-                readGroups
-                updateGroups
-                createdAt
-                updatedAt
-              }
-              company {
-                id
-                name
-                shortName
-                url
-                companyGroupName
-                companyManagerGroupName
-                companyAdminGroupName
-                readGroups
-                updateGroups
-                createdAt
-                updatedAt
-              }
-              owner
-              readGroups
-              updateGroups
-              createdAt
-              updatedAt
-              superior {
-                id
-                no
-                firstName
-                lastName
-                grade
-                email
-                group {
-                  id
-                  name
-                  sort
-                  readGroups
-                  updateGroups
-                  createdAt
-                  updatedAt
-                }
-                company {
-                  id
-                  name
-                  shortName
-                  url
-                  companyGroupName
-                  companyManagerGroupName
-                  companyAdminGroupName
-                  readGroups
-                  updateGroups
-                  createdAt
-                  updatedAt
-                }
-                owner
-                readGroups
-                updateGroups
-                createdAt
-                updatedAt
-                superior {
-                  id
-                  no
-                  firstName
-                  lastName
-                  grade
-                  email
-                  owner
-                  readGroups
-                  updateGroups
-                  createdAt
-                  updatedAt
-                }
-              }
-            }
-          }
-        }
-        secondEmployee {
-          id
-          no
-          firstName
-          lastName
-          grade
-          email
-          group {
-            id
-            name
-            sort
-            readGroups
-            updateGroups
-            createdAt
-            updatedAt
-          }
-          company {
-            id
-            name
-            shortName
-            url
-            companyGroupName
-            companyManagerGroupName
-            companyAdminGroupName
-            readGroups
-            updateGroups
-            createdAt
-            updatedAt
-          }
-          owner
-          readGroups
-          updateGroups
-          createdAt
-          updatedAt
-          superior {
-            id
-            no
-            firstName
-            lastName
-            grade
-            email
-            group {
-              id
-              name
-              sort
-              readGroups
-              updateGroups
-              createdAt
-              updatedAt
-            }
-            company {
-              id
-              name
-              shortName
-              url
-              companyGroupName
-              companyManagerGroupName
-              companyAdminGroupName
-              readGroups
-              updateGroups
-              createdAt
-              updatedAt
-            }
-            owner
-            readGroups
-            updateGroups
-            createdAt
-            updatedAt
-            superior {
-              id
-              no
-              firstName
-              lastName
-              grade
-              email
-              group {
-                id
-                name
-                sort
-                readGroups
-                updateGroups
-                createdAt
-                updatedAt
-              }
-              company {
-                id
-                name
-                shortName
-                url
-                companyGroupName
-                companyManagerGroupName
-                companyAdminGroupName
-                readGroups
-                updateGroups
-                createdAt
-                updatedAt
-              }
-              owner
-              readGroups
-              updateGroups
-              createdAt
-              updatedAt
-              superior {
-                id
-                no
-                firstName
-                lastName
-                grade
-                email
-                group {
-                  id
-                  name
-                  sort
-                  readGroups
-                  updateGroups
-                  createdAt
-                  updatedAt
-                }
-                company {
-                  id
-                  name
-                  shortName
-                  url
-                  companyGroupName
-                  companyManagerGroupName
-                  companyAdminGroupName
-                  readGroups
-                  updateGroups
-                  createdAt
-                  updatedAt
-                }
-                owner
-                readGroups
-                updateGroups
-                createdAt
-                updatedAt
-                superior {
-                  id
-                  no
-                  firstName
-                  lastName
-                  grade
-                  email
-                  owner
-                  readGroups
-                  updateGroups
-                  createdAt
-                  updatedAt
-                }
-              }
-            }
-          }
-        }
-      }
     }
   }
 `;
 export const onUpdateObjective = /* GraphQL */ `
-  subscription OnUpdateObjective($reviewers: String, $reviewee: String) {
-    onUpdateObjective(reviewers: $reviewers, reviewee: $reviewee) {
-      id
+  subscription OnUpdateObjective(
+    $topReviewers: String
+    $secondReviewers: String
+    $reviewee: String
+    $referencer: String
+  ) {
+    onUpdateObjective(
+      topReviewers: $topReviewers
+      secondReviewers: $secondReviewers
+      reviewee: $reviewee
+      referencer: $referencer
+    ) {
+      sectionKeys
+      createdAt
+      companyID
       content
       result
       priority
@@ -1911,688 +322,32 @@ export const onUpdateObjective = /* GraphQL */ `
       firstEvaluation
       lastEvaluation
       progress
-      status
       expStartDate
       expDoneDate
-      objectiveSectionId
-      section {
-        id
-        sectionSheetId
-        objective {
-          items {
-            id
-            content
-            result
-            priority
-            selfEvaluation
-            firstEvaluation
-            lastEvaluation
-            progress
-            status
-            expStartDate
-            expDoneDate
-            objectiveSectionId
-            section {
-              id
-              sectionSheetId
-              objective {
-                items {
-                  id
-                  content
-                  result
-                  priority
-                  selfEvaluation
-                  firstEvaluation
-                  lastEvaluation
-                  progress
-                  status
-                  expStartDate
-                  expDoneDate
-                  objectiveSectionId
-                  reviewee
-                  reviewers
-                  readGroups
-                  updateGroups
-                  createdAt
-                  updatedAt
-                }
-                nextToken
-              }
-              category {
-                id
-                no
-                name
-                readGroups
-                updateGroups
-                createdAt
-                updatedAt
-              }
-              reviewee
-              reviewers
-              readGroups
-              updateGroups
-              createdAt
-              updatedAt
-            }
-            reviewee
-            reviewers
-            readGroups
-            updateGroups
-            createdAt
-            updatedAt
-            sheet {
-              id
-              year
-              grade
-              careerPlan
-              careerPlanComment
-              reviewComment
-              reviewDate
-              selfCheckDate
-              firstComment
-              firstCheckDate
-              secondComment
-              secondCheckDate
-              overAllEvaluation
-              statusValue
-              interviewPlanDate
-              interviewPlanComment
-              InterviewMid1Date
-              InterviewMid1Comment
-              InterviewMid2Date
-              InterviewMid2Comment
-              InterviewMid3Date
-              InterviewMid3Comment
-              sheetGroupId
-              group {
-                id
-                name
-                sort
-                readGroups
-                updateGroups
-                createdAt
-                updatedAt
-              }
-              section {
-                items {
-                  id
-                  sectionSheetId
-                  reviewee
-                  reviewers
-                  readGroups
-                  updateGroups
-                  createdAt
-                  updatedAt
-                }
-                nextToken
-              }
-              reviewee
-              reviewers
-              readGroups
-              updateGroups
-              createdAt
-              updatedAt
-              revieweeEmployee {
-                id
-                no
-                firstName
-                lastName
-                grade
-                email
-                group {
-                  id
-                  name
-                  sort
-                  readGroups
-                  updateGroups
-                  createdAt
-                  updatedAt
-                }
-                company {
-                  id
-                  name
-                  shortName
-                  url
-                  companyGroupName
-                  companyManagerGroupName
-                  companyAdminGroupName
-                  readGroups
-                  updateGroups
-                  createdAt
-                  updatedAt
-                }
-                owner
-                readGroups
-                updateGroups
-                createdAt
-                updatedAt
-                superior {
-                  id
-                  no
-                  firstName
-                  lastName
-                  grade
-                  email
-                  owner
-                  readGroups
-                  updateGroups
-                  createdAt
-                  updatedAt
-                }
-              }
-              secondEmployee {
-                id
-                no
-                firstName
-                lastName
-                grade
-                email
-                group {
-                  id
-                  name
-                  sort
-                  readGroups
-                  updateGroups
-                  createdAt
-                  updatedAt
-                }
-                company {
-                  id
-                  name
-                  shortName
-                  url
-                  companyGroupName
-                  companyManagerGroupName
-                  companyAdminGroupName
-                  readGroups
-                  updateGroups
-                  createdAt
-                  updatedAt
-                }
-                owner
-                readGroups
-                updateGroups
-                createdAt
-                updatedAt
-                superior {
-                  id
-                  no
-                  firstName
-                  lastName
-                  grade
-                  email
-                  owner
-                  readGroups
-                  updateGroups
-                  createdAt
-                  updatedAt
-                }
-              }
-            }
-          }
-          nextToken
-        }
-        category {
-          id
-          no
-          name
-          readGroups
-          updateGroups
-          createdAt
-          updatedAt
-        }
-        reviewee
-        reviewers
-        readGroups
-        updateGroups
-        createdAt
-        updatedAt
-      }
       reviewee
-      reviewers
-      readGroups
-      updateGroups
-      createdAt
+      topReviewers
+      secondReviewers
+      referencer
       updatedAt
-      sheet {
-        id
-        year
-        grade
-        careerPlan
-        careerPlanComment
-        reviewComment
-        reviewDate
-        selfCheckDate
-        firstComment
-        firstCheckDate
-        secondComment
-        secondCheckDate
-        overAllEvaluation
-        statusValue
-        interviewPlanDate
-        interviewPlanComment
-        InterviewMid1Date
-        InterviewMid1Comment
-        InterviewMid2Date
-        InterviewMid2Comment
-        InterviewMid3Date
-        InterviewMid3Comment
-        sheetGroupId
-        group {
-          id
-          name
-          sort
-          readGroups
-          updateGroups
-          createdAt
-          updatedAt
-        }
-        section {
-          items {
-            id
-            sectionSheetId
-            objective {
-              items {
-                id
-                content
-                result
-                priority
-                selfEvaluation
-                firstEvaluation
-                lastEvaluation
-                progress
-                status
-                expStartDate
-                expDoneDate
-                objectiveSectionId
-                section {
-                  id
-                  sectionSheetId
-                  reviewee
-                  reviewers
-                  readGroups
-                  updateGroups
-                  createdAt
-                  updatedAt
-                }
-                reviewee
-                reviewers
-                readGroups
-                updateGroups
-                createdAt
-                updatedAt
-                sheet {
-                  id
-                  year
-                  grade
-                  careerPlan
-                  careerPlanComment
-                  reviewComment
-                  reviewDate
-                  selfCheckDate
-                  firstComment
-                  firstCheckDate
-                  secondComment
-                  secondCheckDate
-                  overAllEvaluation
-                  statusValue
-                  interviewPlanDate
-                  interviewPlanComment
-                  InterviewMid1Date
-                  InterviewMid1Comment
-                  InterviewMid2Date
-                  InterviewMid2Comment
-                  InterviewMid3Date
-                  InterviewMid3Comment
-                  sheetGroupId
-                  reviewee
-                  reviewers
-                  readGroups
-                  updateGroups
-                  createdAt
-                  updatedAt
-                }
-              }
-              nextToken
-            }
-            category {
-              id
-              no
-              name
-              readGroups
-              updateGroups
-              createdAt
-              updatedAt
-            }
-            reviewee
-            reviewers
-            readGroups
-            updateGroups
-            createdAt
-            updatedAt
-          }
-          nextToken
-        }
-        reviewee
-        reviewers
-        readGroups
-        updateGroups
-        createdAt
-        updatedAt
-        revieweeEmployee {
-          id
-          no
-          firstName
-          lastName
-          grade
-          email
-          group {
-            id
-            name
-            sort
-            readGroups
-            updateGroups
-            createdAt
-            updatedAt
-          }
-          company {
-            id
-            name
-            shortName
-            url
-            companyGroupName
-            companyManagerGroupName
-            companyAdminGroupName
-            readGroups
-            updateGroups
-            createdAt
-            updatedAt
-          }
-          owner
-          readGroups
-          updateGroups
-          createdAt
-          updatedAt
-          superior {
-            id
-            no
-            firstName
-            lastName
-            grade
-            email
-            group {
-              id
-              name
-              sort
-              readGroups
-              updateGroups
-              createdAt
-              updatedAt
-            }
-            company {
-              id
-              name
-              shortName
-              url
-              companyGroupName
-              companyManagerGroupName
-              companyAdminGroupName
-              readGroups
-              updateGroups
-              createdAt
-              updatedAt
-            }
-            owner
-            readGroups
-            updateGroups
-            createdAt
-            updatedAt
-            superior {
-              id
-              no
-              firstName
-              lastName
-              grade
-              email
-              group {
-                id
-                name
-                sort
-                readGroups
-                updateGroups
-                createdAt
-                updatedAt
-              }
-              company {
-                id
-                name
-                shortName
-                url
-                companyGroupName
-                companyManagerGroupName
-                companyAdminGroupName
-                readGroups
-                updateGroups
-                createdAt
-                updatedAt
-              }
-              owner
-              readGroups
-              updateGroups
-              createdAt
-              updatedAt
-              superior {
-                id
-                no
-                firstName
-                lastName
-                grade
-                email
-                group {
-                  id
-                  name
-                  sort
-                  readGroups
-                  updateGroups
-                  createdAt
-                  updatedAt
-                }
-                company {
-                  id
-                  name
-                  shortName
-                  url
-                  companyGroupName
-                  companyManagerGroupName
-                  companyAdminGroupName
-                  readGroups
-                  updateGroups
-                  createdAt
-                  updatedAt
-                }
-                owner
-                readGroups
-                updateGroups
-                createdAt
-                updatedAt
-                superior {
-                  id
-                  no
-                  firstName
-                  lastName
-                  grade
-                  email
-                  owner
-                  readGroups
-                  updateGroups
-                  createdAt
-                  updatedAt
-                }
-              }
-            }
-          }
-        }
-        secondEmployee {
-          id
-          no
-          firstName
-          lastName
-          grade
-          email
-          group {
-            id
-            name
-            sort
-            readGroups
-            updateGroups
-            createdAt
-            updatedAt
-          }
-          company {
-            id
-            name
-            shortName
-            url
-            companyGroupName
-            companyManagerGroupName
-            companyAdminGroupName
-            readGroups
-            updateGroups
-            createdAt
-            updatedAt
-          }
-          owner
-          readGroups
-          updateGroups
-          createdAt
-          updatedAt
-          superior {
-            id
-            no
-            firstName
-            lastName
-            grade
-            email
-            group {
-              id
-              name
-              sort
-              readGroups
-              updateGroups
-              createdAt
-              updatedAt
-            }
-            company {
-              id
-              name
-              shortName
-              url
-              companyGroupName
-              companyManagerGroupName
-              companyAdminGroupName
-              readGroups
-              updateGroups
-              createdAt
-              updatedAt
-            }
-            owner
-            readGroups
-            updateGroups
-            createdAt
-            updatedAt
-            superior {
-              id
-              no
-              firstName
-              lastName
-              grade
-              email
-              group {
-                id
-                name
-                sort
-                readGroups
-                updateGroups
-                createdAt
-                updatedAt
-              }
-              company {
-                id
-                name
-                shortName
-                url
-                companyGroupName
-                companyManagerGroupName
-                companyAdminGroupName
-                readGroups
-                updateGroups
-                createdAt
-                updatedAt
-              }
-              owner
-              readGroups
-              updateGroups
-              createdAt
-              updatedAt
-              superior {
-                id
-                no
-                firstName
-                lastName
-                grade
-                email
-                group {
-                  id
-                  name
-                  sort
-                  readGroups
-                  updateGroups
-                  createdAt
-                  updatedAt
-                }
-                company {
-                  id
-                  name
-                  shortName
-                  url
-                  companyGroupName
-                  companyManagerGroupName
-                  companyAdminGroupName
-                  readGroups
-                  updateGroups
-                  createdAt
-                  updatedAt
-                }
-                owner
-                readGroups
-                updateGroups
-                createdAt
-                updatedAt
-                superior {
-                  id
-                  no
-                  firstName
-                  lastName
-                  grade
-                  email
-                  owner
-                  readGroups
-                  updateGroups
-                  createdAt
-                  updatedAt
-                }
-              }
-            }
-          }
-        }
-      }
     }
   }
 `;
 export const onDeleteObjective = /* GraphQL */ `
-  subscription OnDeleteObjective($reviewers: String, $reviewee: String) {
-    onDeleteObjective(reviewers: $reviewers, reviewee: $reviewee) {
-      id
+  subscription OnDeleteObjective(
+    $topReviewers: String
+    $secondReviewers: String
+    $reviewee: String
+    $referencer: String
+  ) {
+    onDeleteObjective(
+      topReviewers: $topReviewers
+      secondReviewers: $secondReviewers
+      reviewee: $reviewee
+      referencer: $referencer
+    ) {
+      sectionKeys
+      createdAt
+      companyID
       content
       result
       priority
@@ -2600,699 +355,32 @@ export const onDeleteObjective = /* GraphQL */ `
       firstEvaluation
       lastEvaluation
       progress
-      status
       expStartDate
       expDoneDate
-      objectiveSectionId
-      section {
-        id
-        sectionSheetId
-        objective {
-          items {
-            id
-            content
-            result
-            priority
-            selfEvaluation
-            firstEvaluation
-            lastEvaluation
-            progress
-            status
-            expStartDate
-            expDoneDate
-            objectiveSectionId
-            section {
-              id
-              sectionSheetId
-              objective {
-                items {
-                  id
-                  content
-                  result
-                  priority
-                  selfEvaluation
-                  firstEvaluation
-                  lastEvaluation
-                  progress
-                  status
-                  expStartDate
-                  expDoneDate
-                  objectiveSectionId
-                  reviewee
-                  reviewers
-                  readGroups
-                  updateGroups
-                  createdAt
-                  updatedAt
-                }
-                nextToken
-              }
-              category {
-                id
-                no
-                name
-                readGroups
-                updateGroups
-                createdAt
-                updatedAt
-              }
-              reviewee
-              reviewers
-              readGroups
-              updateGroups
-              createdAt
-              updatedAt
-            }
-            reviewee
-            reviewers
-            readGroups
-            updateGroups
-            createdAt
-            updatedAt
-            sheet {
-              id
-              year
-              grade
-              careerPlan
-              careerPlanComment
-              reviewComment
-              reviewDate
-              selfCheckDate
-              firstComment
-              firstCheckDate
-              secondComment
-              secondCheckDate
-              overAllEvaluation
-              statusValue
-              interviewPlanDate
-              interviewPlanComment
-              InterviewMid1Date
-              InterviewMid1Comment
-              InterviewMid2Date
-              InterviewMid2Comment
-              InterviewMid3Date
-              InterviewMid3Comment
-              sheetGroupId
-              group {
-                id
-                name
-                sort
-                readGroups
-                updateGroups
-                createdAt
-                updatedAt
-              }
-              section {
-                items {
-                  id
-                  sectionSheetId
-                  reviewee
-                  reviewers
-                  readGroups
-                  updateGroups
-                  createdAt
-                  updatedAt
-                }
-                nextToken
-              }
-              reviewee
-              reviewers
-              readGroups
-              updateGroups
-              createdAt
-              updatedAt
-              revieweeEmployee {
-                id
-                no
-                firstName
-                lastName
-                grade
-                email
-                group {
-                  id
-                  name
-                  sort
-                  readGroups
-                  updateGroups
-                  createdAt
-                  updatedAt
-                }
-                company {
-                  id
-                  name
-                  shortName
-                  url
-                  companyGroupName
-                  companyManagerGroupName
-                  companyAdminGroupName
-                  readGroups
-                  updateGroups
-                  createdAt
-                  updatedAt
-                }
-                owner
-                readGroups
-                updateGroups
-                createdAt
-                updatedAt
-                superior {
-                  id
-                  no
-                  firstName
-                  lastName
-                  grade
-                  email
-                  owner
-                  readGroups
-                  updateGroups
-                  createdAt
-                  updatedAt
-                }
-              }
-              secondEmployee {
-                id
-                no
-                firstName
-                lastName
-                grade
-                email
-                group {
-                  id
-                  name
-                  sort
-                  readGroups
-                  updateGroups
-                  createdAt
-                  updatedAt
-                }
-                company {
-                  id
-                  name
-                  shortName
-                  url
-                  companyGroupName
-                  companyManagerGroupName
-                  companyAdminGroupName
-                  readGroups
-                  updateGroups
-                  createdAt
-                  updatedAt
-                }
-                owner
-                readGroups
-                updateGroups
-                createdAt
-                updatedAt
-                superior {
-                  id
-                  no
-                  firstName
-                  lastName
-                  grade
-                  email
-                  owner
-                  readGroups
-                  updateGroups
-                  createdAt
-                  updatedAt
-                }
-              }
-            }
-          }
-          nextToken
-        }
-        category {
-          id
-          no
-          name
-          readGroups
-          updateGroups
-          createdAt
-          updatedAt
-        }
-        reviewee
-        reviewers
-        readGroups
-        updateGroups
-        createdAt
-        updatedAt
-      }
       reviewee
-      reviewers
-      readGroups
-      updateGroups
-      createdAt
+      topReviewers
+      secondReviewers
+      referencer
       updatedAt
-      sheet {
-        id
-        year
-        grade
-        careerPlan
-        careerPlanComment
-        reviewComment
-        reviewDate
-        selfCheckDate
-        firstComment
-        firstCheckDate
-        secondComment
-        secondCheckDate
-        overAllEvaluation
-        statusValue
-        interviewPlanDate
-        interviewPlanComment
-        InterviewMid1Date
-        InterviewMid1Comment
-        InterviewMid2Date
-        InterviewMid2Comment
-        InterviewMid3Date
-        InterviewMid3Comment
-        sheetGroupId
-        group {
-          id
-          name
-          sort
-          readGroups
-          updateGroups
-          createdAt
-          updatedAt
-        }
-        section {
-          items {
-            id
-            sectionSheetId
-            objective {
-              items {
-                id
-                content
-                result
-                priority
-                selfEvaluation
-                firstEvaluation
-                lastEvaluation
-                progress
-                status
-                expStartDate
-                expDoneDate
-                objectiveSectionId
-                section {
-                  id
-                  sectionSheetId
-                  reviewee
-                  reviewers
-                  readGroups
-                  updateGroups
-                  createdAt
-                  updatedAt
-                }
-                reviewee
-                reviewers
-                readGroups
-                updateGroups
-                createdAt
-                updatedAt
-                sheet {
-                  id
-                  year
-                  grade
-                  careerPlan
-                  careerPlanComment
-                  reviewComment
-                  reviewDate
-                  selfCheckDate
-                  firstComment
-                  firstCheckDate
-                  secondComment
-                  secondCheckDate
-                  overAllEvaluation
-                  statusValue
-                  interviewPlanDate
-                  interviewPlanComment
-                  InterviewMid1Date
-                  InterviewMid1Comment
-                  InterviewMid2Date
-                  InterviewMid2Comment
-                  InterviewMid3Date
-                  InterviewMid3Comment
-                  sheetGroupId
-                  reviewee
-                  reviewers
-                  readGroups
-                  updateGroups
-                  createdAt
-                  updatedAt
-                }
-              }
-              nextToken
-            }
-            category {
-              id
-              no
-              name
-              readGroups
-              updateGroups
-              createdAt
-              updatedAt
-            }
-            reviewee
-            reviewers
-            readGroups
-            updateGroups
-            createdAt
-            updatedAt
-          }
-          nextToken
-        }
-        reviewee
-        reviewers
-        readGroups
-        updateGroups
-        createdAt
-        updatedAt
-        revieweeEmployee {
-          id
-          no
-          firstName
-          lastName
-          grade
-          email
-          group {
-            id
-            name
-            sort
-            readGroups
-            updateGroups
-            createdAt
-            updatedAt
-          }
-          company {
-            id
-            name
-            shortName
-            url
-            companyGroupName
-            companyManagerGroupName
-            companyAdminGroupName
-            readGroups
-            updateGroups
-            createdAt
-            updatedAt
-          }
-          owner
-          readGroups
-          updateGroups
-          createdAt
-          updatedAt
-          superior {
-            id
-            no
-            firstName
-            lastName
-            grade
-            email
-            group {
-              id
-              name
-              sort
-              readGroups
-              updateGroups
-              createdAt
-              updatedAt
-            }
-            company {
-              id
-              name
-              shortName
-              url
-              companyGroupName
-              companyManagerGroupName
-              companyAdminGroupName
-              readGroups
-              updateGroups
-              createdAt
-              updatedAt
-            }
-            owner
-            readGroups
-            updateGroups
-            createdAt
-            updatedAt
-            superior {
-              id
-              no
-              firstName
-              lastName
-              grade
-              email
-              group {
-                id
-                name
-                sort
-                readGroups
-                updateGroups
-                createdAt
-                updatedAt
-              }
-              company {
-                id
-                name
-                shortName
-                url
-                companyGroupName
-                companyManagerGroupName
-                companyAdminGroupName
-                readGroups
-                updateGroups
-                createdAt
-                updatedAt
-              }
-              owner
-              readGroups
-              updateGroups
-              createdAt
-              updatedAt
-              superior {
-                id
-                no
-                firstName
-                lastName
-                grade
-                email
-                group {
-                  id
-                  name
-                  sort
-                  readGroups
-                  updateGroups
-                  createdAt
-                  updatedAt
-                }
-                company {
-                  id
-                  name
-                  shortName
-                  url
-                  companyGroupName
-                  companyManagerGroupName
-                  companyAdminGroupName
-                  readGroups
-                  updateGroups
-                  createdAt
-                  updatedAt
-                }
-                owner
-                readGroups
-                updateGroups
-                createdAt
-                updatedAt
-                superior {
-                  id
-                  no
-                  firstName
-                  lastName
-                  grade
-                  email
-                  owner
-                  readGroups
-                  updateGroups
-                  createdAt
-                  updatedAt
-                }
-              }
-            }
-          }
-        }
-        secondEmployee {
-          id
-          no
-          firstName
-          lastName
-          grade
-          email
-          group {
-            id
-            name
-            sort
-            readGroups
-            updateGroups
-            createdAt
-            updatedAt
-          }
-          company {
-            id
-            name
-            shortName
-            url
-            companyGroupName
-            companyManagerGroupName
-            companyAdminGroupName
-            readGroups
-            updateGroups
-            createdAt
-            updatedAt
-          }
-          owner
-          readGroups
-          updateGroups
-          createdAt
-          updatedAt
-          superior {
-            id
-            no
-            firstName
-            lastName
-            grade
-            email
-            group {
-              id
-              name
-              sort
-              readGroups
-              updateGroups
-              createdAt
-              updatedAt
-            }
-            company {
-              id
-              name
-              shortName
-              url
-              companyGroupName
-              companyManagerGroupName
-              companyAdminGroupName
-              readGroups
-              updateGroups
-              createdAt
-              updatedAt
-            }
-            owner
-            readGroups
-            updateGroups
-            createdAt
-            updatedAt
-            superior {
-              id
-              no
-              firstName
-              lastName
-              grade
-              email
-              group {
-                id
-                name
-                sort
-                readGroups
-                updateGroups
-                createdAt
-                updatedAt
-              }
-              company {
-                id
-                name
-                shortName
-                url
-                companyGroupName
-                companyManagerGroupName
-                companyAdminGroupName
-                readGroups
-                updateGroups
-                createdAt
-                updatedAt
-              }
-              owner
-              readGroups
-              updateGroups
-              createdAt
-              updatedAt
-              superior {
-                id
-                no
-                firstName
-                lastName
-                grade
-                email
-                group {
-                  id
-                  name
-                  sort
-                  readGroups
-                  updateGroups
-                  createdAt
-                  updatedAt
-                }
-                company {
-                  id
-                  name
-                  shortName
-                  url
-                  companyGroupName
-                  companyManagerGroupName
-                  companyAdminGroupName
-                  readGroups
-                  updateGroups
-                  createdAt
-                  updatedAt
-                }
-                owner
-                readGroups
-                updateGroups
-                createdAt
-                updatedAt
-                superior {
-                  id
-                  no
-                  firstName
-                  lastName
-                  grade
-                  email
-                  owner
-                  readGroups
-                  updateGroups
-                  createdAt
-                  updatedAt
-                }
-              }
-            }
-          }
-        }
-      }
     }
   }
 `;
 export const onCreateEmployee = /* GraphQL */ `
-  subscription OnCreateEmployee($owner: String) {
-    onCreateEmployee(owner: $owner) {
-      id
-      no
+  subscription OnCreateEmployee {
+    onCreateEmployee {
+      companyID
+      username
+      localID
+      employeeGroupLocalId
+      superiorUsername
       firstName
       lastName
       grade
       email
       group {
-        id
+        companyID
+        localID
         name
-        sort
-        readGroups
-        updateGroups
         createdAt
         updatedAt
       }
@@ -3301,32 +389,26 @@ export const onCreateEmployee = /* GraphQL */ `
         name
         shortName
         url
-        companyGroupName
-        companyManagerGroupName
-        companyAdminGroupName
-        readGroups
-        updateGroups
         createdAt
         updatedAt
       }
-      owner
-      readGroups
-      updateGroups
+      manager
       createdAt
       updatedAt
       superior {
-        id
-        no
+        companyID
+        username
+        localID
+        employeeGroupLocalId
+        superiorUsername
         firstName
         lastName
         grade
         email
         group {
-          id
+          companyID
+          localID
           name
-          sort
-          readGroups
-          updateGroups
           createdAt
           updatedAt
         }
@@ -3335,32 +417,26 @@ export const onCreateEmployee = /* GraphQL */ `
           name
           shortName
           url
-          companyGroupName
-          companyManagerGroupName
-          companyAdminGroupName
-          readGroups
-          updateGroups
           createdAt
           updatedAt
         }
-        owner
-        readGroups
-        updateGroups
+        manager
         createdAt
         updatedAt
         superior {
-          id
-          no
+          companyID
+          username
+          localID
+          employeeGroupLocalId
+          superiorUsername
           firstName
           lastName
           grade
           email
           group {
-            id
+            companyID
+            localID
             name
-            sort
-            readGroups
-            updateGroups
             createdAt
             updatedAt
           }
@@ -3369,32 +445,26 @@ export const onCreateEmployee = /* GraphQL */ `
             name
             shortName
             url
-            companyGroupName
-            companyManagerGroupName
-            companyAdminGroupName
-            readGroups
-            updateGroups
             createdAt
             updatedAt
           }
-          owner
-          readGroups
-          updateGroups
+          manager
           createdAt
           updatedAt
           superior {
-            id
-            no
+            companyID
+            username
+            localID
+            employeeGroupLocalId
+            superiorUsername
             firstName
             lastName
             grade
             email
             group {
-              id
+              companyID
+              localID
               name
-              sort
-              readGroups
-              updateGroups
               createdAt
               updatedAt
             }
@@ -3403,32 +473,26 @@ export const onCreateEmployee = /* GraphQL */ `
               name
               shortName
               url
-              companyGroupName
-              companyManagerGroupName
-              companyAdminGroupName
-              readGroups
-              updateGroups
               createdAt
               updatedAt
             }
-            owner
-            readGroups
-            updateGroups
+            manager
             createdAt
             updatedAt
             superior {
-              id
-              no
+              companyID
+              username
+              localID
+              employeeGroupLocalId
+              superiorUsername
               firstName
               lastName
               grade
               email
               group {
-                id
+                companyID
+                localID
                 name
-                sort
-                readGroups
-                updateGroups
                 createdAt
                 updatedAt
               }
@@ -3437,32 +501,26 @@ export const onCreateEmployee = /* GraphQL */ `
                 name
                 shortName
                 url
-                companyGroupName
-                companyManagerGroupName
-                companyAdminGroupName
-                readGroups
-                updateGroups
                 createdAt
                 updatedAt
               }
-              owner
-              readGroups
-              updateGroups
+              manager
               createdAt
               updatedAt
               superior {
-                id
-                no
+                companyID
+                username
+                localID
+                employeeGroupLocalId
+                superiorUsername
                 firstName
                 lastName
                 grade
                 email
                 group {
-                  id
+                  companyID
+                  localID
                   name
-                  sort
-                  readGroups
-                  updateGroups
                   createdAt
                   updatedAt
                 }
@@ -3471,29 +529,23 @@ export const onCreateEmployee = /* GraphQL */ `
                   name
                   shortName
                   url
-                  companyGroupName
-                  companyManagerGroupName
-                  companyAdminGroupName
-                  readGroups
-                  updateGroups
                   createdAt
                   updatedAt
                 }
-                owner
-                readGroups
-                updateGroups
+                manager
                 createdAt
                 updatedAt
                 superior {
-                  id
-                  no
+                  companyID
+                  username
+                  localID
+                  employeeGroupLocalId
+                  superiorUsername
                   firstName
                   lastName
                   grade
                   email
-                  owner
-                  readGroups
-                  updateGroups
+                  manager
                   createdAt
                   updatedAt
                 }
@@ -3506,20 +558,21 @@ export const onCreateEmployee = /* GraphQL */ `
   }
 `;
 export const onUpdateEmployee = /* GraphQL */ `
-  subscription OnUpdateEmployee($owner: String) {
-    onUpdateEmployee(owner: $owner) {
-      id
-      no
+  subscription OnUpdateEmployee {
+    onUpdateEmployee {
+      companyID
+      username
+      localID
+      employeeGroupLocalId
+      superiorUsername
       firstName
       lastName
       grade
       email
       group {
-        id
+        companyID
+        localID
         name
-        sort
-        readGroups
-        updateGroups
         createdAt
         updatedAt
       }
@@ -3528,32 +581,26 @@ export const onUpdateEmployee = /* GraphQL */ `
         name
         shortName
         url
-        companyGroupName
-        companyManagerGroupName
-        companyAdminGroupName
-        readGroups
-        updateGroups
         createdAt
         updatedAt
       }
-      owner
-      readGroups
-      updateGroups
+      manager
       createdAt
       updatedAt
       superior {
-        id
-        no
+        companyID
+        username
+        localID
+        employeeGroupLocalId
+        superiorUsername
         firstName
         lastName
         grade
         email
         group {
-          id
+          companyID
+          localID
           name
-          sort
-          readGroups
-          updateGroups
           createdAt
           updatedAt
         }
@@ -3562,32 +609,26 @@ export const onUpdateEmployee = /* GraphQL */ `
           name
           shortName
           url
-          companyGroupName
-          companyManagerGroupName
-          companyAdminGroupName
-          readGroups
-          updateGroups
           createdAt
           updatedAt
         }
-        owner
-        readGroups
-        updateGroups
+        manager
         createdAt
         updatedAt
         superior {
-          id
-          no
+          companyID
+          username
+          localID
+          employeeGroupLocalId
+          superiorUsername
           firstName
           lastName
           grade
           email
           group {
-            id
+            companyID
+            localID
             name
-            sort
-            readGroups
-            updateGroups
             createdAt
             updatedAt
           }
@@ -3596,32 +637,26 @@ export const onUpdateEmployee = /* GraphQL */ `
             name
             shortName
             url
-            companyGroupName
-            companyManagerGroupName
-            companyAdminGroupName
-            readGroups
-            updateGroups
             createdAt
             updatedAt
           }
-          owner
-          readGroups
-          updateGroups
+          manager
           createdAt
           updatedAt
           superior {
-            id
-            no
+            companyID
+            username
+            localID
+            employeeGroupLocalId
+            superiorUsername
             firstName
             lastName
             grade
             email
             group {
-              id
+              companyID
+              localID
               name
-              sort
-              readGroups
-              updateGroups
               createdAt
               updatedAt
             }
@@ -3630,32 +665,26 @@ export const onUpdateEmployee = /* GraphQL */ `
               name
               shortName
               url
-              companyGroupName
-              companyManagerGroupName
-              companyAdminGroupName
-              readGroups
-              updateGroups
               createdAt
               updatedAt
             }
-            owner
-            readGroups
-            updateGroups
+            manager
             createdAt
             updatedAt
             superior {
-              id
-              no
+              companyID
+              username
+              localID
+              employeeGroupLocalId
+              superiorUsername
               firstName
               lastName
               grade
               email
               group {
-                id
+                companyID
+                localID
                 name
-                sort
-                readGroups
-                updateGroups
                 createdAt
                 updatedAt
               }
@@ -3664,32 +693,26 @@ export const onUpdateEmployee = /* GraphQL */ `
                 name
                 shortName
                 url
-                companyGroupName
-                companyManagerGroupName
-                companyAdminGroupName
-                readGroups
-                updateGroups
                 createdAt
                 updatedAt
               }
-              owner
-              readGroups
-              updateGroups
+              manager
               createdAt
               updatedAt
               superior {
-                id
-                no
+                companyID
+                username
+                localID
+                employeeGroupLocalId
+                superiorUsername
                 firstName
                 lastName
                 grade
                 email
                 group {
-                  id
+                  companyID
+                  localID
                   name
-                  sort
-                  readGroups
-                  updateGroups
                   createdAt
                   updatedAt
                 }
@@ -3698,29 +721,23 @@ export const onUpdateEmployee = /* GraphQL */ `
                   name
                   shortName
                   url
-                  companyGroupName
-                  companyManagerGroupName
-                  companyAdminGroupName
-                  readGroups
-                  updateGroups
                   createdAt
                   updatedAt
                 }
-                owner
-                readGroups
-                updateGroups
+                manager
                 createdAt
                 updatedAt
                 superior {
-                  id
-                  no
+                  companyID
+                  username
+                  localID
+                  employeeGroupLocalId
+                  superiorUsername
                   firstName
                   lastName
                   grade
                   email
-                  owner
-                  readGroups
-                  updateGroups
+                  manager
                   createdAt
                   updatedAt
                 }
@@ -3733,20 +750,21 @@ export const onUpdateEmployee = /* GraphQL */ `
   }
 `;
 export const onDeleteEmployee = /* GraphQL */ `
-  subscription OnDeleteEmployee($owner: String) {
-    onDeleteEmployee(owner: $owner) {
-      id
-      no
+  subscription OnDeleteEmployee {
+    onDeleteEmployee {
+      companyID
+      username
+      localID
+      employeeGroupLocalId
+      superiorUsername
       firstName
       lastName
       grade
       email
       group {
-        id
+        companyID
+        localID
         name
-        sort
-        readGroups
-        updateGroups
         createdAt
         updatedAt
       }
@@ -3755,32 +773,26 @@ export const onDeleteEmployee = /* GraphQL */ `
         name
         shortName
         url
-        companyGroupName
-        companyManagerGroupName
-        companyAdminGroupName
-        readGroups
-        updateGroups
         createdAt
         updatedAt
       }
-      owner
-      readGroups
-      updateGroups
+      manager
       createdAt
       updatedAt
       superior {
-        id
-        no
+        companyID
+        username
+        localID
+        employeeGroupLocalId
+        superiorUsername
         firstName
         lastName
         grade
         email
         group {
-          id
+          companyID
+          localID
           name
-          sort
-          readGroups
-          updateGroups
           createdAt
           updatedAt
         }
@@ -3789,32 +801,26 @@ export const onDeleteEmployee = /* GraphQL */ `
           name
           shortName
           url
-          companyGroupName
-          companyManagerGroupName
-          companyAdminGroupName
-          readGroups
-          updateGroups
           createdAt
           updatedAt
         }
-        owner
-        readGroups
-        updateGroups
+        manager
         createdAt
         updatedAt
         superior {
-          id
-          no
+          companyID
+          username
+          localID
+          employeeGroupLocalId
+          superiorUsername
           firstName
           lastName
           grade
           email
           group {
-            id
+            companyID
+            localID
             name
-            sort
-            readGroups
-            updateGroups
             createdAt
             updatedAt
           }
@@ -3823,32 +829,26 @@ export const onDeleteEmployee = /* GraphQL */ `
             name
             shortName
             url
-            companyGroupName
-            companyManagerGroupName
-            companyAdminGroupName
-            readGroups
-            updateGroups
             createdAt
             updatedAt
           }
-          owner
-          readGroups
-          updateGroups
+          manager
           createdAt
           updatedAt
           superior {
-            id
-            no
+            companyID
+            username
+            localID
+            employeeGroupLocalId
+            superiorUsername
             firstName
             lastName
             grade
             email
             group {
-              id
+              companyID
+              localID
               name
-              sort
-              readGroups
-              updateGroups
               createdAt
               updatedAt
             }
@@ -3857,32 +857,26 @@ export const onDeleteEmployee = /* GraphQL */ `
               name
               shortName
               url
-              companyGroupName
-              companyManagerGroupName
-              companyAdminGroupName
-              readGroups
-              updateGroups
               createdAt
               updatedAt
             }
-            owner
-            readGroups
-            updateGroups
+            manager
             createdAt
             updatedAt
             superior {
-              id
-              no
+              companyID
+              username
+              localID
+              employeeGroupLocalId
+              superiorUsername
               firstName
               lastName
               grade
               email
               group {
-                id
+                companyID
+                localID
                 name
-                sort
-                readGroups
-                updateGroups
                 createdAt
                 updatedAt
               }
@@ -3891,32 +885,26 @@ export const onDeleteEmployee = /* GraphQL */ `
                 name
                 shortName
                 url
-                companyGroupName
-                companyManagerGroupName
-                companyAdminGroupName
-                readGroups
-                updateGroups
                 createdAt
                 updatedAt
               }
-              owner
-              readGroups
-              updateGroups
+              manager
               createdAt
               updatedAt
               superior {
-                id
-                no
+                companyID
+                username
+                localID
+                employeeGroupLocalId
+                superiorUsername
                 firstName
                 lastName
                 grade
                 email
                 group {
-                  id
+                  companyID
+                  localID
                   name
-                  sort
-                  readGroups
-                  updateGroups
                   createdAt
                   updatedAt
                 }
@@ -3925,29 +913,23 @@ export const onDeleteEmployee = /* GraphQL */ `
                   name
                   shortName
                   url
-                  companyGroupName
-                  companyManagerGroupName
-                  companyAdminGroupName
-                  readGroups
-                  updateGroups
                   createdAt
                   updatedAt
                 }
-                owner
-                readGroups
-                updateGroups
+                manager
                 createdAt
                 updatedAt
                 superior {
-                  id
-                  no
+                  companyID
+                  username
+                  localID
+                  employeeGroupLocalId
+                  superiorUsername
                   firstName
                   lastName
                   grade
                   email
-                  owner
-                  readGroups
-                  updateGroups
+                  manager
                   createdAt
                   updatedAt
                 }
@@ -3960,9 +942,19 @@ export const onDeleteEmployee = /* GraphQL */ `
   }
 `;
 export const onCreateSheet = /* GraphQL */ `
-  subscription OnCreateSheet($reviewers: String, $reviewee: String) {
-    onCreateSheet(reviewers: $reviewers, reviewee: $reviewee) {
-      id
+  subscription OnCreateSheet(
+    $topReviewers: String
+    $secondReviewers: String
+    $reviewee: String
+    $referencer: String
+  ) {
+    onCreateSheet(
+      topReviewers: $topReviewers
+      secondReviewers: $secondReviewers
+      reviewee: $reviewee
+      referencer: $referencer
+    ) {
+      companyID
       year
       grade
       careerPlan
@@ -3984,23 +976,26 @@ export const onCreateSheet = /* GraphQL */ `
       InterviewMid2Comment
       InterviewMid3Date
       InterviewMid3Comment
-      sheetGroupId
+      revieweeUsername
+      secondUsername
+      sheetGroupLocalId
       group {
-        id
+        companyID
+        localID
         name
-        sort
-        readGroups
-        updateGroups
         createdAt
         updatedAt
       }
       section {
         items {
-          id
-          sectionSheetId
+          sheetKeys
+          sectionCategoryLocalId
+          companyID
           objective {
             items {
-              id
+              sectionKeys
+              createdAt
+              companyID
               content
               result
               priority
@@ -4008,147 +1003,52 @@ export const onCreateSheet = /* GraphQL */ `
               firstEvaluation
               lastEvaluation
               progress
-              status
               expStartDate
               expDoneDate
-              objectiveSectionId
-              section {
-                id
-                sectionSheetId
-                objective {
-                  nextToken
-                }
-                category {
-                  id
-                  no
-                  name
-                  readGroups
-                  updateGroups
-                  createdAt
-                  updatedAt
-                }
-                reviewee
-                reviewers
-                readGroups
-                updateGroups
-                createdAt
-                updatedAt
-              }
               reviewee
-              reviewers
-              readGroups
-              updateGroups
-              createdAt
+              topReviewers
+              secondReviewers
+              referencer
               updatedAt
-              sheet {
-                id
-                year
-                grade
-                careerPlan
-                careerPlanComment
-                reviewComment
-                reviewDate
-                selfCheckDate
-                firstComment
-                firstCheckDate
-                secondComment
-                secondCheckDate
-                overAllEvaluation
-                statusValue
-                interviewPlanDate
-                interviewPlanComment
-                InterviewMid1Date
-                InterviewMid1Comment
-                InterviewMid2Date
-                InterviewMid2Comment
-                InterviewMid3Date
-                InterviewMid3Comment
-                sheetGroupId
-                group {
-                  id
-                  name
-                  sort
-                  readGroups
-                  updateGroups
-                  createdAt
-                  updatedAt
-                }
-                section {
-                  nextToken
-                }
-                reviewee
-                reviewers
-                readGroups
-                updateGroups
-                createdAt
-                updatedAt
-                revieweeEmployee {
-                  id
-                  no
-                  firstName
-                  lastName
-                  grade
-                  email
-                  owner
-                  readGroups
-                  updateGroups
-                  createdAt
-                  updatedAt
-                }
-                secondEmployee {
-                  id
-                  no
-                  firstName
-                  lastName
-                  grade
-                  email
-                  owner
-                  readGroups
-                  updateGroups
-                  createdAt
-                  updatedAt
-                }
-              }
             }
             nextToken
           }
           category {
-            id
-            no
+            companyID
+            localID
             name
-            readGroups
-            updateGroups
             createdAt
             updatedAt
           }
           reviewee
-          reviewers
-          readGroups
-          updateGroups
+          topReviewers
+          secondReviewers
+          referencer
           createdAt
           updatedAt
         }
         nextToken
       }
+      referencer
       reviewee
-      reviewers
-      readGroups
-      updateGroups
+      topReviewers
+      secondReviewers
       createdAt
       updatedAt
       revieweeEmployee {
-        id
-        no
+        companyID
+        username
+        localID
+        employeeGroupLocalId
+        superiorUsername
         firstName
         lastName
         grade
         email
         group {
-          id
+          companyID
+          localID
           name
-          sort
-          readGroups
-          updateGroups
           createdAt
           updatedAt
         }
@@ -4157,32 +1057,26 @@ export const onCreateSheet = /* GraphQL */ `
           name
           shortName
           url
-          companyGroupName
-          companyManagerGroupName
-          companyAdminGroupName
-          readGroups
-          updateGroups
           createdAt
           updatedAt
         }
-        owner
-        readGroups
-        updateGroups
+        manager
         createdAt
         updatedAt
         superior {
-          id
-          no
+          companyID
+          username
+          localID
+          employeeGroupLocalId
+          superiorUsername
           firstName
           lastName
           grade
           email
           group {
-            id
+            companyID
+            localID
             name
-            sort
-            readGroups
-            updateGroups
             createdAt
             updatedAt
           }
@@ -4191,32 +1085,26 @@ export const onCreateSheet = /* GraphQL */ `
             name
             shortName
             url
-            companyGroupName
-            companyManagerGroupName
-            companyAdminGroupName
-            readGroups
-            updateGroups
             createdAt
             updatedAt
           }
-          owner
-          readGroups
-          updateGroups
+          manager
           createdAt
           updatedAt
           superior {
-            id
-            no
+            companyID
+            username
+            localID
+            employeeGroupLocalId
+            superiorUsername
             firstName
             lastName
             grade
             email
             group {
-              id
+              companyID
+              localID
               name
-              sort
-              readGroups
-              updateGroups
               createdAt
               updatedAt
             }
@@ -4225,32 +1113,26 @@ export const onCreateSheet = /* GraphQL */ `
               name
               shortName
               url
-              companyGroupName
-              companyManagerGroupName
-              companyAdminGroupName
-              readGroups
-              updateGroups
               createdAt
               updatedAt
             }
-            owner
-            readGroups
-            updateGroups
+            manager
             createdAt
             updatedAt
             superior {
-              id
-              no
+              companyID
+              username
+              localID
+              employeeGroupLocalId
+              superiorUsername
               firstName
               lastName
               grade
               email
               group {
-                id
+                companyID
+                localID
                 name
-                sort
-                readGroups
-                updateGroups
                 createdAt
                 updatedAt
               }
@@ -4259,32 +1141,26 @@ export const onCreateSheet = /* GraphQL */ `
                 name
                 shortName
                 url
-                companyGroupName
-                companyManagerGroupName
-                companyAdminGroupName
-                readGroups
-                updateGroups
                 createdAt
                 updatedAt
               }
-              owner
-              readGroups
-              updateGroups
+              manager
               createdAt
               updatedAt
               superior {
-                id
-                no
+                companyID
+                username
+                localID
+                employeeGroupLocalId
+                superiorUsername
                 firstName
                 lastName
                 grade
                 email
                 group {
-                  id
+                  companyID
+                  localID
                   name
-                  sort
-                  readGroups
-                  updateGroups
                   createdAt
                   updatedAt
                 }
@@ -4293,29 +1169,23 @@ export const onCreateSheet = /* GraphQL */ `
                   name
                   shortName
                   url
-                  companyGroupName
-                  companyManagerGroupName
-                  companyAdminGroupName
-                  readGroups
-                  updateGroups
                   createdAt
                   updatedAt
                 }
-                owner
-                readGroups
-                updateGroups
+                manager
                 createdAt
                 updatedAt
                 superior {
-                  id
-                  no
+                  companyID
+                  username
+                  localID
+                  employeeGroupLocalId
+                  superiorUsername
                   firstName
                   lastName
                   grade
                   email
-                  owner
-                  readGroups
-                  updateGroups
+                  manager
                   createdAt
                   updatedAt
                 }
@@ -4325,18 +1195,19 @@ export const onCreateSheet = /* GraphQL */ `
         }
       }
       secondEmployee {
-        id
-        no
+        companyID
+        username
+        localID
+        employeeGroupLocalId
+        superiorUsername
         firstName
         lastName
         grade
         email
         group {
-          id
+          companyID
+          localID
           name
-          sort
-          readGroups
-          updateGroups
           createdAt
           updatedAt
         }
@@ -4345,32 +1216,26 @@ export const onCreateSheet = /* GraphQL */ `
           name
           shortName
           url
-          companyGroupName
-          companyManagerGroupName
-          companyAdminGroupName
-          readGroups
-          updateGroups
           createdAt
           updatedAt
         }
-        owner
-        readGroups
-        updateGroups
+        manager
         createdAt
         updatedAt
         superior {
-          id
-          no
+          companyID
+          username
+          localID
+          employeeGroupLocalId
+          superiorUsername
           firstName
           lastName
           grade
           email
           group {
-            id
+            companyID
+            localID
             name
-            sort
-            readGroups
-            updateGroups
             createdAt
             updatedAt
           }
@@ -4379,32 +1244,26 @@ export const onCreateSheet = /* GraphQL */ `
             name
             shortName
             url
-            companyGroupName
-            companyManagerGroupName
-            companyAdminGroupName
-            readGroups
-            updateGroups
             createdAt
             updatedAt
           }
-          owner
-          readGroups
-          updateGroups
+          manager
           createdAt
           updatedAt
           superior {
-            id
-            no
+            companyID
+            username
+            localID
+            employeeGroupLocalId
+            superiorUsername
             firstName
             lastName
             grade
             email
             group {
-              id
+              companyID
+              localID
               name
-              sort
-              readGroups
-              updateGroups
               createdAt
               updatedAt
             }
@@ -4413,32 +1272,26 @@ export const onCreateSheet = /* GraphQL */ `
               name
               shortName
               url
-              companyGroupName
-              companyManagerGroupName
-              companyAdminGroupName
-              readGroups
-              updateGroups
               createdAt
               updatedAt
             }
-            owner
-            readGroups
-            updateGroups
+            manager
             createdAt
             updatedAt
             superior {
-              id
-              no
+              companyID
+              username
+              localID
+              employeeGroupLocalId
+              superiorUsername
               firstName
               lastName
               grade
               email
               group {
-                id
+                companyID
+                localID
                 name
-                sort
-                readGroups
-                updateGroups
                 createdAt
                 updatedAt
               }
@@ -4447,32 +1300,26 @@ export const onCreateSheet = /* GraphQL */ `
                 name
                 shortName
                 url
-                companyGroupName
-                companyManagerGroupName
-                companyAdminGroupName
-                readGroups
-                updateGroups
                 createdAt
                 updatedAt
               }
-              owner
-              readGroups
-              updateGroups
+              manager
               createdAt
               updatedAt
               superior {
-                id
-                no
+                companyID
+                username
+                localID
+                employeeGroupLocalId
+                superiorUsername
                 firstName
                 lastName
                 grade
                 email
                 group {
-                  id
+                  companyID
+                  localID
                   name
-                  sort
-                  readGroups
-                  updateGroups
                   createdAt
                   updatedAt
                 }
@@ -4481,29 +1328,23 @@ export const onCreateSheet = /* GraphQL */ `
                   name
                   shortName
                   url
-                  companyGroupName
-                  companyManagerGroupName
-                  companyAdminGroupName
-                  readGroups
-                  updateGroups
                   createdAt
                   updatedAt
                 }
-                owner
-                readGroups
-                updateGroups
+                manager
                 createdAt
                 updatedAt
                 superior {
-                  id
-                  no
+                  companyID
+                  username
+                  localID
+                  employeeGroupLocalId
+                  superiorUsername
                   firstName
                   lastName
                   grade
                   email
-                  owner
-                  readGroups
-                  updateGroups
+                  manager
                   createdAt
                   updatedAt
                 }
@@ -4516,9 +1357,19 @@ export const onCreateSheet = /* GraphQL */ `
   }
 `;
 export const onUpdateSheet = /* GraphQL */ `
-  subscription OnUpdateSheet($reviewers: String, $reviewee: String) {
-    onUpdateSheet(reviewers: $reviewers, reviewee: $reviewee) {
-      id
+  subscription OnUpdateSheet(
+    $topReviewers: String
+    $secondReviewers: String
+    $reviewee: String
+    $referencer: String
+  ) {
+    onUpdateSheet(
+      topReviewers: $topReviewers
+      secondReviewers: $secondReviewers
+      reviewee: $reviewee
+      referencer: $referencer
+    ) {
+      companyID
       year
       grade
       careerPlan
@@ -4540,23 +1391,26 @@ export const onUpdateSheet = /* GraphQL */ `
       InterviewMid2Comment
       InterviewMid3Date
       InterviewMid3Comment
-      sheetGroupId
+      revieweeUsername
+      secondUsername
+      sheetGroupLocalId
       group {
-        id
+        companyID
+        localID
         name
-        sort
-        readGroups
-        updateGroups
         createdAt
         updatedAt
       }
       section {
         items {
-          id
-          sectionSheetId
+          sheetKeys
+          sectionCategoryLocalId
+          companyID
           objective {
             items {
-              id
+              sectionKeys
+              createdAt
+              companyID
               content
               result
               priority
@@ -4564,147 +1418,52 @@ export const onUpdateSheet = /* GraphQL */ `
               firstEvaluation
               lastEvaluation
               progress
-              status
               expStartDate
               expDoneDate
-              objectiveSectionId
-              section {
-                id
-                sectionSheetId
-                objective {
-                  nextToken
-                }
-                category {
-                  id
-                  no
-                  name
-                  readGroups
-                  updateGroups
-                  createdAt
-                  updatedAt
-                }
-                reviewee
-                reviewers
-                readGroups
-                updateGroups
-                createdAt
-                updatedAt
-              }
               reviewee
-              reviewers
-              readGroups
-              updateGroups
-              createdAt
+              topReviewers
+              secondReviewers
+              referencer
               updatedAt
-              sheet {
-                id
-                year
-                grade
-                careerPlan
-                careerPlanComment
-                reviewComment
-                reviewDate
-                selfCheckDate
-                firstComment
-                firstCheckDate
-                secondComment
-                secondCheckDate
-                overAllEvaluation
-                statusValue
-                interviewPlanDate
-                interviewPlanComment
-                InterviewMid1Date
-                InterviewMid1Comment
-                InterviewMid2Date
-                InterviewMid2Comment
-                InterviewMid3Date
-                InterviewMid3Comment
-                sheetGroupId
-                group {
-                  id
-                  name
-                  sort
-                  readGroups
-                  updateGroups
-                  createdAt
-                  updatedAt
-                }
-                section {
-                  nextToken
-                }
-                reviewee
-                reviewers
-                readGroups
-                updateGroups
-                createdAt
-                updatedAt
-                revieweeEmployee {
-                  id
-                  no
-                  firstName
-                  lastName
-                  grade
-                  email
-                  owner
-                  readGroups
-                  updateGroups
-                  createdAt
-                  updatedAt
-                }
-                secondEmployee {
-                  id
-                  no
-                  firstName
-                  lastName
-                  grade
-                  email
-                  owner
-                  readGroups
-                  updateGroups
-                  createdAt
-                  updatedAt
-                }
-              }
             }
             nextToken
           }
           category {
-            id
-            no
+            companyID
+            localID
             name
-            readGroups
-            updateGroups
             createdAt
             updatedAt
           }
           reviewee
-          reviewers
-          readGroups
-          updateGroups
+          topReviewers
+          secondReviewers
+          referencer
           createdAt
           updatedAt
         }
         nextToken
       }
+      referencer
       reviewee
-      reviewers
-      readGroups
-      updateGroups
+      topReviewers
+      secondReviewers
       createdAt
       updatedAt
       revieweeEmployee {
-        id
-        no
+        companyID
+        username
+        localID
+        employeeGroupLocalId
+        superiorUsername
         firstName
         lastName
         grade
         email
         group {
-          id
+          companyID
+          localID
           name
-          sort
-          readGroups
-          updateGroups
           createdAt
           updatedAt
         }
@@ -4713,32 +1472,26 @@ export const onUpdateSheet = /* GraphQL */ `
           name
           shortName
           url
-          companyGroupName
-          companyManagerGroupName
-          companyAdminGroupName
-          readGroups
-          updateGroups
           createdAt
           updatedAt
         }
-        owner
-        readGroups
-        updateGroups
+        manager
         createdAt
         updatedAt
         superior {
-          id
-          no
+          companyID
+          username
+          localID
+          employeeGroupLocalId
+          superiorUsername
           firstName
           lastName
           grade
           email
           group {
-            id
+            companyID
+            localID
             name
-            sort
-            readGroups
-            updateGroups
             createdAt
             updatedAt
           }
@@ -4747,32 +1500,26 @@ export const onUpdateSheet = /* GraphQL */ `
             name
             shortName
             url
-            companyGroupName
-            companyManagerGroupName
-            companyAdminGroupName
-            readGroups
-            updateGroups
             createdAt
             updatedAt
           }
-          owner
-          readGroups
-          updateGroups
+          manager
           createdAt
           updatedAt
           superior {
-            id
-            no
+            companyID
+            username
+            localID
+            employeeGroupLocalId
+            superiorUsername
             firstName
             lastName
             grade
             email
             group {
-              id
+              companyID
+              localID
               name
-              sort
-              readGroups
-              updateGroups
               createdAt
               updatedAt
             }
@@ -4781,32 +1528,26 @@ export const onUpdateSheet = /* GraphQL */ `
               name
               shortName
               url
-              companyGroupName
-              companyManagerGroupName
-              companyAdminGroupName
-              readGroups
-              updateGroups
               createdAt
               updatedAt
             }
-            owner
-            readGroups
-            updateGroups
+            manager
             createdAt
             updatedAt
             superior {
-              id
-              no
+              companyID
+              username
+              localID
+              employeeGroupLocalId
+              superiorUsername
               firstName
               lastName
               grade
               email
               group {
-                id
+                companyID
+                localID
                 name
-                sort
-                readGroups
-                updateGroups
                 createdAt
                 updatedAt
               }
@@ -4815,32 +1556,26 @@ export const onUpdateSheet = /* GraphQL */ `
                 name
                 shortName
                 url
-                companyGroupName
-                companyManagerGroupName
-                companyAdminGroupName
-                readGroups
-                updateGroups
                 createdAt
                 updatedAt
               }
-              owner
-              readGroups
-              updateGroups
+              manager
               createdAt
               updatedAt
               superior {
-                id
-                no
+                companyID
+                username
+                localID
+                employeeGroupLocalId
+                superiorUsername
                 firstName
                 lastName
                 grade
                 email
                 group {
-                  id
+                  companyID
+                  localID
                   name
-                  sort
-                  readGroups
-                  updateGroups
                   createdAt
                   updatedAt
                 }
@@ -4849,29 +1584,23 @@ export const onUpdateSheet = /* GraphQL */ `
                   name
                   shortName
                   url
-                  companyGroupName
-                  companyManagerGroupName
-                  companyAdminGroupName
-                  readGroups
-                  updateGroups
                   createdAt
                   updatedAt
                 }
-                owner
-                readGroups
-                updateGroups
+                manager
                 createdAt
                 updatedAt
                 superior {
-                  id
-                  no
+                  companyID
+                  username
+                  localID
+                  employeeGroupLocalId
+                  superiorUsername
                   firstName
                   lastName
                   grade
                   email
-                  owner
-                  readGroups
-                  updateGroups
+                  manager
                   createdAt
                   updatedAt
                 }
@@ -4881,18 +1610,19 @@ export const onUpdateSheet = /* GraphQL */ `
         }
       }
       secondEmployee {
-        id
-        no
+        companyID
+        username
+        localID
+        employeeGroupLocalId
+        superiorUsername
         firstName
         lastName
         grade
         email
         group {
-          id
+          companyID
+          localID
           name
-          sort
-          readGroups
-          updateGroups
           createdAt
           updatedAt
         }
@@ -4901,32 +1631,26 @@ export const onUpdateSheet = /* GraphQL */ `
           name
           shortName
           url
-          companyGroupName
-          companyManagerGroupName
-          companyAdminGroupName
-          readGroups
-          updateGroups
           createdAt
           updatedAt
         }
-        owner
-        readGroups
-        updateGroups
+        manager
         createdAt
         updatedAt
         superior {
-          id
-          no
+          companyID
+          username
+          localID
+          employeeGroupLocalId
+          superiorUsername
           firstName
           lastName
           grade
           email
           group {
-            id
+            companyID
+            localID
             name
-            sort
-            readGroups
-            updateGroups
             createdAt
             updatedAt
           }
@@ -4935,32 +1659,26 @@ export const onUpdateSheet = /* GraphQL */ `
             name
             shortName
             url
-            companyGroupName
-            companyManagerGroupName
-            companyAdminGroupName
-            readGroups
-            updateGroups
             createdAt
             updatedAt
           }
-          owner
-          readGroups
-          updateGroups
+          manager
           createdAt
           updatedAt
           superior {
-            id
-            no
+            companyID
+            username
+            localID
+            employeeGroupLocalId
+            superiorUsername
             firstName
             lastName
             grade
             email
             group {
-              id
+              companyID
+              localID
               name
-              sort
-              readGroups
-              updateGroups
               createdAt
               updatedAt
             }
@@ -4969,32 +1687,26 @@ export const onUpdateSheet = /* GraphQL */ `
               name
               shortName
               url
-              companyGroupName
-              companyManagerGroupName
-              companyAdminGroupName
-              readGroups
-              updateGroups
               createdAt
               updatedAt
             }
-            owner
-            readGroups
-            updateGroups
+            manager
             createdAt
             updatedAt
             superior {
-              id
-              no
+              companyID
+              username
+              localID
+              employeeGroupLocalId
+              superiorUsername
               firstName
               lastName
               grade
               email
               group {
-                id
+                companyID
+                localID
                 name
-                sort
-                readGroups
-                updateGroups
                 createdAt
                 updatedAt
               }
@@ -5003,32 +1715,26 @@ export const onUpdateSheet = /* GraphQL */ `
                 name
                 shortName
                 url
-                companyGroupName
-                companyManagerGroupName
-                companyAdminGroupName
-                readGroups
-                updateGroups
                 createdAt
                 updatedAt
               }
-              owner
-              readGroups
-              updateGroups
+              manager
               createdAt
               updatedAt
               superior {
-                id
-                no
+                companyID
+                username
+                localID
+                employeeGroupLocalId
+                superiorUsername
                 firstName
                 lastName
                 grade
                 email
                 group {
-                  id
+                  companyID
+                  localID
                   name
-                  sort
-                  readGroups
-                  updateGroups
                   createdAt
                   updatedAt
                 }
@@ -5037,29 +1743,23 @@ export const onUpdateSheet = /* GraphQL */ `
                   name
                   shortName
                   url
-                  companyGroupName
-                  companyManagerGroupName
-                  companyAdminGroupName
-                  readGroups
-                  updateGroups
                   createdAt
                   updatedAt
                 }
-                owner
-                readGroups
-                updateGroups
+                manager
                 createdAt
                 updatedAt
                 superior {
-                  id
-                  no
+                  companyID
+                  username
+                  localID
+                  employeeGroupLocalId
+                  superiorUsername
                   firstName
                   lastName
                   grade
                   email
-                  owner
-                  readGroups
-                  updateGroups
+                  manager
                   createdAt
                   updatedAt
                 }
@@ -5072,9 +1772,19 @@ export const onUpdateSheet = /* GraphQL */ `
   }
 `;
 export const onDeleteSheet = /* GraphQL */ `
-  subscription OnDeleteSheet($reviewers: String, $reviewee: String) {
-    onDeleteSheet(reviewers: $reviewers, reviewee: $reviewee) {
-      id
+  subscription OnDeleteSheet(
+    $topReviewers: String
+    $secondReviewers: String
+    $reviewee: String
+    $referencer: String
+  ) {
+    onDeleteSheet(
+      topReviewers: $topReviewers
+      secondReviewers: $secondReviewers
+      reviewee: $reviewee
+      referencer: $referencer
+    ) {
+      companyID
       year
       grade
       careerPlan
@@ -5096,23 +1806,26 @@ export const onDeleteSheet = /* GraphQL */ `
       InterviewMid2Comment
       InterviewMid3Date
       InterviewMid3Comment
-      sheetGroupId
+      revieweeUsername
+      secondUsername
+      sheetGroupLocalId
       group {
-        id
+        companyID
+        localID
         name
-        sort
-        readGroups
-        updateGroups
         createdAt
         updatedAt
       }
       section {
         items {
-          id
-          sectionSheetId
+          sheetKeys
+          sectionCategoryLocalId
+          companyID
           objective {
             items {
-              id
+              sectionKeys
+              createdAt
+              companyID
               content
               result
               priority
@@ -5120,147 +1833,52 @@ export const onDeleteSheet = /* GraphQL */ `
               firstEvaluation
               lastEvaluation
               progress
-              status
               expStartDate
               expDoneDate
-              objectiveSectionId
-              section {
-                id
-                sectionSheetId
-                objective {
-                  nextToken
-                }
-                category {
-                  id
-                  no
-                  name
-                  readGroups
-                  updateGroups
-                  createdAt
-                  updatedAt
-                }
-                reviewee
-                reviewers
-                readGroups
-                updateGroups
-                createdAt
-                updatedAt
-              }
               reviewee
-              reviewers
-              readGroups
-              updateGroups
-              createdAt
+              topReviewers
+              secondReviewers
+              referencer
               updatedAt
-              sheet {
-                id
-                year
-                grade
-                careerPlan
-                careerPlanComment
-                reviewComment
-                reviewDate
-                selfCheckDate
-                firstComment
-                firstCheckDate
-                secondComment
-                secondCheckDate
-                overAllEvaluation
-                statusValue
-                interviewPlanDate
-                interviewPlanComment
-                InterviewMid1Date
-                InterviewMid1Comment
-                InterviewMid2Date
-                InterviewMid2Comment
-                InterviewMid3Date
-                InterviewMid3Comment
-                sheetGroupId
-                group {
-                  id
-                  name
-                  sort
-                  readGroups
-                  updateGroups
-                  createdAt
-                  updatedAt
-                }
-                section {
-                  nextToken
-                }
-                reviewee
-                reviewers
-                readGroups
-                updateGroups
-                createdAt
-                updatedAt
-                revieweeEmployee {
-                  id
-                  no
-                  firstName
-                  lastName
-                  grade
-                  email
-                  owner
-                  readGroups
-                  updateGroups
-                  createdAt
-                  updatedAt
-                }
-                secondEmployee {
-                  id
-                  no
-                  firstName
-                  lastName
-                  grade
-                  email
-                  owner
-                  readGroups
-                  updateGroups
-                  createdAt
-                  updatedAt
-                }
-              }
             }
             nextToken
           }
           category {
-            id
-            no
+            companyID
+            localID
             name
-            readGroups
-            updateGroups
             createdAt
             updatedAt
           }
           reviewee
-          reviewers
-          readGroups
-          updateGroups
+          topReviewers
+          secondReviewers
+          referencer
           createdAt
           updatedAt
         }
         nextToken
       }
+      referencer
       reviewee
-      reviewers
-      readGroups
-      updateGroups
+      topReviewers
+      secondReviewers
       createdAt
       updatedAt
       revieweeEmployee {
-        id
-        no
+        companyID
+        username
+        localID
+        employeeGroupLocalId
+        superiorUsername
         firstName
         lastName
         grade
         email
         group {
-          id
+          companyID
+          localID
           name
-          sort
-          readGroups
-          updateGroups
           createdAt
           updatedAt
         }
@@ -5269,32 +1887,26 @@ export const onDeleteSheet = /* GraphQL */ `
           name
           shortName
           url
-          companyGroupName
-          companyManagerGroupName
-          companyAdminGroupName
-          readGroups
-          updateGroups
           createdAt
           updatedAt
         }
-        owner
-        readGroups
-        updateGroups
+        manager
         createdAt
         updatedAt
         superior {
-          id
-          no
+          companyID
+          username
+          localID
+          employeeGroupLocalId
+          superiorUsername
           firstName
           lastName
           grade
           email
           group {
-            id
+            companyID
+            localID
             name
-            sort
-            readGroups
-            updateGroups
             createdAt
             updatedAt
           }
@@ -5303,32 +1915,26 @@ export const onDeleteSheet = /* GraphQL */ `
             name
             shortName
             url
-            companyGroupName
-            companyManagerGroupName
-            companyAdminGroupName
-            readGroups
-            updateGroups
             createdAt
             updatedAt
           }
-          owner
-          readGroups
-          updateGroups
+          manager
           createdAt
           updatedAt
           superior {
-            id
-            no
+            companyID
+            username
+            localID
+            employeeGroupLocalId
+            superiorUsername
             firstName
             lastName
             grade
             email
             group {
-              id
+              companyID
+              localID
               name
-              sort
-              readGroups
-              updateGroups
               createdAt
               updatedAt
             }
@@ -5337,32 +1943,26 @@ export const onDeleteSheet = /* GraphQL */ `
               name
               shortName
               url
-              companyGroupName
-              companyManagerGroupName
-              companyAdminGroupName
-              readGroups
-              updateGroups
               createdAt
               updatedAt
             }
-            owner
-            readGroups
-            updateGroups
+            manager
             createdAt
             updatedAt
             superior {
-              id
-              no
+              companyID
+              username
+              localID
+              employeeGroupLocalId
+              superiorUsername
               firstName
               lastName
               grade
               email
               group {
-                id
+                companyID
+                localID
                 name
-                sort
-                readGroups
-                updateGroups
                 createdAt
                 updatedAt
               }
@@ -5371,32 +1971,26 @@ export const onDeleteSheet = /* GraphQL */ `
                 name
                 shortName
                 url
-                companyGroupName
-                companyManagerGroupName
-                companyAdminGroupName
-                readGroups
-                updateGroups
                 createdAt
                 updatedAt
               }
-              owner
-              readGroups
-              updateGroups
+              manager
               createdAt
               updatedAt
               superior {
-                id
-                no
+                companyID
+                username
+                localID
+                employeeGroupLocalId
+                superiorUsername
                 firstName
                 lastName
                 grade
                 email
                 group {
-                  id
+                  companyID
+                  localID
                   name
-                  sort
-                  readGroups
-                  updateGroups
                   createdAt
                   updatedAt
                 }
@@ -5405,29 +1999,23 @@ export const onDeleteSheet = /* GraphQL */ `
                   name
                   shortName
                   url
-                  companyGroupName
-                  companyManagerGroupName
-                  companyAdminGroupName
-                  readGroups
-                  updateGroups
                   createdAt
                   updatedAt
                 }
-                owner
-                readGroups
-                updateGroups
+                manager
                 createdAt
                 updatedAt
                 superior {
-                  id
-                  no
+                  companyID
+                  username
+                  localID
+                  employeeGroupLocalId
+                  superiorUsername
                   firstName
                   lastName
                   grade
                   email
-                  owner
-                  readGroups
-                  updateGroups
+                  manager
                   createdAt
                   updatedAt
                 }
@@ -5437,18 +2025,19 @@ export const onDeleteSheet = /* GraphQL */ `
         }
       }
       secondEmployee {
-        id
-        no
+        companyID
+        username
+        localID
+        employeeGroupLocalId
+        superiorUsername
         firstName
         lastName
         grade
         email
         group {
-          id
+          companyID
+          localID
           name
-          sort
-          readGroups
-          updateGroups
           createdAt
           updatedAt
         }
@@ -5457,32 +2046,26 @@ export const onDeleteSheet = /* GraphQL */ `
           name
           shortName
           url
-          companyGroupName
-          companyManagerGroupName
-          companyAdminGroupName
-          readGroups
-          updateGroups
           createdAt
           updatedAt
         }
-        owner
-        readGroups
-        updateGroups
+        manager
         createdAt
         updatedAt
         superior {
-          id
-          no
+          companyID
+          username
+          localID
+          employeeGroupLocalId
+          superiorUsername
           firstName
           lastName
           grade
           email
           group {
-            id
+            companyID
+            localID
             name
-            sort
-            readGroups
-            updateGroups
             createdAt
             updatedAt
           }
@@ -5491,32 +2074,26 @@ export const onDeleteSheet = /* GraphQL */ `
             name
             shortName
             url
-            companyGroupName
-            companyManagerGroupName
-            companyAdminGroupName
-            readGroups
-            updateGroups
             createdAt
             updatedAt
           }
-          owner
-          readGroups
-          updateGroups
+          manager
           createdAt
           updatedAt
           superior {
-            id
-            no
+            companyID
+            username
+            localID
+            employeeGroupLocalId
+            superiorUsername
             firstName
             lastName
             grade
             email
             group {
-              id
+              companyID
+              localID
               name
-              sort
-              readGroups
-              updateGroups
               createdAt
               updatedAt
             }
@@ -5525,32 +2102,26 @@ export const onDeleteSheet = /* GraphQL */ `
               name
               shortName
               url
-              companyGroupName
-              companyManagerGroupName
-              companyAdminGroupName
-              readGroups
-              updateGroups
               createdAt
               updatedAt
             }
-            owner
-            readGroups
-            updateGroups
+            manager
             createdAt
             updatedAt
             superior {
-              id
-              no
+              companyID
+              username
+              localID
+              employeeGroupLocalId
+              superiorUsername
               firstName
               lastName
               grade
               email
               group {
-                id
+                companyID
+                localID
                 name
-                sort
-                readGroups
-                updateGroups
                 createdAt
                 updatedAt
               }
@@ -5559,32 +2130,26 @@ export const onDeleteSheet = /* GraphQL */ `
                 name
                 shortName
                 url
-                companyGroupName
-                companyManagerGroupName
-                companyAdminGroupName
-                readGroups
-                updateGroups
                 createdAt
                 updatedAt
               }
-              owner
-              readGroups
-              updateGroups
+              manager
               createdAt
               updatedAt
               superior {
-                id
-                no
+                companyID
+                username
+                localID
+                employeeGroupLocalId
+                superiorUsername
                 firstName
                 lastName
                 grade
                 email
                 group {
-                  id
+                  companyID
+                  localID
                   name
-                  sort
-                  readGroups
-                  updateGroups
                   createdAt
                   updatedAt
                 }
@@ -5593,29 +2158,23 @@ export const onDeleteSheet = /* GraphQL */ `
                   name
                   shortName
                   url
-                  companyGroupName
-                  companyManagerGroupName
-                  companyAdminGroupName
-                  readGroups
-                  updateGroups
                   createdAt
                   updatedAt
                 }
-                owner
-                readGroups
-                updateGroups
+                manager
                 createdAt
                 updatedAt
                 superior {
-                  id
-                  no
+                  companyID
+                  username
+                  localID
+                  employeeGroupLocalId
+                  superiorUsername
                   firstName
                   lastName
                   grade
                   email
-                  owner
-                  readGroups
-                  updateGroups
+                  manager
                   createdAt
                   updatedAt
                 }

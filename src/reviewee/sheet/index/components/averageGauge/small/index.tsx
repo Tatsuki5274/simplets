@@ -1,5 +1,5 @@
 import { Section } from "App"
-import { calcAvg, round } from "lib/util"
+import { calcAvg, getSectionKeys, round } from "lib/util"
 import React from "react"
 import { SmallGage } from "../../gage/small"
 
@@ -21,7 +21,7 @@ export const AverageSmallGaugeBox = (props: Props) => {
     return (
         <h4>
             {props.section.category?.name}
-            {avg || avg === 0 ? <SmallGage value={parseInt(round(avg, 2).toFixed(1))} id={props.section.id} /> : null}
+            {avg || avg === 0 ? <SmallGage value={parseInt(round(avg, 2).toFixed(1))} id={getSectionKeys(props.section).replace(/[.@]/g,'-')} /> : null}
         </h4>
     )
 }

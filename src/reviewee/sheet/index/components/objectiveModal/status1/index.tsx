@@ -1,8 +1,8 @@
 import { Formik } from "formik";
-import React from "react"
+import React, { useContext } from "react"
 import { Button, Col, Form, Modal, Row } from "react-bootstrap";
 import * as APIt from 'API';
-import { Objective } from "App";
+import { Objective, UserContext } from "App";
 import { ObjectiveDao } from "lib/dao/objectiveDao";
 import { updateObjective } from "graphql/mutations";
 import { inputFieldStyle } from "common/globalStyle.module.scss";
@@ -14,7 +14,7 @@ type Props = {
 }
 
 export const RevieweeSheetObjectiveModalStatus1 = (props: Props)=>{
-    // const context = useContext(SheetContext);
+    const currentUser = useContext(UserContext);
     // const sheet = context.sheet
     // const setSheet = context.setSheet
     
@@ -33,14 +33,15 @@ export const RevieweeSheetObjectiveModalStatus1 = (props: Props)=>{
                     console.log("values", values);
     
                     //項目明細 情報更新
-                    const objectiveId = props.objective.id;
+                    // const objectiveId = props.objective.id;
                     let selfEvaluationInput:number | null | undefined = parseInt(values.selfEvaluation);
                     if(isNaN(selfEvaluationInput)) {
                         selfEvaluationInput = undefined;
                     }
                     //目標変更の目標、ステータス、自己評価、優先順位、実績を項目明細に上書き
                     const updateI: APIt.UpdateObjectiveInput = {
-                        id: objectiveId,
+                        createdAt: props.objective.createdAt,
+                        sectionKeys: props.objective.sectionKeys,
                         content: values.content,
                         selfEvaluation: selfEvaluationInput,
                         priority: values.priority,

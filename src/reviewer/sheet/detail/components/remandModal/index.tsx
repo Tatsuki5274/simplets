@@ -42,7 +42,9 @@ export const RemandModal = (props: Props)=>{
 
                         //sheet更新処理
                         const updateI: APIt.UpdateSheetInput = {
-                            id: sheet.id,
+                            companyID: sheet.companyID,
+                            reviewee: sheet.reviewee,
+                            year: sheet.year,
                             statusValue: sheet.statusValue
                         };
                         const updateMV: APIt.UpdateSheetMutationVariables = {

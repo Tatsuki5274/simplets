@@ -76,7 +76,9 @@ export const ReviewerSheetPagesStatus10 = (props: Props) => {
 
                                             const work = commandWorkFlow(Command.SUP1_INPUT_SCORE, sheet)
                                             const data: UpdateSheetInput = {
-                                                id: sheet.id,
+                                                companyID: sheet.companyID,
+                                                reviewee: sheet.reviewee,
+                                                year: sheet.year,
                                                 secondComment: values.secondComment,
                                                 secondCheckDate: formatAWSDate(new Date()),
                                                 statusValue: work.sheet.statusValue,
@@ -131,7 +133,9 @@ export const ReviewerSheetPagesStatus10 = (props: Props) => {
                                         <Form.Group>
                                             <Button className={buttonComponentStyle} onClick={async () => {
                                                 const data: UpdateSheetInput = {
-                                                    id: sheet.id,
+                                                    companyID: sheet.companyID,
+                                                    reviewee: sheet.reviewee,
+                                                    year: sheet.year,
                                                     secondComment: formik.values.secondComment,
                                                     secondCheckDate: formatAWSDate(new Date()),
                                                     overAllEvaluation: formik.values.overAllEvaluation

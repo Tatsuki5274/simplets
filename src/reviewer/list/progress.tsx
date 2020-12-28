@@ -15,11 +15,18 @@ import { Field, Form, Formik } from 'formik';
 import { SheetDao } from 'lib/dao/sheetDao';
 import GaugeChart from 'react-gauge-chart';
 import { calcAvg, round} from 'lib/util';
+import { string } from 'yup';
+import { routeBuilder } from 'router';
 
 
 type ViewType = {
-    sheetId: string
-    reviewee: {
+
+    // sheetId: string
+    companyId: string,
+    year: string,
+    reviewee: string,
+
+    revieweeName: {
         lastName: string,
         firstName: string
     }
@@ -81,13 +88,12 @@ function ProgressReferenceList() {
             const listItems = await SheetDao.list(listSheets, filter)
             if(listItems){
                 // setSheets(listItems)
-                listItems.sort(function (a, b){
+                listItems.sort(function (a, b) {
                     // 社員番号の昇順でソート
-                    if(a.revieweeEmployee?.no && b.revieweeEmployee?.no){
-                        if(a.revieweeEmployee.no > b.revieweeEmployee.no){
-                            return 1
-                        }
+                    if (a.revieweeEmployee?.localID && b.revieweeEmployee?.localID && a.revieweeEmployee.localID > b.revieweeEmployee.localID) {
+                        return 1
                     }
+
                     return -1
                 })
                 setView(listItems)
@@ -99,9 +105,13 @@ function ProgressReferenceList() {
         // 画面表示に必要な情報を加工する処理
         let viewTemp: ViewType[] = listItems.map((sheet)=>{
             return {
-                sheetId: sheet.id,
+
+                // sheetId: sheet.id,
+                companyId: sheet.companyID,
+                year: String(sheet.year),
+                reviewee: sheet.reviewee,
                 groupName: sheet.group?.name || "",
-                reviewee: {
+                revieweeName: {
                     firstName: sheet.revieweeEmployee?.firstName || "",
                     lastName: sheet.revieweeEmployee?.lastName || ""
                 },
@@ -112,9 +122,9 @@ function ProgressReferenceList() {
                             calcAvg(section.objective.items.map((obj)=>{
                                 return  obj && obj.progress ? obj.progress : 0
                             })) : null,
-                        no: section?.category?.no,
-                        id: section?.category?.id,
-                        sectionId: section?.id
+                        no: section?.category ? parseInt(section.category.localID) : null,
+                        id: section?.category?.localID,
+                        sectionId: section?.companyID
                     }
                 }),
                 avg: -1
@@ -166,7 +176,12 @@ function ProgressReferenceList() {
                         }}
                         onSubmit={async (values)=>{
                             let filter: APIt.ListSheetsQueryVariables =  { filter: { year: { eq: values.year } } }
-                            if(values.groupId !== "all") filter = { filter: { year: { eq: values.year }, sheetGroupId: {eq: values.groupId} } }
+                            if(values.groupId !== "all") filter = {
+                                filter: {
+                                    year: {eq: values.year },
+                                    sheetGroupLocalId: {eq: values.groupId} //選択した部署情報
+                                }
+                            }
                             const listItems = await SheetDao.list(listSheets, filter)
                             console.log(listItems)
 
@@ -176,17 +191,17 @@ function ProgressReferenceList() {
                         }}
                     >
                         {(formik) => (
-                            <Form>
+                            <Form onSubmit={formik.handleSubmit}>
                                 <div>
                                     {/* 部門の選択肢を表示 */}
                                     <span className={`${style.selectionSize} ${style.selectionMargin}`}>
-                                        <Field type="radio" name="groupId" value="all" />
+                                        <Field type="radio" name="groupId" value="all" handleChange={formik.handleChange}/>
                                         全て
                                     </span>
                                     {groupList?.map((group: Group) => {
                                         return (
                                             <span className={`${style.selectionSize} ${style.selectionMargin}`}>
-                                                <Field type="radio" name="groupId" value={group.id} />
+                                                <Field type="radio" name="groupId" value={group.localID} handleChange={formik.handleChange}/>
                                                 {group.name}
                                             </span>
                                         )
@@ -255,18 +270,18 @@ function ProgressReferenceList() {
                         });
                     return (
                             <Card className={style.linkbox}>
-                                <Link to={`/reviewer/sheet/${view.sheetId}`} />
+                                <Link to={routeBuilder.reviewerDetailPath(view.companyId,view.reviewee,view.year)} />
                                 {/* 社員の姓名と部門名を表示 */}
                             <Card.Header>
-                                {view.reviewee.lastName}
-                                {view.reviewee.firstName}
+                                {view.revieweeName.lastName}
+                                {view.revieweeName.firstName}
                                 &nbsp;
                                 {view.groupName}
                                 &nbsp;
                                 {view.avg ? `${round(view.avg, 2).toFixed(1)}%` : null}
 
                                 {view.avg ?
-                                <GaugeChart id={`chart-${view.sheetId}`}
+                                <GaugeChart id={`chart-${view.groupName}-${view.avg}`}
                                     nrOfLevels={10}
                                     colors={['#EA4228', '#F5CD19', '#5BE12C']}
                                     percent={view.avg / 100}

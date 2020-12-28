@@ -29,7 +29,13 @@ export type Employee = Omit<Exclude<APIt.GetEmployeeQuery['getEmployee'], null>,
 export type Company = Omit<Exclude<APIt.GetCompanyQuery['getCompany'], null>, '__typename'>;
 export type SendEmail = Omit<Exclude<APIt.sendEmailInput, null>, '__typename'>;
 
-export const UserContext = createContext<any>(null)
+type User = {
+  username: string
+  attributes: {
+    "custom:companyId": string
+  }
+}
+export const UserContext = createContext<User | null>(null)
 
 //approvalStatusManagerの引数の型
 export type approvalStatusManagerMutationVariables = {
@@ -62,11 +68,11 @@ function App() {
         <BrowserRouter>
           <Switch>
             <Route exact path="/" component={ListPerformanceEvalution} />
-            <Route exact path="/reviewee/sheet/:sheetId" component={RevieweeSheetShow} />
+            <Route exact path="/reviewee/company/:companyId/reviewee/:reviewee/year/:year" component={RevieweeSheetShow} />
             <Route exact path="/reviewee/list" component={ListPerformanceEvalution} />
             <Route exact path="/reviewer/list" component={ProgressReferenceList} />
-            <Route exact path="/reviewer/sheet/:sheetId" component={EvaluationScreen} />
-            <Route exact path="/preview/sheet/:sheetId" component={PDFPage} />
+            <Route exact path="/reviewer/company/:companyId/reviewee/:reviewee/year/:year" component={EvaluationScreen} />
+            <Route exact path="/preview/company/:companyId/reviewee/:reviewee/year/:year" component={PDFPage} />
           </Switch>
         </BrowserRouter>
       </UserContext.Provider>

@@ -1,37 +1,28 @@
-import { Auth } from 'aws-amplify';
-import React, { CSSProperties, useEffect, useState } from 'react';
+import { EmployeeType } from 'API';
+import { UserContext } from 'App';
+import { getEmployee } from 'graphql/queries';
+import { EmployeeDao } from 'lib/dao/employeeDao';
+import React, { CSSProperties, useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import style from './sidebarStyle.module.scss'
 
 function SidebarComponents() {
 
-    //ユーザ情報取得
-    //const groups: string[] = ["test","test2"];
-
     const [isManager, setIsManager] = useState<boolean>();
+
+    //ユーザ情報取得
+    const currentUser = useContext(UserContext);
     useEffect(() => {
         ; (async () => {
             try {
-                const groups: string[] = [""];
-                const currentUser = await Auth.currentAuthenticatedUser()
-                console.log("currentUser", currentUser)
-                const currentUserGroups = currentUser.signInUserSession.idToken.payload["cognito:groups"];
+                if (currentUser) {
+                    const employeeItem = await EmployeeDao.get(getEmployee, { companyID: currentUser.attributes["custom:companyId"], username: currentUser.username })
 
-                for (let i = 0; i < currentUserGroups.length; i++) {
-                    groups[i] = currentUserGroups[i];
-                    console.log(groups[i]);
-                }
-                console.log(groups);
-
-
-                // admin,managerが含まれているか確認
-                for (let i = 0; i < groups.length; i++) {
-                    if (groups[i].indexOf('Admin') >= 0 || groups[i].indexOf('Manager') >= 0) {
+                    // SUPER_MANAGER,MANAGERが含まれているか確認
+                    if(employeeItem && (employeeItem.manager === 'MANAGER' as EmployeeType || employeeItem.manager === 'SUPER_MANAGER' as EmployeeType)) {
                         setIsManager(true);
-
                     }
                 }
-
             } catch (e) {
                 console.log(e);
             }

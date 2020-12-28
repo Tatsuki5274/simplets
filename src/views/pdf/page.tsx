@@ -7,7 +7,9 @@ import { PDFTemplete } from "./templete";
 type Props = {
     match: {
         params: {
-            sheetId: string
+            companyId: string
+            reviewee: string
+            year: string        
         }
     }
 }
@@ -20,7 +22,7 @@ const sortObjective = function (a: any, b: any) {
     }
 }
 const sortCategory = function (a: Pick<Section, "category"> | null, b: Pick<Section, "category"> | null) {
-    if (a?.category?.no && b?.category?.no && (a.category.no > b.category.no)) {
+    if (a?.category?.localID && b?.category?.localID && a.category.localID > b.category.localID) {
         return 1;
     } else {
         return -1;
@@ -30,7 +32,7 @@ export function PDFPage(props:Props) {
     const [sheet, setSheet] = useState<Sheet | null>(null);
     useEffect(() => {
         (async () => {
-            const res = await SheetDao.get(getSheet, { id: props.match.params.sheetId})
+            const res = await SheetDao.get(getSheet, { companyID: props.match.params.companyId, reviewee: props.match.params.reviewee, year: parseInt(props.match.params.year) })
 
             res?.section?.items?.forEach((section) => {
                 section?.objective?.items?.sort(sortObjective)

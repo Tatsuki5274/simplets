@@ -1,6 +1,7 @@
 import { Objective, Section } from "App";
 import { tableHeaderStyle } from "common/globalStyle.module.scss";
 import dateFormat from "dateformat";
+import { getObjectiveKeys, getSectionKeys } from "lib/util";
 import React from "react"
 import { Table } from "react-bootstrap";
 import style from '../common/style.module.scss';
@@ -26,7 +27,7 @@ export const ReviewerSheetDetailObjectiveEditable = (props: Props) => {
         });
 
         return (
-            <div key={section.id}>
+            <div key={getSectionKeys(section)}>
                 <h4>{section.category?.name}</h4>
                 <Table bordered className={style.ReviewerObjectiveTableView}>
                     <thead className={tableHeaderStyle}>
@@ -54,7 +55,7 @@ export const ReviewerSheetDetailObjectiveEditable = (props: Props) => {
                                 styleObjective = "";
                             }
                             return (
-                                <tr key={objective.id} className={styleObjective}>
+                                <tr key={getObjectiveKeys(objective)} className={styleObjective}>
 
                                     {/* 目標本文 */}
                                     <td>{objective.content}</td>
@@ -79,7 +80,7 @@ export const ReviewerSheetDetailObjectiveEditable = (props: Props) => {
 
                                     {/* 最終評価 */}
                                     <td className={style.detailSelect}>
-                                        <select name="lastEvaluation" data-objective-id={objective.id} onChange={props.handleChange}>
+                                        <select name="lastEvaluation" onChange={props.handleChange}>
                                             <option value=""></option>
                                             {[5, 4, 3, 2, 1].map((number: number) => {
                                                 if (number === objective.lastEvaluation) {

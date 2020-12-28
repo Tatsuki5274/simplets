@@ -1,11 +1,10 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { Auth } from 'aws-amplify';
 import { Button, Col, Container, Row, Table } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Link } from 'react-router-dom';
 import { Category, Sheet, UserContext } from 'App';
 import { ApprovalStatus, getStatusValue } from 'lib/getStatusValue'
-import { getEmployee, listCategorys, listSheets } from 'graphql/queries'
+import { getEmployee, listCategorys, listEmployees, listSheets } from 'graphql/queries'
 import * as APIt from 'API';
 import { createSection, createSheet } from 'graphql/mutations';
 import SidebarComponents, { performanceSidebarBackgroundColor } from 'common/Sidebar';
@@ -16,6 +15,8 @@ import { CategoryDao } from 'lib/dao/categoryDao';
 import { SectionDao } from 'lib/dao/sectionDao';
 import { DisplaySheetAverage } from './components/average';
 import { tableHeaderStyle } from 'common/globalStyle.module.scss';
+import { getSheetKeys } from 'lib/util';
+import { EmployeeType } from 'API';
 
 const sortSheet = (a: Sheet, b: Sheet) => {
     if (a.year < b.year) {
@@ -50,100 +51,103 @@ function ListPerformanceEvalution() {
                 items?.sort(sortSheet);
                 setSheets(items);
 
-                // 今年に作成されたシートを確認
-                // let result = false;
-                // if(items){
-                //     const currentYear:number = new Date().getFullYear();
-                //     let filteredSheet = items.filter((item)=>{
-                //         return item.year === currentYear ? true : false;
-                //     })
-                //     if(filteredSheet.length === 0) {
-                //         result = true;
-                //     }
-                // }
             }
         })()
     }, [currentUser]);
 
     async function handleClickCreate() {
 
-        // 社員情報取得
-        const currentUser = await Auth.currentAuthenticatedUser();
-        const revieweeEmployeeID: string = currentUser.username;
-        const revieweeEmployee = await EmployeeDao.get(getEmployee, {id: revieweeEmployeeID})
-        if(revieweeEmployee){
-            let revieweeEmployeeSuperior: Array<string> | null = null
+        if (currentUser) {
+            const revieweeEmployee = await EmployeeDao.get(getEmployee, { companyID: currentUser.attributes["custom:companyId"], username: currentUser.username })
 
-            //上司情報取得
-            if(revieweeEmployee.superior){
-                revieweeEmployeeSuperior = []
-                revieweeEmployeeSuperior.push(revieweeEmployee.superior.id)
-                if(revieweeEmployee.superior.superior){
-                    revieweeEmployeeSuperior.push(revieweeEmployee.superior.superior.id)
-                }
-            }
             
-                    // 権限グループ名の取得
-            // const companyGroup = revieweeEmployee.company?.companyGroupName || "";
-            const companyManagerGroup = revieweeEmployee.company?.companyManagerGroupName || null;
-            const companyAdminGroup = revieweeEmployee.company?.companyAdminGroupName || null;
+            if (revieweeEmployee) {
+                let revieweeEmployeeSuperior: Array<string> | null = null
 
-            if(companyManagerGroup && companyAdminGroup){
+                //上司情報取得
+                if (revieweeEmployee.superior) {
+                    revieweeEmployeeSuperior = []
+                    revieweeEmployeeSuperior.push(revieweeEmployee.superior.username)
+                    if (revieweeEmployee.superior.superior) {
+                        revieweeEmployeeSuperior.push(revieweeEmployee.superior.superior.username)
+                    }
+                }
+
+
                 //カテゴリを取得する
-                const categorys = await CategoryDao.list(listCategorys, {});
+                const categorys = await CategoryDao.list(listCategorys, {companyID: currentUser.attributes['custom:companyId']});
                 if (categorys) {
                     console.log("categorys", categorys)
+
+                    //全ての社内特権マネージャーの情報を取得
+                    const superManagers = await EmployeeDao.list(listEmployees, { companyID: currentUser.attributes["custom:companyId"], filter: { manager: { eq: 'SUPER_MANAGER' as EmployeeType } } })
+                    const groupManagers = await EmployeeDao.list(listEmployees, { companyID: currentUser.attributes["custom:companyId"], filter: { manager: { eq: 'MANAGER' as EmployeeType }, employeeGroupLocalId: { eq: revieweeEmployee?.employeeGroupLocalId } } })
+                    console.log("superManagers", superManagers)
+                    console.log("groupManagers", groupManagers)
+                    let listSuperManagers: Array<string> = [];
+                    let listGroupManagers: Array<string> = [];
+                    superManagers?.forEach(element => listSuperManagers.push(element.username));
+                    groupManagers?.forEach(element => listGroupManagers.push(element.username));
+                    console.log("listSuperManagers", listSuperManagers)
+                    console.log("listGroupManagers", listGroupManagers)
+                    const managers = listSuperManagers.concat(listGroupManagers)
+
 
                     //シートを作成
                     const createdSheet = await SheetDao.create(createSheet, {
                         grade: 0,
                         year: today.getFullYear(),
                         statusValue: 1,
-                        sheetSecondEmployeeId: revieweeEmployee.superior?.id,
-                        sheetGroupId: revieweeEmployee.group?.id || "",
-                        sheetRevieweeEmployeeId: revieweeEmployeeID,
-                        reviewers: revieweeEmployeeSuperior,
-                        readGroups: [companyManagerGroup],
-                        updateGroups: [companyAdminGroup]
+                        revieweeUsername: revieweeEmployee.username,
+                        secondUsername: revieweeEmployee.superior?.username || "",
+                        sheetGroupLocalId: revieweeEmployee.group?.localID || "empty",
+                        companyID: currentUser.attributes['custom:companyId'],
+                        reviewee: currentUser.username,
+                        secondReviewers: revieweeEmployee.superior ? [revieweeEmployee.superior.username] : null,
+                        topReviewers: revieweeEmployee.superior?.superior ? [revieweeEmployee.superior.superior.username] : null,
+                        referencer: managers
+
                     })
                     if (createdSheet) {
                         //取得したカテゴリを元にsectionを作成する
                         let isSuccess = true
                         categorys.forEach(async (category: Category) => {
                             const createdSection = await SectionDao.create(createSection, {
-                                sectionSheetId: createdSheet.id,
-                                sectionCategoryId: category.id,
-                                reviewers: revieweeEmployeeSuperior,
-                                readGroups: [companyManagerGroup]
+                                sheetKeys: getSheetKeys(createdSheet),
+                                sectionCategoryLocalId: category.localID,
+                                secondReviewers: createdSheet.secondReviewers,
+                                topReviewers: createdSheet.topReviewers,
+                                companyID: createdSheet.companyID,
+                                referencer: managers
                             })
-                            if(!createdSection){
+                            if (!createdSection) {
                                 isSuccess = false
                                 console.log("カテゴリセクションの登録に失敗しました")
                             }
                         })
+                        const addSheets = (newSheet: Sheet) => {
+                            //現在のステートへ適用
+                            if (sheets) {
+                                const newSheetState = sheets.concat();
+                                newSheetState.push(newSheet)
+                                newSheetState.sort(sortSheet);
+                                setSheets(newSheetState);
+                            }
+                        }
                         //レンダリング要素の追加
                         addSheets(createdSheet);
-                        if(isSuccess){
+                        if (isSuccess) {
                             console.log("シートの作成に成功しました", sheets);
                         }
                     } else {
                         console.error("シートの作成に失敗しました");
                     }
                 }
-            }else{
-                console.error("権限の取得に失敗しました")
+
+
             }
 
-        }
-
-        function addSheets(newSheet: Sheet) {
-            //現在のステートへ適用
-            if(sheets){
-                const newSheetState = sheets.concat();
-                newSheetState.push(newSheet)
-                newSheetState.sort(sortSheet);
-                setSheets(newSheetState);
-            }
+            
         }
     }
 
@@ -203,14 +207,14 @@ function ListPerformanceEvalution() {
                                 }
 
                                 return (
-                                    <tr key={sheet.id}>
-                                        <td><Link to={`/reviewee/sheet/${sheet.id}`}>{editName}</Link></td>
+                                    <tr key={sheet.sheetGroupLocalId}>
+                                        <td><Link to={`/reviewee/company/${sheet.companyID}/reviewee/${sheet.reviewee}/year/${sheet.year}`}>{editName}</Link></td>
                                         <td>{sheet.year}</td>
                                         <td>{sheet.secondEmployee ? sheet.secondEmployee.lastName : ""}{sheet.secondEmployee ? sheet.secondEmployee.firstName : ""}</td>
                                         <td><DisplaySheetAverage sheet={sheet} /></td>
                                         <td>{getStatusValue(sheet.statusValue || -1)}</td>
                                         <td>{sheet.overAllEvaluation}</td>
-                                        <td><a href={`/preview/sheet/${sheet.id}`}>プレビュー</a></td>
+                                        <td><a href={`/preview/company/${sheet.companyID}/reviewee/${sheet.reviewee}/year/${sheet.year}`}>プレビュー</a></td>
                                     </tr>
                                 )
                             })}

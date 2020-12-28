@@ -28,7 +28,9 @@ export const ReviewerSheetPagesStatus3 = (props: Props) => {
 
     const onSubmit = async (values: Sheet) => {
         const data: UpdateSheetInput = {
-            id: props.sheet.id,
+            companyID: props.sheet.companyID,
+            reviewee: props.sheet.reviewee,
+            year: props.sheet.year,
             careerPlanComment: values.careerPlanComment,
             interviewPlanComment: values.interviewPlanComment,
             interviewPlanDate: values.interviewPlanDate,
