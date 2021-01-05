@@ -1,4 +1,4 @@
-import React, { CSSProperties } from 'react';
+import React from 'react';
 import { Sheet } from 'App';
 import { Button, Col, Row, Table } from 'react-bootstrap';
 import dateFormat from 'dateformat';

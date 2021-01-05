@@ -1,7 +1,7 @@
 import { Employee, UserContext } from 'App';
 import React, { useContext, useEffect, useState } from 'react';
 import * as APIt from 'API';
-import  {  API, Auth, graphqlOperation } from 'aws-amplify';
+import  { API, graphqlOperation } from 'aws-amplify';
 import { getEmployee } from 'graphql/queries';
 import { GetEmployeeQuery } from 'API';
 import { GraphQLResult } from "@aws-amplify/api";

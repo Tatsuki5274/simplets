@@ -1,5 +1,5 @@
 import { Sheet } from "App"
-import { calcAvg, round } from "lib/util"
+import { calcAvg } from "lib/util"
 import React from "react"
 
 type Props = {

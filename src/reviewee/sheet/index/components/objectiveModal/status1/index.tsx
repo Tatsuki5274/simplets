@@ -1,8 +1,8 @@
 import { Formik } from "formik";
-import React, { useContext } from "react"
+import React from "react"
 import { Button, Col, Form, Modal, Row } from "react-bootstrap";
 import * as APIt from 'API';
-import { Objective, UserContext } from "App";
+import { Objective } from "App";
 import { ObjectiveDao } from "lib/dao/objectiveDao";
 import { updateObjective } from "graphql/mutations";
 import { inputFieldStyle } from "common/globalStyle.module.scss";
@@ -14,7 +14,6 @@ type Props = {
 }
 
 export const RevieweeSheetObjectiveModalStatus1 = (props: Props)=>{
-    const currentUser = useContext(UserContext);
     // const sheet = context.sheet
     // const setSheet = context.setSheet
     

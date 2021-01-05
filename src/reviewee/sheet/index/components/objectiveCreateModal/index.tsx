@@ -26,9 +26,7 @@ export function ObjectiveCreateModal(props: Props){
                 <Modal.Title>業績目標設定</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <ObjectiveCreateModalContent
-                        sheetId={props.sheetId}
-                    />
+                    <ObjectiveCreateModalContent/>
                 </Modal.Body>
                 <Modal.Footer>
 

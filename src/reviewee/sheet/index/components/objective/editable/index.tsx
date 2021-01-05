@@ -45,7 +45,6 @@ export const RevieweeSheetObjectiveEditable = (props: Props) => {
 
     // Progress 更新
     async function handleChangeProgress(event: any) {
-        const objectiveId = event.target.getAttribute('data-objective-id');
         const objectiveProgress = parseInt(event.currentTarget.value);
 
         if (objective && objectiveProgress >= 0 && objectiveProgress <= 100) {
@@ -85,13 +84,12 @@ export const RevieweeSheetObjectiveEditable = (props: Props) => {
     if(objective){
         return (
             <tr>
-                <td><Button variant="primary" data-objectiveId={""} onClick={HandleChange}>変更</Button></td>
+                <td><Button variant="primary" onClick={HandleChange}>変更</Button></td>
                 <td>{objective.content}</td>
                 <td>{objective.result}</td>
                 <input
                     name="progress"
                     onChange={handleChangeProgress}
-                    data-objective-id={""}
                     placeholder={progress}
                     type="number"
                     min="0"

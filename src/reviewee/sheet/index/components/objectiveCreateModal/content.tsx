@@ -13,9 +13,9 @@ import { inputFieldStyle } from 'common/globalStyle.module.scss';
 import { getSectionKeys } from 'lib/util';
 import { ObjectiveDao } from 'lib/dao/objectiveDao';
 
-type Props = {
-    sheetId: string
-}
+// type Props = {
+//     sheetId: string
+// }
 
 type TypeForm = {
     sectionKeys: string | null,
@@ -25,8 +25,8 @@ type TypeForm = {
     expDoneDate: string,
 }
 
-export function ObjectiveCreateModalContent(props: Props) {
-    const sheetId = props.sheetId;
+export function ObjectiveCreateModalContent() {
+    // const sheetId = props.sheetId;
     const [sheet, setSheet] = useState<Sheet | null>(null)
 
     const [defaultSectionKeys, setDefaultSectionKeys] = useState<string | null>(null);
@@ -53,7 +53,7 @@ export function ObjectiveCreateModalContent(props: Props) {
                 setDefaultSectionKeys(defaultSectionKeys)
             }
         })()
-    }, [sheetId]);
+    }, [sheet]);
 
     if (sheet && defaultSectionKeys) {
         return (
@@ -72,7 +72,7 @@ export function ObjectiveCreateModalContent(props: Props) {
                         }
                         validationSchema={Yup.object({
                             expStartDate: Yup.date().typeError('正しく入力してください').required('必須入力です'),
-                            expDoneDate: Yup.date().min(Yup.ref('expStartDate'), ({ }) => `開始予定日より後の日付を入力してください`,)
+                            expDoneDate: Yup.date().min(Yup.ref('expStartDate'), ({min}) => `${min}より後の日付を入力してください`,)
                                 .typeError('正しく入力してください')
                                 .required('必須入力です'),
                             sectionKeys: Yup.string().required('目標カテゴリを選択してください').nullable(),

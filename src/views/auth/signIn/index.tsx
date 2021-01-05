@@ -35,12 +35,12 @@ export default class CustomSignIn extends SignIn {
                 />
                 <Button onClick={(event: any) => super.signIn(event)}>ログイン</Button>
                 <div>
-                    <a
+                    <p
                         className="text-indigo cursor-pointer hover:text-indigo-darker"
                         onClick={() => super.changeState('forgotPassword')}
                     >
                         パスワードを忘れた場合
-                    </a>
+                    </p>
                 </div>
             </Container>
         )

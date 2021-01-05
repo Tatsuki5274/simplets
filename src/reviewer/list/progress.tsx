@@ -15,7 +15,6 @@ import { Field, Form, Formik } from 'formik';
 import { SheetDao } from 'lib/dao/sheetDao';
 import GaugeChart from 'react-gauge-chart';
 import { calcAvg, round} from 'lib/util';
-import { string } from 'yup';
 import { routeBuilder } from 'router';
 
 

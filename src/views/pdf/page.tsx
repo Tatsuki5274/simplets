@@ -1,4 +1,4 @@
-import { Category, Section, Sheet } from "App";
+import { Section, Sheet } from "App";
 import { getSheet } from "graphql/queries";
 import { SheetDao } from "lib/dao/sheetDao";
 import React, { useEffect, useState } from "react";
