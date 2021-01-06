@@ -325,6 +325,7 @@ export const listEmployees = /* GraphQL */ `
           updatedAt
         }
         manager
+        isDeleted
         createdAt
         updatedAt
         superior {
@@ -353,6 +354,7 @@ export const listEmployees = /* GraphQL */ `
             updatedAt
           }
           manager
+          isDeleted
           createdAt
           updatedAt
           superior {
@@ -381,6 +383,7 @@ export const listEmployees = /* GraphQL */ `
               updatedAt
             }
             manager
+            isDeleted
             createdAt
             updatedAt
             superior {
@@ -409,6 +412,7 @@ export const listEmployees = /* GraphQL */ `
                 updatedAt
               }
               manager
+              isDeleted
               createdAt
               updatedAt
               superior {
@@ -437,6 +441,7 @@ export const listEmployees = /* GraphQL */ `
                   updatedAt
                 }
                 manager
+                isDeleted
                 createdAt
                 updatedAt
                 superior {
@@ -450,6 +455,7 @@ export const listEmployees = /* GraphQL */ `
                   grade
                   email
                   manager
+                  isDeleted
                   createdAt
                   updatedAt
                 }
@@ -490,6 +496,7 @@ export const getEmployee = /* GraphQL */ `
         updatedAt
       }
       manager
+      isDeleted
       createdAt
       updatedAt
       superior {
@@ -518,6 +525,7 @@ export const getEmployee = /* GraphQL */ `
           updatedAt
         }
         manager
+        isDeleted
         createdAt
         updatedAt
         superior {
@@ -546,6 +554,7 @@ export const getEmployee = /* GraphQL */ `
             updatedAt
           }
           manager
+          isDeleted
           createdAt
           updatedAt
           superior {
@@ -574,6 +583,7 @@ export const getEmployee = /* GraphQL */ `
               updatedAt
             }
             manager
+            isDeleted
             createdAt
             updatedAt
             superior {
@@ -602,6 +612,7 @@ export const getEmployee = /* GraphQL */ `
                 updatedAt
               }
               manager
+              isDeleted
               createdAt
               updatedAt
               superior {
@@ -630,6 +641,7 @@ export const getEmployee = /* GraphQL */ `
                   updatedAt
                 }
                 manager
+                isDeleted
                 createdAt
                 updatedAt
                 superior {
@@ -643,6 +655,7 @@ export const getEmployee = /* GraphQL */ `
                   grade
                   email
                   manager
+                  isDeleted
                   createdAt
                   updatedAt
                 }
@@ -697,6 +710,7 @@ export const listEmployeeLocalId = /* GraphQL */ `
           updatedAt
         }
         manager
+        isDeleted
         createdAt
         updatedAt
         superior {
@@ -725,6 +739,7 @@ export const listEmployeeLocalId = /* GraphQL */ `
             updatedAt
           }
           manager
+          isDeleted
           createdAt
           updatedAt
           superior {
@@ -753,6 +768,7 @@ export const listEmployeeLocalId = /* GraphQL */ `
               updatedAt
             }
             manager
+            isDeleted
             createdAt
             updatedAt
             superior {
@@ -781,6 +797,7 @@ export const listEmployeeLocalId = /* GraphQL */ `
                 updatedAt
               }
               manager
+              isDeleted
               createdAt
               updatedAt
               superior {
@@ -809,6 +826,7 @@ export const listEmployeeLocalId = /* GraphQL */ `
                   updatedAt
                 }
                 manager
+                isDeleted
                 createdAt
                 updatedAt
                 superior {
@@ -822,6 +840,7 @@ export const listEmployeeLocalId = /* GraphQL */ `
                   grade
                   email
                   manager
+                  isDeleted
                   createdAt
                   updatedAt
                 }
@@ -837,7 +856,7 @@ export const listEmployeeLocalId = /* GraphQL */ `
 export const listEmployeesManager = /* GraphQL */ `
   query ListEmployeesManager(
     $companyID: ID
-    $manager: ModelStringKeyConditionInput
+    $managerIsDeleted: ModelEmployeeEmployee_managerCompositeKeyConditionInput
     $sortDirection: ModelSortDirection
     $filter: ModelEmployeeFilterInput
     $limit: Int
@@ -845,7 +864,7 @@ export const listEmployeesManager = /* GraphQL */ `
   ) {
     listEmployeesManager(
       companyID: $companyID
-      manager: $manager
+      managerIsDeleted: $managerIsDeleted
       sortDirection: $sortDirection
       filter: $filter
       limit: $limit
@@ -877,6 +896,7 @@ export const listEmployeesManager = /* GraphQL */ `
           updatedAt
         }
         manager
+        isDeleted
         createdAt
         updatedAt
         superior {
@@ -905,6 +925,7 @@ export const listEmployeesManager = /* GraphQL */ `
             updatedAt
           }
           manager
+          isDeleted
           createdAt
           updatedAt
           superior {
@@ -933,6 +954,7 @@ export const listEmployeesManager = /* GraphQL */ `
               updatedAt
             }
             manager
+            isDeleted
             createdAt
             updatedAt
             superior {
@@ -961,6 +983,7 @@ export const listEmployeesManager = /* GraphQL */ `
                 updatedAt
               }
               manager
+              isDeleted
               createdAt
               updatedAt
               superior {
@@ -989,6 +1012,7 @@ export const listEmployeesManager = /* GraphQL */ `
                   updatedAt
                 }
                 manager
+                isDeleted
                 createdAt
                 updatedAt
                 superior {
@@ -1002,6 +1026,7 @@ export const listEmployeesManager = /* GraphQL */ `
                   grade
                   email
                   manager
+                  isDeleted
                   createdAt
                   updatedAt
                 }
@@ -1124,6 +1149,7 @@ export const getSheet = /* GraphQL */ `
           updatedAt
         }
         manager
+        isDeleted
         createdAt
         updatedAt
         superior {
@@ -1152,6 +1178,7 @@ export const getSheet = /* GraphQL */ `
             updatedAt
           }
           manager
+          isDeleted
           createdAt
           updatedAt
           superior {
@@ -1180,6 +1207,7 @@ export const getSheet = /* GraphQL */ `
               updatedAt
             }
             manager
+            isDeleted
             createdAt
             updatedAt
             superior {
@@ -1208,6 +1236,7 @@ export const getSheet = /* GraphQL */ `
                 updatedAt
               }
               manager
+              isDeleted
               createdAt
               updatedAt
               superior {
@@ -1236,6 +1265,7 @@ export const getSheet = /* GraphQL */ `
                   updatedAt
                 }
                 manager
+                isDeleted
                 createdAt
                 updatedAt
                 superior {
@@ -1249,6 +1279,7 @@ export const getSheet = /* GraphQL */ `
                   grade
                   email
                   manager
+                  isDeleted
                   createdAt
                   updatedAt
                 }
@@ -1283,6 +1314,7 @@ export const getSheet = /* GraphQL */ `
           updatedAt
         }
         manager
+        isDeleted
         createdAt
         updatedAt
         superior {
@@ -1311,6 +1343,7 @@ export const getSheet = /* GraphQL */ `
             updatedAt
           }
           manager
+          isDeleted
           createdAt
           updatedAt
           superior {
@@ -1339,6 +1372,7 @@ export const getSheet = /* GraphQL */ `
               updatedAt
             }
             manager
+            isDeleted
             createdAt
             updatedAt
             superior {
@@ -1367,6 +1401,7 @@ export const getSheet = /* GraphQL */ `
                 updatedAt
               }
               manager
+              isDeleted
               createdAt
               updatedAt
               superior {
@@ -1395,6 +1430,7 @@ export const getSheet = /* GraphQL */ `
                   updatedAt
                 }
                 manager
+                isDeleted
                 createdAt
                 updatedAt
                 superior {
@@ -1408,6 +1444,7 @@ export const getSheet = /* GraphQL */ `
                   grade
                   email
                   manager
+                  isDeleted
                   createdAt
                   updatedAt
                 }
@@ -1544,6 +1581,7 @@ export const listSheets = /* GraphQL */ `
             updatedAt
           }
           manager
+          isDeleted
           createdAt
           updatedAt
           superior {
@@ -1572,6 +1610,7 @@ export const listSheets = /* GraphQL */ `
               updatedAt
             }
             manager
+            isDeleted
             createdAt
             updatedAt
             superior {
@@ -1600,6 +1639,7 @@ export const listSheets = /* GraphQL */ `
                 updatedAt
               }
               manager
+              isDeleted
               createdAt
               updatedAt
               superior {
@@ -1628,6 +1668,7 @@ export const listSheets = /* GraphQL */ `
                   updatedAt
                 }
                 manager
+                isDeleted
                 createdAt
                 updatedAt
                 superior {
@@ -1641,6 +1682,7 @@ export const listSheets = /* GraphQL */ `
                   grade
                   email
                   manager
+                  isDeleted
                   createdAt
                   updatedAt
                 }
@@ -1674,6 +1716,7 @@ export const listSheets = /* GraphQL */ `
             updatedAt
           }
           manager
+          isDeleted
           createdAt
           updatedAt
           superior {
@@ -1702,6 +1745,7 @@ export const listSheets = /* GraphQL */ `
               updatedAt
             }
             manager
+            isDeleted
             createdAt
             updatedAt
             superior {
@@ -1730,6 +1774,7 @@ export const listSheets = /* GraphQL */ `
                 updatedAt
               }
               manager
+              isDeleted
               createdAt
               updatedAt
               superior {
@@ -1758,6 +1803,7 @@ export const listSheets = /* GraphQL */ `
                   updatedAt
                 }
                 manager
+                isDeleted
                 createdAt
                 updatedAt
                 superior {
@@ -1771,6 +1817,7 @@ export const listSheets = /* GraphQL */ `
                   grade
                   email
                   manager
+                  isDeleted
                   createdAt
                   updatedAt
                 }
@@ -1908,6 +1955,7 @@ export const listSheetReviewee = /* GraphQL */ `
             updatedAt
           }
           manager
+          isDeleted
           createdAt
           updatedAt
           superior {
@@ -1936,6 +1984,7 @@ export const listSheetReviewee = /* GraphQL */ `
               updatedAt
             }
             manager
+            isDeleted
             createdAt
             updatedAt
             superior {
@@ -1964,6 +2013,7 @@ export const listSheetReviewee = /* GraphQL */ `
                 updatedAt
               }
               manager
+              isDeleted
               createdAt
               updatedAt
               superior {
@@ -1992,6 +2042,7 @@ export const listSheetReviewee = /* GraphQL */ `
                   updatedAt
                 }
                 manager
+                isDeleted
                 createdAt
                 updatedAt
                 superior {
@@ -2005,6 +2056,7 @@ export const listSheetReviewee = /* GraphQL */ `
                   grade
                   email
                   manager
+                  isDeleted
                   createdAt
                   updatedAt
                 }
@@ -2038,6 +2090,7 @@ export const listSheetReviewee = /* GraphQL */ `
             updatedAt
           }
           manager
+          isDeleted
           createdAt
           updatedAt
           superior {
@@ -2066,6 +2119,7 @@ export const listSheetReviewee = /* GraphQL */ `
               updatedAt
             }
             manager
+            isDeleted
             createdAt
             updatedAt
             superior {
@@ -2094,6 +2148,7 @@ export const listSheetReviewee = /* GraphQL */ `
                 updatedAt
               }
               manager
+              isDeleted
               createdAt
               updatedAt
               superior {
@@ -2122,6 +2177,7 @@ export const listSheetReviewee = /* GraphQL */ `
                   updatedAt
                 }
                 manager
+                isDeleted
                 createdAt
                 updatedAt
                 superior {
@@ -2135,6 +2191,7 @@ export const listSheetReviewee = /* GraphQL */ `
                   grade
                   email
                   manager
+                  isDeleted
                   createdAt
                   updatedAt
                 }
@@ -2272,6 +2329,7 @@ export const listSheetYear = /* GraphQL */ `
             updatedAt
           }
           manager
+          isDeleted
           createdAt
           updatedAt
           superior {
@@ -2300,6 +2358,7 @@ export const listSheetYear = /* GraphQL */ `
               updatedAt
             }
             manager
+            isDeleted
             createdAt
             updatedAt
             superior {
@@ -2328,6 +2387,7 @@ export const listSheetYear = /* GraphQL */ `
                 updatedAt
               }
               manager
+              isDeleted
               createdAt
               updatedAt
               superior {
@@ -2356,6 +2416,7 @@ export const listSheetYear = /* GraphQL */ `
                   updatedAt
                 }
                 manager
+                isDeleted
                 createdAt
                 updatedAt
                 superior {
@@ -2369,6 +2430,7 @@ export const listSheetYear = /* GraphQL */ `
                   grade
                   email
                   manager
+                  isDeleted
                   createdAt
                   updatedAt
                 }
@@ -2402,6 +2464,7 @@ export const listSheetYear = /* GraphQL */ `
             updatedAt
           }
           manager
+          isDeleted
           createdAt
           updatedAt
           superior {
@@ -2430,6 +2493,7 @@ export const listSheetYear = /* GraphQL */ `
               updatedAt
             }
             manager
+            isDeleted
             createdAt
             updatedAt
             superior {
@@ -2458,6 +2522,7 @@ export const listSheetYear = /* GraphQL */ `
                 updatedAt
               }
               manager
+              isDeleted
               createdAt
               updatedAt
               superior {
@@ -2486,6 +2551,7 @@ export const listSheetYear = /* GraphQL */ `
                   updatedAt
                 }
                 manager
+                isDeleted
                 createdAt
                 updatedAt
                 superior {
@@ -2499,6 +2565,7 @@ export const listSheetYear = /* GraphQL */ `
                   grade
                   email
                   manager
+                  isDeleted
                   createdAt
                   updatedAt
                 }
@@ -2636,6 +2703,7 @@ export const listSheetGroup = /* GraphQL */ `
             updatedAt
           }
           manager
+          isDeleted
           createdAt
           updatedAt
           superior {
@@ -2664,6 +2732,7 @@ export const listSheetGroup = /* GraphQL */ `
               updatedAt
             }
             manager
+            isDeleted
             createdAt
             updatedAt
             superior {
@@ -2692,6 +2761,7 @@ export const listSheetGroup = /* GraphQL */ `
                 updatedAt
               }
               manager
+              isDeleted
               createdAt
               updatedAt
               superior {
@@ -2720,6 +2790,7 @@ export const listSheetGroup = /* GraphQL */ `
                   updatedAt
                 }
                 manager
+                isDeleted
                 createdAt
                 updatedAt
                 superior {
@@ -2733,6 +2804,7 @@ export const listSheetGroup = /* GraphQL */ `
                   grade
                   email
                   manager
+                  isDeleted
                   createdAt
                   updatedAt
                 }
@@ -2766,6 +2838,7 @@ export const listSheetGroup = /* GraphQL */ `
             updatedAt
           }
           manager
+          isDeleted
           createdAt
           updatedAt
           superior {
@@ -2794,6 +2867,7 @@ export const listSheetGroup = /* GraphQL */ `
               updatedAt
             }
             manager
+            isDeleted
             createdAt
             updatedAt
             superior {
@@ -2822,6 +2896,7 @@ export const listSheetGroup = /* GraphQL */ `
                 updatedAt
               }
               manager
+              isDeleted
               createdAt
               updatedAt
               superior {
@@ -2850,6 +2925,7 @@ export const listSheetGroup = /* GraphQL */ `
                   updatedAt
                 }
                 manager
+                isDeleted
                 createdAt
                 updatedAt
                 superior {
@@ -2863,6 +2939,7 @@ export const listSheetGroup = /* GraphQL */ `
                   grade
                   email
                   manager
+                  isDeleted
                   createdAt
                   updatedAt
                 }

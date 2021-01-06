@@ -23,13 +23,18 @@ enum EmployeeType {
   SUPER_MANAGER #特権マネージャー
 }
 
+enum BooleanType {
+  TRUE
+  FALSE
+}
+
 # ユーザーはcognitoで管理しています。
 # このEmployeeは名簿として機能します。認証とは関係がありません。
 type Employee #社員
 @key(fields: ["companyID", "username"])
-@key(fields: ["companyID", "localID"], name: "employee-local-id", queryField: "listEmployeeLocalID")
-@key(fields: ["companyID", "manager"], name: "employee-manager", queryField: "listEmployeesManager")
-# @key(fields: ["companyID", "employeeGroupLocalId", "username"], name: "employee-manager-group", queryField: "listEmployeesManagerGroup")
+@key(fields: ["companyID", "localID"], name: "employee_local_id", queryField: "listEmployeeLocalID")
+@key(fields: ["companyID", "manager", "isDeleted"], name: "employee_manager", queryField: "listEmployeesManager")
+# @key(fields: ["companyID", "employeeGroupLocalId", "username"], name: "employee_manager_group", queryField: "listEmployeesManagerGroup")
 @auth(
   rules:[
     {allow: groups, groups: ["Admin"]}
@@ -60,7 +65,8 @@ type Employee #社員
   group: Group @connection(fields: ["companyID", "employeeGroupLocalId"])  #所属部門
   company: Company @connection (fields: ["companyID"])
 
-  manager: EmployeeType  #マネージャー
+  manager: EmployeeType!  #マネージャー
+  isDeleted: BooleanType!
 }
 
 type Group #部門
@@ -103,9 +109,9 @@ type Category
 type Sheet
 @model
 @key(fields: ["companyID", "reviewee", "year"])
-@key(fields: ["companyID", "reviewee"], name: "sheet-reviewee", queryField: "listSheetReviewee")
-@key(fields: ["companyID", "year"], name: "sheet-year", queryField: "listSheetYear")
-@key(fields: ["companyID", "sheetGroupLocalId"], name: "sheet-group", queryField: "listSheetGroup")
+@key(fields: ["companyID", "reviewee"], name: "sheet_reviewee", queryField: "listSheetReviewee")
+@key(fields: ["companyID", "year"], name: "sheet_year", queryField: "listSheetYear")
+@key(fields: ["companyID", "sheetGroupLocalId"], name: "sheet_group", queryField: "listSheetGroup")
 @auth(
   rules: [
     {allow: groups, groups: ["Admin"]}
@@ -199,7 +205,7 @@ type Section
 type Objective
 @model
 @key(fields: ["sectionKeys", "createdAt"])
-# @key(fields: ["sectionKeys", "objectiveCategoryDate"], name: "objective-sheet-category")
+# @key(fields: ["sectionKeys", "objectiveCategoryDate"], name: "objective_sheet_category")
 @auth(
   rules: [
     {allow: groups, groups: ["Admin"]}
@@ -244,13 +250,13 @@ type Objective
 }
 
 # type Query {
-#   #listSheetsLtGrade: String @function(name: "listSheetsLtGrade-${env}")
-#   # listSheetsLtGrade: [Sheet] @function(name: "listSheetsLtGrade-${env}")
+#   #listSheetsLtGrade: String @function(name: "listSheetsLtGrade_${env}")
+#   # listSheetsLtGrade: [Sheet] @function(name: "listSheetsLtGrade_${env}")
 #   #   @auth(rules:[
 #   #     {allow: groups, groups: ["Admin", "Manager"]}
 #   #     {allow: private, operations: []}
 #   #   ])
-#   # approvalStatusReferencer(sheetId: String): String @function(name: "approvalStatusReferencer-${env}")
+#   # approvalStatusReferencer(sheetId: String): String @function(name: "approvalStatusReferencer_${env}")
 #   #   @auth(rules:[
 #   #     {allow: private}
 #   #   ])
@@ -267,14 +273,14 @@ input sendEmailInput{
 
 type Mutation{
   # 廃止
-  approvalStatusManager(action: String, sheetId: String): String @function(name: "approvalStatusManager-${env}")
+  approvalStatusManager(action: String, sheetId: String): String @function(name: "approvalStatusManager_${env}")
     @auth(rules:[
       {allow: private}
     ])
   
   # メールを送信する関数を呼び出す
   sendEmail(input: sendEmailInput): String
-    @function(name: "sendEmail-${env}")
+    @function(name: "sendEmail_${env}")
     @auth(rules:[
       {allow: private}
     ])
