@@ -25,6 +25,7 @@ import { RevieweeSheetObjectiveModalStatus3 } from './components/objectiveModal/
 import { ObjectiveCreateModal } from './components/objectiveCreateModal';
 import { tableHeaderStyle } from 'common/globalStyle.module.scss';
 import style from './indexStyle.module.scss';
+import { getSectionKeys } from 'lib/util';
 
 
 export const SheetContext = createContext<
@@ -147,7 +148,7 @@ function RevieweeSheetShow(props: Props) {
 
                         
                         return (
-                            <div key={section.sheetKeys}>
+                            <div key={getSectionKeys(section)}>
                                 <AverageSmallGaugeBox section={section} />
                                 <Table bordered hover className={style.objectiveTableView}>
                                     <thead className={tableHeaderStyle}>
