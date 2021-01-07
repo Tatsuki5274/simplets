@@ -4,9 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Link } from 'react-router-dom';
 import { Category, Sheet, UserContext } from 'App';
 import { ApprovalStatus, getStatusValue } from 'lib/getStatusValue'
-import { getEmployee, listCategorys, listEmployeesManager, listSheetReviewee } from 'graphql/queries'
 import * as APIt from 'API';
-import { createSection, createSheet } from 'graphql/mutations';
 import SidebarComponents, { performanceSidebarBackgroundColor } from 'common/Sidebar';
 import HeaderComponents from 'common/header';
 import { SheetDao } from 'lib/dao/sheetDao';
@@ -28,6 +26,148 @@ const sortSheet = (a: Sheet, b: Sheet) => {
 
 //今日の日付を取得
 const today: Date = new Date();
+
+const getEmployee = /* GraphQL */ `
+  query GetEmployee($companyID: ID!, $username: ID!) {
+    getEmployee(companyID: $companyID, username: $username) {
+      username
+      employeeGroupLocalId
+      superior {
+        username
+        superior {
+          username
+        }
+      }
+    }
+  }
+`;
+const listSheetReviewee = /* GraphQL */ `
+  query ListSheetReviewee(
+    $companyID: ID
+    $reviewee: ModelStringKeyConditionInput
+    $sortDirection: ModelSortDirection
+    $filter: ModelSheetFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listSheetReviewee(
+      companyID: $companyID
+      reviewee: $reviewee
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        companyID
+        year
+        grade
+        overAllEvaluation
+        statusValue
+        sheetGroupLocalId
+        reviewee
+        section {
+          items {
+            objective {
+              items {
+                progress
+              }
+            }
+          }
+        }
+        secondEmployee {
+          firstName
+          lastName
+        }
+      }
+    }
+  }
+`;
+
+const listCategorys = /* GraphQL */ `
+  query ListCategorys(
+    $companyID: ID
+    $localID: ModelIDKeyConditionInput
+    $filter: ModelCategoryFilterInput
+    $limit: Int
+    $nextToken: String
+    $sortDirection: ModelSortDirection
+  ) {
+    listCategorys(
+      companyID: $companyID
+      localID: $localID
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      sortDirection: $sortDirection
+    ) {
+      items {
+        localID
+      }
+    }
+  }
+`;
+
+const listEmployeesManager = /* GraphQL */ `
+  query ListEmployeesManager(
+    $companyID: ID
+    $managerIsDeleted: ModelEmployeeEmployee_managerCompositeKeyConditionInput
+    $sortDirection: ModelSortDirection
+    $filter: ModelEmployeeFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listEmployeesManager(
+      companyID: $companyID
+      managerIsDeleted: $managerIsDeleted
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        username
+      }
+    }
+  }
+`;
+const createSheet = /* GraphQL */ `
+  mutation CreateSheet(
+    $input: CreateSheetInput!
+    $condition: ModelSheetConditionInput
+  ) {
+    createSheet(input: $input, condition: $condition) {
+      companyID
+      year
+      grade
+      statusValue
+      revieweeUsername
+      secondUsername
+      sheetGroupLocalId
+      referencer
+      reviewee
+      topReviewers
+      secondReviewers
+    }
+  }
+`;
+
+const createSection = /* GraphQL */ `
+  mutation CreateSection(
+    $input: CreateSectionInput!
+    $condition: ModelSectionConditionInput
+  ) {
+    createSection(input: $input, condition: $condition) {
+      sheetKeys
+      sectionCategoryLocalId
+      companyID
+      reviewee
+      topReviewers
+      secondReviewers
+      referencer
+    }
+  }
+`;
 
 function ListPerformanceEvalution() {
     const [sheets, setSheets] = useState<Sheet[] | null>(null);
@@ -120,7 +260,7 @@ function ListPerformanceEvalution() {
                         statusValue: 1,
                         revieweeUsername: revieweeEmployee.username,
                         secondUsername: revieweeEmployee.superior?.username || "",
-                        sheetGroupLocalId: revieweeEmployee.group?.localID || "empty",
+                        sheetGroupLocalId: revieweeEmployee.employeeGroupLocalId || "empty",
                         companyID: currentUser.attributes['custom:companyId'],
                         reviewee: currentUser.username,
                         secondReviewers: revieweeEmployee.superior ? [revieweeEmployee.superior.username] : null,
