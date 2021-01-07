@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Button, Card, Row, Col } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { API, graphqlOperation } from 'aws-amplify';
-import { listGroups, listSheets } from 'graphql/queries';
+import { listGroups, listSheetYear } from 'graphql/queries';
 import { ListGroupsQuery } from 'API';
 import { GraphQLResult } from "@aws-amplify/api";
 import * as APIt from 'API';
-import { Group, Sheet } from 'App';
+import { Group, Sheet, UserContext } from 'App';
 import SidebarComponents, { performanceSidebarBackgroundColor } from 'common/Sidebar';
 import HeaderComponents from 'common/header';//ヘッダーの表示
 import style from './progressStyle.module.scss';
@@ -55,6 +55,10 @@ function ProgressReferenceList() {
     
     //選択する部署のデータを取得して昇順でソートして表示する機能
     const [groupList, setGroupList] = useState<Group[]>()
+
+    // ログインユーザを取得する
+    const currentUser = useContext(UserContext);
+    
     useEffect(() => {
         ; (async () => {
 
@@ -83,22 +87,30 @@ function ProgressReferenceList() {
 
     useEffect(()=>{
         (async()=>{
-            const filter =  { filter: { year: { eq: today.getFullYear() } } }
-            const listItems = await SheetDao.list(listSheets, filter)
-            if(listItems){
-                // setSheets(listItems)
-                listItems.sort(function (a, b) {
-                    // 社員番号の昇順でソート
-                    if (a.revieweeEmployee?.localID && b.revieweeEmployee?.localID && a.revieweeEmployee.localID > b.revieweeEmployee.localID) {
-                        return 1
+            if (currentUser) {
+                const listYearQV: APIt.ListSheetYearQueryVariables = {
+                    companyID: currentUser.attributes["custom:companyId"],
+                    year: {
+                        eq: today.getFullYear()
                     }
+                };
 
-                    return -1
-                })
-                setView(listItems)
+                const listItems = await SheetDao.listYear(listSheetYear, listYearQV)
+                if (listItems) {
+                    // setSheets(listItems)
+                    listItems.sort(function (a, b) {
+                        // 社員番号の昇順でソート
+                        if (a.revieweeEmployee?.localID && b.revieweeEmployee?.localID && a.revieweeEmployee.localID > b.revieweeEmployee.localID) {
+                            return 1
+                        }
+
+                        return -1
+                    })
+                    setView(listItems)
+                }
             }
         })()
-    }, [])
+    }, [currentUser])
 
     const setView = (listItems: Sheet[])=>{
         // 画面表示に必要な情報を加工する処理
@@ -174,14 +186,22 @@ function ProgressReferenceList() {
                             groupId: "",
                         }}
                         onSubmit={async (values)=>{
-                            let filter: APIt.ListSheetsQueryVariables =  { filter: { year: { eq: values.year } } }
+                            let filter: APIt.ListSheetYearQueryVariables = {
+                                companyID: currentUser?.attributes["custom:companyId"],
+                                year: {
+                                    eq: values.year
+                                },
+                            }
                             if(values.groupId !== "all") filter = {
+                                companyID: currentUser?.attributes["custom:companyId"],
+                                year: {
+                                    eq: values.year
+                                },
                                 filter: {
-                                    year: {eq: values.year },
                                     sheetGroupLocalId: {eq: values.groupId} //選択した部署情報
                                 }
                             }
-                            const listItems = await SheetDao.list(listSheets, filter)
+                            const listItems = await SheetDao.listYear(listSheetYear, filter)
                             console.log(listItems)
 
                             if(listItems){

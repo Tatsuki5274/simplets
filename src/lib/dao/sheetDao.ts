@@ -129,4 +129,76 @@ export const SheetDao = {
     }
     return null
   },
+
+  listReviewee: async (query: string, params: APIt.ListSheetRevieweeQueryVariables): Promise<Sheet[] | null> => {
+    try {
+      const listRevieweeQV: APIt.ListSheetRevieweeQueryVariables = params
+      const listRevieweeGQL = await graphqlQuery
+        <APIt.ListSheetRevieweeQueryVariables, APIt.ListSheetRevieweeQuery>
+        (query, listRevieweeQV)
+      if (listRevieweeGQL.data) {
+        const listRevieweeQ: APIt.ListSheetRevieweeQuery = listRevieweeGQL.data;
+        if (listRevieweeQ.listSheetReviewee && listRevieweeQ.listSheetReviewee.items) {
+          const gotSheets = listRevieweeQ.listSheetReviewee.items as Sheet[]
+          return gotSheets
+        } else console.error("情報の取得に失敗しました")
+      } else console.error("情報の取得に失敗しました")
+    } catch (e) {
+      if (e && e.data && e.data.listSheets) {
+        console.error("違反があります", e.errors)
+        return e.data.listSheets.items as Sheet[]
+      } else {
+        console.error(e)
+      }
+    }
+    return null
+  },
+
+  listYear: async (query: string, params: APIt.ListSheetYearQueryVariables): Promise<Sheet[] | null> => {
+    try {
+      const listYearQV: APIt.ListSheetYearQueryVariables = params
+      const listYearGQL = await graphqlQuery
+        <APIt.ListSheetYearQueryVariables, APIt.ListSheetYearQuery>
+        (query, listYearQV)
+      if (listYearGQL.data) {
+        const listYearQ: APIt.ListSheetYearQuery = listYearGQL.data;
+        if (listYearQ.listSheetYear && listYearQ.listSheetYear.items) {
+          const gotSheets = listYearQ.listSheetYear.items as Sheet[]
+          return gotSheets
+        } else console.error("情報の取得に失敗しました")
+      } else console.error("情報の取得に失敗しました")
+    } catch (e) {
+      if (e && e.data && e.data.listSheets) {
+        console.error("違反があります", e.errors)
+        return e.data.listSheets.items as Sheet[]
+      } else {
+        console.error(e)
+      }
+    }
+    return null
+  },
+
+  listGroup: async (query: string, params: APIt.ListSheetGroupQueryVariables): Promise<Sheet[] | null> => {
+    try {
+      const listGroupQV: APIt.ListSheetGroupQueryVariables = params
+      const listGroupGQL = await graphqlQuery
+        <APIt.ListSheetGroupQueryVariables, APIt.ListSheetGroupQuery>
+        (query, listGroupQV)
+      if (listGroupGQL.data) {
+        const listGroupQ: APIt.ListSheetGroupQuery = listGroupGQL.data;
+        if (listGroupQ.listSheetGroup && listGroupQ.listSheetGroup.items) {
+          const gotSheets = listGroupQ.listSheetGroup.items as Sheet[]
+          return gotSheets
+        } else console.error("情報の取得に失敗しました")
+      } else console.error("情報の取得に失敗しました")
+    } catch (e) {
+      if (e && e.data && e.data.listSheets) {
+        console.error("違反があります", e.errors)
+        return e.data.listSheets.items as Sheet[]
+      } else {
+        console.error(e)
+      }
+    }
+    return null
+  },
 }

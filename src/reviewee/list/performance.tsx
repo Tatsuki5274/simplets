@@ -4,7 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Link } from 'react-router-dom';
 import { Category, Sheet, UserContext } from 'App';
 import { ApprovalStatus, getStatusValue } from 'lib/getStatusValue'
-import { getEmployee, listCategorys, listEmployees, listSheets } from 'graphql/queries'
+import { getEmployee, listCategorys, listEmployeesManager, listSheetReviewee } from 'graphql/queries'
 import * as APIt from 'API';
 import { createSection, createSheet } from 'graphql/mutations';
 import SidebarComponents, { performanceSidebarBackgroundColor } from 'common/Sidebar';
@@ -16,7 +16,7 @@ import { SectionDao } from 'lib/dao/sectionDao';
 import { DisplaySheetAverage } from './components/average';
 import { tableHeaderStyle } from 'common/globalStyle.module.scss';
 import { getSheetKeys } from 'lib/util';
-import { EmployeeType } from 'API';
+import { BooleanType, EmployeeType } from 'API';
 
 const sortSheet = (a: Sheet, b: Sheet) => {
     if (a.year < b.year) {
@@ -38,14 +38,14 @@ function ListPerformanceEvalution() {
     useEffect(() => {
         ; (async () => {
             if(currentUser){
-                const listQV: APIt.ListSheetsQueryVariables = {
-                    filter: {
-                        reviewee: {
-                            eq: currentUser.username
-                        }
-                    }
+                const listQV: APIt.ListSheetRevieweeQueryVariables = {
+                    companyID: currentUser.attributes["custom:companyId"],
+                    reviewee: {
+                        eq: currentUser.username
+                    },
                 };
-                const items = await SheetDao.list(listSheets, listQV)
+                
+                const items = await SheetDao.listReviewee(listSheetReviewee, listQV)
 
                 //降順でソートしてlistItemsに保存
                 items?.sort(sortSheet);
@@ -80,8 +80,28 @@ function ListPerformanceEvalution() {
                     console.log("categorys", categorys)
 
                     //全ての社内特権マネージャーの情報を取得
-                    const superManagers = await EmployeeDao.list(listEmployees, { companyID: currentUser.attributes["custom:companyId"], filter: { manager: { eq: 'SUPER_MANAGER' as EmployeeType } } })
-                    const groupManagers = await EmployeeDao.list(listEmployees, { companyID: currentUser.attributes["custom:companyId"], filter: { manager: { eq: 'MANAGER' as EmployeeType }, employeeGroupLocalId: { eq: revieweeEmployee?.employeeGroupLocalId } } })
+                    const superManagers = await EmployeeDao.listManager(listEmployeesManager, {
+                        companyID: currentUser.attributes["custom:companyId"],
+                        managerIsDeleted: {
+                            eq: {
+                                manager: 'SUPER_MANAGER' as EmployeeType,
+                                isDeleted: 'FALSE' as BooleanType
+                            }
+                        }
+                    })
+                    const groupManagers = await EmployeeDao.listManager(listEmployeesManager, {
+                        companyID: currentUser.attributes["custom:companyId"],
+                        managerIsDeleted: {
+                            eq: {
+                                manager: 'MANAGER' as EmployeeType,
+                                isDeleted: 'FALSE' as BooleanType
+                            }
+                        }, filter: {
+                            employeeGroupLocalId: {
+                                eq: revieweeEmployee?.employeeGroupLocalId
+                            }
+                        }
+                    })
                     console.log("superManagers", superManagers)
                     console.log("groupManagers", groupManagers)
                     let listSuperManagers: Array<string> = [];
