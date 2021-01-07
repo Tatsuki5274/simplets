@@ -4,8 +4,33 @@ import { Table } from "react-bootstrap"
 import { SheetContext } from "../..";
 import * as APIt from 'API';
 import { SheetDao } from "lib/dao/sheetDao";
-import { listSheets } from "graphql/queries";
 import { tableHeaderStyle } from "common/globalStyle.module.scss";
+
+const listSheetReviewee = /* GraphQL */ `
+  query ListSheetReviewee(
+    $companyID: ID
+    $reviewee: ModelStringKeyConditionInput
+    $sortDirection: ModelSortDirection
+    $filter: ModelSheetFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listSheetReviewee(
+      companyID: $companyID
+      reviewee: $reviewee
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        year
+        overAllEvaluation
+      }
+      nextToken
+    }
+  }
+`;
 
 export const OverEvaluationTable = () => {
     const currentUser = useContext(UserContext);
@@ -22,17 +47,20 @@ export const OverEvaluationTable = () => {
                 const thisYear = sheet.year
 
                 if(currentUser){
-                    const input: APIt.ListSheetsQueryVariables = {
+                    const input: APIt.ListSheetRevieweeQueryVariables = {
+                        companyID: currentUser.attributes["custom:companyId"],
+                        reviewee: {
+                            eq: currentUser.username
+                        },
                         filter: {
                             year: {
                                 between: [thisYear - 2, thisYear - 1]
-                            },
-                            reviewee:{
-                                eq: currentUser.username
                             }
                         }
                     }
-                    const gotSheets = await SheetDao.list(listSheets, input)
+                    console.log("input",input);
+                    const gotSheets = await SheetDao.listReviewee(listSheetReviewee, input)
+                    console.log("gotSheets",gotSheets);
 
                     if(gotSheets){
                         if(gotSheets.length > 2){
