@@ -1,5 +1,5 @@
 //React
-import React, { createContext, useEffect, useState } from 'react';
+import React, { createContext, useContext, useEffect, useState } from 'react';
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { ConfirmSignIn, ConfirmSignUp, ForgotPassword, RequireNewPassword, SignUp, VerifyContact, withAuthenticator } from 'aws-amplify-react';
 
@@ -18,6 +18,7 @@ import ProgressReferenceList from 'reviewer/list/progress';
 import EvaluationScreen from "reviewer/sheet";
 import { PDFPage } from 'views/pdf/page';
 import MySignIn from 'views/auth/signIn';
+import { EmployeeDao } from 'lib/dao/employeeDao';
 Amplify.configure(awsconfig);
 
 export type Sheet = Omit<Exclude<APIt.GetSheetQuery['getSheet'], null>, '__typename'>;
@@ -36,6 +37,7 @@ type User = {
   }
 }
 export const UserContext = createContext<User | null>(null)
+export const EmployeeContext = createContext<Employee | null>(null)
 
 //approvalStatusManagerの引数の型
 export type approvalStatusManagerMutationVariables = {
@@ -50,31 +52,62 @@ export type approvalStatusManagerMutationResult = {
   error?: String  //エラー時のメッセージを格納
 }
 
+const getEmployee = /* GraphQL */ `
+  query GetEmployee($companyID: ID!, $username: ID!) {
+    getEmployee(companyID: $companyID, username: $username) {
+      companyID
+      username
+      firstName
+      lastName
+      group {
+        name
+      }
+      company {
+        id
+        name
+      }
+    }
+  }
+`;
+
 function App() {
   const [user, setUser] = useState<any>(null);
+  const [employee, setEmployee] = useState<Employee | null>(null);
 
   useEffect(() => {
     ; (async () => {
       const user = await Auth.currentAuthenticatedUser()
       setUser(user);
-      console.log("user", user)
+      console.log("user", user)    
     })()
   }, []);
+
+  useEffect(() => {
+    ; (async () => {
+      if (user) {
+        const employee = await EmployeeDao.get(getEmployee, { companyID: user.attributes["custom:companyId"], username: user.username })      
+        setEmployee(employee);
+        console.log("employee", employee)
+      }
+    })()
+  }, [user]);
 
 
   return (
     <div>
       <UserContext.Provider value={user}>
-        <BrowserRouter>
-          <Switch>
-            <Route exact path="/" component={ListPerformanceEvalution} />
-            <Route exact path="/reviewee/company/:companyId/reviewee/:reviewee/year/:year" component={RevieweeSheetShow} />
-            <Route exact path="/reviewee/list" component={ListPerformanceEvalution} />
-            <Route exact path="/reviewer/list" component={ProgressReferenceList} />
-            <Route exact path="/reviewer/company/:companyId/reviewee/:reviewee/year/:year" component={EvaluationScreen} />
-            <Route exact path="/preview/company/:companyId/reviewee/:reviewee/year/:year" component={PDFPage} />
-          </Switch>
-        </BrowserRouter>
+        <EmployeeContext.Provider value={employee}>
+          <BrowserRouter>
+            <Switch>
+              <Route exact path="/" component={ListPerformanceEvalution} />
+              <Route exact path="/reviewee/company/:companyId/reviewee/:reviewee/year/:year" component={RevieweeSheetShow} />
+              <Route exact path="/reviewee/list" component={ListPerformanceEvalution} />
+              <Route exact path="/reviewer/list" component={ProgressReferenceList} />
+              <Route exact path="/reviewer/company/:companyId/reviewee/:reviewee/year/:year" component={EvaluationScreen} />
+              <Route exact path="/preview/company/:companyId/reviewee/:reviewee/year/:year" component={PDFPage} />
+            </Switch>
+          </BrowserRouter>
+        </EmployeeContext.Provider>
       </UserContext.Provider>
     </div>
   );

@@ -1,10 +1,5 @@
-import { Employee, UserContext } from 'App';
+import { Employee, EmployeeContext } from 'App';
 import React, { useContext, useEffect, useState } from 'react';
-import * as APIt from 'API';
-import  { API, graphqlOperation } from 'aws-amplify';
-import { getEmployee } from 'graphql/queries';
-import { GetEmployeeQuery } from 'API';
-import { GraphQLResult } from "@aws-amplify/api";
 import style from './headerStyle.module.scss'
 import { Navbar } from 'react-bootstrap';
 import { AmplifySignOut } from '@aws-amplify/ui-react';
@@ -14,38 +9,19 @@ import { AmplifySignOut } from '@aws-amplify/ui-react';
 function HeaderComponents() {    
     //所属する部署と社員名のデータを取得
     const [employee, setEmployee] = useState<Employee>()
-    const currentUser = useContext(UserContext);
+    // const currentUser = useContext(UserContext);
+    const currentEmployee = useContext(EmployeeContext);
     
     //ログインユーザーデータ格納      
     useEffect(() => {
         ; (async () => {
 
-            if(currentUser){
-                try {
-                    console.log("currentUser", currentUser)
-
-                    const employee: APIt.GetEmployeeQueryVariables = {
-                        username: currentUser?.username || "",
-                        companyID: currentUser?.attributes['custom:companyId'] || ""
-                    }
-                    let response: GraphQLResult<GetEmployeeQuery>
-                    try{
-                        response = (await API.graphql(graphqlOperation(getEmployee, employee))
-                        ) as GraphQLResult<GetEmployeeQuery>;
-                    }catch(e){
-                        console.log(e);
-                        response = e;
-                    }
-
-                    const employeeItem = response.data?.getEmployee as Employee;
-                    setEmployee(employeeItem);
-                } catch (e) {
-                    console.error(e);
-                }
+            if(currentEmployee) {
+            setEmployee(currentEmployee)
             }
 
         })()
-    }, [currentUser]);
+    }, [currentEmployee]);
 
 
     //ヘッダー表示
