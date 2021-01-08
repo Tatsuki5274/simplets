@@ -1,10 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Button, Card, Row, Col } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { API, graphqlOperation } from 'aws-amplify';
-import { listGroups, listSheetYear } from 'graphql/queries';
-import { ListGroupsQuery } from 'API';
-import { GraphQLResult } from "@aws-amplify/api";
 import * as APIt from 'API';
 import { Group, Sheet, UserContext } from 'App';
 import SidebarComponents, { performanceSidebarBackgroundColor } from 'common/Sidebar';
@@ -14,8 +10,9 @@ import { Link } from 'react-router-dom';
 import { Field, Form, Formik } from 'formik';
 import { SheetDao } from 'lib/dao/sheetDao';
 import GaugeChart from 'react-gauge-chart';
-import { calcAvg, round} from 'lib/util';
+import { calcAvg, getSectionKeys, round} from 'lib/util';
 import { routeBuilder } from 'router';
+import { GroupDao } from 'lib/dao/groupDao';
 
 
 type ViewType = {
@@ -35,11 +32,89 @@ type ViewType = {
         avg: number | null,
         no: number | null | undefined,
         id: string | undefined,
-        sectionId?: string
+        sectionId: string | null
     }[] | undefined,
     avg: number | null
 }
 
+const listGroups = /* GraphQL */ `
+  query ListGroups(
+    $companyID: ID
+    $localID: ModelIDKeyConditionInput
+    $filter: ModelGroupFilterInput
+    $limit: Int
+    $nextToken: String
+    $sortDirection: ModelSortDirection
+  ) {
+    listGroups(
+      companyID: $companyID
+      localID: $localID
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      sortDirection: $sortDirection
+    ) {
+      items {
+        localID
+        name
+      }
+      nextToken
+    }
+  }
+`;
+
+const listSheetYear = /* GraphQL */ `
+  query ListSheetYear(
+    $companyID: ID
+    $year: ModelIntKeyConditionInput
+    $sortDirection: ModelSortDirection
+    $filter: ModelSheetFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listSheetYear(
+      companyID: $companyID
+      year: $year
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        companyID
+        year
+        sheetGroupLocalId
+        group {
+          localID
+          name
+        }
+        section {
+          items {
+            sheetKeys
+            sectionCategoryLocalId
+            companyID
+            objective {
+              items {
+                progress
+              }
+            }
+            category {
+              localID
+              name
+            }
+          }
+        }
+        reviewee
+        revieweeEmployee {
+          localID
+          firstName
+          lastName
+        }
+      }
+      nextToken
+    }
+  }
+`;
 
 function ProgressReferenceList() {
     //今日の日付を取得
@@ -61,16 +136,14 @@ function ProgressReferenceList() {
     
     useEffect(() => {
         ; (async () => {
-
-            try {
+            if (currentUser) {
                 const groupList: APIt.ListGroupsQueryVariables = {
+                    companyID: currentUser.attributes["custom:companyId"]
                 }
-                const response = (await API.graphql(graphqlOperation(listGroups, groupList))
-                ) as GraphQLResult<ListGroupsQuery>;
+                const response = await GroupDao.list(listGroups, groupList)
 
-                const groupItem = response.data?.listGroups?.items as Group[];
                 //昇順でソートしてgroupItemに保存
-                groupItem?.sort(function (a, b) {
+                const groupItem = response?.sort(function (a, b) {
                     if (a.name > b.name) {
                         return 1;
                     } else {
@@ -78,15 +151,13 @@ function ProgressReferenceList() {
                     }
                 });
                 setGroupList(groupItem);
-            } catch (e) {
-                console.log(e);
             }
 
         })()
-    }, []);
+    }, [currentUser]);
 
     useEffect(()=>{
-        (async()=>{
+        ; (async()=>{
             if (currentUser) {
                 const listYearQV: APIt.ListSheetYearQueryVariables = {
                     companyID: currentUser.attributes["custom:companyId"],
@@ -135,7 +206,7 @@ function ProgressReferenceList() {
                             })) : null,
                         no: section?.category ? parseInt(section.category.localID) : null,
                         id: section?.category?.localID,
-                        sectionId: section?.companyID
+                        sectionId: section ? getSectionKeys(section).replace(/[.@]/g,'-') : null
                     }
                 }),
                 avg: -1
@@ -300,7 +371,7 @@ function ProgressReferenceList() {
                                 {view.avg ? `${round(view.avg, 2).toFixed(1)}%` : null}
 
                                 {view.avg ?
-                                <GaugeChart id={`chart-${view.groupName}-${view.avg}`}
+                                <GaugeChart id={`chart-${view.groupName}-${view.avg*10}`}
                                     nrOfLevels={10}
                                     colors={['#EA4228', '#F5CD19', '#5BE12C']}
                                     percent={view.avg / 100}
