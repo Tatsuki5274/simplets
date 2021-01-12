@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import { Button, Card, Row, Col } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import * as APIt from 'API';
-import { Group, Sheet, UserContext } from 'App';
+import { EmployeeContext, Group, Sheet, UserContext } from 'App';
 import SidebarComponents, { performanceSidebarBackgroundColor } from 'common/Sidebar';
 import HeaderComponents from 'common/header';//ヘッダーの表示
 import style from './progressStyle.module.scss';
@@ -133,13 +133,15 @@ function ProgressReferenceList() {
 
     // ログインユーザを取得する
     const currentUser = useContext(UserContext);
+    const currentEmployee = useContext(EmployeeContext);
     
     useEffect(() => {
         ; (async () => {
-            if (currentUser) {
+            if (currentUser && currentEmployee && currentEmployee.manager === 'SUPER_MANAGER') {
                 const groupList: APIt.ListGroupsQueryVariables = {
                     companyID: currentUser.attributes["custom:companyId"]
                 }
+                console.log("groupList",groupList)
                 const response = await GroupDao.list(listGroups, groupList)
 
                 //昇順でソートしてgroupItemに保存
@@ -151,10 +153,31 @@ function ProgressReferenceList() {
                     }
                 });
                 setGroupList(groupItem);
+            } else {
+                if (currentUser && currentEmployee && currentEmployee.employeeGroupLocalId) {
+                    const groupList: APIt.ListGroupsQueryVariables = {
+                        companyID: currentUser.attributes["custom:companyId"],
+                        localID: {
+                            eq: currentEmployee?.employeeGroupLocalId
+                        }
+                    }
+                    console.log("groupList",groupList)
+                    const response = await GroupDao.list(listGroups, groupList)
+    
+                    //昇順でソートしてgroupItemに保存
+                    const groupItem = response?.sort(function (a, b) {
+                        if (a.name > b.name) {
+                            return 1;
+                        } else {
+                            return -1;
+                        }
+                    });
+                    setGroupList(groupItem);
+                }
             }
 
         })()
-    }, [currentUser]);
+    }, [currentUser, currentEmployee]);
 
     useEffect(()=>{
         ; (async()=>{
@@ -254,7 +277,7 @@ function ProgressReferenceList() {
                     <Formik
                         initialValues={{
                             year: today.getFullYear(),
-                            groupId: "",
+                            groupId: "all",
                         }}
                         onSubmit={async (values)=>{
                             let filter: APIt.ListSheetYearQueryVariables = {
@@ -282,7 +305,7 @@ function ProgressReferenceList() {
                     >
                         {(formik) => (
                             <Form onSubmit={formik.handleSubmit}>
-                                <div>
+                                <div className={style.groupMargin}>
                                     {/* 部門の選択肢を表示 */}
                                     <span className={`${style.selectionSize} ${style.selectionMargin}`}>
                                         <Field type="radio" name="groupId" value="all" handleChange={formik.handleChange}/>
@@ -300,7 +323,7 @@ function ProgressReferenceList() {
 
                                 {/* 年度の選択肢を表示 */}
                                 <span>年度</span>
-                                <Field as="select" name="year">
+                                <Field as="select" name="year" className={style.yearMargin}>
                                     {yearList.map((year: number) => {
                                         return (
                                             <option value={year}>{year}</option>
@@ -309,7 +332,7 @@ function ProgressReferenceList() {
                                 </Field>
 
                                 {/* 確認を表示 */}
-                                <Button type="submit">確認</Button>
+                                <Button type="submit">参照</Button>
 
                             </Form>
                         )}

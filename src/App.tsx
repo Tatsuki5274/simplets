@@ -59,6 +59,7 @@ const getEmployee = /* GraphQL */ `
       username
       firstName
       lastName
+      employeeGroupLocalId
       group {
         name
       }
