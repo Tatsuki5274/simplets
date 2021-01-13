@@ -317,8 +317,8 @@ export const PDFTemplete = (props: Props) => {
                         </thead>
                         <tbody>
                           <td>{props.gradeString}</td>
-                          <td>{props.twoYearsAgoOverAllEvaluation}</td>
-                          <td>{props.lastYearsAgoOverAllEvaluation}</td>
+                          <td>{props.twoYearsAgoOverAllEvaluation ? props.twoYearsAgoOverAllEvaluation : "-"}</td>
+                          <td>{props.lastYearsAgoOverAllEvaluation ? props.lastYearsAgoOverAllEvaluation : "-"}</td>
                           <td>{props.sheet.overAllEvaluation}</td>
                         </tbody>
                       </Table>
