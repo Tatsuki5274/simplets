@@ -14,8 +14,8 @@ type Props = {
   // section: Section,
   isConfirmReviewee: boolean, //本人確認
   isConfirmSuperior1: boolean, //所属長確認
-  twoYearsAgoOverAllEvaluation: number, //前々期評価
-  lastYearsAgoOverAllEvaluation: number, //前期評価
+  twoYearsAgoOverAllEvaluation: number | null, //前々期評価
+  lastYearsAgoOverAllEvaluation: number | null, //前期評価
   gradeString: string, //等級名称
   approvalStatusString: string, //承認ステータス文字列
   isConfirmSuperior2: boolean, //部門長確認
