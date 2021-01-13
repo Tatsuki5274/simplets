@@ -3,7 +3,7 @@ import { Button, Modal } from "react-bootstrap";
 import { ObjectiveCreateModalContent } from "./content";
 
 type Props = {
-    sheetId: string
+    year: number
 }
 
 export function ObjectiveCreateModal(props: Props){
@@ -26,7 +26,9 @@ export function ObjectiveCreateModal(props: Props){
                 <Modal.Title>業績目標設定</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <ObjectiveCreateModalContent/>
+                    <ObjectiveCreateModalContent
+                        year={props.year}
+                    />
                 </Modal.Body>
                 <Modal.Footer>
 

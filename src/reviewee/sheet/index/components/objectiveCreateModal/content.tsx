@@ -25,7 +25,11 @@ type TypeForm = {
     expDoneDate: string,
 }
 
-export function ObjectiveCreateModalContent() {
+type Props = {
+    year: number
+}
+
+export function ObjectiveCreateModalContent(props: Props) {
     // const sheetId = props.sheetId;
     const [sheet, setSheet] = useState<Sheet | null>(null)
 
@@ -38,7 +42,7 @@ export function ObjectiveCreateModalContent() {
 
     useEffect(() => {
         ; (async () => {
-            const sheet = await SheetDao.get(getSheet, { companyID: currentUser?.attributes["custom:companyId"] || "", reviewee: currentUser?.username || "", year: today })
+            const sheet = await SheetDao.get(getSheet, { companyID: currentUser?.attributes["custom:companyId"] || "", reviewee: currentUser?.username || "", year: props.year })
             if (sheet && sheet.section && sheet.section.items) {
                 sheet.section.items.sort(function (a, b) {
                     if (a?.category && b?.category && a.category.localID > b.category.localID) {

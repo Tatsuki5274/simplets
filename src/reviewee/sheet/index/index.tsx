@@ -129,7 +129,7 @@ function RevieweeSheetShow(props: Props) {
                     <h2>業績評価</h2>
                     {sheet.statusValue === 1 || sheet.statusValue === 3 ?
                     <ObjectiveCreateModal
-                        sheetId={sheet.sheetGroupLocalId}
+                        year={sheet.year}
                     /> : null}
                     
                     <AverageMediumGaugeBox sheet={sheet} />
