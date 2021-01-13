@@ -137,24 +137,24 @@ function ProgressReferenceList() {
     
     useEffect(() => {
         ; (async () => {
-            if (currentUser && currentEmployee && currentEmployee.manager === 'SUPER_MANAGER') {
-                const groupList: APIt.ListGroupsQueryVariables = {
-                    companyID: currentUser.attributes["custom:companyId"]
-                }
-                console.log("groupList",groupList)
-                const response = await GroupDao.list(listGroups, groupList)
-
-                //昇順でソートしてgroupItemに保存
-                const groupItem = response?.sort(function (a, b) {
-                    if (a.name > b.name) {
-                        return 1;
-                    } else {
-                        return -1;
+            if(currentUser && currentEmployee){
+                if (currentEmployee.manager === 'SUPER_MANAGER') {
+                    const groupList: APIt.ListGroupsQueryVariables = {
+                        companyID: currentUser.attributes["custom:companyId"]
                     }
-                });
-                setGroupList(groupItem);
-            } else {
-                if (currentUser && currentEmployee && currentEmployee.employeeGroupLocalId) {
+                    console.log("groupList",groupList)
+                    const response = await GroupDao.list(listGroups, groupList)
+    
+                    //昇順でソートしてgroupItemに保存
+                    const groupItem = response?.sort(function (a, b) {
+                        if (a.name > b.name) {
+                            return 1;
+                        } else {
+                            return -1;
+                        }
+                    });
+                    setGroupList(groupItem);
+                } else if(currentEmployee.manager === 'MANAGER'){
                     const groupList: APIt.ListGroupsQueryVariables = {
                         companyID: currentUser.attributes["custom:companyId"],
                         localID: {
@@ -173,8 +173,11 @@ function ProgressReferenceList() {
                         }
                     });
                     setGroupList(groupItem);
+                }else{
+                    console.error("マネージャーではありません")
                 }
             }
+
 
         })()
     }, [currentUser, currentEmployee]);

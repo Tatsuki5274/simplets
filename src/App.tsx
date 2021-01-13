@@ -60,6 +60,7 @@ const getEmployee = /* GraphQL */ `
       firstName
       lastName
       employeeGroupLocalId
+      manager
       group {
         name
       }
