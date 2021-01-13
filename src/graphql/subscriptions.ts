@@ -7,6 +7,7 @@ export const onCreateCompany = /* GraphQL */ `
     onCreateCompany {
       id
       name
+      startMonth
       shortName
       url
       createdAt
@@ -19,6 +20,7 @@ export const onUpdateCompany = /* GraphQL */ `
     onUpdateCompany {
       id
       name
+      startMonth
       shortName
       url
       createdAt
@@ -31,6 +33,7 @@ export const onDeleteCompany = /* GraphQL */ `
     onDeleteCompany {
       id
       name
+      startMonth
       shortName
       url
       createdAt
@@ -387,6 +390,7 @@ export const onCreateEmployee = /* GraphQL */ `
       company {
         id
         name
+        startMonth
         shortName
         url
         createdAt
@@ -416,6 +420,7 @@ export const onCreateEmployee = /* GraphQL */ `
         company {
           id
           name
+          startMonth
           shortName
           url
           createdAt
@@ -445,6 +450,7 @@ export const onCreateEmployee = /* GraphQL */ `
           company {
             id
             name
+            startMonth
             shortName
             url
             createdAt
@@ -474,6 +480,7 @@ export const onCreateEmployee = /* GraphQL */ `
             company {
               id
               name
+              startMonth
               shortName
               url
               createdAt
@@ -503,6 +510,7 @@ export const onCreateEmployee = /* GraphQL */ `
               company {
                 id
                 name
+                startMonth
                 shortName
                 url
                 createdAt
@@ -532,6 +540,7 @@ export const onCreateEmployee = /* GraphQL */ `
                 company {
                   id
                   name
+                  startMonth
                   shortName
                   url
                   createdAt
@@ -586,6 +595,7 @@ export const onUpdateEmployee = /* GraphQL */ `
       company {
         id
         name
+        startMonth
         shortName
         url
         createdAt
@@ -615,6 +625,7 @@ export const onUpdateEmployee = /* GraphQL */ `
         company {
           id
           name
+          startMonth
           shortName
           url
           createdAt
@@ -644,6 +655,7 @@ export const onUpdateEmployee = /* GraphQL */ `
           company {
             id
             name
+            startMonth
             shortName
             url
             createdAt
@@ -673,6 +685,7 @@ export const onUpdateEmployee = /* GraphQL */ `
             company {
               id
               name
+              startMonth
               shortName
               url
               createdAt
@@ -702,6 +715,7 @@ export const onUpdateEmployee = /* GraphQL */ `
               company {
                 id
                 name
+                startMonth
                 shortName
                 url
                 createdAt
@@ -731,6 +745,7 @@ export const onUpdateEmployee = /* GraphQL */ `
                 company {
                   id
                   name
+                  startMonth
                   shortName
                   url
                   createdAt
@@ -785,6 +800,7 @@ export const onDeleteEmployee = /* GraphQL */ `
       company {
         id
         name
+        startMonth
         shortName
         url
         createdAt
@@ -814,6 +830,7 @@ export const onDeleteEmployee = /* GraphQL */ `
         company {
           id
           name
+          startMonth
           shortName
           url
           createdAt
@@ -843,6 +860,7 @@ export const onDeleteEmployee = /* GraphQL */ `
           company {
             id
             name
+            startMonth
             shortName
             url
             createdAt
@@ -872,6 +890,7 @@ export const onDeleteEmployee = /* GraphQL */ `
             company {
               id
               name
+              startMonth
               shortName
               url
               createdAt
@@ -901,6 +920,7 @@ export const onDeleteEmployee = /* GraphQL */ `
               company {
                 id
                 name
+                startMonth
                 shortName
                 url
                 createdAt
@@ -930,6 +950,7 @@ export const onDeleteEmployee = /* GraphQL */ `
                 company {
                   id
                   name
+                  startMonth
                   shortName
                   url
                   createdAt
@@ -1076,6 +1097,7 @@ export const onCreateSheet = /* GraphQL */ `
         company {
           id
           name
+          startMonth
           shortName
           url
           createdAt
@@ -1105,6 +1127,7 @@ export const onCreateSheet = /* GraphQL */ `
           company {
             id
             name
+            startMonth
             shortName
             url
             createdAt
@@ -1134,6 +1157,7 @@ export const onCreateSheet = /* GraphQL */ `
             company {
               id
               name
+              startMonth
               shortName
               url
               createdAt
@@ -1163,6 +1187,7 @@ export const onCreateSheet = /* GraphQL */ `
               company {
                 id
                 name
+                startMonth
                 shortName
                 url
                 createdAt
@@ -1192,6 +1217,7 @@ export const onCreateSheet = /* GraphQL */ `
                 company {
                   id
                   name
+                  startMonth
                   shortName
                   url
                   createdAt
@@ -1241,6 +1267,7 @@ export const onCreateSheet = /* GraphQL */ `
         company {
           id
           name
+          startMonth
           shortName
           url
           createdAt
@@ -1270,6 +1297,7 @@ export const onCreateSheet = /* GraphQL */ `
           company {
             id
             name
+            startMonth
             shortName
             url
             createdAt
@@ -1299,6 +1327,7 @@ export const onCreateSheet = /* GraphQL */ `
             company {
               id
               name
+              startMonth
               shortName
               url
               createdAt
@@ -1328,6 +1357,7 @@ export const onCreateSheet = /* GraphQL */ `
               company {
                 id
                 name
+                startMonth
                 shortName
                 url
                 createdAt
@@ -1357,6 +1387,7 @@ export const onCreateSheet = /* GraphQL */ `
                 company {
                   id
                   name
+                  startMonth
                   shortName
                   url
                   createdAt
@@ -1503,6 +1534,7 @@ export const onUpdateSheet = /* GraphQL */ `
         company {
           id
           name
+          startMonth
           shortName
           url
           createdAt
@@ -1532,6 +1564,7 @@ export const onUpdateSheet = /* GraphQL */ `
           company {
             id
             name
+            startMonth
             shortName
             url
             createdAt
@@ -1561,6 +1594,7 @@ export const onUpdateSheet = /* GraphQL */ `
             company {
               id
               name
+              startMonth
               shortName
               url
               createdAt
@@ -1590,6 +1624,7 @@ export const onUpdateSheet = /* GraphQL */ `
               company {
                 id
                 name
+                startMonth
                 shortName
                 url
                 createdAt
@@ -1619,6 +1654,7 @@ export const onUpdateSheet = /* GraphQL */ `
                 company {
                   id
                   name
+                  startMonth
                   shortName
                   url
                   createdAt
@@ -1668,6 +1704,7 @@ export const onUpdateSheet = /* GraphQL */ `
         company {
           id
           name
+          startMonth
           shortName
           url
           createdAt
@@ -1697,6 +1734,7 @@ export const onUpdateSheet = /* GraphQL */ `
           company {
             id
             name
+            startMonth
             shortName
             url
             createdAt
@@ -1726,6 +1764,7 @@ export const onUpdateSheet = /* GraphQL */ `
             company {
               id
               name
+              startMonth
               shortName
               url
               createdAt
@@ -1755,6 +1794,7 @@ export const onUpdateSheet = /* GraphQL */ `
               company {
                 id
                 name
+                startMonth
                 shortName
                 url
                 createdAt
@@ -1784,6 +1824,7 @@ export const onUpdateSheet = /* GraphQL */ `
                 company {
                   id
                   name
+                  startMonth
                   shortName
                   url
                   createdAt
@@ -1930,6 +1971,7 @@ export const onDeleteSheet = /* GraphQL */ `
         company {
           id
           name
+          startMonth
           shortName
           url
           createdAt
@@ -1959,6 +2001,7 @@ export const onDeleteSheet = /* GraphQL */ `
           company {
             id
             name
+            startMonth
             shortName
             url
             createdAt
@@ -1988,6 +2031,7 @@ export const onDeleteSheet = /* GraphQL */ `
             company {
               id
               name
+              startMonth
               shortName
               url
               createdAt
@@ -2017,6 +2061,7 @@ export const onDeleteSheet = /* GraphQL */ `
               company {
                 id
                 name
+                startMonth
                 shortName
                 url
                 createdAt
@@ -2046,6 +2091,7 @@ export const onDeleteSheet = /* GraphQL */ `
                 company {
                   id
                   name
+                  startMonth
                   shortName
                   url
                   createdAt
@@ -2095,6 +2141,7 @@ export const onDeleteSheet = /* GraphQL */ `
         company {
           id
           name
+          startMonth
           shortName
           url
           createdAt
@@ -2124,6 +2171,7 @@ export const onDeleteSheet = /* GraphQL */ `
           company {
             id
             name
+            startMonth
             shortName
             url
             createdAt
@@ -2153,6 +2201,7 @@ export const onDeleteSheet = /* GraphQL */ `
             company {
               id
               name
+              startMonth
               shortName
               url
               createdAt
@@ -2182,6 +2231,7 @@ export const onDeleteSheet = /* GraphQL */ `
               company {
                 id
                 name
+                startMonth
                 shortName
                 url
                 createdAt
@@ -2211,6 +2261,7 @@ export const onDeleteSheet = /* GraphQL */ `
                 company {
                   id
                   name
+                  startMonth
                   shortName
                   url
                   createdAt

@@ -7,6 +7,7 @@ export const getCompany = /* GraphQL */ `
     getCompany(id: $id) {
       id
       name
+      startMonth
       shortName
       url
       createdAt
@@ -24,6 +25,7 @@ export const listCompanys = /* GraphQL */ `
       items {
         id
         name
+        startMonth
         shortName
         url
         createdAt
@@ -319,6 +321,7 @@ export const listEmployees = /* GraphQL */ `
         company {
           id
           name
+          startMonth
           shortName
           url
           createdAt
@@ -348,6 +351,7 @@ export const listEmployees = /* GraphQL */ `
           company {
             id
             name
+            startMonth
             shortName
             url
             createdAt
@@ -377,6 +381,7 @@ export const listEmployees = /* GraphQL */ `
             company {
               id
               name
+              startMonth
               shortName
               url
               createdAt
@@ -406,6 +411,7 @@ export const listEmployees = /* GraphQL */ `
               company {
                 id
                 name
+                startMonth
                 shortName
                 url
                 createdAt
@@ -435,6 +441,7 @@ export const listEmployees = /* GraphQL */ `
                 company {
                   id
                   name
+                  startMonth
                   shortName
                   url
                   createdAt
@@ -490,6 +497,7 @@ export const getEmployee = /* GraphQL */ `
       company {
         id
         name
+        startMonth
         shortName
         url
         createdAt
@@ -519,6 +527,7 @@ export const getEmployee = /* GraphQL */ `
         company {
           id
           name
+          startMonth
           shortName
           url
           createdAt
@@ -548,6 +557,7 @@ export const getEmployee = /* GraphQL */ `
           company {
             id
             name
+            startMonth
             shortName
             url
             createdAt
@@ -577,6 +587,7 @@ export const getEmployee = /* GraphQL */ `
             company {
               id
               name
+              startMonth
               shortName
               url
               createdAt
@@ -606,6 +617,7 @@ export const getEmployee = /* GraphQL */ `
               company {
                 id
                 name
+                startMonth
                 shortName
                 url
                 createdAt
@@ -635,6 +647,7 @@ export const getEmployee = /* GraphQL */ `
                 company {
                   id
                   name
+                  startMonth
                   shortName
                   url
                   createdAt
@@ -704,6 +717,7 @@ export const listEmployeeLocalId = /* GraphQL */ `
         company {
           id
           name
+          startMonth
           shortName
           url
           createdAt
@@ -733,6 +747,7 @@ export const listEmployeeLocalId = /* GraphQL */ `
           company {
             id
             name
+            startMonth
             shortName
             url
             createdAt
@@ -762,6 +777,7 @@ export const listEmployeeLocalId = /* GraphQL */ `
             company {
               id
               name
+              startMonth
               shortName
               url
               createdAt
@@ -791,6 +807,7 @@ export const listEmployeeLocalId = /* GraphQL */ `
               company {
                 id
                 name
+                startMonth
                 shortName
                 url
                 createdAt
@@ -820,6 +837,7 @@ export const listEmployeeLocalId = /* GraphQL */ `
                 company {
                   id
                   name
+                  startMonth
                   shortName
                   url
                   createdAt
@@ -890,6 +908,7 @@ export const listEmployeesManager = /* GraphQL */ `
         company {
           id
           name
+          startMonth
           shortName
           url
           createdAt
@@ -919,6 +938,7 @@ export const listEmployeesManager = /* GraphQL */ `
           company {
             id
             name
+            startMonth
             shortName
             url
             createdAt
@@ -948,6 +968,7 @@ export const listEmployeesManager = /* GraphQL */ `
             company {
               id
               name
+              startMonth
               shortName
               url
               createdAt
@@ -977,6 +998,7 @@ export const listEmployeesManager = /* GraphQL */ `
               company {
                 id
                 name
+                startMonth
                 shortName
                 url
                 createdAt
@@ -1006,6 +1028,7 @@ export const listEmployeesManager = /* GraphQL */ `
                 company {
                   id
                   name
+                  startMonth
                   shortName
                   url
                   createdAt
@@ -1143,6 +1166,7 @@ export const getSheet = /* GraphQL */ `
         company {
           id
           name
+          startMonth
           shortName
           url
           createdAt
@@ -1172,6 +1196,7 @@ export const getSheet = /* GraphQL */ `
           company {
             id
             name
+            startMonth
             shortName
             url
             createdAt
@@ -1201,6 +1226,7 @@ export const getSheet = /* GraphQL */ `
             company {
               id
               name
+              startMonth
               shortName
               url
               createdAt
@@ -1230,6 +1256,7 @@ export const getSheet = /* GraphQL */ `
               company {
                 id
                 name
+                startMonth
                 shortName
                 url
                 createdAt
@@ -1259,6 +1286,7 @@ export const getSheet = /* GraphQL */ `
                 company {
                   id
                   name
+                  startMonth
                   shortName
                   url
                   createdAt
@@ -1308,6 +1336,7 @@ export const getSheet = /* GraphQL */ `
         company {
           id
           name
+          startMonth
           shortName
           url
           createdAt
@@ -1337,6 +1366,7 @@ export const getSheet = /* GraphQL */ `
           company {
             id
             name
+            startMonth
             shortName
             url
             createdAt
@@ -1366,6 +1396,7 @@ export const getSheet = /* GraphQL */ `
             company {
               id
               name
+              startMonth
               shortName
               url
               createdAt
@@ -1395,6 +1426,7 @@ export const getSheet = /* GraphQL */ `
               company {
                 id
                 name
+                startMonth
                 shortName
                 url
                 createdAt
@@ -1424,6 +1456,7 @@ export const getSheet = /* GraphQL */ `
                 company {
                   id
                   name
+                  startMonth
                   shortName
                   url
                   createdAt
@@ -1575,6 +1608,7 @@ export const listSheets = /* GraphQL */ `
           company {
             id
             name
+            startMonth
             shortName
             url
             createdAt
@@ -1604,6 +1638,7 @@ export const listSheets = /* GraphQL */ `
             company {
               id
               name
+              startMonth
               shortName
               url
               createdAt
@@ -1633,6 +1668,7 @@ export const listSheets = /* GraphQL */ `
               company {
                 id
                 name
+                startMonth
                 shortName
                 url
                 createdAt
@@ -1662,6 +1698,7 @@ export const listSheets = /* GraphQL */ `
                 company {
                   id
                   name
+                  startMonth
                   shortName
                   url
                   createdAt
@@ -1710,6 +1747,7 @@ export const listSheets = /* GraphQL */ `
           company {
             id
             name
+            startMonth
             shortName
             url
             createdAt
@@ -1739,6 +1777,7 @@ export const listSheets = /* GraphQL */ `
             company {
               id
               name
+              startMonth
               shortName
               url
               createdAt
@@ -1768,6 +1807,7 @@ export const listSheets = /* GraphQL */ `
               company {
                 id
                 name
+                startMonth
                 shortName
                 url
                 createdAt
@@ -1797,6 +1837,7 @@ export const listSheets = /* GraphQL */ `
                 company {
                   id
                   name
+                  startMonth
                   shortName
                   url
                   createdAt
@@ -1949,6 +1990,7 @@ export const listSheetReviewee = /* GraphQL */ `
           company {
             id
             name
+            startMonth
             shortName
             url
             createdAt
@@ -1978,6 +2020,7 @@ export const listSheetReviewee = /* GraphQL */ `
             company {
               id
               name
+              startMonth
               shortName
               url
               createdAt
@@ -2007,6 +2050,7 @@ export const listSheetReviewee = /* GraphQL */ `
               company {
                 id
                 name
+                startMonth
                 shortName
                 url
                 createdAt
@@ -2036,6 +2080,7 @@ export const listSheetReviewee = /* GraphQL */ `
                 company {
                   id
                   name
+                  startMonth
                   shortName
                   url
                   createdAt
@@ -2084,6 +2129,7 @@ export const listSheetReviewee = /* GraphQL */ `
           company {
             id
             name
+            startMonth
             shortName
             url
             createdAt
@@ -2113,6 +2159,7 @@ export const listSheetReviewee = /* GraphQL */ `
             company {
               id
               name
+              startMonth
               shortName
               url
               createdAt
@@ -2142,6 +2189,7 @@ export const listSheetReviewee = /* GraphQL */ `
               company {
                 id
                 name
+                startMonth
                 shortName
                 url
                 createdAt
@@ -2171,6 +2219,7 @@ export const listSheetReviewee = /* GraphQL */ `
                 company {
                   id
                   name
+                  startMonth
                   shortName
                   url
                   createdAt
@@ -2323,6 +2372,7 @@ export const listSheetYear = /* GraphQL */ `
           company {
             id
             name
+            startMonth
             shortName
             url
             createdAt
@@ -2352,6 +2402,7 @@ export const listSheetYear = /* GraphQL */ `
             company {
               id
               name
+              startMonth
               shortName
               url
               createdAt
@@ -2381,6 +2432,7 @@ export const listSheetYear = /* GraphQL */ `
               company {
                 id
                 name
+                startMonth
                 shortName
                 url
                 createdAt
@@ -2410,6 +2462,7 @@ export const listSheetYear = /* GraphQL */ `
                 company {
                   id
                   name
+                  startMonth
                   shortName
                   url
                   createdAt
@@ -2458,6 +2511,7 @@ export const listSheetYear = /* GraphQL */ `
           company {
             id
             name
+            startMonth
             shortName
             url
             createdAt
@@ -2487,6 +2541,7 @@ export const listSheetYear = /* GraphQL */ `
             company {
               id
               name
+              startMonth
               shortName
               url
               createdAt
@@ -2516,6 +2571,7 @@ export const listSheetYear = /* GraphQL */ `
               company {
                 id
                 name
+                startMonth
                 shortName
                 url
                 createdAt
@@ -2545,6 +2601,7 @@ export const listSheetYear = /* GraphQL */ `
                 company {
                   id
                   name
+                  startMonth
                   shortName
                   url
                   createdAt
@@ -2697,6 +2754,7 @@ export const listSheetGroup = /* GraphQL */ `
           company {
             id
             name
+            startMonth
             shortName
             url
             createdAt
@@ -2726,6 +2784,7 @@ export const listSheetGroup = /* GraphQL */ `
             company {
               id
               name
+              startMonth
               shortName
               url
               createdAt
@@ -2755,6 +2814,7 @@ export const listSheetGroup = /* GraphQL */ `
               company {
                 id
                 name
+                startMonth
                 shortName
                 url
                 createdAt
@@ -2784,6 +2844,7 @@ export const listSheetGroup = /* GraphQL */ `
                 company {
                   id
                   name
+                  startMonth
                   shortName
                   url
                   createdAt
@@ -2832,6 +2893,7 @@ export const listSheetGroup = /* GraphQL */ `
           company {
             id
             name
+            startMonth
             shortName
             url
             createdAt
@@ -2861,6 +2923,7 @@ export const listSheetGroup = /* GraphQL */ `
             company {
               id
               name
+              startMonth
               shortName
               url
               createdAt
@@ -2890,6 +2953,7 @@ export const listSheetGroup = /* GraphQL */ `
               company {
                 id
                 name
+                startMonth
                 shortName
                 url
                 createdAt
@@ -2919,6 +2983,7 @@ export const listSheetGroup = /* GraphQL */ `
                 company {
                   id
                   name
+                  startMonth
                   shortName
                   url
                   createdAt

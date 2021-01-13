@@ -34,7 +34,7 @@ export const PDFTemplete = (props: Props) => {
 
   return (
     <ReactToPdf
-      filename="test.pdf"
+      filename="output.pdf"
       scale={0.7}
       options={{
         orientation: "l",

@@ -10,6 +10,7 @@ type Company #会社
   id: ID!
 
   name: String!
+  startMonth: Int!
   shortName: String
   url: AWSURL
 
