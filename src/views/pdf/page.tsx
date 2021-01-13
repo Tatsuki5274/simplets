@@ -95,11 +95,8 @@ export function PDFPage(props:Props) {
                 sheet={sheet}
                 approvalStatusString={getStatusValue(sheet.statusValue || -1)}
                 gradeString={"社員"}
-                isConfirmReviewee={true}
-                isConfirmSuperior1={true}
                 lastYearsAgoOverAllEvaluation={lastOverAllEvaluations && lastOverAllEvaluations[0] ? lastOverAllEvaluations[0] : null}
                 twoYearsAgoOverAllEvaluation={lastOverAllEvaluations && lastOverAllEvaluations[1] ? lastOverAllEvaluations[1] : null}
-                isConfirmSuperior2={true}
             />
 
         )
