@@ -423,8 +423,8 @@ export const PDFTemplete = (props: Props) => {
                             </span> : null}
                         </td>
                         <td>{props.sheet.secondComment}</td>
-                        <td>{props.sheet.selfCheckDate ? props.sheet.selfCheckDate : "未"}</td>
-                        <td>{props.sheet.secondCheckDate ? props.sheet.secondCheckDate : "未"}</td>
+                        <td>{props.sheet.selfCheckDate ? props.sheet.selfCheckDate : "-"}</td>
+                        <td>{props.sheet.secondCheckDate ? props.sheet.secondCheckDate : "-"}</td>
                       </tr>
                       <tr>
                         <td>総合評価に関する部門長コメント</td>
@@ -436,7 +436,7 @@ export const PDFTemplete = (props: Props) => {
                             </span> : null}
                         </td>
                         <td>{props.sheet.firstComment}</td>
-                        <td>{props.sheet.firstCheckDate ? props.sheet.firstCheckDate : "未"}</td>
+                        <td>{props.sheet.firstCheckDate ? props.sheet.firstCheckDate : "-"}</td>
                       </tr>
                     </tbody>
                   </Table>
