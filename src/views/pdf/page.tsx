@@ -4,6 +4,7 @@ import { SheetDao } from "lib/dao/sheetDao";
 import React, { useEffect, useState } from "react";
 import { PDFTemplete } from "./templete";
 import * as APIt from 'API';
+import { getStatusValue } from "lib/getStatusValue";
 
 type Props = {
     match: {
@@ -92,7 +93,7 @@ export function PDFPage(props:Props) {
         return (
             <PDFTemplete
                 sheet={sheet}
-                approvalStatusString={"完了"}
+                approvalStatusString={getStatusValue(sheet.statusValue || -1)}
                 gradeString={"社員"}
                 isConfirmReviewee={true}
                 isConfirmSuperior1={true}
