@@ -5,20 +5,17 @@ import dateFormat from 'dateformat';
 import { Link } from 'react-router-dom';
 import { buttonComponentStyle } from 'common/globalStyle.module.scss';
 import style from './common/style.module.scss';
+import { getSectionKeys } from 'lib/util';
 const ReactToPdf = require('react-to-pdf').default;
 
 // import Pdf from "react-to-pdf";
 
 type Props = {
   sheet: Sheet,
-  // section: Section,
-  isConfirmReviewee: boolean, //本人確認
-  isConfirmSuperior1: boolean, //所属長確認
-  twoYearsAgoOverAllEvaluation: number, //前々期評価
-  lastYearsAgoOverAllEvaluation: number, //前期評価
+  twoYearsAgoOverAllEvaluation: number | null, //前々期評価
+  lastYearsAgoOverAllEvaluation: number | null, //前期評価
   gradeString: string, //等級名称
   approvalStatusString: string, //承認ステータス文字列
-  isConfirmSuperior2: boolean, //部門長確認
 }
 
 const outputDate = (dateStr: string) => {
@@ -175,7 +172,7 @@ export const PDFTemplete = (props: Props) => {
 
                         return (
                           section ?
-                            <tr key={section.sheetKeys + section.sectionCategoryLocalId}>
+                            <tr key={getSectionKeys(section)}>
                               <td>
                                 <p>{section.category?.name}</p>
                                 <Table borderless>
@@ -317,8 +314,8 @@ export const PDFTemplete = (props: Props) => {
                         </thead>
                         <tbody>
                           <td>{props.gradeString}</td>
-                          <td>{props.twoYearsAgoOverAllEvaluation}</td>
-                          <td>{props.lastYearsAgoOverAllEvaluation}</td>
+                          <td>{props.twoYearsAgoOverAllEvaluation ? props.twoYearsAgoOverAllEvaluation : "-"}</td>
+                          <td>{props.lastYearsAgoOverAllEvaluation ? props.lastYearsAgoOverAllEvaluation : "-"}</td>
                           <td>{props.sheet.overAllEvaluation}</td>
                         </tbody>
                       </Table>
@@ -426,8 +423,8 @@ export const PDFTemplete = (props: Props) => {
                             </span> : null}
                         </td>
                         <td>{props.sheet.secondComment}</td>
-                        <td>{props.isConfirmReviewee ? "済" : "未"}</td>
-                        <td>{props.isConfirmSuperior1 ? "済" : "未"}</td>
+                        <td>{props.sheet.selfCheckDate ? props.sheet.selfCheckDate : "-"}</td>
+                        <td>{props.sheet.secondCheckDate ? props.sheet.secondCheckDate : "-"}</td>
                       </tr>
                       <tr>
                         <td>総合評価に関する部門長コメント</td>
@@ -439,7 +436,7 @@ export const PDFTemplete = (props: Props) => {
                             </span> : null}
                         </td>
                         <td>{props.sheet.firstComment}</td>
-                        <td>{props.isConfirmSuperior2 ? "済" : "未"}</td>
+                        <td>{props.sheet.firstCheckDate ? props.sheet.firstCheckDate : "-"}</td>
                       </tr>
                     </tbody>
                   </Table>

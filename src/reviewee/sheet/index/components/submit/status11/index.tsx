@@ -1,4 +1,5 @@
 import { updateSheet } from "graphql/mutations";
+import { formatAWSDate } from "lib/awsdate";
 import { SheetDao } from "lib/dao/sheetDao";
 import { sendEmailMutation } from "lib/sendEmail";
 import { Command, commandWorkFlow } from "lib/workflow";
@@ -21,7 +22,8 @@ export const SubmitButtonStatus11 = () => {
                             companyID: sheet.companyID,
                             reviewee: sheet.reviewee,
                             year: sheet.year,
-                            statusValue: sheet.statusValue
+                            statusValue: sheet.statusValue,
+                            selfCheckDate: formatAWSDate(new Date()),
                         });
 
                         if (updatedSheet) {

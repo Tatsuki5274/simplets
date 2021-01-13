@@ -1,8 +1,10 @@
 import { Section, Sheet } from "App";
-import { getSheet } from "graphql/queries";
+import { getSheet, listSheetReviewee } from "graphql/queries";
 import { SheetDao } from "lib/dao/sheetDao";
 import React, { useEffect, useState } from "react";
 import { PDFTemplete } from "./templete";
+import * as APIt from 'API';
+import { getStatusValue } from "lib/getStatusValue";
 
 type Props = {
     match: {
@@ -30,6 +32,7 @@ const sortCategory = function (a: Pick<Section, "category"> | null, b: Pick<Sect
 
 export function PDFPage(props:Props) {
     const [sheet, setSheet] = useState<Sheet | null>(null);
+    const [lastOverAllEvaluations, setlastOverAllEvaluations] = useState<Array<number | null> | null>();
     useEffect(() => {
         (async () => {
             const res = await SheetDao.get(getSheet, { companyID: props.match.params.companyId, reviewee: props.match.params.reviewee, year: parseInt(props.match.params.year) })
@@ -42,18 +45,58 @@ export function PDFPage(props:Props) {
         })()
     }, [])
 
+    useEffect(() => {
+        (async () => {
+            // 前期と前々期を取得
+            if (sheet) {
+                const thisYear = sheet.year
+
+                const input: APIt.ListSheetRevieweeQueryVariables = {
+                    companyID: sheet.companyID,
+                    reviewee: {
+                        eq: sheet.reviewee
+                    },
+                    filter: {
+                        year: {
+                            between: [thisYear - 2, thisYear - 1]
+                        }
+                    }
+                }
+                console.log("input", input);
+                const gotSheets = await SheetDao.listReviewee(listSheetReviewee, input)
+                console.log("gotSheets", gotSheets);
+
+                if (gotSheets) {
+                    if (gotSheets.length > 2) {
+                        console.error("業績評価年度に重複があります。前期前々期の記録に想定されない値が格納される場合があります。", gotSheets)
+                    }
+                    let results: (number | null)[] = [null, null]
+
+                    // 前期の記録を取得
+                    results[0] = gotSheets.find((sheet) => {
+                        return sheet?.year === thisYear - 1
+                    })?.overAllEvaluation || null
+                    // 前々期の記録を取得
+                    results[1] = gotSheets.find((sheet) => {
+                        return sheet?.year === thisYear - 2
+                    })?.overAllEvaluation || null
+
+                    setlastOverAllEvaluations(results);
+
+                }
+            }
+        })()
+    }, [sheet])
+
     if (sheet) {
 
         return (
             <PDFTemplete
                 sheet={sheet}
-                approvalStatusString={"完了"}
+                approvalStatusString={getStatusValue(sheet.statusValue || -1)}
                 gradeString={"社員"}
-                isConfirmReviewee={true}
-                isConfirmSuperior1={true}
-                lastYearsAgoOverAllEvaluation={5}
-                twoYearsAgoOverAllEvaluation={2}
-                isConfirmSuperior2={true}
+                lastYearsAgoOverAllEvaluation={lastOverAllEvaluations && lastOverAllEvaluations[0] ? lastOverAllEvaluations[0] : null}
+                twoYearsAgoOverAllEvaluation={lastOverAllEvaluations && lastOverAllEvaluations[1] ? lastOverAllEvaluations[1] : null}
             />
 
         )
