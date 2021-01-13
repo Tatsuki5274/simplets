@@ -5,6 +5,7 @@ import dateFormat from 'dateformat';
 import { Link } from 'react-router-dom';
 import { buttonComponentStyle } from 'common/globalStyle.module.scss';
 import style from './common/style.module.scss';
+import { getSectionKeys } from 'lib/util';
 const ReactToPdf = require('react-to-pdf').default;
 
 // import Pdf from "react-to-pdf";
@@ -175,7 +176,7 @@ export const PDFTemplete = (props: Props) => {
 
                         return (
                           section ?
-                            <tr key={section.sheetKeys + section.sectionCategoryLocalId}>
+                            <tr key={getSectionKeys(section)}>
                               <td>
                                 <p>{section.category?.name}</p>
                                 <Table borderless>
