@@ -180,7 +180,8 @@ export function ObjectiveCreateModalContent() {
         )
     } else {
         console.error("sheetが存在しません")
-        return <span>表示にエラーが生じました</span>
+        return <span></span>
+        // return <span>表示にエラーが生じました</span>
     }
 }
 
