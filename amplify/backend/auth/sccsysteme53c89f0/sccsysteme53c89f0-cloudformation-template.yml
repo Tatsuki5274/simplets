@@ -176,7 +176,7 @@ Resources:
           MinimumLength: !Ref passwordPolicyMinLength
           RequireLowercase: false
           RequireNumbers: true
-          RequireSymbols: true
+          RequireSymbols: false
           RequireUppercase: false
           
       MfaConfiguration: !Ref mfaConfiguration

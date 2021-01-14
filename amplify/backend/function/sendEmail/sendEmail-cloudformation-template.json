@@ -68,8 +68,8 @@
         "Layers": [],
         "Timeout": "25",
         "Code": {
-          "S3Bucket": "amplify-sccsystem-dev-115621-deployment",
-          "S3Key": "amplify-builds/sendEmail-37586d666a414f524a31-build.zip"
+          "S3Bucket": "amplify-sccsystem-prod-92900-deployment",
+          "S3Key": "amplify-builds/sendEmail-455132724a3950554b54-build.zip"
         }
       }
     },

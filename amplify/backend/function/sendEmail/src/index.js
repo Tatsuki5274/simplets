@@ -9,6 +9,7 @@ AWS.config.update({region: 'ap-northeast-1'});
 const ses = new AWS.SES();
 
 exports.handler = async (event) => {
+    console.log("event", JSON.stringify(event))
     const to = event.arguments.input.to;
     const cc = event.arguments.input.cc;
     const bcc = event.arguments.input.bcc;
@@ -44,6 +45,7 @@ exports.handler = async (event) => {
     };
     
     const response = await ses.sendEmail(params).promise();
+    console.log("response", response)
     return response;
 
     // const response = {

@@ -281,7 +281,7 @@ type Mutation{
   
   # メールを送信する関数を呼び出す
   sendEmail(input: sendEmailInput): String
-    @function(name: "sendEmail_${env}")
+    @function(name: "sendEmail-${env}")
     @auth(rules:[
       {allow: private}
     ])

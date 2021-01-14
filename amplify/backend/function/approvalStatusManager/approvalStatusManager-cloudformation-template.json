@@ -89,7 +89,7 @@
         "Layers": [],
         "Timeout": "25",
         "Code": {
-          "S3Bucket": "amplify-sccsystem-dev-115621-deployment",
+          "S3Bucket": "amplify-sccsystem-prod-92900-deployment",
           "S3Key": "amplify-builds/approvalStatusManager-42454d534e6f2b6b4b59-build.zip"
         }
       }
