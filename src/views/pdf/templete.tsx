@@ -63,7 +63,7 @@ export const PDFTemplete = (props: Props) => {
                   lg={6}
                   xl={6}
                 >
-                  <h4>{props.sheet.revieweeEmployee?.company?.name} {props.sheet.year}年度 業績評価シート</h4>
+                  <h4>{props.sheet.year}年度 業績評価シート</h4>
                 </Col>
               </Row>
               <Row>
@@ -85,67 +85,13 @@ export const PDFTemplete = (props: Props) => {
 
               <Row>
                 <Col
-                  xs={1}
-                  sm={1}
-                  md={1}
-                  lg={1}
-                  xl={1}
+                  xs={12}
+                  sm={12}
+                  md={12}
+                  lg={12}
+                  xl={12}
                 >
                   <h5>目標設定</h5>
-                </Col>
-                <Col
-                  xs={4}
-                  sm={4}
-                  md={4}
-                  lg={4}
-                  xl={4}
-                >
-                  <div>*年度初めに設定しますが、年度途中での追加・修正が可能です</div>
-                </Col>
-                <Col
-                  xs={1}
-                  sm={1}
-                  md={1}
-                  lg={1}
-                  xl={1}
-                >
-                  <div>A・B・C</div>
-                </Col>
-                <Col
-                  xs={1}
-                  sm={1}
-                  md={1}
-                  lg={1}
-                  xl={1}
-                >
-                  <h5>業績評価</h5>
-                </Col>
-                <Col
-                  xs={3}
-                  sm={3}
-                  md={3}
-                  lg={3}
-                  xl={3}
-                >
-                  <div>*年度末に自己評価をした後でインタビューを実施し、所属長が最終評価します</div>
-                </Col>
-                <Col
-                  xs={1}
-                  sm={1}
-                  md={1}
-                  lg={1}
-                  xl={1}
-                >
-                  <div>5～1</div>
-                </Col>
-                <Col
-                  xs={1}
-                  sm={1}
-                  md={1}
-                  lg={1}
-                  xl={1}
-                >
-                  <div>5～1</div>
                 </Col>
               </Row>
 
@@ -247,13 +193,22 @@ export const PDFTemplete = (props: Props) => {
 
               <Row>
                 <Col
-                  xs={12}
-                  sm={12}
-                  md={12}
-                  lg={12}
-                  xl={12}
+                  xs={6}
+                  sm={6}
+                  md={6}
+                  lg={6}
+                  xl={6}
                 >
                   <h5>今後のキャリア計画</h5>
+                </Col>
+                <Col
+                  xs={6}
+                  sm={6}
+                  md={6}
+                  lg={6}
+                  xl={6}
+                >
+                  <h5>業績評価</h5>
                 </Col>
               </Row>
               <Row>

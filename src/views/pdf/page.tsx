@@ -94,7 +94,7 @@ export function PDFPage(props:Props) {
             <PDFTemplete
                 sheet={sheet}
                 approvalStatusString={getStatusValue(sheet.statusValue || -1)}
-                gradeString={"社員"}
+                gradeString={`L${sheet.grade}`}
                 lastYearsAgoOverAllEvaluation={lastOverAllEvaluations && lastOverAllEvaluations[0] ? lastOverAllEvaluations[0] : null}
                 twoYearsAgoOverAllEvaluation={lastOverAllEvaluations && lastOverAllEvaluations[1] ? lastOverAllEvaluations[1] : null}
             />
