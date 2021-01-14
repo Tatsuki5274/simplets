@@ -33,6 +33,7 @@ const getEmployee = /* GraphQL */ `
   query GetEmployee($companyID: ID!, $username: ID!) {
     getEmployee(companyID: $companyID, username: $username) {
       username
+      grade
       employeeGroupLocalId
       superior {
         username
@@ -279,7 +280,7 @@ function ListPerformanceEvalution() {
           if (targetYear) {
             //シートを作成
             const createdSheet = await SheetDao.create(createSheet, {
-              grade: 0,
+              grade: revieweeEmployee.grade,
               year: targetYear,
               statusValue: 1,
               revieweeUsername: revieweeEmployee.username,
