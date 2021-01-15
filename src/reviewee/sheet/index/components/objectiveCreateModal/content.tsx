@@ -61,6 +61,7 @@ export function ObjectiveCreateModalContent(props: Props) {
                 onChange={props.formik.handleChange}
                 className={inputFieldStyle}
                 style={expDateInputStyle}
+                placeholder={"yyyy-mm-dd"}
             />
             <p><ErrorMessage name="expStartDate" /></p>
 
@@ -72,8 +73,11 @@ export function ObjectiveCreateModalContent(props: Props) {
                 onChange={props.formik.handleChange}
                 className={inputFieldStyle}
                 style={expDateInputStyle}
+                placeholder={"yyyy-mm-dd"}
             />
             <p><ErrorMessage name="expDoneDate" /></p>
+            <p>※使用しているブラウザがSafariの場合、開始予定日と完了予定日は yyyy-mm-dd 形式で入力してください</p>
+            <p>例：2020年1月1日　→　2020-01-01</p>
 
         </>
 

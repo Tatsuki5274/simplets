@@ -90,7 +90,7 @@ export const RevieweeSheetObjectiveEditable = (props: Props) => {
                 <input
                     name="progress"
                     onChange={handleChangeProgress}
-                    placeholder={progress}
+                    defaultValue={progress}
                     type="number"
                     min="0"
                     max="100"

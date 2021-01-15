@@ -72,7 +72,7 @@ export function ObjectiveCreateModal(props: Props){
                         }as TypeForm}
                         validationSchema={Yup.object({
                             expStartDate: Yup.date().typeError('正しく入力してください').required('必須入力です'),
-                            expDoneDate: Yup.date().min(Yup.ref('expStartDate'), ({min}) => `${min}より後の日付を入力してください`,)
+                            expDoneDate: Yup.date().min(Yup.ref('expStartDate'), ({min}) => `開始予定日より後の日付を入力してください`,)
                                 .typeError('正しく入力してください')
                                 .required('必須入力です'),
                             sectionKeys: Yup.string().required('目標カテゴリを選択してください').nullable(),
@@ -111,7 +111,7 @@ export function ObjectiveCreateModal(props: Props){
                         {formik => (
                             <form onSubmit={formik.handleSubmit}>
                                 <Modal.Header closeButton>
-                                <Modal.Title>業績目標設定</Modal.Title>
+                                <Modal.Title>目標追加</Modal.Title>
                                 </Modal.Header>
                                 <Modal.Body>
                                     <ObjectiveCreateModalContent
@@ -122,7 +122,7 @@ export function ObjectiveCreateModal(props: Props){
                                     />
                                 </Modal.Body>
                                 <Modal.Footer>
-                                    <Button type="submit">目標登録</Button>
+                                    <Button type="submit">目標追加</Button>
 
                                     {/* <Button variant="primary" onClick={handleClose}>
                                         Save Changes

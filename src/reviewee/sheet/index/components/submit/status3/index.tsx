@@ -83,7 +83,7 @@ export const SubmitButtonStatus3 = () => {
                             }
                         }
                     }}
-            >差し戻し</Button>
+            >承認差し戻し</Button>
             </div>
         )
     }

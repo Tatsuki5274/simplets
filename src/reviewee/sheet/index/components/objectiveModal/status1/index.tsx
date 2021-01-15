@@ -1,4 +1,4 @@
-import { Formik } from "formik";
+import { ErrorMessage, Formik } from "formik";
 import React from "react"
 import { Button, Col, Form, Modal, Row } from "react-bootstrap";
 import * as APIt from 'API';
@@ -6,6 +6,7 @@ import { Objective } from "App";
 import { ObjectiveDao } from "lib/dao/objectiveDao";
 import { updateObjective } from "graphql/mutations";
 import { inputFieldStyle } from "common/globalStyle.module.scss";
+import * as Yup from 'yup';
 
 type Props = {
     objective: Objective,
@@ -28,6 +29,11 @@ export const RevieweeSheetObjectiveModalStatus1 = (props: Props)=>{
                     priority: props.objective.priority,
                     result: props.objective.result
                 }}
+                validationSchema={Yup.object({
+                    expStartDate: Yup.date().typeError('yyyy-mm-dd形式で入力してください'),
+                    expDoneDate: Yup.date().min(Yup.ref('expStartDate'), ({min}) => `開始予定日より後の日付を入力してください`,)
+                        .typeError('yyyy-mm-dd形式で入力してください'),
+                })}
                 onSubmit={async (values, actions) => {
                     console.log("values", values);
     
@@ -93,7 +99,7 @@ export const RevieweeSheetObjectiveModalStatus1 = (props: Props)=>{
                                             defaultValue={props.objective.expStartDate || undefined}
                                             className={inputFieldStyle}
                                         />
-                                        <p></p>
+                                        <p><ErrorMessage name="expStartDate" /></p>
                                     </Col>
                                 </Row>
                                 <Row>
@@ -107,7 +113,7 @@ export const RevieweeSheetObjectiveModalStatus1 = (props: Props)=>{
                                             defaultValue={props.objective.expDoneDate || undefined}
                                             className={inputFieldStyle}
                                         />
-                                        <p></p>
+                                        <p><ErrorMessage name="expDoneDate" /></p>
                                     </Col>
                                 </Row>
                                 <Row>
