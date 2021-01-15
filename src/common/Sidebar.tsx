@@ -28,7 +28,7 @@ function SidebarComponents() {
             }
 
         })()
-    }, []);
+    }, [currentUser]);
     // サイドバーを表示
     return (
         <div style={boxStyle}>
@@ -54,6 +54,7 @@ export function RevieweeSidebar(){
 const boxStyle: CSSProperties = {
     position: "sticky",
     top: "100px",
+    marginLeft: "10px",
 }
 export const sidebarBackgroundColor: CSSProperties = {
     backgroundColor: "#8080804d",
