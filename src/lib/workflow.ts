@@ -13,6 +13,8 @@ export enum Command {
     REVIEWEE_CHANGE_OBJECTIVE,
     REMAND_FROM_INPUT_RESULT,
     REMAND_FROM_SUR1_CONFIRM,
+    REVIWEE_PULLBACK_SUBMIT,
+    REVIWEE_PULLBACK_APPROVAL
 }
 
 type ReturnType = {
@@ -81,6 +83,12 @@ export function commandWorkFlow(command: Command, sheet: Sheet, reason?: string)
             key = 11
             status = 1
             break
+        case Command.REVIWEE_PULLBACK_SUBMIT:
+            key = 14
+            status = 1
+        case Command.REVIWEE_PULLBACK_APPROVAL:
+            key = 13
+            status = 1
     }
     if(key !== -1){
         ret.mailObject = getMailObject(key, sheet, reason)
@@ -354,7 +362,44 @@ ${revieweeUrl}
 # 本メールに返信されましても、返答できませんのでご了承ください。
                     `
                     break;
+                case 13:
+                    ret.to = [sup1.email]
+                    ret.subject = "[業績評価システム]  承認が引き戻されました"
+                    ret.body = `
+${sup1.name}様:
 
+承認が引き戻されました
+
+---------------------------------------------------------------------- 
+社員: ${reviewee.name} 承認引き戻し
+---------------------------------------------------------------------- 
+
+    ${reviewerUrl} 
+
+# 本メールは${sup1.email}宛にお送りしています。 
+# 本メールはシステムより自動送信されています。 
+# 本メールに返信されましても、返答できませんのでご了承ください。
+                    `
+                    break;
+                case 14:
+                    ret.to = [sup1.email]
+                    ret.subject = "[業績評価システム]  提出が引き戻されました"
+                    ret.body = `
+${sup1.name}様:
+
+提出が引き戻されました
+
+---------------------------------------------------------------------- 
+社員: ${reviewee.name} 提出引き戻し
+---------------------------------------------------------------------- 
+
+    ${reviewerUrl}
+
+# 本メールは${reviewerUrl}宛にお送りしています。 
+# 本メールはシステムより自動送信されています。 
+# 本メールに返信されましても、返答できませんのでご了承ください。
+                    `
+                    break;
             }
         }else{
             console.error("社員データの初期化に失敗しました", employees)

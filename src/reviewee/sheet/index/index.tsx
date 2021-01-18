@@ -26,6 +26,7 @@ import { ObjectiveCreateModal } from './components/objectiveCreateModal';
 import { tableHeaderStyle } from 'common/globalStyle.module.scss';
 import style from './indexStyle.module.scss';
 import { getSectionKeys } from 'lib/util';
+import { SubmitButtonStatus2 } from './components/submit/status2';
 
 
 export const SheetContext = createContext<
@@ -205,6 +206,9 @@ function RevieweeSheetShow(props: Props) {
                     
                     {sheet.statusValue === 1 ? 
                     <SubmitButtonStatus1 /> : null}
+
+                    {sheet.statusValue === 2 ?
+                    <SubmitButtonStatus2 /> : null}
 
                     {sheet.statusValue === 3 ?
                     <SubmitButtonStatus3 /> : null}

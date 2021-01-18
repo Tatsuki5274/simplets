@@ -67,8 +67,8 @@ export const SubmitButtonStatus3 = () => {
             </Button>
             <Button className={buttonComponentStyle}
                     onClick={async () => {
-                        if (window.confirm("目標内容の差し戻しを行いますか？")) {
-                            const work = commandWorkFlow(Command.REVIEWEE_CHANGE_OBJECTIVE, sheet)
+                        if (window.confirm("目標内容の引き戻しを行いますか？")) {
+                            const work = commandWorkFlow(Command.REVIWEE_PULLBACK_APPROVAL, sheet)
                             let updatedSheet = await SheetDao.update(updateSheet, {
                                 companyID: work.sheet.companyID,
                                 reviewee: work.sheet.reviewee,
@@ -77,13 +77,17 @@ export const SubmitButtonStatus3 = () => {
                             });
                             if (updatedSheet) {
                                 setSheet({ ...(updatedSheet) })
-
+                                if (work.mailObject) {
+                                    sendEmailMutation(work.mailObject)
+                                } else {
+                                    console.error("メールの作成に失敗しました")
+                                }
                             } else {
                                 console.error("フォームデータの登録に失敗しました")
                             }
                         }
                     }}
-            >承認差し戻し</Button>
+            >承認引き戻し</Button>
             </div>
         )
     }
