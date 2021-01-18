@@ -27,6 +27,7 @@ type ViewType = {
         firstName: string
     }
     groupName: string
+    groupId: string
     categorys: {
         name: string | undefined
         avg: number | null,
@@ -35,7 +36,7 @@ type ViewType = {
         sectionId: string | null
     }[] | undefined,
     avg: number | null
-}
+} | null
 
 const listGroups = /* GraphQL */ `
   query ListGroups(
@@ -211,45 +212,59 @@ function ProgressReferenceList() {
 
     const setView = (listItems: Sheet[])=>{
         // 画面表示に必要な情報を加工する処理
-        let viewTemp: ViewType[] = listItems.map((sheet)=>{
-            return {
+        let viewTemp: ViewType[] | null = listItems.map((sheet) => {
+            if (sheet.revieweeEmployee && sheet.group && sheet.section) {
+                return {
 
-                // sheetId: sheet.id,
-                companyId: sheet.companyID,
-                year: String(sheet.year),
-                reviewee: sheet.reviewee,
-                groupName: sheet.group?.name || "",
-                revieweeName: {
-                    firstName: sheet.revieweeEmployee?.firstName || "",
-                    lastName: sheet.revieweeEmployee?.lastName || ""
-                },
-                categorys: sheet.section?.items?.map((section)=>{
-                    return {
-                        name: section?.category?.name,
-                        avg: section && section.objective && section.objective.items ?
-                            calcAvg(section.objective.items.map((obj)=>{
-                                return  obj && obj.progress ? obj.progress : 0
-                            })) : null,
-                        no: section?.category ? parseInt(section.category.localID) : null,
-                        id: section?.category?.localID,
-                        sectionId: section ? getSectionKeys(section).replace(/[.@]/g,'-') : null
-                    }
-                }),
-                avg: -1
+                    // sheetId: sheet.id,
+                    companyId: sheet.companyID,
+                    year: String(sheet.year),
+                    reviewee: sheet.reviewee,
+                    groupName: sheet.group?.name,
+                    groupId: sheet.group.localID,
+                    revieweeName: {
+                        firstName: sheet.revieweeEmployee.firstName,
+                        lastName: sheet.revieweeEmployee.lastName
+                    },
+                    categorys: sheet.section.items?.map((section) => {
+                        return {
+                            name: section?.category?.name,
+                            avg: section && section.objective && section.objective.items ?
+                                calcAvg(section.objective.items.map((obj) => {
+                                    return obj && obj.progress ? obj.progress : 0
+                                })) : null,
+                            no: section?.category ? parseInt(section.category.localID) : null,
+                            id: section?.category?.localID,
+                            sectionId: section ? getSectionKeys(section).replace(/[.@]/g, '-') : null
+                        }
+                    }),
+                    avg: -1
+                }
+            } else {
+                console.error("シート情報に不備があります");
+                return null
             }
         })
-        const view = viewTemp.map(item=>{
-            return {
-                ...item,
-                avg: item.categorys ? 
-                    calcAvg(item.categorys.map(cat=>{
-                        return cat.avg;
-                    })) 
-                : -1
-            }            
-        })
+        if (viewTemp) {
+            const view = viewTemp.map(item => {
+                if (item) {
+                    return {
+                        ...item,
+                        avg: item.categorys ?
+                            calcAvg(item.categorys.map(cat => {
+                                return cat.avg;
+                            }))
+                            : -1
+                    }
+                } else {
+                    return null
+                }
+            })
 
-        setSheetsView(view);
+            if (view) {
+                setSheetsView(view);
+            }
+        }
     }
 
     return (
@@ -376,63 +391,68 @@ function ProgressReferenceList() {
                         )
                     })} */}
 
-                    {sheetsView?.map(view => {
-                        view.categorys?.sort(function (a, b) {
-                            if (a.no! > b.no!) {
-                                return 1;
-                            } else {
-                                return -1;
-                            }
-                        });
-                    return (
-                            <Card className={style.linkbox}>
-                                <Link to={routeBuilder.reviewerDetailPath(view.companyId,view.reviewee,view.year)} />
-                                {/* 社員の姓名と部門名を表示 */}
-                            <Card.Header>
-                                {view.revieweeName.lastName}
-                                {view.revieweeName.firstName}
+                    {sheetsView ? sheetsView.map(view => {
+                        if (view) {
+                            view?.categorys?.sort(function (a, b) {
+                                if (a.no! > b.no!) {
+                                    return 1;
+                                } else {
+                                    return -1;
+                                }
+                            });
+
+                            return (
+                                <Card className={style.linkbox}>
+                                    <Link to={routeBuilder.reviewerDetailPath(view.companyId, view.reviewee, view.year)} />
+                                    {/* 社員の姓名と部門名を表示 */}
+                                    <Card.Header>
+                                        {view.revieweeName.lastName}
+                                        {view.revieweeName.firstName}
                                 &nbsp;
                                 {view.groupName}
                                 &nbsp;
                                 {view.avg ? `${round(view.avg, 2).toFixed(1)}%` : null}
 
-                                {view.avg ?
-                                <GaugeChart id={`chart-${view.groupName}-${view.avg*10}`}
-                                    nrOfLevels={10}
-                                    colors={['#EA4228', '#F5CD19', '#5BE12C']}
-                                    percent={view.avg / 100}
-                                    hideText={true}
-                                    style={{
-                                        width: '100px',
-                                        height: '50px',
-                                        display: 'inline-block'
-                                    }}
-                                /> : null}
-                                </Card.Header>
-                                <Card.Body>
-                                    {view.categorys?.map(category=>{
-                                        return category.id && category.avg ?
-                                        <div id={category.id}>
-                                            {category.name}&nbsp;{round(category.avg, 2).toFixed(1)}
-                                            <GaugeChart id={`chart-${category.sectionId}`}
+                                        {view.avg ?
+                                            <GaugeChart id={`chart-${view.groupId}-${view.avg * 10}`}
                                                 nrOfLevels={10}
                                                 colors={['#EA4228', '#F5CD19', '#5BE12C']}
-                                                percent={category.avg / 100}
+                                                percent={view.avg / 100}
+                                                hideText={true}
                                                 style={{
-                                                    width: '50px',
+                                                    width: '100px',
                                                     height: '50px',
                                                     display: 'inline-block'
                                                 }}
-                                            />
-                                        </div> :
-                                        <div id={category.id}>
-                                            {category.name}&nbsp;-
+                                            /> : null}
+                                    </Card.Header>
+                                    <Card.Body>
+                                        {view.categorys?.map(category => {
+                                            return category.id && category.avg ?
+                                                <div id={category.id}>
+                                                    {category.name}&nbsp;{round(category.avg, 2).toFixed(1)}
+                                                    <GaugeChart id={`chart-${category.sectionId}`}
+                                                        nrOfLevels={10}
+                                                        colors={['#EA4228', '#F5CD19', '#5BE12C']}
+                                                        percent={category.avg / 100}
+                                                        style={{
+                                                            width: '50px',
+                                                            height: '50px',
+                                                            display: 'inline-block'
+                                                        }}
+                                                    />
+                                                </div> :
+                                                <div id={category.id}>
+                                                    {category.name}&nbsp;-
                                         </div>
-                                    })}
-                                </Card.Body>
-                            </Card>
-                        )
-                    })}
+                                        })}
+                                    </Card.Body>
+                                </Card>
+                            )
+                        } else {
+                            return null
+                        }
+                    }) : null}
                 </Col>
             </Row>
         </div>
