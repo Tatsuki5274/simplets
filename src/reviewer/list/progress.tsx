@@ -13,6 +13,7 @@ import GaugeChart from 'react-gauge-chart';
 import { calcAvg, getSectionKeys, round} from 'lib/util';
 import { routeBuilder } from 'router';
 import { GroupDao } from 'lib/dao/groupDao';
+import ApprovalStatusBox from 'common/approvalStatusBox';
 
 
 type ViewType = {
@@ -21,7 +22,7 @@ type ViewType = {
     companyId: string,
     year: string,
     reviewee: string,
-
+    statusValue: number | null,
     revieweeName: {
         lastName: string,
         firstName: string
@@ -85,6 +86,7 @@ const listSheetYear = /* GraphQL */ `
         companyID
         year
         sheetGroupLocalId
+        statusValue
         group {
           localID
           name
@@ -220,6 +222,7 @@ function ProgressReferenceList() {
                     companyId: sheet.companyID,
                     year: String(sheet.year),
                     reviewee: sheet.reviewee,
+                    statusValue: sheet.statusValue,
                     groupName: sheet.group?.name,
                     groupId: sheet.group.localID,
                     revieweeName: {
@@ -424,6 +427,9 @@ function ProgressReferenceList() {
                                                     height: '50px',
                                                     display: 'inline-block'
                                                 }}
+                                            /> : null}
+                                        {view.statusValue ?
+                                            <ApprovalStatusBox statusValue={view.statusValue}
                                             /> : null}
                                     </Card.Header>
                                     <Card.Body>
