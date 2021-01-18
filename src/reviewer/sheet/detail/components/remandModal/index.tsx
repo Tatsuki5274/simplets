@@ -90,6 +90,7 @@ export const RemandModal = (props: Props)=>{
                             <Modal.Title>目標差し戻し</Modal.Title>
                         </Modal.Header>
                         <Modal.Body>
+                            <div>差し戻しを行う場合はコメントを入力してください</div>
                             <InputGroup>
                                 <InputGroup.Prepend>
                                     <InputGroup.Text>理由</InputGroup.Text>
