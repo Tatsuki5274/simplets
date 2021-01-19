@@ -5,6 +5,7 @@ import React, { useEffect, useState } from "react";
 import { PDFTemplete } from "./templete";
 import * as APIt from 'API';
 import { getStatusValue } from "lib/getStatusValue";
+import { PDFTempleteStatus10 } from "./templeteStatus10";
 
 type Props = {
     match: {
@@ -91,6 +92,14 @@ export function PDFPage(props:Props) {
     if (sheet) {
 
         return (
+            sheet.statusValue === 10 ? 
+            <PDFTempleteStatus10
+                sheet={sheet}
+                approvalStatusString={getStatusValue(sheet.statusValue || -1)}
+                gradeString={`L${sheet.grade}`}
+                lastYearsAgoOverAllEvaluation={lastOverAllEvaluations && lastOverAllEvaluations[0] ? lastOverAllEvaluations[0] : null}
+                twoYearsAgoOverAllEvaluation={lastOverAllEvaluations && lastOverAllEvaluations[1] ? lastOverAllEvaluations[1] : null}
+            /> :
             <PDFTemplete
                 sheet={sheet}
                 approvalStatusString={getStatusValue(sheet.statusValue || -1)}
@@ -98,7 +107,6 @@ export function PDFPage(props:Props) {
                 lastYearsAgoOverAllEvaluation={lastOverAllEvaluations && lastOverAllEvaluations[0] ? lastOverAllEvaluations[0] : null}
                 twoYearsAgoOverAllEvaluation={lastOverAllEvaluations && lastOverAllEvaluations[1] ? lastOverAllEvaluations[1] : null}
             />
-
         )
     } else {
         return null;
