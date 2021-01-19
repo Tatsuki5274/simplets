@@ -402,7 +402,9 @@ function ListPerformanceEvalution() {
                     <td>{sheet.secondEmployee ? sheet.secondEmployee.lastName : ""}{sheet.secondEmployee ? sheet.secondEmployee.firstName : ""}</td>
                     <td><DisplaySheetAverage sheet={sheet} /></td>
                     <td>{getStatusValue(sheet.statusValue || -1)}</td>
-                    <td>{sheet.overAllEvaluation}</td>
+                    {sheet.statusValue === 10 ?
+                      <td></td> :
+                      <td>{sheet.overAllEvaluation}</td>}
                     <td><a href={`/preview/company/${sheet.companyID}/reviewee/${sheet.reviewee}/year/${sheet.year}`}>プレビュー</a></td>
                   </tr>
                 )
