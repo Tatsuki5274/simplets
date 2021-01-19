@@ -60,7 +60,7 @@ type Employee #社員
   # no: String #社員番号
   firstName: String!
   lastName: String!
-  grade: Int! #等級
+  grade: String! #等級
   email: String!
   superior: Employee @connection(fields: ["companyID", "superiorUsername"])  #上司(所属長や部門長)
   group: Group @connection(fields: ["companyID", "employeeGroupLocalId"])  #所属部門
@@ -132,7 +132,7 @@ type Sheet
   year: Int!  #実施年度
   # sheetSectionKey: String!
 
-  grade: Int! #等級
+  grade: String! #等級
   careerPlan: String  #キャリア計画本人希望
   careerPlanComment: String #話し合い結果コメント
   reviewComment: String #年間評価コメント
