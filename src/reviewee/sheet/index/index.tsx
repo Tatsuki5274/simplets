@@ -28,6 +28,9 @@ import { getSectionKeys } from 'lib/util';
 import { SubmitButtonStatus2 } from './components/submit/status2';
 import { RevieweeSheetObjectiveEditableStatus1 } from './components/objective/editable/status1';
 import { RevieweeSheetObjectiveEditableStatus3 } from './components/objective/editable/status3';
+import { YearlyTableStatus10 } from './components/yearly/status10';
+import { OverEvaluationTableStatus10 } from './components/overEvaluation/status10';
+import { RevieweeSheetObjectiveReadonlyStatus10 } from './components/objective/readonly/status10';
 
 
 export const SheetContext = createContext<
@@ -182,6 +185,8 @@ function RevieweeSheetShow(props: Props) {
                                                     objective={objective}
                                                     setModalObjective={setModalObjective}
                                                 /> :
+                                                sheet.statusValue === 10 ?
+                                                <RevieweeSheetObjectiveReadonlyStatus10 objective={objective} /> :
                                                 <RevieweeSheetObjectiveReadonly objective={objective} />
                                             )
 
@@ -199,15 +204,19 @@ function RevieweeSheetShow(props: Props) {
                     <RevieweeSheetCareerReadonly />}
 
                     <h4>年度評価</h4>
-                    <YearlyTable
-                        secondComment={sheet.secondComment}
-                        secondCheckDate={sheet.secondCheckDate}
-                        firstComment={sheet.firstComment}
-                        firstCheckDate={sheet.firstCheckDate}
-                    />
+                    {sheet.statusValue === 10 ?
+                        <YearlyTableStatus10/> :
+                        <YearlyTable
+                            secondComment={sheet.secondComment}
+                            secondCheckDate={sheet.secondCheckDate}
+                            firstComment={sheet.firstComment}
+                            firstCheckDate={sheet.firstCheckDate}
+                        />}
 
                     <h4>総合評価</h4>
-                    <OverEvaluationTable />
+                    {sheet.statusValue === 10 ?
+                        <OverEvaluationTableStatus10 /> :
+                        <OverEvaluationTable />}
 
                     <BorderTable />
                     
