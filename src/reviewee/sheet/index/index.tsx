@@ -8,7 +8,6 @@ import ApprovalStatusBox from 'common/approvalStatusBox';
 import { RevieweeSidebar, sidebarBackgroundColor } from 'common/Sidebar';
 import { SheetDao } from 'lib/dao/sheetDao';
 import { RevieweeSheetObjectiveReadonly } from './components/objective/readonly';
-import { RevieweeSheetObjectiveEditable } from './components/objective/editable';
 import { RevieweeSheetCareerEditable } from './components/career/editable';
 import { RevieweeSheetCareerReadonly } from './components/career/readonly';
 import { SubmitButtonStatus1 } from './components/submit/status1';
@@ -27,6 +26,8 @@ import { tableHeaderStyle } from 'common/globalStyle.module.scss';
 import style from './indexStyle.module.scss';
 import { getSectionKeys } from 'lib/util';
 import { SubmitButtonStatus2 } from './components/submit/status2';
+import { RevieweeSheetObjectiveEditableStatus1 } from './components/objective/editable/status1';
+import { RevieweeSheetObjectiveEditableStatus3 } from './components/objective/editable/status3';
 
 
 export const SheetContext = createContext<
@@ -169,8 +170,14 @@ function RevieweeSheetShow(props: Props) {
                                     <tbody>
                                         {objectiveItems.map((objective: Objective) => {
                                             return (
-                                                sheet.statusValue === 1 || sheet.statusValue === 3 ?
-                                                <RevieweeSheetObjectiveEditable
+                                                sheet.statusValue === 1 ?
+                                                <RevieweeSheetObjectiveEditableStatus1
+                                                    handleOpenModal={handleShowObjectiveUpdate}
+                                                    objective={objective}
+                                                    setModalObjective={setModalObjective}
+                                                /> :
+                                                sheet.statusValue === 3 ?
+                                                <RevieweeSheetObjectiveEditableStatus3
                                                     handleOpenModal={handleShowObjectiveUpdate}
                                                     objective={objective}
                                                     setModalObjective={setModalObjective}

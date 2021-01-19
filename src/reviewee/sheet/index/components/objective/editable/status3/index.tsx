@@ -6,7 +6,7 @@ import { Button } from "react-bootstrap";
 import * as APIt from 'API';
 import { ObjectiveDao } from "lib/dao/objectiveDao";
 import { deleteObjective, updateObjective } from "graphql/mutations";
-import Style from '../../../indexStyle.module.scss';
+import Style from '../../../../indexStyle.module.scss';
 
 type Props = {
     objective: Objective,
@@ -14,7 +14,7 @@ type Props = {
     setModalObjective: (objective: Objective) => void
 }
 
-export const RevieweeSheetObjectiveEditable = (props: Props) => {
+export const RevieweeSheetObjectiveEditableStatus3 = (props: Props) => {
     const progress: string | undefined
         = props.objective.progress ?
         props.objective.progress.toString()
@@ -84,7 +84,7 @@ export const RevieweeSheetObjectiveEditable = (props: Props) => {
     if(objective){
         return (
             <tr>
-                <td><Button variant="primary" onClick={HandleChange}>変更</Button></td>
+                <td><Button variant="primary" onClick={HandleChange}>実績</Button></td>
                 <td>{objective.content}</td>
                 <td>{objective.result}</td>
                 <input
