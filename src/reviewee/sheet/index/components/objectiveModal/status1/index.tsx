@@ -1,6 +1,6 @@
 import { ErrorMessage, Formik } from "formik";
 import React from "react"
-import { Button, Col, Form, Modal, Row } from "react-bootstrap";
+import { Badge, Button, Col, Form, Modal, Row } from "react-bootstrap";
 import * as APIt from 'API';
 import { Objective } from "App";
 import { ObjectiveDao } from "lib/dao/objectiveDao";
@@ -15,8 +15,6 @@ type Props = {
 }
 
 export const RevieweeSheetObjectiveModalStatus1 = (props: Props)=>{
-    // const sheet = context.sheet
-    // const setSheet = context.setSheet
     
     if(props.objective){
         return (
@@ -25,32 +23,24 @@ export const RevieweeSheetObjectiveModalStatus1 = (props: Props)=>{
                     content: props.objective.content,
                     expStartDate: props.objective.expDoneDate,
                     expDoneDate: props.objective.expDoneDate,
-                    selfEvaluation: String(props.objective.selfEvaluation),
                     priority: props.objective.priority,
-                    result: props.objective.result
                 }}
                 validationSchema={Yup.object({
-                    expStartDate: Yup.date().typeError('yyyy-mm-dd形式で入力してください'),
+                    expStartDate: Yup.date().typeError('yyyy-mm-dd形式で入力してください').required('必須入力です'),
                     expDoneDate: Yup.date().min(Yup.ref('expStartDate'), ({min}) => `開始予定日より後の日付を入力してください`,)
-                        .typeError('yyyy-mm-dd形式で入力してください'),
+                        .typeError('yyyy-mm-dd形式で入力してください').required('必須入力です'),
+                    priority: Yup.string().required('必須入力です'),
+                    content: Yup.string().required('必須入力です'),
                 })}
-                onSubmit={async (values, actions) => {
+                onSubmit={async (values) => {
                     console.log("values", values);
     
-                    //項目明細 情報更新
-                    // const objectiveId = props.objective.id;
-                    let selfEvaluationInput:number | null | undefined = parseInt(values.selfEvaluation);
-                    if(isNaN(selfEvaluationInput)) {
-                        selfEvaluationInput = undefined;
-                    }
                     //目標変更の目標、ステータス、自己評価、優先順位、実績を項目明細に上書き
                     const updateI: APIt.UpdateObjectiveInput = {
                         createdAt: props.objective.createdAt,
                         sectionKeys: props.objective.sectionKeys,
                         content: values.content,
-                        selfEvaluation: selfEvaluationInput,
                         priority: values.priority,
-                        result: values.result,
                         expStartDate: values.expStartDate ? values.expStartDate : undefined,
                         expDoneDate: values.expDoneDate ? values.expDoneDate : undefined
                     };
@@ -74,7 +64,7 @@ export const RevieweeSheetObjectiveModalStatus1 = (props: Props)=>{
                             <Modal.Body>
                                 <Row>
                                     <Col xs={3} sm={3} md={3} lg={3} xl={3}>
-                                        目標
+                                        目標<Badge variant="danger">必須</Badge>
                                     </Col>
                                     <Col xs={9} sm={9} md={9} lg={9} xl={9}>
                                         <Form.Control
@@ -85,14 +75,13 @@ export const RevieweeSheetObjectiveModalStatus1 = (props: Props)=>{
                                             className={inputFieldStyle}
                                             rows={5}
                                         />
-                                        <p></p>
+                                        <p><ErrorMessage name="content" /></p>
                                     </Col>
                                 </Row>
                                 <Row>
-                                    <Col xs={3} sm={3} md={3} lg={3} xl={3}>開始予定日</Col>
+                                    <Col xs={3} sm={3} md={3} lg={3} xl={3}>開始予定日<Badge variant="danger">必須</Badge></Col>
                                     <Col xs={3} sm={3} md={3} lg={3} xl={3}>
                                         <Form.Control
-                                            required
                                             type="date"
                                             name="expStartDate"
                                             onChange={formik.handleChange}
@@ -103,10 +92,9 @@ export const RevieweeSheetObjectiveModalStatus1 = (props: Props)=>{
                                     </Col>
                                 </Row>
                                 <Row>
-                                    <Col xs={3} sm={3} md={3} lg={3} xl={3}>完了予定日</Col>
+                                    <Col xs={3} sm={3} md={3} lg={3} xl={3}>完了予定日<Badge variant="danger">必須</Badge></Col>
                                     <Col xs={3} sm={3} md={3} lg={3} xl={3}>
                                         <Form.Control
-                                            required
                                             type="date"
                                             name="expDoneDate"
                                             onChange={formik.handleChange}
@@ -117,27 +105,7 @@ export const RevieweeSheetObjectiveModalStatus1 = (props: Props)=>{
                                     </Col>
                                 </Row>
                                 <Row>
-                                    <Col xs={3} sm={3} md={3} lg={3} xl={3}>自己評価</Col>
-                                    <Col xs={2} sm={2} md={2} lg={2} xl={1}>
-                                        <Form.Control
-                                            as="select"
-                                            name="selfEvaluation"
-                                            onChange={formik.handleChange}
-                                            defaultValue={String(props.objective.selfEvaluation) || undefined}
-                                            className={inputFieldStyle} >
-                                            <option></option>
-                                            <option value='1'>1</option>
-                                            <option value='2'>2</option>
-                                            <option value='3'>3</option>
-                                            <option value='4'>4</option>
-                                            <option value='5'>5</option>
-                                        </Form.Control>
-                                        <p></p>
-                                    </Col>
-                                </Row>
-                                <Row>
-                                    <Col xs={3} sm={3} md={3} lg={3} xl={3}>優先順位</Col>
-                                    {/* <Col md="1" lg="1" xl="1"> */}
+                                    <Col xs={3} sm={3} md={3} lg={3} xl={3}>優先順位<Badge variant="danger">必須</Badge></Col>
                                     <Col xs={2} sm={2} md={2} lg={2} xl={1}>
                                         <Form.Control
                                             as="select"
@@ -150,26 +118,15 @@ export const RevieweeSheetObjectiveModalStatus1 = (props: Props)=>{
                                             <option value="B">B</option>
                                             <option value="C">C</option>
                                         </Form.Control>
-                                        <p></p>
+                                        <p><ErrorMessage name="priority" /></p>
                                     </Col>
                                 </Row>
-                                <Row>
-                                    <Col xs={3} sm={3} md={3} lg={3} xl={3}>実績</Col>
-                                    <Col xs={9} sm={9} md={9} lg={9} xl={9}>
-                                        <Form.Control
-                                            as="textarea"
-                                            name="result"
-                                            onChange={formik.handleChange}
-                                            defaultValue={props.objective.result || undefined}
-                                            className={inputFieldStyle}
-                                            rows={5}
-                                        />
-                                    </Col>
-                                </Row>
+                                <p>※使用しているブラウザがSafariの場合、開始予定日と完了予定日は yyyy-mm-dd 形式で入力してください</p>
+                                <p>例：2020年1月1日　→　2020-01-01</p>
                             </Modal.Body>
                             <Modal.Footer>
                             <Button variant="primary" type="submit">
-                                    変更保存
+                                    保存
                         </Button>
                                 <Button variant="secondary" onClick={props.handleClose}>
                                     キャンセル
