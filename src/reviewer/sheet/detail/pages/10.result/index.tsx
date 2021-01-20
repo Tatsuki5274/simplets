@@ -62,16 +62,7 @@ export const ReviewerSheetPagesStatus10 = (props: Props) => {
                             onSubmit={async (values) => {
                                 if (sheet) {
                                     if (window.confirm("承認しますか？")) {
-
-                                        let isInputAllObjectiveEvaluation = true
-                                        sheet.section?.items?.forEach(section => {
-                                            section?.objective?.items?.forEach(objective => {
-                                                if (!objective?.lastEvaluation) {
-                                                    isInputAllObjectiveEvaluation = false
-                                                }
-                                            })
-                                        })
-                                        if (isInputAllObjectiveEvaluation) {
+                                        if(values.overAllEvaluation && values.secondComment){
                                             //評価が入力済み
 
                                             const work = commandWorkFlow(Command.SUP1_INPUT_SCORE, sheet)
