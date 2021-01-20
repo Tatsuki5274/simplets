@@ -132,7 +132,7 @@ function RevieweeSheetShow(props: Props) {
                     </Link>
                     <ApprovalStatusBox statusValue={sheet.statusValue || -1}/>
                     <h2>業績評価</h2>
-                    {sheet.statusValue === 1 || sheet.statusValue === 3 ?
+                    {sheet.statusValue === 1 ?
                     <ObjectiveCreateModal
                         year={sheet.year}
                     /> : null}

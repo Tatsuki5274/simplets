@@ -60,26 +60,6 @@ export const RevieweeSheetObjectiveEditableStatus3 = (props: Props) => {
         }
     }
 
-    //objectiveの削除
-    async function handleDeleteObjective(event: any) {
-        if(objective){
-            if(window.confirm("目標を削除しますか？")){    
-                const deleteI: APIt.DeleteObjectiveInput = {
-                    createdAt: objective.createdAt,
-                    sectionKeys: objective.sectionKeys
-                };
-                const deletedObjective = await ObjectiveDao.delete(deleteObjective, deleteI)
-                if(deletedObjective){
-                    setObjective(null)
-                }
-    
-        
-                console.log("delete", deletedObjective)
-            }
-
-        }
-
-    }
 
     if(objective){
         return (
@@ -103,13 +83,7 @@ export const RevieweeSheetObjectiveEditableStatus3 = (props: Props) => {
                 <td>{objective.selfEvaluation}</td>
                 <td>{objective.lastEvaluation}</td>
                 <td>{dateFormat(date, "yyyy/mm/dd HH:MM")}</td>
-                <td>
-                    <Button
-                        variant="danger"
-                        onClick={handleDeleteObjective}
-                        data-objective-id={""}
-                    >削除</Button>
-                </td>
+                <td></td>
     
             </tr>
         )
