@@ -67,7 +67,7 @@ export const SubmitButtonStatus3 = () => {
             </Button>
             <Button className={buttonComponentStyle}
                     onClick={async () => {
-                        if (window.confirm("目標内容の引き戻しを行いますか？")) {
+                        if (window.confirm("承認内容の引き戻しを行い、目標設定中のステータスに変更しますか？")) {
                             const work = commandWorkFlow(Command.REVIWEE_PULLBACK_APPROVAL, sheet)
                             let updatedSheet = await SheetDao.update(updateSheet, {
                                 companyID: work.sheet.companyID,
