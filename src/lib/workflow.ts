@@ -136,6 +136,14 @@ function getMailObject(key: number, sheet: Sheet, reason?: string): SendEmail | 
             name: "",
             email: ""
         }
+        if(employees.length === 2){
+            reviewee.name = `${employees[0].lastName} ${employees[0].firstName}`
+            reviewee.email = employees[0].email
+            sup1.name = `${employees[1].lastName} ${employees[1].firstName}`
+            sup1.email = employees[1].email
+            ceo.name = `${employees[1].lastName} ${employees[2].firstName}`
+            ceo.email = employees[1].email          
+        }
         if(employees.length === 3){
             reviewee.name = `${employees[0].lastName} ${employees[0].firstName}`
             reviewee.email = employees[0].email
@@ -295,7 +303,7 @@ ${reviewerUrl}
                     `
                     break;
                 case 8:
-                    ret.to = [ceo.email, sup1.email, reviewee.email]
+                    ret.to = Array.from(new Set([ceo.email, sup1.email, reviewee.email]))
                     ret.subject = "[業績評価システム]  評価が完了しました"
                     ret.body = `
 年度評価が完了しました。
