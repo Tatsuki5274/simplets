@@ -17,6 +17,8 @@ export enum Command {
     REVIWEE_PULLBACK_APPROVAL
 }
 
+const systemName = "Simplet's"
+
 type ReturnType = {
     sheet: Sheet,
     mailObject: SendEmail | null
@@ -176,7 +178,7 @@ function getMailObject(key: number, sheet: Sheet, reason?: string): SendEmail | 
             switch (key) {
                 case 1:
                     ret.to = [sup1.email]
-                    ret.subject = "[業績評価システム]  目標設定が提出されました"
+                    ret.subject = `[${systemName}]  目標設定が提出されました`
                     ret.body = `
 ${sup1.name}様:
 
@@ -197,7 +199,7 @@ ${reviewerUrl}
                     break;
                 case 2:
                     ret.to = [reviewee.email]
-                    ret.subject = "[業績評価システム]  目標設定が承認されました"
+                    ret.subject = `[${systemName}]  目標設定が承認されました`
                     ret.body = `
 ${reviewee.name}様:
 
@@ -218,7 +220,7 @@ ${revieweeUrl}
                     break;
                 case 3:
                     ret.to = [sup1.email]
-                    ret.subject = "[業績評価システム]  自己評価が入力されました"
+                    ret.subject = `[${systemName}]  自己評価が入力されました`
                     ret.body = `
 ${sup1.name}様:
 
@@ -240,7 +242,7 @@ ${reviewerUrl}
                     break;
                 case 4:
                     ret.to = [reviewee.email]
-                    ret.subject = "[業績評価システム]  目標設定の実績が確認されました"
+                    ret.subject = `[${systemName}]  目標設定の実績が確認されました`
                     ret.body = `
 ${reviewee.name}様:
 
@@ -261,7 +263,7 @@ ${revieweeUrl}
                     break;
                 case 5:
                     ret.to = [sup1.email]
-                    ret.subject = "[業績評価システム]  目標設定の実績の確認が完了しました"
+                    ret.subject = `[${systemName}]  目標設定の実績の確認が完了しました`
                     ret.body = `
 ${sup1.name}様:
 
@@ -282,7 +284,7 @@ ${reviewerUrl}
                     break;
                 case 7:
                     ret.to = [sup2.email]
-                    ret.subject = "[業績評価システム]  目標設定が承認されました"
+                    ret.subject = `[${systemName}]  目標設定が承認されました`
                     ret.body = `
 ${sup2.email}様:
 
@@ -304,7 +306,7 @@ ${reviewerUrl}
                     break;
                 case 8:
                     ret.to = Array.from(new Set([ceo.email, sup1.email, reviewee.email]))
-                    ret.subject = "[業績評価システム]  評価が完了しました"
+                    ret.subject = `[${systemName}]  評価が完了しました`
                     ret.body = `
 年度評価が完了しました。
 
@@ -323,7 +325,7 @@ ${reviewerUrl}
                     break;
                 case 10:
                     ret.to = [reviewee.email]
-                    ret.subject = "[業績評価システム]  目標が差し戻されました"
+                    ret.subject = `[${systemName}]  目標が差し戻されました`
                     ret.body = `
 ${reviewee.name}様:
 
@@ -346,7 +348,7 @@ ${revieweeUrl}
                     break;
                 case 11:
                     ret.to = [reviewee.email]
-                    ret.subject = "[業績評価システム]  目標が差し戻されました"
+                    ret.subject = `[${systemName}]  目標が差し戻されました`
                     ret.body = `
 ${reviewee.name}様:
 
@@ -372,7 +374,7 @@ ${revieweeUrl}
                     break;
                 case 13:
                     ret.to = [sup1.email]
-                    ret.subject = "[業績評価システム]  承認依頼が引き戻されました"
+                    ret.subject = `[${systemName}]  承認依頼が引き戻されました`
                     ret.body = `
 ${sup1.name}様:
 
@@ -391,7 +393,7 @@ ${sup1.name}様:
                     break;
                 case 14:
                     ret.to = [sup1.email]
-                    ret.subject = "[業績評価システム]  提出が引き戻されました"
+                    ret.subject = `[${systemName}]  提出が引き戻されました`
                     ret.body = `
 ${sup1.name}様:
 
