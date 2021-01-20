@@ -3,6 +3,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import style from './headerStyle.module.scss'
 import { Navbar } from 'react-bootstrap';
 import { AmplifySignOut } from '@aws-amplify/ui-react';
+import HeaderLogo from 'views/components/organisms/common/HeaderLogo';
 
 
 
@@ -27,7 +28,7 @@ function HeaderComponents() {
     //ヘッダー表示
     return (
         <Navbar bg="dark" variant="dark" sticky="top">
-            <Navbar.Brand>業績評価システム</Navbar.Brand>
+            <Navbar.Brand><HeaderLogo/></Navbar.Brand>
             <Navbar.Toggle />
             <Navbar.Collapse className="justify-content-end">
                 <Navbar.Text className={style.headerContents}>{employee?.company?.name}</Navbar.Text>

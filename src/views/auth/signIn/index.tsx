@@ -2,6 +2,7 @@ import { SignIn } from "aws-amplify-react";
 import { inputFieldStyle } from "common/globalStyle.module.scss";
 import React from "react";
 import { Button, Container, Form } from "react-bootstrap";
+import LoginLogo from "views/components/organisms/auth/LoginLogo";
 
 export default class CustomSignIn extends SignIn {
     constructor(props: any) {
@@ -12,7 +13,7 @@ export default class CustomSignIn extends SignIn {
     showComponent() {
         return (
             <Container>
-                <h4>業績評価システム</h4>
+                <LoginLogo/>
                 <Form.Label>メールアドレス</Form.Label>
                 <Form.Control
                     id="username"
