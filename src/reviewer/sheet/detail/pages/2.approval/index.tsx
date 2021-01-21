@@ -62,7 +62,7 @@ export const ReviewerSheetPagesStatus2 = ()=>{
                             }}
                             onSubmit={ async (values) => {
                                 if(sheet){
-                                    if(window.confirm("承認しますか？")){
+                                    if(window.confirm("総合評価が社員に通知されます。よろしいでしょうか")){
                                         const work = commandWorkFlow(Command.SUP1_APPLOVAL, sheet)
                                         const data: UpdateSheetInput = {
                                             companyID: sheet.companyID,
@@ -142,7 +142,7 @@ export const ReviewerSheetPagesStatus2 = ()=>{
                                                 }
                                             }}>保存</Button>
                                             
-                                            <Button type="submit" className={buttonComponentStyle}>保存して承認</Button>
+                                            <Button type="submit" className={buttonComponentStyle}>総合評価確定</Button>
                                             <Button onClick={handleShow} className={buttonComponentStyle}>差し戻し</Button>
                             
                                         </Form.Group>
