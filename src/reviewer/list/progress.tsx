@@ -199,12 +199,14 @@ function ProgressReferenceList() {
                 if (listItems) {
                     // setSheets(listItems)
                     listItems.sort(function (a, b) {
-                        // 社員番号の昇順でソート
-                        if (a.revieweeEmployee?.localID && b.revieweeEmployee?.localID && a.revieweeEmployee.localID > b.revieweeEmployee.localID) {
-                            return 1
+                        // 部署コードの照準、社員番号の昇順にソート
+                        if(a.revieweeEmployee?.group && b.revieweeEmployee?.group){
+                            if(a.revieweeEmployee.group.localID > b.revieweeEmployee.group.localID) return 1
+                            if(a.revieweeEmployee.group.localID < b.revieweeEmployee.group.localID) return -1
+                            if(a.revieweeEmployee.localID > b.revieweeEmployee.localID) return 1
+                            if(a.revieweeEmployee.localID < b.revieweeEmployee.localID) return -1
                         }
-
-                        return -1
+                        return 0
                     })
                     setView(listItems)
                 }
