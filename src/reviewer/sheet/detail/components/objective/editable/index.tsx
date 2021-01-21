@@ -5,11 +5,14 @@ import { getObjectiveKeys, getSectionKeys } from "lib/util";
 import React from "react"
 import { Table } from "react-bootstrap";
 import style from '../common/style.module.scss';
+import * as APIt from 'API';
+import { ObjectiveDao } from "lib/dao/objectiveDao";
+import { updateObjective } from "graphql/mutations";
 
 
 type Props = {
     sections: Section[],
-    handleChange: (e: React.ChangeEvent<any>)=> void,
+    onChange: (e: React.ChangeEvent<any>)=> void
 }
 
 export const ReviewerSheetDetailObjectiveEditable = (props: Props) => {
@@ -80,7 +83,18 @@ export const ReviewerSheetDetailObjectiveEditable = (props: Props) => {
 
                                     {/* 最終評価 */}
                                     <td className={style.detailSelect}>
-                                        <select name="lastEvaluation" onChange={props.handleChange}>
+                                        <select name={`lastEvaluation[${getObjectiveKeys(objective).replace(/[.]/g, '-')}]`} onChange={async (event: React.ChangeEvent<HTMLSelectElement>)=>{
+                                            props.onChange(event)
+                                            const objectiveLastEvaluation = parseInt(event.currentTarget.value);
+                                            const updateI: APIt.UpdateObjectiveInput = {
+                                                // id: objectiveId,
+                                                createdAt: objective.createdAt, //仮で空白を設定
+                                                sectionKeys: objective.sectionKeys, //仮で空白を設定
+                                                lastEvaluation: objectiveLastEvaluation,
+                                            };
+                                            const updatedObjective = await ObjectiveDao.update(updateObjective, updateI)
+                                            console.log("updatedObjective", updatedObjective)
+                                        }}>
                                             <option value=""></option>
                                             {[5, 4, 3, 2, 1].map((number: number) => {
                                                 if (number === objective.lastEvaluation) {

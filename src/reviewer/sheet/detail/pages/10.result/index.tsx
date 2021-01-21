@@ -18,12 +18,12 @@ import { RemandModal } from "../../components/remandModal";
 import { ReviewerSheetDetailYearlyEditableSecond } from "../../components/yearly/editable/second";
 import * as Yup from 'yup';
 import { buttonComponentStyle } from "common/globalStyle.module.scss";
+import { getObjectiveKeys } from "lib/util";
 
 type Props = {
     //sheet: Sheet,
     sections: Section[]
 
-    handleUpdateObjective: (e: React.ChangeEvent<any>) => void
 }
 
 export const ReviewerSheetPagesStatus10 = (props: Props) => {
@@ -37,6 +37,15 @@ export const ReviewerSheetPagesStatus10 = (props: Props) => {
 
 
     if (sheet) {
+        const evaluation: any = {}
+        sheet.section?.items?.forEach(section => {
+            section?.objective?.items?.forEach(objective => {
+                if (objective) {
+                    evaluation[`${getObjectiveKeys(objective).replace(/[.]/g, '-')}`] = objective.lastEvaluation?.toString()
+                }
+            })
+        })
+
         return (
             <div>
                 {/* モーダルウィンドウ 差し戻しコメント */}
@@ -53,7 +62,8 @@ export const ReviewerSheetPagesStatus10 = (props: Props) => {
                         <Formik
                             initialValues={{
                                 secondComment: sheet.secondComment,
-                                overAllEvaluation: sheet.overAllEvaluation
+                                overAllEvaluation: sheet.overAllEvaluation,
+                                lastEvaluation: evaluation
                             }}
                             validationSchema={Yup.object({
                                 secondComment: Yup.string().typeError('コメントを入力してください').required('コメントを入力してください'),
@@ -61,9 +71,14 @@ export const ReviewerSheetPagesStatus10 = (props: Props) => {
                             })}
                             onSubmit={async (values) => {
                                 if (sheet) {
-                                    if (window.confirm("承認しますか？")) {
-                                        if(values.overAllEvaluation && values.secondComment){
-                                            //評価が入力済み
+                                    let isValid = true
+                                    for (const key in values.lastEvaluation) {
+                                        if (!values.lastEvaluation[key]) isValid = false
+                                    }
+                                    if (isValid && values.overAllEvaluation && values.secondComment) {
+                                        //評価が入力済み
+                                        if (window.confirm("総合評価を確定しますか？")) {
+
 
                                             const work = commandWorkFlow(Command.SUP1_INPUT_SCORE, sheet)
                                             const data: UpdateSheetInput = {
@@ -92,12 +107,13 @@ export const ReviewerSheetPagesStatus10 = (props: Props) => {
                                             } else {
                                                 console.error("フォームデータの登録に失敗しました")
                                             }
-                                        } else {
-                                            alert("評価をすべて入力してください")
                                         }
                                     } else {
-                                        console.error("sheetの読み込みに失敗しています")
+                                        alert("評価をすべて入力してください")
+                                        
                                     }
+                                }else{
+                                    console.error("sheetの読み込みに失敗しています")
                                 }
                             }}
                         >
@@ -105,7 +121,7 @@ export const ReviewerSheetPagesStatus10 = (props: Props) => {
                                 <form onSubmit={formik.handleSubmit}>
 
                                     {/* 目標コンポーネント */}
-                                    <ReviewerSheetDetailObjectiveEditable handleChange={props.handleUpdateObjective} sections={props.sections} />
+                                    <ReviewerSheetDetailObjectiveEditable sections={props.sections} onChange={formik.handleChange} />
 
                                     <h3>今後のキャリア計画</h3><br />
                                     <ReviewerSheetDetailCareerReadonly sheet={sheet} />
@@ -123,6 +139,7 @@ export const ReviewerSheetPagesStatus10 = (props: Props) => {
                                         {/* ステータスによってボタンの出し分け */}
                                         <Form.Group>
                                             <Button className={buttonComponentStyle} onClick={async () => {
+                                                console.log("formik", formik.values)
                                                 const data: UpdateSheetInput = {
                                                     companyID: sheet.companyID,
                                                     reviewee: sheet.reviewee,
@@ -141,7 +158,7 @@ export const ReviewerSheetPagesStatus10 = (props: Props) => {
                                                 }
                                             }}>保存</Button>
 
-                                            <Button type="submit" className={buttonComponentStyle}>保存して承認</Button>
+                                            <Button type="submit" className={buttonComponentStyle}>総合評価確定</Button>
                                             <Button onClick={handleShow} className={buttonComponentStyle}>差し戻し</Button>
 
                                         </Form.Group>

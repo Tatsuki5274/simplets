@@ -128,10 +128,10 @@ function EvalutionScreen(props: Props) {
                         return <ReviewerSheetPagesStatus2 />
                     }else if(sheet.statusValue === 3){
                         // 所属長が変更可能なコンポーネントを返却
-                        return <ReviewerSheetPagesStatus3 sheet={sheet} sections={sectionItems} handleUpdateObjective={handleChangeObjective} />
+                        return <ReviewerSheetPagesStatus3 sheet={sheet} sections={sectionItems} />
                     }else if(sheet.statusValue === 10){
                         // 所属長が変更可能なコンポーネントを返却
-                        return <ReviewerSheetPagesStatus10 sections={sectionItems} handleUpdateObjective={handleChangeObjective} />
+                        return <ReviewerSheetPagesStatus10 sections={sectionItems}/>
                     }else if(sheet.statusValue === 12){
                         if(currentUser && sheet.topReviewers?.includes(currentUser.username)){
                             // 部門長のコンポーネントを返却

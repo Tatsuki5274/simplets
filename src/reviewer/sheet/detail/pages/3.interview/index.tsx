@@ -17,8 +17,6 @@ import { ReviewerSheetDetailYearlyReadonly } from "../../components/yearly/reado
 type Props = {
     sheet: Sheet,
     sections: Section[]
-
-    handleUpdateObjective: (e: React.ChangeEvent<any>) => void
 }
 
 export const ReviewerSheetPagesStatus3 = (props: Props) => {
