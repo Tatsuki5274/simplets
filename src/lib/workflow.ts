@@ -145,7 +145,7 @@ function getMailObject(key: number, sheet: Sheet, reason?: string): SendEmail | 
             reviewee.email = employees[0].email
             sup1.name = `${employees[1].lastName} ${employees[1].firstName}`
             sup1.email = employees[1].email
-            ceo.name = `${employees[1].lastName} ${employees[2].firstName}`
+            ceo.name = `${employees[1].lastName} ${employees[1].firstName}`
             ceo.email = employees[1].email          
         }
         if(employees.length === 3){
