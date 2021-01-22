@@ -220,7 +220,7 @@ ${revieweeUrl}
                     break;
                 case 3:
                     ret.to = [sup1.email]
-                    ret.subject = `[${systemName}]  自己評価が入力されました`
+                    ret.subject = `[${systemName}]  目標設定の実績が入力されましたので評価をお願いいたします`
                     ret.body = `
 ${sup1.name}様:
 
@@ -242,7 +242,7 @@ ${reviewerUrl}
                     break;
                 case 4:
                     ret.to = [reviewee.email]
-                    ret.subject = `[${systemName}]  目標設定の実績が確認されました`
+                    ret.subject = `[${systemName}]  今年度の総合評価が決定しました`
                     ret.body = `
 ${reviewee.name}様:
 
@@ -284,7 +284,7 @@ ${reviewerUrl}
                     break;
                 case 7:
                     ret.to = [sup2.email]
-                    ret.subject = `[${systemName}]  目標設定が承認されました`
+                    ret.subject = `[${systemName}]  今年度評価へのコメントをお願いいたします`
                     ret.body = `
 ${sup2.email}様:
 
@@ -308,14 +308,14 @@ ${reviewerUrl}
                     ret.to = Array.from(new Set([ceo.email, sup1.email, reviewee.email]))
                     ret.subject = `[${systemName}]  評価が完了しました`
                     ret.body = `
-年度評価が完了しました。
+最終承認者のコメントが記入されました。
 
 ----------------------------------------------------------------------
 社員: ${reviewee.name}
 申請の種類: 完了
 ----------------------------------------------------------------------
 
-以下のURLにアクセスし年度評価を確認してください。
+以下のURLにアクセスしコメントを確認してください。
 ${reviewerUrl}
 
 # 本メールは${ceo.email}/${sup1.email}/${reviewee.email}宛にお送りしています。
@@ -348,11 +348,10 @@ ${revieweeUrl}
                     break;
                 case 11:
                     ret.to = [reviewee.email]
-                    ret.subject = `[${systemName}]  目標が差し戻されました`
+                    ret.subject = `[${systemName}]  評価依頼が差し戻されました`
                     ret.body = `
 ${reviewee.name}様:
 
-目標設定が差し戻されました、
 評価依頼が差し戻されました。修正し再度、評価依頼を行なってください。
 
 ----------------------------------------------------------------------
@@ -381,7 +380,7 @@ ${sup1.name}様:
 承認依頼が引き戻されました
 
 ---------------------------------------------------------------------- 
-社員: ${reviewee.name} 承認引き戻し
+社員: ${reviewee.name} 承認依頼引き戻し
 ---------------------------------------------------------------------- 
 
     ${reviewerUrl} 
@@ -393,14 +392,14 @@ ${sup1.name}様:
                     break;
                 case 14:
                     ret.to = [sup1.email]
-                    ret.subject = `[${systemName}]  提出が引き戻されました`
+                    ret.subject = `[${systemName}]  承認済み目標が引き戻されました`
                     ret.body = `
 ${sup1.name}様:
 
-提出が引き戻されました
+承認済み目標が引き戻されました
 
 ---------------------------------------------------------------------- 
-社員: ${reviewee.name} 提出引き戻し
+社員: ${reviewee.name} 承認済み目標引き戻し
 ---------------------------------------------------------------------- 
 
     ${reviewerUrl}
