@@ -31,6 +31,7 @@ import { RevieweeSheetObjectiveEditableStatus3 } from './components/objective/ed
 import { YearlyTableStatus10 } from './components/yearly/status10';
 import { OverEvaluationTableStatus10 } from './components/overEvaluation/status10';
 import { RevieweeSheetObjectiveReadonlyStatus10 } from './components/objective/readonly/status10';
+import InterviewTable from 'views/components/organisms/evaluation/InterviewTable/InterviewTable';
 
 
 export const SheetContext = createContext<
@@ -202,6 +203,18 @@ function RevieweeSheetShow(props: Props) {
                     {sheet.statusValue === 1 || sheet.statusValue === 2 || sheet.statusValue === 3 ?
                     <RevieweeSheetCareerEditable /> :
                     <RevieweeSheetCareerReadonly />}
+
+                    <h4>インタビュー実施記録</h4>
+                    <InterviewTable
+                        interviewPlanDate={sheet.interviewPlanDate}
+                        interviewPlanComment={sheet.interviewPlanComment}
+                        InterviewMid1Date={sheet.InterviewMid1Date}
+                        InterviewMid1Comment={sheet.InterviewMid1Comment}
+                        InterviewMid2Date={sheet.InterviewMid2Date}
+                        InterviewMid2Comment={sheet.InterviewMid2Comment}
+                        InterviewMid3Date={sheet.InterviewMid3Date}
+                        InterviewMid3Comment={sheet.InterviewMid3Comment}
+                    />
 
                     <h4>年度評価</h4>
                     {sheet.statusValue === 10 ?
