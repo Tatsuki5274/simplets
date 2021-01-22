@@ -10,7 +10,7 @@ import { Link } from 'react-router-dom';
 import { Field, Form, Formik } from 'formik';
 import { SheetDao } from 'lib/dao/sheetDao';
 import GaugeChart from 'react-gauge-chart';
-import { calcAvg, getSectionKeys, round} from 'lib/util';
+import { calcAvg, getSectionKeys, getSheetKeys, round} from 'lib/util';
 import { routeBuilder } from 'router';
 import { GroupDao } from 'lib/dao/groupDao';
 import ApprovalStatusBox from 'common/approvalStatusBox';
@@ -18,7 +18,7 @@ import ApprovalStatusBox from 'common/approvalStatusBox';
 
 type ViewType = {
 
-    // sheetId: string
+    sheetKey: string,
     companyId: string,
     year: string,
     reviewee: string,
@@ -220,7 +220,7 @@ function ProgressReferenceList() {
             if (sheet.revieweeEmployee && sheet.group && sheet.section) {
                 return {
 
-                    // sheetId: sheet.id,
+                    sheetKey: getSheetKeys(sheet).replace(/[.@]/g, '-'),
                     companyId: sheet.companyID,
                     year: String(sheet.year),
                     reviewee: sheet.reviewee,
@@ -419,7 +419,7 @@ function ProgressReferenceList() {
                                 {view.avg ? `${round(view.avg, 2).toFixed(1)}%` : null}
 
                                         {view.avg ?
-                                            <GaugeChart id={`chart-${view.groupId}-${view.avg * 10}`}
+                                            <GaugeChart id={`chart-${view.groupId}-${view.sheetKey}`}
                                                 nrOfLevels={10}
                                                 colors={['#EA4228', '#F5CD19', '#5BE12C']}
                                                 percent={view.avg / 100}
