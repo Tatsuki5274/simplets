@@ -133,7 +133,7 @@ function EvalutionScreen(props: Props) {
                         // 所属長が変更可能なコンポーネントを返却
                         return <ReviewerSheetPagesStatus10 sections={sectionItems}/>
                     }else if(sheet.statusValue === 12){
-                        if(currentUser && sheet.topReviewers?.includes(currentUser.username)){
+                        if(currentUser && sheet.secondReviewers?.includes(currentUser.username) && sheet.topReviewers === null){
                             // 部門長のコンポーネントを返却
                             return <ReviewerSheetPagesStatus12Top />
                         }else if(currentUser && sheet.secondReviewers?.includes(currentUser.username)){

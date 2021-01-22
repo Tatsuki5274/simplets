@@ -147,8 +147,7 @@ function getMailObject(key: number, sheet: Sheet, reason?: string): SendEmail | 
             sup1.email = employees[1].email
             ceo.name = `${employees[1].lastName} ${employees[1].firstName}`
             ceo.email = employees[1].email          
-        }
-        if(employees.length === 3){
+        }else if(employees.length === 3){
             reviewee.name = `${employees[0].lastName} ${employees[0].firstName}`
             reviewee.email = employees[0].email
             sup1.name = `${employees[1].lastName} ${employees[1].firstName}`
@@ -394,14 +393,14 @@ ${sup1.name}様:
                     break;
                 case 14:
                     ret.to = [sup1.email]
-                    ret.subject = `[${systemName}]  承認済み目標が引き戻されました`
+                    ret.subject = `[${systemName}]  提出済み目標が引き戻されました`
                     ret.body = `
 ${sup1.name}様:
 
-承認済み目標が引き戻されました
+提出済み目標が引き戻されました
 
 ---------------------------------------------------------------------- 
-社員: ${reviewee.name} 承認済み目標引き戻し
+社員: ${reviewee.name} 提出済み目標引き戻し
 ---------------------------------------------------------------------- 
 
     ${reviewerUrl}
