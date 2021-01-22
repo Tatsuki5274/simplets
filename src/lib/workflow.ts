@@ -78,8 +78,8 @@ export function commandWorkFlow(command: Command, sheet: Sheet, reason?: string)
             status = 1
             break;
         case Command.REMAND_FROM_INPUT_RESULT:
-            key = 10
-            status = 1
+            key = 15
+            status = 3
             break;
         case Command.REMAND_FROM_SUR1_CONFIRM:
             key = 11
@@ -88,9 +88,11 @@ export function commandWorkFlow(command: Command, sheet: Sheet, reason?: string)
         case Command.REVIWEE_PULLBACK_SUBMIT:
             key = 14
             status = 1
+            break;
         case Command.REVIWEE_PULLBACK_APPROVAL:
             key = 13
             status = 1
+            break;
     }
     if(key !== -1){
         ret.mailObject = getMailObject(key, sheet, reason)
@@ -228,7 +230,7 @@ ${sup1.name}様:
 
 ----------------------------------------------------------------------
 社員: ${reviewee.name}
-申請の種類: 所属長評価待ち
+申請の種類: 年度評価依頼
 ----------------------------------------------------------------------
 
 面談を実施後、以下のURLにアクセスし、項目毎評価、年度評価を入力してください。
@@ -250,7 +252,7 @@ ${reviewee.name}様:
 
 ----------------------------------------------------------------------
 所属長: ${sup1.name}
-申請の種類: 目標設定承認
+申請の種類: 年度評価確認
 ----------------------------------------------------------------------
 
 以下のURLにアクセスし、年度評価を確認してください。
@@ -263,7 +265,7 @@ ${revieweeUrl}
                     break;
                 case 5:
                     ret.to = [sup1.email]
-                    ret.subject = `[${systemName}]  目標設定の実績の確認が完了しました`
+                    ret.subject = `[${systemName}]  総合評価の社員確認が完了しました`
                     ret.body = `
 ${sup1.name}様:
 
@@ -271,7 +273,7 @@ ${sup1.name}様:
 
 ----------------------------------------------------------------------
 社員: ${reviewee.name}
-申請の種類: 評価の確認
+申請の種類: 年度評価確認
 ----------------------------------------------------------------------
 
 以下のURLにアクセスし、部門長へ評価確認を行ってください。
@@ -404,8 +406,32 @@ ${sup1.name}様:
 
     ${reviewerUrl}
 
-# 本メールは${reviewerUrl}宛にお送りしています。 
+# 本メールは${sup1.email}宛にお送りしています。 
 # 本メールはシステムより自動送信されています。 
+# 本メールに返信されましても、返答できませんのでご了承ください。
+                    `
+                    break;
+                case 15:
+                    ret.to = [reviewee.email]
+                    ret.subject = `[${systemName}]  自己評価と実績が差し戻されました`
+                    ret.body = `
+${reviewee.name}様:
+
+自己評価と実績が差し戻されました、
+自己評価を修正し、再度承認依頼を行なってください。
+
+----------------------------------------------------------------------
+所属長: ${sup1.name}
+申請の種類: 差し戻し
+理由：${reason}
+----------------------------------------------------------------------
+                    
+以下のURLにアクセスし自己評価を修正してください。
+
+${revieweeUrl}
+                    
+# 本メールは${reviewee.email}宛にお送りしています。
+# 本メールはシステムより自動送信されています。
 # 本メールに返信されましても、返答できませんのでご了承ください。
                     `
                     break;

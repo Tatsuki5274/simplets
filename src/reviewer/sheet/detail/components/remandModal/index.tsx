@@ -35,6 +35,8 @@ export const RemandModal = (props: Props)=>{
                         let work
                         if(sheet.statusValue === 2) {
                             work = commandWorkFlow(Command.REMAND_FROM_SUBMIT, sheet, values.reason)
+                        } else if (sheet.statusValue === 10){
+                            work = commandWorkFlow(Command.REMAND_FROM_INPUT_RESULT, sheet, values.reason)
                         } else {
                             work = commandWorkFlow(Command.REMAND_FROM_SUR1_CONFIRM, sheet, values.reason)
                         }
