@@ -70,6 +70,14 @@ export const ReviewerSheetPagesStatus2 = ()=>{
                                             year: sheet.year,
                                             statusValue: work.sheet.statusValue,
                                             careerPlanComment: values.careerPlanComment,
+                                            interviewPlanComment: values.interviewPlanComment,
+                                            interviewPlanDate: values.interviewPlanDate,
+                                            InterviewMid1Comment: values.InterviewMid1Comment,
+                                            InterviewMid1Date: values.InterviewMid1Date,
+                                            InterviewMid2Comment: values.InterviewMid2Comment,
+                                            InterviewMid2Date: values.InterviewMid2Date,
+                                            InterviewMid3Comment: values.InterviewMid3Comment,
+                                            InterviewMid3Date: values.InterviewMid3Date,
                                         }
                                         let updatedSheet = await SheetDao.update(updateSheet, data);
                                         
