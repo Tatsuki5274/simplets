@@ -3,11 +3,11 @@ import { tableHeaderStyle } from "common/globalStyle.module.scss";
 import dateFormat from "dateformat";
 import { getObjectiveKeys, getSectionKeys } from "lib/util";
 import React from "react"
-import { Table } from "react-bootstrap";
 import style from '../common/style.module.scss';
 import * as APIt from 'API';
 import { ObjectiveDao } from "lib/dao/objectiveDao";
 import { updateObjective } from "graphql/mutations";
+import ScrollTable from "views/components/molecules/ScrollTable";
 
 
 type Props = {
@@ -32,7 +32,7 @@ export const ReviewerSheetDetailObjectiveEditable = (props: Props) => {
         return (
             <div key={getSectionKeys(section)}>
                 <h4>{section.category?.name}</h4>
-                <Table bordered className={style.ReviewerObjectiveTableView}>
+                <ScrollTable>
                     <thead className={tableHeaderStyle}>
                         <tr>
                             <td>目標</td>
@@ -118,7 +118,7 @@ export const ReviewerSheetDetailObjectiveEditable = (props: Props) => {
                             )
                         })}
                     </tbody>
-                </Table>
+                </ScrollTable>
             </div>
         )
         })}

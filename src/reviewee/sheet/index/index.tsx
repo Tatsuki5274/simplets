@@ -38,6 +38,8 @@ import Sidebar from 'views/components/templates/Sidebar';
 import SidebarManager from 'views/components/organisms/common/SidebarManager';
 import { routeBuilder } from 'router';
 import { EmployeeType } from 'API';
+import Scroll from 'views/components/atoms/Scroll';
+import ScrollTable from 'views/components/molecules/ScrollTable';
 import Container from 'views/components/templates/Container';
 
 
@@ -179,7 +181,7 @@ function RevieweeSheetShow(props: Props) {
                                 return (
                                     <div key={getSectionKeys(section)}>
                                         <AverageSmallGaugeBox section={section} />
-                                        <Table bordered hover className={style.objectiveTableView}>
+                                        <ScrollTable>
                                             <thead className={tableHeaderStyle}>
                                                 <tr>
                                                     <td>#</td>
@@ -217,7 +219,7 @@ function RevieweeSheetShow(props: Props) {
 
                                                 })}
                                             </tbody>
-                                        </Table>
+                                        </ScrollTable>
                                     </div>
                                 )
                             })}
