@@ -110,7 +110,7 @@ function RevieweeSheetShow(props: Props) {
                 setSheet(sheet);
             }
         })()
-    }, []);
+    }, [props.match.params.companyId, props.match.params.reviewee, props.match.params.year]);
 
     if (sheet === undefined) return <p>Loading</p>
     else if (sheet === null) {

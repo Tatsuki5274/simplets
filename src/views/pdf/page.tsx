@@ -44,7 +44,7 @@ export function PDFPage(props:Props) {
             res?.section?.items?.sort(sortCategory)
             setSheet(res)
         })()
-    }, [])
+    }, [props.match.params.companyId, props.match.params.year, props.match.params.reviewee])
 
     useEffect(() => {
         (async () => {

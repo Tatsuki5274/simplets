@@ -1,7 +1,6 @@
 import React from "react"
 import { Table } from "react-bootstrap"
 import { Link } from "react-router-dom"
-import styled from "styled-components"
 import TableBodyCell from "views/components/molecules/TableBodyCell"
 import TableHeaderCell from "views/components/molecules/TableHeaderCell"
 
@@ -30,9 +29,6 @@ type Props = {
     data: (TableEvaluationListType | null)[] | null
 }
 
-const Styled = styled.table({
-
-})
 
 export default function (props:Props) {
     if(props.data){

@@ -50,7 +50,7 @@ export function ObjectiveCreateModal(props: Props){
                 setDefaultSectionKeys(defaultSectionKeys)
             }
         })()
-    }, [sheet]);
+    }, [sheet, currentUser, props.year]);
     if(sheet && defaultSectionKeys){
         return (
             <>

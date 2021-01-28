@@ -1,5 +1,4 @@
 import React from "react";
-import { Col, Row } from "react-bootstrap";
 import { routeBuilder } from "router";
 import styled from "styled-components";
 import { SelectLabel } from "views/components/atoms/Types";

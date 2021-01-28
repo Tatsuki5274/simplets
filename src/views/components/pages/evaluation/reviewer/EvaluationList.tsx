@@ -1,15 +1,12 @@
 import { SheetDao } from "lib/dao/sheetDao";
 import React, { useContext, useEffect, useState } from "react";
-import EvaluationFilter from "views/components/organisms/evaluation/reviewerList/EvaluationFilter";
 import { TableEvaluationListType } from "views/components/organisms/evaluation/reviewerList/TableEvaluationList"
 import ReviewerEvaluationList from "views/components/templates/evaluation/reviewer/ReviewerEvaluationList";
 import * as APIt from 'API';
 import { EmployeeContext, UserContext } from "App";
-import { start } from "repl";
 import { getStatusValue } from "lib/getStatusValue";
 import { routeBuilder } from "router";
 import { HeaderProps } from "views/components/organisms/common/Header";
-import { EmployeeDao } from "lib/dao/employeeDao";
 import { getThisYear } from "lib/util";
 import { GroupDao } from "lib/dao/groupDao";
 import { listGroups } from "graphql/queries";
@@ -182,7 +179,7 @@ export default function () {
           }
         }
       })()
-    }, [])
+    }, [currentUser])
 
     return (
         <ReviewerEvaluationList

@@ -4,7 +4,6 @@ import { GraphQLResult } from "@aws-amplify/api";
 import {  } from 'react-router';
 import { Sheet, Section, UserContext} from 'App';
 import { GetSheetQuery } from 'API';
-import { updateObjective } from 'graphql/mutations';
 import * as APIt from 'API';
 import { getSheet } from 'graphql/queries';
 import HeaderComponents from 'common/header';
@@ -15,7 +14,6 @@ import { ReviewerSheetPagesStatus10 } from './detail/pages/10.result';
 import { ReviewerSheetPagesStatus12Second } from './detail/pages/12.confirm/second';
 import { ReviewerSheetPagesStatus12Top } from './detail/pages/12.confirm/top';
 import { ReviewerSheetPagesStatus13 } from './detail/pages/13.firstComment';
-import { ObjectiveDao } from 'lib/dao/objectiveDao';
 
 export const SheetContext = createContext<
     {
@@ -64,39 +62,39 @@ function EvalutionScreen(props: Props) {
             const sheetItem: Sheet = response.data?.getSheet as Sheet;
             setSheet(sheetItem);
         })()
-    }, []);
+    }, [props.match.params.companyId, props.match.params.reviewee, props.match.params.year]);
 
     // lastEvalutation 更新
-    async function handleChangeObjective(event: any) {
+    // async function handleChangeObjective(event: any) {
 
-        // ObjectiveId 取得
-        console.log(event.target.getAttribute('data-objective-id'));
-        const objectiveId = event.target.getAttribute('data-objective-id');
-        const objectiveLastEvaluation = parseInt(event.currentTarget.value);
+    //     // ObjectiveId 取得
+    //     console.log(event.target.getAttribute('data-objective-id'));
+    //     const objectiveId = event.target.getAttribute('data-objective-id');
+    //     const objectiveLastEvaluation = parseInt(event.currentTarget.value);
 
-        // lastEvaluation value 取得
-        console.log(event.currentTarget.value);
+    //     // lastEvaluation value 取得
+    //     console.log(event.currentTarget.value);
 
-        const updateI: APIt.UpdateObjectiveInput = {
-            // id: objectiveId,
-            createdAt: "", //仮で空白を設定
-            sectionKeys: "", //仮で空白を設定
-            lastEvaluation: objectiveLastEvaluation,
-        };
-        const updatedObjective = await ObjectiveDao.update(updateObjective, updateI)
-        if(updatedObjective && sheet){
-            const applyedSheet = {...sheet}
-            applyedSheet.section?.items?.forEach(section=>{
-                section?.objective?.items?.forEach(objective => {
-                    if(objective){
-                        if(objective.sectionKeys === objectiveId){
-                            objective.lastEvaluation = objectiveLastEvaluation
-                        }
-                    }
-                });
-            })
-        }
-    }
+    //     const updateI: APIt.UpdateObjectiveInput = {
+    //         // id: objectiveId,
+    //         createdAt: "", //仮で空白を設定
+    //         sectionKeys: "", //仮で空白を設定
+    //         lastEvaluation: objectiveLastEvaluation,
+    //     };
+    //     const updatedObjective = await ObjectiveDao.update(updateObjective, updateI)
+    //     if(updatedObjective && sheet){
+    //         const applyedSheet = {...sheet}
+    //         applyedSheet.section?.items?.forEach(section=>{
+    //             section?.objective?.items?.forEach(objective => {
+    //                 if(objective){
+    //                     if(objective.sectionKeys === objectiveId){
+    //                         objective.lastEvaluation = objectiveLastEvaluation
+    //                     }
+    //                 }
+    //             });
+    //         })
+    //     }
+    // }
 
 
 

@@ -1,9 +1,8 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { Button, Card, Row, Col } from 'react-bootstrap';
+import { Button, Card} from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import * as APIt from 'API';
 import { EmployeeContext, Group, Sheet, UserContext } from 'App';
-import SidebarComponents, { performanceSidebarBackgroundColor } from 'common/Sidebar';
 import HeaderComponents from 'common/header';//ヘッダーの表示
 import style from './progressStyle.module.scss';
 import { Link } from 'react-router-dom';
@@ -207,6 +206,7 @@ function ProgressReferenceList() {
     }, [currentUser, currentEmployee]);
 
     useEffect(() => {
+        const today: Date = new Date();
         ; (async () => {
             if (currentUser) {
                 const listYearQV: APIt.ListSheetYearQueryVariables = {

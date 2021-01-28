@@ -1,4 +1,3 @@
-import { Sheet } from "App";
 import { buttonComponentStyle } from "common/globalStyle.module.scss";
 import { updateSheet } from "graphql/mutations";
 import { SheetDao } from "lib/dao/sheetDao";
@@ -14,18 +13,18 @@ import { SheetContext } from "reviewee/sheet/index";
  * @param sheet 検証対象のシート
  * @returns 検証成功: true, 検証失敗: false
  */
-function validSheet(sheet: Sheet): boolean{
-    let result = true
-    sheet.section?.items?.forEach(section => {
-        section?.objective?.items?.forEach(objective => {
-            // 検証条件
-            if(objective && (!(objective.selfEvaluation) || !(objective.result))){
-                result = false  // 検証失敗判定
-            }
-        })
-    })
-    return result
-}
+// function validSheet(sheet: Sheet): boolean{
+//     let result = true
+//     sheet.section?.items?.forEach(section => {
+//         section?.objective?.items?.forEach(objective => {
+//             // 検証条件
+//             if(objective && (!(objective.selfEvaluation) || !(objective.result))){
+//                 result = false  // 検証失敗判定
+//             }
+//         })
+//     })
+//     return result
+// }
 
 export const SubmitButtonStatus2 = () => {
     const context = useContext(SheetContext);
