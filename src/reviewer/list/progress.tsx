@@ -212,7 +212,7 @@ function ProgressReferenceList() {
                 const listYearQV: APIt.ListSheetYearQueryVariables = {
                     companyID: currentUser.attributes["custom:companyId"],
                     year: {
-                        eq: today.getFullYear()
+                        eq: thisYear
                     }
                 };
 
@@ -312,7 +312,7 @@ function ProgressReferenceList() {
                             <h2>進捗参照</h2><br />
                             <Formik
                                 initialValues={{
-                                    year: today.getFullYear(),
+                                    year: thisYear,
                                     groupId: "all",
                                 }}
                                 onSubmit={async (values) => {
