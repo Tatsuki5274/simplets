@@ -14,6 +14,9 @@ export const routeBuilder = {
     reviewerListPath: (host?: string) =>{
         return `${host || ""}/reviewer/list`
     },
+    reviewerEvaluationListPath: (host?: string) =>{
+        return `${host || ""}/reviewer/evaluationlist`
+    },
     previewPath: (companyId: string, reviewee: string, year: string, host?: string)=>{
         return `${host || ""}/preview/company/${companyId}/reviewee/${reviewee}/year/${year}`
     },

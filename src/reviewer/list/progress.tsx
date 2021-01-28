@@ -10,10 +10,15 @@ import { Link } from 'react-router-dom';
 import { Field, Form, Formik } from 'formik';
 import { SheetDao } from 'lib/dao/sheetDao';
 import GaugeChart from 'react-gauge-chart';
-import { calcAvg, getSectionKeys, getSheetKeys, round} from 'lib/util';
+import { calcAvg, getSectionKeys, getSheetKeys, getThisYear, round} from 'lib/util';
 import { routeBuilder } from 'router';
 import { GroupDao } from 'lib/dao/groupDao';
 import ApprovalStatusBox from 'common/approvalStatusBox';
+import LeftBox from 'views/components/templates/LeftBox';
+import RightBox from 'views/components/templates/RightBox';
+import Content from 'views/components/templates/Content';
+import SidebarManager from 'views/components/organisms/common/SidebarManager';
+import Sidebar from 'views/components/templates/Sidebar';
 
 
 type ViewType = {
@@ -120,9 +125,13 @@ const listSheetYear = /* GraphQL */ `
 `;
 
 function ProgressReferenceList() {
+    // ログインユーザを取得する
+    const currentUser = useContext(UserContext);
+    const currentEmployee = useContext(EmployeeContext);
+
     //今日の日付を取得
     const today: Date = new Date();
-    const thisYear: number = today.getFullYear();
+    const thisYear: number = getThisYear(currentEmployee?.company?.startMonth);
     let yearList: Array<number> = [];
     for (let step = 0; step < 10; step++) {
         yearList.push((thisYear - step));
@@ -134,9 +143,20 @@ function ProgressReferenceList() {
     //選択する部署のデータを取得して昇順でソートして表示する機能
     const [groupList, setGroupList] = useState<Group[]>()
 
-    // ログインユーザを取得する
-    const currentUser = useContext(UserContext);
-    const currentEmployee = useContext(EmployeeContext);
+    //サイドバー
+    const sidebarMock = [
+        {
+            label: "業績評価一覧",
+            dest: routeBuilder.revieweeListPath()
+        }, {
+            label: "進捗参照",
+            dest: routeBuilder.reviewerListPath()
+        }, {
+            label: "総合評価参照",
+            dest: routeBuilder.reviewerEvaluationListPath()
+        }]
+
+
     
     useEffect(() => {
         ; (async () => {
@@ -277,92 +297,83 @@ function ProgressReferenceList() {
             <div id="gage"></div>
             {/* ヘッダーの表示 */}
             <HeaderComponents />
-            <Row>
-                <Col
-                    xs={1}
-                    sm={1}
-                    md={1}
-                    lg={1}
-                    xl={1}
-                    style={performanceSidebarBackgroundColor}
-                >
-                    {/* サイドバーコンポーネント 表示 */}
-                    <SidebarComponents />
-                </Col>
-                <Col
-                    xs={10}
-                    sm={10}
-                    md={10}
-                    lg={10}
-                    xl={10}
-                >
-                    <h2>進捗参照</h2><br />
-                    <Formik
-                        initialValues={{
-                            year: today.getFullYear(),
-                            groupId: "all",
-                        }}
-                        onSubmit={async (values)=>{
-                            let filter: APIt.ListSheetYearQueryVariables = {
-                                companyID: currentUser?.attributes["custom:companyId"],
-                                year: {
-                                    eq: values.year
-                                },
-                            }
-                            if(values.groupId !== "all") filter = {
-                                companyID: currentUser?.attributes["custom:companyId"],
-                                year: {
-                                    eq: values.year
-                                },
-                                filter: {
-                                    sheetGroupLocalId: {eq: values.groupId} //選択した部署情報
+            <LeftBox>
+                <Sidebar>
+                    <SidebarManager
+                        links={sidebarMock}
+                    />
+                </Sidebar>
+            </LeftBox>
+            <RightBox>
+                <Content>
+                    <>
+                        <h2>進捗参照</h2><br />
+                        <Formik
+                            initialValues={{
+                                year: today.getFullYear(),
+                                groupId: "all",
+                            }}
+                            onSubmit={async (values) => {
+                                let filter: APIt.ListSheetYearQueryVariables = {
+                                    companyID: currentUser?.attributes["custom:companyId"],
+                                    year: {
+                                        eq: values.year
+                                    },
                                 }
-                            }
-                            const listItems = await SheetDao.listYear(listSheetYear, filter)
-                            console.log(listItems)
+                                if (values.groupId !== "all") filter = {
+                                    companyID: currentUser?.attributes["custom:companyId"],
+                                    year: {
+                                        eq: values.year
+                                    },
+                                    filter: {
+                                        sheetGroupLocalId: { eq: values.groupId } //選択した部署情報
+                                    }
+                                }
+                                const listItems = await SheetDao.listYear(listSheetYear, filter)
+                                console.log(listItems)
 
-                            if(listItems){
-                                setView(listItems)
-                            }
-                        }}
-                    >
-                        {(formik) => (
-                            <Form onSubmit={formik.handleSubmit}>
-                                <div className={style.groupMargin}>
-                                    {/* 部門の選択肢を表示 */}
-                                    <span className={`${style.selectionSize} ${style.selectionMargin}`}>
-                                        <Field type="radio" name="groupId" value="all" handleChange={formik.handleChange}/>
+                                if (listItems) {
+                                    setView(listItems)
+                                }
+                            }}
+                        >
+                            {(formik) => (
+                                <Form onSubmit={formik.handleSubmit}>
+                                    <div className={style.groupMargin}>
+                                        {/* 部門の選択肢を表示 */}
+                                        <span className={`${style.selectionSize} ${style.selectionMargin}`}>
+                                            <Field type="radio" name="groupId" value="all" handleChange={formik.handleChange} />
                                         全て
                                     </span>
-                                    {groupList?.map((group: Group) => {
-                                        return (
-                                            <span className={`${style.selectionSize} ${style.selectionMargin}`}>
-                                                <Field type="radio" name="groupId" value={group.localID} handleChange={formik.handleChange}/>
-                                                {group.name}
-                                            </span>
-                                        )
-                                    })}
-                                </div>
+                                        {groupList?.map((group: Group) => {
+                                            return (
+                                                <span className={`${style.selectionSize} ${style.selectionMargin}`}>
+                                                    <Field type="radio" name="groupId" value={group.localID} handleChange={formik.handleChange} />
+                                                    {group.name}
+                                                </span>
+                                            )
+                                        })}
+                                    </div>
 
-                                {/* 年度の選択肢を表示 */}
-                                <span>年度</span>
-                                <Field as="select" name="year" className={style.yearMargin}>
-                                    {yearList.map((year: number) => {
-                                        return (
-                                            <option value={year}>{year}</option>
-                                        )
-                                    })}
-                                </Field>
+                                    {/* 年度の選択肢を表示 */}
+                                    <span>年度</span>
+                                    <Field as="select" name="year" className={style.yearMargin}>
+                                        {yearList.map((year: number) => {
+                                            return (
+                                                <option value={year}>{year}</option>
+                                            )
+                                        })}
+                                    </Field>
 
-                                {/* 確認を表示 */}
-                                <Button type="submit">参照</Button>
+                                    {/* 確認を表示 */}
+                                    <Button type="submit">参照</Button>
 
-                            </Form>
-                        )}
-                    </Formik>
+                                </Form>
+                            )}
+                        </Formik>
 
-                    <br />
-                    {/* {sheets?.map(sheet => {
+                        <br />
+                        {/* {sheets?.map(sheet => {
                         return (
                             <Card className={style.linkbox}>
                                 <Link to={`/reviewer/sheet/${sheet.id}`} />
@@ -396,73 +407,74 @@ function ProgressReferenceList() {
                         )
                     })} */}
 
-                    {sheetsView ? sheetsView.map(view => {
-                        if (view) {
-                            view?.categorys?.sort(function (a, b) {
-                                if (a.no! > b.no!) {
-                                    return 1;
-                                } else {
-                                    return -1;
-                                }
-                            });
+                        {sheetsView ? sheetsView.map(view => {
+                            if (view) {
+                                view?.categorys?.sort(function (a, b) {
+                                    if (a.no! > b.no!) {
+                                        return 1;
+                                    } else {
+                                        return -1;
+                                    }
+                                });
 
-                            return (
-                                <Card className={style.linkbox}>
-                                    <Link to={routeBuilder.reviewerDetailPath(view.companyId, view.reviewee, view.year)} />
-                                    {/* 社員の姓名と部門名を表示 */}
-                                    <Card.Header>
-                                        {view.revieweeName.lastName}
-                                        {view.revieweeName.firstName}
+                                return (
+                                    <Card className={style.linkbox}>
+                                        <Link to={routeBuilder.reviewerDetailPath(view.companyId, view.reviewee, view.year)} />
+                                        {/* 社員の姓名と部門名を表示 */}
+                                        <Card.Header>
+                                            {view.revieweeName.lastName}
+                                            {view.revieweeName.firstName}
                                 &nbsp;
                                 {view.groupName}
                                 &nbsp;
                                 {view.avg ? `${round(view.avg, 2).toFixed(1)}%` : null}
 
-                                        {view.avg ?
-                                            <GaugeChart id={`chart-${view.groupId}-${view.sheetKey}`}
-                                                nrOfLevels={10}
-                                                colors={['#EA4228', '#F5CD19', '#5BE12C']}
-                                                percent={view.avg / 100}
-                                                hideText={true}
-                                                style={{
-                                                    width: '100px',
-                                                    height: '50px',
-                                                    display: 'inline-block'
-                                                }}
-                                            /> : null}
-                                        {view.statusValue ?
-                                            <ApprovalStatusBox statusValue={view.statusValue}
-                                            /> : null}
-                                    </Card.Header>
-                                    <Card.Body>
-                                        {view.categorys?.map(category => {
-                                            return category.id && category.avg ?
-                                                <div id={category.id}>
-                                                    {category.name}&nbsp;{round(category.avg, 2).toFixed(1)}
-                                                    <GaugeChart id={`chart-${category.sectionId}`}
-                                                        nrOfLevels={10}
-                                                        colors={['#EA4228', '#F5CD19', '#5BE12C']}
-                                                        percent={category.avg / 100}
-                                                        style={{
-                                                            width: '50px',
-                                                            height: '50px',
-                                                            display: 'inline-block'
-                                                        }}
-                                                    />
-                                                </div> :
-                                                <div id={category.id}>
-                                                    {category.name}&nbsp;-
+                                            {view.avg ?
+                                                <GaugeChart id={`chart-${view.groupId}-${view.sheetKey}`}
+                                                    nrOfLevels={10}
+                                                    colors={['#EA4228', '#F5CD19', '#5BE12C']}
+                                                    percent={view.avg / 100}
+                                                    hideText={true}
+                                                    style={{
+                                                        width: '100px',
+                                                        height: '50px',
+                                                        display: 'inline-block'
+                                                    }}
+                                                /> : null}
+                                            {view.statusValue ?
+                                                <ApprovalStatusBox statusValue={view.statusValue}
+                                                /> : null}
+                                        </Card.Header>
+                                        <Card.Body>
+                                            {view.categorys?.map(category => {
+                                                return category.id && category.avg ?
+                                                    <div id={category.id}>
+                                                        {category.name}&nbsp;{round(category.avg, 2).toFixed(1)}
+                                                        <GaugeChart id={`chart-${category.sectionId}`}
+                                                            nrOfLevels={10}
+                                                            colors={['#EA4228', '#F5CD19', '#5BE12C']}
+                                                            percent={category.avg / 100}
+                                                            style={{
+                                                                width: '50px',
+                                                                height: '50px',
+                                                                display: 'inline-block'
+                                                            }}
+                                                        />
+                                                    </div> :
+                                                    <div id={category.id}>
+                                                        {category.name}&nbsp;-
                                         </div>
-                                        })}
-                                    </Card.Body>
-                                </Card>
-                            )
-                        } else {
-                            return null
-                        }
-                    }) : null}
-                </Col>
-            </Row>
+                                            })}
+                                        </Card.Body>
+                                    </Card>
+                                )
+                            } else {
+                                return null
+                            }
+                        }) : null}
+                    </>
+                </Content>
+            </RightBox>
         </div>
     );
 }

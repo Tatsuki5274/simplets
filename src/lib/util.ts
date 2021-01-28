@@ -57,3 +57,15 @@ export function getSectionKeys(section: Section): string{
 export function getObjectiveKeys(objective: Objective): string{
     return `${objective.sectionKeys}.${objective.createdAt}`
 }
+
+/**
+ * 
+ * @param startMonth 開始月
+ * @returns 今年の年度
+ */
+export function getThisYear(startMonth = 1): number{
+    const today: Date = new Date();
+    const dateMonth = startMonth - 1 //1月が0のため
+    const thisYear = today.getMonth() < dateMonth ? today.getFullYear() - 1 : today.getFullYear()
+    return thisYear
+}

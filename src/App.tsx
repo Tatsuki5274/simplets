@@ -19,6 +19,8 @@ import EvaluationScreen from "reviewer/sheet";
 import { PDFPage } from 'views/pdf/page';
 import MySignIn from 'views/auth/signIn';
 import { EmployeeDao } from 'lib/dao/employeeDao';
+import EvaluationList from 'views/components/pages/evaluation/reviewer/EvaluationList';　//総合評価参照画面 テスト用
+import { routeBuilder } from 'router';
 Amplify.configure(awsconfig);
 
 export type Sheet = Omit<Exclude<APIt.GetSheetQuery['getSheet'], null>, '__typename'>;
@@ -67,6 +69,7 @@ const getEmployee = /* GraphQL */ `
       company {
         id
         name
+        startMonth
       }
     }
   }
@@ -107,6 +110,8 @@ function App() {
               <Route exact path="/reviewer/list" component={ProgressReferenceList} />
               <Route exact path="/reviewer/company/:companyId/reviewee/:reviewee/year/:year" component={EvaluationScreen} />
               <Route exact path="/preview/company/:companyId/reviewee/:reviewee/year/:year" component={PDFPage} />
+              {/* 総合評価参照画面 テスト用 */}
+              <Route exact path={routeBuilder.reviewerEvaluationListPath()} component={EvaluationList} />
             </Switch>
           </BrowserRouter>
         </EmployeeContext.Provider>

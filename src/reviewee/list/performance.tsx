@@ -1,11 +1,10 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { Button, Col, Container, Row, Table } from 'react-bootstrap';
+import { Button, Container, Table } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Link } from 'react-router-dom';
-import { Category, Sheet, UserContext } from 'App';
+import { Category, EmployeeContext, Sheet, UserContext } from 'App';
 import { ApprovalStatus, getStatusValue } from 'lib/getStatusValue'
 import * as APIt from 'API';
-import SidebarComponents, { performanceSidebarBackgroundColor } from 'common/Sidebar';
 import HeaderComponents from 'common/header';
 import { SheetDao } from 'lib/dao/sheetDao';
 import { EmployeeDao } from 'lib/dao/employeeDao';
@@ -15,6 +14,12 @@ import { DisplaySheetAverage } from './components/average';
 import { tableHeaderStyle } from 'common/globalStyle.module.scss';
 import { getSheetKeys } from 'lib/util';
 import { BooleanType, EmployeeType } from 'API';
+import LeftBox from 'views/components/templates/LeftBox';
+import RightBox from 'views/components/templates/RightBox';
+import SidebarManager from 'views/components/organisms/common/SidebarManager';
+import { routeBuilder } from 'router';
+import Sidebar from 'views/components/templates/Sidebar';
+import Content from 'views/components/templates/Content';
 
 const sortSheet = (a: Sheet, b: Sheet) => {
   if (a.year < b.year) {
@@ -184,6 +189,30 @@ function ListPerformanceEvalution() {
   // ログインユーザを取得する
   const currentUser = useContext(UserContext);
 
+  const currentEmployee = useContext(EmployeeContext);
+
+  //サイドバー
+  let sidebar = [
+    {
+        label: "業績評価一覧",
+        dest: routeBuilder.revieweeListPath()
+  }]
+
+  // SUPER_MANAGER,MANAGERが含まれているか確認
+  if(currentEmployee && (currentEmployee.manager === 'MANAGER' as EmployeeType || currentEmployee.manager === 'SUPER_MANAGER' as EmployeeType)) {
+      sidebar = [
+          {
+              label: "業績評価一覧",
+              dest: routeBuilder.revieweeListPath()
+      }, {
+          label: "進捗参照",
+          dest: routeBuilder.reviewerListPath()
+      }, {
+          label: "総合評価参照",
+          dest: routeBuilder.reviewerEvaluationListPath()
+      }]
+  }
+
   useEffect(() => {
     ; (async () => {
       if (currentUser) {
@@ -345,70 +374,63 @@ function ListPerformanceEvalution() {
     <div>
       {/* ヘッダーの表示 */}
       <HeaderComponents />
-      <Row>
-        <Col
-          xs={1}
-          sm={1}
-          md={1}
-          lg={1}
-          xl={1}
-          style={performanceSidebarBackgroundColor}
-        >
-          <SidebarComponents />
-        </Col>
-        <Col
-          xs={10}
-          sm={10}
-          md={10}
-          lg={10}
-          xl={10}
-        >
-          <h2>業績評価一覧</h2>
-          {(sheets && sheets.find(sheet => {
-            return sheet.year === targetYear
-          }))
-            ? null :
-            <Button
-              variant="primary"
-              onClick={handleClickCreate}
-            >
-              新規作成
+      <LeftBox>
+        <Sidebar>
+          <SidebarManager
+            links={sidebar}
+          />
+        </Sidebar>
+      </LeftBox>
+      <RightBox>
+        <Content>
+          <>
+            <h2>業績評価一覧</h2>
+            {(sheets && sheets.find(sheet => {
+              return sheet.year === targetYear
+            }))
+              ? null :
+              <Button
+                variant="primary"
+                onClick={handleClickCreate}
+              >
+                新規作成
                         </Button>
-          }
-          <Table bordered>
-            <thead className={tableHeaderStyle}>
-              <tr>
-                <td></td>
-                <td>年度</td>
-                <td>所属長</td>
-                <td>平均達成率</td>
-                <td>ステータス</td>
-                <td></td>
-              </tr>
-            </thead>
+            }
+            <Table bordered>
+              <thead className={tableHeaderStyle}>
+                <tr>
+                  <td></td>
+                  <td>年度</td>
+                  <td>所属長</td>
+                  <td>平均達成率</td>
+                  <td>ステータス</td>
+                  <td></td>
+                </tr>
+              </thead>
 
-            <tbody>
-              {sheets?.map((sheet: Sheet) => {
-                let editName = "編集";
-                if (sheet.statusValue === ApprovalStatus.DONE) {
-                  editName = "確認";
-                }
+              <tbody>
+                {sheets?.map((sheet: Sheet) => {
+                  let editName = "編集";
+                  if (sheet.statusValue === ApprovalStatus.DONE) {
+                    editName = "確認";
+                  }
 
-                return (
-                  <tr key={sheet.sheetGroupLocalId}>
-                    <td><Link to={`/reviewee/company/${sheet.companyID}/reviewee/${sheet.reviewee}/year/${sheet.year}`}>{editName}</Link></td>
-                    <td>{sheet.year}</td>
-                    <td>{sheet.secondEmployee ? sheet.secondEmployee.lastName : ""}{sheet.secondEmployee ? sheet.secondEmployee.firstName : ""}</td>
-                    <td><DisplaySheetAverage sheet={sheet} /></td>
-                    <td>{getStatusValue(sheet.statusValue || -1)}</td>
-                    <td><a href={`/preview/company/${sheet.companyID}/reviewee/${sheet.reviewee}/year/${sheet.year}`}>プレビュー</a></td>
-                  </tr>
-                )
-              })}
-            </tbody>
-          </Table>
-        </Col>
-      </Row>
+                  return (
+                    <tr key={sheet.sheetGroupLocalId}>
+                      <td><Link to={`/reviewee/company/${sheet.companyID}/reviewee/${sheet.reviewee}/year/${sheet.year}`}>{editName}</Link></td>
+                      <td>{sheet.year}</td>
+                      <td>{sheet.secondEmployee ? sheet.secondEmployee.lastName : ""}{sheet.secondEmployee ? sheet.secondEmployee.firstName : ""}</td>
+                      <td><DisplaySheetAverage sheet={sheet} /></td>
+                      <td>{getStatusValue(sheet.statusValue || -1)}</td>
+                      <td><a href={`/preview/company/${sheet.companyID}/reviewee/${sheet.reviewee}/year/${sheet.year}`}>プレビュー</a></td>
+                    </tr>
+                  )
+                })}
+              </tbody>
+            </Table>
+          </>
+        </Content>
+      </RightBox>
       {/* サイドバーコンポーネント 表示 */}
 
       <div>

@@ -4,6 +4,7 @@ import { getEmployee } from 'graphql/queries';
 import { EmployeeDao } from 'lib/dao/employeeDao';
 import React, { CSSProperties, useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { routeBuilder } from 'router';
 import style from './sidebarStyle.module.scss'
 
 function SidebarComponents() {
@@ -35,7 +36,11 @@ function SidebarComponents() {
             <Link className={style.sidebarContents} to="/reviewee/list">業績評価一覧</Link><br />
 
             {/* 進捗参照 表示条件 */}
-            {isManager? <Link className={style.sidebarContents} to="/reviewer/list">進捗参照</Link>: ""}
+            {isManager? <>
+                    <Link className={style.sidebarContents} to="/reviewer/list">進捗参照</Link><br />
+                    <Link className={style.sidebarContents} to={routeBuilder.reviewerEvaluationListPath()}>総合評価参照</Link>
+                </>
+                : ""}
 
         </div>
     );
