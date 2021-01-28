@@ -15,6 +15,6 @@ export default function (props: Props) {
 
 const Styled = styled.div({
     backgroundColor: "#8080804d",
-    minHeight: "100vh",
+    minHeight: "100%",
     padding: "20px 10px",
 })

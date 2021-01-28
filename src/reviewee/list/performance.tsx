@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { Button, Container, Table } from 'react-bootstrap';
+import { Button, Table } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Link } from 'react-router-dom';
 import { Category, EmployeeContext, Sheet, UserContext } from 'App';
@@ -20,6 +20,7 @@ import SidebarManager from 'views/components/organisms/common/SidebarManager';
 import { routeBuilder } from 'router';
 import Sidebar from 'views/components/templates/Sidebar';
 import Content from 'views/components/templates/Content';
+import Container from 'views/components/templates/Container';
 
 const sortSheet = (a: Sheet, b: Sheet) => {
   if (a.year < b.year) {
@@ -371,9 +372,10 @@ function ListPerformanceEvalution() {
 
   if (sheets === undefined) return <div>Loading</div>
   return (
-    <div>
-      {/* ヘッダーの表示 */}
-      <HeaderComponents />
+    <>
+    {/* ヘッダーの表示 */}
+    <HeaderComponents />
+    <Container>
       <LeftBox>
         <Sidebar>
           <SidebarManager
@@ -433,12 +435,8 @@ function ListPerformanceEvalution() {
       </RightBox>
       {/* サイドバーコンポーネント 表示 */}
 
-      <div>
-        <Container>
-
-        </Container>
-      </div>
-    </div>
+    </Container>
+    </>
   );
 }
 

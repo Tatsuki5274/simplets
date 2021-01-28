@@ -8,6 +8,7 @@ import SidebarManager from "views/components/organisms/common/SidebarManager";
 import EvaluationFilter from "views/components/organisms/evaluation/reviewerList/EvaluationFilter";
 import EvaluationListTitle from "views/components/organisms/evaluation/reviewerList/EvaluationListTitle";
 import TableEvaluationList, { TableEvaluationListType } from "views/components/organisms/evaluation/reviewerList/TableEvaluationList";
+import Container from "../../Container";
 import Content from "../../Content";
 import LeftBox from "../../LeftBox";
 import RightBox from "../../RightBox";
@@ -124,40 +125,41 @@ export default function (props: Props) {
             <Header
                 {...props.data.header}
             />
-            <LeftBox>
-                <Sidebar>
-                    <SidebarManager
-                        links={sidebarMock}
-                    />
-                </Sidebar>
-            </LeftBox>
-
-            <RightBox>
-                <Content>
-                    <>
-                        <EvaluationListTitleStyle>
-                            <EvaluationListTitle />
-                        </EvaluationListTitleStyle>
-                        {yearList && props.data.groups ?
-                            <EvaluationFilterStyle>
-                                <EvaluationFilter
-                                    groups={props.data.groups}
-                                    status={statusMock}
-                                    years={yearList}
-                                    initTableData={props.initTableData}
-                                    setTableData={props.setTableData}
+            <Container>
+                <LeftBox>
+                    <Sidebar>
+                        <SidebarManager
+                            links={sidebarMock}
+                        />
+                    </Sidebar>
+                </LeftBox>
+                <RightBox>
+                    <Content>
+                        <>
+                            <EvaluationListTitleStyle>
+                                <EvaluationListTitle />
+                            </EvaluationListTitleStyle>
+                            {yearList && props.data.groups ?
+                                <EvaluationFilterStyle>
+                                    <EvaluationFilter
+                                        groups={props.data.groups}
+                                        status={statusMock}
+                                        years={yearList}
+                                        initTableData={props.initTableData}
+                                        setTableData={props.setTableData}
+                                    />
+                                </EvaluationFilterStyle>
+                                : null}
+                            {props.tableData ?
+                                <TableEvaluationList
+                                    data={props.tableData}
                                 />
-                            </EvaluationFilterStyle>
-                            : null}
-                        {props.tableData ?
-                            <TableEvaluationList
-                                data={props.tableData}
-                            />
-                            : null}
+                                : null}
 
-                    </>
-                </Content>
-            </RightBox>
+                        </>
+                    </Content>
+                </RightBox>
+            </Container>
         </>
     )
 }

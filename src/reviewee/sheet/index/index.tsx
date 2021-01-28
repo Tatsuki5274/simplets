@@ -38,6 +38,7 @@ import Sidebar from 'views/components/templates/Sidebar';
 import SidebarManager from 'views/components/organisms/common/SidebarManager';
 import { routeBuilder } from 'router';
 import { EmployeeType } from 'API';
+import Container from 'views/components/templates/Container';
 
 
 export const SheetContext = createContext<
@@ -131,7 +132,7 @@ function RevieweeSheetShow(props: Props) {
             <HeaderComponents />
             {/* <RevieweeSidebar /> */}
 
-            <div>
+            <Container>
                 <div>
                     {modalObjective && sheet.statusValue === 1 ?
                         <RevieweeSheetObjectiveModalStatus1 objective={modalObjective} isShowModal={objectiveUpdateShow} handleClose={handleCloseObjectiveUpdate} /> :
@@ -269,7 +270,7 @@ function RevieweeSheetShow(props: Props) {
                         </>
                     </Content>
                 </RightBox>
-            </div>
+            </Container>
         </SheetContext.Provider>
     );
 }
