@@ -9,7 +9,8 @@ export type TableEvaluationListType = {
     data: {
         year: number
         groupLocalId: string,
-        statusValue: number
+        statusValue: number,
+        localId: string,
     }
 
     // 表示データ

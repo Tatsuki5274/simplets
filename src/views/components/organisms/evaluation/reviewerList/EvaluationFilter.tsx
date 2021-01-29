@@ -28,7 +28,9 @@ export default function (props: Props) {
                 if(props.initTableData){
                     let filter: (TableEvaluationListType | null)[] = props.initTableData
                     // 部署フィルター
-                    filter = filter.filter(datum => datum?.data.groupLocalId === values.group)
+                    if (values.group !== "all") {
+                        filter = filter.filter(datum => datum?.data.groupLocalId === values.group)
+                    }
                     // 年度フィルター
                     filter = filter.filter(datum => datum?.data.year.toString() === values.year)
                     // ステータスフィルター
@@ -37,6 +39,17 @@ export default function (props: Props) {
                         filter = filter.filter(datum => datum?.data.statusValue.toString() === values.statusValue)
                     }
                     // console.log("filter", filter)
+
+                    //ソート
+                    filter.sort(function (a, b) {
+                        if (a && b && a.data && b.data) {
+                            if (a.data.groupLocalId > b.data.groupLocalId) return 1
+                            if (a.data.groupLocalId < b.data.groupLocalId) return -1
+                            if (a.data.localId > b.data.localId) return 1
+                            if (a.data.localId < b.data.localId) return -1
+                        }
+                        return 0
+                    })
                     props.setTableData(filter)
                 }
 

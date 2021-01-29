@@ -107,12 +107,13 @@ export default function () {
                         const twoYearsAgoOverAllEvaluation = sheets.find(comSheet => {
                             return sheet.year - 2 === comSheet.year
                         })?.overAllEvaluation || null
-                        if(sheet.group?.localID && sheet.year && sheet.statusValue){
+                        if(sheet.group?.localID && sheet.year && sheet.statusValue && sheet.revieweeEmployee){
                             ret = {
                                 data: {
                                     groupLocalId: sheet.group?.localID,
                                     year: sheet.year,
-                                    statusValue: sheet.statusValue
+                                    statusValue: sheet.statusValue,
+                                    localId: sheet.revieweeEmployee.localID
                                 },
                                 groupName: sheet.group?.name || "",
                                 name: `${sheet.revieweeEmployee?.lastName} ${sheet.revieweeEmployee?.firstName}`,
@@ -125,6 +126,18 @@ export default function () {
                         }
                         return ret
                     })
+
+                    //ソート
+                    obj.sort(function (a, b) {
+                      if (a && b && a.data && b.data) {
+                          if (a.data.groupLocalId > b.data.groupLocalId) return 1
+                          if (a.data.groupLocalId < b.data.groupLocalId) return -1
+                          if (a.data.localId > b.data.localId) return 1
+                          if (a.data.localId < b.data.localId) return -1
+                      }
+                      return 0
+                    })
+                    
                     setInitTableData(obj)
                     setTableData(obj)
                     console.log("tableData", obj)
@@ -169,13 +182,19 @@ export default function () {
         if(currentUser){
           const groups = await GroupDao.list(listGroups, {companyID: currentUser.attributes["custom:companyId"]})
           if(groups){
+            const groupAll: SelectLabel[] = [
+              {
+                label: "全て",
+                value: "all"
+              }
+            ]
             const groupsLabel: SelectLabel[] = groups.map(group => {
               return {
                 label: group.name,
                 value: group.localID
               }
             })
-            setGroups(groupsLabel)
+            setGroups(groupAll.concat(groupsLabel))
           }
         }
       })()
