@@ -146,7 +146,7 @@ export const ReviewerSheetPagesStatus10 = (props: Props) => {
                                                     year: sheet.year,
                                                     secondComment: formik.values.secondComment,
                                                     secondCheckDate: formatAWSDate(new Date()),
-                                                    overAllEvaluation: formik.values.overAllEvaluation
+                                                    overAllEvaluation: formik.values.overAllEvaluation || null
                                                 }
                                                 const updatedSheet = await SheetDao.update(updateSheet, data);
 
