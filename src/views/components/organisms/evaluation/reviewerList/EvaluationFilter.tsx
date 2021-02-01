@@ -2,9 +2,9 @@ import React from "react";
 import Text from "views/components/atoms/Text";
 import PullDown from "views/components/molecules/PullDown";
 import { TableEvaluationListType } from "./TableEvaluationList";
-import ButtonPositive from "views/components/molecules/ButtonPositive";
 import { Formik } from "formik";
 import RadioButtonSelect from "views/components/molecules/RadioButtonSelect";
+import CommandButton from "views/components/molecules/CommandButton";
 
 type Props = {
     groups: { value: string, label: string }[]
@@ -77,11 +77,11 @@ export default function (props: Props) {
                         options={props.status}
                     ></PullDown>
 
-                    <ButtonPositive
+                    <CommandButton
                         type="submit"
                     >
                         確認
-                    </ButtonPositive>
+                    </CommandButton>
                 </form>
             )}
         </Formik>

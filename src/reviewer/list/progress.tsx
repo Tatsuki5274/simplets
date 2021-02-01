@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { Button, Card} from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import * as APIt from 'API';
 import { EmployeeContext, Group, Sheet, UserContext } from 'App';
@@ -19,6 +19,7 @@ import Content from 'views/components/templates/Content';
 import SidebarManager from 'views/components/organisms/common/SidebarManager';
 import Sidebar from 'views/components/templates/Sidebar';
 import Container from 'views/components/templates/Container';
+import CommandButton from 'views/components/molecules/CommandButton';
 
 
 type ViewType = {
@@ -368,7 +369,7 @@ function ProgressReferenceList() {
                                         </Field>
 
                                         {/* 確認を表示 */}
-                                        <Button type="submit">参照</Button>
+                                        <CommandButton type="submit">参照</CommandButton>
 
                                     </Form>
                                 )}
