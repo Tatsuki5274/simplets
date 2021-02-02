@@ -25,7 +25,7 @@ type Props = {
 }
 
 const EvaluationListTitleStyle = styled.div({
-    paddingTop: "20px",
+    // paddingTop: "20px",
 })
 
 const EvaluationFilterStyle = styled.div({

@@ -21,6 +21,7 @@ import { routeBuilder } from 'router';
 import Sidebar from 'views/components/templates/Sidebar';
 import Content from 'views/components/templates/Content';
 import Container from 'views/components/templates/Container';
+import Title from 'views/components/molecules/Title';
 
 const sortSheet = (a: Sheet, b: Sheet) => {
   if (a.year < b.year) {
@@ -386,7 +387,7 @@ function ListPerformanceEvalution() {
       <RightBox>
         <Content>
           <>
-            <h2>業績評価一覧</h2>
+            <Title>業績評価一覧</Title>
             {(sheets && sheets.find(sheet => {
               return sheet.year === targetYear
             }))

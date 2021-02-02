@@ -19,6 +19,7 @@ import Content from 'views/components/templates/Content';
 import SidebarManager from 'views/components/organisms/common/SidebarManager';
 import Sidebar from 'views/components/templates/Sidebar';
 import Container from 'views/components/templates/Container';
+import Title from 'views/components/molecules/Title';
 import CommandButton from 'views/components/molecules/CommandButton';
 
 
@@ -310,7 +311,7 @@ function ProgressReferenceList() {
                 <RightBox>
                     <Content>
                         <>
-                            <h2>進捗参照</h2><br />
+                            <Title>進捗参照</Title>
                             <Formik
                                 initialValues={{
                                     year: thisYear,

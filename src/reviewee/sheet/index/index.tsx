@@ -41,6 +41,7 @@ import { EmployeeType } from 'API';
 import Scroll from 'views/components/atoms/Scroll';
 import ScrollTable from 'views/components/molecules/ScrollTable';
 import Container from 'views/components/templates/Container';
+import Title from 'views/components/molecules/Title';
 
 
 export const SheetContext = createContext<
@@ -157,7 +158,7 @@ function RevieweeSheetShow(props: Props) {
                                 <Button >戻る</Button>
                             </Link>
                             <ApprovalStatusBox statusValue={sheet.statusValue || -1} />
-                            <h2>業績評価</h2>
+                            <Title>業績評価</Title>
                             {sheet.statusValue === 1 ?
                                 <ObjectiveCreateModal
                                     year={sheet.year}
