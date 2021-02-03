@@ -461,15 +461,6 @@ export enum ModelSortDirection {
 }
 
 
-export type ModelCategoryFilterInput = {
-  companyID?: ModelIDInput | null,
-  localID?: ModelIDInput | null,
-  name?: ModelStringInput | null,
-  and?: Array< ModelCategoryFilterInput | null > | null,
-  or?: Array< ModelCategoryFilterInput | null > | null,
-  not?: ModelCategoryFilterInput | null,
-};
-
 export type ModelStringKeyConditionInput = {
   eq?: string | null,
   le?: string | null,
@@ -532,6 +523,15 @@ export type ModelEmployeeEmployee_managerCompositeKeyConditionInput = {
 export type ModelEmployeeEmployee_managerCompositeKeyInput = {
   manager?: EmployeeType | null,
   isDeleted?: BooleanType | null,
+};
+
+export type ModelCategoryFilterInput = {
+  companyID?: ModelIDInput | null,
+  localID?: ModelIDInput | null,
+  name?: ModelStringInput | null,
+  and?: Array< ModelCategoryFilterInput | null > | null,
+  or?: Array< ModelCategoryFilterInput | null > | null,
+  not?: ModelCategoryFilterInput | null,
 };
 
 export type ModelSheetPrimaryCompositeKeyConditionInput = {
@@ -3146,46 +3146,6 @@ export type ListGroupsQuery = {
   } | null,
 };
 
-export type GetCategoryQueryVariables = {
-  companyID: string,
-  localID: string,
-};
-
-export type GetCategoryQuery = {
-  getCategory:  {
-    __typename: "Category",
-    companyID: string,
-    localID: string,
-    name: string,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
-};
-
-export type ListCategorysQueryVariables = {
-  companyID?: string | null,
-  localID?: ModelIDKeyConditionInput | null,
-  filter?: ModelCategoryFilterInput | null,
-  limit?: number | null,
-  nextToken?: string | null,
-  sortDirection?: ModelSortDirection | null,
-};
-
-export type ListCategorysQuery = {
-  listCategorys:  {
-    __typename: "ModelCategoryConnection",
-    items:  Array< {
-      __typename: "Category",
-      companyID: string,
-      localID: string,
-      name: string,
-      createdAt: string,
-      updatedAt: string,
-    } | null > | null,
-    nextToken: string | null,
-  } | null,
-};
-
 export type GetObjectiveQueryVariables = {
   sectionKeys: string,
   createdAt: string,
@@ -4079,6 +4039,46 @@ export type ListEmployeesManagerQuery = {
           } | null,
         } | null,
       } | null,
+    } | null > | null,
+    nextToken: string | null,
+  } | null,
+};
+
+export type GetCategoryQueryVariables = {
+  companyID: string,
+  localID: string,
+};
+
+export type GetCategoryQuery = {
+  getCategory:  {
+    __typename: "Category",
+    companyID: string,
+    localID: string,
+    name: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type ListCategorysQueryVariables = {
+  companyID?: string | null,
+  localID?: ModelIDKeyConditionInput | null,
+  filter?: ModelCategoryFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+  sortDirection?: ModelSortDirection | null,
+};
+
+export type ListCategorysQuery = {
+  listCategorys:  {
+    __typename: "ModelCategoryConnection",
+    items:  Array< {
+      __typename: "Category",
+      companyID: string,
+      localID: string,
+      name: string,
+      createdAt: string,
+      updatedAt: string,
     } | null > | null,
     nextToken: string | null,
   } | null,
@@ -6330,39 +6330,6 @@ export type OnDeleteGroupSubscription = {
   } | null,
 };
 
-export type OnCreateCategorySubscription = {
-  onCreateCategory:  {
-    __typename: "Category",
-    companyID: string,
-    localID: string,
-    name: string,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
-};
-
-export type OnUpdateCategorySubscription = {
-  onUpdateCategory:  {
-    __typename: "Category",
-    companyID: string,
-    localID: string,
-    name: string,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
-};
-
-export type OnDeleteCategorySubscription = {
-  onDeleteCategory:  {
-    __typename: "Category",
-    companyID: string,
-    localID: string,
-    name: string,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
-};
-
 export type OnCreateObjectiveSubscriptionVariables = {
   topReviewers?: string | null,
   secondReviewers?: string | null,
@@ -7119,6 +7086,39 @@ export type OnDeleteEmployeeSubscription = {
         } | null,
       } | null,
     } | null,
+  } | null,
+};
+
+export type OnCreateCategorySubscription = {
+  onCreateCategory:  {
+    __typename: "Category",
+    companyID: string,
+    localID: string,
+    name: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnUpdateCategorySubscription = {
+  onUpdateCategory:  {
+    __typename: "Category",
+    companyID: string,
+    localID: string,
+    name: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnDeleteCategorySubscription = {
+  onDeleteCategory:  {
+    __typename: "Category",
+    companyID: string,
+    localID: string,
+    name: string,
+    createdAt: string,
+    updatedAt: string,
   } | null,
 };
 

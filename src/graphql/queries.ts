@@ -74,45 +74,6 @@ export const listGroups = /* GraphQL */ `
     }
   }
 `;
-export const getCategory = /* GraphQL */ `
-  query GetCategory($companyID: ID!, $localID: ID!) {
-    getCategory(companyID: $companyID, localID: $localID) {
-      companyID
-      localID
-      name
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const listCategorys = /* GraphQL */ `
-  query ListCategorys(
-    $companyID: ID
-    $localID: ModelIDKeyConditionInput
-    $filter: ModelCategoryFilterInput
-    $limit: Int
-    $nextToken: String
-    $sortDirection: ModelSortDirection
-  ) {
-    listCategorys(
-      companyID: $companyID
-      localID: $localID
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-      sortDirection: $sortDirection
-    ) {
-      items {
-        companyID
-        localID
-        name
-        createdAt
-        updatedAt
-      }
-      nextToken
-    }
-  }
-`;
 export const getObjective = /* GraphQL */ `
   query GetObjective($sectionKeys: ID!, $createdAt: AWSDateTime!) {
     getObjective(sectionKeys: $sectionKeys, createdAt: $createdAt) {
@@ -949,6 +910,45 @@ export const listEmployeesManager = /* GraphQL */ `
             }
           }
         }
+      }
+      nextToken
+    }
+  }
+`;
+export const getCategory = /* GraphQL */ `
+  query GetCategory($companyID: ID!, $localID: ID!) {
+    getCategory(companyID: $companyID, localID: $localID) {
+      companyID
+      localID
+      name
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listCategorys = /* GraphQL */ `
+  query ListCategorys(
+    $companyID: ID
+    $localID: ModelIDKeyConditionInput
+    $filter: ModelCategoryFilterInput
+    $limit: Int
+    $nextToken: String
+    $sortDirection: ModelSortDirection
+  ) {
+    listCategorys(
+      companyID: $companyID
+      localID: $localID
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      sortDirection: $sortDirection
+    ) {
+      items {
+        companyID
+        localID
+        name
+        createdAt
+        updatedAt
       }
       nextToken
     }

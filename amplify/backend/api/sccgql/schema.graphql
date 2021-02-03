@@ -96,6 +96,8 @@ type Category
   rules: [
     {allow: groups, groups: ["Admin"]}
     {allow: private}
+    {allow: private, provider: iam ,operations:[read]}
+
   ]
 )
 {

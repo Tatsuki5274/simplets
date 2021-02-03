@@ -74,39 +74,6 @@ export const onDeleteGroup = /* GraphQL */ `
     }
   }
 `;
-export const onCreateCategory = /* GraphQL */ `
-  subscription OnCreateCategory {
-    onCreateCategory {
-      companyID
-      localID
-      name
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const onUpdateCategory = /* GraphQL */ `
-  subscription OnUpdateCategory {
-    onUpdateCategory {
-      companyID
-      localID
-      name
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const onDeleteCategory = /* GraphQL */ `
-  subscription OnDeleteCategory {
-    onDeleteCategory {
-      companyID
-      localID
-      name
-      createdAt
-      updatedAt
-    }
-  }
-`;
 export const onCreateObjective = /* GraphQL */ `
   subscription OnCreateObjective(
     $topReviewers: String
@@ -818,6 +785,39 @@ export const onDeleteEmployee = /* GraphQL */ `
           }
         }
       }
+    }
+  }
+`;
+export const onCreateCategory = /* GraphQL */ `
+  subscription OnCreateCategory {
+    onCreateCategory {
+      companyID
+      localID
+      name
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateCategory = /* GraphQL */ `
+  subscription OnUpdateCategory {
+    onUpdateCategory {
+      companyID
+      localID
+      name
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteCategory = /* GraphQL */ `
+  subscription OnDeleteCategory {
+    onDeleteCategory {
+      companyID
+      localID
+      name
+      createdAt
+      updatedAt
     }
   }
 `;
