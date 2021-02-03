@@ -107,168 +107,6 @@ export const onDeleteCategory = /* GraphQL */ `
     }
   }
 `;
-export const onCreateSection = /* GraphQL */ `
-  subscription OnCreateSection(
-    $topReviewers: String
-    $secondReviewers: String
-    $reviewee: String
-    $referencer: String
-  ) {
-    onCreateSection(
-      topReviewers: $topReviewers
-      secondReviewers: $secondReviewers
-      reviewee: $reviewee
-      referencer: $referencer
-    ) {
-      sheetKeys
-      sectionCategoryLocalId
-      companyID
-      objective {
-        items {
-          sectionKeys
-          createdAt
-          companyID
-          content
-          result
-          priority
-          selfEvaluation
-          firstEvaluation
-          lastEvaluation
-          progress
-          expStartDate
-          expDoneDate
-          reviewee
-          topReviewers
-          secondReviewers
-          referencer
-          updatedAt
-        }
-        nextToken
-      }
-      category {
-        companyID
-        localID
-        name
-        createdAt
-        updatedAt
-      }
-      reviewee
-      topReviewers
-      secondReviewers
-      referencer
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const onUpdateSection = /* GraphQL */ `
-  subscription OnUpdateSection(
-    $topReviewers: String
-    $secondReviewers: String
-    $reviewee: String
-    $referencer: String
-  ) {
-    onUpdateSection(
-      topReviewers: $topReviewers
-      secondReviewers: $secondReviewers
-      reviewee: $reviewee
-      referencer: $referencer
-    ) {
-      sheetKeys
-      sectionCategoryLocalId
-      companyID
-      objective {
-        items {
-          sectionKeys
-          createdAt
-          companyID
-          content
-          result
-          priority
-          selfEvaluation
-          firstEvaluation
-          lastEvaluation
-          progress
-          expStartDate
-          expDoneDate
-          reviewee
-          topReviewers
-          secondReviewers
-          referencer
-          updatedAt
-        }
-        nextToken
-      }
-      category {
-        companyID
-        localID
-        name
-        createdAt
-        updatedAt
-      }
-      reviewee
-      topReviewers
-      secondReviewers
-      referencer
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const onDeleteSection = /* GraphQL */ `
-  subscription OnDeleteSection(
-    $topReviewers: String
-    $secondReviewers: String
-    $reviewee: String
-    $referencer: String
-  ) {
-    onDeleteSection(
-      topReviewers: $topReviewers
-      secondReviewers: $secondReviewers
-      reviewee: $reviewee
-      referencer: $referencer
-    ) {
-      sheetKeys
-      sectionCategoryLocalId
-      companyID
-      objective {
-        items {
-          sectionKeys
-          createdAt
-          companyID
-          content
-          result
-          priority
-          selfEvaluation
-          firstEvaluation
-          lastEvaluation
-          progress
-          expStartDate
-          expDoneDate
-          reviewee
-          topReviewers
-          secondReviewers
-          referencer
-          updatedAt
-        }
-        nextToken
-      }
-      category {
-        companyID
-        localID
-        name
-        createdAt
-        updatedAt
-      }
-      reviewee
-      topReviewers
-      secondReviewers
-      referencer
-      createdAt
-      updatedAt
-    }
-  }
-`;
 export const onCreateObjective = /* GraphQL */ `
   subscription OnCreateObjective(
     $topReviewers: String
@@ -1028,49 +866,6 @@ export const onCreateSheet = /* GraphQL */ `
         createdAt
         updatedAt
       }
-      section {
-        items {
-          sheetKeys
-          sectionCategoryLocalId
-          companyID
-          objective {
-            items {
-              sectionKeys
-              createdAt
-              companyID
-              content
-              result
-              priority
-              selfEvaluation
-              firstEvaluation
-              lastEvaluation
-              progress
-              expStartDate
-              expDoneDate
-              reviewee
-              topReviewers
-              secondReviewers
-              referencer
-              updatedAt
-            }
-            nextToken
-          }
-          category {
-            companyID
-            localID
-            name
-            createdAt
-            updatedAt
-          }
-          reviewee
-          topReviewers
-          secondReviewers
-          referencer
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
       referencer
       reviewee
       topReviewers
@@ -1416,6 +1211,43 @@ export const onCreateSheet = /* GraphQL */ `
             }
           }
         }
+      }
+      section {
+        items {
+          sheetKeys
+          sectionCategoryLocalId
+          sectionCategoryName
+          companyID
+          objective {
+            items {
+              sectionKeys
+              createdAt
+              companyID
+              content
+              result
+              priority
+              selfEvaluation
+              firstEvaluation
+              lastEvaluation
+              progress
+              expStartDate
+              expDoneDate
+              reviewee
+              topReviewers
+              secondReviewers
+              referencer
+              updatedAt
+            }
+            nextToken
+          }
+          reviewee
+          topReviewers
+          secondReviewers
+          referencer
+          createdAt
+          updatedAt
+        }
+        nextToken
       }
     }
   }
@@ -1465,49 +1297,6 @@ export const onUpdateSheet = /* GraphQL */ `
         createdAt
         updatedAt
       }
-      section {
-        items {
-          sheetKeys
-          sectionCategoryLocalId
-          companyID
-          objective {
-            items {
-              sectionKeys
-              createdAt
-              companyID
-              content
-              result
-              priority
-              selfEvaluation
-              firstEvaluation
-              lastEvaluation
-              progress
-              expStartDate
-              expDoneDate
-              reviewee
-              topReviewers
-              secondReviewers
-              referencer
-              updatedAt
-            }
-            nextToken
-          }
-          category {
-            companyID
-            localID
-            name
-            createdAt
-            updatedAt
-          }
-          reviewee
-          topReviewers
-          secondReviewers
-          referencer
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
       referencer
       reviewee
       topReviewers
@@ -1853,6 +1642,43 @@ export const onUpdateSheet = /* GraphQL */ `
             }
           }
         }
+      }
+      section {
+        items {
+          sheetKeys
+          sectionCategoryLocalId
+          sectionCategoryName
+          companyID
+          objective {
+            items {
+              sectionKeys
+              createdAt
+              companyID
+              content
+              result
+              priority
+              selfEvaluation
+              firstEvaluation
+              lastEvaluation
+              progress
+              expStartDate
+              expDoneDate
+              reviewee
+              topReviewers
+              secondReviewers
+              referencer
+              updatedAt
+            }
+            nextToken
+          }
+          reviewee
+          topReviewers
+          secondReviewers
+          referencer
+          createdAt
+          updatedAt
+        }
+        nextToken
       }
     }
   }
@@ -1902,49 +1728,6 @@ export const onDeleteSheet = /* GraphQL */ `
         createdAt
         updatedAt
       }
-      section {
-        items {
-          sheetKeys
-          sectionCategoryLocalId
-          companyID
-          objective {
-            items {
-              sectionKeys
-              createdAt
-              companyID
-              content
-              result
-              priority
-              selfEvaluation
-              firstEvaluation
-              lastEvaluation
-              progress
-              expStartDate
-              expDoneDate
-              reviewee
-              topReviewers
-              secondReviewers
-              referencer
-              updatedAt
-            }
-            nextToken
-          }
-          category {
-            companyID
-            localID
-            name
-            createdAt
-            updatedAt
-          }
-          reviewee
-          topReviewers
-          secondReviewers
-          referencer
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
       referencer
       reviewee
       topReviewers
@@ -2291,6 +2074,187 @@ export const onDeleteSheet = /* GraphQL */ `
           }
         }
       }
+      section {
+        items {
+          sheetKeys
+          sectionCategoryLocalId
+          sectionCategoryName
+          companyID
+          objective {
+            items {
+              sectionKeys
+              createdAt
+              companyID
+              content
+              result
+              priority
+              selfEvaluation
+              firstEvaluation
+              lastEvaluation
+              progress
+              expStartDate
+              expDoneDate
+              reviewee
+              topReviewers
+              secondReviewers
+              referencer
+              updatedAt
+            }
+            nextToken
+          }
+          reviewee
+          topReviewers
+          secondReviewers
+          referencer
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+    }
+  }
+`;
+export const onCreateSection = /* GraphQL */ `
+  subscription OnCreateSection(
+    $topReviewers: String
+    $secondReviewers: String
+    $reviewee: String
+    $referencer: String
+  ) {
+    onCreateSection(
+      topReviewers: $topReviewers
+      secondReviewers: $secondReviewers
+      reviewee: $reviewee
+      referencer: $referencer
+    ) {
+      sheetKeys
+      sectionCategoryLocalId
+      sectionCategoryName
+      companyID
+      objective {
+        items {
+          sectionKeys
+          createdAt
+          companyID
+          content
+          result
+          priority
+          selfEvaluation
+          firstEvaluation
+          lastEvaluation
+          progress
+          expStartDate
+          expDoneDate
+          reviewee
+          topReviewers
+          secondReviewers
+          referencer
+          updatedAt
+        }
+        nextToken
+      }
+      reviewee
+      topReviewers
+      secondReviewers
+      referencer
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateSection = /* GraphQL */ `
+  subscription OnUpdateSection(
+    $topReviewers: String
+    $secondReviewers: String
+    $reviewee: String
+    $referencer: String
+  ) {
+    onUpdateSection(
+      topReviewers: $topReviewers
+      secondReviewers: $secondReviewers
+      reviewee: $reviewee
+      referencer: $referencer
+    ) {
+      sheetKeys
+      sectionCategoryLocalId
+      sectionCategoryName
+      companyID
+      objective {
+        items {
+          sectionKeys
+          createdAt
+          companyID
+          content
+          result
+          priority
+          selfEvaluation
+          firstEvaluation
+          lastEvaluation
+          progress
+          expStartDate
+          expDoneDate
+          reviewee
+          topReviewers
+          secondReviewers
+          referencer
+          updatedAt
+        }
+        nextToken
+      }
+      reviewee
+      topReviewers
+      secondReviewers
+      referencer
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteSection = /* GraphQL */ `
+  subscription OnDeleteSection(
+    $topReviewers: String
+    $secondReviewers: String
+    $reviewee: String
+    $referencer: String
+  ) {
+    onDeleteSection(
+      topReviewers: $topReviewers
+      secondReviewers: $secondReviewers
+      reviewee: $reviewee
+      referencer: $referencer
+    ) {
+      sheetKeys
+      sectionCategoryLocalId
+      sectionCategoryName
+      companyID
+      objective {
+        items {
+          sectionKeys
+          createdAt
+          companyID
+          content
+          result
+          priority
+          selfEvaluation
+          firstEvaluation
+          lastEvaluation
+          progress
+          expStartDate
+          expDoneDate
+          reviewee
+          topReviewers
+          secondReviewers
+          referencer
+          updatedAt
+        }
+        nextToken
+      }
+      reviewee
+      topReviewers
+      secondReviewers
+      referencer
+      createdAt
+      updatedAt
     }
   }
 `;

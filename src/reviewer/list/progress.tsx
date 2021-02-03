@@ -108,10 +108,8 @@ const listSheetYear = /* GraphQL */ `
                 progress
               }
             }
-            category {
-              localID
-              name
-            }
+            sectionCategoryLocalId
+            sectionCategoryName
           }
         }
         reviewee
@@ -256,13 +254,13 @@ function ProgressReferenceList() {
                     },
                     categorys: sheet.section.items?.map((section) => {
                         return {
-                            name: section?.category?.name,
+                            name: section?.sectionCategoryName || undefined,
                             avg: section && section.objective && section.objective.items ?
                                 calcAvg(section.objective.items.map((obj) => {
                                     return obj && obj.progress ? obj.progress : 0
                                 })) : null,
-                            no: section?.category ? parseInt(section.category.localID) : null,
-                            id: section?.category?.localID,
+                            no: section?.sectionCategoryLocalId ? parseInt(section.sectionCategoryLocalId) : null,
+                            id: section?.sectionCategoryLocalId,
                             sectionId: section ? getSectionKeys(section).replace(/[.@]/g, '-') : null
                         }
                     }),

@@ -806,49 +806,6 @@ export const createSheet = /* GraphQL */ `
         createdAt
         updatedAt
       }
-      section {
-        items {
-          sheetKeys
-          sectionCategoryLocalId
-          companyID
-          objective {
-            items {
-              sectionKeys
-              createdAt
-              companyID
-              content
-              result
-              priority
-              selfEvaluation
-              firstEvaluation
-              lastEvaluation
-              progress
-              expStartDate
-              expDoneDate
-              reviewee
-              topReviewers
-              secondReviewers
-              referencer
-              updatedAt
-            }
-            nextToken
-          }
-          category {
-            companyID
-            localID
-            name
-            createdAt
-            updatedAt
-          }
-          reviewee
-          topReviewers
-          secondReviewers
-          referencer
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
       referencer
       reviewee
       topReviewers
@@ -1194,6 +1151,43 @@ export const createSheet = /* GraphQL */ `
             }
           }
         }
+      }
+      section {
+        items {
+          sheetKeys
+          sectionCategoryLocalId
+          sectionCategoryName
+          companyID
+          objective {
+            items {
+              sectionKeys
+              createdAt
+              companyID
+              content
+              result
+              priority
+              selfEvaluation
+              firstEvaluation
+              lastEvaluation
+              progress
+              expStartDate
+              expDoneDate
+              reviewee
+              topReviewers
+              secondReviewers
+              referencer
+              updatedAt
+            }
+            nextToken
+          }
+          reviewee
+          topReviewers
+          secondReviewers
+          referencer
+          createdAt
+          updatedAt
+        }
+        nextToken
       }
     }
   }
@@ -1236,49 +1230,6 @@ export const deleteSheet = /* GraphQL */ `
         createdAt
         updatedAt
       }
-      section {
-        items {
-          sheetKeys
-          sectionCategoryLocalId
-          companyID
-          objective {
-            items {
-              sectionKeys
-              createdAt
-              companyID
-              content
-              result
-              priority
-              selfEvaluation
-              firstEvaluation
-              lastEvaluation
-              progress
-              expStartDate
-              expDoneDate
-              reviewee
-              topReviewers
-              secondReviewers
-              referencer
-              updatedAt
-            }
-            nextToken
-          }
-          category {
-            companyID
-            localID
-            name
-            createdAt
-            updatedAt
-          }
-          reviewee
-          topReviewers
-          secondReviewers
-          referencer
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
       referencer
       reviewee
       topReviewers
@@ -1625,6 +1576,43 @@ export const deleteSheet = /* GraphQL */ `
           }
         }
       }
+      section {
+        items {
+          sheetKeys
+          sectionCategoryLocalId
+          sectionCategoryName
+          companyID
+          objective {
+            items {
+              sectionKeys
+              createdAt
+              companyID
+              content
+              result
+              priority
+              selfEvaluation
+              firstEvaluation
+              lastEvaluation
+              progress
+              expStartDate
+              expDoneDate
+              reviewee
+              topReviewers
+              secondReviewers
+              referencer
+              updatedAt
+            }
+            nextToken
+          }
+          reviewee
+          topReviewers
+          secondReviewers
+          referencer
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
     }
   }
 `;
@@ -1636,6 +1624,7 @@ export const createSection = /* GraphQL */ `
     createSection(input: $input, condition: $condition) {
       sheetKeys
       sectionCategoryLocalId
+      sectionCategoryName
       companyID
       objective {
         items {
@@ -1658,60 +1647,6 @@ export const createSection = /* GraphQL */ `
           updatedAt
         }
         nextToken
-      }
-      category {
-        companyID
-        localID
-        name
-        createdAt
-        updatedAt
-      }
-      reviewee
-      topReviewers
-      secondReviewers
-      referencer
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const updateSection = /* GraphQL */ `
-  mutation UpdateSection(
-    $input: UpdateSectionInput!
-    $condition: ModelSectionConditionInput
-  ) {
-    updateSection(input: $input, condition: $condition) {
-      sheetKeys
-      sectionCategoryLocalId
-      companyID
-      objective {
-        items {
-          sectionKeys
-          createdAt
-          companyID
-          content
-          result
-          priority
-          selfEvaluation
-          firstEvaluation
-          lastEvaluation
-          progress
-          expStartDate
-          expDoneDate
-          reviewee
-          topReviewers
-          secondReviewers
-          referencer
-          updatedAt
-        }
-        nextToken
-      }
-      category {
-        companyID
-        localID
-        name
-        createdAt
-        updatedAt
       }
       reviewee
       topReviewers
@@ -1730,6 +1665,7 @@ export const deleteSection = /* GraphQL */ `
     deleteSection(input: $input, condition: $condition) {
       sheetKeys
       sectionCategoryLocalId
+      sectionCategoryName
       companyID
       objective {
         items {
@@ -1752,13 +1688,6 @@ export const deleteSection = /* GraphQL */ `
           updatedAt
         }
         nextToken
-      }
-      category {
-        companyID
-        localID
-        name
-        createdAt
-        updatedAt
       }
       reviewee
       topReviewers
@@ -1885,49 +1814,6 @@ export const updateSheet = /* GraphQL */ `
         createdAt
         updatedAt
       }
-      section {
-        items {
-          sheetKeys
-          sectionCategoryLocalId
-          companyID
-          objective {
-            items {
-              sectionKeys
-              createdAt
-              companyID
-              content
-              result
-              priority
-              selfEvaluation
-              firstEvaluation
-              lastEvaluation
-              progress
-              expStartDate
-              expDoneDate
-              reviewee
-              topReviewers
-              secondReviewers
-              referencer
-              updatedAt
-            }
-            nextToken
-          }
-          category {
-            companyID
-            localID
-            name
-            createdAt
-            updatedAt
-          }
-          reviewee
-          topReviewers
-          secondReviewers
-          referencer
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
       referencer
       reviewee
       topReviewers
@@ -2274,6 +2160,84 @@ export const updateSheet = /* GraphQL */ `
           }
         }
       }
+      section {
+        items {
+          sheetKeys
+          sectionCategoryLocalId
+          sectionCategoryName
+          companyID
+          objective {
+            items {
+              sectionKeys
+              createdAt
+              companyID
+              content
+              result
+              priority
+              selfEvaluation
+              firstEvaluation
+              lastEvaluation
+              progress
+              expStartDate
+              expDoneDate
+              reviewee
+              topReviewers
+              secondReviewers
+              referencer
+              updatedAt
+            }
+            nextToken
+          }
+          reviewee
+          topReviewers
+          secondReviewers
+          referencer
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+    }
+  }
+`;
+export const updateSection = /* GraphQL */ `
+  mutation UpdateSection(
+    $input: UpdateSectionInput!
+    $condition: ModelSectionConditionInput
+  ) {
+    updateSection(input: $input, condition: $condition) {
+      sheetKeys
+      sectionCategoryLocalId
+      sectionCategoryName
+      companyID
+      objective {
+        items {
+          sectionKeys
+          createdAt
+          companyID
+          content
+          result
+          priority
+          selfEvaluation
+          firstEvaluation
+          lastEvaluation
+          progress
+          expStartDate
+          expDoneDate
+          reviewee
+          topReviewers
+          secondReviewers
+          referencer
+          updatedAt
+        }
+        nextToken
+      }
+      reviewee
+      topReviewers
+      secondReviewers
+      referencer
+      createdAt
+      updatedAt
     }
   }
 `;

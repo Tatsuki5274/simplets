@@ -20,7 +20,7 @@ export const AverageSmallGaugeBox = (props: Props) => {
 
     return (
         <h4>
-            {props.section.category?.name}
+            {props.section.sectionCategoryName}
             {avg || avg === 0 ? <SmallGage value={parseInt(round(avg, 2).toFixed(1))} id={getSectionKeys(props.section).replace(/[.@]/g,'-')} /> : null}
         </h4>
     )

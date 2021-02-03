@@ -31,7 +31,7 @@ export const ReviewerSheetDetailObjectiveEditable = (props: Props) => {
 
         return (
             <div key={getSectionKeys(section)}>
-                <h4>{section.category?.name}</h4>
+                <h4>{section.sectionCategoryName}</h4>
                 <ScrollTable>
                     <thead className={tableHeaderStyle}>
                         <tr>

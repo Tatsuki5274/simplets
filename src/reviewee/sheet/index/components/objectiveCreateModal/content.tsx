@@ -22,13 +22,13 @@ export function ObjectiveCreateModalContent(props: Props) {
             <div>
                 <Form.Label>目標カテゴリ<Badge variant="danger">必須</Badge></Form.Label>
                 {props.sheet.section?.items?.map((section, index) => {
-                    if (section && section.category && section.category.name) {
+                    if (section && section.sectionCategoryName) {
                         return (
                             <CategoryInput
                                 key={getSectionKeys(section)}
                                 handleChange={props.formik.handleChange}
                                 sectionKeys={getSectionKeys(section)}
-                                categoryName={section.category?.name}
+                                categoryName={section.sectionCategoryName}
                                 defaultCheck={index === 0}
                                 style={categoryInputStyle}
                             ></CategoryInput>

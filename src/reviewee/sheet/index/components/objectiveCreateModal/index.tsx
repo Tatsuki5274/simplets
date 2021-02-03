@@ -38,7 +38,7 @@ export function ObjectiveCreateModal(props: Props){
             const sheet = await SheetDao.get(getSheet, { companyID: currentUser?.attributes["custom:companyId"] || "", reviewee: currentUser?.username || "", year: props.year })
             if (sheet && sheet.section && sheet.section.items) {
                 sheet.section.items.sort(function (a, b) {
-                    if (a?.category && b?.category && a.category.localID > b.category.localID) {
+                    if (a && b && a.sectionCategoryLocalId > b.sectionCategoryLocalId) {
                         return 1;
                     } else {
                         return -1;

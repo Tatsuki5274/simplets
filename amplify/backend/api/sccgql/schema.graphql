@@ -184,17 +184,20 @@ type Section
     {allow: owner, ownerField: "secondReviewers", operations: [read]}
     {allow: owner, ownerField: "reviewee", operations: [create, update, read, delete]}
     {allow: owner, ownerField: "referencer", operations: [read]}
+
+    {allow: private, provider: iam ,operations:[read, update]}
   ]
 )
 {
   sheetKeys: ID! # companyID.reviewee.year の形式として保持
   sectionCategoryLocalId: ID!
+  sectionCategoryName: String
   # sectionCategoryId: ID!
   companyID: ID!
 
 
   objective: [Objective] @connection(fields: ["sheetKeys"]) # sheetKeys.sectionCategoryLocalId
-  category: Category @connection(fields: ["companyID", "sectionCategoryLocalId"])
+  # category: Category @connection(fields: ["companyID", "sectionCategoryLocalId"])
 
   #　オーナーフィールド
   reviewee: String #被評価者

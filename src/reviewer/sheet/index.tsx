@@ -109,7 +109,7 @@ function EvalutionScreen(props: Props) {
     //カテゴリ情報のnoを元に昇順でソート
     const sectionItems = sheet.section?.items as Section[];
     sectionItems?.sort(function (a, b) {
-        if (a?.category && b?.category && a.category.localID > b.category.localID) {
+        if (a && b && a.sectionCategoryLocalId > b.sectionCategoryLocalId) {
             return 1;
         } else {
             return -1;

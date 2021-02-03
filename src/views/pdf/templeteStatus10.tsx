@@ -120,7 +120,7 @@ export const PDFTempleteStatus10 = (props: Props) => {
                           section ?
                             <tr key={getSectionKeys(section)}>
                               <td>
-                                <p>{section.category?.name}</p>
+                                <p>{section.sectionCategoryName}</p>
                                 <Table borderless>
                                   {section.objective?.items?.map((objective) => {
                                     return (

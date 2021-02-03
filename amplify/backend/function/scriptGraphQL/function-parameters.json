@@ -1,0 +1,13 @@
+{
+  "lambdaLayers": [],
+  "permissions": {
+    "api": {
+      "sccgql": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ]
+    }
+  }
+}

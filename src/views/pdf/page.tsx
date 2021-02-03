@@ -24,8 +24,8 @@ const sortObjective = function (a: any, b: any) {
         return -1;
     }
 }
-const sortCategory = function (a: Pick<Section, "category"> | null, b: Pick<Section, "category"> | null) {
-    if (a?.category?.localID && b?.category?.localID && a.category.localID > b.category.localID) {
+const sortCategory = function (a: Section | null, b: Section | null) {
+    if (a?.sectionCategoryLocalId && b?.sectionCategoryLocalId && a.sectionCategoryLocalId > b.sectionCategoryLocalId) {
         return 1;
     } else {
         return -1;
