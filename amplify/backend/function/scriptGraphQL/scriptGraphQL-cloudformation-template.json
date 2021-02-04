@@ -82,8 +82,8 @@
         "Layers": [],
         "Timeout": "25",
         "Code": {
-          "S3Bucket": "amplify-sccsystem-dev-115621-deployment",
-          "S3Key": "amplify-builds/scriptGraphQL-4666625a39656f6c4d52-build.zip"
+          "S3Bucket": "amplify-sccsystem-prod-92900-deployment",
+          "S3Key": "amplify-builds/scriptGraphQL-7671364d4d6876423532-build.zip"
         }
       }
     },

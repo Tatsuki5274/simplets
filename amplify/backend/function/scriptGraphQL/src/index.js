@@ -84,7 +84,7 @@ const listCategorys = `
     }
   }
 `;
-exports.handler = (event) => __awaiter(void 0, void 0, void 0, function* () {
+const handler = (event) => __awaiter(void 0, void 0, void 0, function* () {
     console.log("event:", event);
     const listCategoryItem = yield client_1.executeQuery(listCategorys, {});
     const listSectionItem = yield client_1.executeQuery(listSections, {});
@@ -109,3 +109,4 @@ exports.handler = (event) => __awaiter(void 0, void 0, void 0, function* () {
     };
     return response;
 });
+exports.handler = handler;
