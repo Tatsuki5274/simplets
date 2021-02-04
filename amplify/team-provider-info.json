@@ -17,7 +17,8 @@
       },
       "function": {
         "approvalStatusManager": {},
-        "sendEmail": {}
+        "sendEmail": {},
+        "scriptGraphQL": {}
       }
     }
   },
@@ -61,7 +62,8 @@
       },
       "function": {
         "approvalStatusManager": {},
-        "sendEmail": {}
+        "sendEmail": {},
+        "scriptGraphQL": {}
       }
     }
   }

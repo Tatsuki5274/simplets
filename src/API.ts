@@ -1915,6 +1915,14 @@ export type CreateSheetMutation = {
         referencer: Array< string > | null,
         createdAt: string,
         updatedAt: string,
+        category:  {
+          __typename: "Category",
+          companyID: string,
+          localID: string,
+          name: string,
+          createdAt: string,
+          updatedAt: string,
+        } | null,
       } | null > | null,
       nextToken: string | null,
     } | null,
@@ -2378,6 +2386,14 @@ export type DeleteSheetMutation = {
         referencer: Array< string > | null,
         createdAt: string,
         updatedAt: string,
+        category:  {
+          __typename: "Category",
+          companyID: string,
+          localID: string,
+          name: string,
+          createdAt: string,
+          updatedAt: string,
+        } | null,
       } | null > | null,
       nextToken: string | null,
     } | null,
@@ -2426,6 +2442,14 @@ export type CreateSectionMutation = {
     referencer: Array< string > | null,
     createdAt: string,
     updatedAt: string,
+    category:  {
+      __typename: "Category",
+      companyID: string,
+      localID: string,
+      name: string,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
   } | null,
 };
 
@@ -2471,6 +2495,14 @@ export type DeleteSectionMutation = {
     referencer: Array< string > | null,
     createdAt: string,
     updatedAt: string,
+    category:  {
+      __typename: "Category",
+      companyID: string,
+      localID: string,
+      name: string,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
   } | null,
 };
 
@@ -3015,6 +3047,14 @@ export type UpdateSheetMutation = {
         referencer: Array< string > | null,
         createdAt: string,
         updatedAt: string,
+        category:  {
+          __typename: "Category",
+          companyID: string,
+          localID: string,
+          name: string,
+          createdAt: string,
+          updatedAt: string,
+        } | null,
       } | null > | null,
       nextToken: string | null,
     } | null,
@@ -3063,6 +3103,14 @@ export type UpdateSectionMutation = {
     referencer: Array< string > | null,
     createdAt: string,
     updatedAt: string,
+    category:  {
+      __typename: "Category",
+      companyID: string,
+      localID: string,
+      name: string,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
   } | null,
 };
 
@@ -4044,22 +4092,6 @@ export type ListEmployeesManagerQuery = {
   } | null,
 };
 
-export type GetCategoryQueryVariables = {
-  companyID: string,
-  localID: string,
-};
-
-export type GetCategoryQuery = {
-  getCategory:  {
-    __typename: "Category",
-    companyID: string,
-    localID: string,
-    name: string,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
-};
-
 export type ListCategorysQueryVariables = {
   companyID?: string | null,
   localID?: ModelIDKeyConditionInput | null,
@@ -4081,6 +4113,22 @@ export type ListCategorysQuery = {
       updatedAt: string,
     } | null > | null,
     nextToken: string | null,
+  } | null,
+};
+
+export type GetCategoryQueryVariables = {
+  companyID: string,
+  localID: string,
+};
+
+export type GetCategoryQuery = {
+  getCategory:  {
+    __typename: "Category",
+    companyID: string,
+    localID: string,
+    name: string,
+    createdAt: string,
+    updatedAt: string,
   } | null,
 };
 
@@ -4542,6 +4590,14 @@ export type GetSheetQuery = {
         referencer: Array< string > | null,
         createdAt: string,
         updatedAt: string,
+        category:  {
+          __typename: "Category",
+          companyID: string,
+          localID: string,
+          name: string,
+          createdAt: string,
+          updatedAt: string,
+        } | null,
       } | null > | null,
       nextToken: string | null,
     } | null,
@@ -4943,6 +4999,14 @@ export type ListSheetsQuery = {
           referencer: Array< string > | null,
           createdAt: string,
           updatedAt: string,
+          category:  {
+            __typename: "Category",
+            companyID: string,
+            localID: string,
+            name: string,
+            createdAt: string,
+            updatedAt: string,
+          } | null,
         } | null > | null,
         nextToken: string | null,
       } | null,
@@ -5346,6 +5410,14 @@ export type ListSheetRevieweeQuery = {
           referencer: Array< string > | null,
           createdAt: string,
           updatedAt: string,
+          category:  {
+            __typename: "Category",
+            companyID: string,
+            localID: string,
+            name: string,
+            createdAt: string,
+            updatedAt: string,
+          } | null,
         } | null > | null,
         nextToken: string | null,
       } | null,
@@ -5749,6 +5821,14 @@ export type ListSheetYearQuery = {
           referencer: Array< string > | null,
           createdAt: string,
           updatedAt: string,
+          category:  {
+            __typename: "Category",
+            companyID: string,
+            localID: string,
+            name: string,
+            createdAt: string,
+            updatedAt: string,
+          } | null,
         } | null > | null,
         nextToken: string | null,
       } | null,
@@ -6152,6 +6232,14 @@ export type ListSheetGroupQuery = {
           referencer: Array< string > | null,
           createdAt: string,
           updatedAt: string,
+          category:  {
+            __typename: "Category",
+            companyID: string,
+            localID: string,
+            name: string,
+            createdAt: string,
+            updatedAt: string,
+          } | null,
         } | null > | null,
         nextToken: string | null,
       } | null,
@@ -6202,6 +6290,14 @@ export type GetSectionQuery = {
     referencer: Array< string > | null,
     createdAt: string,
     updatedAt: string,
+    category:  {
+      __typename: "Category",
+      companyID: string,
+      localID: string,
+      name: string,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
   } | null,
 };
 
@@ -6253,6 +6349,14 @@ export type ListSectionsQuery = {
       referencer: Array< string > | null,
       createdAt: string,
       updatedAt: string,
+      category:  {
+        __typename: "Category",
+        companyID: string,
+        localID: string,
+        name: string,
+        createdAt: string,
+        updatedAt: string,
+      } | null,
     } | null > | null,
     nextToken: string | null,
   } | null,
@@ -7581,6 +7685,14 @@ export type OnCreateSheetSubscription = {
         referencer: Array< string > | null,
         createdAt: string,
         updatedAt: string,
+        category:  {
+          __typename: "Category",
+          companyID: string,
+          localID: string,
+          name: string,
+          createdAt: string,
+          updatedAt: string,
+        } | null,
       } | null > | null,
       nextToken: string | null,
     } | null,
@@ -8046,6 +8158,14 @@ export type OnUpdateSheetSubscription = {
         referencer: Array< string > | null,
         createdAt: string,
         updatedAt: string,
+        category:  {
+          __typename: "Category",
+          companyID: string,
+          localID: string,
+          name: string,
+          createdAt: string,
+          updatedAt: string,
+        } | null,
       } | null > | null,
       nextToken: string | null,
     } | null,
@@ -8511,6 +8631,14 @@ export type OnDeleteSheetSubscription = {
         referencer: Array< string > | null,
         createdAt: string,
         updatedAt: string,
+        category:  {
+          __typename: "Category",
+          companyID: string,
+          localID: string,
+          name: string,
+          createdAt: string,
+          updatedAt: string,
+        } | null,
       } | null > | null,
       nextToken: string | null,
     } | null,
@@ -8561,6 +8689,14 @@ export type OnCreateSectionSubscription = {
     referencer: Array< string > | null,
     createdAt: string,
     updatedAt: string,
+    category:  {
+      __typename: "Category",
+      companyID: string,
+      localID: string,
+      name: string,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
   } | null,
 };
 
@@ -8608,6 +8744,14 @@ export type OnUpdateSectionSubscription = {
     referencer: Array< string > | null,
     createdAt: string,
     updatedAt: string,
+    category:  {
+      __typename: "Category",
+      companyID: string,
+      localID: string,
+      name: string,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
   } | null,
 };
 
@@ -8655,5 +8799,13 @@ export type OnDeleteSectionSubscription = {
     referencer: Array< string > | null,
     createdAt: string,
     updatedAt: string,
+    category:  {
+      __typename: "Category",
+      companyID: string,
+      localID: string,
+      name: string,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
   } | null,
 };

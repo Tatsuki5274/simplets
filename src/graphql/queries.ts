@@ -915,17 +915,6 @@ export const listEmployeesManager = /* GraphQL */ `
     }
   }
 `;
-export const getCategory = /* GraphQL */ `
-  query GetCategory($companyID: ID!, $localID: ID!) {
-    getCategory(companyID: $companyID, localID: $localID) {
-      companyID
-      localID
-      name
-      createdAt
-      updatedAt
-    }
-  }
-`;
 export const listCategorys = /* GraphQL */ `
   query ListCategorys(
     $companyID: ID
@@ -951,6 +940,17 @@ export const listCategorys = /* GraphQL */ `
         updatedAt
       }
       nextToken
+    }
+  }
+`;
+export const getCategory = /* GraphQL */ `
+  query GetCategory($companyID: ID!, $localID: ID!) {
+    getCategory(companyID: $companyID, localID: $localID) {
+      companyID
+      localID
+      name
+      createdAt
+      updatedAt
     }
   }
 `;
@@ -1369,6 +1369,13 @@ export const getSheet = /* GraphQL */ `
           referencer
           createdAt
           updatedAt
+          category {
+            companyID
+            localID
+            name
+            createdAt
+            updatedAt
+          }
         }
         nextToken
       }
@@ -1743,6 +1750,13 @@ export const listSheets = /* GraphQL */ `
             referencer
             createdAt
             updatedAt
+            category {
+              companyID
+              localID
+              name
+              createdAt
+              updatedAt
+            }
           }
           nextToken
         }
@@ -2119,6 +2133,13 @@ export const listSheetReviewee = /* GraphQL */ `
             referencer
             createdAt
             updatedAt
+            category {
+              companyID
+              localID
+              name
+              createdAt
+              updatedAt
+            }
           }
           nextToken
         }
@@ -2495,6 +2516,13 @@ export const listSheetYear = /* GraphQL */ `
             referencer
             createdAt
             updatedAt
+            category {
+              companyID
+              localID
+              name
+              createdAt
+              updatedAt
+            }
           }
           nextToken
         }
@@ -2871,6 +2899,13 @@ export const listSheetGroup = /* GraphQL */ `
             referencer
             createdAt
             updatedAt
+            category {
+              companyID
+              localID
+              name
+              createdAt
+              updatedAt
+            }
           }
           nextToken
         }
@@ -2917,6 +2952,13 @@ export const getSection = /* GraphQL */ `
       referencer
       createdAt
       updatedAt
+      category {
+        companyID
+        localID
+        name
+        createdAt
+        updatedAt
+      }
     }
   }
 `;
@@ -2970,6 +3012,13 @@ export const listSections = /* GraphQL */ `
         referencer
         createdAt
         updatedAt
+        category {
+          companyID
+          localID
+          name
+          createdAt
+          updatedAt
+        }
       }
       nextToken
     }

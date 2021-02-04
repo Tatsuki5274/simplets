@@ -112,12 +112,13 @@ export const handler = async (event: any) => {
             sectionCategoryLocalId: element.sectionCategoryLocalId,
             sectionCategoryName: element.sectionCategoryName
         }
+        // console.log("params", JSON.stringify(UpdateSection, null, 2));
         const result = await executeMutation(updateSection,{input:UpdateSection})
         console.log("result", JSON.stringify(result, null, 2));
     };
     console.log("listSectionItem", JSON.stringify(listSectionItem, null, 2));
-    const mutationSection = executeMutation(updateSection,listSectionItem)
-    console.log("mutationSection", JSON.stringify(mutationSection, null, 2));
+    // const mutationSection = executeMutation(updateSection,listSectionItem)
+    // console.log("mutationSection", JSON.stringify(mutationSection, null, 2));
     const response = {
         statusCode: 200,
     //  Uncomment below to enable CORS requests

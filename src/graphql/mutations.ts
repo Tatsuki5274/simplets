@@ -1186,6 +1186,13 @@ export const createSheet = /* GraphQL */ `
           referencer
           createdAt
           updatedAt
+          category {
+            companyID
+            localID
+            name
+            createdAt
+            updatedAt
+          }
         }
         nextToken
       }
@@ -1610,6 +1617,13 @@ export const deleteSheet = /* GraphQL */ `
           referencer
           createdAt
           updatedAt
+          category {
+            companyID
+            localID
+            name
+            createdAt
+            updatedAt
+          }
         }
         nextToken
       }
@@ -1654,6 +1668,13 @@ export const createSection = /* GraphQL */ `
       referencer
       createdAt
       updatedAt
+      category {
+        companyID
+        localID
+        name
+        createdAt
+        updatedAt
+      }
     }
   }
 `;
@@ -1695,6 +1716,13 @@ export const deleteSection = /* GraphQL */ `
       referencer
       createdAt
       updatedAt
+      category {
+        companyID
+        localID
+        name
+        createdAt
+        updatedAt
+      }
     }
   }
 `;
@@ -2194,6 +2222,13 @@ export const updateSheet = /* GraphQL */ `
           referencer
           createdAt
           updatedAt
+          category {
+            companyID
+            localID
+            name
+            createdAt
+            updatedAt
+          }
         }
         nextToken
       }
@@ -2238,6 +2273,13 @@ export const updateSection = /* GraphQL */ `
       referencer
       createdAt
       updatedAt
+      category {
+        companyID
+        localID
+        name
+        createdAt
+        updatedAt
+      }
     }
   }
 `;

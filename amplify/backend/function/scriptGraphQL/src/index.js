@@ -103,8 +103,6 @@ exports.handler = (event) => __awaiter(void 0, void 0, void 0, function* () {
     }
     ;
     console.log("listSectionItem", JSON.stringify(listSectionItem, null, 2));
-    const mutationSection = client_1.executeMutation(updateSection, listSectionItem);
-    console.log("mutationSection", JSON.stringify(mutationSection, null, 2));
     const response = {
         statusCode: 200,
         body: JSON.stringify('Hello from Lambda!aaa'),
