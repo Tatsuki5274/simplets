@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { Button, Table } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Link } from 'react-router-dom';
-import { Category, EmployeeContext, Sheet, UserContext } from 'App';
+import { Category, EmployeeContext, ErrorContext, Sheet, UserContext } from 'App';
 import { ApprovalStatus, getStatusValue } from 'lib/getStatusValue'
 import * as APIt from 'API';
 import HeaderComponents from 'common/header';
@@ -192,8 +192,9 @@ function ListPerformanceEvalution() {
 
   // ログインユーザを取得する
   const currentUser = useContext(UserContext);
-
   const currentEmployee = useContext(EmployeeContext);
+
+  const setError = useContext(ErrorContext)
 
   //サイドバー
   let sidebar = [
@@ -248,6 +249,7 @@ function ListPerformanceEvalution() {
           setTargetYear(targetYear)
         }else{
           console.error("会社の年度開始月を取得できませんでした")
+          setError("会社の年度開始月を取得できませんでした")
         }
       }
     })()
@@ -360,9 +362,11 @@ function ListPerformanceEvalution() {
               }
             } else {
               console.error("シートの作成に失敗しました");
+              setError("シートの作成に失敗しました")
             }
           }else{
             console.error("年度情報の取得に失敗しました")
+            setError("年度情報の取得に失敗しました")
           }
 
         }

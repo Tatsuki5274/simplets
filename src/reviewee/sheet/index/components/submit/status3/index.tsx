@@ -1,4 +1,4 @@
-import { Sheet } from "App";
+import { ErrorContext, Sheet } from "App";
 import { buttonComponentStyle } from "common/globalStyle.module.scss";
 import { updateSheet } from "graphql/mutations";
 import { SheetDao } from "lib/dao/sheetDao";
@@ -29,6 +29,7 @@ function validSheet(sheet: Sheet): boolean{
 
 export const SubmitButtonStatus3 = () => {
     const context = useContext(SheetContext);
+    const setError = useContext(ErrorContext)
     const sheet = context.sheet
     const setSheet = context.setSheet
 
@@ -52,9 +53,11 @@ export const SubmitButtonStatus3 = () => {
                                 if (work.mailObject) {
                                     sendEmailMutation(work.mailObject)
                                 } else {
+                                    setError("メールの作成に失敗しました")
                                     console.error("メールの作成に失敗しました")
                                 }
                             } else {
+                                setError("フォームデータの登録に失敗しました")
                                 console.error("フォームデータの登録に失敗しました")
                             }
                         }
@@ -80,9 +83,11 @@ export const SubmitButtonStatus3 = () => {
                                 if (work.mailObject) {
                                     sendEmailMutation(work.mailObject)
                                 } else {
+                                    setError("メールの作成に失敗しました")
                                     console.error("メールの作成に失敗しました")
                                 }
                             } else {
+                                setError("フォームデータの登録に失敗しました")
                                 console.error("フォームデータの登録に失敗しました")
                             }
                         }

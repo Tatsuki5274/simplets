@@ -1,5 +1,5 @@
 import { UpdateSheetInput } from "API";
-import { Section } from "App";
+import { ErrorContext, Section } from "App";
 import ApprovalStatusBox from "common/approvalStatusBox";
 import { Formik } from "formik";
 import { updateSheet } from "graphql/mutations";
@@ -20,6 +20,7 @@ import { buttonComponentStyle } from "common/globalStyle.module.scss";
 
 
 export const ReviewerSheetPagesStatus13 = () => {
+    const setError = useContext(ErrorContext)
     const context = useContext(SheetContext);
     const sheet = context.sheet
     const setSheet = context.setSheet
@@ -63,16 +64,19 @@ export const ReviewerSheetPagesStatus13 = () => {
                                                 sendEmailMutation(work.mailObject)
                                                 alert('承認が完了しました');
                                             } else {
+                                                setError("メールの作成に失敗しました")
                                                 console.error("メールの作成に失敗しました")
                                             }
                                             if (setSheet) {
                                                 setSheet({ ...updatedSheet })
                                             }
                                         } else {
+                                            setError("フォームデータの登録に失敗しました")
                                             console.error("フォームデータの登録に失敗しました")
                                         }
                                     }
                                 } else {
+                                    setError("sheetの読み込みに失敗しています")
                                     console.error("sheetの読み込みに失敗しています")
                                 }
                             }}
@@ -113,6 +117,7 @@ export const ReviewerSheetPagesStatus13 = () => {
                                                 if (updatedSheet) {
                                                     console.log("保存成功")
                                                 } else {
+                                                    setError("保存失敗")
                                                     console.error("保存失敗", updatedSheet)
                                                 }
                                             }}>保存</Button>
@@ -132,6 +137,7 @@ export const ReviewerSheetPagesStatus13 = () => {
             </div>
         );
     } else {
+        setError("シートが存在しません")
         console.error("シートが存在しません")
         return null
     }

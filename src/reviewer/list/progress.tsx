@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import { Card } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import * as APIt from 'API';
-import { EmployeeContext, Group, Sheet, UserContext } from 'App';
+import { EmployeeContext, ErrorContext, Group, Sheet, UserContext } from 'App';
 import HeaderComponents from 'common/header';//ヘッダーの表示
 import style from './progressStyle.module.scss';
 import { Link } from 'react-router-dom';
@@ -129,6 +129,8 @@ function ProgressReferenceList() {
     const currentUser = useContext(UserContext);
     const currentEmployee = useContext(EmployeeContext);
 
+    const setError = useContext(ErrorContext)
+
     //今日の日付を取得
     const today: Date = new Date();
     const thisYear: number = getThisYear(currentEmployee?.company?.startMonth);
@@ -197,6 +199,7 @@ function ProgressReferenceList() {
                     });
                     setGroupList(groupItem);
                 } else {
+                    setError("マネージャーではありません")
                     console.error("マネージャーではありません")
                 }
             }
@@ -267,6 +270,7 @@ function ProgressReferenceList() {
                     avg: -1
                 }
             } else {
+                setError("シート情報に不備があります")
                 console.error("シート情報に不備があります");
                 return null
             }

@@ -1,7 +1,7 @@
-import { Objective } from "App";
+import { ErrorContext, Objective } from "App";
 import { inputFieldStyle } from "common/globalStyle.module.scss";
 import dateFormat from "dateformat";
-import React, { useState } from "react"
+import React, { useContext, useState } from "react"
 import { Button } from "react-bootstrap";
 import * as APIt from 'API';
 import { ObjectiveDao } from "lib/dao/objectiveDao";
@@ -15,6 +15,7 @@ type Props = {
 }
 
 export const RevieweeSheetObjectiveEditableStatus1 = (props: Props) => {
+    const setError = useContext(ErrorContext)
     const progress: string | undefined
         = props.objective.progress ?
         props.objective.progress.toString()
@@ -56,6 +57,7 @@ export const RevieweeSheetObjectiveEditableStatus1 = (props: Props) => {
             const updatedObjective = await ObjectiveDao.update(updateObjective, updateI)
             if(!updatedObjective){
                 console.error("更新に失敗しました")
+                setError("更新に失敗しました")
             }
         }
     }

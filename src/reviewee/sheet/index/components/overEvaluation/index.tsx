@@ -1,4 +1,4 @@
-import { UserContext } from "App";
+import { ErrorContext, UserContext } from "App";
 import React, { useContext, useEffect, useState } from "react"
 import { Table } from "react-bootstrap"
 import { SheetContext } from "../..";
@@ -35,6 +35,7 @@ const listSheetReviewee = /* GraphQL */ `
 export const OverEvaluationTable = () => {
     const currentUser = useContext(UserContext);
     const context = useContext(SheetContext);
+    const setError = useContext(ErrorContext)
     const sheet = context.sheet
     const setSheet = context.setSheet
     const [previousPeriod, setPreviousPeriod] = useState<(number | null)[]>([null, null])
@@ -64,6 +65,7 @@ export const OverEvaluationTable = () => {
 
                     if(gotSheets){
                         if(gotSheets.length > 2){
+                            setError("業績評価年度に重複があります。前期前々期の記録に想定されない値が格納される場合があります。")
                             console.error("業績評価年度に重複があります。前期前々期の記録に想定されない値が格納される場合があります。", gotSheets)
                         }
                         let results: (number | null)[] = [null, null]

@@ -1,7 +1,7 @@
-import { Section, Sheet } from "App";
+import { ErrorContext, Section, Sheet } from "App";
 import { getSheet, listSheetReviewee } from "graphql/queries";
 import { SheetDao } from "lib/dao/sheetDao";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { PDFTemplete } from "./templete";
 import * as APIt from 'API';
 import { getStatusValue } from "lib/getStatusValue";
@@ -32,6 +32,7 @@ const sortCategory = function (a: Section | null, b: Section | null) {
     }}
 
 export function PDFPage(props:Props) {
+    const setError = useContext(ErrorContext)
     const [sheet, setSheet] = useState<Sheet | null>(null);
     const [lastOverAllEvaluations, setlastOverAllEvaluations] = useState<Array<number | null> | null>();
     useEffect(() => {
@@ -69,6 +70,7 @@ export function PDFPage(props:Props) {
 
                 if (gotSheets) {
                     if (gotSheets.length > 2) {
+                        setError("業績評価年度に重複があります。前期前々期の記録に想定されない値が格納される場合があります。")
                         console.error("業績評価年度に重複があります。前期前々期の記録に想定されない値が格納される場合があります。", gotSheets)
                     }
                     let results: (number | null)[] = [null, null]

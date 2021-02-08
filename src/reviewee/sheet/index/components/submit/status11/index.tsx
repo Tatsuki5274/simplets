@@ -1,3 +1,4 @@
+import { ErrorContext } from "App";
 import { updateSheet } from "graphql/mutations";
 import { formatAWSDate } from "lib/awsdate";
 import { SheetDao } from "lib/dao/sheetDao";
@@ -9,6 +10,7 @@ import { SheetContext } from "reviewee/sheet/index";
 
 export const SubmitButtonStatus11 = () => {
     const context = useContext(SheetContext);
+    const setError = useContext(ErrorContext)
     const sheet = context.sheet
     const setSheet = context.setSheet
 
@@ -32,8 +34,10 @@ export const SubmitButtonStatus11 = () => {
                                 sendEmailMutation(work.mailObject)
                             } else {
                                 console.error("メールの作成に失敗しました")
+                                setError("メールの作成に失敗しました")
                             }
                         } else {
+                            setError("フォームデータの登録に失敗しました")
                             console.error("フォームデータの登録に失敗しました")
                         }
                     }

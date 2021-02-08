@@ -1,5 +1,5 @@
 import { UpdateSheetInput } from "API";
-import { Section } from "App";
+import { ErrorContext, Section } from "App";
 import ApprovalStatusBox from "common/approvalStatusBox";
 import { Formik } from "formik";
 import { updateSheet } from "graphql/mutations";
@@ -27,6 +27,7 @@ type Props = {
 }
 
 export const ReviewerSheetPagesStatus10 = (props: Props) => {
+    const setError = useContext(ErrorContext)
     const context = useContext(SheetContext);
     const sheet = context.sheet
     const setSheet = context.setSheet
@@ -99,12 +100,14 @@ export const ReviewerSheetPagesStatus10 = (props: Props) => {
                                                     sendEmailMutation(work.mailObject)
                                                     alert('承認が完了しました');
                                                 } else {
+                                                    setError("メールの作成に失敗しました")
                                                     console.error("メールの作成に失敗しました")
                                                 }
                                                 if (setSheet) {
                                                     setSheet({ ...updatedSheet })
                                                 }
                                             } else {
+                                                setError("フォームデータの登録に失敗しました")
                                                 console.error("フォームデータの登録に失敗しました")
                                             }
                                         }
@@ -113,6 +116,7 @@ export const ReviewerSheetPagesStatus10 = (props: Props) => {
                                         
                                     }
                                 }else{
+                                    setError("sheetの読み込みに失敗しています")
                                     console.error("sheetの読み込みに失敗しています")
                                 }
                             }}

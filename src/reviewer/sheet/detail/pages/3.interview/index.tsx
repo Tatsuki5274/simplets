@@ -1,11 +1,11 @@
 import { UpdateSheetInput } from "API";
-import { Section, Sheet } from "App";
+import { ErrorContext, Section, Sheet } from "App";
 import ApprovalStatusBox from "common/approvalStatusBox";
 import { buttonComponentStyle } from "common/globalStyle.module.scss";
 import { Formik } from "formik";
 import { updateSheet } from "graphql/mutations";
 import { SheetDao } from "lib/dao/sheetDao";
-import React, { useState } from "react"
+import React, { useContext, useState } from "react"
 import { Container, Button, Form } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { ReviewerSheetDetailCareerEditable } from "../../components/career/editable";
@@ -20,6 +20,7 @@ type Props = {
 }
 
 export const ReviewerSheetPagesStatus3 = (props: Props) => {
+    const setError = useContext(ErrorContext)
     const [isRemandModal, setIsRemandModal] = useState<boolean>(false);
     const handleClose = () => setIsRemandModal(false);
     const handleShow = () => setIsRemandModal(true);
@@ -45,6 +46,7 @@ export const ReviewerSheetPagesStatus3 = (props: Props) => {
         if (updatedSheet) {
             console.log("保存成功")
         } else {
+            setError("保存失敗")
             console.error("保存失敗", updatedSheet)
         }
     }

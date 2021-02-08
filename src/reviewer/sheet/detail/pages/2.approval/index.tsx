@@ -1,4 +1,4 @@
-import { Section } from "App";
+import { ErrorContext, Section } from "App";
 import ApprovalStatusBox from "common/approvalStatusBox";
 import { Formik } from "formik";
 import { SheetDao } from "lib/dao/sheetDao";
@@ -25,6 +25,7 @@ import { buttonComponentStyle } from "common/globalStyle.module.scss";
 // }
 
 export const ReviewerSheetPagesStatus2 = ()=>{
+    const setError = useContext(ErrorContext)
     const context = useContext(SheetContext);
     const sheet = context.sheet
     const setSheet = context.setSheet
@@ -86,6 +87,7 @@ export const ReviewerSheetPagesStatus2 = ()=>{
                                             if(work.mailObject){
                                                 sendEmailMutation(work.mailObject)
                                             }else{
+                                                setError("メールの作成に失敗しました")
                                                 console.error("メールの作成に失敗しました")
                                             }
                                             if(setSheet){
@@ -94,11 +96,13 @@ export const ReviewerSheetPagesStatus2 = ()=>{
                                             // updatedSheet = await statusManager.exec(updatedSheet, "proceed");
                                             // setSheet({...updatedSheet});
                                         }else{
+                                            setError("フォームデータの登録に失敗しました")
                                             console.error("フォームデータの登録に失敗しました")
                                         }
                                     }
 
                                 }else{
+                                    setError("sheetの読み込みに失敗しています")
                                     console.error("sheetの読み込みに失敗しています")
                                 }
                             }}
@@ -146,6 +150,7 @@ export const ReviewerSheetPagesStatus2 = ()=>{
                                                 if (updatedSheet) {
                                                     console.log("保存成功", updatedSheet)
                                                 } else {
+                                                    setError("保存失敗")
                                                     console.error("保存失敗", updatedSheet)
                                                 }
                                             }}>保存</Button>
@@ -166,6 +171,7 @@ export const ReviewerSheetPagesStatus2 = ()=>{
             </div>
         );
     }else{
+        setError("シートが存在しません")
         console.error("シートが存在しません")
         return null
     }

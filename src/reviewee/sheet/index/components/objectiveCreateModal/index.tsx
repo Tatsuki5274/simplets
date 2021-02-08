@@ -1,4 +1,4 @@
-import { Sheet, UserContext } from "App";
+import { ErrorContext, Sheet, UserContext } from "App";
 import { Formik } from "formik";
 import { getSheet } from "graphql/queries";
 import { SheetDao } from "lib/dao/sheetDao";
@@ -25,6 +25,7 @@ export type TypeForm = {
 }
 
 export function ObjectiveCreateModal(props: Props){
+    const setError = useContext(ErrorContext)
     const [show, setShow] = useState(false);
     const [sheet, setSheet] = useState<Sheet | null>(null)
     const [defaultSectionKeys, setDefaultSectionKeys] = useState<string | null>(null);
@@ -103,6 +104,7 @@ export function ObjectiveCreateModal(props: Props){
                                         console.log("保存に失敗しました", createR)
                                     }
                                 }else{
+                                    setError("目標追加時にシートの取得に失敗しています")
                                     console.error("目標追加時にシートの取得に失敗しています")
                                 }
 

@@ -21,6 +21,7 @@ import { EmployeeDao } from 'lib/dao/employeeDao';
 import EvaluationList from 'views/components/pages/evaluation/reviewer/EvaluationList';　//総合評価参照画面 テスト用
 import { routeBuilder } from 'router';
 import ProgressReferenceScreen from 'views/components/pages/progress/reviewee/ProgressReferenceScreen';
+import ErrorMessageView from 'views/components/templates/ErrorMessageView';
 Amplify.configure(awsconfig);
 
 export type Sheet = Omit<Exclude<APIt.GetSheetQuery['getSheet'], null>, '__typename'>;
@@ -40,6 +41,8 @@ type User = {
 }
 export const UserContext = createContext<User | null>(null)
 export const EmployeeContext = createContext<Employee | null>(null)
+export const ErrorContext = createContext<React.Dispatch<React.SetStateAction<string | null>>>(() => console.log("実装されていません"));
+
 
 //approvalStatusManagerの引数の型
 export type approvalStatusManagerMutationVariables = {
@@ -78,19 +81,20 @@ const getEmployee = /* GraphQL */ `
 function App() {
   const [user, setUser] = useState<any>(null);
   const [employee, setEmployee] = useState<Employee | null>(null);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null)
 
   useEffect(() => {
     ; (async () => {
       const user = await Auth.currentAuthenticatedUser()
       setUser(user);
-      console.log("user", user)    
+      console.log("user", user)
     })()
   }, []);
 
   useEffect(() => {
     ; (async () => {
       if (user) {
-        const employee = await EmployeeDao.get(getEmployee, { companyID: user.attributes["custom:companyId"], username: user.username })      
+        const employee = await EmployeeDao.get(getEmployee, { companyID: user.attributes["custom:companyId"], username: user.username })
         setEmployee(employee);
         console.log("employee", employee)
       }
@@ -102,18 +106,21 @@ function App() {
     <div>
       <UserContext.Provider value={user}>
         <EmployeeContext.Provider value={employee}>
-          <BrowserRouter>
-            <Switch>
-              <Route exact path="/" component={ListPerformanceEvalution} />
-              <Route exact path="/reviewee/company/:companyId/reviewee/:reviewee/year/:year" component={RevieweeSheetShow} />
-              <Route exact path="/reviewee/list" component={ListPerformanceEvalution} />
-              <Route exact path="/reviewer/list" component={ProgressReferenceScreen} />
-              <Route exact path="/reviewer/company/:companyId/reviewee/:reviewee/year/:year" component={EvaluationScreen} />
-              <Route exact path="/preview/company/:companyId/reviewee/:reviewee/year/:year" component={PDFPage} />
-              {/* 総合評価参照画面 テスト用 */}
-              <Route exact path={routeBuilder.reviewerEvaluationListPath()} component={EvaluationList} />
-            </Switch>
-          </BrowserRouter>
+          <ErrorContext.Provider value={setErrorMessage}>
+            <BrowserRouter>
+              <Switch>
+                <Route exact path="/" component={ListPerformanceEvalution} />
+                <Route exact path="/reviewee/company/:companyId/reviewee/:reviewee/year/:year" component={RevieweeSheetShow} />
+                <Route exact path="/reviewee/list" component={ListPerformanceEvalution} />
+                <Route exact path="/reviewer/list" component={ProgressReferenceScreen} />
+                <Route exact path="/reviewer/company/:companyId/reviewee/:reviewee/year/:year" component={EvaluationScreen} />
+                <Route exact path="/preview/company/:companyId/reviewee/:reviewee/year/:year" component={PDFPage} />
+                {/* 総合評価参照画面 テスト用 */}
+                <Route exact path={routeBuilder.reviewerEvaluationListPath()} component={EvaluationList} />
+              </Switch>
+              <ErrorMessageView>{errorMessage || undefined}</ErrorMessageView>
+            </BrowserRouter>
+          </ErrorContext.Provider>
         </EmployeeContext.Provider>
       </UserContext.Provider>
     </div>

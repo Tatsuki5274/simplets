@@ -6,6 +6,7 @@ import * as APIt from 'API';
 import { SheetDao } from "lib/dao/sheetDao";
 import { updateSheet } from "graphql/mutations";
 import { inputFieldStyle } from "common/globalStyle.module.scss";
+import { ErrorContext } from "App";
 
 type Props = {
     isShowModal: boolean,
@@ -13,6 +14,7 @@ type Props = {
 }
 
 export const RevieweeSheetCareerModal = (props: Props) => {
+    const setError = useContext(ErrorContext)
     const context = useContext(SheetContext);
     const sheet = context.sheet
     const setSheet = context.setSheet
@@ -38,6 +40,7 @@ export const RevieweeSheetCareerModal = (props: Props) => {
                     props.handleClose()
                 }else{
                     console.error("sheetの取得に失敗しています")
+                    setError("sheetの取得に失敗しています")
                 }
 
             }}

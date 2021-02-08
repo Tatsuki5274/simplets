@@ -1,4 +1,4 @@
-import { Sheet } from "App"
+import { ErrorContext, Sheet } from "App"
 import { Form, Formik } from "formik"
 import { Command, commandWorkFlow } from "lib/workflow"
 import React, { useContext } from "react"
@@ -23,6 +23,7 @@ type Props = {
 
 export const RemandModal = (props: Props)=>{
     const context = useContext(SheetContext);
+    const setError = useContext(ErrorContext)
     const sheet = context.sheet
 
     return <div>
@@ -73,15 +74,18 @@ export const RemandModal = (props: Props)=>{
                                 sendEmailMutation(work.mailObject)
                             }else{
                                 console.error("メールの作成に失敗しました")
+                                setError("メールの作成に失敗しました")
                             }
                             // updatedSheet = await statusManager.exec(updatedSheet, "proceed");
                             // setSheet({...updatedSheet});
                         }else{
+                            setError("更新に失敗しました")
                             console.error("更新に失敗しました")
                         }
 
                         props.handleClose();
                     }else{
+                        setError("SheetContexの参照がありませんでした")
                         console.error("SheetContexの参照がありませんでした")
                     }
                 }}
