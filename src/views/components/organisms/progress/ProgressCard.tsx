@@ -58,7 +58,7 @@ export default function (props: Props) {
             </Card.Header>
             <Card.Body>
                 {props.objective?.map(obj => {
-                    return obj && obj.categoryId && obj.avg && obj.gaugeId ?
+                    return obj && obj.categoryId && typeof obj.avg === "number" && obj.gaugeId ?
                         <div id={obj.categoryId}>
                             {obj.categoryName}&nbsp;{round(obj.avg, 2).toFixed(1)}%
                             <GaugeObjective
