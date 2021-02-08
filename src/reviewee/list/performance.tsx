@@ -118,6 +118,7 @@ const listCategorys = /* GraphQL */ `
     ) {
       items {
         localID
+        name
       }
     }
   }
@@ -175,6 +176,7 @@ const createSection = /* GraphQL */ `
     createSection(input: $input, condition: $condition) {
       sheetKeys
       sectionCategoryLocalId
+      sectionCategoryName
       companyID
       reviewee
       topReviewers
@@ -331,6 +333,7 @@ function ListPerformanceEvalution() {
                 const createdSection = await SectionDao.create(createSection, {
                   sheetKeys: getSheetKeys(createdSheet),
                   sectionCategoryLocalId: category.localID,
+                  sectionCategoryName: category.name,
                   secondReviewers: createdSheet.secondReviewers,
                   topReviewers: createdSheet.topReviewers,
                   companyID: createdSheet.companyID,
