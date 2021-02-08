@@ -69,3 +69,7 @@ export function getThisYear(startMonth = 1): number{
     const thisYear = today.getMonth() < dateMonth ? today.getFullYear() - 1 : today.getFullYear()
     return thisYear
 }
+
+export function createGaugeId(id:string):string{
+    return id.replace(/[.@+]/g, '-')
+}

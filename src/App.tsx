@@ -14,13 +14,13 @@ import * as APIt from 'API';
 //カスタムコンポーネント
 import RevieweeSheetShow from "reviewee/sheet/index/index"
 import ListPerformanceEvalution from 'reviewee/list/performance';
-import ProgressReferenceList from 'reviewer/list/progress';
 import EvaluationScreen from "reviewer/sheet";
 import { PDFPage } from 'views/pdf/page';
 import MySignIn from 'views/auth/signIn';
 import { EmployeeDao } from 'lib/dao/employeeDao';
 import EvaluationList from 'views/components/pages/evaluation/reviewer/EvaluationList';　//総合評価参照画面 テスト用
 import { routeBuilder } from 'router';
+import ProgressReferenceScreen from 'views/components/pages/progress/reviewee/ProgressReferenceScreen';
 Amplify.configure(awsconfig);
 
 export type Sheet = Omit<Exclude<APIt.GetSheetQuery['getSheet'], null>, '__typename'>;
@@ -107,7 +107,7 @@ function App() {
               <Route exact path="/" component={ListPerformanceEvalution} />
               <Route exact path="/reviewee/company/:companyId/reviewee/:reviewee/year/:year" component={RevieweeSheetShow} />
               <Route exact path="/reviewee/list" component={ListPerformanceEvalution} />
-              <Route exact path="/reviewer/list" component={ProgressReferenceList} />
+              <Route exact path="/reviewer/list" component={ProgressReferenceScreen} />
               <Route exact path="/reviewer/company/:companyId/reviewee/:reviewee/year/:year" component={EvaluationScreen} />
               <Route exact path="/preview/company/:companyId/reviewee/:reviewee/year/:year" component={PDFPage} />
               {/* 総合評価参照画面 テスト用 */}
