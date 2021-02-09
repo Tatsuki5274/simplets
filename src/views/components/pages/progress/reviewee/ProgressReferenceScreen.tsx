@@ -70,7 +70,7 @@ export default function () {
 
     useEffect(() => {
         (async () => {
-            if (currentUser) {
+            if (currentUser && years) {
                 const sheets = await SheetDao.list(listSheets, { companyID: currentUser.attributes["custom:companyId"], })
                 if (sheets) {
                     const result = sheets.map(sheet => {
@@ -115,12 +115,15 @@ export default function () {
                         if (a.employeeId < b.employeeId) return -1
                         return 0
                     })
-                    setCardData(result);
                     setInitCardData(result);
+                    const filteredResult = result.filter(record => {
+                        return record.year === years[0]
+                    })
+                    setCardData(filteredResult);
                 }
             }
         })()
-    }, [currentUser])
+    }, [currentUser, years])
     return (
         <ProgressReference
             cardData={cardData}
