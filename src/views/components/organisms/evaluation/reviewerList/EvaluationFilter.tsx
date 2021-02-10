@@ -5,6 +5,7 @@ import { TableEvaluationListType } from "./TableEvaluationList";
 import { Formik } from "formik";
 import RadioButtonSelect from "views/components/molecules/RadioButtonSelect";
 import CommandButton from "views/components/molecules/CommandButton";
+import styled from "styled-components";
 
 type Props = {
     groups: { value: string, label: string }[]
@@ -57,33 +58,46 @@ export default function (props: Props) {
         >
             {formik => (
                 <form onSubmit={formik.handleSubmit}>
-                    <RadioButtonSelect
-                        radioButtons={props.groups} 
-                        name="group" 
-                        onChange={formik.handleChange}
-                    />
+                    <Space>
+                        <Text>部署</Text>
+                        <PullDown
+                            name="group"
+                            handleChange={formik.handleChange}
+                            options={props.groups}
+                        ></PullDown>
+                    </Space>
+                    <Space>
+                        <Text>年度</Text>
+                        <PullDown
+                            name="year"
+                            handleChange={formik.handleChange}
+                            options={props.years}
+                        ></PullDown>
+                    </Space>
 
-                    <Text>年度</Text>
-                    <PullDown
-                        name="year"
-                        handleChange={formik.handleChange}
-                        options={props.years}
-                    ></PullDown>
+                    <Space>
+                        <Text>ステータス</Text>
+                        <PullDown
+                            name="statusValue"
+                            handleChange={formik.handleChange}
+                            options={props.status}
+                        ></PullDown>
+                    </Space>
 
-                    <Text>ステータス</Text>
-                    <PullDown
-                        name="statusValue"
-                        handleChange={formik.handleChange}
-                        options={props.status}
-                    ></PullDown>
-
-                    <CommandButton
-                        type="submit"
-                    >
-                        確認
-                    </CommandButton>
+                    <Space>
+                        <CommandButton
+                            type="submit"
+                        >
+                            確認
+                        </CommandButton>
+                    </Space>
                 </form>
             )}
         </Formik>
     )
 }
+
+const Space = styled.span({
+    display: "inline-block",
+    margin: "0 10px"
+})
