@@ -22,7 +22,7 @@ export const RevieweeSheetObjectiveEditableStatus1 = (props: Props) => {
         props.objective.progress.toString()
         : undefined
     
-    const date = new Date(props.objective.updatedAt || ""); // unsafe
+    const date: Date | null = props.objective.updatedAt ? new Date(props.objective.updatedAt) : null;
     var expDoneDateStyle: string; //完了予定日のクラス名
     var currentDate = new Date().getTime();
     var doneDate = new Date(props.objective.expDoneDate!).getTime();
@@ -50,15 +50,20 @@ export const RevieweeSheetObjectiveEditableStatus1 = (props: Props) => {
         const objectiveProgress = parseInt(event.currentTarget.value);
 
         if (objective && objectiveProgress >= 0 && objectiveProgress <= 100) {
-            const updateI: APIt.UpdateObjectiveInput = {
-                sectionKeys: objective.sectionKeys || "",   // unsafe
-                createdAt: objective.createdAt || "",   // unsafe
-                progress: objectiveProgress,
-            };
-            const updatedObjective = await ObjectiveDao.update(updateObjective, updateI)
-            if(!updatedObjective){
-                console.error("更新に失敗しました")
-                setError("更新に失敗しました")
+            if(objective.sectionKeys && objective.createdAt){
+                const updateI: APIt.UpdateObjectiveInput = {
+                    sectionKeys: objective.sectionKeys,
+                    createdAt: objective.createdAt,
+                    progress: objectiveProgress,
+                };
+                const updatedObjective = await ObjectiveDao.update(updateObjective, updateI)
+                if(!updatedObjective){
+                    console.error("更新に失敗しました")
+                    setError("更新に失敗しました")
+                }                
+            }else{
+                console.error("必要なデータの取得に失敗しました", objective)
+                setError("必要なデータの取得に失敗しました")
             }
         }
     }
@@ -66,18 +71,21 @@ export const RevieweeSheetObjectiveEditableStatus1 = (props: Props) => {
     //objectiveの削除
     async function handleDeleteObjective(event: any) {
         if(objective){
-            if(window.confirm("目標を削除しますか？")){    
-                const deleteI: APIt.DeleteObjectiveInput = {
-                    createdAt: objective.createdAt || "",   // unsafe
-                    sectionKeys: objective.sectionKeys || ""    // unsafe
-                };
-                const deletedObjective = await ObjectiveDao.delete(deleteObjective, deleteI)
-                if(deletedObjective){
-                    setObjective(null)
+            if(window.confirm("目標を削除しますか？")){
+                if(objective.createdAt && objective.sectionKeys){
+                    const deleteI: APIt.DeleteObjectiveInput = {
+                        createdAt: objective.createdAt,
+                        sectionKeys: objective.sectionKeys
+                    };
+                    const deletedObjective = await ObjectiveDao.delete(deleteObjective, deleteI)
+                    if(deletedObjective){
+                        setObjective(null)
+                    }            
+                    console.log("delete", deletedObjective)
+                }else{
+                    console.error("必要なデータの取得に失敗しました", objective)
+                    setError("必要なデータの取得に失敗しました")
                 }
-    
-        
-                console.log("delete", deletedObjective)
             }
 
         }
@@ -105,7 +113,7 @@ export const RevieweeSheetObjectiveEditableStatus1 = (props: Props) => {
                 <td className={expDoneDateStyle}>{objective.expDoneDate?.replace(/-/g,'/')}</td>
                 <td>{objective.selfEvaluation}</td>
                 <td>{objective.lastEvaluation}</td>
-                <td>{dateFormat(date, "yyyy/mm/dd HH:MM")}</td>
+                <td>{date ? dateFormat(date, "yyyy/mm/dd HH:MM") : ""}</td>
                 <td>
                     <Button
                         variant="danger"

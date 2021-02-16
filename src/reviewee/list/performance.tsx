@@ -265,11 +265,11 @@ function ListPerformanceEvalution() {
         let revieweeEmployeeSuperior: Array<string> | null = null
 
         //上司情報取得
-        if (revieweeEmployee.superior) {
+        if (revieweeEmployee.superior?.username) {
           revieweeEmployeeSuperior = []
-          revieweeEmployeeSuperior.push(revieweeEmployee.superior.username || "") // unsafe
-          if (revieweeEmployee.superior.superior) {
-            revieweeEmployeeSuperior.push(revieweeEmployee.superior.superior.username || "") // unsafe
+          revieweeEmployeeSuperior.push(revieweeEmployee.superior.username)
+          if (revieweeEmployee.superior.superior?.username) {
+            revieweeEmployeeSuperior.push(revieweeEmployee.superior.superior.username)
           }
         }
 
@@ -306,25 +306,25 @@ function ListPerformanceEvalution() {
           console.log("groupManagers", groupManagers)
           let listSuperManagers: Array<string> = [];
           let listGroupManagers: Array<string> = [];
-          superManagers?.forEach(element => listSuperManagers.push(element.username || "")); // unsafe
-          groupManagers?.forEach(element => listGroupManagers.push(element.username || "")); // unsafe
+          superManagers?.forEach(element => listSuperManagers.push(element.username || ""))
+          groupManagers?.forEach(element => listGroupManagers.push(element.username || ""))
           console.log("listSuperManagers", listSuperManagers)
           console.log("listGroupManagers", listGroupManagers)
           const managers = listSuperManagers.concat(listGroupManagers)
 
-          if (targetYear) {
+          if (targetYear && revieweeEmployee.username && revieweeEmployee.superior?.username) {
             //シートを作成
             const createdSheet = await SheetDao.create(createSheet, {
-              grade: revieweeEmployee.grade || "", // unsafe
+              grade: revieweeEmployee.grade || "",
               year: targetYear,
               statusValue: 1,
-              revieweeUsername: revieweeEmployee.username || "", // unsafe
+              revieweeUsername: revieweeEmployee.username,
               secondUsername: revieweeEmployee.superior?.username || "",
-              sheetGroupLocalId: revieweeEmployee.employeeGroupLocalId || "empty",
+              sheetGroupLocalId: revieweeEmployee.employeeGroupLocalId || "",
               companyID: currentUser.attributes['custom:companyId'],
               reviewee: currentUser.username,
-              secondReviewers: revieweeEmployee.superior ? [revieweeEmployee.superior.username || ""] : null, // unsafe
-              topReviewers: revieweeEmployee.superior?.superior ? [revieweeEmployee.superior.superior.username || ""] : null, // unsafe
+              secondReviewers: [revieweeEmployee.superior.username] ,
+              topReviewers: [revieweeEmployee.superior?.superior?.username || ""],
               referencer: managers
 
             })
@@ -365,8 +365,16 @@ function ListPerformanceEvalution() {
               setError("シートの作成に失敗しました")
             }
           }else{
-            console.error("年度情報の取得に失敗しました")
-            setError("年度情報の取得に失敗しました")
+            if(!targetYear){
+              console.error("年度情報の取得に失敗しました")
+              setError("年度情報の取得に失敗しました")
+            }else if(!revieweeEmployee.username){
+              console.error("ユーザー名が取得できませんでした")
+              setError("ユーザー名が取得できませんでした")
+            }else if(!revieweeEmployee.superior?.username){
+              console.error("所属長が設定されていないため目標シートを作成することができません")
+              setError("所属長が設定されていないため目標シートを作成することができません")
+            }
           }
 
         }

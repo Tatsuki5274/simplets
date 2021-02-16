@@ -232,24 +232,24 @@ function RevieweeSheetShow(props: Props) {
 
                             <h4>インタビュー実施記録</h4>
                             <InterviewTable
-                                interviewPlanDate={sheet.interviewPlanDate || ""}   // unsafe
-                                interviewPlanComment={sheet.interviewPlanComment || ""} // unsafe
-                                InterviewMid1Date={sheet.InterviewMid1Date || ""}   // unsafe
-                                InterviewMid1Comment={sheet.InterviewMid1Comment || ""} // unsafe
-                                InterviewMid2Date={sheet.InterviewMid2Date || ""}   // unsafe
-                                InterviewMid2Comment={sheet.InterviewMid2Comment || ""} // unsafe
-                                InterviewMid3Date={sheet.InterviewMid3Date || ""}   // unsafe
-                                InterviewMid3Comment={sheet.InterviewMid3Comment || ""} // unsafe
+                                interviewPlanDate={sheet.interviewPlanDate || null}
+                                interviewPlanComment={sheet.interviewPlanComment || null}
+                                InterviewMid1Date={sheet.InterviewMid1Date || null}
+                                InterviewMid1Comment={sheet.InterviewMid1Comment || null}
+                                InterviewMid2Date={sheet.InterviewMid2Date || null}
+                                InterviewMid2Comment={sheet.InterviewMid2Comment || null}
+                                InterviewMid3Date={sheet.InterviewMid3Date || null}
+                                InterviewMid3Comment={sheet.InterviewMid3Comment || null}
                             />
 
                             <h4>年度評価</h4>
                             {sheet.statusValue === 10 ?
                                 <YearlyTableStatus10 /> :
                                 <YearlyTable
-                                    secondComment={sheet.secondComment || ""}   // unsafe
-                                    secondCheckDate={sheet.secondCheckDate || ""}   // unsafe
-                                    firstComment={sheet.firstComment || ""} // unsafe
-                                    firstCheckDate={sheet.firstCheckDate || ""} // unsafe
+                                    secondComment={sheet.secondComment || null}
+                                    secondCheckDate={sheet.secondCheckDate || null}
+                                    firstComment={sheet.firstComment || null}
+                                    firstCheckDate={sheet.firstCheckDate || null}
                                 />}
 
                             <h4>総合評価</h4>

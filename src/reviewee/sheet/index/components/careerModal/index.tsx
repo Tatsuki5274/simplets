@@ -26,18 +26,24 @@ export const RevieweeSheetCareerModal = (props: Props) => {
             }}
             onSubmit={async (values)=>{
                 if(sheet && setSheet){
-                    const updateI: APIt.UpdateSheetInput = {
-                        companyID: sheet.companyID || "",   // unsafe
-                        reviewee: sheet.reviewee || "", // unsafe
-                        year: sheet.year || 0, // unsafe
-                        careerPlan: values.careerPlan
-                    };
-                    const updatedSheet = await SheetDao.update(updateSheet, updateI)
-            
-                    if (updatedSheet) {
-                        setSheet({...updatedSheet})
+                    if(sheet.companyID && sheet.reviewee && sheet.year){
+                        const updateI: APIt.UpdateSheetInput = {
+                            companyID: sheet.companyID,
+                            reviewee: sheet.reviewee,
+                            year: sheet.year,
+                            careerPlan: values.careerPlan
+                        };
+                        const updatedSheet = await SheetDao.update(updateSheet, updateI)
+                
+                        if (updatedSheet) {
+                            setSheet({...updatedSheet})
+                        }
+                        props.handleClose()
+                    }else{
+                        console.error("必要なデータの取得に失敗しました", sheet)
+                        setError("必要なデータの取得に失敗しました")
                     }
-                    props.handleClose()
+
                 }else{
                     console.error("sheetの取得に失敗しています")
                     setError("sheetの取得に失敗しています")
