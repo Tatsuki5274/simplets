@@ -5,8 +5,6 @@ import React, { useContext } from "react"
 import { Button, FormControl, InputGroup, Modal } from "react-bootstrap"
 import { SheetContext } from "reviewer/sheet"
 import * as APIt from 'API';
-import { GraphQLResult } from "@aws-amplify/api";
-import { API, graphqlOperation } from "aws-amplify";
 import { updateSheet } from "graphql/mutations"
 import { sendEmailMutation } from "lib/sendEmail"
 import { Sheet } from "API"
@@ -45,32 +43,16 @@ export const RemandModal = (props: Props)=>{
                         }
                         let updatedSheet: Sheet | null = null;
 
-                        // 動作しない旧式の処理
-
-                        // //sheet更新処理
-                        // const updateI: APIt.UpdateSheetInput = {
-                        //     companyID: sheet.companyID,
-                        //     reviewee: sheet.reviewee,
-                        //     year: sheet.year,
-                        //     statusValue: sheet.statusValue
-                        // };
-                        // const updateMV: APIt.UpdateSheetMutationVariables = {
-                        //     input: updateI,
-                        // };
-                        // let updateR: GraphQLResult<APIt.UpdateSheetMutation> | null = null
-                        // try{
-                        //   updateR = 
-                        //     await API.graphql(graphqlOperation(updateSheet, updateMV)) as GraphQLResult<APIt.UpdateSheetMutation>;
-                        // }catch(e){
-                        //   updateR = e
-                        //   console.log("無視しているエラー", e)
-                        // }
-                        // if (updateR && updateR.data) {
-                        //     const updateTM: APIt.UpdateSheetMutation = updateR.data;
-                        //     if (updateTM.updateSheet) {
-                        //     updatedSheet = updateTM.updateSheet;
-                        //     }
-                        // }
+                        //sheet更新処理
+                        if (work && work.sheet.companyID && work.sheet.reviewee && work.sheet.year) {
+                            const updateI: APIt.UpdateSheetInput = {
+                                companyID: work.sheet.companyID,
+                                reviewee: work.sheet.reviewee,
+                                year: work.sheet.year,
+                                statusValue: work.sheet.statusValue
+                            };
+                            updatedSheet = await SheetDao.update(updateSheet, updateI);
+                        }
 
                         //メール送信処理
                         if(updatedSheet){
