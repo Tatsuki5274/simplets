@@ -37,7 +37,7 @@ exports.handler = async (event) => {
             Data: subject
            }
           },
-        Source: 'twatanabe@sisco-consulting.co.jp', /* required */
+        Source: 'simplets_send@sisco-consulting.co.jp', /* required */
         // ReplyToAddresses: [
         //    'EMAIL_ADDRESS',
         //   /* more items */
