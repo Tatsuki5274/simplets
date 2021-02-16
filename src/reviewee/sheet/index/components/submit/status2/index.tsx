@@ -40,9 +40,9 @@ export const SubmitButtonStatus2 = () => {
                         if (window.confirm("目標提出の引き戻しを行いますか？")) {
                             const work = commandWorkFlow(Command.REVIWEE_PULLBACK_SUBMIT, sheet)
                             let updatedSheet = await SheetDao.update(updateSheet, {
-                                companyID: work.sheet.companyID,
-                                reviewee: work.sheet.reviewee,
-                                year: work.sheet.year,
+                                companyID: work.sheet.companyID || "",  // unsafe
+                                reviewee: work.sheet.reviewee || "",    // unsafe
+                                year: work.sheet.year || 0, // unsafe
                                 statusValue: work.sheet.statusValue
                             });
                             console.log("workflow", work)

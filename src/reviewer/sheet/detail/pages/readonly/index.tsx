@@ -1,4 +1,3 @@
-import { Section, Sheet } from "App";
 import ApprovalStatusBox from "common/approvalStatusBox";
 import React from "react";
 import { Button, Container } from "react-bootstrap";
@@ -7,6 +6,7 @@ import { ReviewerSheetDetailCareerReadonly } from "../../components/career/reado
 import { ReviewerSheetDetailInterviewReadonly } from "../../components/interview/readonly";
 import { ReviewerSheetDetailYearlyReadonly } from "../../components/yearly/readonly";
 import { ReviewerSheetDetailObjectiveReadonly } from "../../components/objective/readonly";
+import { Section, Sheet } from "API";
 
 type Props = {
     sheet: Sheet,

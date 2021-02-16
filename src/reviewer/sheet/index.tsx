@@ -2,8 +2,8 @@ import React, { useState, useEffect, createContext, useContext } from 'react';
 import { API, graphqlOperation } from 'aws-amplify';
 import { GraphQLResult } from "@aws-amplify/api";
 import {  } from 'react-router';
-import { Sheet, Section, UserContext} from 'App';
-import { GetSheetQuery } from 'API';
+import { UserContext} from 'App';
+import { GetSheetQuery, Section, Sheet } from 'API';
 import * as APIt from 'API';
 import { getSheet } from 'graphql/queries';
 import HeaderComponents from 'common/header';
@@ -109,7 +109,7 @@ function EvalutionScreen(props: Props) {
     //カテゴリ情報のnoを元に昇順でソート
     const sectionItems = sheet.section?.items as Section[];
     sectionItems?.sort(function (a, b) {
-        if (a && b && a.sectionCategoryLocalId > b.sectionCategoryLocalId) {
+        if (a.sectionCategoryLocalId && b.sectionCategoryLocalId && a.sectionCategoryLocalId > b.sectionCategoryLocalId) {
             return 1;
         } else {
             return -1;

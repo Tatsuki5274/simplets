@@ -1,4 +1,4 @@
-import { ErrorContext, Objective } from "App";
+import { ErrorContext } from "App";
 import { inputFieldStyle } from "common/globalStyle.module.scss";
 import dateFormat from "dateformat";
 import React, { useContext, useState } from "react"
@@ -7,6 +7,7 @@ import * as APIt from 'API';
 import { ObjectiveDao } from "lib/dao/objectiveDao";
 import { deleteObjective, updateObjective } from "graphql/mutations";
 import Style from '../../../../indexStyle.module.scss';
+import { Objective } from "API";
 
 type Props = {
     objective: Objective,
@@ -21,7 +22,7 @@ export const RevieweeSheetObjectiveEditableStatus1 = (props: Props) => {
         props.objective.progress.toString()
         : undefined
     
-    const date = new Date(props.objective.updatedAt);
+    const date = new Date(props.objective.updatedAt || ""); // unsafe
     var expDoneDateStyle: string; //完了予定日のクラス名
     var currentDate = new Date().getTime();
     var doneDate = new Date(props.objective.expDoneDate!).getTime();
@@ -50,8 +51,8 @@ export const RevieweeSheetObjectiveEditableStatus1 = (props: Props) => {
 
         if (objective && objectiveProgress >= 0 && objectiveProgress <= 100) {
             const updateI: APIt.UpdateObjectiveInput = {
-                sectionKeys: objective.sectionKeys,
-                createdAt: objective.createdAt,
+                sectionKeys: objective.sectionKeys || "",   // unsafe
+                createdAt: objective.createdAt || "",   // unsafe
                 progress: objectiveProgress,
             };
             const updatedObjective = await ObjectiveDao.update(updateObjective, updateI)
@@ -67,8 +68,8 @@ export const RevieweeSheetObjectiveEditableStatus1 = (props: Props) => {
         if(objective){
             if(window.confirm("目標を削除しますか？")){    
                 const deleteI: APIt.DeleteObjectiveInput = {
-                    createdAt: objective.createdAt,
-                    sectionKeys: objective.sectionKeys
+                    createdAt: objective.createdAt || "",   // unsafe
+                    sectionKeys: objective.sectionKeys || ""    // unsafe
                 };
                 const deletedObjective = await ObjectiveDao.delete(deleteObjective, deleteI)
                 if(deletedObjective){

@@ -1,4 +1,4 @@
-import { Objective } from "App";
+import { Objective } from "API";
 import dateFormat from "dateformat";
 import React from "react"
 import Style from '../../../../indexStyle.module.scss';
@@ -10,7 +10,7 @@ type Props = {
 
 export const RevieweeSheetObjectiveReadonlyStatus10 = (props: Props) => {
 
-    const date = new Date(props.objective.updatedAt);
+    const date = new Date(props.objective.updatedAt || ""); // unsafe
     var expDoneDateStyle: string; //完了予定日のクラス名
     var currentDate = new Date().getTime();
     var doneDate = new Date(props.objective.expDoneDate!).getTime();

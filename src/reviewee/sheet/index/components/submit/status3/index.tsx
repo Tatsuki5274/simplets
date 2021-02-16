@@ -1,4 +1,5 @@
-import { ErrorContext, Sheet } from "App";
+import { Sheet } from "API";
+import { ErrorContext } from "App";
 import { buttonComponentStyle } from "common/globalStyle.module.scss";
 import { updateSheet } from "graphql/mutations";
 import { SheetDao } from "lib/dao/sheetDao";
@@ -42,9 +43,9 @@ export const SubmitButtonStatus3 = () => {
                         if (window.confirm("実績と自己評価を提出しますか？")) {
                             const work = commandWorkFlow(Command.REVIEWEE_INPUT_RESULT, sheet)
                             let updatedSheet = await SheetDao.update(updateSheet, {
-                                companyID: sheet.companyID,
-                                reviewee: sheet.reviewee,
-                                year: sheet.year,
+                                companyID: sheet.companyID || "",   // unsafe
+                                reviewee: sheet.reviewee || "", // unsafe
+                                year: sheet.year || 0,  // unsafe
                                 statusValue: sheet.statusValue
                             });
 
@@ -73,9 +74,9 @@ export const SubmitButtonStatus3 = () => {
                         if (window.confirm("承認内容の引き戻しを行い、目標設定中のステータスに変更しますか？")) {
                             const work = commandWorkFlow(Command.REVIWEE_PULLBACK_APPROVAL, sheet)
                             let updatedSheet = await SheetDao.update(updateSheet, {
-                                companyID: work.sheet.companyID,
-                                reviewee: work.sheet.reviewee,
-                                year: work.sheet.year,
+                                companyID: work.sheet.companyID || "",  // unsafe
+                                reviewee: work.sheet.reviewee || "",    // unsafe
+                                year: work.sheet.year || 0, // unsafe
                                 statusValue: work.sheet.statusValue
                             });
                             if (updatedSheet) {

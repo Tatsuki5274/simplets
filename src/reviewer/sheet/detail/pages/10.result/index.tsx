@@ -1,5 +1,5 @@
-import { UpdateSheetInput } from "API";
-import { ErrorContext, Section } from "App";
+import { Section, UpdateSheetInput } from "API";
+import { ErrorContext } from "App";
 import ApprovalStatusBox from "common/approvalStatusBox";
 import { Formik } from "formik";
 import { updateSheet } from "graphql/mutations";
@@ -83,9 +83,9 @@ export const ReviewerSheetPagesStatus10 = (props: Props) => {
 
                                             const work = commandWorkFlow(Command.SUP1_INPUT_SCORE, sheet)
                                             const data: UpdateSheetInput = {
-                                                companyID: sheet.companyID,
-                                                reviewee: sheet.reviewee,
-                                                year: sheet.year,
+                                                companyID: sheet.companyID || "",   // unsafe
+                                                reviewee: sheet.reviewee || "", // unsafe
+                                                year: sheet.year || 0, // unsafe
                                                 secondComment: values.secondComment,
                                                 secondCheckDate: formatAWSDate(new Date()),
                                                 statusValue: work.sheet.statusValue,
@@ -145,9 +145,9 @@ export const ReviewerSheetPagesStatus10 = (props: Props) => {
                                             <Button className={buttonComponentStyle} onClick={async () => {
                                                 console.log("formik", formik.values)
                                                 const data: UpdateSheetInput = {
-                                                    companyID: sheet.companyID,
-                                                    reviewee: sheet.reviewee,
-                                                    year: sheet.year,
+                                                    companyID: sheet.companyID || "",   // unsafe
+                                                    reviewee: sheet.reviewee || "", // unsafe
+                                                    year: sheet.year || 0,  // unsafe
                                                     secondComment: formik.values.secondComment,
                                                     secondCheckDate: formatAWSDate(new Date()),
                                                     overAllEvaluation: formik.values.overAllEvaluation || null

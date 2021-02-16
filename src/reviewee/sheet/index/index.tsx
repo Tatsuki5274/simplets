@@ -2,7 +2,7 @@ import React, { useState, useEffect, createContext, useContext } from 'react';
 import { Button, Table } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { getSheet } from 'graphql/queries'
-import { Sheet, Section, Objective, EmployeeContext } from 'App';
+import { EmployeeContext } from 'App';
 import HeaderComponents from 'common/header';//ヘッダーの表示
 import ApprovalStatusBox from 'common/approvalStatusBox';
 import { SheetDao } from 'lib/dao/sheetDao';
@@ -37,7 +37,7 @@ import Content from 'views/components/templates/Content';
 import Sidebar from 'views/components/templates/Sidebar';
 import SidebarManager from 'views/components/organisms/common/SidebarManager';
 import { routeBuilder } from 'router';
-import { EmployeeType } from 'API';
+import { EmployeeType, Objective, Section, Sheet } from 'API';
 import Scroll from 'views/components/atoms/Scroll';
 import ScrollTable from 'views/components/molecules/ScrollTable';
 import Container from 'views/components/templates/Container';
@@ -122,7 +122,7 @@ function RevieweeSheetShow(props: Props) {
     //カテゴリ情報のnoを元に昇順でソート
     const sectionItems = sheet.section?.items as Section[];
     sectionItems?.sort(function (a, b) {
-        if (a && b && a.sectionCategoryLocalId > b.sectionCategoryLocalId) {
+        if (a?.sectionCategoryLocalId && b?.sectionCategoryLocalId && a.sectionCategoryLocalId > b.sectionCategoryLocalId) {
             return 1;
         } else {
             return -1;
@@ -161,7 +161,7 @@ function RevieweeSheetShow(props: Props) {
                             <Title>業績評価</Title>
                             {sheet.statusValue === 1 ?
                                 <ObjectiveCreateModal
-                                    year={sheet.year}
+                                    year={sheet.year || 0}  // unsafe
                                 /> : null}
 
                             <AverageMediumGaugeBox sheet={sheet} />
@@ -171,7 +171,7 @@ function RevieweeSheetShow(props: Props) {
                                 //作成日を元に項目明細をソート
                                 const objectiveItems = section.objective?.items as Objective[];
                                 objectiveItems?.sort(function (a, b) {
-                                    if (a.createdAt > b.createdAt) {
+                                    if (a.createdAt && b.createdAt && a.createdAt > b.createdAt) {
                                         return 1;
                                     } else {
                                         return -1;
@@ -232,24 +232,24 @@ function RevieweeSheetShow(props: Props) {
 
                             <h4>インタビュー実施記録</h4>
                             <InterviewTable
-                                interviewPlanDate={sheet.interviewPlanDate}
-                                interviewPlanComment={sheet.interviewPlanComment}
-                                InterviewMid1Date={sheet.InterviewMid1Date}
-                                InterviewMid1Comment={sheet.InterviewMid1Comment}
-                                InterviewMid2Date={sheet.InterviewMid2Date}
-                                InterviewMid2Comment={sheet.InterviewMid2Comment}
-                                InterviewMid3Date={sheet.InterviewMid3Date}
-                                InterviewMid3Comment={sheet.InterviewMid3Comment}
+                                interviewPlanDate={sheet.interviewPlanDate || ""}   // unsafe
+                                interviewPlanComment={sheet.interviewPlanComment || ""} // unsafe
+                                InterviewMid1Date={sheet.InterviewMid1Date || ""}   // unsafe
+                                InterviewMid1Comment={sheet.InterviewMid1Comment || ""} // unsafe
+                                InterviewMid2Date={sheet.InterviewMid2Date || ""}   // unsafe
+                                InterviewMid2Comment={sheet.InterviewMid2Comment || ""} // unsafe
+                                InterviewMid3Date={sheet.InterviewMid3Date || ""}   // unsafe
+                                InterviewMid3Comment={sheet.InterviewMid3Comment || ""} // unsafe
                             />
 
                             <h4>年度評価</h4>
                             {sheet.statusValue === 10 ?
                                 <YearlyTableStatus10 /> :
                                 <YearlyTable
-                                    secondComment={sheet.secondComment}
-                                    secondCheckDate={sheet.secondCheckDate}
-                                    firstComment={sheet.firstComment}
-                                    firstCheckDate={sheet.firstCheckDate}
+                                    secondComment={sheet.secondComment || ""}   // unsafe
+                                    secondCheckDate={sheet.secondCheckDate || ""}   // unsafe
+                                    firstComment={sheet.firstComment || ""} // unsafe
+                                    firstCheckDate={sheet.firstCheckDate || ""} // unsafe
                                 />}
 
                             <h4>総合評価</h4>

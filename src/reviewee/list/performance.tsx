@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { Button, Table } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Link } from 'react-router-dom';
-import { Category, EmployeeContext, ErrorContext, Sheet, UserContext } from 'App';
+import {  EmployeeContext, ErrorContext, UserContext } from 'App';
 import { ApprovalStatus, getStatusValue } from 'lib/getStatusValue'
 import * as APIt from 'API';
 import HeaderComponents from 'common/header';
@@ -13,7 +13,7 @@ import { SectionDao } from 'lib/dao/sectionDao';
 import { DisplaySheetAverage } from './components/average';
 import { tableHeaderStyle } from 'common/globalStyle.module.scss';
 import { getSheetKeys } from 'lib/util';
-import { BooleanType, EmployeeType } from 'API';
+import { BooleanType, Category, EmployeeType, Sheet } from 'API';
 import LeftBox from 'views/components/templates/LeftBox';
 import RightBox from 'views/components/templates/RightBox';
 import SidebarManager from 'views/components/organisms/common/SidebarManager';
@@ -24,7 +24,7 @@ import Container from 'views/components/templates/Container';
 import Title from 'views/components/molecules/Title';
 
 const sortSheet = (a: Sheet, b: Sheet) => {
-  if (a.year < b.year) {
+  if (a.year && b.year && a.year < b.year) {
     return 1;
   } else {
     return -1;
@@ -267,9 +267,9 @@ function ListPerformanceEvalution() {
         //上司情報取得
         if (revieweeEmployee.superior) {
           revieweeEmployeeSuperior = []
-          revieweeEmployeeSuperior.push(revieweeEmployee.superior.username)
+          revieweeEmployeeSuperior.push(revieweeEmployee.superior.username || "") // unsafe
           if (revieweeEmployee.superior.superior) {
-            revieweeEmployeeSuperior.push(revieweeEmployee.superior.superior.username)
+            revieweeEmployeeSuperior.push(revieweeEmployee.superior.superior.username || "") // unsafe
           }
         }
 
@@ -306,8 +306,8 @@ function ListPerformanceEvalution() {
           console.log("groupManagers", groupManagers)
           let listSuperManagers: Array<string> = [];
           let listGroupManagers: Array<string> = [];
-          superManagers?.forEach(element => listSuperManagers.push(element.username));
-          groupManagers?.forEach(element => listGroupManagers.push(element.username));
+          superManagers?.forEach(element => listSuperManagers.push(element.username || "")); // unsafe
+          groupManagers?.forEach(element => listGroupManagers.push(element.username || "")); // unsafe
           console.log("listSuperManagers", listSuperManagers)
           console.log("listGroupManagers", listGroupManagers)
           const managers = listSuperManagers.concat(listGroupManagers)
@@ -315,16 +315,16 @@ function ListPerformanceEvalution() {
           if (targetYear) {
             //シートを作成
             const createdSheet = await SheetDao.create(createSheet, {
-              grade: revieweeEmployee.grade,
+              grade: revieweeEmployee.grade || "", // unsafe
               year: targetYear,
               statusValue: 1,
-              revieweeUsername: revieweeEmployee.username,
+              revieweeUsername: revieweeEmployee.username || "", // unsafe
               secondUsername: revieweeEmployee.superior?.username || "",
               sheetGroupLocalId: revieweeEmployee.employeeGroupLocalId || "empty",
               companyID: currentUser.attributes['custom:companyId'],
               reviewee: currentUser.username,
-              secondReviewers: revieweeEmployee.superior ? [revieweeEmployee.superior.username] : null,
-              topReviewers: revieweeEmployee.superior?.superior ? [revieweeEmployee.superior.superior.username] : null,
+              secondReviewers: revieweeEmployee.superior ? [revieweeEmployee.superior.username || ""] : null, // unsafe
+              topReviewers: revieweeEmployee.superior?.superior ? [revieweeEmployee.superior.superior.username || ""] : null, // unsafe
               referencer: managers
 
             })
@@ -334,11 +334,11 @@ function ListPerformanceEvalution() {
               categorys.forEach(async (category: Category) => {
                 const createdSection = await SectionDao.create(createSection, {
                   sheetKeys: getSheetKeys(createdSheet),
-                  sectionCategoryLocalId: category.localID,
+                  sectionCategoryLocalId: category.localID || "", // unsafe
                   sectionCategoryName: category.name,
                   secondReviewers: createdSheet.secondReviewers,
                   topReviewers: createdSheet.topReviewers,
-                  companyID: createdSheet.companyID,
+                  companyID: createdSheet.companyID || "", // unsafe
                   referencer: managers
                 })
                 if (!createdSection) {

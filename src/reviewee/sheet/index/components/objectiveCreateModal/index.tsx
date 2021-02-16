@@ -1,4 +1,4 @@
-import { ErrorContext, Sheet, UserContext } from "App";
+import { ErrorContext, UserContext } from "App";
 import { Formik } from "formik";
 import { getSheet } from "graphql/queries";
 import { SheetDao } from "lib/dao/sheetDao";
@@ -10,6 +10,7 @@ import * as APIt from 'API';
 import * as Yup from 'yup';
 import { ObjectiveDao } from "lib/dao/objectiveDao";
 import { createObjective } from "graphql/mutations";
+import { Sheet } from "API";
 
 
 type Props = {
@@ -39,7 +40,7 @@ export function ObjectiveCreateModal(props: Props){
             const sheet = await SheetDao.get(getSheet, { companyID: currentUser?.attributes["custom:companyId"] || "", reviewee: currentUser?.username || "", year: props.year })
             if (sheet && sheet.section && sheet.section.items) {
                 sheet.section.items.sort(function (a, b) {
-                    if (a && b && a.sectionCategoryLocalId > b.sectionCategoryLocalId) {
+                    if (a?.sectionCategoryLocalId && b?.sectionCategoryLocalId && a.sectionCategoryLocalId > b.sectionCategoryLocalId) {
                         return 1;
                     } else {
                         return -1;
@@ -85,7 +86,7 @@ export function ObjectiveCreateModal(props: Props){
                             if (values.sectionKeys) {
                                 if(sheet){
                                     const createI: APIt.CreateObjectiveInput = {
-                                        companyID: sheet.companyID,
+                                        companyID: sheet.companyID || "",   // unsafe
                                         sectionKeys: values.sectionKeys,
                                         content: values.content || "",
                                         priority: values.priority || "",

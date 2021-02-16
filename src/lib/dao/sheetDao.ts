@@ -1,5 +1,5 @@
-import { Sheet } from "App";
 import * as APIt from 'API';
+import { Sheet } from 'API';
 import { graphqlMutation, graphqlQuery } from "./common/sdk";
 
 export const SheetDao = {
@@ -15,7 +15,7 @@ export const SheetDao = {
       if (createR.data) {
         const createTM: APIt.CreateSheetMutation = createR.data
         if (createTM.createSheet) {
-          const sheet: Sheet = createTM.createSheet
+          const sheet: Sheet = createTM.createSheet as Sheet // unsafe
           return sheet
         } else console.error("情報の作成に失敗しました")
       } else console.error("情報の作成に失敗しました")
@@ -41,7 +41,7 @@ export const SheetDao = {
       if (updateR.data) {
         const updateTM: APIt.UpdateSheetMutation = updateR.data
         if (updateTM.updateSheet) {
-          const sheet: Sheet = updateTM.updateSheet
+          const sheet: Sheet = updateTM.updateSheet as Sheet // unsafe
           return sheet
         } else console.error("情報の更新に失敗しました")
       } else console.error("情報の更新に失敗しました")
@@ -68,7 +68,7 @@ export const SheetDao = {
       if (deleteR.data) {
         const deleteTM: APIt.DeleteSheetMutation = deleteR.data
         if (deleteTM.deleteSheet) {
-          deletedSheet = deleteTM.deleteSheet
+          deletedSheet = deleteTM.deleteSheet as Sheet // unsafe
           return deletedSheet
         } else console.error("情報の削除に失敗しました")
       } else console.error("情報の削除に失敗しました")
@@ -91,7 +91,7 @@ export const SheetDao = {
       if (getGQL.data) {
         const getQ: APIt.GetSheetQuery = getGQL.data
         if (getQ.getSheet) {
-          const gotSheet: Sheet = getQ.getSheet
+          const gotSheet: Sheet = getQ.getSheet as Sheet // unsafe
           return gotSheet
         } else console.error("情報の取得に失敗しました")
       } else console.error("情報の取得に失敗しました")

@@ -1,4 +1,4 @@
-import { ErrorContext, Section } from "App";
+import { ErrorContext } from "App";
 import ApprovalStatusBox from "common/approvalStatusBox";
 import { Formik } from "formik";
 import { SheetDao } from "lib/dao/sheetDao";
@@ -9,7 +9,7 @@ import { RemandModal } from "../../components/remandModal";
 import { updateSheet } from "graphql/mutations";
 import { Command, commandWorkFlow } from "lib/workflow";
 import { sendEmailMutation } from "lib/sendEmail";
-import { UpdateSheetInput } from "API";
+import { Section, UpdateSheetInput } from "API";
 import { ReviewerSheetDetailObjectiveReadonly } from "../../components/objective/readonly";
 import { ReviewerSheetDetailYearlyReadonly } from "../../components/yearly/readonly";
 import { SheetContext } from "reviewer/sheet";
@@ -66,9 +66,9 @@ export const ReviewerSheetPagesStatus2 = ()=>{
                                     if(window.confirm("目標承認が社員に通知されます。よろしいでしょうか。")){
                                         const work = commandWorkFlow(Command.SUP1_APPLOVAL, sheet)
                                         const data: UpdateSheetInput = {
-                                            companyID: sheet.companyID,
-                                            reviewee: sheet.reviewee,
-                                            year: sheet.year,
+                                            companyID: sheet.companyID || "",   // unsafe
+                                            reviewee: sheet.reviewee || "", // unsafe
+                                            year: sheet.year || 0,  // unsafe
                                             statusValue: work.sheet.statusValue,
                                             careerPlanComment: values.careerPlanComment,
                                             interviewPlanComment: values.interviewPlanComment,
@@ -131,9 +131,9 @@ export const ReviewerSheetPagesStatus2 = ()=>{
                                         <Form.Group>
                                             <Button className={buttonComponentStyle} onClick={async () => {
                                                 const data: UpdateSheetInput = {
-                                                    companyID: sheet.companyID,
-                                                    reviewee: sheet.reviewee,
-                                                    year: sheet.year,
+                                                    companyID: sheet.companyID || "",   // unsafe
+                                                    reviewee: sheet.reviewee || "", // unsafe
+                                                    year: sheet.year || 0,  // unsafe
                                                     careerPlanComment: formik.values.careerPlanComment,
                                                     interviewPlanComment: formik.values.interviewPlanComment,
                                                     interviewPlanDate: formik.values.interviewPlanDate,

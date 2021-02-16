@@ -1,12 +1,12 @@
 import React, { CSSProperties } from 'react';
 import { Form, Badge } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Sheet } from 'App';
 import CategoryInput from "./categoryInput"
 import { ErrorMessage, FormikProps } from 'formik';
 import { inputFieldStyle } from 'common/globalStyle.module.scss';
 import { getSectionKeys } from 'lib/util';
 import { TypeForm } from '.';
+import { Sheet } from 'API';
 
 
 type Props = {

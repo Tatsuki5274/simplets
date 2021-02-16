@@ -1,4 +1,4 @@
-import { Objective, Section } from "App";
+import { Section, Objective } from "API";
 import { tableHeaderStyle } from "common/globalStyle.module.scss";
 import dateFormat from "dateformat";
 import { getObjectiveKeys, getSectionKeys } from "lib/util";
@@ -18,7 +18,7 @@ export const ReviewerSheetDetailObjectiveReadonly = (props: Props) => {
             //項目明細情報の作成日を元に昇順へソート
             const objectiveItems = section?.objective?.items as Objective[];
             objectiveItems?.sort(function (a, b) {
-                if (a.createdAt > b.createdAt) {
+                if (a.createdAt && b.createdAt && a.createdAt > b.createdAt) {
                     return 1;
                 } else {
                     return -1;
@@ -44,7 +44,7 @@ export const ReviewerSheetDetailObjectiveReadonly = (props: Props) => {
                         </thead>
                         <tbody>
                             {objectiveItems.map((objective: Objective) => {
-                                const date = new Date(objective.updatedAt);
+                                const date = new Date(objective.updatedAt || "");   // unsafe
                                 var styleObjective: string;
                                 if (objective.progress === 100) {
                                     styleObjective = style.detailObjectiveProgressHigh;

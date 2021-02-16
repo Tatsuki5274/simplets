@@ -1,4 +1,4 @@
-import { Sheet } from "App"
+import { Sheet } from "API";
 import React from "react"
 import { Form, Table } from "react-bootstrap"
 import style from '../common/style.module.scss';

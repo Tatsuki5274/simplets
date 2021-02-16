@@ -1,4 +1,4 @@
-import { Sheet } from "App"
+import { Sheet } from "API"
 import { tableHeaderStyle, textareaDisplayStyle } from "common/globalStyle.module.scss"
 import React from "react"
 import { Table } from "react-bootstrap"

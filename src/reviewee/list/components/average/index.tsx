@@ -1,4 +1,4 @@
-import { Sheet } from "App"
+import { Sheet } from "API"
 import { calcAvg } from "lib/util"
 import React from "react"
 

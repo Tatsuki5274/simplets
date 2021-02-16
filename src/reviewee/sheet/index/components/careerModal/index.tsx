@@ -27,9 +27,9 @@ export const RevieweeSheetCareerModal = (props: Props) => {
             onSubmit={async (values)=>{
                 if(sheet && setSheet){
                     const updateI: APIt.UpdateSheetInput = {
-                        companyID: sheet.companyID,
-                        reviewee: sheet.reviewee,
-                        year: sheet.year,
+                        companyID: sheet.companyID || "",   // unsafe
+                        reviewee: sheet.reviewee || "", // unsafe
+                        year: sheet.year || 0, // unsafe
                         careerPlan: values.careerPlan
                     };
                     const updatedSheet = await SheetDao.update(updateSheet, updateI)

@@ -1,8 +1,8 @@
-import { SendEmail } from "App";
 import * as APIt from 'API';
 import API, { GraphQLResult, graphqlOperation }
     from '@aws-amplify/api';
 import { sendEmail } from "graphql/mutations";
+import { SendEmail } from 'App';
 
 export async function sendEmailMutation(sendEmailInput: SendEmail) {
     const sendEmailItem: SendEmail = sendEmailInput

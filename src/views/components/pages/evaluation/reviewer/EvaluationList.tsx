@@ -98,14 +98,16 @@ export default function () {
                         if(sheet.revieweeEmployee?.username){
                             preview = {
                                 label: "プレビュー",
-                                dest: routeBuilder.previewPath(sheet.companyID, sheet.revieweeEmployee?.username, sheet.year.toString())
+                                dest: routeBuilder.previewPath(sheet.companyID || "", sheet.revieweeEmployee?.username, sheet.year?.toString() || "") // unsafe
                             }
                         }
                         const lastYearsAgoOverAllEvaluation = sheets.find(comSheet => {
                             console.log(sheet.year, comSheet.year)
+                            if (!sheet.year) return false
                             return sheet.year - 1 === comSheet.year
                         })?.overAllEvaluation || null
                         const twoYearsAgoOverAllEvaluation = sheets.find(comSheet => {
+                            if (!sheet.year) return false
                             return sheet.year - 2 === comSheet.year
                         })?.overAllEvaluation || null
                         if(sheet.group?.localID && sheet.year && sheet.statusValue && sheet.revieweeEmployee){
@@ -114,13 +116,13 @@ export default function () {
                                     groupLocalId: sheet.group?.localID,
                                     year: sheet.year,
                                     statusValue: sheet.statusValue,
-                                    localId: sheet.revieweeEmployee.localID
+                                    localId: sheet.revieweeEmployee.localID || "" // unsafe
                                 },
                                 groupName: sheet.group?.name || "",
                                 name: `${sheet.revieweeEmployee?.lastName} ${sheet.revieweeEmployee?.firstName}`,
                                 status: sheet.statusValue ? getStatusValue(sheet.statusValue) : "",
                                 preview: preview,
-                                overAllEvaluation: sheet.overAllEvaluation,
+                                overAllEvaluation: sheet.overAllEvaluation || -1, // unsafe
                                 lastYearsAgoOverAllEvaluation: lastYearsAgoOverAllEvaluation,
                                 twoYearsAgoOverAllEvaluation: twoYearsAgoOverAllEvaluation
                             }
@@ -192,8 +194,8 @@ export default function () {
             ]
             const groupsLabel: SelectLabel[] = groups.map(group => {
               return {
-                label: group.name,
-                value: group.localID
+                label: group.name || "",
+                value: group.localID || ""
               }
             })
             setGroups(groupAll.concat(groupsLabel))

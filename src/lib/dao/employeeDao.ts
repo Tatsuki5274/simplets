@@ -1,5 +1,5 @@
-import { Employee } from "App";
 import * as APIt from 'API';
+import { Employee } from 'API';
 import { graphqlMutation, graphqlQuery } from "./common/sdk";
 
 export const EmployeeDao = {
@@ -15,7 +15,7 @@ export const EmployeeDao = {
       if (createR.data) {
         const createTM: APIt.CreateEmployeeMutation = createR.data
         if (createTM.createEmployee) {
-          const employee: Employee = createTM.createEmployee
+          const employee: Employee = createTM.createEmployee as Employee // unsafe
           return employee
         } else console.error("情報の作成に失敗しました")
       } else console.error("情報の作成に失敗しました")
@@ -41,7 +41,7 @@ export const EmployeeDao = {
       if (updateR.data) {
         const updateTM: APIt.UpdateEmployeeMutation = updateR.data
         if (updateTM.updateEmployee) {
-          const employee: Employee = updateTM.updateEmployee
+          const employee: Employee = updateTM.updateEmployee as Employee // unsafe
           return employee
         } else console.error("情報の更新に失敗しました")
       } else console.error("情報の更新に失敗しました")
@@ -68,7 +68,7 @@ export const EmployeeDao = {
       if (deleteR.data) {
         const deleteTM: APIt.DeleteEmployeeMutation = deleteR.data
         if (deleteTM.deleteEmployee) {
-          deletedEmployee = deleteTM.deleteEmployee
+          deletedEmployee = deleteTM.deleteEmployee as Employee // unsafe
           return deletedEmployee
         } else console.error("情報の削除に失敗しました")
       } else console.error("情報の削除に失敗しました")
@@ -91,7 +91,7 @@ export const EmployeeDao = {
       if (getGQL.data) {
         const getQ: APIt.GetEmployeeQuery = getGQL.data
         if (getQ.getEmployee) {
-          const gotEmployee: Employee = getQ.getEmployee
+          const gotEmployee: Employee = getQ.getEmployee as Employee // unsafe
           return gotEmployee
         } else console.error("情報の取得に失敗しました")
       } else console.error("情報の取得に失敗しました")

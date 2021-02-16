@@ -20,9 +20,9 @@ export const SubmitButtonStatus1 = () => {
                     if (window.confirm("目標を提出しますか？")) {
                         const work = commandWorkFlow(Command.REVIEWEE_SUBMIT, sheet)
                         let updatedSheet = await SheetDao.update(updateSheet, {
-                            companyID: sheet.companyID,
-                            reviewee: sheet.reviewee,
-                            year: sheet.year,
+                            companyID: sheet.companyID || "",   // unsafe
+                            reviewee: sheet.reviewee || "", // unsafe
+                            year: sheet.year || 0,  // unsafe
                             statusValue: sheet.statusValue
                         });
 

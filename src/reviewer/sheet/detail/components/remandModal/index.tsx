@@ -1,4 +1,4 @@
-import { ErrorContext, Sheet } from "App"
+import { ErrorContext } from "App"
 import { Form, Formik } from "formik"
 import { Command, commandWorkFlow } from "lib/workflow"
 import React, { useContext } from "react"
@@ -9,6 +9,8 @@ import { GraphQLResult } from "@aws-amplify/api";
 import { API, graphqlOperation } from "aws-amplify";
 import { updateSheet } from "graphql/mutations"
 import { sendEmailMutation } from "lib/sendEmail"
+import { Sheet } from "API"
+import { SheetDao } from "lib/dao/sheetDao"
 
 /**
  * 
@@ -43,30 +45,32 @@ export const RemandModal = (props: Props)=>{
                         }
                         let updatedSheet: Sheet | null = null;
 
-                        //sheet更新処理
-                        const updateI: APIt.UpdateSheetInput = {
-                            companyID: sheet.companyID,
-                            reviewee: sheet.reviewee,
-                            year: sheet.year,
-                            statusValue: sheet.statusValue
-                        };
-                        const updateMV: APIt.UpdateSheetMutationVariables = {
-                            input: updateI,
-                        };
-                        let updateR: GraphQLResult<APIt.UpdateSheetMutation> | null = null
-                        try{
-                          updateR = 
-                            await API.graphql(graphqlOperation(updateSheet, updateMV)) as GraphQLResult<APIt.UpdateSheetMutation>;
-                        }catch(e){
-                          updateR = e
-                          console.log("無視しているエラー", e)
-                        }
-                        if (updateR && updateR.data) {
-                            const updateTM: APIt.UpdateSheetMutation = updateR.data;
-                            if (updateTM.updateSheet) {
-                            updatedSheet = updateTM.updateSheet;
-                            }
-                        }
+                        // 動作しない旧式の処理
+
+                        // //sheet更新処理
+                        // const updateI: APIt.UpdateSheetInput = {
+                        //     companyID: sheet.companyID,
+                        //     reviewee: sheet.reviewee,
+                        //     year: sheet.year,
+                        //     statusValue: sheet.statusValue
+                        // };
+                        // const updateMV: APIt.UpdateSheetMutationVariables = {
+                        //     input: updateI,
+                        // };
+                        // let updateR: GraphQLResult<APIt.UpdateSheetMutation> | null = null
+                        // try{
+                        //   updateR = 
+                        //     await API.graphql(graphqlOperation(updateSheet, updateMV)) as GraphQLResult<APIt.UpdateSheetMutation>;
+                        // }catch(e){
+                        //   updateR = e
+                        //   console.log("無視しているエラー", e)
+                        // }
+                        // if (updateR && updateR.data) {
+                        //     const updateTM: APIt.UpdateSheetMutation = updateR.data;
+                        //     if (updateTM.updateSheet) {
+                        //     updatedSheet = updateTM.updateSheet;
+                        //     }
+                        // }
 
                         //メール送信処理
                         if(updatedSheet){

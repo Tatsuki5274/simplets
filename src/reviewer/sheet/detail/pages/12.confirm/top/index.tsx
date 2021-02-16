@@ -1,5 +1,5 @@
-import { UpdateSheetInput } from "API";
-import { ErrorContext, Section } from "App";
+import { Section, UpdateSheetInput } from "API";
+import { ErrorContext } from "App";
 import ApprovalStatusBox from "common/approvalStatusBox";
 import { buttonComponentStyle } from "common/globalStyle.module.scss";
 import { Formik } from "formik";
@@ -49,9 +49,9 @@ export const ReviewerSheetPagesStatus12Top = () => {
 
                                         const work = commandWorkFlow(Command.SUP1_DONE, sheet)
                                         const data: UpdateSheetInput = {
-                                            companyID: sheet.companyID,
-                                            reviewee: sheet.reviewee,
-                                            year: sheet.year,
+                                            companyID: sheet.companyID || "",// unsafe
+                                            reviewee: sheet.reviewee || "",   // unsafe 
+                                            year: sheet.year || 0,  // unsafe
                                             statusValue: work.sheet.statusValue
                                         }
                                         let updatedSheet = await SheetDao.update(updateSheet, data);

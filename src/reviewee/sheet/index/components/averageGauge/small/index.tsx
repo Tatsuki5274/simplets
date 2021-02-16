@@ -1,4 +1,4 @@
-import { Section } from "App"
+import { Section } from "API"
 import { calcAvg, getSectionKeys, round } from "lib/util"
 import React from "react"
 import { SmallGage } from "../../gage/small"

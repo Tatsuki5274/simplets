@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import { Card } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import * as APIt from 'API';
-import { EmployeeContext, ErrorContext, Group, Sheet, UserContext } from 'App';
+import { EmployeeContext, ErrorContext, UserContext } from 'App';
 import HeaderComponents from 'common/header';//ヘッダーの表示
 import style from './progressStyle.module.scss';
 import { Link } from 'react-router-dom';
@@ -21,7 +21,7 @@ import Sidebar from 'views/components/templates/Sidebar';
 import Container from 'views/components/templates/Container';
 import Title from 'views/components/molecules/Title';
 import CommandButton from 'views/components/molecules/CommandButton';
-
+import { Group, Sheet } from 'API';
 
 type ViewType = {
 
@@ -172,7 +172,7 @@ function ProgressReferenceList() {
 
                     //昇順でソートしてgroupItemに保存
                     const groupItem = response?.sort(function (a, b) {
-                        if (a.name > b.name) {
+                        if (a.name && b.name && a.name > b.name) {
                             return 1;
                         } else {
                             return -1;
@@ -191,7 +191,7 @@ function ProgressReferenceList() {
 
                     //昇順でソートしてgroupItemに保存
                     const groupItem = response?.sort(function (a, b) {
-                        if (a.name > b.name) {
+                        if (a.name && b.name && a.name > b.name) {
                             return 1;
                         } else {
                             return -1;
@@ -225,10 +225,14 @@ function ProgressReferenceList() {
                     listItems.sort(function (a, b) {
                         // 部署コードの照準、社員番号の昇順にソート
                         if (a.revieweeEmployee?.group && b.revieweeEmployee?.group) {
-                            if (a.revieweeEmployee.group.localID > b.revieweeEmployee.group.localID) return 1
-                            if (a.revieweeEmployee.group.localID < b.revieweeEmployee.group.localID) return -1
-                            if (a.revieweeEmployee.localID > b.revieweeEmployee.localID) return 1
-                            if (a.revieweeEmployee.localID < b.revieweeEmployee.localID) return -1
+                            if (a.revieweeEmployee.group.localID && b.revieweeEmployee.group.localID){
+                                if (a.revieweeEmployee.group.localID > b.revieweeEmployee.group.localID) return 1
+                                if (a.revieweeEmployee.group.localID < b.revieweeEmployee.group.localID) return -1
+                            }
+                            if(a.revieweeEmployee.localID && b.revieweeEmployee.localID){
+                                if (a.revieweeEmployee.localID > b.revieweeEmployee.localID) return 1
+                                if (a.revieweeEmployee.localID < b.revieweeEmployee.localID) return -1
+                            }
                         }
                         return 0
                     })
@@ -245,15 +249,15 @@ function ProgressReferenceList() {
                 return {
 
                     sheetKey: getSheetKeys(sheet).replace(/[.@]/g, '-'),
-                    companyId: sheet.companyID,
+                    companyId: sheet.companyID || "",   // unsafe
                     year: String(sheet.year),
-                    reviewee: sheet.reviewee,
-                    statusValue: sheet.statusValue,
-                    groupName: sheet.group?.name,
-                    groupId: sheet.group.localID,
+                    reviewee: sheet.reviewee || "", // unsafe
+                    statusValue: sheet.statusValue || 0,    // unsafe
+                    groupName: sheet.group?.name || "",
+                    groupId: sheet.group.localID || "",
                     revieweeName: {
-                        firstName: sheet.revieweeEmployee.firstName,
-                        lastName: sheet.revieweeEmployee.lastName
+                        firstName: sheet.revieweeEmployee.firstName || "",
+                        lastName: sheet.revieweeEmployee.lastName || ""
                     },
                     categorys: sheet.section.items?.map((section) => {
                         return {

@@ -58,8 +58,8 @@ export default function () {
                     ]
                     const groupsLabel: SelectLabel[] = groups.map(group => {
                         return {
-                            label: group.name,
-                            value: group.localID
+                            label: group.name || "",
+                            value: group.localID || ""
                         }
                     })
                     setGroups(groupAll.concat(groupsLabel))
@@ -75,15 +75,15 @@ export default function () {
                 if (sheets) {
                     const result = sheets.map(sheet => {
                         const data: ProgressReferenceType = {
-                            groupId: sheet.group ? sheet.group.localID : "",
-                            year: sheet.year,
-                            employeeId: sheet.revieweeEmployee ? sheet.revieweeEmployee.localID : "",
-                            employeeName: sheet.revieweeEmployee ? sheet.revieweeEmployee.lastName + sheet.revieweeEmployee.firstName : "",
-                            groupName: sheet.group ? sheet.group.name : "",
+                            groupId: sheet.group ? sheet.group.localID || "" : "",
+                            year: sheet.year || -1, // unsafe
+                            employeeId: sheet.revieweeEmployee ? sheet.revieweeEmployee.localID || "" : "",
+                            employeeName: sheet.revieweeEmployee ? sheet.revieweeEmployee.lastName || "" + sheet.revieweeEmployee.firstName || "" : "",
+                            groupName: sheet.group ? sheet.group.name || "" : "",
                             avg: 1,
                             gaugeId: sheet.group ? createGaugeId(`chart-${sheet.group?.localID}-${getSheetKeys(sheet)}`) : null,
                             statusValue: sheet.statusValue || 0,
-                            dest: routeBuilder.reviewerDetailPath(sheet.companyID, sheet.reviewee, sheet.year.toString()),
+                            dest: routeBuilder.reviewerDetailPath(sheet.companyID || "", sheet.reviewee || "", sheet.year?.toString() || ""),   // unsafe
                             objective: sheet.section?.items?.map(sec => {
                                 if (sec && sec.sectionCategoryLocalId) {
                                     
@@ -93,7 +93,7 @@ export default function () {
                                         avg: sec && sec.objective && sec.objective.items ?
                                             calcAvg(sec.objective.items.map((obj) => {
 
-                                                return obj ? obj.progress : null
+                                                return obj ? obj.progress || null : null
                                             })) : null,
                                         gaugeId: createGaugeId(`chart-${getSectionKeys(sec)}`),
                                     }

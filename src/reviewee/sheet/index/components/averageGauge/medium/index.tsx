@@ -1,4 +1,4 @@
-import { Sheet } from "App"
+import { Sheet } from "API"
 import { calcAvg, getSheetKeys, round } from "lib/util"
 import React from "react"
 import { MediumGage } from "../../gage/medium"

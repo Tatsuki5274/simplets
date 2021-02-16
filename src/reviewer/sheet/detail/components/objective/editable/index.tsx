@@ -1,4 +1,3 @@
-import { Objective, Section } from "App";
 import { tableHeaderStyle } from "common/globalStyle.module.scss";
 import dateFormat from "dateformat";
 import { getObjectiveKeys, getSectionKeys } from "lib/util";
@@ -8,6 +7,7 @@ import * as APIt from 'API';
 import { ObjectiveDao } from "lib/dao/objectiveDao";
 import { updateObjective } from "graphql/mutations";
 import ScrollTable from "views/components/molecules/ScrollTable";
+import { Objective, Section } from "API";
 
 
 type Props = {
@@ -22,7 +22,7 @@ export const ReviewerSheetDetailObjectiveEditable = (props: Props) => {
         //項目明細情報の作成日を元に昇順へソート
         const objectiveItems = section?.objective?.items as Objective[];
         objectiveItems?.sort(function (a, b) {
-            if (a.createdAt > b.createdAt) {
+            if (a.createdAt && b.createdAt && a.createdAt > b.createdAt) {
                 return 1;
             } else {
                 return -1;
@@ -48,7 +48,7 @@ export const ReviewerSheetDetailObjectiveEditable = (props: Props) => {
                     </thead>
                     <tbody>
                         {objectiveItems.map((objective: Objective) => {
-                            const date = new Date(objective.updatedAt);
+                            const date = new Date(objective.updatedAt || "");   // unsafe
                             var styleObjective: string;
                             if (objective.progress === 100) {
                                 styleObjective = style.detailObjectiveProgressHigh;
@@ -88,8 +88,8 @@ export const ReviewerSheetDetailObjectiveEditable = (props: Props) => {
                                             const objectiveLastEvaluation = parseInt(event.currentTarget.value);
                                             const updateI: APIt.UpdateObjectiveInput = {
                                                 // id: objectiveId,
-                                                createdAt: objective.createdAt, //仮で空白を設定
-                                                sectionKeys: objective.sectionKeys, //仮で空白を設定
+                                                createdAt: objective.createdAt || "", // unsafe
+                                                sectionKeys: objective.sectionKeys || "", // unsafe
                                                 lastEvaluation: objectiveLastEvaluation,
                                             };
                                             const updatedObjective = await ObjectiveDao.update(updateObjective, updateI)

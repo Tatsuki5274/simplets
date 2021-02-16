@@ -1,4 +1,4 @@
-import { ErrorContext, Section, Sheet } from "App";
+import { ErrorContext } from "App";
 import { getSheet, listSheetReviewee } from "graphql/queries";
 import { SheetDao } from "lib/dao/sheetDao";
 import React, { useContext, useEffect, useState } from "react";
@@ -6,6 +6,7 @@ import { PDFTemplete } from "./templete";
 import * as APIt from 'API';
 import { getStatusValue } from "lib/getStatusValue";
 import { PDFTempleteStatus10 } from "./templeteStatus10";
+import { Section, Sheet } from "API";
 
 type Props = {
     match: {
@@ -51,7 +52,7 @@ export function PDFPage(props:Props) {
         (async () => {
             // 前期と前々期を取得
             if (sheet) {
-                const thisYear = sheet.year
+                const thisYear = sheet.year || 0 // unsafe
 
                 const input: APIt.ListSheetRevieweeQueryVariables = {
                     companyID: sheet.companyID,

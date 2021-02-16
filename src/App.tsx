@@ -22,15 +22,16 @@ import EvaluationList from 'views/components/pages/evaluation/reviewer/Evaluatio
 import { routeBuilder } from 'router';
 import ProgressReferenceScreen from 'views/components/pages/progress/reviewee/ProgressReferenceScreen';
 import ErrorMessageView from 'views/components/templates/ErrorMessageView';
+import { Employee } from 'API';
 Amplify.configure(awsconfig);
 
-export type Sheet = Omit<Exclude<APIt.GetSheetQuery['getSheet'], null>, '__typename'>;
-export type Objective = Omit<Exclude<APIt.GetObjectiveQuery['getObjective'], null>, '__typename'>;
-export type Section = Omit<Exclude<APIt.GetSectionQuery['getSection'], null>, '__typename'>;
-export type Group = Omit<Exclude<APIt.GetGroupQuery['getGroup'], null>, '__typename'>;
-export type Category = Omit<Exclude<APIt.GetCategoryQuery['getCategory'], null>, '__typename'>;
-export type Employee = Omit<Exclude<APIt.GetEmployeeQuery['getEmployee'], null>, '__typename'>;
-export type Company = Omit<Exclude<APIt.GetCompanyQuery['getCompany'], null>, '__typename'>;
+// export type Sheet = Omit<Exclude<APIt.GetSheetQuery['getSheet'], null>, '__typename'>;
+// export type Objective = Omit<Exclude<APIt.GetObjectiveQuery['getObjective'], null>, '__typename'>;
+// export type Section = Omit<Exclude<APIt.GetSectionQuery['getSection'], null>, '__typename'>;
+// export type Group = Omit<Exclude<APIt.GetGroupQuery['getGroup'], null>, '__typename'>;
+// export type Category = Omit<Exclude<APIt.GetCategoryQuery['getCategory'], null>, '__typename'>;
+// export type Employee = Omit<Exclude<APIt.GetEmployeeQuery['getEmployee'], null>, '__typename'>;
+// export type Company = Omit<Exclude<APIt.GetCompanyQuery['getCompany'], null>, '__typename'>;
 export type SendEmail = Omit<Exclude<APIt.sendEmailInput, null>, '__typename'>;
 
 type User = {

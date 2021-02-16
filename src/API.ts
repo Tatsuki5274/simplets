@@ -80,6 +80,17 @@ export type ModelIntInput = {
   attributeType?: ModelAttributeTypes | null,
 };
 
+export type Company = {
+  __typename: "Company",
+  id?: string,
+  name?: string,
+  startMonth?: number,
+  shortName?: string | null,
+  url?: string | null,
+  createdAt?: string,
+  updatedAt?: string,
+};
+
 export type UpdateCompanyInput = {
   id: string,
   name?: string | null,
@@ -161,6 +172,35 @@ export type ModelBooleanTypeInput = {
   ne?: BooleanType | null,
 };
 
+export type Employee = {
+  __typename: "Employee",
+  companyID?: string,
+  username?: string,
+  localID?: string,
+  employeeGroupLocalId?: string,
+  superiorUsername?: string,
+  firstName?: string,
+  lastName?: string,
+  grade?: string,
+  email?: string,
+  group?: Group,
+  company?: Company,
+  manager?: EmployeeType,
+  isDeleted?: BooleanType,
+  createdAt?: string,
+  updatedAt?: string,
+  superior?: Employee,
+};
+
+export type Group = {
+  __typename: "Group",
+  companyID?: string,
+  localID?: string,
+  name?: string,
+  createdAt?: string,
+  updatedAt?: string,
+};
+
 export type UpdateEmployeeInput = {
   companyID: string,
   username: string,
@@ -218,6 +258,15 @@ export type ModelCategoryConditionInput = {
   and?: Array< ModelCategoryConditionInput | null > | null,
   or?: Array< ModelCategoryConditionInput | null > | null,
   not?: ModelCategoryConditionInput | null,
+};
+
+export type Category = {
+  __typename: "Category",
+  companyID?: string,
+  localID?: string,
+  name?: string,
+  createdAt?: string,
+  updatedAt?: string,
 };
 
 export type UpdateCategoryInput = {
@@ -290,6 +339,94 @@ export type ModelSheetConditionInput = {
   and?: Array< ModelSheetConditionInput | null > | null,
   or?: Array< ModelSheetConditionInput | null > | null,
   not?: ModelSheetConditionInput | null,
+};
+
+export type Sheet = {
+  __typename: "Sheet",
+  companyID?: string,
+  year?: number,
+  grade?: string,
+  careerPlan?: string | null,
+  careerPlanComment?: string | null,
+  reviewComment?: string | null,
+  reviewDate?: string | null,
+  selfCheckDate?: string | null,
+  firstComment?: string | null,
+  firstCheckDate?: string | null,
+  secondComment?: string | null,
+  secondCheckDate?: string | null,
+  overAllEvaluation?: number | null,
+  statusValue?: number | null,
+  interviewPlanDate?: string | null,
+  interviewPlanComment?: string | null,
+  InterviewMid1Date?: string | null,
+  InterviewMid1Comment?: string | null,
+  InterviewMid2Date?: string | null,
+  InterviewMid2Comment?: string | null,
+  InterviewMid3Date?: string | null,
+  InterviewMid3Comment?: string | null,
+  revieweeUsername?: string,
+  secondUsername?: string,
+  sheetGroupLocalId?: string,
+  group?: Group,
+  referencer?: Array< string > | null,
+  reviewee?: string,
+  topReviewers?: Array< string > | null,
+  secondReviewers?: Array< string > | null,
+  createdAt?: string,
+  updatedAt?: string,
+  revieweeEmployee?: Employee,
+  secondEmployee?: Employee,
+  section?: ModelSectionConnection,
+};
+
+export type ModelSectionConnection = {
+  __typename: "ModelSectionConnection",
+  items?:  Array<Section | null > | null,
+  nextToken?: string | null,
+};
+
+export type Section = {
+  __typename: "Section",
+  sheetKeys?: string,
+  sectionCategoryLocalId?: string,
+  sectionCategoryName?: string | null,
+  companyID?: string,
+  objective?: ModelObjectiveConnection,
+  reviewee?: string | null,
+  topReviewers?: Array< string > | null,
+  secondReviewers?: Array< string > | null,
+  referencer?: Array< string > | null,
+  createdAt?: string,
+  updatedAt?: string,
+  category?: Category,
+};
+
+export type ModelObjectiveConnection = {
+  __typename: "ModelObjectiveConnection",
+  items?:  Array<Objective | null > | null,
+  nextToken?: string | null,
+};
+
+export type Objective = {
+  __typename: "Objective",
+  sectionKeys?: string,
+  createdAt?: string,
+  companyID?: string,
+  content?: string,
+  result?: string | null,
+  priority?: string | null,
+  selfEvaluation?: number | null,
+  firstEvaluation?: number | null,
+  lastEvaluation?: number | null,
+  progress?: number | null,
+  expStartDate?: string | null,
+  expDoneDate?: string | null,
+  reviewee?: string | null,
+  topReviewers?: Array< string > | null,
+  secondReviewers?: Array< string > | null,
+  referencer?: Array< string > | null,
+  updatedAt?: string,
 };
 
 export type DeleteSheetInput = {
@@ -435,6 +572,12 @@ export type ModelCompanyFilterInput = {
   not?: ModelCompanyFilterInput | null,
 };
 
+export type ModelCompanyConnection = {
+  __typename: "ModelCompanyConnection",
+  items?:  Array<Company | null > | null,
+  nextToken?: string | null,
+};
+
 export type ModelIDKeyConditionInput = {
   eq?: string | null,
   le?: string | null,
@@ -460,6 +603,12 @@ export enum ModelSortDirection {
   DESC = "DESC",
 }
 
+
+export type ModelGroupConnection = {
+  __typename: "ModelGroupConnection",
+  items?:  Array<Group | null > | null,
+  nextToken?: string | null,
+};
 
 export type ModelStringKeyConditionInput = {
   eq?: string | null,
@@ -510,6 +659,12 @@ export type ModelEmployeeFilterInput = {
   not?: ModelEmployeeFilterInput | null,
 };
 
+export type ModelEmployeeConnection = {
+  __typename: "ModelEmployeeConnection",
+  items?:  Array<Employee | null > | null,
+  nextToken?: string | null,
+};
+
 export type ModelEmployeeEmployee_managerCompositeKeyConditionInput = {
   eq?: ModelEmployeeEmployee_managerCompositeKeyInput | null,
   le?: ModelEmployeeEmployee_managerCompositeKeyInput | null,
@@ -532,6 +687,12 @@ export type ModelCategoryFilterInput = {
   and?: Array< ModelCategoryFilterInput | null > | null,
   or?: Array< ModelCategoryFilterInput | null > | null,
   not?: ModelCategoryFilterInput | null,
+};
+
+export type ModelCategoryConnection = {
+  __typename: "ModelCategoryConnection",
+  items?:  Array<Category | null > | null,
+  nextToken?: string | null,
 };
 
 export type ModelSheetPrimaryCompositeKeyConditionInput = {
@@ -584,6 +745,12 @@ export type ModelSheetFilterInput = {
   not?: ModelSheetFilterInput | null,
 };
 
+export type ModelSheetConnection = {
+  __typename: "ModelSheetConnection",
+  items?:  Array<Sheet | null > | null,
+  nextToken?: string | null,
+};
+
 export type ModelIntKeyConditionInput = {
   eq?: number | null,
   le?: number | null,
@@ -613,7 +780,7 @@ export type ApprovalStatusManagerMutationVariables = {
 };
 
 export type ApprovalStatusManagerMutation = {
-  approvalStatusManager: string | null,
+  approvalStatusManager?: string | null,
 };
 
 export type SendEmailMutationVariables = {
@@ -621,70 +788,70 @@ export type SendEmailMutationVariables = {
 };
 
 export type SendEmailMutation = {
-  sendEmail: string | null,
+  sendEmail?: string | null,
 };
 
 export type CreateCompanyMutationVariables = {
-  input: CreateCompanyInput,
+  input?: CreateCompanyInput,
   condition?: ModelCompanyConditionInput | null,
 };
 
 export type CreateCompanyMutation = {
-  createCompany:  {
+  createCompany?:  {
     __typename: "Company",
     id: string,
     name: string,
     startMonth: number,
-    shortName: string | null,
-    url: string | null,
+    shortName?: string | null,
+    url?: string | null,
     createdAt: string,
     updatedAt: string,
   } | null,
 };
 
 export type UpdateCompanyMutationVariables = {
-  input: UpdateCompanyInput,
+  input?: UpdateCompanyInput,
   condition?: ModelCompanyConditionInput | null,
 };
 
 export type UpdateCompanyMutation = {
-  updateCompany:  {
+  updateCompany?:  {
     __typename: "Company",
     id: string,
     name: string,
     startMonth: number,
-    shortName: string | null,
-    url: string | null,
+    shortName?: string | null,
+    url?: string | null,
     createdAt: string,
     updatedAt: string,
   } | null,
 };
 
 export type DeleteCompanyMutationVariables = {
-  input: DeleteCompanyInput,
+  input?: DeleteCompanyInput,
   condition?: ModelCompanyConditionInput | null,
 };
 
 export type DeleteCompanyMutation = {
-  deleteCompany:  {
+  deleteCompany?:  {
     __typename: "Company",
     id: string,
     name: string,
     startMonth: number,
-    shortName: string | null,
-    url: string | null,
+    shortName?: string | null,
+    url?: string | null,
     createdAt: string,
     updatedAt: string,
   } | null,
 };
 
 export type CreateEmployeeMutationVariables = {
-  input: CreateEmployeeInput,
+  input?: CreateEmployeeInput,
   condition?: ModelEmployeeConditionInput | null,
 };
 
 export type CreateEmployeeMutation = {
-  createEmployee:  {
+  createEmployee?:  {
     __typename: "Employee",
     companyID: string,
     username: string,
@@ -695,7 +862,7 @@ export type CreateEmployeeMutation = {
     lastName: string,
     grade: string,
     email: string,
-    group:  {
+    group?:  {
       __typename: "Group",
       companyID: string,
       localID: string,
@@ -703,13 +870,13 @@ export type CreateEmployeeMutation = {
       createdAt: string,
       updatedAt: string,
     } | null,
-    company:  {
+    company?:  {
       __typename: "Company",
       id: string,
       name: string,
       startMonth: number,
-      shortName: string | null,
-      url: string | null,
+      shortName?: string | null,
+      url?: string | null,
       createdAt: string,
       updatedAt: string,
     } | null,
@@ -717,7 +884,7 @@ export type CreateEmployeeMutation = {
     isDeleted: BooleanType,
     createdAt: string,
     updatedAt: string,
-    superior:  {
+    superior?:  {
       __typename: "Employee",
       companyID: string,
       username: string,
@@ -728,7 +895,7 @@ export type CreateEmployeeMutation = {
       lastName: string,
       grade: string,
       email: string,
-      group:  {
+      group?:  {
         __typename: "Group",
         companyID: string,
         localID: string,
@@ -736,13 +903,13 @@ export type CreateEmployeeMutation = {
         createdAt: string,
         updatedAt: string,
       } | null,
-      company:  {
+      company?:  {
         __typename: "Company",
         id: string,
         name: string,
         startMonth: number,
-        shortName: string | null,
-        url: string | null,
+        shortName?: string | null,
+        url?: string | null,
         createdAt: string,
         updatedAt: string,
       } | null,
@@ -750,7 +917,7 @@ export type CreateEmployeeMutation = {
       isDeleted: BooleanType,
       createdAt: string,
       updatedAt: string,
-      superior:  {
+      superior?:  {
         __typename: "Employee",
         companyID: string,
         username: string,
@@ -761,7 +928,7 @@ export type CreateEmployeeMutation = {
         lastName: string,
         grade: string,
         email: string,
-        group:  {
+        group?:  {
           __typename: "Group",
           companyID: string,
           localID: string,
@@ -769,13 +936,13 @@ export type CreateEmployeeMutation = {
           createdAt: string,
           updatedAt: string,
         } | null,
-        company:  {
+        company?:  {
           __typename: "Company",
           id: string,
           name: string,
           startMonth: number,
-          shortName: string | null,
-          url: string | null,
+          shortName?: string | null,
+          url?: string | null,
           createdAt: string,
           updatedAt: string,
         } | null,
@@ -783,7 +950,7 @@ export type CreateEmployeeMutation = {
         isDeleted: BooleanType,
         createdAt: string,
         updatedAt: string,
-        superior:  {
+        superior?:  {
           __typename: "Employee",
           companyID: string,
           username: string,
@@ -794,7 +961,7 @@ export type CreateEmployeeMutation = {
           lastName: string,
           grade: string,
           email: string,
-          group:  {
+          group?:  {
             __typename: "Group",
             companyID: string,
             localID: string,
@@ -802,13 +969,13 @@ export type CreateEmployeeMutation = {
             createdAt: string,
             updatedAt: string,
           } | null,
-          company:  {
+          company?:  {
             __typename: "Company",
             id: string,
             name: string,
             startMonth: number,
-            shortName: string | null,
-            url: string | null,
+            shortName?: string | null,
+            url?: string | null,
             createdAt: string,
             updatedAt: string,
           } | null,
@@ -816,7 +983,7 @@ export type CreateEmployeeMutation = {
           isDeleted: BooleanType,
           createdAt: string,
           updatedAt: string,
-          superior:  {
+          superior?:  {
             __typename: "Employee",
             companyID: string,
             username: string,
@@ -827,7 +994,7 @@ export type CreateEmployeeMutation = {
             lastName: string,
             grade: string,
             email: string,
-            group:  {
+            group?:  {
               __typename: "Group",
               companyID: string,
               localID: string,
@@ -835,13 +1002,13 @@ export type CreateEmployeeMutation = {
               createdAt: string,
               updatedAt: string,
             } | null,
-            company:  {
+            company?:  {
               __typename: "Company",
               id: string,
               name: string,
               startMonth: number,
-              shortName: string | null,
-              url: string | null,
+              shortName?: string | null,
+              url?: string | null,
               createdAt: string,
               updatedAt: string,
             } | null,
@@ -849,7 +1016,7 @@ export type CreateEmployeeMutation = {
             isDeleted: BooleanType,
             createdAt: string,
             updatedAt: string,
-            superior:  {
+            superior?:  {
               __typename: "Employee",
               companyID: string,
               username: string,
@@ -860,7 +1027,7 @@ export type CreateEmployeeMutation = {
               lastName: string,
               grade: string,
               email: string,
-              group:  {
+              group?:  {
                 __typename: "Group",
                 companyID: string,
                 localID: string,
@@ -868,13 +1035,13 @@ export type CreateEmployeeMutation = {
                 createdAt: string,
                 updatedAt: string,
               } | null,
-              company:  {
+              company?:  {
                 __typename: "Company",
                 id: string,
                 name: string,
                 startMonth: number,
-                shortName: string | null,
-                url: string | null,
+                shortName?: string | null,
+                url?: string | null,
                 createdAt: string,
                 updatedAt: string,
               } | null,
@@ -882,7 +1049,7 @@ export type CreateEmployeeMutation = {
               isDeleted: BooleanType,
               createdAt: string,
               updatedAt: string,
-              superior:  {
+              superior?:  {
                 __typename: "Employee",
                 companyID: string,
                 username: string,
@@ -907,12 +1074,12 @@ export type CreateEmployeeMutation = {
 };
 
 export type UpdateEmployeeMutationVariables = {
-  input: UpdateEmployeeInput,
+  input?: UpdateEmployeeInput,
   condition?: ModelEmployeeConditionInput | null,
 };
 
 export type UpdateEmployeeMutation = {
-  updateEmployee:  {
+  updateEmployee?:  {
     __typename: "Employee",
     companyID: string,
     username: string,
@@ -923,7 +1090,7 @@ export type UpdateEmployeeMutation = {
     lastName: string,
     grade: string,
     email: string,
-    group:  {
+    group?:  {
       __typename: "Group",
       companyID: string,
       localID: string,
@@ -931,13 +1098,13 @@ export type UpdateEmployeeMutation = {
       createdAt: string,
       updatedAt: string,
     } | null,
-    company:  {
+    company?:  {
       __typename: "Company",
       id: string,
       name: string,
       startMonth: number,
-      shortName: string | null,
-      url: string | null,
+      shortName?: string | null,
+      url?: string | null,
       createdAt: string,
       updatedAt: string,
     } | null,
@@ -945,7 +1112,7 @@ export type UpdateEmployeeMutation = {
     isDeleted: BooleanType,
     createdAt: string,
     updatedAt: string,
-    superior:  {
+    superior?:  {
       __typename: "Employee",
       companyID: string,
       username: string,
@@ -956,7 +1123,7 @@ export type UpdateEmployeeMutation = {
       lastName: string,
       grade: string,
       email: string,
-      group:  {
+      group?:  {
         __typename: "Group",
         companyID: string,
         localID: string,
@@ -964,13 +1131,13 @@ export type UpdateEmployeeMutation = {
         createdAt: string,
         updatedAt: string,
       } | null,
-      company:  {
+      company?:  {
         __typename: "Company",
         id: string,
         name: string,
         startMonth: number,
-        shortName: string | null,
-        url: string | null,
+        shortName?: string | null,
+        url?: string | null,
         createdAt: string,
         updatedAt: string,
       } | null,
@@ -978,7 +1145,7 @@ export type UpdateEmployeeMutation = {
       isDeleted: BooleanType,
       createdAt: string,
       updatedAt: string,
-      superior:  {
+      superior?:  {
         __typename: "Employee",
         companyID: string,
         username: string,
@@ -989,7 +1156,7 @@ export type UpdateEmployeeMutation = {
         lastName: string,
         grade: string,
         email: string,
-        group:  {
+        group?:  {
           __typename: "Group",
           companyID: string,
           localID: string,
@@ -997,13 +1164,13 @@ export type UpdateEmployeeMutation = {
           createdAt: string,
           updatedAt: string,
         } | null,
-        company:  {
+        company?:  {
           __typename: "Company",
           id: string,
           name: string,
           startMonth: number,
-          shortName: string | null,
-          url: string | null,
+          shortName?: string | null,
+          url?: string | null,
           createdAt: string,
           updatedAt: string,
         } | null,
@@ -1011,7 +1178,7 @@ export type UpdateEmployeeMutation = {
         isDeleted: BooleanType,
         createdAt: string,
         updatedAt: string,
-        superior:  {
+        superior?:  {
           __typename: "Employee",
           companyID: string,
           username: string,
@@ -1022,7 +1189,7 @@ export type UpdateEmployeeMutation = {
           lastName: string,
           grade: string,
           email: string,
-          group:  {
+          group?:  {
             __typename: "Group",
             companyID: string,
             localID: string,
@@ -1030,13 +1197,13 @@ export type UpdateEmployeeMutation = {
             createdAt: string,
             updatedAt: string,
           } | null,
-          company:  {
+          company?:  {
             __typename: "Company",
             id: string,
             name: string,
             startMonth: number,
-            shortName: string | null,
-            url: string | null,
+            shortName?: string | null,
+            url?: string | null,
             createdAt: string,
             updatedAt: string,
           } | null,
@@ -1044,7 +1211,7 @@ export type UpdateEmployeeMutation = {
           isDeleted: BooleanType,
           createdAt: string,
           updatedAt: string,
-          superior:  {
+          superior?:  {
             __typename: "Employee",
             companyID: string,
             username: string,
@@ -1055,7 +1222,7 @@ export type UpdateEmployeeMutation = {
             lastName: string,
             grade: string,
             email: string,
-            group:  {
+            group?:  {
               __typename: "Group",
               companyID: string,
               localID: string,
@@ -1063,13 +1230,13 @@ export type UpdateEmployeeMutation = {
               createdAt: string,
               updatedAt: string,
             } | null,
-            company:  {
+            company?:  {
               __typename: "Company",
               id: string,
               name: string,
               startMonth: number,
-              shortName: string | null,
-              url: string | null,
+              shortName?: string | null,
+              url?: string | null,
               createdAt: string,
               updatedAt: string,
             } | null,
@@ -1077,7 +1244,7 @@ export type UpdateEmployeeMutation = {
             isDeleted: BooleanType,
             createdAt: string,
             updatedAt: string,
-            superior:  {
+            superior?:  {
               __typename: "Employee",
               companyID: string,
               username: string,
@@ -1088,7 +1255,7 @@ export type UpdateEmployeeMutation = {
               lastName: string,
               grade: string,
               email: string,
-              group:  {
+              group?:  {
                 __typename: "Group",
                 companyID: string,
                 localID: string,
@@ -1096,13 +1263,13 @@ export type UpdateEmployeeMutation = {
                 createdAt: string,
                 updatedAt: string,
               } | null,
-              company:  {
+              company?:  {
                 __typename: "Company",
                 id: string,
                 name: string,
                 startMonth: number,
-                shortName: string | null,
-                url: string | null,
+                shortName?: string | null,
+                url?: string | null,
                 createdAt: string,
                 updatedAt: string,
               } | null,
@@ -1110,7 +1277,7 @@ export type UpdateEmployeeMutation = {
               isDeleted: BooleanType,
               createdAt: string,
               updatedAt: string,
-              superior:  {
+              superior?:  {
                 __typename: "Employee",
                 companyID: string,
                 username: string,
@@ -1135,12 +1302,12 @@ export type UpdateEmployeeMutation = {
 };
 
 export type DeleteEmployeeMutationVariables = {
-  input: DeleteEmployeeInput,
+  input?: DeleteEmployeeInput,
   condition?: ModelEmployeeConditionInput | null,
 };
 
 export type DeleteEmployeeMutation = {
-  deleteEmployee:  {
+  deleteEmployee?:  {
     __typename: "Employee",
     companyID: string,
     username: string,
@@ -1151,7 +1318,7 @@ export type DeleteEmployeeMutation = {
     lastName: string,
     grade: string,
     email: string,
-    group:  {
+    group?:  {
       __typename: "Group",
       companyID: string,
       localID: string,
@@ -1159,13 +1326,13 @@ export type DeleteEmployeeMutation = {
       createdAt: string,
       updatedAt: string,
     } | null,
-    company:  {
+    company?:  {
       __typename: "Company",
       id: string,
       name: string,
       startMonth: number,
-      shortName: string | null,
-      url: string | null,
+      shortName?: string | null,
+      url?: string | null,
       createdAt: string,
       updatedAt: string,
     } | null,
@@ -1173,7 +1340,7 @@ export type DeleteEmployeeMutation = {
     isDeleted: BooleanType,
     createdAt: string,
     updatedAt: string,
-    superior:  {
+    superior?:  {
       __typename: "Employee",
       companyID: string,
       username: string,
@@ -1184,7 +1351,7 @@ export type DeleteEmployeeMutation = {
       lastName: string,
       grade: string,
       email: string,
-      group:  {
+      group?:  {
         __typename: "Group",
         companyID: string,
         localID: string,
@@ -1192,13 +1359,13 @@ export type DeleteEmployeeMutation = {
         createdAt: string,
         updatedAt: string,
       } | null,
-      company:  {
+      company?:  {
         __typename: "Company",
         id: string,
         name: string,
         startMonth: number,
-        shortName: string | null,
-        url: string | null,
+        shortName?: string | null,
+        url?: string | null,
         createdAt: string,
         updatedAt: string,
       } | null,
@@ -1206,7 +1373,7 @@ export type DeleteEmployeeMutation = {
       isDeleted: BooleanType,
       createdAt: string,
       updatedAt: string,
-      superior:  {
+      superior?:  {
         __typename: "Employee",
         companyID: string,
         username: string,
@@ -1217,7 +1384,7 @@ export type DeleteEmployeeMutation = {
         lastName: string,
         grade: string,
         email: string,
-        group:  {
+        group?:  {
           __typename: "Group",
           companyID: string,
           localID: string,
@@ -1225,13 +1392,13 @@ export type DeleteEmployeeMutation = {
           createdAt: string,
           updatedAt: string,
         } | null,
-        company:  {
+        company?:  {
           __typename: "Company",
           id: string,
           name: string,
           startMonth: number,
-          shortName: string | null,
-          url: string | null,
+          shortName?: string | null,
+          url?: string | null,
           createdAt: string,
           updatedAt: string,
         } | null,
@@ -1239,7 +1406,7 @@ export type DeleteEmployeeMutation = {
         isDeleted: BooleanType,
         createdAt: string,
         updatedAt: string,
-        superior:  {
+        superior?:  {
           __typename: "Employee",
           companyID: string,
           username: string,
@@ -1250,7 +1417,7 @@ export type DeleteEmployeeMutation = {
           lastName: string,
           grade: string,
           email: string,
-          group:  {
+          group?:  {
             __typename: "Group",
             companyID: string,
             localID: string,
@@ -1258,13 +1425,13 @@ export type DeleteEmployeeMutation = {
             createdAt: string,
             updatedAt: string,
           } | null,
-          company:  {
+          company?:  {
             __typename: "Company",
             id: string,
             name: string,
             startMonth: number,
-            shortName: string | null,
-            url: string | null,
+            shortName?: string | null,
+            url?: string | null,
             createdAt: string,
             updatedAt: string,
           } | null,
@@ -1272,7 +1439,7 @@ export type DeleteEmployeeMutation = {
           isDeleted: BooleanType,
           createdAt: string,
           updatedAt: string,
-          superior:  {
+          superior?:  {
             __typename: "Employee",
             companyID: string,
             username: string,
@@ -1283,7 +1450,7 @@ export type DeleteEmployeeMutation = {
             lastName: string,
             grade: string,
             email: string,
-            group:  {
+            group?:  {
               __typename: "Group",
               companyID: string,
               localID: string,
@@ -1291,13 +1458,13 @@ export type DeleteEmployeeMutation = {
               createdAt: string,
               updatedAt: string,
             } | null,
-            company:  {
+            company?:  {
               __typename: "Company",
               id: string,
               name: string,
               startMonth: number,
-              shortName: string | null,
-              url: string | null,
+              shortName?: string | null,
+              url?: string | null,
               createdAt: string,
               updatedAt: string,
             } | null,
@@ -1305,7 +1472,7 @@ export type DeleteEmployeeMutation = {
             isDeleted: BooleanType,
             createdAt: string,
             updatedAt: string,
-            superior:  {
+            superior?:  {
               __typename: "Employee",
               companyID: string,
               username: string,
@@ -1316,7 +1483,7 @@ export type DeleteEmployeeMutation = {
               lastName: string,
               grade: string,
               email: string,
-              group:  {
+              group?:  {
                 __typename: "Group",
                 companyID: string,
                 localID: string,
@@ -1324,13 +1491,13 @@ export type DeleteEmployeeMutation = {
                 createdAt: string,
                 updatedAt: string,
               } | null,
-              company:  {
+              company?:  {
                 __typename: "Company",
                 id: string,
                 name: string,
                 startMonth: number,
-                shortName: string | null,
-                url: string | null,
+                shortName?: string | null,
+                url?: string | null,
                 createdAt: string,
                 updatedAt: string,
               } | null,
@@ -1338,7 +1505,7 @@ export type DeleteEmployeeMutation = {
               isDeleted: BooleanType,
               createdAt: string,
               updatedAt: string,
-              superior:  {
+              superior?:  {
                 __typename: "Employee",
                 companyID: string,
                 username: string,
@@ -1363,12 +1530,12 @@ export type DeleteEmployeeMutation = {
 };
 
 export type CreateGroupMutationVariables = {
-  input: CreateGroupInput,
+  input?: CreateGroupInput,
   condition?: ModelGroupConditionInput | null,
 };
 
 export type CreateGroupMutation = {
-  createGroup:  {
+  createGroup?:  {
     __typename: "Group",
     companyID: string,
     localID: string,
@@ -1379,12 +1546,12 @@ export type CreateGroupMutation = {
 };
 
 export type UpdateGroupMutationVariables = {
-  input: UpdateGroupInput,
+  input?: UpdateGroupInput,
   condition?: ModelGroupConditionInput | null,
 };
 
 export type UpdateGroupMutation = {
-  updateGroup:  {
+  updateGroup?:  {
     __typename: "Group",
     companyID: string,
     localID: string,
@@ -1395,12 +1562,12 @@ export type UpdateGroupMutation = {
 };
 
 export type DeleteGroupMutationVariables = {
-  input: DeleteGroupInput,
+  input?: DeleteGroupInput,
   condition?: ModelGroupConditionInput | null,
 };
 
 export type DeleteGroupMutation = {
-  deleteGroup:  {
+  deleteGroup?:  {
     __typename: "Group",
     companyID: string,
     localID: string,
@@ -1411,12 +1578,12 @@ export type DeleteGroupMutation = {
 };
 
 export type CreateCategoryMutationVariables = {
-  input: CreateCategoryInput,
+  input?: CreateCategoryInput,
   condition?: ModelCategoryConditionInput | null,
 };
 
 export type CreateCategoryMutation = {
-  createCategory:  {
+  createCategory?:  {
     __typename: "Category",
     companyID: string,
     localID: string,
@@ -1427,12 +1594,12 @@ export type CreateCategoryMutation = {
 };
 
 export type UpdateCategoryMutationVariables = {
-  input: UpdateCategoryInput,
+  input?: UpdateCategoryInput,
   condition?: ModelCategoryConditionInput | null,
 };
 
 export type UpdateCategoryMutation = {
-  updateCategory:  {
+  updateCategory?:  {
     __typename: "Category",
     companyID: string,
     localID: string,
@@ -1443,12 +1610,12 @@ export type UpdateCategoryMutation = {
 };
 
 export type DeleteCategoryMutationVariables = {
-  input: DeleteCategoryInput,
+  input?: DeleteCategoryInput,
   condition?: ModelCategoryConditionInput | null,
 };
 
 export type DeleteCategoryMutation = {
-  deleteCategory:  {
+  deleteCategory?:  {
     __typename: "Category",
     companyID: string,
     localID: string,
@@ -1459,39 +1626,39 @@ export type DeleteCategoryMutation = {
 };
 
 export type CreateSheetMutationVariables = {
-  input: CreateSheetInput,
+  input?: CreateSheetInput,
   condition?: ModelSheetConditionInput | null,
 };
 
 export type CreateSheetMutation = {
-  createSheet:  {
+  createSheet?:  {
     __typename: "Sheet",
     companyID: string,
     year: number,
     grade: string,
-    careerPlan: string | null,
-    careerPlanComment: string | null,
-    reviewComment: string | null,
-    reviewDate: string | null,
-    selfCheckDate: string | null,
-    firstComment: string | null,
-    firstCheckDate: string | null,
-    secondComment: string | null,
-    secondCheckDate: string | null,
-    overAllEvaluation: number | null,
-    statusValue: number | null,
-    interviewPlanDate: string | null,
-    interviewPlanComment: string | null,
-    InterviewMid1Date: string | null,
-    InterviewMid1Comment: string | null,
-    InterviewMid2Date: string | null,
-    InterviewMid2Comment: string | null,
-    InterviewMid3Date: string | null,
-    InterviewMid3Comment: string | null,
+    careerPlan?: string | null,
+    careerPlanComment?: string | null,
+    reviewComment?: string | null,
+    reviewDate?: string | null,
+    selfCheckDate?: string | null,
+    firstComment?: string | null,
+    firstCheckDate?: string | null,
+    secondComment?: string | null,
+    secondCheckDate?: string | null,
+    overAllEvaluation?: number | null,
+    statusValue?: number | null,
+    interviewPlanDate?: string | null,
+    interviewPlanComment?: string | null,
+    InterviewMid1Date?: string | null,
+    InterviewMid1Comment?: string | null,
+    InterviewMid2Date?: string | null,
+    InterviewMid2Comment?: string | null,
+    InterviewMid3Date?: string | null,
+    InterviewMid3Comment?: string | null,
     revieweeUsername: string,
     secondUsername: string,
     sheetGroupLocalId: string,
-    group:  {
+    group?:  {
       __typename: "Group",
       companyID: string,
       localID: string,
@@ -1499,13 +1666,13 @@ export type CreateSheetMutation = {
       createdAt: string,
       updatedAt: string,
     } | null,
-    referencer: Array< string > | null,
+    referencer?: Array< string > | null,
     reviewee: string,
-    topReviewers: Array< string > | null,
-    secondReviewers: Array< string > | null,
+    topReviewers?: Array< string > | null,
+    secondReviewers?: Array< string > | null,
     createdAt: string,
     updatedAt: string,
-    revieweeEmployee:  {
+    revieweeEmployee?:  {
       __typename: "Employee",
       companyID: string,
       username: string,
@@ -1516,7 +1683,7 @@ export type CreateSheetMutation = {
       lastName: string,
       grade: string,
       email: string,
-      group:  {
+      group?:  {
         __typename: "Group",
         companyID: string,
         localID: string,
@@ -1524,13 +1691,13 @@ export type CreateSheetMutation = {
         createdAt: string,
         updatedAt: string,
       } | null,
-      company:  {
+      company?:  {
         __typename: "Company",
         id: string,
         name: string,
         startMonth: number,
-        shortName: string | null,
-        url: string | null,
+        shortName?: string | null,
+        url?: string | null,
         createdAt: string,
         updatedAt: string,
       } | null,
@@ -1538,7 +1705,7 @@ export type CreateSheetMutation = {
       isDeleted: BooleanType,
       createdAt: string,
       updatedAt: string,
-      superior:  {
+      superior?:  {
         __typename: "Employee",
         companyID: string,
         username: string,
@@ -1549,7 +1716,7 @@ export type CreateSheetMutation = {
         lastName: string,
         grade: string,
         email: string,
-        group:  {
+        group?:  {
           __typename: "Group",
           companyID: string,
           localID: string,
@@ -1557,13 +1724,13 @@ export type CreateSheetMutation = {
           createdAt: string,
           updatedAt: string,
         } | null,
-        company:  {
+        company?:  {
           __typename: "Company",
           id: string,
           name: string,
           startMonth: number,
-          shortName: string | null,
-          url: string | null,
+          shortName?: string | null,
+          url?: string | null,
           createdAt: string,
           updatedAt: string,
         } | null,
@@ -1571,7 +1738,7 @@ export type CreateSheetMutation = {
         isDeleted: BooleanType,
         createdAt: string,
         updatedAt: string,
-        superior:  {
+        superior?:  {
           __typename: "Employee",
           companyID: string,
           username: string,
@@ -1582,7 +1749,7 @@ export type CreateSheetMutation = {
           lastName: string,
           grade: string,
           email: string,
-          group:  {
+          group?:  {
             __typename: "Group",
             companyID: string,
             localID: string,
@@ -1590,13 +1757,13 @@ export type CreateSheetMutation = {
             createdAt: string,
             updatedAt: string,
           } | null,
-          company:  {
+          company?:  {
             __typename: "Company",
             id: string,
             name: string,
             startMonth: number,
-            shortName: string | null,
-            url: string | null,
+            shortName?: string | null,
+            url?: string | null,
             createdAt: string,
             updatedAt: string,
           } | null,
@@ -1604,7 +1771,7 @@ export type CreateSheetMutation = {
           isDeleted: BooleanType,
           createdAt: string,
           updatedAt: string,
-          superior:  {
+          superior?:  {
             __typename: "Employee",
             companyID: string,
             username: string,
@@ -1615,7 +1782,7 @@ export type CreateSheetMutation = {
             lastName: string,
             grade: string,
             email: string,
-            group:  {
+            group?:  {
               __typename: "Group",
               companyID: string,
               localID: string,
@@ -1623,13 +1790,13 @@ export type CreateSheetMutation = {
               createdAt: string,
               updatedAt: string,
             } | null,
-            company:  {
+            company?:  {
               __typename: "Company",
               id: string,
               name: string,
               startMonth: number,
-              shortName: string | null,
-              url: string | null,
+              shortName?: string | null,
+              url?: string | null,
               createdAt: string,
               updatedAt: string,
             } | null,
@@ -1637,7 +1804,7 @@ export type CreateSheetMutation = {
             isDeleted: BooleanType,
             createdAt: string,
             updatedAt: string,
-            superior:  {
+            superior?:  {
               __typename: "Employee",
               companyID: string,
               username: string,
@@ -1648,7 +1815,7 @@ export type CreateSheetMutation = {
               lastName: string,
               grade: string,
               email: string,
-              group:  {
+              group?:  {
                 __typename: "Group",
                 companyID: string,
                 localID: string,
@@ -1656,13 +1823,13 @@ export type CreateSheetMutation = {
                 createdAt: string,
                 updatedAt: string,
               } | null,
-              company:  {
+              company?:  {
                 __typename: "Company",
                 id: string,
                 name: string,
                 startMonth: number,
-                shortName: string | null,
-                url: string | null,
+                shortName?: string | null,
+                url?: string | null,
                 createdAt: string,
                 updatedAt: string,
               } | null,
@@ -1670,7 +1837,7 @@ export type CreateSheetMutation = {
               isDeleted: BooleanType,
               createdAt: string,
               updatedAt: string,
-              superior:  {
+              superior?:  {
                 __typename: "Employee",
                 companyID: string,
                 username: string,
@@ -1691,7 +1858,7 @@ export type CreateSheetMutation = {
         } | null,
       } | null,
     } | null,
-    secondEmployee:  {
+    secondEmployee?:  {
       __typename: "Employee",
       companyID: string,
       username: string,
@@ -1702,7 +1869,7 @@ export type CreateSheetMutation = {
       lastName: string,
       grade: string,
       email: string,
-      group:  {
+      group?:  {
         __typename: "Group",
         companyID: string,
         localID: string,
@@ -1710,13 +1877,13 @@ export type CreateSheetMutation = {
         createdAt: string,
         updatedAt: string,
       } | null,
-      company:  {
+      company?:  {
         __typename: "Company",
         id: string,
         name: string,
         startMonth: number,
-        shortName: string | null,
-        url: string | null,
+        shortName?: string | null,
+        url?: string | null,
         createdAt: string,
         updatedAt: string,
       } | null,
@@ -1724,7 +1891,7 @@ export type CreateSheetMutation = {
       isDeleted: BooleanType,
       createdAt: string,
       updatedAt: string,
-      superior:  {
+      superior?:  {
         __typename: "Employee",
         companyID: string,
         username: string,
@@ -1735,7 +1902,7 @@ export type CreateSheetMutation = {
         lastName: string,
         grade: string,
         email: string,
-        group:  {
+        group?:  {
           __typename: "Group",
           companyID: string,
           localID: string,
@@ -1743,13 +1910,13 @@ export type CreateSheetMutation = {
           createdAt: string,
           updatedAt: string,
         } | null,
-        company:  {
+        company?:  {
           __typename: "Company",
           id: string,
           name: string,
           startMonth: number,
-          shortName: string | null,
-          url: string | null,
+          shortName?: string | null,
+          url?: string | null,
           createdAt: string,
           updatedAt: string,
         } | null,
@@ -1757,7 +1924,7 @@ export type CreateSheetMutation = {
         isDeleted: BooleanType,
         createdAt: string,
         updatedAt: string,
-        superior:  {
+        superior?:  {
           __typename: "Employee",
           companyID: string,
           username: string,
@@ -1768,7 +1935,7 @@ export type CreateSheetMutation = {
           lastName: string,
           grade: string,
           email: string,
-          group:  {
+          group?:  {
             __typename: "Group",
             companyID: string,
             localID: string,
@@ -1776,13 +1943,13 @@ export type CreateSheetMutation = {
             createdAt: string,
             updatedAt: string,
           } | null,
-          company:  {
+          company?:  {
             __typename: "Company",
             id: string,
             name: string,
             startMonth: number,
-            shortName: string | null,
-            url: string | null,
+            shortName?: string | null,
+            url?: string | null,
             createdAt: string,
             updatedAt: string,
           } | null,
@@ -1790,7 +1957,7 @@ export type CreateSheetMutation = {
           isDeleted: BooleanType,
           createdAt: string,
           updatedAt: string,
-          superior:  {
+          superior?:  {
             __typename: "Employee",
             companyID: string,
             username: string,
@@ -1801,7 +1968,7 @@ export type CreateSheetMutation = {
             lastName: string,
             grade: string,
             email: string,
-            group:  {
+            group?:  {
               __typename: "Group",
               companyID: string,
               localID: string,
@@ -1809,13 +1976,13 @@ export type CreateSheetMutation = {
               createdAt: string,
               updatedAt: string,
             } | null,
-            company:  {
+            company?:  {
               __typename: "Company",
               id: string,
               name: string,
               startMonth: number,
-              shortName: string | null,
-              url: string | null,
+              shortName?: string | null,
+              url?: string | null,
               createdAt: string,
               updatedAt: string,
             } | null,
@@ -1823,7 +1990,7 @@ export type CreateSheetMutation = {
             isDeleted: BooleanType,
             createdAt: string,
             updatedAt: string,
-            superior:  {
+            superior?:  {
               __typename: "Employee",
               companyID: string,
               username: string,
@@ -1834,7 +2001,7 @@ export type CreateSheetMutation = {
               lastName: string,
               grade: string,
               email: string,
-              group:  {
+              group?:  {
                 __typename: "Group",
                 companyID: string,
                 localID: string,
@@ -1842,13 +2009,13 @@ export type CreateSheetMutation = {
                 createdAt: string,
                 updatedAt: string,
               } | null,
-              company:  {
+              company?:  {
                 __typename: "Company",
                 id: string,
                 name: string,
                 startMonth: number,
-                shortName: string | null,
-                url: string | null,
+                shortName?: string | null,
+                url?: string | null,
                 createdAt: string,
                 updatedAt: string,
               } | null,
@@ -1856,7 +2023,7 @@ export type CreateSheetMutation = {
               isDeleted: BooleanType,
               createdAt: string,
               updatedAt: string,
-              superior:  {
+              superior?:  {
                 __typename: "Employee",
                 companyID: string,
                 username: string,
@@ -1877,45 +2044,45 @@ export type CreateSheetMutation = {
         } | null,
       } | null,
     } | null,
-    section:  {
+    section?:  {
       __typename: "ModelSectionConnection",
-      items:  Array< {
+      items?:  Array< {
         __typename: "Section",
         sheetKeys: string,
         sectionCategoryLocalId: string,
-        sectionCategoryName: string | null,
+        sectionCategoryName?: string | null,
         companyID: string,
-        objective:  {
+        objective?:  {
           __typename: "ModelObjectiveConnection",
-          items:  Array< {
+          items?:  Array< {
             __typename: "Objective",
             sectionKeys: string,
             createdAt: string,
             companyID: string,
             content: string,
-            result: string | null,
-            priority: string | null,
-            selfEvaluation: number | null,
-            firstEvaluation: number | null,
-            lastEvaluation: number | null,
-            progress: number | null,
-            expStartDate: string | null,
-            expDoneDate: string | null,
-            reviewee: string | null,
-            topReviewers: Array< string > | null,
-            secondReviewers: Array< string > | null,
-            referencer: Array< string > | null,
+            result?: string | null,
+            priority?: string | null,
+            selfEvaluation?: number | null,
+            firstEvaluation?: number | null,
+            lastEvaluation?: number | null,
+            progress?: number | null,
+            expStartDate?: string | null,
+            expDoneDate?: string | null,
+            reviewee?: string | null,
+            topReviewers?: Array< string > | null,
+            secondReviewers?: Array< string > | null,
+            referencer?: Array< string > | null,
             updatedAt: string,
           } | null > | null,
-          nextToken: string | null,
+          nextToken?: string | null,
         } | null,
-        reviewee: string | null,
-        topReviewers: Array< string > | null,
-        secondReviewers: Array< string > | null,
-        referencer: Array< string > | null,
+        reviewee?: string | null,
+        topReviewers?: Array< string > | null,
+        secondReviewers?: Array< string > | null,
+        referencer?: Array< string > | null,
         createdAt: string,
         updatedAt: string,
-        category:  {
+        category?:  {
           __typename: "Category",
           companyID: string,
           localID: string,
@@ -1924,45 +2091,45 @@ export type CreateSheetMutation = {
           updatedAt: string,
         } | null,
       } | null > | null,
-      nextToken: string | null,
+      nextToken?: string | null,
     } | null,
   } | null,
 };
 
 export type DeleteSheetMutationVariables = {
-  input: DeleteSheetInput,
+  input?: DeleteSheetInput,
   condition?: ModelSheetConditionInput | null,
 };
 
 export type DeleteSheetMutation = {
-  deleteSheet:  {
+  deleteSheet?:  {
     __typename: "Sheet",
     companyID: string,
     year: number,
     grade: string,
-    careerPlan: string | null,
-    careerPlanComment: string | null,
-    reviewComment: string | null,
-    reviewDate: string | null,
-    selfCheckDate: string | null,
-    firstComment: string | null,
-    firstCheckDate: string | null,
-    secondComment: string | null,
-    secondCheckDate: string | null,
-    overAllEvaluation: number | null,
-    statusValue: number | null,
-    interviewPlanDate: string | null,
-    interviewPlanComment: string | null,
-    InterviewMid1Date: string | null,
-    InterviewMid1Comment: string | null,
-    InterviewMid2Date: string | null,
-    InterviewMid2Comment: string | null,
-    InterviewMid3Date: string | null,
-    InterviewMid3Comment: string | null,
+    careerPlan?: string | null,
+    careerPlanComment?: string | null,
+    reviewComment?: string | null,
+    reviewDate?: string | null,
+    selfCheckDate?: string | null,
+    firstComment?: string | null,
+    firstCheckDate?: string | null,
+    secondComment?: string | null,
+    secondCheckDate?: string | null,
+    overAllEvaluation?: number | null,
+    statusValue?: number | null,
+    interviewPlanDate?: string | null,
+    interviewPlanComment?: string | null,
+    InterviewMid1Date?: string | null,
+    InterviewMid1Comment?: string | null,
+    InterviewMid2Date?: string | null,
+    InterviewMid2Comment?: string | null,
+    InterviewMid3Date?: string | null,
+    InterviewMid3Comment?: string | null,
     revieweeUsername: string,
     secondUsername: string,
     sheetGroupLocalId: string,
-    group:  {
+    group?:  {
       __typename: "Group",
       companyID: string,
       localID: string,
@@ -1970,13 +2137,13 @@ export type DeleteSheetMutation = {
       createdAt: string,
       updatedAt: string,
     } | null,
-    referencer: Array< string > | null,
+    referencer?: Array< string > | null,
     reviewee: string,
-    topReviewers: Array< string > | null,
-    secondReviewers: Array< string > | null,
+    topReviewers?: Array< string > | null,
+    secondReviewers?: Array< string > | null,
     createdAt: string,
     updatedAt: string,
-    revieweeEmployee:  {
+    revieweeEmployee?:  {
       __typename: "Employee",
       companyID: string,
       username: string,
@@ -1987,7 +2154,7 @@ export type DeleteSheetMutation = {
       lastName: string,
       grade: string,
       email: string,
-      group:  {
+      group?:  {
         __typename: "Group",
         companyID: string,
         localID: string,
@@ -1995,13 +2162,13 @@ export type DeleteSheetMutation = {
         createdAt: string,
         updatedAt: string,
       } | null,
-      company:  {
+      company?:  {
         __typename: "Company",
         id: string,
         name: string,
         startMonth: number,
-        shortName: string | null,
-        url: string | null,
+        shortName?: string | null,
+        url?: string | null,
         createdAt: string,
         updatedAt: string,
       } | null,
@@ -2009,7 +2176,7 @@ export type DeleteSheetMutation = {
       isDeleted: BooleanType,
       createdAt: string,
       updatedAt: string,
-      superior:  {
+      superior?:  {
         __typename: "Employee",
         companyID: string,
         username: string,
@@ -2020,7 +2187,7 @@ export type DeleteSheetMutation = {
         lastName: string,
         grade: string,
         email: string,
-        group:  {
+        group?:  {
           __typename: "Group",
           companyID: string,
           localID: string,
@@ -2028,13 +2195,13 @@ export type DeleteSheetMutation = {
           createdAt: string,
           updatedAt: string,
         } | null,
-        company:  {
+        company?:  {
           __typename: "Company",
           id: string,
           name: string,
           startMonth: number,
-          shortName: string | null,
-          url: string | null,
+          shortName?: string | null,
+          url?: string | null,
           createdAt: string,
           updatedAt: string,
         } | null,
@@ -2042,7 +2209,7 @@ export type DeleteSheetMutation = {
         isDeleted: BooleanType,
         createdAt: string,
         updatedAt: string,
-        superior:  {
+        superior?:  {
           __typename: "Employee",
           companyID: string,
           username: string,
@@ -2053,7 +2220,7 @@ export type DeleteSheetMutation = {
           lastName: string,
           grade: string,
           email: string,
-          group:  {
+          group?:  {
             __typename: "Group",
             companyID: string,
             localID: string,
@@ -2061,13 +2228,13 @@ export type DeleteSheetMutation = {
             createdAt: string,
             updatedAt: string,
           } | null,
-          company:  {
+          company?:  {
             __typename: "Company",
             id: string,
             name: string,
             startMonth: number,
-            shortName: string | null,
-            url: string | null,
+            shortName?: string | null,
+            url?: string | null,
             createdAt: string,
             updatedAt: string,
           } | null,
@@ -2075,7 +2242,7 @@ export type DeleteSheetMutation = {
           isDeleted: BooleanType,
           createdAt: string,
           updatedAt: string,
-          superior:  {
+          superior?:  {
             __typename: "Employee",
             companyID: string,
             username: string,
@@ -2086,7 +2253,7 @@ export type DeleteSheetMutation = {
             lastName: string,
             grade: string,
             email: string,
-            group:  {
+            group?:  {
               __typename: "Group",
               companyID: string,
               localID: string,
@@ -2094,13 +2261,13 @@ export type DeleteSheetMutation = {
               createdAt: string,
               updatedAt: string,
             } | null,
-            company:  {
+            company?:  {
               __typename: "Company",
               id: string,
               name: string,
               startMonth: number,
-              shortName: string | null,
-              url: string | null,
+              shortName?: string | null,
+              url?: string | null,
               createdAt: string,
               updatedAt: string,
             } | null,
@@ -2108,7 +2275,7 @@ export type DeleteSheetMutation = {
             isDeleted: BooleanType,
             createdAt: string,
             updatedAt: string,
-            superior:  {
+            superior?:  {
               __typename: "Employee",
               companyID: string,
               username: string,
@@ -2119,7 +2286,7 @@ export type DeleteSheetMutation = {
               lastName: string,
               grade: string,
               email: string,
-              group:  {
+              group?:  {
                 __typename: "Group",
                 companyID: string,
                 localID: string,
@@ -2127,13 +2294,13 @@ export type DeleteSheetMutation = {
                 createdAt: string,
                 updatedAt: string,
               } | null,
-              company:  {
+              company?:  {
                 __typename: "Company",
                 id: string,
                 name: string,
                 startMonth: number,
-                shortName: string | null,
-                url: string | null,
+                shortName?: string | null,
+                url?: string | null,
                 createdAt: string,
                 updatedAt: string,
               } | null,
@@ -2141,7 +2308,7 @@ export type DeleteSheetMutation = {
               isDeleted: BooleanType,
               createdAt: string,
               updatedAt: string,
-              superior:  {
+              superior?:  {
                 __typename: "Employee",
                 companyID: string,
                 username: string,
@@ -2162,7 +2329,7 @@ export type DeleteSheetMutation = {
         } | null,
       } | null,
     } | null,
-    secondEmployee:  {
+    secondEmployee?:  {
       __typename: "Employee",
       companyID: string,
       username: string,
@@ -2173,7 +2340,7 @@ export type DeleteSheetMutation = {
       lastName: string,
       grade: string,
       email: string,
-      group:  {
+      group?:  {
         __typename: "Group",
         companyID: string,
         localID: string,
@@ -2181,13 +2348,13 @@ export type DeleteSheetMutation = {
         createdAt: string,
         updatedAt: string,
       } | null,
-      company:  {
+      company?:  {
         __typename: "Company",
         id: string,
         name: string,
         startMonth: number,
-        shortName: string | null,
-        url: string | null,
+        shortName?: string | null,
+        url?: string | null,
         createdAt: string,
         updatedAt: string,
       } | null,
@@ -2195,7 +2362,7 @@ export type DeleteSheetMutation = {
       isDeleted: BooleanType,
       createdAt: string,
       updatedAt: string,
-      superior:  {
+      superior?:  {
         __typename: "Employee",
         companyID: string,
         username: string,
@@ -2206,7 +2373,7 @@ export type DeleteSheetMutation = {
         lastName: string,
         grade: string,
         email: string,
-        group:  {
+        group?:  {
           __typename: "Group",
           companyID: string,
           localID: string,
@@ -2214,13 +2381,13 @@ export type DeleteSheetMutation = {
           createdAt: string,
           updatedAt: string,
         } | null,
-        company:  {
+        company?:  {
           __typename: "Company",
           id: string,
           name: string,
           startMonth: number,
-          shortName: string | null,
-          url: string | null,
+          shortName?: string | null,
+          url?: string | null,
           createdAt: string,
           updatedAt: string,
         } | null,
@@ -2228,7 +2395,7 @@ export type DeleteSheetMutation = {
         isDeleted: BooleanType,
         createdAt: string,
         updatedAt: string,
-        superior:  {
+        superior?:  {
           __typename: "Employee",
           companyID: string,
           username: string,
@@ -2239,7 +2406,7 @@ export type DeleteSheetMutation = {
           lastName: string,
           grade: string,
           email: string,
-          group:  {
+          group?:  {
             __typename: "Group",
             companyID: string,
             localID: string,
@@ -2247,13 +2414,13 @@ export type DeleteSheetMutation = {
             createdAt: string,
             updatedAt: string,
           } | null,
-          company:  {
+          company?:  {
             __typename: "Company",
             id: string,
             name: string,
             startMonth: number,
-            shortName: string | null,
-            url: string | null,
+            shortName?: string | null,
+            url?: string | null,
             createdAt: string,
             updatedAt: string,
           } | null,
@@ -2261,7 +2428,7 @@ export type DeleteSheetMutation = {
           isDeleted: BooleanType,
           createdAt: string,
           updatedAt: string,
-          superior:  {
+          superior?:  {
             __typename: "Employee",
             companyID: string,
             username: string,
@@ -2272,7 +2439,7 @@ export type DeleteSheetMutation = {
             lastName: string,
             grade: string,
             email: string,
-            group:  {
+            group?:  {
               __typename: "Group",
               companyID: string,
               localID: string,
@@ -2280,13 +2447,13 @@ export type DeleteSheetMutation = {
               createdAt: string,
               updatedAt: string,
             } | null,
-            company:  {
+            company?:  {
               __typename: "Company",
               id: string,
               name: string,
               startMonth: number,
-              shortName: string | null,
-              url: string | null,
+              shortName?: string | null,
+              url?: string | null,
               createdAt: string,
               updatedAt: string,
             } | null,
@@ -2294,7 +2461,7 @@ export type DeleteSheetMutation = {
             isDeleted: BooleanType,
             createdAt: string,
             updatedAt: string,
-            superior:  {
+            superior?:  {
               __typename: "Employee",
               companyID: string,
               username: string,
@@ -2305,7 +2472,7 @@ export type DeleteSheetMutation = {
               lastName: string,
               grade: string,
               email: string,
-              group:  {
+              group?:  {
                 __typename: "Group",
                 companyID: string,
                 localID: string,
@@ -2313,13 +2480,13 @@ export type DeleteSheetMutation = {
                 createdAt: string,
                 updatedAt: string,
               } | null,
-              company:  {
+              company?:  {
                 __typename: "Company",
                 id: string,
                 name: string,
                 startMonth: number,
-                shortName: string | null,
-                url: string | null,
+                shortName?: string | null,
+                url?: string | null,
                 createdAt: string,
                 updatedAt: string,
               } | null,
@@ -2327,7 +2494,7 @@ export type DeleteSheetMutation = {
               isDeleted: BooleanType,
               createdAt: string,
               updatedAt: string,
-              superior:  {
+              superior?:  {
                 __typename: "Employee",
                 companyID: string,
                 username: string,
@@ -2348,45 +2515,45 @@ export type DeleteSheetMutation = {
         } | null,
       } | null,
     } | null,
-    section:  {
+    section?:  {
       __typename: "ModelSectionConnection",
-      items:  Array< {
+      items?:  Array< {
         __typename: "Section",
         sheetKeys: string,
         sectionCategoryLocalId: string,
-        sectionCategoryName: string | null,
+        sectionCategoryName?: string | null,
         companyID: string,
-        objective:  {
+        objective?:  {
           __typename: "ModelObjectiveConnection",
-          items:  Array< {
+          items?:  Array< {
             __typename: "Objective",
             sectionKeys: string,
             createdAt: string,
             companyID: string,
             content: string,
-            result: string | null,
-            priority: string | null,
-            selfEvaluation: number | null,
-            firstEvaluation: number | null,
-            lastEvaluation: number | null,
-            progress: number | null,
-            expStartDate: string | null,
-            expDoneDate: string | null,
-            reviewee: string | null,
-            topReviewers: Array< string > | null,
-            secondReviewers: Array< string > | null,
-            referencer: Array< string > | null,
+            result?: string | null,
+            priority?: string | null,
+            selfEvaluation?: number | null,
+            firstEvaluation?: number | null,
+            lastEvaluation?: number | null,
+            progress?: number | null,
+            expStartDate?: string | null,
+            expDoneDate?: string | null,
+            reviewee?: string | null,
+            topReviewers?: Array< string > | null,
+            secondReviewers?: Array< string > | null,
+            referencer?: Array< string > | null,
             updatedAt: string,
           } | null > | null,
-          nextToken: string | null,
+          nextToken?: string | null,
         } | null,
-        reviewee: string | null,
-        topReviewers: Array< string > | null,
-        secondReviewers: Array< string > | null,
-        referencer: Array< string > | null,
+        reviewee?: string | null,
+        topReviewers?: Array< string > | null,
+        secondReviewers?: Array< string > | null,
+        referencer?: Array< string > | null,
         createdAt: string,
         updatedAt: string,
-        category:  {
+        category?:  {
           __typename: "Category",
           companyID: string,
           localID: string,
@@ -2395,54 +2562,54 @@ export type DeleteSheetMutation = {
           updatedAt: string,
         } | null,
       } | null > | null,
-      nextToken: string | null,
+      nextToken?: string | null,
     } | null,
   } | null,
 };
 
 export type CreateSectionMutationVariables = {
-  input: CreateSectionInput,
+  input?: CreateSectionInput,
   condition?: ModelSectionConditionInput | null,
 };
 
 export type CreateSectionMutation = {
-  createSection:  {
+  createSection?:  {
     __typename: "Section",
     sheetKeys: string,
     sectionCategoryLocalId: string,
-    sectionCategoryName: string | null,
+    sectionCategoryName?: string | null,
     companyID: string,
-    objective:  {
+    objective?:  {
       __typename: "ModelObjectiveConnection",
-      items:  Array< {
+      items?:  Array< {
         __typename: "Objective",
         sectionKeys: string,
         createdAt: string,
         companyID: string,
         content: string,
-        result: string | null,
-        priority: string | null,
-        selfEvaluation: number | null,
-        firstEvaluation: number | null,
-        lastEvaluation: number | null,
-        progress: number | null,
-        expStartDate: string | null,
-        expDoneDate: string | null,
-        reviewee: string | null,
-        topReviewers: Array< string > | null,
-        secondReviewers: Array< string > | null,
-        referencer: Array< string > | null,
+        result?: string | null,
+        priority?: string | null,
+        selfEvaluation?: number | null,
+        firstEvaluation?: number | null,
+        lastEvaluation?: number | null,
+        progress?: number | null,
+        expStartDate?: string | null,
+        expDoneDate?: string | null,
+        reviewee?: string | null,
+        topReviewers?: Array< string > | null,
+        secondReviewers?: Array< string > | null,
+        referencer?: Array< string > | null,
         updatedAt: string,
       } | null > | null,
-      nextToken: string | null,
+      nextToken?: string | null,
     } | null,
-    reviewee: string | null,
-    topReviewers: Array< string > | null,
-    secondReviewers: Array< string > | null,
-    referencer: Array< string > | null,
+    reviewee?: string | null,
+    topReviewers?: Array< string > | null,
+    secondReviewers?: Array< string > | null,
+    referencer?: Array< string > | null,
     createdAt: string,
     updatedAt: string,
-    category:  {
+    category?:  {
       __typename: "Category",
       companyID: string,
       localID: string,
@@ -2454,48 +2621,48 @@ export type CreateSectionMutation = {
 };
 
 export type DeleteSectionMutationVariables = {
-  input: DeleteSectionInput,
+  input?: DeleteSectionInput,
   condition?: ModelSectionConditionInput | null,
 };
 
 export type DeleteSectionMutation = {
-  deleteSection:  {
+  deleteSection?:  {
     __typename: "Section",
     sheetKeys: string,
     sectionCategoryLocalId: string,
-    sectionCategoryName: string | null,
+    sectionCategoryName?: string | null,
     companyID: string,
-    objective:  {
+    objective?:  {
       __typename: "ModelObjectiveConnection",
-      items:  Array< {
+      items?:  Array< {
         __typename: "Objective",
         sectionKeys: string,
         createdAt: string,
         companyID: string,
         content: string,
-        result: string | null,
-        priority: string | null,
-        selfEvaluation: number | null,
-        firstEvaluation: number | null,
-        lastEvaluation: number | null,
-        progress: number | null,
-        expStartDate: string | null,
-        expDoneDate: string | null,
-        reviewee: string | null,
-        topReviewers: Array< string > | null,
-        secondReviewers: Array< string > | null,
-        referencer: Array< string > | null,
+        result?: string | null,
+        priority?: string | null,
+        selfEvaluation?: number | null,
+        firstEvaluation?: number | null,
+        lastEvaluation?: number | null,
+        progress?: number | null,
+        expStartDate?: string | null,
+        expDoneDate?: string | null,
+        reviewee?: string | null,
+        topReviewers?: Array< string > | null,
+        secondReviewers?: Array< string > | null,
+        referencer?: Array< string > | null,
         updatedAt: string,
       } | null > | null,
-      nextToken: string | null,
+      nextToken?: string | null,
     } | null,
-    reviewee: string | null,
-    topReviewers: Array< string > | null,
-    secondReviewers: Array< string > | null,
-    referencer: Array< string > | null,
+    reviewee?: string | null,
+    topReviewers?: Array< string > | null,
+    secondReviewers?: Array< string > | null,
+    referencer?: Array< string > | null,
     createdAt: string,
     updatedAt: string,
-    category:  {
+    category?:  {
       __typename: "Category",
       companyID: string,
       localID: string,
@@ -2507,123 +2674,123 @@ export type DeleteSectionMutation = {
 };
 
 export type CreateObjectiveMutationVariables = {
-  input: CreateObjectiveInput,
+  input?: CreateObjectiveInput,
   condition?: ModelObjectiveConditionInput | null,
 };
 
 export type CreateObjectiveMutation = {
-  createObjective:  {
+  createObjective?:  {
     __typename: "Objective",
     sectionKeys: string,
     createdAt: string,
     companyID: string,
     content: string,
-    result: string | null,
-    priority: string | null,
-    selfEvaluation: number | null,
-    firstEvaluation: number | null,
-    lastEvaluation: number | null,
-    progress: number | null,
-    expStartDate: string | null,
-    expDoneDate: string | null,
-    reviewee: string | null,
-    topReviewers: Array< string > | null,
-    secondReviewers: Array< string > | null,
-    referencer: Array< string > | null,
+    result?: string | null,
+    priority?: string | null,
+    selfEvaluation?: number | null,
+    firstEvaluation?: number | null,
+    lastEvaluation?: number | null,
+    progress?: number | null,
+    expStartDate?: string | null,
+    expDoneDate?: string | null,
+    reviewee?: string | null,
+    topReviewers?: Array< string > | null,
+    secondReviewers?: Array< string > | null,
+    referencer?: Array< string > | null,
     updatedAt: string,
   } | null,
 };
 
 export type UpdateObjectiveMutationVariables = {
-  input: UpdateObjectiveInput,
+  input?: UpdateObjectiveInput,
   condition?: ModelObjectiveConditionInput | null,
 };
 
 export type UpdateObjectiveMutation = {
-  updateObjective:  {
+  updateObjective?:  {
     __typename: "Objective",
     sectionKeys: string,
     createdAt: string,
     companyID: string,
     content: string,
-    result: string | null,
-    priority: string | null,
-    selfEvaluation: number | null,
-    firstEvaluation: number | null,
-    lastEvaluation: number | null,
-    progress: number | null,
-    expStartDate: string | null,
-    expDoneDate: string | null,
-    reviewee: string | null,
-    topReviewers: Array< string > | null,
-    secondReviewers: Array< string > | null,
-    referencer: Array< string > | null,
+    result?: string | null,
+    priority?: string | null,
+    selfEvaluation?: number | null,
+    firstEvaluation?: number | null,
+    lastEvaluation?: number | null,
+    progress?: number | null,
+    expStartDate?: string | null,
+    expDoneDate?: string | null,
+    reviewee?: string | null,
+    topReviewers?: Array< string > | null,
+    secondReviewers?: Array< string > | null,
+    referencer?: Array< string > | null,
     updatedAt: string,
   } | null,
 };
 
 export type DeleteObjectiveMutationVariables = {
-  input: DeleteObjectiveInput,
+  input?: DeleteObjectiveInput,
   condition?: ModelObjectiveConditionInput | null,
 };
 
 export type DeleteObjectiveMutation = {
-  deleteObjective:  {
+  deleteObjective?:  {
     __typename: "Objective",
     sectionKeys: string,
     createdAt: string,
     companyID: string,
     content: string,
-    result: string | null,
-    priority: string | null,
-    selfEvaluation: number | null,
-    firstEvaluation: number | null,
-    lastEvaluation: number | null,
-    progress: number | null,
-    expStartDate: string | null,
-    expDoneDate: string | null,
-    reviewee: string | null,
-    topReviewers: Array< string > | null,
-    secondReviewers: Array< string > | null,
-    referencer: Array< string > | null,
+    result?: string | null,
+    priority?: string | null,
+    selfEvaluation?: number | null,
+    firstEvaluation?: number | null,
+    lastEvaluation?: number | null,
+    progress?: number | null,
+    expStartDate?: string | null,
+    expDoneDate?: string | null,
+    reviewee?: string | null,
+    topReviewers?: Array< string > | null,
+    secondReviewers?: Array< string > | null,
+    referencer?: Array< string > | null,
     updatedAt: string,
   } | null,
 };
 
 export type UpdateSheetMutationVariables = {
-  input: UpdateSheetInput,
+  input?: UpdateSheetInput,
   condition?: ModelSheetConditionInput | null,
 };
 
 export type UpdateSheetMutation = {
-  updateSheet:  {
+  updateSheet?:  {
     __typename: "Sheet",
     companyID: string,
     year: number,
     grade: string,
-    careerPlan: string | null,
-    careerPlanComment: string | null,
-    reviewComment: string | null,
-    reviewDate: string | null,
-    selfCheckDate: string | null,
-    firstComment: string | null,
-    firstCheckDate: string | null,
-    secondComment: string | null,
-    secondCheckDate: string | null,
-    overAllEvaluation: number | null,
-    statusValue: number | null,
-    interviewPlanDate: string | null,
-    interviewPlanComment: string | null,
-    InterviewMid1Date: string | null,
-    InterviewMid1Comment: string | null,
-    InterviewMid2Date: string | null,
-    InterviewMid2Comment: string | null,
-    InterviewMid3Date: string | null,
-    InterviewMid3Comment: string | null,
+    careerPlan?: string | null,
+    careerPlanComment?: string | null,
+    reviewComment?: string | null,
+    reviewDate?: string | null,
+    selfCheckDate?: string | null,
+    firstComment?: string | null,
+    firstCheckDate?: string | null,
+    secondComment?: string | null,
+    secondCheckDate?: string | null,
+    overAllEvaluation?: number | null,
+    statusValue?: number | null,
+    interviewPlanDate?: string | null,
+    interviewPlanComment?: string | null,
+    InterviewMid1Date?: string | null,
+    InterviewMid1Comment?: string | null,
+    InterviewMid2Date?: string | null,
+    InterviewMid2Comment?: string | null,
+    InterviewMid3Date?: string | null,
+    InterviewMid3Comment?: string | null,
     revieweeUsername: string,
     secondUsername: string,
     sheetGroupLocalId: string,
-    group:  {
+    group?:  {
       __typename: "Group",
       companyID: string,
       localID: string,
@@ -2631,13 +2798,13 @@ export type UpdateSheetMutation = {
       createdAt: string,
       updatedAt: string,
     } | null,
-    referencer: Array< string > | null,
+    referencer?: Array< string > | null,
     reviewee: string,
-    topReviewers: Array< string > | null,
-    secondReviewers: Array< string > | null,
+    topReviewers?: Array< string > | null,
+    secondReviewers?: Array< string > | null,
     createdAt: string,
     updatedAt: string,
-    revieweeEmployee:  {
+    revieweeEmployee?:  {
       __typename: "Employee",
       companyID: string,
       username: string,
@@ -2648,7 +2815,7 @@ export type UpdateSheetMutation = {
       lastName: string,
       grade: string,
       email: string,
-      group:  {
+      group?:  {
         __typename: "Group",
         companyID: string,
         localID: string,
@@ -2656,13 +2823,13 @@ export type UpdateSheetMutation = {
         createdAt: string,
         updatedAt: string,
       } | null,
-      company:  {
+      company?:  {
         __typename: "Company",
         id: string,
         name: string,
         startMonth: number,
-        shortName: string | null,
-        url: string | null,
+        shortName?: string | null,
+        url?: string | null,
         createdAt: string,
         updatedAt: string,
       } | null,
@@ -2670,7 +2837,7 @@ export type UpdateSheetMutation = {
       isDeleted: BooleanType,
       createdAt: string,
       updatedAt: string,
-      superior:  {
+      superior?:  {
         __typename: "Employee",
         companyID: string,
         username: string,
@@ -2681,7 +2848,7 @@ export type UpdateSheetMutation = {
         lastName: string,
         grade: string,
         email: string,
-        group:  {
+        group?:  {
           __typename: "Group",
           companyID: string,
           localID: string,
@@ -2689,13 +2856,13 @@ export type UpdateSheetMutation = {
           createdAt: string,
           updatedAt: string,
         } | null,
-        company:  {
+        company?:  {
           __typename: "Company",
           id: string,
           name: string,
           startMonth: number,
-          shortName: string | null,
-          url: string | null,
+          shortName?: string | null,
+          url?: string | null,
           createdAt: string,
           updatedAt: string,
         } | null,
@@ -2703,7 +2870,7 @@ export type UpdateSheetMutation = {
         isDeleted: BooleanType,
         createdAt: string,
         updatedAt: string,
-        superior:  {
+        superior?:  {
           __typename: "Employee",
           companyID: string,
           username: string,
@@ -2714,7 +2881,7 @@ export type UpdateSheetMutation = {
           lastName: string,
           grade: string,
           email: string,
-          group:  {
+          group?:  {
             __typename: "Group",
             companyID: string,
             localID: string,
@@ -2722,13 +2889,13 @@ export type UpdateSheetMutation = {
             createdAt: string,
             updatedAt: string,
           } | null,
-          company:  {
+          company?:  {
             __typename: "Company",
             id: string,
             name: string,
             startMonth: number,
-            shortName: string | null,
-            url: string | null,
+            shortName?: string | null,
+            url?: string | null,
             createdAt: string,
             updatedAt: string,
           } | null,
@@ -2736,7 +2903,7 @@ export type UpdateSheetMutation = {
           isDeleted: BooleanType,
           createdAt: string,
           updatedAt: string,
-          superior:  {
+          superior?:  {
             __typename: "Employee",
             companyID: string,
             username: string,
@@ -2747,7 +2914,7 @@ export type UpdateSheetMutation = {
             lastName: string,
             grade: string,
             email: string,
-            group:  {
+            group?:  {
               __typename: "Group",
               companyID: string,
               localID: string,
@@ -2755,13 +2922,13 @@ export type UpdateSheetMutation = {
               createdAt: string,
               updatedAt: string,
             } | null,
-            company:  {
+            company?:  {
               __typename: "Company",
               id: string,
               name: string,
               startMonth: number,
-              shortName: string | null,
-              url: string | null,
+              shortName?: string | null,
+              url?: string | null,
               createdAt: string,
               updatedAt: string,
             } | null,
@@ -2769,7 +2936,7 @@ export type UpdateSheetMutation = {
             isDeleted: BooleanType,
             createdAt: string,
             updatedAt: string,
-            superior:  {
+            superior?:  {
               __typename: "Employee",
               companyID: string,
               username: string,
@@ -2780,7 +2947,7 @@ export type UpdateSheetMutation = {
               lastName: string,
               grade: string,
               email: string,
-              group:  {
+              group?:  {
                 __typename: "Group",
                 companyID: string,
                 localID: string,
@@ -2788,13 +2955,13 @@ export type UpdateSheetMutation = {
                 createdAt: string,
                 updatedAt: string,
               } | null,
-              company:  {
+              company?:  {
                 __typename: "Company",
                 id: string,
                 name: string,
                 startMonth: number,
-                shortName: string | null,
-                url: string | null,
+                shortName?: string | null,
+                url?: string | null,
                 createdAt: string,
                 updatedAt: string,
               } | null,
@@ -2802,7 +2969,7 @@ export type UpdateSheetMutation = {
               isDeleted: BooleanType,
               createdAt: string,
               updatedAt: string,
-              superior:  {
+              superior?:  {
                 __typename: "Employee",
                 companyID: string,
                 username: string,
@@ -2823,7 +2990,7 @@ export type UpdateSheetMutation = {
         } | null,
       } | null,
     } | null,
-    secondEmployee:  {
+    secondEmployee?:  {
       __typename: "Employee",
       companyID: string,
       username: string,
@@ -2834,7 +3001,7 @@ export type UpdateSheetMutation = {
       lastName: string,
       grade: string,
       email: string,
-      group:  {
+      group?:  {
         __typename: "Group",
         companyID: string,
         localID: string,
@@ -2842,13 +3009,13 @@ export type UpdateSheetMutation = {
         createdAt: string,
         updatedAt: string,
       } | null,
-      company:  {
+      company?:  {
         __typename: "Company",
         id: string,
         name: string,
         startMonth: number,
-        shortName: string | null,
-        url: string | null,
+        shortName?: string | null,
+        url?: string | null,
         createdAt: string,
         updatedAt: string,
       } | null,
@@ -2856,7 +3023,7 @@ export type UpdateSheetMutation = {
       isDeleted: BooleanType,
       createdAt: string,
       updatedAt: string,
-      superior:  {
+      superior?:  {
         __typename: "Employee",
         companyID: string,
         username: string,
@@ -2867,7 +3034,7 @@ export type UpdateSheetMutation = {
         lastName: string,
         grade: string,
         email: string,
-        group:  {
+        group?:  {
           __typename: "Group",
           companyID: string,
           localID: string,
@@ -2875,13 +3042,13 @@ export type UpdateSheetMutation = {
           createdAt: string,
           updatedAt: string,
         } | null,
-        company:  {
+        company?:  {
           __typename: "Company",
           id: string,
           name: string,
           startMonth: number,
-          shortName: string | null,
-          url: string | null,
+          shortName?: string | null,
+          url?: string | null,
           createdAt: string,
           updatedAt: string,
         } | null,
@@ -2889,7 +3056,7 @@ export type UpdateSheetMutation = {
         isDeleted: BooleanType,
         createdAt: string,
         updatedAt: string,
-        superior:  {
+        superior?:  {
           __typename: "Employee",
           companyID: string,
           username: string,
@@ -2900,7 +3067,7 @@ export type UpdateSheetMutation = {
           lastName: string,
           grade: string,
           email: string,
-          group:  {
+          group?:  {
             __typename: "Group",
             companyID: string,
             localID: string,
@@ -2908,13 +3075,13 @@ export type UpdateSheetMutation = {
             createdAt: string,
             updatedAt: string,
           } | null,
-          company:  {
+          company?:  {
             __typename: "Company",
             id: string,
             name: string,
             startMonth: number,
-            shortName: string | null,
-            url: string | null,
+            shortName?: string | null,
+            url?: string | null,
             createdAt: string,
             updatedAt: string,
           } | null,
@@ -2922,7 +3089,7 @@ export type UpdateSheetMutation = {
           isDeleted: BooleanType,
           createdAt: string,
           updatedAt: string,
-          superior:  {
+          superior?:  {
             __typename: "Employee",
             companyID: string,
             username: string,
@@ -2933,7 +3100,7 @@ export type UpdateSheetMutation = {
             lastName: string,
             grade: string,
             email: string,
-            group:  {
+            group?:  {
               __typename: "Group",
               companyID: string,
               localID: string,
@@ -2941,13 +3108,13 @@ export type UpdateSheetMutation = {
               createdAt: string,
               updatedAt: string,
             } | null,
-            company:  {
+            company?:  {
               __typename: "Company",
               id: string,
               name: string,
               startMonth: number,
-              shortName: string | null,
-              url: string | null,
+              shortName?: string | null,
+              url?: string | null,
               createdAt: string,
               updatedAt: string,
             } | null,
@@ -2955,7 +3122,7 @@ export type UpdateSheetMutation = {
             isDeleted: BooleanType,
             createdAt: string,
             updatedAt: string,
-            superior:  {
+            superior?:  {
               __typename: "Employee",
               companyID: string,
               username: string,
@@ -2966,7 +3133,7 @@ export type UpdateSheetMutation = {
               lastName: string,
               grade: string,
               email: string,
-              group:  {
+              group?:  {
                 __typename: "Group",
                 companyID: string,
                 localID: string,
@@ -2974,13 +3141,13 @@ export type UpdateSheetMutation = {
                 createdAt: string,
                 updatedAt: string,
               } | null,
-              company:  {
+              company?:  {
                 __typename: "Company",
                 id: string,
                 name: string,
                 startMonth: number,
-                shortName: string | null,
-                url: string | null,
+                shortName?: string | null,
+                url?: string | null,
                 createdAt: string,
                 updatedAt: string,
               } | null,
@@ -2988,7 +3155,7 @@ export type UpdateSheetMutation = {
               isDeleted: BooleanType,
               createdAt: string,
               updatedAt: string,
-              superior:  {
+              superior?:  {
                 __typename: "Employee",
                 companyID: string,
                 username: string,
@@ -3009,45 +3176,45 @@ export type UpdateSheetMutation = {
         } | null,
       } | null,
     } | null,
-    section:  {
+    section?:  {
       __typename: "ModelSectionConnection",
-      items:  Array< {
+      items?:  Array< {
         __typename: "Section",
         sheetKeys: string,
         sectionCategoryLocalId: string,
-        sectionCategoryName: string | null,
+        sectionCategoryName?: string | null,
         companyID: string,
-        objective:  {
+        objective?:  {
           __typename: "ModelObjectiveConnection",
-          items:  Array< {
+          items?:  Array< {
             __typename: "Objective",
             sectionKeys: string,
             createdAt: string,
             companyID: string,
             content: string,
-            result: string | null,
-            priority: string | null,
-            selfEvaluation: number | null,
-            firstEvaluation: number | null,
-            lastEvaluation: number | null,
-            progress: number | null,
-            expStartDate: string | null,
-            expDoneDate: string | null,
-            reviewee: string | null,
-            topReviewers: Array< string > | null,
-            secondReviewers: Array< string > | null,
-            referencer: Array< string > | null,
+            result?: string | null,
+            priority?: string | null,
+            selfEvaluation?: number | null,
+            firstEvaluation?: number | null,
+            lastEvaluation?: number | null,
+            progress?: number | null,
+            expStartDate?: string | null,
+            expDoneDate?: string | null,
+            reviewee?: string | null,
+            topReviewers?: Array< string > | null,
+            secondReviewers?: Array< string > | null,
+            referencer?: Array< string > | null,
             updatedAt: string,
           } | null > | null,
-          nextToken: string | null,
+          nextToken?: string | null,
         } | null,
-        reviewee: string | null,
-        topReviewers: Array< string > | null,
-        secondReviewers: Array< string > | null,
-        referencer: Array< string > | null,
+        reviewee?: string | null,
+        topReviewers?: Array< string > | null,
+        secondReviewers?: Array< string > | null,
+        referencer?: Array< string > | null,
         createdAt: string,
         updatedAt: string,
-        category:  {
+        category?:  {
           __typename: "Category",
           companyID: string,
           localID: string,
@@ -3056,54 +3223,54 @@ export type UpdateSheetMutation = {
           updatedAt: string,
         } | null,
       } | null > | null,
-      nextToken: string | null,
+      nextToken?: string | null,
     } | null,
   } | null,
 };
 
 export type UpdateSectionMutationVariables = {
-  input: UpdateSectionInput,
+  input?: UpdateSectionInput,
   condition?: ModelSectionConditionInput | null,
 };
 
 export type UpdateSectionMutation = {
-  updateSection:  {
+  updateSection?:  {
     __typename: "Section",
     sheetKeys: string,
     sectionCategoryLocalId: string,
-    sectionCategoryName: string | null,
+    sectionCategoryName?: string | null,
     companyID: string,
-    objective:  {
+    objective?:  {
       __typename: "ModelObjectiveConnection",
-      items:  Array< {
+      items?:  Array< {
         __typename: "Objective",
         sectionKeys: string,
         createdAt: string,
         companyID: string,
         content: string,
-        result: string | null,
-        priority: string | null,
-        selfEvaluation: number | null,
-        firstEvaluation: number | null,
-        lastEvaluation: number | null,
-        progress: number | null,
-        expStartDate: string | null,
-        expDoneDate: string | null,
-        reviewee: string | null,
-        topReviewers: Array< string > | null,
-        secondReviewers: Array< string > | null,
-        referencer: Array< string > | null,
+        result?: string | null,
+        priority?: string | null,
+        selfEvaluation?: number | null,
+        firstEvaluation?: number | null,
+        lastEvaluation?: number | null,
+        progress?: number | null,
+        expStartDate?: string | null,
+        expDoneDate?: string | null,
+        reviewee?: string | null,
+        topReviewers?: Array< string > | null,
+        secondReviewers?: Array< string > | null,
+        referencer?: Array< string > | null,
         updatedAt: string,
       } | null > | null,
-      nextToken: string | null,
+      nextToken?: string | null,
     } | null,
-    reviewee: string | null,
-    topReviewers: Array< string > | null,
-    secondReviewers: Array< string > | null,
-    referencer: Array< string > | null,
+    reviewee?: string | null,
+    topReviewers?: Array< string > | null,
+    secondReviewers?: Array< string > | null,
+    referencer?: Array< string > | null,
     createdAt: string,
     updatedAt: string,
-    category:  {
+    category?:  {
       __typename: "Category",
       companyID: string,
       localID: string,
@@ -3115,17 +3282,17 @@ export type UpdateSectionMutation = {
 };
 
 export type GetCompanyQueryVariables = {
-  id: string,
+  id?: string,
 };
 
 export type GetCompanyQuery = {
-  getCompany:  {
+  getCompany?:  {
     __typename: "Company",
     id: string,
     name: string,
     startMonth: number,
-    shortName: string | null,
-    url: string | null,
+    shortName?: string | null,
+    url?: string | null,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -3138,29 +3305,29 @@ export type ListCompanysQueryVariables = {
 };
 
 export type ListCompanysQuery = {
-  listCompanys:  {
+  listCompanys?:  {
     __typename: "ModelCompanyConnection",
-    items:  Array< {
+    items?:  Array< {
       __typename: "Company",
       id: string,
       name: string,
       startMonth: number,
-      shortName: string | null,
-      url: string | null,
+      shortName?: string | null,
+      url?: string | null,
       createdAt: string,
       updatedAt: string,
     } | null > | null,
-    nextToken: string | null,
+    nextToken?: string | null,
   } | null,
 };
 
 export type GetGroupQueryVariables = {
-  companyID: string,
-  localID: string,
+  companyID?: string,
+  localID?: string,
 };
 
 export type GetGroupQuery = {
-  getGroup:  {
+  getGroup?:  {
     __typename: "Group",
     companyID: string,
     localID: string,
@@ -3180,9 +3347,9 @@ export type ListGroupsQueryVariables = {
 };
 
 export type ListGroupsQuery = {
-  listGroups:  {
+  listGroups?:  {
     __typename: "ModelGroupConnection",
-    items:  Array< {
+    items?:  Array< {
       __typename: "Group",
       companyID: string,
       localID: string,
@@ -3190,34 +3357,34 @@ export type ListGroupsQuery = {
       createdAt: string,
       updatedAt: string,
     } | null > | null,
-    nextToken: string | null,
+    nextToken?: string | null,
   } | null,
 };
 
 export type GetObjectiveQueryVariables = {
-  sectionKeys: string,
-  createdAt: string,
+  sectionKeys?: string,
+  createdAt?: string,
 };
 
 export type GetObjectiveQuery = {
-  getObjective:  {
+  getObjective?:  {
     __typename: "Objective",
     sectionKeys: string,
     createdAt: string,
     companyID: string,
     content: string,
-    result: string | null,
-    priority: string | null,
-    selfEvaluation: number | null,
-    firstEvaluation: number | null,
-    lastEvaluation: number | null,
-    progress: number | null,
-    expStartDate: string | null,
-    expDoneDate: string | null,
-    reviewee: string | null,
-    topReviewers: Array< string > | null,
-    secondReviewers: Array< string > | null,
-    referencer: Array< string > | null,
+    result?: string | null,
+    priority?: string | null,
+    selfEvaluation?: number | null,
+    firstEvaluation?: number | null,
+    lastEvaluation?: number | null,
+    progress?: number | null,
+    expStartDate?: string | null,
+    expDoneDate?: string | null,
+    reviewee?: string | null,
+    topReviewers?: Array< string > | null,
+    secondReviewers?: Array< string > | null,
+    referencer?: Array< string > | null,
     updatedAt: string,
   } | null,
 };
@@ -3232,29 +3399,29 @@ export type ListObjectivesQueryVariables = {
 };
 
 export type ListObjectivesQuery = {
-  listObjectives:  {
+  listObjectives?:  {
     __typename: "ModelObjectiveConnection",
-    items:  Array< {
+    items?:  Array< {
       __typename: "Objective",
       sectionKeys: string,
       createdAt: string,
       companyID: string,
       content: string,
-      result: string | null,
-      priority: string | null,
-      selfEvaluation: number | null,
-      firstEvaluation: number | null,
-      lastEvaluation: number | null,
-      progress: number | null,
-      expStartDate: string | null,
-      expDoneDate: string | null,
-      reviewee: string | null,
-      topReviewers: Array< string > | null,
-      secondReviewers: Array< string > | null,
-      referencer: Array< string > | null,
+      result?: string | null,
+      priority?: string | null,
+      selfEvaluation?: number | null,
+      firstEvaluation?: number | null,
+      lastEvaluation?: number | null,
+      progress?: number | null,
+      expStartDate?: string | null,
+      expDoneDate?: string | null,
+      reviewee?: string | null,
+      topReviewers?: Array< string > | null,
+      secondReviewers?: Array< string > | null,
+      referencer?: Array< string > | null,
       updatedAt: string,
     } | null > | null,
-    nextToken: string | null,
+    nextToken?: string | null,
   } | null,
 };
 
@@ -3268,9 +3435,9 @@ export type ListEmployeesQueryVariables = {
 };
 
 export type ListEmployeesQuery = {
-  listEmployees:  {
+  listEmployees?:  {
     __typename: "ModelEmployeeConnection",
-    items:  Array< {
+    items?:  Array< {
       __typename: "Employee",
       companyID: string,
       username: string,
@@ -3281,7 +3448,7 @@ export type ListEmployeesQuery = {
       lastName: string,
       grade: string,
       email: string,
-      group:  {
+      group?:  {
         __typename: "Group",
         companyID: string,
         localID: string,
@@ -3289,13 +3456,13 @@ export type ListEmployeesQuery = {
         createdAt: string,
         updatedAt: string,
       } | null,
-      company:  {
+      company?:  {
         __typename: "Company",
         id: string,
         name: string,
         startMonth: number,
-        shortName: string | null,
-        url: string | null,
+        shortName?: string | null,
+        url?: string | null,
         createdAt: string,
         updatedAt: string,
       } | null,
@@ -3303,7 +3470,7 @@ export type ListEmployeesQuery = {
       isDeleted: BooleanType,
       createdAt: string,
       updatedAt: string,
-      superior:  {
+      superior?:  {
         __typename: "Employee",
         companyID: string,
         username: string,
@@ -3314,7 +3481,7 @@ export type ListEmployeesQuery = {
         lastName: string,
         grade: string,
         email: string,
-        group:  {
+        group?:  {
           __typename: "Group",
           companyID: string,
           localID: string,
@@ -3322,13 +3489,13 @@ export type ListEmployeesQuery = {
           createdAt: string,
           updatedAt: string,
         } | null,
-        company:  {
+        company?:  {
           __typename: "Company",
           id: string,
           name: string,
           startMonth: number,
-          shortName: string | null,
-          url: string | null,
+          shortName?: string | null,
+          url?: string | null,
           createdAt: string,
           updatedAt: string,
         } | null,
@@ -3336,7 +3503,7 @@ export type ListEmployeesQuery = {
         isDeleted: BooleanType,
         createdAt: string,
         updatedAt: string,
-        superior:  {
+        superior?:  {
           __typename: "Employee",
           companyID: string,
           username: string,
@@ -3347,7 +3514,7 @@ export type ListEmployeesQuery = {
           lastName: string,
           grade: string,
           email: string,
-          group:  {
+          group?:  {
             __typename: "Group",
             companyID: string,
             localID: string,
@@ -3355,13 +3522,13 @@ export type ListEmployeesQuery = {
             createdAt: string,
             updatedAt: string,
           } | null,
-          company:  {
+          company?:  {
             __typename: "Company",
             id: string,
             name: string,
             startMonth: number,
-            shortName: string | null,
-            url: string | null,
+            shortName?: string | null,
+            url?: string | null,
             createdAt: string,
             updatedAt: string,
           } | null,
@@ -3369,7 +3536,7 @@ export type ListEmployeesQuery = {
           isDeleted: BooleanType,
           createdAt: string,
           updatedAt: string,
-          superior:  {
+          superior?:  {
             __typename: "Employee",
             companyID: string,
             username: string,
@@ -3380,7 +3547,7 @@ export type ListEmployeesQuery = {
             lastName: string,
             grade: string,
             email: string,
-            group:  {
+            group?:  {
               __typename: "Group",
               companyID: string,
               localID: string,
@@ -3388,13 +3555,13 @@ export type ListEmployeesQuery = {
               createdAt: string,
               updatedAt: string,
             } | null,
-            company:  {
+            company?:  {
               __typename: "Company",
               id: string,
               name: string,
               startMonth: number,
-              shortName: string | null,
-              url: string | null,
+              shortName?: string | null,
+              url?: string | null,
               createdAt: string,
               updatedAt: string,
             } | null,
@@ -3402,7 +3569,7 @@ export type ListEmployeesQuery = {
             isDeleted: BooleanType,
             createdAt: string,
             updatedAt: string,
-            superior:  {
+            superior?:  {
               __typename: "Employee",
               companyID: string,
               username: string,
@@ -3413,7 +3580,7 @@ export type ListEmployeesQuery = {
               lastName: string,
               grade: string,
               email: string,
-              group:  {
+              group?:  {
                 __typename: "Group",
                 companyID: string,
                 localID: string,
@@ -3421,13 +3588,13 @@ export type ListEmployeesQuery = {
                 createdAt: string,
                 updatedAt: string,
               } | null,
-              company:  {
+              company?:  {
                 __typename: "Company",
                 id: string,
                 name: string,
                 startMonth: number,
-                shortName: string | null,
-                url: string | null,
+                shortName?: string | null,
+                url?: string | null,
                 createdAt: string,
                 updatedAt: string,
               } | null,
@@ -3435,7 +3602,7 @@ export type ListEmployeesQuery = {
               isDeleted: BooleanType,
               createdAt: string,
               updatedAt: string,
-              superior:  {
+              superior?:  {
                 __typename: "Employee",
                 companyID: string,
                 username: string,
@@ -3456,17 +3623,17 @@ export type ListEmployeesQuery = {
         } | null,
       } | null,
     } | null > | null,
-    nextToken: string | null,
+    nextToken?: string | null,
   } | null,
 };
 
 export type GetEmployeeQueryVariables = {
-  companyID: string,
-  username: string,
+  companyID?: string,
+  username?: string,
 };
 
 export type GetEmployeeQuery = {
-  getEmployee:  {
+  getEmployee?:  {
     __typename: "Employee",
     companyID: string,
     username: string,
@@ -3477,7 +3644,7 @@ export type GetEmployeeQuery = {
     lastName: string,
     grade: string,
     email: string,
-    group:  {
+    group?:  {
       __typename: "Group",
       companyID: string,
       localID: string,
@@ -3485,13 +3652,13 @@ export type GetEmployeeQuery = {
       createdAt: string,
       updatedAt: string,
     } | null,
-    company:  {
+    company?:  {
       __typename: "Company",
       id: string,
       name: string,
       startMonth: number,
-      shortName: string | null,
-      url: string | null,
+      shortName?: string | null,
+      url?: string | null,
       createdAt: string,
       updatedAt: string,
     } | null,
@@ -3499,7 +3666,7 @@ export type GetEmployeeQuery = {
     isDeleted: BooleanType,
     createdAt: string,
     updatedAt: string,
-    superior:  {
+    superior?:  {
       __typename: "Employee",
       companyID: string,
       username: string,
@@ -3510,7 +3677,7 @@ export type GetEmployeeQuery = {
       lastName: string,
       grade: string,
       email: string,
-      group:  {
+      group?:  {
         __typename: "Group",
         companyID: string,
         localID: string,
@@ -3518,13 +3685,13 @@ export type GetEmployeeQuery = {
         createdAt: string,
         updatedAt: string,
       } | null,
-      company:  {
+      company?:  {
         __typename: "Company",
         id: string,
         name: string,
         startMonth: number,
-        shortName: string | null,
-        url: string | null,
+        shortName?: string | null,
+        url?: string | null,
         createdAt: string,
         updatedAt: string,
       } | null,
@@ -3532,7 +3699,7 @@ export type GetEmployeeQuery = {
       isDeleted: BooleanType,
       createdAt: string,
       updatedAt: string,
-      superior:  {
+      superior?:  {
         __typename: "Employee",
         companyID: string,
         username: string,
@@ -3543,7 +3710,7 @@ export type GetEmployeeQuery = {
         lastName: string,
         grade: string,
         email: string,
-        group:  {
+        group?:  {
           __typename: "Group",
           companyID: string,
           localID: string,
@@ -3551,13 +3718,13 @@ export type GetEmployeeQuery = {
           createdAt: string,
           updatedAt: string,
         } | null,
-        company:  {
+        company?:  {
           __typename: "Company",
           id: string,
           name: string,
           startMonth: number,
-          shortName: string | null,
-          url: string | null,
+          shortName?: string | null,
+          url?: string | null,
           createdAt: string,
           updatedAt: string,
         } | null,
@@ -3565,7 +3732,7 @@ export type GetEmployeeQuery = {
         isDeleted: BooleanType,
         createdAt: string,
         updatedAt: string,
-        superior:  {
+        superior?:  {
           __typename: "Employee",
           companyID: string,
           username: string,
@@ -3576,7 +3743,7 @@ export type GetEmployeeQuery = {
           lastName: string,
           grade: string,
           email: string,
-          group:  {
+          group?:  {
             __typename: "Group",
             companyID: string,
             localID: string,
@@ -3584,13 +3751,13 @@ export type GetEmployeeQuery = {
             createdAt: string,
             updatedAt: string,
           } | null,
-          company:  {
+          company?:  {
             __typename: "Company",
             id: string,
             name: string,
             startMonth: number,
-            shortName: string | null,
-            url: string | null,
+            shortName?: string | null,
+            url?: string | null,
             createdAt: string,
             updatedAt: string,
           } | null,
@@ -3598,7 +3765,7 @@ export type GetEmployeeQuery = {
           isDeleted: BooleanType,
           createdAt: string,
           updatedAt: string,
-          superior:  {
+          superior?:  {
             __typename: "Employee",
             companyID: string,
             username: string,
@@ -3609,7 +3776,7 @@ export type GetEmployeeQuery = {
             lastName: string,
             grade: string,
             email: string,
-            group:  {
+            group?:  {
               __typename: "Group",
               companyID: string,
               localID: string,
@@ -3617,13 +3784,13 @@ export type GetEmployeeQuery = {
               createdAt: string,
               updatedAt: string,
             } | null,
-            company:  {
+            company?:  {
               __typename: "Company",
               id: string,
               name: string,
               startMonth: number,
-              shortName: string | null,
-              url: string | null,
+              shortName?: string | null,
+              url?: string | null,
               createdAt: string,
               updatedAt: string,
             } | null,
@@ -3631,7 +3798,7 @@ export type GetEmployeeQuery = {
             isDeleted: BooleanType,
             createdAt: string,
             updatedAt: string,
-            superior:  {
+            superior?:  {
               __typename: "Employee",
               companyID: string,
               username: string,
@@ -3642,7 +3809,7 @@ export type GetEmployeeQuery = {
               lastName: string,
               grade: string,
               email: string,
-              group:  {
+              group?:  {
                 __typename: "Group",
                 companyID: string,
                 localID: string,
@@ -3650,13 +3817,13 @@ export type GetEmployeeQuery = {
                 createdAt: string,
                 updatedAt: string,
               } | null,
-              company:  {
+              company?:  {
                 __typename: "Company",
                 id: string,
                 name: string,
                 startMonth: number,
-                shortName: string | null,
-                url: string | null,
+                shortName?: string | null,
+                url?: string | null,
                 createdAt: string,
                 updatedAt: string,
               } | null,
@@ -3664,7 +3831,7 @@ export type GetEmployeeQuery = {
               isDeleted: BooleanType,
               createdAt: string,
               updatedAt: string,
-              superior:  {
+              superior?:  {
                 __typename: "Employee",
                 companyID: string,
                 username: string,
@@ -3698,9 +3865,9 @@ export type ListEmployeeLocalIdQueryVariables = {
 };
 
 export type ListEmployeeLocalIdQuery = {
-  listEmployeeLocalID:  {
+  listEmployeeLocalID?:  {
     __typename: "ModelEmployeeConnection",
-    items:  Array< {
+    items?:  Array< {
       __typename: "Employee",
       companyID: string,
       username: string,
@@ -3711,7 +3878,7 @@ export type ListEmployeeLocalIdQuery = {
       lastName: string,
       grade: string,
       email: string,
-      group:  {
+      group?:  {
         __typename: "Group",
         companyID: string,
         localID: string,
@@ -3719,13 +3886,13 @@ export type ListEmployeeLocalIdQuery = {
         createdAt: string,
         updatedAt: string,
       } | null,
-      company:  {
+      company?:  {
         __typename: "Company",
         id: string,
         name: string,
         startMonth: number,
-        shortName: string | null,
-        url: string | null,
+        shortName?: string | null,
+        url?: string | null,
         createdAt: string,
         updatedAt: string,
       } | null,
@@ -3733,7 +3900,7 @@ export type ListEmployeeLocalIdQuery = {
       isDeleted: BooleanType,
       createdAt: string,
       updatedAt: string,
-      superior:  {
+      superior?:  {
         __typename: "Employee",
         companyID: string,
         username: string,
@@ -3744,7 +3911,7 @@ export type ListEmployeeLocalIdQuery = {
         lastName: string,
         grade: string,
         email: string,
-        group:  {
+        group?:  {
           __typename: "Group",
           companyID: string,
           localID: string,
@@ -3752,13 +3919,13 @@ export type ListEmployeeLocalIdQuery = {
           createdAt: string,
           updatedAt: string,
         } | null,
-        company:  {
+        company?:  {
           __typename: "Company",
           id: string,
           name: string,
           startMonth: number,
-          shortName: string | null,
-          url: string | null,
+          shortName?: string | null,
+          url?: string | null,
           createdAt: string,
           updatedAt: string,
         } | null,
@@ -3766,7 +3933,7 @@ export type ListEmployeeLocalIdQuery = {
         isDeleted: BooleanType,
         createdAt: string,
         updatedAt: string,
-        superior:  {
+        superior?:  {
           __typename: "Employee",
           companyID: string,
           username: string,
@@ -3777,7 +3944,7 @@ export type ListEmployeeLocalIdQuery = {
           lastName: string,
           grade: string,
           email: string,
-          group:  {
+          group?:  {
             __typename: "Group",
             companyID: string,
             localID: string,
@@ -3785,13 +3952,13 @@ export type ListEmployeeLocalIdQuery = {
             createdAt: string,
             updatedAt: string,
           } | null,
-          company:  {
+          company?:  {
             __typename: "Company",
             id: string,
             name: string,
             startMonth: number,
-            shortName: string | null,
-            url: string | null,
+            shortName?: string | null,
+            url?: string | null,
             createdAt: string,
             updatedAt: string,
           } | null,
@@ -3799,7 +3966,7 @@ export type ListEmployeeLocalIdQuery = {
           isDeleted: BooleanType,
           createdAt: string,
           updatedAt: string,
-          superior:  {
+          superior?:  {
             __typename: "Employee",
             companyID: string,
             username: string,
@@ -3810,7 +3977,7 @@ export type ListEmployeeLocalIdQuery = {
             lastName: string,
             grade: string,
             email: string,
-            group:  {
+            group?:  {
               __typename: "Group",
               companyID: string,
               localID: string,
@@ -3818,13 +3985,13 @@ export type ListEmployeeLocalIdQuery = {
               createdAt: string,
               updatedAt: string,
             } | null,
-            company:  {
+            company?:  {
               __typename: "Company",
               id: string,
               name: string,
               startMonth: number,
-              shortName: string | null,
-              url: string | null,
+              shortName?: string | null,
+              url?: string | null,
               createdAt: string,
               updatedAt: string,
             } | null,
@@ -3832,7 +3999,7 @@ export type ListEmployeeLocalIdQuery = {
             isDeleted: BooleanType,
             createdAt: string,
             updatedAt: string,
-            superior:  {
+            superior?:  {
               __typename: "Employee",
               companyID: string,
               username: string,
@@ -3843,7 +4010,7 @@ export type ListEmployeeLocalIdQuery = {
               lastName: string,
               grade: string,
               email: string,
-              group:  {
+              group?:  {
                 __typename: "Group",
                 companyID: string,
                 localID: string,
@@ -3851,13 +4018,13 @@ export type ListEmployeeLocalIdQuery = {
                 createdAt: string,
                 updatedAt: string,
               } | null,
-              company:  {
+              company?:  {
                 __typename: "Company",
                 id: string,
                 name: string,
                 startMonth: number,
-                shortName: string | null,
-                url: string | null,
+                shortName?: string | null,
+                url?: string | null,
                 createdAt: string,
                 updatedAt: string,
               } | null,
@@ -3865,7 +4032,7 @@ export type ListEmployeeLocalIdQuery = {
               isDeleted: BooleanType,
               createdAt: string,
               updatedAt: string,
-              superior:  {
+              superior?:  {
                 __typename: "Employee",
                 companyID: string,
                 username: string,
@@ -3886,7 +4053,7 @@ export type ListEmployeeLocalIdQuery = {
         } | null,
       } | null,
     } | null > | null,
-    nextToken: string | null,
+    nextToken?: string | null,
   } | null,
 };
 
@@ -3900,9 +4067,9 @@ export type ListEmployeesManagerQueryVariables = {
 };
 
 export type ListEmployeesManagerQuery = {
-  listEmployeesManager:  {
+  listEmployeesManager?:  {
     __typename: "ModelEmployeeConnection",
-    items:  Array< {
+    items?:  Array< {
       __typename: "Employee",
       companyID: string,
       username: string,
@@ -3913,7 +4080,7 @@ export type ListEmployeesManagerQuery = {
       lastName: string,
       grade: string,
       email: string,
-      group:  {
+      group?:  {
         __typename: "Group",
         companyID: string,
         localID: string,
@@ -3921,13 +4088,13 @@ export type ListEmployeesManagerQuery = {
         createdAt: string,
         updatedAt: string,
       } | null,
-      company:  {
+      company?:  {
         __typename: "Company",
         id: string,
         name: string,
         startMonth: number,
-        shortName: string | null,
-        url: string | null,
+        shortName?: string | null,
+        url?: string | null,
         createdAt: string,
         updatedAt: string,
       } | null,
@@ -3935,7 +4102,7 @@ export type ListEmployeesManagerQuery = {
       isDeleted: BooleanType,
       createdAt: string,
       updatedAt: string,
-      superior:  {
+      superior?:  {
         __typename: "Employee",
         companyID: string,
         username: string,
@@ -3946,7 +4113,7 @@ export type ListEmployeesManagerQuery = {
         lastName: string,
         grade: string,
         email: string,
-        group:  {
+        group?:  {
           __typename: "Group",
           companyID: string,
           localID: string,
@@ -3954,13 +4121,13 @@ export type ListEmployeesManagerQuery = {
           createdAt: string,
           updatedAt: string,
         } | null,
-        company:  {
+        company?:  {
           __typename: "Company",
           id: string,
           name: string,
           startMonth: number,
-          shortName: string | null,
-          url: string | null,
+          shortName?: string | null,
+          url?: string | null,
           createdAt: string,
           updatedAt: string,
         } | null,
@@ -3968,7 +4135,7 @@ export type ListEmployeesManagerQuery = {
         isDeleted: BooleanType,
         createdAt: string,
         updatedAt: string,
-        superior:  {
+        superior?:  {
           __typename: "Employee",
           companyID: string,
           username: string,
@@ -3979,7 +4146,7 @@ export type ListEmployeesManagerQuery = {
           lastName: string,
           grade: string,
           email: string,
-          group:  {
+          group?:  {
             __typename: "Group",
             companyID: string,
             localID: string,
@@ -3987,13 +4154,13 @@ export type ListEmployeesManagerQuery = {
             createdAt: string,
             updatedAt: string,
           } | null,
-          company:  {
+          company?:  {
             __typename: "Company",
             id: string,
             name: string,
             startMonth: number,
-            shortName: string | null,
-            url: string | null,
+            shortName?: string | null,
+            url?: string | null,
             createdAt: string,
             updatedAt: string,
           } | null,
@@ -4001,7 +4168,7 @@ export type ListEmployeesManagerQuery = {
           isDeleted: BooleanType,
           createdAt: string,
           updatedAt: string,
-          superior:  {
+          superior?:  {
             __typename: "Employee",
             companyID: string,
             username: string,
@@ -4012,7 +4179,7 @@ export type ListEmployeesManagerQuery = {
             lastName: string,
             grade: string,
             email: string,
-            group:  {
+            group?:  {
               __typename: "Group",
               companyID: string,
               localID: string,
@@ -4020,13 +4187,13 @@ export type ListEmployeesManagerQuery = {
               createdAt: string,
               updatedAt: string,
             } | null,
-            company:  {
+            company?:  {
               __typename: "Company",
               id: string,
               name: string,
               startMonth: number,
-              shortName: string | null,
-              url: string | null,
+              shortName?: string | null,
+              url?: string | null,
               createdAt: string,
               updatedAt: string,
             } | null,
@@ -4034,7 +4201,7 @@ export type ListEmployeesManagerQuery = {
             isDeleted: BooleanType,
             createdAt: string,
             updatedAt: string,
-            superior:  {
+            superior?:  {
               __typename: "Employee",
               companyID: string,
               username: string,
@@ -4045,7 +4212,7 @@ export type ListEmployeesManagerQuery = {
               lastName: string,
               grade: string,
               email: string,
-              group:  {
+              group?:  {
                 __typename: "Group",
                 companyID: string,
                 localID: string,
@@ -4053,13 +4220,13 @@ export type ListEmployeesManagerQuery = {
                 createdAt: string,
                 updatedAt: string,
               } | null,
-              company:  {
+              company?:  {
                 __typename: "Company",
                 id: string,
                 name: string,
                 startMonth: number,
-                shortName: string | null,
-                url: string | null,
+                shortName?: string | null,
+                url?: string | null,
                 createdAt: string,
                 updatedAt: string,
               } | null,
@@ -4067,7 +4234,7 @@ export type ListEmployeesManagerQuery = {
               isDeleted: BooleanType,
               createdAt: string,
               updatedAt: string,
-              superior:  {
+              superior?:  {
                 __typename: "Employee",
                 companyID: string,
                 username: string,
@@ -4088,7 +4255,7 @@ export type ListEmployeesManagerQuery = {
         } | null,
       } | null,
     } | null > | null,
-    nextToken: string | null,
+    nextToken?: string | null,
   } | null,
 };
 
@@ -4102,9 +4269,9 @@ export type ListCategorysQueryVariables = {
 };
 
 export type ListCategorysQuery = {
-  listCategorys:  {
+  listCategorys?:  {
     __typename: "ModelCategoryConnection",
-    items:  Array< {
+    items?:  Array< {
       __typename: "Category",
       companyID: string,
       localID: string,
@@ -4112,17 +4279,17 @@ export type ListCategorysQuery = {
       createdAt: string,
       updatedAt: string,
     } | null > | null,
-    nextToken: string | null,
+    nextToken?: string | null,
   } | null,
 };
 
 export type GetCategoryQueryVariables = {
-  companyID: string,
-  localID: string,
+  companyID?: string,
+  localID?: string,
 };
 
 export type GetCategoryQuery = {
-  getCategory:  {
+  getCategory?:  {
     __typename: "Category",
     companyID: string,
     localID: string,
@@ -4133,40 +4300,40 @@ export type GetCategoryQuery = {
 };
 
 export type GetSheetQueryVariables = {
-  companyID: string,
-  reviewee: string,
-  year: number,
+  companyID?: string,
+  reviewee?: string,
+  year?: number,
 };
 
 export type GetSheetQuery = {
-  getSheet:  {
+  getSheet?:  {
     __typename: "Sheet",
     companyID: string,
     year: number,
     grade: string,
-    careerPlan: string | null,
-    careerPlanComment: string | null,
-    reviewComment: string | null,
-    reviewDate: string | null,
-    selfCheckDate: string | null,
-    firstComment: string | null,
-    firstCheckDate: string | null,
-    secondComment: string | null,
-    secondCheckDate: string | null,
-    overAllEvaluation: number | null,
-    statusValue: number | null,
-    interviewPlanDate: string | null,
-    interviewPlanComment: string | null,
-    InterviewMid1Date: string | null,
-    InterviewMid1Comment: string | null,
-    InterviewMid2Date: string | null,
-    InterviewMid2Comment: string | null,
-    InterviewMid3Date: string | null,
-    InterviewMid3Comment: string | null,
+    careerPlan?: string | null,
+    careerPlanComment?: string | null,
+    reviewComment?: string | null,
+    reviewDate?: string | null,
+    selfCheckDate?: string | null,
+    firstComment?: string | null,
+    firstCheckDate?: string | null,
+    secondComment?: string | null,
+    secondCheckDate?: string | null,
+    overAllEvaluation?: number | null,
+    statusValue?: number | null,
+    interviewPlanDate?: string | null,
+    interviewPlanComment?: string | null,
+    InterviewMid1Date?: string | null,
+    InterviewMid1Comment?: string | null,
+    InterviewMid2Date?: string | null,
+    InterviewMid2Comment?: string | null,
+    InterviewMid3Date?: string | null,
+    InterviewMid3Comment?: string | null,
     revieweeUsername: string,
     secondUsername: string,
     sheetGroupLocalId: string,
-    group:  {
+    group?:  {
       __typename: "Group",
       companyID: string,
       localID: string,
@@ -4174,13 +4341,13 @@ export type GetSheetQuery = {
       createdAt: string,
       updatedAt: string,
     } | null,
-    referencer: Array< string > | null,
+    referencer?: Array< string > | null,
     reviewee: string,
-    topReviewers: Array< string > | null,
-    secondReviewers: Array< string > | null,
+    topReviewers?: Array< string > | null,
+    secondReviewers?: Array< string > | null,
     createdAt: string,
     updatedAt: string,
-    revieweeEmployee:  {
+    revieweeEmployee?:  {
       __typename: "Employee",
       companyID: string,
       username: string,
@@ -4191,7 +4358,7 @@ export type GetSheetQuery = {
       lastName: string,
       grade: string,
       email: string,
-      group:  {
+      group?:  {
         __typename: "Group",
         companyID: string,
         localID: string,
@@ -4199,13 +4366,13 @@ export type GetSheetQuery = {
         createdAt: string,
         updatedAt: string,
       } | null,
-      company:  {
+      company?:  {
         __typename: "Company",
         id: string,
         name: string,
         startMonth: number,
-        shortName: string | null,
-        url: string | null,
+        shortName?: string | null,
+        url?: string | null,
         createdAt: string,
         updatedAt: string,
       } | null,
@@ -4213,7 +4380,7 @@ export type GetSheetQuery = {
       isDeleted: BooleanType,
       createdAt: string,
       updatedAt: string,
-      superior:  {
+      superior?:  {
         __typename: "Employee",
         companyID: string,
         username: string,
@@ -4224,7 +4391,7 @@ export type GetSheetQuery = {
         lastName: string,
         grade: string,
         email: string,
-        group:  {
+        group?:  {
           __typename: "Group",
           companyID: string,
           localID: string,
@@ -4232,13 +4399,13 @@ export type GetSheetQuery = {
           createdAt: string,
           updatedAt: string,
         } | null,
-        company:  {
+        company?:  {
           __typename: "Company",
           id: string,
           name: string,
           startMonth: number,
-          shortName: string | null,
-          url: string | null,
+          shortName?: string | null,
+          url?: string | null,
           createdAt: string,
           updatedAt: string,
         } | null,
@@ -4246,7 +4413,7 @@ export type GetSheetQuery = {
         isDeleted: BooleanType,
         createdAt: string,
         updatedAt: string,
-        superior:  {
+        superior?:  {
           __typename: "Employee",
           companyID: string,
           username: string,
@@ -4257,7 +4424,7 @@ export type GetSheetQuery = {
           lastName: string,
           grade: string,
           email: string,
-          group:  {
+          group?:  {
             __typename: "Group",
             companyID: string,
             localID: string,
@@ -4265,13 +4432,13 @@ export type GetSheetQuery = {
             createdAt: string,
             updatedAt: string,
           } | null,
-          company:  {
+          company?:  {
             __typename: "Company",
             id: string,
             name: string,
             startMonth: number,
-            shortName: string | null,
-            url: string | null,
+            shortName?: string | null,
+            url?: string | null,
             createdAt: string,
             updatedAt: string,
           } | null,
@@ -4279,7 +4446,7 @@ export type GetSheetQuery = {
           isDeleted: BooleanType,
           createdAt: string,
           updatedAt: string,
-          superior:  {
+          superior?:  {
             __typename: "Employee",
             companyID: string,
             username: string,
@@ -4290,7 +4457,7 @@ export type GetSheetQuery = {
             lastName: string,
             grade: string,
             email: string,
-            group:  {
+            group?:  {
               __typename: "Group",
               companyID: string,
               localID: string,
@@ -4298,13 +4465,13 @@ export type GetSheetQuery = {
               createdAt: string,
               updatedAt: string,
             } | null,
-            company:  {
+            company?:  {
               __typename: "Company",
               id: string,
               name: string,
               startMonth: number,
-              shortName: string | null,
-              url: string | null,
+              shortName?: string | null,
+              url?: string | null,
               createdAt: string,
               updatedAt: string,
             } | null,
@@ -4312,7 +4479,7 @@ export type GetSheetQuery = {
             isDeleted: BooleanType,
             createdAt: string,
             updatedAt: string,
-            superior:  {
+            superior?:  {
               __typename: "Employee",
               companyID: string,
               username: string,
@@ -4323,7 +4490,7 @@ export type GetSheetQuery = {
               lastName: string,
               grade: string,
               email: string,
-              group:  {
+              group?:  {
                 __typename: "Group",
                 companyID: string,
                 localID: string,
@@ -4331,13 +4498,13 @@ export type GetSheetQuery = {
                 createdAt: string,
                 updatedAt: string,
               } | null,
-              company:  {
+              company?:  {
                 __typename: "Company",
                 id: string,
                 name: string,
                 startMonth: number,
-                shortName: string | null,
-                url: string | null,
+                shortName?: string | null,
+                url?: string | null,
                 createdAt: string,
                 updatedAt: string,
               } | null,
@@ -4345,7 +4512,7 @@ export type GetSheetQuery = {
               isDeleted: BooleanType,
               createdAt: string,
               updatedAt: string,
-              superior:  {
+              superior?:  {
                 __typename: "Employee",
                 companyID: string,
                 username: string,
@@ -4366,7 +4533,7 @@ export type GetSheetQuery = {
         } | null,
       } | null,
     } | null,
-    secondEmployee:  {
+    secondEmployee?:  {
       __typename: "Employee",
       companyID: string,
       username: string,
@@ -4377,7 +4544,7 @@ export type GetSheetQuery = {
       lastName: string,
       grade: string,
       email: string,
-      group:  {
+      group?:  {
         __typename: "Group",
         companyID: string,
         localID: string,
@@ -4385,13 +4552,13 @@ export type GetSheetQuery = {
         createdAt: string,
         updatedAt: string,
       } | null,
-      company:  {
+      company?:  {
         __typename: "Company",
         id: string,
         name: string,
         startMonth: number,
-        shortName: string | null,
-        url: string | null,
+        shortName?: string | null,
+        url?: string | null,
         createdAt: string,
         updatedAt: string,
       } | null,
@@ -4399,7 +4566,7 @@ export type GetSheetQuery = {
       isDeleted: BooleanType,
       createdAt: string,
       updatedAt: string,
-      superior:  {
+      superior?:  {
         __typename: "Employee",
         companyID: string,
         username: string,
@@ -4410,7 +4577,7 @@ export type GetSheetQuery = {
         lastName: string,
         grade: string,
         email: string,
-        group:  {
+        group?:  {
           __typename: "Group",
           companyID: string,
           localID: string,
@@ -4418,13 +4585,13 @@ export type GetSheetQuery = {
           createdAt: string,
           updatedAt: string,
         } | null,
-        company:  {
+        company?:  {
           __typename: "Company",
           id: string,
           name: string,
           startMonth: number,
-          shortName: string | null,
-          url: string | null,
+          shortName?: string | null,
+          url?: string | null,
           createdAt: string,
           updatedAt: string,
         } | null,
@@ -4432,7 +4599,7 @@ export type GetSheetQuery = {
         isDeleted: BooleanType,
         createdAt: string,
         updatedAt: string,
-        superior:  {
+        superior?:  {
           __typename: "Employee",
           companyID: string,
           username: string,
@@ -4443,7 +4610,7 @@ export type GetSheetQuery = {
           lastName: string,
           grade: string,
           email: string,
-          group:  {
+          group?:  {
             __typename: "Group",
             companyID: string,
             localID: string,
@@ -4451,13 +4618,13 @@ export type GetSheetQuery = {
             createdAt: string,
             updatedAt: string,
           } | null,
-          company:  {
+          company?:  {
             __typename: "Company",
             id: string,
             name: string,
             startMonth: number,
-            shortName: string | null,
-            url: string | null,
+            shortName?: string | null,
+            url?: string | null,
             createdAt: string,
             updatedAt: string,
           } | null,
@@ -4465,7 +4632,7 @@ export type GetSheetQuery = {
           isDeleted: BooleanType,
           createdAt: string,
           updatedAt: string,
-          superior:  {
+          superior?:  {
             __typename: "Employee",
             companyID: string,
             username: string,
@@ -4476,7 +4643,7 @@ export type GetSheetQuery = {
             lastName: string,
             grade: string,
             email: string,
-            group:  {
+            group?:  {
               __typename: "Group",
               companyID: string,
               localID: string,
@@ -4484,13 +4651,13 @@ export type GetSheetQuery = {
               createdAt: string,
               updatedAt: string,
             } | null,
-            company:  {
+            company?:  {
               __typename: "Company",
               id: string,
               name: string,
               startMonth: number,
-              shortName: string | null,
-              url: string | null,
+              shortName?: string | null,
+              url?: string | null,
               createdAt: string,
               updatedAt: string,
             } | null,
@@ -4498,7 +4665,7 @@ export type GetSheetQuery = {
             isDeleted: BooleanType,
             createdAt: string,
             updatedAt: string,
-            superior:  {
+            superior?:  {
               __typename: "Employee",
               companyID: string,
               username: string,
@@ -4509,7 +4676,7 @@ export type GetSheetQuery = {
               lastName: string,
               grade: string,
               email: string,
-              group:  {
+              group?:  {
                 __typename: "Group",
                 companyID: string,
                 localID: string,
@@ -4517,13 +4684,13 @@ export type GetSheetQuery = {
                 createdAt: string,
                 updatedAt: string,
               } | null,
-              company:  {
+              company?:  {
                 __typename: "Company",
                 id: string,
                 name: string,
                 startMonth: number,
-                shortName: string | null,
-                url: string | null,
+                shortName?: string | null,
+                url?: string | null,
                 createdAt: string,
                 updatedAt: string,
               } | null,
@@ -4531,7 +4698,7 @@ export type GetSheetQuery = {
               isDeleted: BooleanType,
               createdAt: string,
               updatedAt: string,
-              superior:  {
+              superior?:  {
                 __typename: "Employee",
                 companyID: string,
                 username: string,
@@ -4552,45 +4719,45 @@ export type GetSheetQuery = {
         } | null,
       } | null,
     } | null,
-    section:  {
+    section?:  {
       __typename: "ModelSectionConnection",
-      items:  Array< {
+      items?:  Array< {
         __typename: "Section",
         sheetKeys: string,
         sectionCategoryLocalId: string,
-        sectionCategoryName: string | null,
+        sectionCategoryName?: string | null,
         companyID: string,
-        objective:  {
+        objective?:  {
           __typename: "ModelObjectiveConnection",
-          items:  Array< {
+          items?:  Array< {
             __typename: "Objective",
             sectionKeys: string,
             createdAt: string,
             companyID: string,
             content: string,
-            result: string | null,
-            priority: string | null,
-            selfEvaluation: number | null,
-            firstEvaluation: number | null,
-            lastEvaluation: number | null,
-            progress: number | null,
-            expStartDate: string | null,
-            expDoneDate: string | null,
-            reviewee: string | null,
-            topReviewers: Array< string > | null,
-            secondReviewers: Array< string > | null,
-            referencer: Array< string > | null,
+            result?: string | null,
+            priority?: string | null,
+            selfEvaluation?: number | null,
+            firstEvaluation?: number | null,
+            lastEvaluation?: number | null,
+            progress?: number | null,
+            expStartDate?: string | null,
+            expDoneDate?: string | null,
+            reviewee?: string | null,
+            topReviewers?: Array< string > | null,
+            secondReviewers?: Array< string > | null,
+            referencer?: Array< string > | null,
             updatedAt: string,
           } | null > | null,
-          nextToken: string | null,
+          nextToken?: string | null,
         } | null,
-        reviewee: string | null,
-        topReviewers: Array< string > | null,
-        secondReviewers: Array< string > | null,
-        referencer: Array< string > | null,
+        reviewee?: string | null,
+        topReviewers?: Array< string > | null,
+        secondReviewers?: Array< string > | null,
+        referencer?: Array< string > | null,
         createdAt: string,
         updatedAt: string,
-        category:  {
+        category?:  {
           __typename: "Category",
           companyID: string,
           localID: string,
@@ -4599,7 +4766,7 @@ export type GetSheetQuery = {
           updatedAt: string,
         } | null,
       } | null > | null,
-      nextToken: string | null,
+      nextToken?: string | null,
     } | null,
   } | null,
 };
@@ -4614,36 +4781,36 @@ export type ListSheetsQueryVariables = {
 };
 
 export type ListSheetsQuery = {
-  listSheets:  {
+  listSheets?:  {
     __typename: "ModelSheetConnection",
-    items:  Array< {
+    items?:  Array< {
       __typename: "Sheet",
       companyID: string,
       year: number,
       grade: string,
-      careerPlan: string | null,
-      careerPlanComment: string | null,
-      reviewComment: string | null,
-      reviewDate: string | null,
-      selfCheckDate: string | null,
-      firstComment: string | null,
-      firstCheckDate: string | null,
-      secondComment: string | null,
-      secondCheckDate: string | null,
-      overAllEvaluation: number | null,
-      statusValue: number | null,
-      interviewPlanDate: string | null,
-      interviewPlanComment: string | null,
-      InterviewMid1Date: string | null,
-      InterviewMid1Comment: string | null,
-      InterviewMid2Date: string | null,
-      InterviewMid2Comment: string | null,
-      InterviewMid3Date: string | null,
-      InterviewMid3Comment: string | null,
+      careerPlan?: string | null,
+      careerPlanComment?: string | null,
+      reviewComment?: string | null,
+      reviewDate?: string | null,
+      selfCheckDate?: string | null,
+      firstComment?: string | null,
+      firstCheckDate?: string | null,
+      secondComment?: string | null,
+      secondCheckDate?: string | null,
+      overAllEvaluation?: number | null,
+      statusValue?: number | null,
+      interviewPlanDate?: string | null,
+      interviewPlanComment?: string | null,
+      InterviewMid1Date?: string | null,
+      InterviewMid1Comment?: string | null,
+      InterviewMid2Date?: string | null,
+      InterviewMid2Comment?: string | null,
+      InterviewMid3Date?: string | null,
+      InterviewMid3Comment?: string | null,
       revieweeUsername: string,
       secondUsername: string,
       sheetGroupLocalId: string,
-      group:  {
+      group?:  {
         __typename: "Group",
         companyID: string,
         localID: string,
@@ -4651,13 +4818,13 @@ export type ListSheetsQuery = {
         createdAt: string,
         updatedAt: string,
       } | null,
-      referencer: Array< string > | null,
+      referencer?: Array< string > | null,
       reviewee: string,
-      topReviewers: Array< string > | null,
-      secondReviewers: Array< string > | null,
+      topReviewers?: Array< string > | null,
+      secondReviewers?: Array< string > | null,
       createdAt: string,
       updatedAt: string,
-      revieweeEmployee:  {
+      revieweeEmployee?:  {
         __typename: "Employee",
         companyID: string,
         username: string,
@@ -4668,7 +4835,7 @@ export type ListSheetsQuery = {
         lastName: string,
         grade: string,
         email: string,
-        group:  {
+        group?:  {
           __typename: "Group",
           companyID: string,
           localID: string,
@@ -4676,13 +4843,13 @@ export type ListSheetsQuery = {
           createdAt: string,
           updatedAt: string,
         } | null,
-        company:  {
+        company?:  {
           __typename: "Company",
           id: string,
           name: string,
           startMonth: number,
-          shortName: string | null,
-          url: string | null,
+          shortName?: string | null,
+          url?: string | null,
           createdAt: string,
           updatedAt: string,
         } | null,
@@ -4690,7 +4857,7 @@ export type ListSheetsQuery = {
         isDeleted: BooleanType,
         createdAt: string,
         updatedAt: string,
-        superior:  {
+        superior?:  {
           __typename: "Employee",
           companyID: string,
           username: string,
@@ -4701,7 +4868,7 @@ export type ListSheetsQuery = {
           lastName: string,
           grade: string,
           email: string,
-          group:  {
+          group?:  {
             __typename: "Group",
             companyID: string,
             localID: string,
@@ -4709,13 +4876,13 @@ export type ListSheetsQuery = {
             createdAt: string,
             updatedAt: string,
           } | null,
-          company:  {
+          company?:  {
             __typename: "Company",
             id: string,
             name: string,
             startMonth: number,
-            shortName: string | null,
-            url: string | null,
+            shortName?: string | null,
+            url?: string | null,
             createdAt: string,
             updatedAt: string,
           } | null,
@@ -4723,7 +4890,7 @@ export type ListSheetsQuery = {
           isDeleted: BooleanType,
           createdAt: string,
           updatedAt: string,
-          superior:  {
+          superior?:  {
             __typename: "Employee",
             companyID: string,
             username: string,
@@ -4734,7 +4901,7 @@ export type ListSheetsQuery = {
             lastName: string,
             grade: string,
             email: string,
-            group:  {
+            group?:  {
               __typename: "Group",
               companyID: string,
               localID: string,
@@ -4742,13 +4909,13 @@ export type ListSheetsQuery = {
               createdAt: string,
               updatedAt: string,
             } | null,
-            company:  {
+            company?:  {
               __typename: "Company",
               id: string,
               name: string,
               startMonth: number,
-              shortName: string | null,
-              url: string | null,
+              shortName?: string | null,
+              url?: string | null,
               createdAt: string,
               updatedAt: string,
             } | null,
@@ -4756,7 +4923,7 @@ export type ListSheetsQuery = {
             isDeleted: BooleanType,
             createdAt: string,
             updatedAt: string,
-            superior:  {
+            superior?:  {
               __typename: "Employee",
               companyID: string,
               username: string,
@@ -4767,7 +4934,7 @@ export type ListSheetsQuery = {
               lastName: string,
               grade: string,
               email: string,
-              group:  {
+              group?:  {
                 __typename: "Group",
                 companyID: string,
                 localID: string,
@@ -4775,13 +4942,13 @@ export type ListSheetsQuery = {
                 createdAt: string,
                 updatedAt: string,
               } | null,
-              company:  {
+              company?:  {
                 __typename: "Company",
                 id: string,
                 name: string,
                 startMonth: number,
-                shortName: string | null,
-                url: string | null,
+                shortName?: string | null,
+                url?: string | null,
                 createdAt: string,
                 updatedAt: string,
               } | null,
@@ -4789,7 +4956,7 @@ export type ListSheetsQuery = {
               isDeleted: BooleanType,
               createdAt: string,
               updatedAt: string,
-              superior:  {
+              superior?:  {
                 __typename: "Employee",
                 companyID: string,
                 username: string,
@@ -4809,7 +4976,7 @@ export type ListSheetsQuery = {
           } | null,
         } | null,
       } | null,
-      secondEmployee:  {
+      secondEmployee?:  {
         __typename: "Employee",
         companyID: string,
         username: string,
@@ -4820,7 +4987,7 @@ export type ListSheetsQuery = {
         lastName: string,
         grade: string,
         email: string,
-        group:  {
+        group?:  {
           __typename: "Group",
           companyID: string,
           localID: string,
@@ -4828,13 +4995,13 @@ export type ListSheetsQuery = {
           createdAt: string,
           updatedAt: string,
         } | null,
-        company:  {
+        company?:  {
           __typename: "Company",
           id: string,
           name: string,
           startMonth: number,
-          shortName: string | null,
-          url: string | null,
+          shortName?: string | null,
+          url?: string | null,
           createdAt: string,
           updatedAt: string,
         } | null,
@@ -4842,7 +5009,7 @@ export type ListSheetsQuery = {
         isDeleted: BooleanType,
         createdAt: string,
         updatedAt: string,
-        superior:  {
+        superior?:  {
           __typename: "Employee",
           companyID: string,
           username: string,
@@ -4853,7 +5020,7 @@ export type ListSheetsQuery = {
           lastName: string,
           grade: string,
           email: string,
-          group:  {
+          group?:  {
             __typename: "Group",
             companyID: string,
             localID: string,
@@ -4861,13 +5028,13 @@ export type ListSheetsQuery = {
             createdAt: string,
             updatedAt: string,
           } | null,
-          company:  {
+          company?:  {
             __typename: "Company",
             id: string,
             name: string,
             startMonth: number,
-            shortName: string | null,
-            url: string | null,
+            shortName?: string | null,
+            url?: string | null,
             createdAt: string,
             updatedAt: string,
           } | null,
@@ -4875,7 +5042,7 @@ export type ListSheetsQuery = {
           isDeleted: BooleanType,
           createdAt: string,
           updatedAt: string,
-          superior:  {
+          superior?:  {
             __typename: "Employee",
             companyID: string,
             username: string,
@@ -4886,7 +5053,7 @@ export type ListSheetsQuery = {
             lastName: string,
             grade: string,
             email: string,
-            group:  {
+            group?:  {
               __typename: "Group",
               companyID: string,
               localID: string,
@@ -4894,13 +5061,13 @@ export type ListSheetsQuery = {
               createdAt: string,
               updatedAt: string,
             } | null,
-            company:  {
+            company?:  {
               __typename: "Company",
               id: string,
               name: string,
               startMonth: number,
-              shortName: string | null,
-              url: string | null,
+              shortName?: string | null,
+              url?: string | null,
               createdAt: string,
               updatedAt: string,
             } | null,
@@ -4908,7 +5075,7 @@ export type ListSheetsQuery = {
             isDeleted: BooleanType,
             createdAt: string,
             updatedAt: string,
-            superior:  {
+            superior?:  {
               __typename: "Employee",
               companyID: string,
               username: string,
@@ -4919,7 +5086,7 @@ export type ListSheetsQuery = {
               lastName: string,
               grade: string,
               email: string,
-              group:  {
+              group?:  {
                 __typename: "Group",
                 companyID: string,
                 localID: string,
@@ -4927,13 +5094,13 @@ export type ListSheetsQuery = {
                 createdAt: string,
                 updatedAt: string,
               } | null,
-              company:  {
+              company?:  {
                 __typename: "Company",
                 id: string,
                 name: string,
                 startMonth: number,
-                shortName: string | null,
-                url: string | null,
+                shortName?: string | null,
+                url?: string | null,
                 createdAt: string,
                 updatedAt: string,
               } | null,
@@ -4941,7 +5108,7 @@ export type ListSheetsQuery = {
               isDeleted: BooleanType,
               createdAt: string,
               updatedAt: string,
-              superior:  {
+              superior?:  {
                 __typename: "Employee",
                 companyID: string,
                 username: string,
@@ -4961,45 +5128,45 @@ export type ListSheetsQuery = {
           } | null,
         } | null,
       } | null,
-      section:  {
+      section?:  {
         __typename: "ModelSectionConnection",
-        items:  Array< {
+        items?:  Array< {
           __typename: "Section",
           sheetKeys: string,
           sectionCategoryLocalId: string,
-          sectionCategoryName: string | null,
+          sectionCategoryName?: string | null,
           companyID: string,
-          objective:  {
+          objective?:  {
             __typename: "ModelObjectiveConnection",
-            items:  Array< {
+            items?:  Array< {
               __typename: "Objective",
               sectionKeys: string,
               createdAt: string,
               companyID: string,
               content: string,
-              result: string | null,
-              priority: string | null,
-              selfEvaluation: number | null,
-              firstEvaluation: number | null,
-              lastEvaluation: number | null,
-              progress: number | null,
-              expStartDate: string | null,
-              expDoneDate: string | null,
-              reviewee: string | null,
-              topReviewers: Array< string > | null,
-              secondReviewers: Array< string > | null,
-              referencer: Array< string > | null,
+              result?: string | null,
+              priority?: string | null,
+              selfEvaluation?: number | null,
+              firstEvaluation?: number | null,
+              lastEvaluation?: number | null,
+              progress?: number | null,
+              expStartDate?: string | null,
+              expDoneDate?: string | null,
+              reviewee?: string | null,
+              topReviewers?: Array< string > | null,
+              secondReviewers?: Array< string > | null,
+              referencer?: Array< string > | null,
               updatedAt: string,
             } | null > | null,
-            nextToken: string | null,
+            nextToken?: string | null,
           } | null,
-          reviewee: string | null,
-          topReviewers: Array< string > | null,
-          secondReviewers: Array< string > | null,
-          referencer: Array< string > | null,
+          reviewee?: string | null,
+          topReviewers?: Array< string > | null,
+          secondReviewers?: Array< string > | null,
+          referencer?: Array< string > | null,
           createdAt: string,
           updatedAt: string,
-          category:  {
+          category?:  {
             __typename: "Category",
             companyID: string,
             localID: string,
@@ -5008,10 +5175,10 @@ export type ListSheetsQuery = {
             updatedAt: string,
           } | null,
         } | null > | null,
-        nextToken: string | null,
+        nextToken?: string | null,
       } | null,
     } | null > | null,
-    nextToken: string | null,
+    nextToken?: string | null,
   } | null,
 };
 
@@ -5025,36 +5192,36 @@ export type ListSheetRevieweeQueryVariables = {
 };
 
 export type ListSheetRevieweeQuery = {
-  listSheetReviewee:  {
+  listSheetReviewee?:  {
     __typename: "ModelSheetConnection",
-    items:  Array< {
+    items?:  Array< {
       __typename: "Sheet",
       companyID: string,
       year: number,
       grade: string,
-      careerPlan: string | null,
-      careerPlanComment: string | null,
-      reviewComment: string | null,
-      reviewDate: string | null,
-      selfCheckDate: string | null,
-      firstComment: string | null,
-      firstCheckDate: string | null,
-      secondComment: string | null,
-      secondCheckDate: string | null,
-      overAllEvaluation: number | null,
-      statusValue: number | null,
-      interviewPlanDate: string | null,
-      interviewPlanComment: string | null,
-      InterviewMid1Date: string | null,
-      InterviewMid1Comment: string | null,
-      InterviewMid2Date: string | null,
-      InterviewMid2Comment: string | null,
-      InterviewMid3Date: string | null,
-      InterviewMid3Comment: string | null,
+      careerPlan?: string | null,
+      careerPlanComment?: string | null,
+      reviewComment?: string | null,
+      reviewDate?: string | null,
+      selfCheckDate?: string | null,
+      firstComment?: string | null,
+      firstCheckDate?: string | null,
+      secondComment?: string | null,
+      secondCheckDate?: string | null,
+      overAllEvaluation?: number | null,
+      statusValue?: number | null,
+      interviewPlanDate?: string | null,
+      interviewPlanComment?: string | null,
+      InterviewMid1Date?: string | null,
+      InterviewMid1Comment?: string | null,
+      InterviewMid2Date?: string | null,
+      InterviewMid2Comment?: string | null,
+      InterviewMid3Date?: string | null,
+      InterviewMid3Comment?: string | null,
       revieweeUsername: string,
       secondUsername: string,
       sheetGroupLocalId: string,
-      group:  {
+      group?:  {
         __typename: "Group",
         companyID: string,
         localID: string,
@@ -5062,13 +5229,13 @@ export type ListSheetRevieweeQuery = {
         createdAt: string,
         updatedAt: string,
       } | null,
-      referencer: Array< string > | null,
+      referencer?: Array< string > | null,
       reviewee: string,
-      topReviewers: Array< string > | null,
-      secondReviewers: Array< string > | null,
+      topReviewers?: Array< string > | null,
+      secondReviewers?: Array< string > | null,
       createdAt: string,
       updatedAt: string,
-      revieweeEmployee:  {
+      revieweeEmployee?:  {
         __typename: "Employee",
         companyID: string,
         username: string,
@@ -5079,7 +5246,7 @@ export type ListSheetRevieweeQuery = {
         lastName: string,
         grade: string,
         email: string,
-        group:  {
+        group?:  {
           __typename: "Group",
           companyID: string,
           localID: string,
@@ -5087,13 +5254,13 @@ export type ListSheetRevieweeQuery = {
           createdAt: string,
           updatedAt: string,
         } | null,
-        company:  {
+        company?:  {
           __typename: "Company",
           id: string,
           name: string,
           startMonth: number,
-          shortName: string | null,
-          url: string | null,
+          shortName?: string | null,
+          url?: string | null,
           createdAt: string,
           updatedAt: string,
         } | null,
@@ -5101,7 +5268,7 @@ export type ListSheetRevieweeQuery = {
         isDeleted: BooleanType,
         createdAt: string,
         updatedAt: string,
-        superior:  {
+        superior?:  {
           __typename: "Employee",
           companyID: string,
           username: string,
@@ -5112,7 +5279,7 @@ export type ListSheetRevieweeQuery = {
           lastName: string,
           grade: string,
           email: string,
-          group:  {
+          group?:  {
             __typename: "Group",
             companyID: string,
             localID: string,
@@ -5120,13 +5287,13 @@ export type ListSheetRevieweeQuery = {
             createdAt: string,
             updatedAt: string,
           } | null,
-          company:  {
+          company?:  {
             __typename: "Company",
             id: string,
             name: string,
             startMonth: number,
-            shortName: string | null,
-            url: string | null,
+            shortName?: string | null,
+            url?: string | null,
             createdAt: string,
             updatedAt: string,
           } | null,
@@ -5134,7 +5301,7 @@ export type ListSheetRevieweeQuery = {
           isDeleted: BooleanType,
           createdAt: string,
           updatedAt: string,
-          superior:  {
+          superior?:  {
             __typename: "Employee",
             companyID: string,
             username: string,
@@ -5145,7 +5312,7 @@ export type ListSheetRevieweeQuery = {
             lastName: string,
             grade: string,
             email: string,
-            group:  {
+            group?:  {
               __typename: "Group",
               companyID: string,
               localID: string,
@@ -5153,13 +5320,13 @@ export type ListSheetRevieweeQuery = {
               createdAt: string,
               updatedAt: string,
             } | null,
-            company:  {
+            company?:  {
               __typename: "Company",
               id: string,
               name: string,
               startMonth: number,
-              shortName: string | null,
-              url: string | null,
+              shortName?: string | null,
+              url?: string | null,
               createdAt: string,
               updatedAt: string,
             } | null,
@@ -5167,7 +5334,7 @@ export type ListSheetRevieweeQuery = {
             isDeleted: BooleanType,
             createdAt: string,
             updatedAt: string,
-            superior:  {
+            superior?:  {
               __typename: "Employee",
               companyID: string,
               username: string,
@@ -5178,7 +5345,7 @@ export type ListSheetRevieweeQuery = {
               lastName: string,
               grade: string,
               email: string,
-              group:  {
+              group?:  {
                 __typename: "Group",
                 companyID: string,
                 localID: string,
@@ -5186,13 +5353,13 @@ export type ListSheetRevieweeQuery = {
                 createdAt: string,
                 updatedAt: string,
               } | null,
-              company:  {
+              company?:  {
                 __typename: "Company",
                 id: string,
                 name: string,
                 startMonth: number,
-                shortName: string | null,
-                url: string | null,
+                shortName?: string | null,
+                url?: string | null,
                 createdAt: string,
                 updatedAt: string,
               } | null,
@@ -5200,7 +5367,7 @@ export type ListSheetRevieweeQuery = {
               isDeleted: BooleanType,
               createdAt: string,
               updatedAt: string,
-              superior:  {
+              superior?:  {
                 __typename: "Employee",
                 companyID: string,
                 username: string,
@@ -5220,7 +5387,7 @@ export type ListSheetRevieweeQuery = {
           } | null,
         } | null,
       } | null,
-      secondEmployee:  {
+      secondEmployee?:  {
         __typename: "Employee",
         companyID: string,
         username: string,
@@ -5231,7 +5398,7 @@ export type ListSheetRevieweeQuery = {
         lastName: string,
         grade: string,
         email: string,
-        group:  {
+        group?:  {
           __typename: "Group",
           companyID: string,
           localID: string,
@@ -5239,13 +5406,13 @@ export type ListSheetRevieweeQuery = {
           createdAt: string,
           updatedAt: string,
         } | null,
-        company:  {
+        company?:  {
           __typename: "Company",
           id: string,
           name: string,
           startMonth: number,
-          shortName: string | null,
-          url: string | null,
+          shortName?: string | null,
+          url?: string | null,
           createdAt: string,
           updatedAt: string,
         } | null,
@@ -5253,7 +5420,7 @@ export type ListSheetRevieweeQuery = {
         isDeleted: BooleanType,
         createdAt: string,
         updatedAt: string,
-        superior:  {
+        superior?:  {
           __typename: "Employee",
           companyID: string,
           username: string,
@@ -5264,7 +5431,7 @@ export type ListSheetRevieweeQuery = {
           lastName: string,
           grade: string,
           email: string,
-          group:  {
+          group?:  {
             __typename: "Group",
             companyID: string,
             localID: string,
@@ -5272,13 +5439,13 @@ export type ListSheetRevieweeQuery = {
             createdAt: string,
             updatedAt: string,
           } | null,
-          company:  {
+          company?:  {
             __typename: "Company",
             id: string,
             name: string,
             startMonth: number,
-            shortName: string | null,
-            url: string | null,
+            shortName?: string | null,
+            url?: string | null,
             createdAt: string,
             updatedAt: string,
           } | null,
@@ -5286,7 +5453,7 @@ export type ListSheetRevieweeQuery = {
           isDeleted: BooleanType,
           createdAt: string,
           updatedAt: string,
-          superior:  {
+          superior?:  {
             __typename: "Employee",
             companyID: string,
             username: string,
@@ -5297,7 +5464,7 @@ export type ListSheetRevieweeQuery = {
             lastName: string,
             grade: string,
             email: string,
-            group:  {
+            group?:  {
               __typename: "Group",
               companyID: string,
               localID: string,
@@ -5305,13 +5472,13 @@ export type ListSheetRevieweeQuery = {
               createdAt: string,
               updatedAt: string,
             } | null,
-            company:  {
+            company?:  {
               __typename: "Company",
               id: string,
               name: string,
               startMonth: number,
-              shortName: string | null,
-              url: string | null,
+              shortName?: string | null,
+              url?: string | null,
               createdAt: string,
               updatedAt: string,
             } | null,
@@ -5319,7 +5486,7 @@ export type ListSheetRevieweeQuery = {
             isDeleted: BooleanType,
             createdAt: string,
             updatedAt: string,
-            superior:  {
+            superior?:  {
               __typename: "Employee",
               companyID: string,
               username: string,
@@ -5330,7 +5497,7 @@ export type ListSheetRevieweeQuery = {
               lastName: string,
               grade: string,
               email: string,
-              group:  {
+              group?:  {
                 __typename: "Group",
                 companyID: string,
                 localID: string,
@@ -5338,13 +5505,13 @@ export type ListSheetRevieweeQuery = {
                 createdAt: string,
                 updatedAt: string,
               } | null,
-              company:  {
+              company?:  {
                 __typename: "Company",
                 id: string,
                 name: string,
                 startMonth: number,
-                shortName: string | null,
-                url: string | null,
+                shortName?: string | null,
+                url?: string | null,
                 createdAt: string,
                 updatedAt: string,
               } | null,
@@ -5352,7 +5519,7 @@ export type ListSheetRevieweeQuery = {
               isDeleted: BooleanType,
               createdAt: string,
               updatedAt: string,
-              superior:  {
+              superior?:  {
                 __typename: "Employee",
                 companyID: string,
                 username: string,
@@ -5372,45 +5539,45 @@ export type ListSheetRevieweeQuery = {
           } | null,
         } | null,
       } | null,
-      section:  {
+      section?:  {
         __typename: "ModelSectionConnection",
-        items:  Array< {
+        items?:  Array< {
           __typename: "Section",
           sheetKeys: string,
           sectionCategoryLocalId: string,
-          sectionCategoryName: string | null,
+          sectionCategoryName?: string | null,
           companyID: string,
-          objective:  {
+          objective?:  {
             __typename: "ModelObjectiveConnection",
-            items:  Array< {
+            items?:  Array< {
               __typename: "Objective",
               sectionKeys: string,
               createdAt: string,
               companyID: string,
               content: string,
-              result: string | null,
-              priority: string | null,
-              selfEvaluation: number | null,
-              firstEvaluation: number | null,
-              lastEvaluation: number | null,
-              progress: number | null,
-              expStartDate: string | null,
-              expDoneDate: string | null,
-              reviewee: string | null,
-              topReviewers: Array< string > | null,
-              secondReviewers: Array< string > | null,
-              referencer: Array< string > | null,
+              result?: string | null,
+              priority?: string | null,
+              selfEvaluation?: number | null,
+              firstEvaluation?: number | null,
+              lastEvaluation?: number | null,
+              progress?: number | null,
+              expStartDate?: string | null,
+              expDoneDate?: string | null,
+              reviewee?: string | null,
+              topReviewers?: Array< string > | null,
+              secondReviewers?: Array< string > | null,
+              referencer?: Array< string > | null,
               updatedAt: string,
             } | null > | null,
-            nextToken: string | null,
+            nextToken?: string | null,
           } | null,
-          reviewee: string | null,
-          topReviewers: Array< string > | null,
-          secondReviewers: Array< string > | null,
-          referencer: Array< string > | null,
+          reviewee?: string | null,
+          topReviewers?: Array< string > | null,
+          secondReviewers?: Array< string > | null,
+          referencer?: Array< string > | null,
           createdAt: string,
           updatedAt: string,
-          category:  {
+          category?:  {
             __typename: "Category",
             companyID: string,
             localID: string,
@@ -5419,10 +5586,10 @@ export type ListSheetRevieweeQuery = {
             updatedAt: string,
           } | null,
         } | null > | null,
-        nextToken: string | null,
+        nextToken?: string | null,
       } | null,
     } | null > | null,
-    nextToken: string | null,
+    nextToken?: string | null,
   } | null,
 };
 
@@ -5436,36 +5603,36 @@ export type ListSheetYearQueryVariables = {
 };
 
 export type ListSheetYearQuery = {
-  listSheetYear:  {
+  listSheetYear?:  {
     __typename: "ModelSheetConnection",
-    items:  Array< {
+    items?:  Array< {
       __typename: "Sheet",
       companyID: string,
       year: number,
       grade: string,
-      careerPlan: string | null,
-      careerPlanComment: string | null,
-      reviewComment: string | null,
-      reviewDate: string | null,
-      selfCheckDate: string | null,
-      firstComment: string | null,
-      firstCheckDate: string | null,
-      secondComment: string | null,
-      secondCheckDate: string | null,
-      overAllEvaluation: number | null,
-      statusValue: number | null,
-      interviewPlanDate: string | null,
-      interviewPlanComment: string | null,
-      InterviewMid1Date: string | null,
-      InterviewMid1Comment: string | null,
-      InterviewMid2Date: string | null,
-      InterviewMid2Comment: string | null,
-      InterviewMid3Date: string | null,
-      InterviewMid3Comment: string | null,
+      careerPlan?: string | null,
+      careerPlanComment?: string | null,
+      reviewComment?: string | null,
+      reviewDate?: string | null,
+      selfCheckDate?: string | null,
+      firstComment?: string | null,
+      firstCheckDate?: string | null,
+      secondComment?: string | null,
+      secondCheckDate?: string | null,
+      overAllEvaluation?: number | null,
+      statusValue?: number | null,
+      interviewPlanDate?: string | null,
+      interviewPlanComment?: string | null,
+      InterviewMid1Date?: string | null,
+      InterviewMid1Comment?: string | null,
+      InterviewMid2Date?: string | null,
+      InterviewMid2Comment?: string | null,
+      InterviewMid3Date?: string | null,
+      InterviewMid3Comment?: string | null,
       revieweeUsername: string,
       secondUsername: string,
       sheetGroupLocalId: string,
-      group:  {
+      group?:  {
         __typename: "Group",
         companyID: string,
         localID: string,
@@ -5473,13 +5640,13 @@ export type ListSheetYearQuery = {
         createdAt: string,
         updatedAt: string,
       } | null,
-      referencer: Array< string > | null,
+      referencer?: Array< string > | null,
       reviewee: string,
-      topReviewers: Array< string > | null,
-      secondReviewers: Array< string > | null,
+      topReviewers?: Array< string > | null,
+      secondReviewers?: Array< string > | null,
       createdAt: string,
       updatedAt: string,
-      revieweeEmployee:  {
+      revieweeEmployee?:  {
         __typename: "Employee",
         companyID: string,
         username: string,
@@ -5490,7 +5657,7 @@ export type ListSheetYearQuery = {
         lastName: string,
         grade: string,
         email: string,
-        group:  {
+        group?:  {
           __typename: "Group",
           companyID: string,
           localID: string,
@@ -5498,13 +5665,13 @@ export type ListSheetYearQuery = {
           createdAt: string,
           updatedAt: string,
         } | null,
-        company:  {
+        company?:  {
           __typename: "Company",
           id: string,
           name: string,
           startMonth: number,
-          shortName: string | null,
-          url: string | null,
+          shortName?: string | null,
+          url?: string | null,
           createdAt: string,
           updatedAt: string,
         } | null,
@@ -5512,7 +5679,7 @@ export type ListSheetYearQuery = {
         isDeleted: BooleanType,
         createdAt: string,
         updatedAt: string,
-        superior:  {
+        superior?:  {
           __typename: "Employee",
           companyID: string,
           username: string,
@@ -5523,7 +5690,7 @@ export type ListSheetYearQuery = {
           lastName: string,
           grade: string,
           email: string,
-          group:  {
+          group?:  {
             __typename: "Group",
             companyID: string,
             localID: string,
@@ -5531,13 +5698,13 @@ export type ListSheetYearQuery = {
             createdAt: string,
             updatedAt: string,
           } | null,
-          company:  {
+          company?:  {
             __typename: "Company",
             id: string,
             name: string,
             startMonth: number,
-            shortName: string | null,
-            url: string | null,
+            shortName?: string | null,
+            url?: string | null,
             createdAt: string,
             updatedAt: string,
           } | null,
@@ -5545,7 +5712,7 @@ export type ListSheetYearQuery = {
           isDeleted: BooleanType,
           createdAt: string,
           updatedAt: string,
-          superior:  {
+          superior?:  {
             __typename: "Employee",
             companyID: string,
             username: string,
@@ -5556,7 +5723,7 @@ export type ListSheetYearQuery = {
             lastName: string,
             grade: string,
             email: string,
-            group:  {
+            group?:  {
               __typename: "Group",
               companyID: string,
               localID: string,
@@ -5564,13 +5731,13 @@ export type ListSheetYearQuery = {
               createdAt: string,
               updatedAt: string,
             } | null,
-            company:  {
+            company?:  {
               __typename: "Company",
               id: string,
               name: string,
               startMonth: number,
-              shortName: string | null,
-              url: string | null,
+              shortName?: string | null,
+              url?: string | null,
               createdAt: string,
               updatedAt: string,
             } | null,
@@ -5578,7 +5745,7 @@ export type ListSheetYearQuery = {
             isDeleted: BooleanType,
             createdAt: string,
             updatedAt: string,
-            superior:  {
+            superior?:  {
               __typename: "Employee",
               companyID: string,
               username: string,
@@ -5589,7 +5756,7 @@ export type ListSheetYearQuery = {
               lastName: string,
               grade: string,
               email: string,
-              group:  {
+              group?:  {
                 __typename: "Group",
                 companyID: string,
                 localID: string,
@@ -5597,13 +5764,13 @@ export type ListSheetYearQuery = {
                 createdAt: string,
                 updatedAt: string,
               } | null,
-              company:  {
+              company?:  {
                 __typename: "Company",
                 id: string,
                 name: string,
                 startMonth: number,
-                shortName: string | null,
-                url: string | null,
+                shortName?: string | null,
+                url?: string | null,
                 createdAt: string,
                 updatedAt: string,
               } | null,
@@ -5611,7 +5778,7 @@ export type ListSheetYearQuery = {
               isDeleted: BooleanType,
               createdAt: string,
               updatedAt: string,
-              superior:  {
+              superior?:  {
                 __typename: "Employee",
                 companyID: string,
                 username: string,
@@ -5631,7 +5798,7 @@ export type ListSheetYearQuery = {
           } | null,
         } | null,
       } | null,
-      secondEmployee:  {
+      secondEmployee?:  {
         __typename: "Employee",
         companyID: string,
         username: string,
@@ -5642,7 +5809,7 @@ export type ListSheetYearQuery = {
         lastName: string,
         grade: string,
         email: string,
-        group:  {
+        group?:  {
           __typename: "Group",
           companyID: string,
           localID: string,
@@ -5650,13 +5817,13 @@ export type ListSheetYearQuery = {
           createdAt: string,
           updatedAt: string,
         } | null,
-        company:  {
+        company?:  {
           __typename: "Company",
           id: string,
           name: string,
           startMonth: number,
-          shortName: string | null,
-          url: string | null,
+          shortName?: string | null,
+          url?: string | null,
           createdAt: string,
           updatedAt: string,
         } | null,
@@ -5664,7 +5831,7 @@ export type ListSheetYearQuery = {
         isDeleted: BooleanType,
         createdAt: string,
         updatedAt: string,
-        superior:  {
+        superior?:  {
           __typename: "Employee",
           companyID: string,
           username: string,
@@ -5675,7 +5842,7 @@ export type ListSheetYearQuery = {
           lastName: string,
           grade: string,
           email: string,
-          group:  {
+          group?:  {
             __typename: "Group",
             companyID: string,
             localID: string,
@@ -5683,13 +5850,13 @@ export type ListSheetYearQuery = {
             createdAt: string,
             updatedAt: string,
           } | null,
-          company:  {
+          company?:  {
             __typename: "Company",
             id: string,
             name: string,
             startMonth: number,
-            shortName: string | null,
-            url: string | null,
+            shortName?: string | null,
+            url?: string | null,
             createdAt: string,
             updatedAt: string,
           } | null,
@@ -5697,7 +5864,7 @@ export type ListSheetYearQuery = {
           isDeleted: BooleanType,
           createdAt: string,
           updatedAt: string,
-          superior:  {
+          superior?:  {
             __typename: "Employee",
             companyID: string,
             username: string,
@@ -5708,7 +5875,7 @@ export type ListSheetYearQuery = {
             lastName: string,
             grade: string,
             email: string,
-            group:  {
+            group?:  {
               __typename: "Group",
               companyID: string,
               localID: string,
@@ -5716,13 +5883,13 @@ export type ListSheetYearQuery = {
               createdAt: string,
               updatedAt: string,
             } | null,
-            company:  {
+            company?:  {
               __typename: "Company",
               id: string,
               name: string,
               startMonth: number,
-              shortName: string | null,
-              url: string | null,
+              shortName?: string | null,
+              url?: string | null,
               createdAt: string,
               updatedAt: string,
             } | null,
@@ -5730,7 +5897,7 @@ export type ListSheetYearQuery = {
             isDeleted: BooleanType,
             createdAt: string,
             updatedAt: string,
-            superior:  {
+            superior?:  {
               __typename: "Employee",
               companyID: string,
               username: string,
@@ -5741,7 +5908,7 @@ export type ListSheetYearQuery = {
               lastName: string,
               grade: string,
               email: string,
-              group:  {
+              group?:  {
                 __typename: "Group",
                 companyID: string,
                 localID: string,
@@ -5749,13 +5916,13 @@ export type ListSheetYearQuery = {
                 createdAt: string,
                 updatedAt: string,
               } | null,
-              company:  {
+              company?:  {
                 __typename: "Company",
                 id: string,
                 name: string,
                 startMonth: number,
-                shortName: string | null,
-                url: string | null,
+                shortName?: string | null,
+                url?: string | null,
                 createdAt: string,
                 updatedAt: string,
               } | null,
@@ -5763,7 +5930,7 @@ export type ListSheetYearQuery = {
               isDeleted: BooleanType,
               createdAt: string,
               updatedAt: string,
-              superior:  {
+              superior?:  {
                 __typename: "Employee",
                 companyID: string,
                 username: string,
@@ -5783,45 +5950,45 @@ export type ListSheetYearQuery = {
           } | null,
         } | null,
       } | null,
-      section:  {
+      section?:  {
         __typename: "ModelSectionConnection",
-        items:  Array< {
+        items?:  Array< {
           __typename: "Section",
           sheetKeys: string,
           sectionCategoryLocalId: string,
-          sectionCategoryName: string | null,
+          sectionCategoryName?: string | null,
           companyID: string,
-          objective:  {
+          objective?:  {
             __typename: "ModelObjectiveConnection",
-            items:  Array< {
+            items?:  Array< {
               __typename: "Objective",
               sectionKeys: string,
               createdAt: string,
               companyID: string,
               content: string,
-              result: string | null,
-              priority: string | null,
-              selfEvaluation: number | null,
-              firstEvaluation: number | null,
-              lastEvaluation: number | null,
-              progress: number | null,
-              expStartDate: string | null,
-              expDoneDate: string | null,
-              reviewee: string | null,
-              topReviewers: Array< string > | null,
-              secondReviewers: Array< string > | null,
-              referencer: Array< string > | null,
+              result?: string | null,
+              priority?: string | null,
+              selfEvaluation?: number | null,
+              firstEvaluation?: number | null,
+              lastEvaluation?: number | null,
+              progress?: number | null,
+              expStartDate?: string | null,
+              expDoneDate?: string | null,
+              reviewee?: string | null,
+              topReviewers?: Array< string > | null,
+              secondReviewers?: Array< string > | null,
+              referencer?: Array< string > | null,
               updatedAt: string,
             } | null > | null,
-            nextToken: string | null,
+            nextToken?: string | null,
           } | null,
-          reviewee: string | null,
-          topReviewers: Array< string > | null,
-          secondReviewers: Array< string > | null,
-          referencer: Array< string > | null,
+          reviewee?: string | null,
+          topReviewers?: Array< string > | null,
+          secondReviewers?: Array< string > | null,
+          referencer?: Array< string > | null,
           createdAt: string,
           updatedAt: string,
-          category:  {
+          category?:  {
             __typename: "Category",
             companyID: string,
             localID: string,
@@ -5830,10 +5997,10 @@ export type ListSheetYearQuery = {
             updatedAt: string,
           } | null,
         } | null > | null,
-        nextToken: string | null,
+        nextToken?: string | null,
       } | null,
     } | null > | null,
-    nextToken: string | null,
+    nextToken?: string | null,
   } | null,
 };
 
@@ -5847,36 +6014,36 @@ export type ListSheetGroupQueryVariables = {
 };
 
 export type ListSheetGroupQuery = {
-  listSheetGroup:  {
+  listSheetGroup?:  {
     __typename: "ModelSheetConnection",
-    items:  Array< {
+    items?:  Array< {
       __typename: "Sheet",
       companyID: string,
       year: number,
       grade: string,
-      careerPlan: string | null,
-      careerPlanComment: string | null,
-      reviewComment: string | null,
-      reviewDate: string | null,
-      selfCheckDate: string | null,
-      firstComment: string | null,
-      firstCheckDate: string | null,
-      secondComment: string | null,
-      secondCheckDate: string | null,
-      overAllEvaluation: number | null,
-      statusValue: number | null,
-      interviewPlanDate: string | null,
-      interviewPlanComment: string | null,
-      InterviewMid1Date: string | null,
-      InterviewMid1Comment: string | null,
-      InterviewMid2Date: string | null,
-      InterviewMid2Comment: string | null,
-      InterviewMid3Date: string | null,
-      InterviewMid3Comment: string | null,
+      careerPlan?: string | null,
+      careerPlanComment?: string | null,
+      reviewComment?: string | null,
+      reviewDate?: string | null,
+      selfCheckDate?: string | null,
+      firstComment?: string | null,
+      firstCheckDate?: string | null,
+      secondComment?: string | null,
+      secondCheckDate?: string | null,
+      overAllEvaluation?: number | null,
+      statusValue?: number | null,
+      interviewPlanDate?: string | null,
+      interviewPlanComment?: string | null,
+      InterviewMid1Date?: string | null,
+      InterviewMid1Comment?: string | null,
+      InterviewMid2Date?: string | null,
+      InterviewMid2Comment?: string | null,
+      InterviewMid3Date?: string | null,
+      InterviewMid3Comment?: string | null,
       revieweeUsername: string,
       secondUsername: string,
       sheetGroupLocalId: string,
-      group:  {
+      group?:  {
         __typename: "Group",
         companyID: string,
         localID: string,
@@ -5884,13 +6051,13 @@ export type ListSheetGroupQuery = {
         createdAt: string,
         updatedAt: string,
       } | null,
-      referencer: Array< string > | null,
+      referencer?: Array< string > | null,
       reviewee: string,
-      topReviewers: Array< string > | null,
-      secondReviewers: Array< string > | null,
+      topReviewers?: Array< string > | null,
+      secondReviewers?: Array< string > | null,
       createdAt: string,
       updatedAt: string,
-      revieweeEmployee:  {
+      revieweeEmployee?:  {
         __typename: "Employee",
         companyID: string,
         username: string,
@@ -5901,7 +6068,7 @@ export type ListSheetGroupQuery = {
         lastName: string,
         grade: string,
         email: string,
-        group:  {
+        group?:  {
           __typename: "Group",
           companyID: string,
           localID: string,
@@ -5909,13 +6076,13 @@ export type ListSheetGroupQuery = {
           createdAt: string,
           updatedAt: string,
         } | null,
-        company:  {
+        company?:  {
           __typename: "Company",
           id: string,
           name: string,
           startMonth: number,
-          shortName: string | null,
-          url: string | null,
+          shortName?: string | null,
+          url?: string | null,
           createdAt: string,
           updatedAt: string,
         } | null,
@@ -5923,7 +6090,7 @@ export type ListSheetGroupQuery = {
         isDeleted: BooleanType,
         createdAt: string,
         updatedAt: string,
-        superior:  {
+        superior?:  {
           __typename: "Employee",
           companyID: string,
           username: string,
@@ -5934,7 +6101,7 @@ export type ListSheetGroupQuery = {
           lastName: string,
           grade: string,
           email: string,
-          group:  {
+          group?:  {
             __typename: "Group",
             companyID: string,
             localID: string,
@@ -5942,13 +6109,13 @@ export type ListSheetGroupQuery = {
             createdAt: string,
             updatedAt: string,
           } | null,
-          company:  {
+          company?:  {
             __typename: "Company",
             id: string,
             name: string,
             startMonth: number,
-            shortName: string | null,
-            url: string | null,
+            shortName?: string | null,
+            url?: string | null,
             createdAt: string,
             updatedAt: string,
           } | null,
@@ -5956,7 +6123,7 @@ export type ListSheetGroupQuery = {
           isDeleted: BooleanType,
           createdAt: string,
           updatedAt: string,
-          superior:  {
+          superior?:  {
             __typename: "Employee",
             companyID: string,
             username: string,
@@ -5967,7 +6134,7 @@ export type ListSheetGroupQuery = {
             lastName: string,
             grade: string,
             email: string,
-            group:  {
+            group?:  {
               __typename: "Group",
               companyID: string,
               localID: string,
@@ -5975,13 +6142,13 @@ export type ListSheetGroupQuery = {
               createdAt: string,
               updatedAt: string,
             } | null,
-            company:  {
+            company?:  {
               __typename: "Company",
               id: string,
               name: string,
               startMonth: number,
-              shortName: string | null,
-              url: string | null,
+              shortName?: string | null,
+              url?: string | null,
               createdAt: string,
               updatedAt: string,
             } | null,
@@ -5989,7 +6156,7 @@ export type ListSheetGroupQuery = {
             isDeleted: BooleanType,
             createdAt: string,
             updatedAt: string,
-            superior:  {
+            superior?:  {
               __typename: "Employee",
               companyID: string,
               username: string,
@@ -6000,7 +6167,7 @@ export type ListSheetGroupQuery = {
               lastName: string,
               grade: string,
               email: string,
-              group:  {
+              group?:  {
                 __typename: "Group",
                 companyID: string,
                 localID: string,
@@ -6008,13 +6175,13 @@ export type ListSheetGroupQuery = {
                 createdAt: string,
                 updatedAt: string,
               } | null,
-              company:  {
+              company?:  {
                 __typename: "Company",
                 id: string,
                 name: string,
                 startMonth: number,
-                shortName: string | null,
-                url: string | null,
+                shortName?: string | null,
+                url?: string | null,
                 createdAt: string,
                 updatedAt: string,
               } | null,
@@ -6022,7 +6189,7 @@ export type ListSheetGroupQuery = {
               isDeleted: BooleanType,
               createdAt: string,
               updatedAt: string,
-              superior:  {
+              superior?:  {
                 __typename: "Employee",
                 companyID: string,
                 username: string,
@@ -6042,7 +6209,7 @@ export type ListSheetGroupQuery = {
           } | null,
         } | null,
       } | null,
-      secondEmployee:  {
+      secondEmployee?:  {
         __typename: "Employee",
         companyID: string,
         username: string,
@@ -6053,7 +6220,7 @@ export type ListSheetGroupQuery = {
         lastName: string,
         grade: string,
         email: string,
-        group:  {
+        group?:  {
           __typename: "Group",
           companyID: string,
           localID: string,
@@ -6061,13 +6228,13 @@ export type ListSheetGroupQuery = {
           createdAt: string,
           updatedAt: string,
         } | null,
-        company:  {
+        company?:  {
           __typename: "Company",
           id: string,
           name: string,
           startMonth: number,
-          shortName: string | null,
-          url: string | null,
+          shortName?: string | null,
+          url?: string | null,
           createdAt: string,
           updatedAt: string,
         } | null,
@@ -6075,7 +6242,7 @@ export type ListSheetGroupQuery = {
         isDeleted: BooleanType,
         createdAt: string,
         updatedAt: string,
-        superior:  {
+        superior?:  {
           __typename: "Employee",
           companyID: string,
           username: string,
@@ -6086,7 +6253,7 @@ export type ListSheetGroupQuery = {
           lastName: string,
           grade: string,
           email: string,
-          group:  {
+          group?:  {
             __typename: "Group",
             companyID: string,
             localID: string,
@@ -6094,13 +6261,13 @@ export type ListSheetGroupQuery = {
             createdAt: string,
             updatedAt: string,
           } | null,
-          company:  {
+          company?:  {
             __typename: "Company",
             id: string,
             name: string,
             startMonth: number,
-            shortName: string | null,
-            url: string | null,
+            shortName?: string | null,
+            url?: string | null,
             createdAt: string,
             updatedAt: string,
           } | null,
@@ -6108,7 +6275,7 @@ export type ListSheetGroupQuery = {
           isDeleted: BooleanType,
           createdAt: string,
           updatedAt: string,
-          superior:  {
+          superior?:  {
             __typename: "Employee",
             companyID: string,
             username: string,
@@ -6119,7 +6286,7 @@ export type ListSheetGroupQuery = {
             lastName: string,
             grade: string,
             email: string,
-            group:  {
+            group?:  {
               __typename: "Group",
               companyID: string,
               localID: string,
@@ -6127,13 +6294,13 @@ export type ListSheetGroupQuery = {
               createdAt: string,
               updatedAt: string,
             } | null,
-            company:  {
+            company?:  {
               __typename: "Company",
               id: string,
               name: string,
               startMonth: number,
-              shortName: string | null,
-              url: string | null,
+              shortName?: string | null,
+              url?: string | null,
               createdAt: string,
               updatedAt: string,
             } | null,
@@ -6141,7 +6308,7 @@ export type ListSheetGroupQuery = {
             isDeleted: BooleanType,
             createdAt: string,
             updatedAt: string,
-            superior:  {
+            superior?:  {
               __typename: "Employee",
               companyID: string,
               username: string,
@@ -6152,7 +6319,7 @@ export type ListSheetGroupQuery = {
               lastName: string,
               grade: string,
               email: string,
-              group:  {
+              group?:  {
                 __typename: "Group",
                 companyID: string,
                 localID: string,
@@ -6160,13 +6327,13 @@ export type ListSheetGroupQuery = {
                 createdAt: string,
                 updatedAt: string,
               } | null,
-              company:  {
+              company?:  {
                 __typename: "Company",
                 id: string,
                 name: string,
                 startMonth: number,
-                shortName: string | null,
-                url: string | null,
+                shortName?: string | null,
+                url?: string | null,
                 createdAt: string,
                 updatedAt: string,
               } | null,
@@ -6174,7 +6341,7 @@ export type ListSheetGroupQuery = {
               isDeleted: BooleanType,
               createdAt: string,
               updatedAt: string,
-              superior:  {
+              superior?:  {
                 __typename: "Employee",
                 companyID: string,
                 username: string,
@@ -6194,45 +6361,45 @@ export type ListSheetGroupQuery = {
           } | null,
         } | null,
       } | null,
-      section:  {
+      section?:  {
         __typename: "ModelSectionConnection",
-        items:  Array< {
+        items?:  Array< {
           __typename: "Section",
           sheetKeys: string,
           sectionCategoryLocalId: string,
-          sectionCategoryName: string | null,
+          sectionCategoryName?: string | null,
           companyID: string,
-          objective:  {
+          objective?:  {
             __typename: "ModelObjectiveConnection",
-            items:  Array< {
+            items?:  Array< {
               __typename: "Objective",
               sectionKeys: string,
               createdAt: string,
               companyID: string,
               content: string,
-              result: string | null,
-              priority: string | null,
-              selfEvaluation: number | null,
-              firstEvaluation: number | null,
-              lastEvaluation: number | null,
-              progress: number | null,
-              expStartDate: string | null,
-              expDoneDate: string | null,
-              reviewee: string | null,
-              topReviewers: Array< string > | null,
-              secondReviewers: Array< string > | null,
-              referencer: Array< string > | null,
+              result?: string | null,
+              priority?: string | null,
+              selfEvaluation?: number | null,
+              firstEvaluation?: number | null,
+              lastEvaluation?: number | null,
+              progress?: number | null,
+              expStartDate?: string | null,
+              expDoneDate?: string | null,
+              reviewee?: string | null,
+              topReviewers?: Array< string > | null,
+              secondReviewers?: Array< string > | null,
+              referencer?: Array< string > | null,
               updatedAt: string,
             } | null > | null,
-            nextToken: string | null,
+            nextToken?: string | null,
           } | null,
-          reviewee: string | null,
-          topReviewers: Array< string > | null,
-          secondReviewers: Array< string > | null,
-          referencer: Array< string > | null,
+          reviewee?: string | null,
+          topReviewers?: Array< string > | null,
+          secondReviewers?: Array< string > | null,
+          referencer?: Array< string > | null,
           createdAt: string,
           updatedAt: string,
-          category:  {
+          category?:  {
             __typename: "Category",
             companyID: string,
             localID: string,
@@ -6241,56 +6408,56 @@ export type ListSheetGroupQuery = {
             updatedAt: string,
           } | null,
         } | null > | null,
-        nextToken: string | null,
+        nextToken?: string | null,
       } | null,
     } | null > | null,
-    nextToken: string | null,
+    nextToken?: string | null,
   } | null,
 };
 
 export type GetSectionQueryVariables = {
-  sheetKeys: string,
-  sectionCategoryLocalId: string,
+  sheetKeys?: string,
+  sectionCategoryLocalId?: string,
 };
 
 export type GetSectionQuery = {
-  getSection:  {
+  getSection?:  {
     __typename: "Section",
     sheetKeys: string,
     sectionCategoryLocalId: string,
-    sectionCategoryName: string | null,
+    sectionCategoryName?: string | null,
     companyID: string,
-    objective:  {
+    objective?:  {
       __typename: "ModelObjectiveConnection",
-      items:  Array< {
+      items?:  Array< {
         __typename: "Objective",
         sectionKeys: string,
         createdAt: string,
         companyID: string,
         content: string,
-        result: string | null,
-        priority: string | null,
-        selfEvaluation: number | null,
-        firstEvaluation: number | null,
-        lastEvaluation: number | null,
-        progress: number | null,
-        expStartDate: string | null,
-        expDoneDate: string | null,
-        reviewee: string | null,
-        topReviewers: Array< string > | null,
-        secondReviewers: Array< string > | null,
-        referencer: Array< string > | null,
+        result?: string | null,
+        priority?: string | null,
+        selfEvaluation?: number | null,
+        firstEvaluation?: number | null,
+        lastEvaluation?: number | null,
+        progress?: number | null,
+        expStartDate?: string | null,
+        expDoneDate?: string | null,
+        reviewee?: string | null,
+        topReviewers?: Array< string > | null,
+        secondReviewers?: Array< string > | null,
+        referencer?: Array< string > | null,
         updatedAt: string,
       } | null > | null,
-      nextToken: string | null,
+      nextToken?: string | null,
     } | null,
-    reviewee: string | null,
-    topReviewers: Array< string > | null,
-    secondReviewers: Array< string > | null,
-    referencer: Array< string > | null,
+    reviewee?: string | null,
+    topReviewers?: Array< string > | null,
+    secondReviewers?: Array< string > | null,
+    referencer?: Array< string > | null,
     createdAt: string,
     updatedAt: string,
-    category:  {
+    category?:  {
       __typename: "Category",
       companyID: string,
       localID: string,
@@ -6311,45 +6478,45 @@ export type ListSectionsQueryVariables = {
 };
 
 export type ListSectionsQuery = {
-  listSections:  {
+  listSections?:  {
     __typename: "ModelSectionConnection",
-    items:  Array< {
+    items?:  Array< {
       __typename: "Section",
       sheetKeys: string,
       sectionCategoryLocalId: string,
-      sectionCategoryName: string | null,
+      sectionCategoryName?: string | null,
       companyID: string,
-      objective:  {
+      objective?:  {
         __typename: "ModelObjectiveConnection",
-        items:  Array< {
+        items?:  Array< {
           __typename: "Objective",
           sectionKeys: string,
           createdAt: string,
           companyID: string,
           content: string,
-          result: string | null,
-          priority: string | null,
-          selfEvaluation: number | null,
-          firstEvaluation: number | null,
-          lastEvaluation: number | null,
-          progress: number | null,
-          expStartDate: string | null,
-          expDoneDate: string | null,
-          reviewee: string | null,
-          topReviewers: Array< string > | null,
-          secondReviewers: Array< string > | null,
-          referencer: Array< string > | null,
+          result?: string | null,
+          priority?: string | null,
+          selfEvaluation?: number | null,
+          firstEvaluation?: number | null,
+          lastEvaluation?: number | null,
+          progress?: number | null,
+          expStartDate?: string | null,
+          expDoneDate?: string | null,
+          reviewee?: string | null,
+          topReviewers?: Array< string > | null,
+          secondReviewers?: Array< string > | null,
+          referencer?: Array< string > | null,
           updatedAt: string,
         } | null > | null,
-        nextToken: string | null,
+        nextToken?: string | null,
       } | null,
-      reviewee: string | null,
-      topReviewers: Array< string > | null,
-      secondReviewers: Array< string > | null,
-      referencer: Array< string > | null,
+      reviewee?: string | null,
+      topReviewers?: Array< string > | null,
+      secondReviewers?: Array< string > | null,
+      referencer?: Array< string > | null,
       createdAt: string,
       updatedAt: string,
-      category:  {
+      category?:  {
         __typename: "Category",
         companyID: string,
         localID: string,
@@ -6358,51 +6525,51 @@ export type ListSectionsQuery = {
         updatedAt: string,
       } | null,
     } | null > | null,
-    nextToken: string | null,
+    nextToken?: string | null,
   } | null,
 };
 
 export type OnCreateCompanySubscription = {
-  onCreateCompany:  {
+  onCreateCompany?:  {
     __typename: "Company",
     id: string,
     name: string,
     startMonth: number,
-    shortName: string | null,
-    url: string | null,
+    shortName?: string | null,
+    url?: string | null,
     createdAt: string,
     updatedAt: string,
   } | null,
 };
 
 export type OnUpdateCompanySubscription = {
-  onUpdateCompany:  {
+  onUpdateCompany?:  {
     __typename: "Company",
     id: string,
     name: string,
     startMonth: number,
-    shortName: string | null,
-    url: string | null,
+    shortName?: string | null,
+    url?: string | null,
     createdAt: string,
     updatedAt: string,
   } | null,
 };
 
 export type OnDeleteCompanySubscription = {
-  onDeleteCompany:  {
+  onDeleteCompany?:  {
     __typename: "Company",
     id: string,
     name: string,
     startMonth: number,
-    shortName: string | null,
-    url: string | null,
+    shortName?: string | null,
+    url?: string | null,
     createdAt: string,
     updatedAt: string,
   } | null,
 };
 
 export type OnCreateGroupSubscription = {
-  onCreateGroup:  {
+  onCreateGroup?:  {
     __typename: "Group",
     companyID: string,
     localID: string,
@@ -6413,7 +6580,7 @@ export type OnCreateGroupSubscription = {
 };
 
 export type OnUpdateGroupSubscription = {
-  onUpdateGroup:  {
+  onUpdateGroup?:  {
     __typename: "Group",
     companyID: string,
     localID: string,
@@ -6424,7 +6591,7 @@ export type OnUpdateGroupSubscription = {
 };
 
 export type OnDeleteGroupSubscription = {
-  onDeleteGroup:  {
+  onDeleteGroup?:  {
     __typename: "Group",
     companyID: string,
     localID: string,
@@ -6442,24 +6609,24 @@ export type OnCreateObjectiveSubscriptionVariables = {
 };
 
 export type OnCreateObjectiveSubscription = {
-  onCreateObjective:  {
+  onCreateObjective?:  {
     __typename: "Objective",
     sectionKeys: string,
     createdAt: string,
     companyID: string,
     content: string,
-    result: string | null,
-    priority: string | null,
-    selfEvaluation: number | null,
-    firstEvaluation: number | null,
-    lastEvaluation: number | null,
-    progress: number | null,
-    expStartDate: string | null,
-    expDoneDate: string | null,
-    reviewee: string | null,
-    topReviewers: Array< string > | null,
-    secondReviewers: Array< string > | null,
-    referencer: Array< string > | null,
+    result?: string | null,
+    priority?: string | null,
+    selfEvaluation?: number | null,
+    firstEvaluation?: number | null,
+    lastEvaluation?: number | null,
+    progress?: number | null,
+    expStartDate?: string | null,
+    expDoneDate?: string | null,
+    reviewee?: string | null,
+    topReviewers?: Array< string > | null,
+    secondReviewers?: Array< string > | null,
+    referencer?: Array< string > | null,
     updatedAt: string,
   } | null,
 };
@@ -6472,24 +6639,24 @@ export type OnUpdateObjectiveSubscriptionVariables = {
 };
 
 export type OnUpdateObjectiveSubscription = {
-  onUpdateObjective:  {
+  onUpdateObjective?:  {
     __typename: "Objective",
     sectionKeys: string,
     createdAt: string,
     companyID: string,
     content: string,
-    result: string | null,
-    priority: string | null,
-    selfEvaluation: number | null,
-    firstEvaluation: number | null,
-    lastEvaluation: number | null,
-    progress: number | null,
-    expStartDate: string | null,
-    expDoneDate: string | null,
-    reviewee: string | null,
-    topReviewers: Array< string > | null,
-    secondReviewers: Array< string > | null,
-    referencer: Array< string > | null,
+    result?: string | null,
+    priority?: string | null,
+    selfEvaluation?: number | null,
+    firstEvaluation?: number | null,
+    lastEvaluation?: number | null,
+    progress?: number | null,
+    expStartDate?: string | null,
+    expDoneDate?: string | null,
+    reviewee?: string | null,
+    topReviewers?: Array< string > | null,
+    secondReviewers?: Array< string > | null,
+    referencer?: Array< string > | null,
     updatedAt: string,
   } | null,
 };
@@ -6502,30 +6669,30 @@ export type OnDeleteObjectiveSubscriptionVariables = {
 };
 
 export type OnDeleteObjectiveSubscription = {
-  onDeleteObjective:  {
+  onDeleteObjective?:  {
     __typename: "Objective",
     sectionKeys: string,
     createdAt: string,
     companyID: string,
     content: string,
-    result: string | null,
-    priority: string | null,
-    selfEvaluation: number | null,
-    firstEvaluation: number | null,
-    lastEvaluation: number | null,
-    progress: number | null,
-    expStartDate: string | null,
-    expDoneDate: string | null,
-    reviewee: string | null,
-    topReviewers: Array< string > | null,
-    secondReviewers: Array< string > | null,
-    referencer: Array< string > | null,
+    result?: string | null,
+    priority?: string | null,
+    selfEvaluation?: number | null,
+    firstEvaluation?: number | null,
+    lastEvaluation?: number | null,
+    progress?: number | null,
+    expStartDate?: string | null,
+    expDoneDate?: string | null,
+    reviewee?: string | null,
+    topReviewers?: Array< string > | null,
+    secondReviewers?: Array< string > | null,
+    referencer?: Array< string > | null,
     updatedAt: string,
   } | null,
 };
 
 export type OnCreateEmployeeSubscription = {
-  onCreateEmployee:  {
+  onCreateEmployee?:  {
     __typename: "Employee",
     companyID: string,
     username: string,
@@ -6536,7 +6703,7 @@ export type OnCreateEmployeeSubscription = {
     lastName: string,
     grade: string,
     email: string,
-    group:  {
+    group?:  {
       __typename: "Group",
       companyID: string,
       localID: string,
@@ -6544,13 +6711,13 @@ export type OnCreateEmployeeSubscription = {
       createdAt: string,
       updatedAt: string,
     } | null,
-    company:  {
+    company?:  {
       __typename: "Company",
       id: string,
       name: string,
       startMonth: number,
-      shortName: string | null,
-      url: string | null,
+      shortName?: string | null,
+      url?: string | null,
       createdAt: string,
       updatedAt: string,
     } | null,
@@ -6558,7 +6725,7 @@ export type OnCreateEmployeeSubscription = {
     isDeleted: BooleanType,
     createdAt: string,
     updatedAt: string,
-    superior:  {
+    superior?:  {
       __typename: "Employee",
       companyID: string,
       username: string,
@@ -6569,7 +6736,7 @@ export type OnCreateEmployeeSubscription = {
       lastName: string,
       grade: string,
       email: string,
-      group:  {
+      group?:  {
         __typename: "Group",
         companyID: string,
         localID: string,
@@ -6577,13 +6744,13 @@ export type OnCreateEmployeeSubscription = {
         createdAt: string,
         updatedAt: string,
       } | null,
-      company:  {
+      company?:  {
         __typename: "Company",
         id: string,
         name: string,
         startMonth: number,
-        shortName: string | null,
-        url: string | null,
+        shortName?: string | null,
+        url?: string | null,
         createdAt: string,
         updatedAt: string,
       } | null,
@@ -6591,7 +6758,7 @@ export type OnCreateEmployeeSubscription = {
       isDeleted: BooleanType,
       createdAt: string,
       updatedAt: string,
-      superior:  {
+      superior?:  {
         __typename: "Employee",
         companyID: string,
         username: string,
@@ -6602,7 +6769,7 @@ export type OnCreateEmployeeSubscription = {
         lastName: string,
         grade: string,
         email: string,
-        group:  {
+        group?:  {
           __typename: "Group",
           companyID: string,
           localID: string,
@@ -6610,13 +6777,13 @@ export type OnCreateEmployeeSubscription = {
           createdAt: string,
           updatedAt: string,
         } | null,
-        company:  {
+        company?:  {
           __typename: "Company",
           id: string,
           name: string,
           startMonth: number,
-          shortName: string | null,
-          url: string | null,
+          shortName?: string | null,
+          url?: string | null,
           createdAt: string,
           updatedAt: string,
         } | null,
@@ -6624,7 +6791,7 @@ export type OnCreateEmployeeSubscription = {
         isDeleted: BooleanType,
         createdAt: string,
         updatedAt: string,
-        superior:  {
+        superior?:  {
           __typename: "Employee",
           companyID: string,
           username: string,
@@ -6635,7 +6802,7 @@ export type OnCreateEmployeeSubscription = {
           lastName: string,
           grade: string,
           email: string,
-          group:  {
+          group?:  {
             __typename: "Group",
             companyID: string,
             localID: string,
@@ -6643,13 +6810,13 @@ export type OnCreateEmployeeSubscription = {
             createdAt: string,
             updatedAt: string,
           } | null,
-          company:  {
+          company?:  {
             __typename: "Company",
             id: string,
             name: string,
             startMonth: number,
-            shortName: string | null,
-            url: string | null,
+            shortName?: string | null,
+            url?: string | null,
             createdAt: string,
             updatedAt: string,
           } | null,
@@ -6657,7 +6824,7 @@ export type OnCreateEmployeeSubscription = {
           isDeleted: BooleanType,
           createdAt: string,
           updatedAt: string,
-          superior:  {
+          superior?:  {
             __typename: "Employee",
             companyID: string,
             username: string,
@@ -6668,7 +6835,7 @@ export type OnCreateEmployeeSubscription = {
             lastName: string,
             grade: string,
             email: string,
-            group:  {
+            group?:  {
               __typename: "Group",
               companyID: string,
               localID: string,
@@ -6676,13 +6843,13 @@ export type OnCreateEmployeeSubscription = {
               createdAt: string,
               updatedAt: string,
             } | null,
-            company:  {
+            company?:  {
               __typename: "Company",
               id: string,
               name: string,
               startMonth: number,
-              shortName: string | null,
-              url: string | null,
+              shortName?: string | null,
+              url?: string | null,
               createdAt: string,
               updatedAt: string,
             } | null,
@@ -6690,7 +6857,7 @@ export type OnCreateEmployeeSubscription = {
             isDeleted: BooleanType,
             createdAt: string,
             updatedAt: string,
-            superior:  {
+            superior?:  {
               __typename: "Employee",
               companyID: string,
               username: string,
@@ -6701,7 +6868,7 @@ export type OnCreateEmployeeSubscription = {
               lastName: string,
               grade: string,
               email: string,
-              group:  {
+              group?:  {
                 __typename: "Group",
                 companyID: string,
                 localID: string,
@@ -6709,13 +6876,13 @@ export type OnCreateEmployeeSubscription = {
                 createdAt: string,
                 updatedAt: string,
               } | null,
-              company:  {
+              company?:  {
                 __typename: "Company",
                 id: string,
                 name: string,
                 startMonth: number,
-                shortName: string | null,
-                url: string | null,
+                shortName?: string | null,
+                url?: string | null,
                 createdAt: string,
                 updatedAt: string,
               } | null,
@@ -6723,7 +6890,7 @@ export type OnCreateEmployeeSubscription = {
               isDeleted: BooleanType,
               createdAt: string,
               updatedAt: string,
-              superior:  {
+              superior?:  {
                 __typename: "Employee",
                 companyID: string,
                 username: string,
@@ -6748,7 +6915,7 @@ export type OnCreateEmployeeSubscription = {
 };
 
 export type OnUpdateEmployeeSubscription = {
-  onUpdateEmployee:  {
+  onUpdateEmployee?:  {
     __typename: "Employee",
     companyID: string,
     username: string,
@@ -6759,7 +6926,7 @@ export type OnUpdateEmployeeSubscription = {
     lastName: string,
     grade: string,
     email: string,
-    group:  {
+    group?:  {
       __typename: "Group",
       companyID: string,
       localID: string,
@@ -6767,13 +6934,13 @@ export type OnUpdateEmployeeSubscription = {
       createdAt: string,
       updatedAt: string,
     } | null,
-    company:  {
+    company?:  {
       __typename: "Company",
       id: string,
       name: string,
       startMonth: number,
-      shortName: string | null,
-      url: string | null,
+      shortName?: string | null,
+      url?: string | null,
       createdAt: string,
       updatedAt: string,
     } | null,
@@ -6781,7 +6948,7 @@ export type OnUpdateEmployeeSubscription = {
     isDeleted: BooleanType,
     createdAt: string,
     updatedAt: string,
-    superior:  {
+    superior?:  {
       __typename: "Employee",
       companyID: string,
       username: string,
@@ -6792,7 +6959,7 @@ export type OnUpdateEmployeeSubscription = {
       lastName: string,
       grade: string,
       email: string,
-      group:  {
+      group?:  {
         __typename: "Group",
         companyID: string,
         localID: string,
@@ -6800,13 +6967,13 @@ export type OnUpdateEmployeeSubscription = {
         createdAt: string,
         updatedAt: string,
       } | null,
-      company:  {
+      company?:  {
         __typename: "Company",
         id: string,
         name: string,
         startMonth: number,
-        shortName: string | null,
-        url: string | null,
+        shortName?: string | null,
+        url?: string | null,
         createdAt: string,
         updatedAt: string,
       } | null,
@@ -6814,7 +6981,7 @@ export type OnUpdateEmployeeSubscription = {
       isDeleted: BooleanType,
       createdAt: string,
       updatedAt: string,
-      superior:  {
+      superior?:  {
         __typename: "Employee",
         companyID: string,
         username: string,
@@ -6825,7 +6992,7 @@ export type OnUpdateEmployeeSubscription = {
         lastName: string,
         grade: string,
         email: string,
-        group:  {
+        group?:  {
           __typename: "Group",
           companyID: string,
           localID: string,
@@ -6833,13 +7000,13 @@ export type OnUpdateEmployeeSubscription = {
           createdAt: string,
           updatedAt: string,
         } | null,
-        company:  {
+        company?:  {
           __typename: "Company",
           id: string,
           name: string,
           startMonth: number,
-          shortName: string | null,
-          url: string | null,
+          shortName?: string | null,
+          url?: string | null,
           createdAt: string,
           updatedAt: string,
         } | null,
@@ -6847,7 +7014,7 @@ export type OnUpdateEmployeeSubscription = {
         isDeleted: BooleanType,
         createdAt: string,
         updatedAt: string,
-        superior:  {
+        superior?:  {
           __typename: "Employee",
           companyID: string,
           username: string,
@@ -6858,7 +7025,7 @@ export type OnUpdateEmployeeSubscription = {
           lastName: string,
           grade: string,
           email: string,
-          group:  {
+          group?:  {
             __typename: "Group",
             companyID: string,
             localID: string,
@@ -6866,13 +7033,13 @@ export type OnUpdateEmployeeSubscription = {
             createdAt: string,
             updatedAt: string,
           } | null,
-          company:  {
+          company?:  {
             __typename: "Company",
             id: string,
             name: string,
             startMonth: number,
-            shortName: string | null,
-            url: string | null,
+            shortName?: string | null,
+            url?: string | null,
             createdAt: string,
             updatedAt: string,
           } | null,
@@ -6880,7 +7047,7 @@ export type OnUpdateEmployeeSubscription = {
           isDeleted: BooleanType,
           createdAt: string,
           updatedAt: string,
-          superior:  {
+          superior?:  {
             __typename: "Employee",
             companyID: string,
             username: string,
@@ -6891,7 +7058,7 @@ export type OnUpdateEmployeeSubscription = {
             lastName: string,
             grade: string,
             email: string,
-            group:  {
+            group?:  {
               __typename: "Group",
               companyID: string,
               localID: string,
@@ -6899,13 +7066,13 @@ export type OnUpdateEmployeeSubscription = {
               createdAt: string,
               updatedAt: string,
             } | null,
-            company:  {
+            company?:  {
               __typename: "Company",
               id: string,
               name: string,
               startMonth: number,
-              shortName: string | null,
-              url: string | null,
+              shortName?: string | null,
+              url?: string | null,
               createdAt: string,
               updatedAt: string,
             } | null,
@@ -6913,7 +7080,7 @@ export type OnUpdateEmployeeSubscription = {
             isDeleted: BooleanType,
             createdAt: string,
             updatedAt: string,
-            superior:  {
+            superior?:  {
               __typename: "Employee",
               companyID: string,
               username: string,
@@ -6924,7 +7091,7 @@ export type OnUpdateEmployeeSubscription = {
               lastName: string,
               grade: string,
               email: string,
-              group:  {
+              group?:  {
                 __typename: "Group",
                 companyID: string,
                 localID: string,
@@ -6932,13 +7099,13 @@ export type OnUpdateEmployeeSubscription = {
                 createdAt: string,
                 updatedAt: string,
               } | null,
-              company:  {
+              company?:  {
                 __typename: "Company",
                 id: string,
                 name: string,
                 startMonth: number,
-                shortName: string | null,
-                url: string | null,
+                shortName?: string | null,
+                url?: string | null,
                 createdAt: string,
                 updatedAt: string,
               } | null,
@@ -6946,7 +7113,7 @@ export type OnUpdateEmployeeSubscription = {
               isDeleted: BooleanType,
               createdAt: string,
               updatedAt: string,
-              superior:  {
+              superior?:  {
                 __typename: "Employee",
                 companyID: string,
                 username: string,
@@ -6971,7 +7138,7 @@ export type OnUpdateEmployeeSubscription = {
 };
 
 export type OnDeleteEmployeeSubscription = {
-  onDeleteEmployee:  {
+  onDeleteEmployee?:  {
     __typename: "Employee",
     companyID: string,
     username: string,
@@ -6982,7 +7149,7 @@ export type OnDeleteEmployeeSubscription = {
     lastName: string,
     grade: string,
     email: string,
-    group:  {
+    group?:  {
       __typename: "Group",
       companyID: string,
       localID: string,
@@ -6990,13 +7157,13 @@ export type OnDeleteEmployeeSubscription = {
       createdAt: string,
       updatedAt: string,
     } | null,
-    company:  {
+    company?:  {
       __typename: "Company",
       id: string,
       name: string,
       startMonth: number,
-      shortName: string | null,
-      url: string | null,
+      shortName?: string | null,
+      url?: string | null,
       createdAt: string,
       updatedAt: string,
     } | null,
@@ -7004,7 +7171,7 @@ export type OnDeleteEmployeeSubscription = {
     isDeleted: BooleanType,
     createdAt: string,
     updatedAt: string,
-    superior:  {
+    superior?:  {
       __typename: "Employee",
       companyID: string,
       username: string,
@@ -7015,7 +7182,7 @@ export type OnDeleteEmployeeSubscription = {
       lastName: string,
       grade: string,
       email: string,
-      group:  {
+      group?:  {
         __typename: "Group",
         companyID: string,
         localID: string,
@@ -7023,13 +7190,13 @@ export type OnDeleteEmployeeSubscription = {
         createdAt: string,
         updatedAt: string,
       } | null,
-      company:  {
+      company?:  {
         __typename: "Company",
         id: string,
         name: string,
         startMonth: number,
-        shortName: string | null,
-        url: string | null,
+        shortName?: string | null,
+        url?: string | null,
         createdAt: string,
         updatedAt: string,
       } | null,
@@ -7037,7 +7204,7 @@ export type OnDeleteEmployeeSubscription = {
       isDeleted: BooleanType,
       createdAt: string,
       updatedAt: string,
-      superior:  {
+      superior?:  {
         __typename: "Employee",
         companyID: string,
         username: string,
@@ -7048,7 +7215,7 @@ export type OnDeleteEmployeeSubscription = {
         lastName: string,
         grade: string,
         email: string,
-        group:  {
+        group?:  {
           __typename: "Group",
           companyID: string,
           localID: string,
@@ -7056,13 +7223,13 @@ export type OnDeleteEmployeeSubscription = {
           createdAt: string,
           updatedAt: string,
         } | null,
-        company:  {
+        company?:  {
           __typename: "Company",
           id: string,
           name: string,
           startMonth: number,
-          shortName: string | null,
-          url: string | null,
+          shortName?: string | null,
+          url?: string | null,
           createdAt: string,
           updatedAt: string,
         } | null,
@@ -7070,7 +7237,7 @@ export type OnDeleteEmployeeSubscription = {
         isDeleted: BooleanType,
         createdAt: string,
         updatedAt: string,
-        superior:  {
+        superior?:  {
           __typename: "Employee",
           companyID: string,
           username: string,
@@ -7081,7 +7248,7 @@ export type OnDeleteEmployeeSubscription = {
           lastName: string,
           grade: string,
           email: string,
-          group:  {
+          group?:  {
             __typename: "Group",
             companyID: string,
             localID: string,
@@ -7089,13 +7256,13 @@ export type OnDeleteEmployeeSubscription = {
             createdAt: string,
             updatedAt: string,
           } | null,
-          company:  {
+          company?:  {
             __typename: "Company",
             id: string,
             name: string,
             startMonth: number,
-            shortName: string | null,
-            url: string | null,
+            shortName?: string | null,
+            url?: string | null,
             createdAt: string,
             updatedAt: string,
           } | null,
@@ -7103,7 +7270,7 @@ export type OnDeleteEmployeeSubscription = {
           isDeleted: BooleanType,
           createdAt: string,
           updatedAt: string,
-          superior:  {
+          superior?:  {
             __typename: "Employee",
             companyID: string,
             username: string,
@@ -7114,7 +7281,7 @@ export type OnDeleteEmployeeSubscription = {
             lastName: string,
             grade: string,
             email: string,
-            group:  {
+            group?:  {
               __typename: "Group",
               companyID: string,
               localID: string,
@@ -7122,13 +7289,13 @@ export type OnDeleteEmployeeSubscription = {
               createdAt: string,
               updatedAt: string,
             } | null,
-            company:  {
+            company?:  {
               __typename: "Company",
               id: string,
               name: string,
               startMonth: number,
-              shortName: string | null,
-              url: string | null,
+              shortName?: string | null,
+              url?: string | null,
               createdAt: string,
               updatedAt: string,
             } | null,
@@ -7136,7 +7303,7 @@ export type OnDeleteEmployeeSubscription = {
             isDeleted: BooleanType,
             createdAt: string,
             updatedAt: string,
-            superior:  {
+            superior?:  {
               __typename: "Employee",
               companyID: string,
               username: string,
@@ -7147,7 +7314,7 @@ export type OnDeleteEmployeeSubscription = {
               lastName: string,
               grade: string,
               email: string,
-              group:  {
+              group?:  {
                 __typename: "Group",
                 companyID: string,
                 localID: string,
@@ -7155,13 +7322,13 @@ export type OnDeleteEmployeeSubscription = {
                 createdAt: string,
                 updatedAt: string,
               } | null,
-              company:  {
+              company?:  {
                 __typename: "Company",
                 id: string,
                 name: string,
                 startMonth: number,
-                shortName: string | null,
-                url: string | null,
+                shortName?: string | null,
+                url?: string | null,
                 createdAt: string,
                 updatedAt: string,
               } | null,
@@ -7169,7 +7336,7 @@ export type OnDeleteEmployeeSubscription = {
               isDeleted: BooleanType,
               createdAt: string,
               updatedAt: string,
-              superior:  {
+              superior?:  {
                 __typename: "Employee",
                 companyID: string,
                 username: string,
@@ -7194,7 +7361,7 @@ export type OnDeleteEmployeeSubscription = {
 };
 
 export type OnCreateCategorySubscription = {
-  onCreateCategory:  {
+  onCreateCategory?:  {
     __typename: "Category",
     companyID: string,
     localID: string,
@@ -7205,7 +7372,7 @@ export type OnCreateCategorySubscription = {
 };
 
 export type OnUpdateCategorySubscription = {
-  onUpdateCategory:  {
+  onUpdateCategory?:  {
     __typename: "Category",
     companyID: string,
     localID: string,
@@ -7216,7 +7383,7 @@ export type OnUpdateCategorySubscription = {
 };
 
 export type OnDeleteCategorySubscription = {
-  onDeleteCategory:  {
+  onDeleteCategory?:  {
     __typename: "Category",
     companyID: string,
     localID: string,
@@ -7234,34 +7401,34 @@ export type OnCreateSheetSubscriptionVariables = {
 };
 
 export type OnCreateSheetSubscription = {
-  onCreateSheet:  {
+  onCreateSheet?:  {
     __typename: "Sheet",
     companyID: string,
     year: number,
     grade: string,
-    careerPlan: string | null,
-    careerPlanComment: string | null,
-    reviewComment: string | null,
-    reviewDate: string | null,
-    selfCheckDate: string | null,
-    firstComment: string | null,
-    firstCheckDate: string | null,
-    secondComment: string | null,
-    secondCheckDate: string | null,
-    overAllEvaluation: number | null,
-    statusValue: number | null,
-    interviewPlanDate: string | null,
-    interviewPlanComment: string | null,
-    InterviewMid1Date: string | null,
-    InterviewMid1Comment: string | null,
-    InterviewMid2Date: string | null,
-    InterviewMid2Comment: string | null,
-    InterviewMid3Date: string | null,
-    InterviewMid3Comment: string | null,
+    careerPlan?: string | null,
+    careerPlanComment?: string | null,
+    reviewComment?: string | null,
+    reviewDate?: string | null,
+    selfCheckDate?: string | null,
+    firstComment?: string | null,
+    firstCheckDate?: string | null,
+    secondComment?: string | null,
+    secondCheckDate?: string | null,
+    overAllEvaluation?: number | null,
+    statusValue?: number | null,
+    interviewPlanDate?: string | null,
+    interviewPlanComment?: string | null,
+    InterviewMid1Date?: string | null,
+    InterviewMid1Comment?: string | null,
+    InterviewMid2Date?: string | null,
+    InterviewMid2Comment?: string | null,
+    InterviewMid3Date?: string | null,
+    InterviewMid3Comment?: string | null,
     revieweeUsername: string,
     secondUsername: string,
     sheetGroupLocalId: string,
-    group:  {
+    group?:  {
       __typename: "Group",
       companyID: string,
       localID: string,
@@ -7269,13 +7436,13 @@ export type OnCreateSheetSubscription = {
       createdAt: string,
       updatedAt: string,
     } | null,
-    referencer: Array< string > | null,
+    referencer?: Array< string > | null,
     reviewee: string,
-    topReviewers: Array< string > | null,
-    secondReviewers: Array< string > | null,
+    topReviewers?: Array< string > | null,
+    secondReviewers?: Array< string > | null,
     createdAt: string,
     updatedAt: string,
-    revieweeEmployee:  {
+    revieweeEmployee?:  {
       __typename: "Employee",
       companyID: string,
       username: string,
@@ -7286,7 +7453,7 @@ export type OnCreateSheetSubscription = {
       lastName: string,
       grade: string,
       email: string,
-      group:  {
+      group?:  {
         __typename: "Group",
         companyID: string,
         localID: string,
@@ -7294,13 +7461,13 @@ export type OnCreateSheetSubscription = {
         createdAt: string,
         updatedAt: string,
       } | null,
-      company:  {
+      company?:  {
         __typename: "Company",
         id: string,
         name: string,
         startMonth: number,
-        shortName: string | null,
-        url: string | null,
+        shortName?: string | null,
+        url?: string | null,
         createdAt: string,
         updatedAt: string,
       } | null,
@@ -7308,7 +7475,7 @@ export type OnCreateSheetSubscription = {
       isDeleted: BooleanType,
       createdAt: string,
       updatedAt: string,
-      superior:  {
+      superior?:  {
         __typename: "Employee",
         companyID: string,
         username: string,
@@ -7319,7 +7486,7 @@ export type OnCreateSheetSubscription = {
         lastName: string,
         grade: string,
         email: string,
-        group:  {
+        group?:  {
           __typename: "Group",
           companyID: string,
           localID: string,
@@ -7327,13 +7494,13 @@ export type OnCreateSheetSubscription = {
           createdAt: string,
           updatedAt: string,
         } | null,
-        company:  {
+        company?:  {
           __typename: "Company",
           id: string,
           name: string,
           startMonth: number,
-          shortName: string | null,
-          url: string | null,
+          shortName?: string | null,
+          url?: string | null,
           createdAt: string,
           updatedAt: string,
         } | null,
@@ -7341,7 +7508,7 @@ export type OnCreateSheetSubscription = {
         isDeleted: BooleanType,
         createdAt: string,
         updatedAt: string,
-        superior:  {
+        superior?:  {
           __typename: "Employee",
           companyID: string,
           username: string,
@@ -7352,7 +7519,7 @@ export type OnCreateSheetSubscription = {
           lastName: string,
           grade: string,
           email: string,
-          group:  {
+          group?:  {
             __typename: "Group",
             companyID: string,
             localID: string,
@@ -7360,13 +7527,13 @@ export type OnCreateSheetSubscription = {
             createdAt: string,
             updatedAt: string,
           } | null,
-          company:  {
+          company?:  {
             __typename: "Company",
             id: string,
             name: string,
             startMonth: number,
-            shortName: string | null,
-            url: string | null,
+            shortName?: string | null,
+            url?: string | null,
             createdAt: string,
             updatedAt: string,
           } | null,
@@ -7374,7 +7541,7 @@ export type OnCreateSheetSubscription = {
           isDeleted: BooleanType,
           createdAt: string,
           updatedAt: string,
-          superior:  {
+          superior?:  {
             __typename: "Employee",
             companyID: string,
             username: string,
@@ -7385,7 +7552,7 @@ export type OnCreateSheetSubscription = {
             lastName: string,
             grade: string,
             email: string,
-            group:  {
+            group?:  {
               __typename: "Group",
               companyID: string,
               localID: string,
@@ -7393,13 +7560,13 @@ export type OnCreateSheetSubscription = {
               createdAt: string,
               updatedAt: string,
             } | null,
-            company:  {
+            company?:  {
               __typename: "Company",
               id: string,
               name: string,
               startMonth: number,
-              shortName: string | null,
-              url: string | null,
+              shortName?: string | null,
+              url?: string | null,
               createdAt: string,
               updatedAt: string,
             } | null,
@@ -7407,7 +7574,7 @@ export type OnCreateSheetSubscription = {
             isDeleted: BooleanType,
             createdAt: string,
             updatedAt: string,
-            superior:  {
+            superior?:  {
               __typename: "Employee",
               companyID: string,
               username: string,
@@ -7418,7 +7585,7 @@ export type OnCreateSheetSubscription = {
               lastName: string,
               grade: string,
               email: string,
-              group:  {
+              group?:  {
                 __typename: "Group",
                 companyID: string,
                 localID: string,
@@ -7426,13 +7593,13 @@ export type OnCreateSheetSubscription = {
                 createdAt: string,
                 updatedAt: string,
               } | null,
-              company:  {
+              company?:  {
                 __typename: "Company",
                 id: string,
                 name: string,
                 startMonth: number,
-                shortName: string | null,
-                url: string | null,
+                shortName?: string | null,
+                url?: string | null,
                 createdAt: string,
                 updatedAt: string,
               } | null,
@@ -7440,7 +7607,7 @@ export type OnCreateSheetSubscription = {
               isDeleted: BooleanType,
               createdAt: string,
               updatedAt: string,
-              superior:  {
+              superior?:  {
                 __typename: "Employee",
                 companyID: string,
                 username: string,
@@ -7461,7 +7628,7 @@ export type OnCreateSheetSubscription = {
         } | null,
       } | null,
     } | null,
-    secondEmployee:  {
+    secondEmployee?:  {
       __typename: "Employee",
       companyID: string,
       username: string,
@@ -7472,7 +7639,7 @@ export type OnCreateSheetSubscription = {
       lastName: string,
       grade: string,
       email: string,
-      group:  {
+      group?:  {
         __typename: "Group",
         companyID: string,
         localID: string,
@@ -7480,13 +7647,13 @@ export type OnCreateSheetSubscription = {
         createdAt: string,
         updatedAt: string,
       } | null,
-      company:  {
+      company?:  {
         __typename: "Company",
         id: string,
         name: string,
         startMonth: number,
-        shortName: string | null,
-        url: string | null,
+        shortName?: string | null,
+        url?: string | null,
         createdAt: string,
         updatedAt: string,
       } | null,
@@ -7494,7 +7661,7 @@ export type OnCreateSheetSubscription = {
       isDeleted: BooleanType,
       createdAt: string,
       updatedAt: string,
-      superior:  {
+      superior?:  {
         __typename: "Employee",
         companyID: string,
         username: string,
@@ -7505,7 +7672,7 @@ export type OnCreateSheetSubscription = {
         lastName: string,
         grade: string,
         email: string,
-        group:  {
+        group?:  {
           __typename: "Group",
           companyID: string,
           localID: string,
@@ -7513,13 +7680,13 @@ export type OnCreateSheetSubscription = {
           createdAt: string,
           updatedAt: string,
         } | null,
-        company:  {
+        company?:  {
           __typename: "Company",
           id: string,
           name: string,
           startMonth: number,
-          shortName: string | null,
-          url: string | null,
+          shortName?: string | null,
+          url?: string | null,
           createdAt: string,
           updatedAt: string,
         } | null,
@@ -7527,7 +7694,7 @@ export type OnCreateSheetSubscription = {
         isDeleted: BooleanType,
         createdAt: string,
         updatedAt: string,
-        superior:  {
+        superior?:  {
           __typename: "Employee",
           companyID: string,
           username: string,
@@ -7538,7 +7705,7 @@ export type OnCreateSheetSubscription = {
           lastName: string,
           grade: string,
           email: string,
-          group:  {
+          group?:  {
             __typename: "Group",
             companyID: string,
             localID: string,
@@ -7546,13 +7713,13 @@ export type OnCreateSheetSubscription = {
             createdAt: string,
             updatedAt: string,
           } | null,
-          company:  {
+          company?:  {
             __typename: "Company",
             id: string,
             name: string,
             startMonth: number,
-            shortName: string | null,
-            url: string | null,
+            shortName?: string | null,
+            url?: string | null,
             createdAt: string,
             updatedAt: string,
           } | null,
@@ -7560,7 +7727,7 @@ export type OnCreateSheetSubscription = {
           isDeleted: BooleanType,
           createdAt: string,
           updatedAt: string,
-          superior:  {
+          superior?:  {
             __typename: "Employee",
             companyID: string,
             username: string,
@@ -7571,7 +7738,7 @@ export type OnCreateSheetSubscription = {
             lastName: string,
             grade: string,
             email: string,
-            group:  {
+            group?:  {
               __typename: "Group",
               companyID: string,
               localID: string,
@@ -7579,13 +7746,13 @@ export type OnCreateSheetSubscription = {
               createdAt: string,
               updatedAt: string,
             } | null,
-            company:  {
+            company?:  {
               __typename: "Company",
               id: string,
               name: string,
               startMonth: number,
-              shortName: string | null,
-              url: string | null,
+              shortName?: string | null,
+              url?: string | null,
               createdAt: string,
               updatedAt: string,
             } | null,
@@ -7593,7 +7760,7 @@ export type OnCreateSheetSubscription = {
             isDeleted: BooleanType,
             createdAt: string,
             updatedAt: string,
-            superior:  {
+            superior?:  {
               __typename: "Employee",
               companyID: string,
               username: string,
@@ -7604,7 +7771,7 @@ export type OnCreateSheetSubscription = {
               lastName: string,
               grade: string,
               email: string,
-              group:  {
+              group?:  {
                 __typename: "Group",
                 companyID: string,
                 localID: string,
@@ -7612,13 +7779,13 @@ export type OnCreateSheetSubscription = {
                 createdAt: string,
                 updatedAt: string,
               } | null,
-              company:  {
+              company?:  {
                 __typename: "Company",
                 id: string,
                 name: string,
                 startMonth: number,
-                shortName: string | null,
-                url: string | null,
+                shortName?: string | null,
+                url?: string | null,
                 createdAt: string,
                 updatedAt: string,
               } | null,
@@ -7626,7 +7793,7 @@ export type OnCreateSheetSubscription = {
               isDeleted: BooleanType,
               createdAt: string,
               updatedAt: string,
-              superior:  {
+              superior?:  {
                 __typename: "Employee",
                 companyID: string,
                 username: string,
@@ -7647,45 +7814,45 @@ export type OnCreateSheetSubscription = {
         } | null,
       } | null,
     } | null,
-    section:  {
+    section?:  {
       __typename: "ModelSectionConnection",
-      items:  Array< {
+      items?:  Array< {
         __typename: "Section",
         sheetKeys: string,
         sectionCategoryLocalId: string,
-        sectionCategoryName: string | null,
+        sectionCategoryName?: string | null,
         companyID: string,
-        objective:  {
+        objective?:  {
           __typename: "ModelObjectiveConnection",
-          items:  Array< {
+          items?:  Array< {
             __typename: "Objective",
             sectionKeys: string,
             createdAt: string,
             companyID: string,
             content: string,
-            result: string | null,
-            priority: string | null,
-            selfEvaluation: number | null,
-            firstEvaluation: number | null,
-            lastEvaluation: number | null,
-            progress: number | null,
-            expStartDate: string | null,
-            expDoneDate: string | null,
-            reviewee: string | null,
-            topReviewers: Array< string > | null,
-            secondReviewers: Array< string > | null,
-            referencer: Array< string > | null,
+            result?: string | null,
+            priority?: string | null,
+            selfEvaluation?: number | null,
+            firstEvaluation?: number | null,
+            lastEvaluation?: number | null,
+            progress?: number | null,
+            expStartDate?: string | null,
+            expDoneDate?: string | null,
+            reviewee?: string | null,
+            topReviewers?: Array< string > | null,
+            secondReviewers?: Array< string > | null,
+            referencer?: Array< string > | null,
             updatedAt: string,
           } | null > | null,
-          nextToken: string | null,
+          nextToken?: string | null,
         } | null,
-        reviewee: string | null,
-        topReviewers: Array< string > | null,
-        secondReviewers: Array< string > | null,
-        referencer: Array< string > | null,
+        reviewee?: string | null,
+        topReviewers?: Array< string > | null,
+        secondReviewers?: Array< string > | null,
+        referencer?: Array< string > | null,
         createdAt: string,
         updatedAt: string,
-        category:  {
+        category?:  {
           __typename: "Category",
           companyID: string,
           localID: string,
@@ -7694,7 +7861,7 @@ export type OnCreateSheetSubscription = {
           updatedAt: string,
         } | null,
       } | null > | null,
-      nextToken: string | null,
+      nextToken?: string | null,
     } | null,
   } | null,
 };
@@ -7707,34 +7874,34 @@ export type OnUpdateSheetSubscriptionVariables = {
 };
 
 export type OnUpdateSheetSubscription = {
-  onUpdateSheet:  {
+  onUpdateSheet?:  {
     __typename: "Sheet",
     companyID: string,
     year: number,
     grade: string,
-    careerPlan: string | null,
-    careerPlanComment: string | null,
-    reviewComment: string | null,
-    reviewDate: string | null,
-    selfCheckDate: string | null,
-    firstComment: string | null,
-    firstCheckDate: string | null,
-    secondComment: string | null,
-    secondCheckDate: string | null,
-    overAllEvaluation: number | null,
-    statusValue: number | null,
-    interviewPlanDate: string | null,
-    interviewPlanComment: string | null,
-    InterviewMid1Date: string | null,
-    InterviewMid1Comment: string | null,
-    InterviewMid2Date: string | null,
-    InterviewMid2Comment: string | null,
-    InterviewMid3Date: string | null,
-    InterviewMid3Comment: string | null,
+    careerPlan?: string | null,
+    careerPlanComment?: string | null,
+    reviewComment?: string | null,
+    reviewDate?: string | null,
+    selfCheckDate?: string | null,
+    firstComment?: string | null,
+    firstCheckDate?: string | null,
+    secondComment?: string | null,
+    secondCheckDate?: string | null,
+    overAllEvaluation?: number | null,
+    statusValue?: number | null,
+    interviewPlanDate?: string | null,
+    interviewPlanComment?: string | null,
+    InterviewMid1Date?: string | null,
+    InterviewMid1Comment?: string | null,
+    InterviewMid2Date?: string | null,
+    InterviewMid2Comment?: string | null,
+    InterviewMid3Date?: string | null,
+    InterviewMid3Comment?: string | null,
     revieweeUsername: string,
     secondUsername: string,
     sheetGroupLocalId: string,
-    group:  {
+    group?:  {
       __typename: "Group",
       companyID: string,
       localID: string,
@@ -7742,13 +7909,13 @@ export type OnUpdateSheetSubscription = {
       createdAt: string,
       updatedAt: string,
     } | null,
-    referencer: Array< string > | null,
+    referencer?: Array< string > | null,
     reviewee: string,
-    topReviewers: Array< string > | null,
-    secondReviewers: Array< string > | null,
+    topReviewers?: Array< string > | null,
+    secondReviewers?: Array< string > | null,
     createdAt: string,
     updatedAt: string,
-    revieweeEmployee:  {
+    revieweeEmployee?:  {
       __typename: "Employee",
       companyID: string,
       username: string,
@@ -7759,7 +7926,7 @@ export type OnUpdateSheetSubscription = {
       lastName: string,
       grade: string,
       email: string,
-      group:  {
+      group?:  {
         __typename: "Group",
         companyID: string,
         localID: string,
@@ -7767,13 +7934,13 @@ export type OnUpdateSheetSubscription = {
         createdAt: string,
         updatedAt: string,
       } | null,
-      company:  {
+      company?:  {
         __typename: "Company",
         id: string,
         name: string,
         startMonth: number,
-        shortName: string | null,
-        url: string | null,
+        shortName?: string | null,
+        url?: string | null,
         createdAt: string,
         updatedAt: string,
       } | null,
@@ -7781,7 +7948,7 @@ export type OnUpdateSheetSubscription = {
       isDeleted: BooleanType,
       createdAt: string,
       updatedAt: string,
-      superior:  {
+      superior?:  {
         __typename: "Employee",
         companyID: string,
         username: string,
@@ -7792,7 +7959,7 @@ export type OnUpdateSheetSubscription = {
         lastName: string,
         grade: string,
         email: string,
-        group:  {
+        group?:  {
           __typename: "Group",
           companyID: string,
           localID: string,
@@ -7800,13 +7967,13 @@ export type OnUpdateSheetSubscription = {
           createdAt: string,
           updatedAt: string,
         } | null,
-        company:  {
+        company?:  {
           __typename: "Company",
           id: string,
           name: string,
           startMonth: number,
-          shortName: string | null,
-          url: string | null,
+          shortName?: string | null,
+          url?: string | null,
           createdAt: string,
           updatedAt: string,
         } | null,
@@ -7814,7 +7981,7 @@ export type OnUpdateSheetSubscription = {
         isDeleted: BooleanType,
         createdAt: string,
         updatedAt: string,
-        superior:  {
+        superior?:  {
           __typename: "Employee",
           companyID: string,
           username: string,
@@ -7825,7 +7992,7 @@ export type OnUpdateSheetSubscription = {
           lastName: string,
           grade: string,
           email: string,
-          group:  {
+          group?:  {
             __typename: "Group",
             companyID: string,
             localID: string,
@@ -7833,13 +8000,13 @@ export type OnUpdateSheetSubscription = {
             createdAt: string,
             updatedAt: string,
           } | null,
-          company:  {
+          company?:  {
             __typename: "Company",
             id: string,
             name: string,
             startMonth: number,
-            shortName: string | null,
-            url: string | null,
+            shortName?: string | null,
+            url?: string | null,
             createdAt: string,
             updatedAt: string,
           } | null,
@@ -7847,7 +8014,7 @@ export type OnUpdateSheetSubscription = {
           isDeleted: BooleanType,
           createdAt: string,
           updatedAt: string,
-          superior:  {
+          superior?:  {
             __typename: "Employee",
             companyID: string,
             username: string,
@@ -7858,7 +8025,7 @@ export type OnUpdateSheetSubscription = {
             lastName: string,
             grade: string,
             email: string,
-            group:  {
+            group?:  {
               __typename: "Group",
               companyID: string,
               localID: string,
@@ -7866,13 +8033,13 @@ export type OnUpdateSheetSubscription = {
               createdAt: string,
               updatedAt: string,
             } | null,
-            company:  {
+            company?:  {
               __typename: "Company",
               id: string,
               name: string,
               startMonth: number,
-              shortName: string | null,
-              url: string | null,
+              shortName?: string | null,
+              url?: string | null,
               createdAt: string,
               updatedAt: string,
             } | null,
@@ -7880,7 +8047,7 @@ export type OnUpdateSheetSubscription = {
             isDeleted: BooleanType,
             createdAt: string,
             updatedAt: string,
-            superior:  {
+            superior?:  {
               __typename: "Employee",
               companyID: string,
               username: string,
@@ -7891,7 +8058,7 @@ export type OnUpdateSheetSubscription = {
               lastName: string,
               grade: string,
               email: string,
-              group:  {
+              group?:  {
                 __typename: "Group",
                 companyID: string,
                 localID: string,
@@ -7899,13 +8066,13 @@ export type OnUpdateSheetSubscription = {
                 createdAt: string,
                 updatedAt: string,
               } | null,
-              company:  {
+              company?:  {
                 __typename: "Company",
                 id: string,
                 name: string,
                 startMonth: number,
-                shortName: string | null,
-                url: string | null,
+                shortName?: string | null,
+                url?: string | null,
                 createdAt: string,
                 updatedAt: string,
               } | null,
@@ -7913,7 +8080,7 @@ export type OnUpdateSheetSubscription = {
               isDeleted: BooleanType,
               createdAt: string,
               updatedAt: string,
-              superior:  {
+              superior?:  {
                 __typename: "Employee",
                 companyID: string,
                 username: string,
@@ -7934,7 +8101,7 @@ export type OnUpdateSheetSubscription = {
         } | null,
       } | null,
     } | null,
-    secondEmployee:  {
+    secondEmployee?:  {
       __typename: "Employee",
       companyID: string,
       username: string,
@@ -7945,7 +8112,7 @@ export type OnUpdateSheetSubscription = {
       lastName: string,
       grade: string,
       email: string,
-      group:  {
+      group?:  {
         __typename: "Group",
         companyID: string,
         localID: string,
@@ -7953,13 +8120,13 @@ export type OnUpdateSheetSubscription = {
         createdAt: string,
         updatedAt: string,
       } | null,
-      company:  {
+      company?:  {
         __typename: "Company",
         id: string,
         name: string,
         startMonth: number,
-        shortName: string | null,
-        url: string | null,
+        shortName?: string | null,
+        url?: string | null,
         createdAt: string,
         updatedAt: string,
       } | null,
@@ -7967,7 +8134,7 @@ export type OnUpdateSheetSubscription = {
       isDeleted: BooleanType,
       createdAt: string,
       updatedAt: string,
-      superior:  {
+      superior?:  {
         __typename: "Employee",
         companyID: string,
         username: string,
@@ -7978,7 +8145,7 @@ export type OnUpdateSheetSubscription = {
         lastName: string,
         grade: string,
         email: string,
-        group:  {
+        group?:  {
           __typename: "Group",
           companyID: string,
           localID: string,
@@ -7986,13 +8153,13 @@ export type OnUpdateSheetSubscription = {
           createdAt: string,
           updatedAt: string,
         } | null,
-        company:  {
+        company?:  {
           __typename: "Company",
           id: string,
           name: string,
           startMonth: number,
-          shortName: string | null,
-          url: string | null,
+          shortName?: string | null,
+          url?: string | null,
           createdAt: string,
           updatedAt: string,
         } | null,
@@ -8000,7 +8167,7 @@ export type OnUpdateSheetSubscription = {
         isDeleted: BooleanType,
         createdAt: string,
         updatedAt: string,
-        superior:  {
+        superior?:  {
           __typename: "Employee",
           companyID: string,
           username: string,
@@ -8011,7 +8178,7 @@ export type OnUpdateSheetSubscription = {
           lastName: string,
           grade: string,
           email: string,
-          group:  {
+          group?:  {
             __typename: "Group",
             companyID: string,
             localID: string,
@@ -8019,13 +8186,13 @@ export type OnUpdateSheetSubscription = {
             createdAt: string,
             updatedAt: string,
           } | null,
-          company:  {
+          company?:  {
             __typename: "Company",
             id: string,
             name: string,
             startMonth: number,
-            shortName: string | null,
-            url: string | null,
+            shortName?: string | null,
+            url?: string | null,
             createdAt: string,
             updatedAt: string,
           } | null,
@@ -8033,7 +8200,7 @@ export type OnUpdateSheetSubscription = {
           isDeleted: BooleanType,
           createdAt: string,
           updatedAt: string,
-          superior:  {
+          superior?:  {
             __typename: "Employee",
             companyID: string,
             username: string,
@@ -8044,7 +8211,7 @@ export type OnUpdateSheetSubscription = {
             lastName: string,
             grade: string,
             email: string,
-            group:  {
+            group?:  {
               __typename: "Group",
               companyID: string,
               localID: string,
@@ -8052,13 +8219,13 @@ export type OnUpdateSheetSubscription = {
               createdAt: string,
               updatedAt: string,
             } | null,
-            company:  {
+            company?:  {
               __typename: "Company",
               id: string,
               name: string,
               startMonth: number,
-              shortName: string | null,
-              url: string | null,
+              shortName?: string | null,
+              url?: string | null,
               createdAt: string,
               updatedAt: string,
             } | null,
@@ -8066,7 +8233,7 @@ export type OnUpdateSheetSubscription = {
             isDeleted: BooleanType,
             createdAt: string,
             updatedAt: string,
-            superior:  {
+            superior?:  {
               __typename: "Employee",
               companyID: string,
               username: string,
@@ -8077,7 +8244,7 @@ export type OnUpdateSheetSubscription = {
               lastName: string,
               grade: string,
               email: string,
-              group:  {
+              group?:  {
                 __typename: "Group",
                 companyID: string,
                 localID: string,
@@ -8085,13 +8252,13 @@ export type OnUpdateSheetSubscription = {
                 createdAt: string,
                 updatedAt: string,
               } | null,
-              company:  {
+              company?:  {
                 __typename: "Company",
                 id: string,
                 name: string,
                 startMonth: number,
-                shortName: string | null,
-                url: string | null,
+                shortName?: string | null,
+                url?: string | null,
                 createdAt: string,
                 updatedAt: string,
               } | null,
@@ -8099,7 +8266,7 @@ export type OnUpdateSheetSubscription = {
               isDeleted: BooleanType,
               createdAt: string,
               updatedAt: string,
-              superior:  {
+              superior?:  {
                 __typename: "Employee",
                 companyID: string,
                 username: string,
@@ -8120,45 +8287,45 @@ export type OnUpdateSheetSubscription = {
         } | null,
       } | null,
     } | null,
-    section:  {
+    section?:  {
       __typename: "ModelSectionConnection",
-      items:  Array< {
+      items?:  Array< {
         __typename: "Section",
         sheetKeys: string,
         sectionCategoryLocalId: string,
-        sectionCategoryName: string | null,
+        sectionCategoryName?: string | null,
         companyID: string,
-        objective:  {
+        objective?:  {
           __typename: "ModelObjectiveConnection",
-          items:  Array< {
+          items?:  Array< {
             __typename: "Objective",
             sectionKeys: string,
             createdAt: string,
             companyID: string,
             content: string,
-            result: string | null,
-            priority: string | null,
-            selfEvaluation: number | null,
-            firstEvaluation: number | null,
-            lastEvaluation: number | null,
-            progress: number | null,
-            expStartDate: string | null,
-            expDoneDate: string | null,
-            reviewee: string | null,
-            topReviewers: Array< string > | null,
-            secondReviewers: Array< string > | null,
-            referencer: Array< string > | null,
+            result?: string | null,
+            priority?: string | null,
+            selfEvaluation?: number | null,
+            firstEvaluation?: number | null,
+            lastEvaluation?: number | null,
+            progress?: number | null,
+            expStartDate?: string | null,
+            expDoneDate?: string | null,
+            reviewee?: string | null,
+            topReviewers?: Array< string > | null,
+            secondReviewers?: Array< string > | null,
+            referencer?: Array< string > | null,
             updatedAt: string,
           } | null > | null,
-          nextToken: string | null,
+          nextToken?: string | null,
         } | null,
-        reviewee: string | null,
-        topReviewers: Array< string > | null,
-        secondReviewers: Array< string > | null,
-        referencer: Array< string > | null,
+        reviewee?: string | null,
+        topReviewers?: Array< string > | null,
+        secondReviewers?: Array< string > | null,
+        referencer?: Array< string > | null,
         createdAt: string,
         updatedAt: string,
-        category:  {
+        category?:  {
           __typename: "Category",
           companyID: string,
           localID: string,
@@ -8167,7 +8334,7 @@ export type OnUpdateSheetSubscription = {
           updatedAt: string,
         } | null,
       } | null > | null,
-      nextToken: string | null,
+      nextToken?: string | null,
     } | null,
   } | null,
 };
@@ -8180,34 +8347,34 @@ export type OnDeleteSheetSubscriptionVariables = {
 };
 
 export type OnDeleteSheetSubscription = {
-  onDeleteSheet:  {
+  onDeleteSheet?:  {
     __typename: "Sheet",
     companyID: string,
     year: number,
     grade: string,
-    careerPlan: string | null,
-    careerPlanComment: string | null,
-    reviewComment: string | null,
-    reviewDate: string | null,
-    selfCheckDate: string | null,
-    firstComment: string | null,
-    firstCheckDate: string | null,
-    secondComment: string | null,
-    secondCheckDate: string | null,
-    overAllEvaluation: number | null,
-    statusValue: number | null,
-    interviewPlanDate: string | null,
-    interviewPlanComment: string | null,
-    InterviewMid1Date: string | null,
-    InterviewMid1Comment: string | null,
-    InterviewMid2Date: string | null,
-    InterviewMid2Comment: string | null,
-    InterviewMid3Date: string | null,
-    InterviewMid3Comment: string | null,
+    careerPlan?: string | null,
+    careerPlanComment?: string | null,
+    reviewComment?: string | null,
+    reviewDate?: string | null,
+    selfCheckDate?: string | null,
+    firstComment?: string | null,
+    firstCheckDate?: string | null,
+    secondComment?: string | null,
+    secondCheckDate?: string | null,
+    overAllEvaluation?: number | null,
+    statusValue?: number | null,
+    interviewPlanDate?: string | null,
+    interviewPlanComment?: string | null,
+    InterviewMid1Date?: string | null,
+    InterviewMid1Comment?: string | null,
+    InterviewMid2Date?: string | null,
+    InterviewMid2Comment?: string | null,
+    InterviewMid3Date?: string | null,
+    InterviewMid3Comment?: string | null,
     revieweeUsername: string,
     secondUsername: string,
     sheetGroupLocalId: string,
-    group:  {
+    group?:  {
       __typename: "Group",
       companyID: string,
       localID: string,
@@ -8215,13 +8382,13 @@ export type OnDeleteSheetSubscription = {
       createdAt: string,
       updatedAt: string,
     } | null,
-    referencer: Array< string > | null,
+    referencer?: Array< string > | null,
     reviewee: string,
-    topReviewers: Array< string > | null,
-    secondReviewers: Array< string > | null,
+    topReviewers?: Array< string > | null,
+    secondReviewers?: Array< string > | null,
     createdAt: string,
     updatedAt: string,
-    revieweeEmployee:  {
+    revieweeEmployee?:  {
       __typename: "Employee",
       companyID: string,
       username: string,
@@ -8232,7 +8399,7 @@ export type OnDeleteSheetSubscription = {
       lastName: string,
       grade: string,
       email: string,
-      group:  {
+      group?:  {
         __typename: "Group",
         companyID: string,
         localID: string,
@@ -8240,13 +8407,13 @@ export type OnDeleteSheetSubscription = {
         createdAt: string,
         updatedAt: string,
       } | null,
-      company:  {
+      company?:  {
         __typename: "Company",
         id: string,
         name: string,
         startMonth: number,
-        shortName: string | null,
-        url: string | null,
+        shortName?: string | null,
+        url?: string | null,
         createdAt: string,
         updatedAt: string,
       } | null,
@@ -8254,7 +8421,7 @@ export type OnDeleteSheetSubscription = {
       isDeleted: BooleanType,
       createdAt: string,
       updatedAt: string,
-      superior:  {
+      superior?:  {
         __typename: "Employee",
         companyID: string,
         username: string,
@@ -8265,7 +8432,7 @@ export type OnDeleteSheetSubscription = {
         lastName: string,
         grade: string,
         email: string,
-        group:  {
+        group?:  {
           __typename: "Group",
           companyID: string,
           localID: string,
@@ -8273,13 +8440,13 @@ export type OnDeleteSheetSubscription = {
           createdAt: string,
           updatedAt: string,
         } | null,
-        company:  {
+        company?:  {
           __typename: "Company",
           id: string,
           name: string,
           startMonth: number,
-          shortName: string | null,
-          url: string | null,
+          shortName?: string | null,
+          url?: string | null,
           createdAt: string,
           updatedAt: string,
         } | null,
@@ -8287,7 +8454,7 @@ export type OnDeleteSheetSubscription = {
         isDeleted: BooleanType,
         createdAt: string,
         updatedAt: string,
-        superior:  {
+        superior?:  {
           __typename: "Employee",
           companyID: string,
           username: string,
@@ -8298,7 +8465,7 @@ export type OnDeleteSheetSubscription = {
           lastName: string,
           grade: string,
           email: string,
-          group:  {
+          group?:  {
             __typename: "Group",
             companyID: string,
             localID: string,
@@ -8306,13 +8473,13 @@ export type OnDeleteSheetSubscription = {
             createdAt: string,
             updatedAt: string,
           } | null,
-          company:  {
+          company?:  {
             __typename: "Company",
             id: string,
             name: string,
             startMonth: number,
-            shortName: string | null,
-            url: string | null,
+            shortName?: string | null,
+            url?: string | null,
             createdAt: string,
             updatedAt: string,
           } | null,
@@ -8320,7 +8487,7 @@ export type OnDeleteSheetSubscription = {
           isDeleted: BooleanType,
           createdAt: string,
           updatedAt: string,
-          superior:  {
+          superior?:  {
             __typename: "Employee",
             companyID: string,
             username: string,
@@ -8331,7 +8498,7 @@ export type OnDeleteSheetSubscription = {
             lastName: string,
             grade: string,
             email: string,
-            group:  {
+            group?:  {
               __typename: "Group",
               companyID: string,
               localID: string,
@@ -8339,13 +8506,13 @@ export type OnDeleteSheetSubscription = {
               createdAt: string,
               updatedAt: string,
             } | null,
-            company:  {
+            company?:  {
               __typename: "Company",
               id: string,
               name: string,
               startMonth: number,
-              shortName: string | null,
-              url: string | null,
+              shortName?: string | null,
+              url?: string | null,
               createdAt: string,
               updatedAt: string,
             } | null,
@@ -8353,7 +8520,7 @@ export type OnDeleteSheetSubscription = {
             isDeleted: BooleanType,
             createdAt: string,
             updatedAt: string,
-            superior:  {
+            superior?:  {
               __typename: "Employee",
               companyID: string,
               username: string,
@@ -8364,7 +8531,7 @@ export type OnDeleteSheetSubscription = {
               lastName: string,
               grade: string,
               email: string,
-              group:  {
+              group?:  {
                 __typename: "Group",
                 companyID: string,
                 localID: string,
@@ -8372,13 +8539,13 @@ export type OnDeleteSheetSubscription = {
                 createdAt: string,
                 updatedAt: string,
               } | null,
-              company:  {
+              company?:  {
                 __typename: "Company",
                 id: string,
                 name: string,
                 startMonth: number,
-                shortName: string | null,
-                url: string | null,
+                shortName?: string | null,
+                url?: string | null,
                 createdAt: string,
                 updatedAt: string,
               } | null,
@@ -8386,7 +8553,7 @@ export type OnDeleteSheetSubscription = {
               isDeleted: BooleanType,
               createdAt: string,
               updatedAt: string,
-              superior:  {
+              superior?:  {
                 __typename: "Employee",
                 companyID: string,
                 username: string,
@@ -8407,7 +8574,7 @@ export type OnDeleteSheetSubscription = {
         } | null,
       } | null,
     } | null,
-    secondEmployee:  {
+    secondEmployee?:  {
       __typename: "Employee",
       companyID: string,
       username: string,
@@ -8418,7 +8585,7 @@ export type OnDeleteSheetSubscription = {
       lastName: string,
       grade: string,
       email: string,
-      group:  {
+      group?:  {
         __typename: "Group",
         companyID: string,
         localID: string,
@@ -8426,13 +8593,13 @@ export type OnDeleteSheetSubscription = {
         createdAt: string,
         updatedAt: string,
       } | null,
-      company:  {
+      company?:  {
         __typename: "Company",
         id: string,
         name: string,
         startMonth: number,
-        shortName: string | null,
-        url: string | null,
+        shortName?: string | null,
+        url?: string | null,
         createdAt: string,
         updatedAt: string,
       } | null,
@@ -8440,7 +8607,7 @@ export type OnDeleteSheetSubscription = {
       isDeleted: BooleanType,
       createdAt: string,
       updatedAt: string,
-      superior:  {
+      superior?:  {
         __typename: "Employee",
         companyID: string,
         username: string,
@@ -8451,7 +8618,7 @@ export type OnDeleteSheetSubscription = {
         lastName: string,
         grade: string,
         email: string,
-        group:  {
+        group?:  {
           __typename: "Group",
           companyID: string,
           localID: string,
@@ -8459,13 +8626,13 @@ export type OnDeleteSheetSubscription = {
           createdAt: string,
           updatedAt: string,
         } | null,
-        company:  {
+        company?:  {
           __typename: "Company",
           id: string,
           name: string,
           startMonth: number,
-          shortName: string | null,
-          url: string | null,
+          shortName?: string | null,
+          url?: string | null,
           createdAt: string,
           updatedAt: string,
         } | null,
@@ -8473,7 +8640,7 @@ export type OnDeleteSheetSubscription = {
         isDeleted: BooleanType,
         createdAt: string,
         updatedAt: string,
-        superior:  {
+        superior?:  {
           __typename: "Employee",
           companyID: string,
           username: string,
@@ -8484,7 +8651,7 @@ export type OnDeleteSheetSubscription = {
           lastName: string,
           grade: string,
           email: string,
-          group:  {
+          group?:  {
             __typename: "Group",
             companyID: string,
             localID: string,
@@ -8492,13 +8659,13 @@ export type OnDeleteSheetSubscription = {
             createdAt: string,
             updatedAt: string,
           } | null,
-          company:  {
+          company?:  {
             __typename: "Company",
             id: string,
             name: string,
             startMonth: number,
-            shortName: string | null,
-            url: string | null,
+            shortName?: string | null,
+            url?: string | null,
             createdAt: string,
             updatedAt: string,
           } | null,
@@ -8506,7 +8673,7 @@ export type OnDeleteSheetSubscription = {
           isDeleted: BooleanType,
           createdAt: string,
           updatedAt: string,
-          superior:  {
+          superior?:  {
             __typename: "Employee",
             companyID: string,
             username: string,
@@ -8517,7 +8684,7 @@ export type OnDeleteSheetSubscription = {
             lastName: string,
             grade: string,
             email: string,
-            group:  {
+            group?:  {
               __typename: "Group",
               companyID: string,
               localID: string,
@@ -8525,13 +8692,13 @@ export type OnDeleteSheetSubscription = {
               createdAt: string,
               updatedAt: string,
             } | null,
-            company:  {
+            company?:  {
               __typename: "Company",
               id: string,
               name: string,
               startMonth: number,
-              shortName: string | null,
-              url: string | null,
+              shortName?: string | null,
+              url?: string | null,
               createdAt: string,
               updatedAt: string,
             } | null,
@@ -8539,7 +8706,7 @@ export type OnDeleteSheetSubscription = {
             isDeleted: BooleanType,
             createdAt: string,
             updatedAt: string,
-            superior:  {
+            superior?:  {
               __typename: "Employee",
               companyID: string,
               username: string,
@@ -8550,7 +8717,7 @@ export type OnDeleteSheetSubscription = {
               lastName: string,
               grade: string,
               email: string,
-              group:  {
+              group?:  {
                 __typename: "Group",
                 companyID: string,
                 localID: string,
@@ -8558,13 +8725,13 @@ export type OnDeleteSheetSubscription = {
                 createdAt: string,
                 updatedAt: string,
               } | null,
-              company:  {
+              company?:  {
                 __typename: "Company",
                 id: string,
                 name: string,
                 startMonth: number,
-                shortName: string | null,
-                url: string | null,
+                shortName?: string | null,
+                url?: string | null,
                 createdAt: string,
                 updatedAt: string,
               } | null,
@@ -8572,7 +8739,7 @@ export type OnDeleteSheetSubscription = {
               isDeleted: BooleanType,
               createdAt: string,
               updatedAt: string,
-              superior:  {
+              superior?:  {
                 __typename: "Employee",
                 companyID: string,
                 username: string,
@@ -8593,45 +8760,45 @@ export type OnDeleteSheetSubscription = {
         } | null,
       } | null,
     } | null,
-    section:  {
+    section?:  {
       __typename: "ModelSectionConnection",
-      items:  Array< {
+      items?:  Array< {
         __typename: "Section",
         sheetKeys: string,
         sectionCategoryLocalId: string,
-        sectionCategoryName: string | null,
+        sectionCategoryName?: string | null,
         companyID: string,
-        objective:  {
+        objective?:  {
           __typename: "ModelObjectiveConnection",
-          items:  Array< {
+          items?:  Array< {
             __typename: "Objective",
             sectionKeys: string,
             createdAt: string,
             companyID: string,
             content: string,
-            result: string | null,
-            priority: string | null,
-            selfEvaluation: number | null,
-            firstEvaluation: number | null,
-            lastEvaluation: number | null,
-            progress: number | null,
-            expStartDate: string | null,
-            expDoneDate: string | null,
-            reviewee: string | null,
-            topReviewers: Array< string > | null,
-            secondReviewers: Array< string > | null,
-            referencer: Array< string > | null,
+            result?: string | null,
+            priority?: string | null,
+            selfEvaluation?: number | null,
+            firstEvaluation?: number | null,
+            lastEvaluation?: number | null,
+            progress?: number | null,
+            expStartDate?: string | null,
+            expDoneDate?: string | null,
+            reviewee?: string | null,
+            topReviewers?: Array< string > | null,
+            secondReviewers?: Array< string > | null,
+            referencer?: Array< string > | null,
             updatedAt: string,
           } | null > | null,
-          nextToken: string | null,
+          nextToken?: string | null,
         } | null,
-        reviewee: string | null,
-        topReviewers: Array< string > | null,
-        secondReviewers: Array< string > | null,
-        referencer: Array< string > | null,
+        reviewee?: string | null,
+        topReviewers?: Array< string > | null,
+        secondReviewers?: Array< string > | null,
+        referencer?: Array< string > | null,
         createdAt: string,
         updatedAt: string,
-        category:  {
+        category?:  {
           __typename: "Category",
           companyID: string,
           localID: string,
@@ -8640,7 +8807,7 @@ export type OnDeleteSheetSubscription = {
           updatedAt: string,
         } | null,
       } | null > | null,
-      nextToken: string | null,
+      nextToken?: string | null,
     } | null,
   } | null,
 };
@@ -8653,43 +8820,43 @@ export type OnCreateSectionSubscriptionVariables = {
 };
 
 export type OnCreateSectionSubscription = {
-  onCreateSection:  {
+  onCreateSection?:  {
     __typename: "Section",
     sheetKeys: string,
     sectionCategoryLocalId: string,
-    sectionCategoryName: string | null,
+    sectionCategoryName?: string | null,
     companyID: string,
-    objective:  {
+    objective?:  {
       __typename: "ModelObjectiveConnection",
-      items:  Array< {
+      items?:  Array< {
         __typename: "Objective",
         sectionKeys: string,
         createdAt: string,
         companyID: string,
         content: string,
-        result: string | null,
-        priority: string | null,
-        selfEvaluation: number | null,
-        firstEvaluation: number | null,
-        lastEvaluation: number | null,
-        progress: number | null,
-        expStartDate: string | null,
-        expDoneDate: string | null,
-        reviewee: string | null,
-        topReviewers: Array< string > | null,
-        secondReviewers: Array< string > | null,
-        referencer: Array< string > | null,
+        result?: string | null,
+        priority?: string | null,
+        selfEvaluation?: number | null,
+        firstEvaluation?: number | null,
+        lastEvaluation?: number | null,
+        progress?: number | null,
+        expStartDate?: string | null,
+        expDoneDate?: string | null,
+        reviewee?: string | null,
+        topReviewers?: Array< string > | null,
+        secondReviewers?: Array< string > | null,
+        referencer?: Array< string > | null,
         updatedAt: string,
       } | null > | null,
-      nextToken: string | null,
+      nextToken?: string | null,
     } | null,
-    reviewee: string | null,
-    topReviewers: Array< string > | null,
-    secondReviewers: Array< string > | null,
-    referencer: Array< string > | null,
+    reviewee?: string | null,
+    topReviewers?: Array< string > | null,
+    secondReviewers?: Array< string > | null,
+    referencer?: Array< string > | null,
     createdAt: string,
     updatedAt: string,
-    category:  {
+    category?:  {
       __typename: "Category",
       companyID: string,
       localID: string,
@@ -8708,43 +8875,43 @@ export type OnUpdateSectionSubscriptionVariables = {
 };
 
 export type OnUpdateSectionSubscription = {
-  onUpdateSection:  {
+  onUpdateSection?:  {
     __typename: "Section",
     sheetKeys: string,
     sectionCategoryLocalId: string,
-    sectionCategoryName: string | null,
+    sectionCategoryName?: string | null,
     companyID: string,
-    objective:  {
+    objective?:  {
       __typename: "ModelObjectiveConnection",
-      items:  Array< {
+      items?:  Array< {
         __typename: "Objective",
         sectionKeys: string,
         createdAt: string,
         companyID: string,
         content: string,
-        result: string | null,
-        priority: string | null,
-        selfEvaluation: number | null,
-        firstEvaluation: number | null,
-        lastEvaluation: number | null,
-        progress: number | null,
-        expStartDate: string | null,
-        expDoneDate: string | null,
-        reviewee: string | null,
-        topReviewers: Array< string > | null,
-        secondReviewers: Array< string > | null,
-        referencer: Array< string > | null,
+        result?: string | null,
+        priority?: string | null,
+        selfEvaluation?: number | null,
+        firstEvaluation?: number | null,
+        lastEvaluation?: number | null,
+        progress?: number | null,
+        expStartDate?: string | null,
+        expDoneDate?: string | null,
+        reviewee?: string | null,
+        topReviewers?: Array< string > | null,
+        secondReviewers?: Array< string > | null,
+        referencer?: Array< string > | null,
         updatedAt: string,
       } | null > | null,
-      nextToken: string | null,
+      nextToken?: string | null,
     } | null,
-    reviewee: string | null,
-    topReviewers: Array< string > | null,
-    secondReviewers: Array< string > | null,
-    referencer: Array< string > | null,
+    reviewee?: string | null,
+    topReviewers?: Array< string > | null,
+    secondReviewers?: Array< string > | null,
+    referencer?: Array< string > | null,
     createdAt: string,
     updatedAt: string,
-    category:  {
+    category?:  {
       __typename: "Category",
       companyID: string,
       localID: string,
@@ -8763,43 +8930,43 @@ export type OnDeleteSectionSubscriptionVariables = {
 };
 
 export type OnDeleteSectionSubscription = {
-  onDeleteSection:  {
+  onDeleteSection?:  {
     __typename: "Section",
     sheetKeys: string,
     sectionCategoryLocalId: string,
-    sectionCategoryName: string | null,
+    sectionCategoryName?: string | null,
     companyID: string,
-    objective:  {
+    objective?:  {
       __typename: "ModelObjectiveConnection",
-      items:  Array< {
+      items?:  Array< {
         __typename: "Objective",
         sectionKeys: string,
         createdAt: string,
         companyID: string,
         content: string,
-        result: string | null,
-        priority: string | null,
-        selfEvaluation: number | null,
-        firstEvaluation: number | null,
-        lastEvaluation: number | null,
-        progress: number | null,
-        expStartDate: string | null,
-        expDoneDate: string | null,
-        reviewee: string | null,
-        topReviewers: Array< string > | null,
-        secondReviewers: Array< string > | null,
-        referencer: Array< string > | null,
+        result?: string | null,
+        priority?: string | null,
+        selfEvaluation?: number | null,
+        firstEvaluation?: number | null,
+        lastEvaluation?: number | null,
+        progress?: number | null,
+        expStartDate?: string | null,
+        expDoneDate?: string | null,
+        reviewee?: string | null,
+        topReviewers?: Array< string > | null,
+        secondReviewers?: Array< string > | null,
+        referencer?: Array< string > | null,
         updatedAt: string,
       } | null > | null,
-      nextToken: string | null,
+      nextToken?: string | null,
     } | null,
-    reviewee: string | null,
-    topReviewers: Array< string > | null,
-    secondReviewers: Array< string > | null,
-    referencer: Array< string > | null,
+    reviewee?: string | null,
+    topReviewers?: Array< string > | null,
+    secondReviewers?: Array< string > | null,
+    referencer?: Array< string > | null,
     createdAt: string,
     updatedAt: string,
-    category:  {
+    category?:  {
       __typename: "Category",
       companyID: string,
       localID: string,

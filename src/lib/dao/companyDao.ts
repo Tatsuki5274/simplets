@@ -1,5 +1,5 @@
-import { Company } from "App";
 import * as APIt from 'API';
+import { Company } from 'API';
 import { graphqlMutation, graphqlQuery } from "./common/sdk";
 
 export const CompanyDao = {

@@ -1,4 +1,4 @@
-import { ErrorContext, Objective } from "App";
+import { ErrorContext } from "App";
 import { inputFieldStyle } from "common/globalStyle.module.scss";
 import dateFormat from "dateformat";
 import React, { useContext } from "react"
@@ -7,6 +7,7 @@ import * as APIt from 'API';
 import { ObjectiveDao } from "lib/dao/objectiveDao";
 import { updateObjective } from "graphql/mutations";
 import Style from '../../../../indexStyle.module.scss';
+import { Objective } from "API";
 
 type Props = {
     objective: Objective,
@@ -22,7 +23,7 @@ export const RevieweeSheetObjectiveEditableStatus3 = (props: Props) => {
         props.objective.progress.toString()
         : undefined
     
-    const date = new Date(props.objective.updatedAt);
+    const date = new Date(props.objective.updatedAt || ""); // unsafe
     var expDoneDateStyle: string; //完了予定日のクラス名
     var currentDate = new Date().getTime();
     var doneDate = new Date(props.objective.expDoneDate!).getTime();
@@ -51,8 +52,8 @@ export const RevieweeSheetObjectiveEditableStatus3 = (props: Props) => {
 
         if (props.objective && objectiveProgress >= 0 && objectiveProgress <= 100) {
             const updateI: APIt.UpdateObjectiveInput = {
-                sectionKeys: props.objective.sectionKeys,
-                createdAt: props.objective.createdAt,
+                sectionKeys: props.objective.sectionKeys || "", // unsafe
+                createdAt: props.objective.createdAt || "", // unsafe
                 progress: objectiveProgress,
             };
             const updatedObjective = await ObjectiveDao.update(updateObjective, updateI)

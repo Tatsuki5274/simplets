@@ -45,7 +45,7 @@ export const OverEvaluationTableStatus10 = () => {
         ; (async () => {
             // 前期と前々期を取得
             if(sheet){
-                const thisYear = sheet.year
+                const thisYear = sheet.year || 0 // unsafe
 
                 if(currentUser){
                     const input: APIt.ListSheetRevieweeQueryVariables = {

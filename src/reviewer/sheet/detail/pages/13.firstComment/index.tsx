@@ -1,5 +1,5 @@
-import { UpdateSheetInput } from "API";
-import { ErrorContext, Section } from "App";
+import { Section, UpdateSheetInput } from "API";
+import { ErrorContext } from "App";
 import ApprovalStatusBox from "common/approvalStatusBox";
 import { Formik } from "formik";
 import { updateSheet } from "graphql/mutations";
@@ -49,9 +49,9 @@ export const ReviewerSheetPagesStatus13 = () => {
                                     if (window.confirm("最終承認を行いますか？")) {
                                         const work = commandWorkFlow(Command.SUP2_DONE, sheet)
                                         const data: UpdateSheetInput = {
-                                            companyID: sheet.companyID,
-                                            reviewee: sheet.reviewee,
-                                            year: sheet.year,
+                                            companyID: sheet.companyID || "",
+                                            reviewee: sheet.reviewee || "",
+                                            year: sheet.year || 0,
                                             statusValue: work.sheet.statusValue,
                                             firstComment: values.firstComment,
                                             firstCheckDate: formatAWSDate(new Date()),
@@ -105,9 +105,9 @@ export const ReviewerSheetPagesStatus13 = () => {
                                         <Form.Group>
                                             <Button className={buttonComponentStyle} onClick={async () => {
                                                 const formikData: UpdateSheetInput = {
-                                                    companyID: sheet.companyID,
-                                                    reviewee: sheet.reviewee,
-                                                    year: sheet.year,
+                                                    companyID: sheet.companyID || "",
+                                                    reviewee: sheet.reviewee || "",
+                                                    year: sheet.year || 0,
                                                     firstComment: formik.values.firstComment,
                                                     firstCheckDate: formatAWSDate(new Date()),
                                                 }

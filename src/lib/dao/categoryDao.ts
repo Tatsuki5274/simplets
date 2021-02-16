@@ -1,5 +1,5 @@
-import { Category } from "App";
 import * as APIt from 'API';
+import { Category } from 'API';
 import { graphqlMutation, graphqlQuery } from "./common/sdk";
 
 export const CategoryDao = {

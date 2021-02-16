@@ -1,5 +1,5 @@
-import { UpdateSheetInput } from "API";
-import { ErrorContext, Section, Sheet } from "App";
+import { Section, Sheet, UpdateSheetInput } from "API";
+import { ErrorContext } from "App";
 import ApprovalStatusBox from "common/approvalStatusBox";
 import { buttonComponentStyle } from "common/globalStyle.module.scss";
 import { Formik } from "formik";
@@ -27,9 +27,9 @@ export const ReviewerSheetPagesStatus3 = (props: Props) => {
 
     const onSubmit = async (values: Sheet) => {
         const data: UpdateSheetInput = {
-            companyID: props.sheet.companyID,
-            reviewee: props.sheet.reviewee,
-            year: props.sheet.year,
+            companyID: props.sheet.companyID || "", // unsafe
+            reviewee: props.sheet.reviewee || "",   // unsafe
+            year: props.sheet.year || 0,    // unsafe
             careerPlanComment: values.careerPlanComment,
             interviewPlanComment: values.interviewPlanComment,
             interviewPlanDate: values.interviewPlanDate,

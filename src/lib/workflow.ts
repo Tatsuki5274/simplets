@@ -1,4 +1,5 @@
-import { Employee, SendEmail, Sheet } from "App";
+import { Employee, Sheet } from "API";
+import { SendEmail } from "App";
 
 export enum Command {
     REVIEWEE_SUBMIT,
@@ -142,27 +143,27 @@ function getMailObject(key: number, sheet: Sheet, reason?: string): SendEmail | 
         }
         if(employees.length === 2){
             reviewee.name = `${employees[0].lastName} ${employees[0].firstName}`
-            reviewee.email = employees[0].email
+            reviewee.email = employees[0].email || "" // unsafe
             sup1.name = `${employees[1].lastName} ${employees[1].firstName}`
-            sup1.email = employees[1].email
+            sup1.email = employees[1].email || "" // unsafe
             ceo.name = `${employees[1].lastName} ${employees[1].firstName}`
-            ceo.email = employees[1].email          
+            ceo.email = employees[1].email || "" // unsafe
         }else if(employees.length === 3){
             reviewee.name = `${employees[0].lastName} ${employees[0].firstName}`
-            reviewee.email = employees[0].email
+            reviewee.email = employees[0].email || "" // unsafe
             sup1.name = `${employees[1].lastName} ${employees[1].firstName}`
-            sup1.email = employees[1].email
+            sup1.email = employees[1].email || "" // unsafe
             ceo.name = `${employees[2].lastName} ${employees[2].firstName}`
-            ceo.email = employees[2].email
+            ceo.email = employees[2].email || "" // unsafe
         }else if(employees.length >= 4){
             reviewee.name = `${employees[0].lastName} ${employees[0].firstName}`
-            reviewee.email = employees[0].email
+            reviewee.email = employees[0].email || "" // unsafe
             sup1.name = `${employees[1].lastName} ${employees[1].firstName}`
-            sup1.email = employees[1].email
+            sup1.email = employees[1].email || "" // unsafe
             sup2.name = `${employees[2].lastName} ${employees[2].firstName}`
-            sup2.email = employees[2].email
+            sup2.email = employees[2].email || "" // unsafe
             ceo.name = `${employees[employees.length-1].lastName} ${employees[employees.length-1].firstName}`
-            ceo.email = employees[employees.length-1].email
+            ceo.email = employees[employees.length-1].email || "" // unsafe
         }else{
             console.error("社員情報に誤りがあります", employees)
             isInitSuccess = false

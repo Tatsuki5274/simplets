@@ -1,5 +1,5 @@
-import { Objective } from "App";
 import * as APIt from 'API';
+import { Objective } from 'API';
 import { graphqlMutation, graphqlQuery } from "./common/sdk";
 
 export const ObjectiveDao = {

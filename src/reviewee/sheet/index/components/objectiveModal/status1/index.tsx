@@ -2,11 +2,11 @@ import { ErrorMessage, Formik } from "formik";
 import React from "react"
 import { Badge, Button, Col, Form, Modal, Row } from "react-bootstrap";
 import * as APIt from 'API';
-import { Objective } from "App";
 import { ObjectiveDao } from "lib/dao/objectiveDao";
 import { updateObjective } from "graphql/mutations";
 import { inputFieldStyle } from "common/globalStyle.module.scss";
 import * as Yup from 'yup';
+import { Objective } from "API";
 
 type Props = {
     objective: Objective,
@@ -37,8 +37,8 @@ export const RevieweeSheetObjectiveModalStatus1 = (props: Props)=>{
     
                     //目標変更の目標、ステータス、自己評価、優先順位、実績を項目明細に上書き
                     const updateI: APIt.UpdateObjectiveInput = {
-                        createdAt: props.objective.createdAt,
-                        sectionKeys: props.objective.sectionKeys,
+                        createdAt: props.objective.createdAt || "", // unsafe
+                        sectionKeys: props.objective.sectionKeys || "", // unsafe
                         content: values.content,
                         priority: values.priority,
                         expStartDate: values.expStartDate ? values.expStartDate : undefined,
