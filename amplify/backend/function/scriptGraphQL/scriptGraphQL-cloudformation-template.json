@@ -17,6 +17,12 @@
     "apisccgqlGraphQLAPIEndpointOutput": {
       "Type": "String",
       "Default": "apisccgqlGraphQLAPIEndpointOutput"
+    },
+    "deploymentBucketName": {
+      "Type": "String"
+    },
+    "s3Key": {
+      "Type": "String"
     }
   },
   "Conditions": {
@@ -82,8 +88,12 @@
         "Layers": [],
         "Timeout": "25",
         "Code": {
-          "S3Bucket": "amplify-sccsystem-prod-92900-deployment",
-          "S3Key": "amplify-builds/scriptGraphQL-7671364d4d6876423532-build.zip"
+          "S3Bucket": {
+            "Ref": "deploymentBucketName"
+          },
+          "S3Key": {
+            "Ref": "s3Key"
+          }
         }
       }
     },

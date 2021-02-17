@@ -61,9 +61,18 @@
         "sccsysteme53c89f0": {}
       },
       "function": {
-        "approvalStatusManager": {},
-        "sendEmail": {},
-        "scriptGraphQL": {}
+        "approvalStatusManager": {
+          "deploymentBucketName": "amplify-sccsystem-prod-92900-deployment",
+          "s3Key": "amplify-builds/approvalStatusManager-2b5a664e783654343558-build.zip"
+        },
+        "sendEmail": {
+          "deploymentBucketName": "amplify-sccsystem-prod-92900-deployment",
+          "s3Key": "amplify-builds/sendEmail-704e69774d4952544c75-build.zip"
+        },
+        "scriptGraphQL": {
+          "deploymentBucketName": "amplify-sccsystem-prod-92900-deployment",
+          "s3Key": "amplify-builds/scriptGraphQL-644f6435557864683858-build.zip"
+        }
       }
     }
   }
