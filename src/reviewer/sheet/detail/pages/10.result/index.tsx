@@ -72,50 +72,55 @@ export const ReviewerSheetPagesStatus10 = (props: Props) => {
                             })}
                             onSubmit={async (values) => {
                                 if (sheet) {
-                                    let isValid = true
-                                    for (const key in values.lastEvaluation) {
-                                        if (!values.lastEvaluation[key]) isValid = false
-                                    }
-                                    if (isValid && values.overAllEvaluation && values.secondComment) {
-                                        //評価が入力済み
-                                        if (window.confirm("総合評価を確定しますか？")) {
-
-
-                                            const work = commandWorkFlow(Command.SUP1_INPUT_SCORE, sheet)
-                                            const data: UpdateSheetInput = {
-                                                companyID: sheet.companyID || "",   // unsafe
-                                                reviewee: sheet.reviewee || "", // unsafe
-                                                year: sheet.year || 0, // unsafe
-                                                secondComment: values.secondComment,
-                                                secondCheckDate: formatAWSDate(new Date()),
-                                                statusValue: work.sheet.statusValue,
-                                                overAllEvaluation: values.overAllEvaluation
-                                            }
-                                            let updatedSheet = await SheetDao.update(updateSheet, data);
-                                            console.log("10updated", updatedSheet)
-
-
-                                            if (updatedSheet) {
-                                                if (work.mailObject) {
-                                                    sendEmailMutation(work.mailObject)
-                                                    alert('承認が完了しました');
-                                                } else {
-                                                    setError("メールの作成に失敗しました")
-                                                    console.error("メールの作成に失敗しました")
-                                                }
-                                                if (setSheet) {
-                                                    setSheet({ ...updatedSheet })
-                                                }
-                                            } else {
-                                                setError("フォームデータの登録に失敗しました")
-                                                console.error("フォームデータの登録に失敗しました")
-                                            }
+                                    if (sheet.companyID && sheet.reviewee && sheet.year) {
+                                        let isValid = true
+                                        for (const key in values.lastEvaluation) {
+                                            if (!values.lastEvaluation[key]) isValid = false
                                         }
-                                    } else {
-                                        alert("評価をすべて入力してください")
-                                        
+                                        if (isValid && values.overAllEvaluation && values.secondComment) {
+                                            //評価が入力済み
+                                            if (window.confirm("総合評価を確定しますか？")) {
+
+
+                                                const work = commandWorkFlow(Command.SUP1_INPUT_SCORE, sheet)
+                                                const data: UpdateSheetInput = {
+                                                    companyID: sheet.companyID,
+                                                    reviewee: sheet.reviewee,
+                                                    year: sheet.year,
+                                                    secondComment: values.secondComment,
+                                                    secondCheckDate: formatAWSDate(new Date()),
+                                                    statusValue: work.sheet.statusValue,
+                                                    overAllEvaluation: values.overAllEvaluation
+                                                }
+                                                let updatedSheet = await SheetDao.update(updateSheet, data);
+                                                console.log("10updated", updatedSheet)
+
+
+                                                if (updatedSheet) {
+                                                    if (work.mailObject) {
+                                                        sendEmailMutation(work.mailObject)
+                                                        alert('承認が完了しました');
+                                                    } else {
+                                                        setError("メールの作成に失敗しました")
+                                                        console.error("メールの作成に失敗しました")
+                                                    }
+                                                    if (setSheet) {
+                                                        setSheet({ ...updatedSheet })
+                                                    }
+                                                } else {
+                                                    setError("フォームデータの登録に失敗しました")
+                                                    console.error("フォームデータの登録に失敗しました")
+                                                }
+                                            }
+                                        } else {
+                                            alert("評価をすべて入力してください")
+
+                                        }
+                                    }else{
+                                        console.error("評価シートの特定に失敗しました")
+                                        setError("評価シートの特定に失敗しました")
                                     }
-                                }else{
+                                } else {
                                     setError("sheetの読み込みに失敗しています")
                                     console.error("sheetの読み込みに失敗しています")
                                 }
@@ -143,23 +148,29 @@ export const ReviewerSheetPagesStatus10 = (props: Props) => {
                                         {/* ステータスによってボタンの出し分け */}
                                         <Form.Group>
                                             <Button className={buttonComponentStyle} onClick={async () => {
-                                                console.log("formik", formik.values)
-                                                const data: UpdateSheetInput = {
-                                                    companyID: sheet.companyID || "",   // unsafe
-                                                    reviewee: sheet.reviewee || "", // unsafe
-                                                    year: sheet.year || 0,  // unsafe
-                                                    secondComment: formik.values.secondComment,
-                                                    secondCheckDate: formatAWSDate(new Date()),
-                                                    overAllEvaluation: formik.values.overAllEvaluation || null
+                                                if(sheet.companyID && sheet.reviewee && sheet.year){
+                                                    console.log("formik", formik.values)
+                                                    const data: UpdateSheetInput = {
+                                                        companyID: sheet.companyID,
+                                                        reviewee: sheet.reviewee,
+                                                        year: sheet.year,
+                                                        secondComment: formik.values.secondComment,
+                                                        secondCheckDate: formatAWSDate(new Date()),
+                                                        overAllEvaluation: formik.values.overAllEvaluation || null
+                                                    }
+                                                    const updatedSheet = await SheetDao.update(updateSheet, data);
+    
+                                                    // const updatedSheet = runUpdateSheet(props.values);
+                                                    if (updatedSheet) {
+                                                        console.log("保存成功", updatedSheet)
+                                                    } else {
+                                                        console.error("保存失敗", updatedSheet)
+                                                    }
+                                                }else{
+                                                    console.error("評価シートの特定に失敗しました")
+                                                    setError("評価シートの特定に失敗しました")
                                                 }
-                                                const updatedSheet = await SheetDao.update(updateSheet, data);
-
-                                                // const updatedSheet = runUpdateSheet(props.values);
-                                                if (updatedSheet) {
-                                                    console.log("保存成功", updatedSheet)
-                                                } else {
-                                                    console.error("保存失敗", updatedSheet)
-                                                }
+               
                                             }}>保存</Button>
 
                                             <Button type="submit" className={buttonComponentStyle}>総合評価確定</Button>

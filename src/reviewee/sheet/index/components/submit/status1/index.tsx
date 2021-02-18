@@ -17,27 +17,32 @@ export const SubmitButtonStatus1 = () => {
         return (
             <Button
                 onClick={async () => {
-                    if (window.confirm("目標を提出しますか？")) {
-                        const work = commandWorkFlow(Command.REVIEWEE_SUBMIT, sheet)
-                        let updatedSheet = await SheetDao.update(updateSheet, {
-                            companyID: sheet.companyID || "",   // unsafe
-                            reviewee: sheet.reviewee || "", // unsafe
-                            year: sheet.year || 0,  // unsafe
-                            statusValue: sheet.statusValue
-                        });
+                    if (sheet.companyID && sheet.reviewee && sheet.year) {
+                        if (window.confirm("目標を提出しますか？")) {
+                            const work = commandWorkFlow(Command.REVIEWEE_SUBMIT, sheet)
+                            let updatedSheet = await SheetDao.update(updateSheet, {
+                                companyID: sheet.companyID,
+                                reviewee: sheet.reviewee,
+                                year: sheet.year,
+                                statusValue: sheet.statusValue
+                            });
 
-                        if (updatedSheet) {
-                            setSheet({ ...(updatedSheet) })
-                            if (work.mailObject) {
-                                sendEmailMutation(work.mailObject)
+                            if (updatedSheet) {
+                                setSheet({ ...(updatedSheet) })
+                                if (work.mailObject) {
+                                    sendEmailMutation(work.mailObject)
+                                } else {
+                                    setError("メールの作成に失敗しました")
+                                    console.error("メールの作成に失敗しました")
+                                }
                             } else {
-                                setError("メールの作成に失敗しました")
-                                console.error("メールの作成に失敗しました")
+                                setError("フォームデータの登録に失敗しました")
+                                console.error("フォームデータの登録に失敗しました")
                             }
-                        } else {
-                            setError("フォームデータの登録に失敗しました")
-                            console.error("フォームデータの登録に失敗しました")
                         }
+                    }else{
+                        console.error("評価シートの特定に失敗しました")
+                        setError("評価シートの特定に失敗しました")
                     }
                 }}
             >

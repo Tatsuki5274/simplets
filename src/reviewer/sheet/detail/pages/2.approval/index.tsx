@@ -62,13 +62,13 @@ export const ReviewerSheetPagesStatus2 = ()=>{
                                 InterviewMid3Date: sheet.InterviewMid3Date,
                             }}
                             onSubmit={ async (values) => {
-                                if(sheet){
+                                if(sheet && sheet.companyID && sheet.reviewee && sheet.year){
                                     if(window.confirm("目標承認が社員に通知されます。よろしいでしょうか。")){
                                         const work = commandWorkFlow(Command.SUP1_APPLOVAL, sheet)
                                         const data: UpdateSheetInput = {
-                                            companyID: sheet.companyID || "",   // unsafe
-                                            reviewee: sheet.reviewee || "", // unsafe
-                                            year: sheet.year || 0,  // unsafe
+                                            companyID: sheet.companyID,
+                                            reviewee: sheet.reviewee,
+                                            year: sheet.year,
                                             statusValue: work.sheet.statusValue,
                                             careerPlanComment: values.careerPlanComment,
                                             interviewPlanComment: values.interviewPlanComment,
@@ -102,8 +102,8 @@ export const ReviewerSheetPagesStatus2 = ()=>{
                                     }
 
                                 }else{
-                                    setError("sheetの読み込みに失敗しています")
-                                    console.error("sheetの読み込みに失敗しています")
+                                    setError("評価シートの特定に失敗しました")
+                                    console.error("評価シートの特定に失敗しました")
                                 }
                             }}
                         >
@@ -130,29 +130,35 @@ export const ReviewerSheetPagesStatus2 = ()=>{
                                         {/* ステータスによってボタンの出し分け */}
                                         <Form.Group>
                                             <Button className={buttonComponentStyle} onClick={async () => {
-                                                const data: UpdateSheetInput = {
-                                                    companyID: sheet.companyID || "",   // unsafe
-                                                    reviewee: sheet.reviewee || "", // unsafe
-                                                    year: sheet.year || 0,  // unsafe
-                                                    careerPlanComment: formik.values.careerPlanComment,
-                                                    interviewPlanComment: formik.values.interviewPlanComment,
-                                                    interviewPlanDate: formik.values.interviewPlanDate,
-                                                    InterviewMid1Comment: formik.values.InterviewMid1Comment,
-                                                    InterviewMid1Date: formik.values.InterviewMid1Date,
-                                                    InterviewMid2Comment: formik.values.InterviewMid2Comment,
-                                                    InterviewMid2Date: formik.values.InterviewMid2Date,
-                                                    InterviewMid3Comment: formik.values.InterviewMid3Comment,
-                                                    InterviewMid3Date: formik.values.InterviewMid3Date,
+                                                if(sheet.companyID && sheet.reviewee && sheet.year){
+                                                    const data: UpdateSheetInput = {
+                                                        companyID: sheet.companyID,
+                                                        reviewee: sheet.reviewee,
+                                                        year: sheet.year,
+                                                        careerPlanComment: formik.values.careerPlanComment,
+                                                        interviewPlanComment: formik.values.interviewPlanComment,
+                                                        interviewPlanDate: formik.values.interviewPlanDate,
+                                                        InterviewMid1Comment: formik.values.InterviewMid1Comment,
+                                                        InterviewMid1Date: formik.values.InterviewMid1Date,
+                                                        InterviewMid2Comment: formik.values.InterviewMid2Comment,
+                                                        InterviewMid2Date: formik.values.InterviewMid2Date,
+                                                        InterviewMid3Comment: formik.values.InterviewMid3Comment,
+                                                        InterviewMid3Date: formik.values.InterviewMid3Date,
+                                                    }
+                                                    const updatedSheet = await SheetDao.update(updateSheet, data);
+    
+                                                    // const updatedSheet = runUpdateSheet(props.values);
+                                                    if (updatedSheet) {
+                                                        console.log("保存成功", updatedSheet)
+                                                    } else {
+                                                        setError("保存失敗")
+                                                        console.error("保存失敗", updatedSheet)
+                                                    }
+                                                }else{
+                                                    setError("評価シートの特定に失敗しました")
+                                                    console.error("評価シートの特定に失敗しました")
                                                 }
-                                                const updatedSheet = await SheetDao.update(updateSheet, data);
-
-                                                // const updatedSheet = runUpdateSheet(props.values);
-                                                if (updatedSheet) {
-                                                    console.log("保存成功", updatedSheet)
-                                                } else {
-                                                    setError("保存失敗")
-                                                    console.error("保存失敗", updatedSheet)
-                                                }
+    
                                             }}>保存</Button>
                                             
                                             <Button type="submit" className={buttonComponentStyle}>目標内容承認</Button>

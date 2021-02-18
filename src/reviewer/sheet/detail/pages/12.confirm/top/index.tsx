@@ -45,33 +45,38 @@ export const ReviewerSheetPagesStatus12Top = () => {
                             }}
                             onSubmit={async () => {
                                 if (sheet) {
-                                    if(window.confirm("最終承認を行いますか？")){
+                                    if (sheet.companyID && sheet.reviewee && sheet.year) {
+                                        if (window.confirm("最終承認を行いますか？")) {
 
-                                        const work = commandWorkFlow(Command.SUP1_DONE, sheet)
-                                        const data: UpdateSheetInput = {
-                                            companyID: sheet.companyID || "",// unsafe
-                                            reviewee: sheet.reviewee || "",   // unsafe 
-                                            year: sheet.year || 0,  // unsafe
-                                            statusValue: work.sheet.statusValue
-                                        }
-                                        let updatedSheet = await SheetDao.update(updateSheet, data);
+                                            const work = commandWorkFlow(Command.SUP1_DONE, sheet)
+                                            const data: UpdateSheetInput = {
+                                                companyID: sheet.companyID,
+                                                reviewee: sheet.reviewee, 
+                                                year: sheet.year,
+                                                statusValue: work.sheet.statusValue
+                                            }
+                                            let updatedSheet = await SheetDao.update(updateSheet, data);
 
 
-                                        if (updatedSheet) {
-                                            if (work.mailObject) {
-                                                sendEmailMutation(work.mailObject)
-                                                alert('承認が完了しました');
+                                            if (updatedSheet) {
+                                                if (work.mailObject) {
+                                                    sendEmailMutation(work.mailObject)
+                                                    alert('承認が完了しました');
+                                                } else {
+                                                    setError("メールの作成に失敗しました")
+                                                    console.error("メールの作成に失敗しました")
+                                                }
+                                                if (setSheet) {
+                                                    setSheet({ ...updatedSheet })
+                                                }
                                             } else {
-                                                setError("メールの作成に失敗しました")
-                                                console.error("メールの作成に失敗しました")
+                                                setError("フォームデータの登録に失敗しました")
+                                                console.error("フォームデータの登録に失敗しました")
                                             }
-                                            if(setSheet){
-                                                setSheet({...updatedSheet})
-                                            }
-                                        } else {
-                                            setError("フォームデータの登録に失敗しました")
-                                            console.error("フォームデータの登録に失敗しました")
                                         }
+                                    }else{
+                                        console.error("評価シートの特定に失敗しました")
+                                        setError("評価シートの特定に失敗しました")
                                     }
                                 } else {
                                     setError("sheetの読み込みに失敗しています")
@@ -85,7 +90,7 @@ export const ReviewerSheetPagesStatus12Top = () => {
                                     {sheet && sheet.section && sheet.section.items ?
                                         <ReviewerSheetDetailObjectiveReadonly sections={sheet.section.items as Section[]} />
                                         : null}
-                                        
+
                                     <h3>今後のキャリア計画</h3><br />
                                     <ReviewerSheetDetailCareerReadonly sheet={sheet} />
 

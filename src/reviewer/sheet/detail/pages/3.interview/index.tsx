@@ -26,29 +26,35 @@ export const ReviewerSheetPagesStatus3 = (props: Props) => {
     const handleShow = () => setIsRemandModal(true);
 
     const onSubmit = async (values: Sheet) => {
-        const data: UpdateSheetInput = {
-            companyID: props.sheet.companyID || "", // unsafe
-            reviewee: props.sheet.reviewee || "",   // unsafe
-            year: props.sheet.year || 0,    // unsafe
-            careerPlanComment: values.careerPlanComment,
-            interviewPlanComment: values.interviewPlanComment,
-            interviewPlanDate: values.interviewPlanDate,
-            InterviewMid1Comment: values.InterviewMid1Comment,
-            InterviewMid1Date: values.InterviewMid1Date,
-            InterviewMid2Comment: values.InterviewMid2Comment,
-            InterviewMid2Date: values.InterviewMid2Date,
-            InterviewMid3Comment: values.InterviewMid3Comment,
-            InterviewMid3Date: values.InterviewMid3Date,
+        if(props.sheet.companyID && props.sheet.reviewee && props.sheet.year){
+            const data: UpdateSheetInput = {
+                companyID: props.sheet.companyID,
+                reviewee: props.sheet.reviewee,
+                year: props.sheet.year,
+                careerPlanComment: values.careerPlanComment,
+                interviewPlanComment: values.interviewPlanComment,
+                interviewPlanDate: values.interviewPlanDate,
+                InterviewMid1Comment: values.InterviewMid1Comment,
+                InterviewMid1Date: values.InterviewMid1Date,
+                InterviewMid2Comment: values.InterviewMid2Comment,
+                InterviewMid2Date: values.InterviewMid2Date,
+                InterviewMid3Comment: values.InterviewMid3Comment,
+                InterviewMid3Date: values.InterviewMid3Date,
+            }
+            const updatedSheet = await SheetDao.update(updateSheet, data)
+    
+            // const updatedSheet = runUpdateSheet(props.values);
+            if (updatedSheet) {
+                console.log("保存成功")
+            } else {
+                setError("保存失敗")
+                console.error("保存失敗", updatedSheet)
+            }
+        }else{
+            console.error("シートの特定に失敗しました。", props.sheet)
+            setError("シートの特定に失敗しました。")
         }
-        const updatedSheet = await SheetDao.update(updateSheet, data)
 
-        // const updatedSheet = runUpdateSheet(props.values);
-        if (updatedSheet) {
-            console.log("保存成功")
-        } else {
-            setError("保存失敗")
-            console.error("保存失敗", updatedSheet)
-        }
     }
 
     return (

@@ -36,13 +36,14 @@ export const SubmitButtonStatus2 = () => {
     if(sheet && setSheet){
         return (
             <Button className={buttonComponentStyle}
-                    onClick={async () => {
+                onClick={async () => {
+                    if (sheet.companyID && sheet.reviewee && sheet.year) {
                         if (window.confirm("目標提出の引き戻しを行いますか？")) {
                             const work = commandWorkFlow(Command.REVIWEE_PULLBACK_SUBMIT, sheet)
                             let updatedSheet = await SheetDao.update(updateSheet, {
-                                companyID: work.sheet.companyID || "",  // unsafe
-                                reviewee: work.sheet.reviewee || "",    // unsafe
-                                year: work.sheet.year || 0, // unsafe
+                                companyID: sheet.companyID,
+                                reviewee: sheet.reviewee,
+                                year: sheet.year,
                                 statusValue: work.sheet.statusValue
                             });
                             console.log("workflow", work)
@@ -59,7 +60,11 @@ export const SubmitButtonStatus2 = () => {
                                 console.error("フォームデータの登録に失敗しました")
                             }
                         }
-                    }}
+                    }else{
+                        console.error("評価シートの特定に失敗しました")
+                        setError("評価シートの特定に失敗しました")
+                    }
+                }}
             >提出引き戻し</Button>
         )
     }

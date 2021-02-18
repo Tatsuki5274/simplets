@@ -1,13 +1,14 @@
 import { tableHeaderStyle } from "common/globalStyle.module.scss";
 import dateFormat from "dateformat";
 import { getObjectiveKeys, getSectionKeys } from "lib/util";
-import React from "react"
+import React, { useContext } from "react"
 import style from '../common/style.module.scss';
 import * as APIt from 'API';
 import { ObjectiveDao } from "lib/dao/objectiveDao";
 import { updateObjective } from "graphql/mutations";
 import ScrollTable from "views/components/molecules/ScrollTable";
 import { Objective, Section } from "API";
+import { ErrorContext } from "App";
 
 
 type Props = {
@@ -16,6 +17,8 @@ type Props = {
 }
 
 export const ReviewerSheetDetailObjectiveEditable = (props: Props) => {
+    const setError = useContext(ErrorContext)
+
     return <div>
         {props.sections.map((section: Section) => {
 
@@ -85,15 +88,20 @@ export const ReviewerSheetDetailObjectiveEditable = (props: Props) => {
                                     <td className={style.detailSelect}>
                                         <select name={`lastEvaluation[${getObjectiveKeys(objective).replace(/[.]/g, '-')}]`} onChange={async (event: React.ChangeEvent<HTMLSelectElement>)=>{
                                             props.onChange(event)
-                                            const objectiveLastEvaluation = parseInt(event.currentTarget.value);
-                                            const updateI: APIt.UpdateObjectiveInput = {
-                                                // id: objectiveId,
-                                                createdAt: objective.createdAt || "", // unsafe
-                                                sectionKeys: objective.sectionKeys || "", // unsafe
-                                                lastEvaluation: objectiveLastEvaluation,
-                                            };
-                                            const updatedObjective = await ObjectiveDao.update(updateObjective, updateI)
-                                            console.log("updatedObjective", updatedObjective)
+                                            if(objective.createdAt && objective.sectionKeys){
+                                                const objectiveLastEvaluation = parseInt(event.currentTarget.value);
+                                                const updateI: APIt.UpdateObjectiveInput = {
+                                                    // id: objectiveId,
+                                                    createdAt: objective.createdAt,
+                                                    sectionKeys: objective.sectionKeys,
+                                                    lastEvaluation: objectiveLastEvaluation,
+                                                };
+                                                const updatedObjective = await ObjectiveDao.update(updateObjective, updateI)
+                                                console.log("updatedObjective", updatedObjective)
+                                            }else{
+                                                console.error("変更対象の特定に失敗しました", objective)
+                                                setError("変更対象の特定に失敗しました")
+                                            }
                                         }}>
                                             <option value=""></option>
                                             {[5, 4, 3, 2, 1].map((number: number) => {

@@ -13,7 +13,7 @@ type Props = {
         params: {
             companyId: string
             reviewee: string
-            year: string        
+            year: string
         }
     }
 }
@@ -30,9 +30,10 @@ const sortCategory = function (a: Section | null, b: Section | null) {
         return 1;
     } else {
         return -1;
-    }}
+    }
+}
 
-export function PDFPage(props:Props) {
+export function PDFPage(props: Props) {
     const setError = useContext(ErrorContext)
     const [sheet, setSheet] = useState<Sheet | null>(null);
     const [lastOverAllEvaluations, setlastOverAllEvaluations] = useState<Array<number | null> | null>();
@@ -52,41 +53,44 @@ export function PDFPage(props:Props) {
         (async () => {
             // 前期と前々期を取得
             if (sheet) {
-                const thisYear = sheet.year || 0 // unsafe
-
-                const input: APIt.ListSheetRevieweeQueryVariables = {
-                    companyID: sheet.companyID,
-                    reviewee: {
-                        eq: sheet.reviewee
-                    },
-                    filter: {
-                        year: {
-                            between: [thisYear - 2, thisYear - 1]
+                if (sheet.year) {
+                    const thisYear = sheet.year
+                    const input: APIt.ListSheetRevieweeQueryVariables = {
+                        companyID: sheet.companyID,
+                        reviewee: {
+                            eq: sheet.reviewee
+                        },
+                        filter: {
+                            year: {
+                                between: [thisYear - 2, thisYear - 1]
+                            }
                         }
                     }
-                }
-                console.log("input", input);
-                const gotSheets = await SheetDao.listReviewee(listSheetReviewee, input)
-                console.log("gotSheets", gotSheets);
+                    console.log("input", input);
+                    const gotSheets = await SheetDao.listReviewee(listSheetReviewee, input)
+                    console.log("gotSheets", gotSheets);
 
-                if (gotSheets) {
-                    if (gotSheets.length > 2) {
-                        setError("業績評価年度に重複があります。前期前々期の記録に想定されない値が格納される場合があります。")
-                        console.error("業績評価年度に重複があります。前期前々期の記録に想定されない値が格納される場合があります。", gotSheets)
+                    if (gotSheets) {
+                        if (gotSheets.length > 2) {
+                            setError("業績評価年度に重複があります。前期前々期の記録に想定されない値が格納される場合があります。")
+                            console.error("業績評価年度に重複があります。前期前々期の記録に想定されない値が格納される場合があります。", gotSheets)
+                        }
+                        let results: (number | null)[] = [null, null]
+
+                        // 前期の記録を取得
+                        results[0] = gotSheets.find((sheet) => {
+                            return sheet?.year === thisYear - 1
+                        })?.overAllEvaluation || null
+                        // 前々期の記録を取得
+                        results[1] = gotSheets.find((sheet) => {
+                            return sheet?.year === thisYear - 2
+                        })?.overAllEvaluation || null
+
+                        setlastOverAllEvaluations(results);
                     }
-                    let results: (number | null)[] = [null, null]
-
-                    // 前期の記録を取得
-                    results[0] = gotSheets.find((sheet) => {
-                        return sheet?.year === thisYear - 1
-                    })?.overAllEvaluation || null
-                    // 前々期の記録を取得
-                    results[1] = gotSheets.find((sheet) => {
-                        return sheet?.year === thisYear - 2
-                    })?.overAllEvaluation || null
-
-                    setlastOverAllEvaluations(results);
-
+                }else{
+                    console.error("評価シートの年度情報を取得できませんでした", sheet)
+                    setError("評価シートの年度情報を取得できませんでした")
                 }
             }
         })()
@@ -95,21 +99,21 @@ export function PDFPage(props:Props) {
     if (sheet) {
 
         return (
-            sheet.statusValue === 10 ? 
-            <PDFTempleteStatus10
-                sheet={sheet}
-                approvalStatusString={getStatusValue(sheet.statusValue || -1)}
-                gradeString={`${sheet.grade}`}
-                lastYearsAgoOverAllEvaluation={lastOverAllEvaluations && lastOverAllEvaluations[0] ? lastOverAllEvaluations[0] : null}
-                twoYearsAgoOverAllEvaluation={lastOverAllEvaluations && lastOverAllEvaluations[1] ? lastOverAllEvaluations[1] : null}
-            /> :
-            <PDFTemplete
-                sheet={sheet}
-                approvalStatusString={getStatusValue(sheet.statusValue || -1)}
-                gradeString={`${sheet.grade}`}
-                lastYearsAgoOverAllEvaluation={lastOverAllEvaluations && lastOverAllEvaluations[0] ? lastOverAllEvaluations[0] : null}
-                twoYearsAgoOverAllEvaluation={lastOverAllEvaluations && lastOverAllEvaluations[1] ? lastOverAllEvaluations[1] : null}
-            />
+            sheet.statusValue === 10 ?
+                <PDFTempleteStatus10
+                    sheet={sheet}
+                    approvalStatusString={getStatusValue(sheet.statusValue || -1)}
+                    gradeString={`${sheet.grade}`}
+                    lastYearsAgoOverAllEvaluation={lastOverAllEvaluations && lastOverAllEvaluations[0] ? lastOverAllEvaluations[0] : null}
+                    twoYearsAgoOverAllEvaluation={lastOverAllEvaluations && lastOverAllEvaluations[1] ? lastOverAllEvaluations[1] : null}
+                /> :
+                <PDFTemplete
+                    sheet={sheet}
+                    approvalStatusString={getStatusValue(sheet.statusValue || -1)}
+                    gradeString={`${sheet.grade}`}
+                    lastYearsAgoOverAllEvaluation={lastOverAllEvaluations && lastOverAllEvaluations[0] ? lastOverAllEvaluations[0] : null}
+                    twoYearsAgoOverAllEvaluation={lastOverAllEvaluations && lastOverAllEvaluations[1] ? lastOverAllEvaluations[1] : null}
+                />
         )
     } else {
         return null;
