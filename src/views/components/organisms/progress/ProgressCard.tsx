@@ -1,9 +1,11 @@
 import ApprovalStatusBox from "common/approvalStatusBox";
+import { getStatusValue } from "lib/getStatusValue";
 import { round } from "lib/util";
 import React from "react";
 import { Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { CSSProperties } from "styled-components";
+import styled, { CSSProperties } from "styled-components";
+import BadgeStatus from "views/components/molecules/BadgeStatus";
 import GaugeObjective from "views/components/molecules/GaugeObjective";
 import GaugeSheet from "views/components/molecules/GaugeSheet";
 
@@ -37,6 +39,7 @@ export default function (props: Props) {
                 style={cardLinkStyle}
             />
             <Card.Header>
+                <CardTitle>
                 {props.employeeName}
                 &nbsp;
                 {props.groupName}
@@ -49,10 +52,14 @@ export default function (props: Props) {
                         value={props.avg / 100}
                     />
                     : null}
+                </CardTitle>
+  
                 {props.statusValue ?
-                    <ApprovalStatusBox
-                        statusValue={props.statusValue}
-                    />
+                    <StatusBoxStyle>
+                        <BadgeStatus>
+                            {getStatusValue(props.statusValue)}
+                        </BadgeStatus>
+                    </StatusBoxStyle>
 
                     : null}
             </Card.Header>
@@ -87,3 +94,16 @@ const cardLinkStyle: CSSProperties = {
     height: "100%",
     width: "100%",
 }
+
+const CardTitle = styled.div({
+    width: "50%",
+    display: "inline-block"
+})
+
+const StatusBoxStyle = styled.div({
+    fontSize: "2rem",
+    display: "inline-block",
+    marginLeft: "auto",
+    width: "50%",
+    textAlign: "right"
+})
