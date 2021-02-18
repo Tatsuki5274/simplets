@@ -288,7 +288,7 @@ ${reviewerUrl}
                     ret.to = [sup2.email]
                     ret.subject = `[${systemName}]  今年度評価へのコメントをお願いいたします`
                     ret.body = `
-${sup2.email}様:
+${sup2.name}様:
 
 所属長の評価が完了しました。
 コメントを入力して年度評価を完了してください。
