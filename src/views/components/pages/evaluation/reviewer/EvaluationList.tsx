@@ -122,7 +122,7 @@ export default function () {
                                 name: `${sheet.revieweeEmployee?.lastName} ${sheet.revieweeEmployee?.firstName}`,
                                 status: sheet.statusValue ? getStatusValue(sheet.statusValue) : "",
                                 preview: preview,
-                                overAllEvaluation: sheet.overAllEvaluation || -1, // unsafe
+                                overAllEvaluation: sheet.overAllEvaluation || null,
                                 lastYearsAgoOverAllEvaluation: lastYearsAgoOverAllEvaluation,
                                 twoYearsAgoOverAllEvaluation: twoYearsAgoOverAllEvaluation
                             }
