@@ -66,9 +66,9 @@ export const ReviewerSheetPagesStatus2 = ()=>{
                                     if(window.confirm("目標承認が社員に通知されます。よろしいでしょうか。")){
                                         const work = commandWorkFlow(Command.SUP1_APPLOVAL, sheet)
                                         const data: UpdateSheetInput = {
-                                            companyID: sheet.companyID,
-                                            reviewee: sheet.reviewee,
-                                            year: sheet.year,
+                                            companyID: sheet.companyID || "",   // unsafe
+                                            reviewee: sheet.reviewee || "", // unsafe
+                                            year: sheet.year || 0,  // unsafe
                                             statusValue: work.sheet.statusValue,
                                             careerPlanComment: values.careerPlanComment,
                                             interviewPlanComment: values.interviewPlanComment,

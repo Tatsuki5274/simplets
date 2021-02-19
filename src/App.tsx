@@ -20,9 +20,19 @@ import MySignIn from 'views/auth/signIn';
 import { EmployeeDao } from 'lib/dao/employeeDao';
 import EvaluationList from 'views/components/pages/evaluation/reviewer/EvaluationList';　//総合評価参照画面 テスト用
 import { routeBuilder } from 'router';
-import ProgressReferenceScreen from 'views/components/pages/progress/reviewee/ProgressReferenceScreen';
+import RevieweeReportList from 'views/components/pages/report/reviewee/RevieweeReportList';
+import CreateReportScreen from 'views/components/pages/report/reviewee/CreateReportScreen';
+import EditReportScreeen from 'views/components/pages/report/reviewer/EditReportScreeen';
+import ReportListScreen from 'views/components/pages/report/reviewer/ReportListScreen';
+import { HeaderProps } from 'views/components/organisms/common/Header';
+import ChangeReportScreen from 'views/components/pages/report/reviewee/ChangeReportScreen';
 import ErrorMessageView from 'views/components/templates/ErrorMessageView';
-import { Employee } from 'API';
+import { Employee, EmployeeType } from 'API';
+import ProgressReferenceList from 'reviewer/list/progress';
+import ReviewerReportList from 'views/components/pages/report/reviewer/ReviewerReportListCalendar';
+import { LinkType } from 'views/components/atoms/Types';
+import { createSidebarElements } from 'lib/util';
+import ProgressReferenceScreen from 'views/components/pages/progress/reviewee/ProgressReferenceScreen';
 Amplify.configure(awsconfig);
 
 // export type Sheet = Omit<Exclude<APIt.GetSheetQuery['getSheet'], null>, '__typename'>;
@@ -33,6 +43,7 @@ Amplify.configure(awsconfig);
 // export type Employee = Omit<Exclude<APIt.GetEmployeeQuery['getEmployee'], null>, '__typename'>;
 // export type Company = Omit<Exclude<APIt.GetCompanyQuery['getCompany'], null>, '__typename'>;
 export type SendEmail = Omit<Exclude<APIt.sendEmailInput, null>, '__typename'>;
+// export type Report = Omit<Exclude<APIt.GetReportQuery['getReport'], null>, '__typename'>;
 
 type User = {
   username: string
@@ -42,6 +53,8 @@ type User = {
 }
 export const UserContext = createContext<User | null>(null)
 export const EmployeeContext = createContext<Employee | null>(null)
+export const HeaderContext = createContext<HeaderProps | null>(null)
+export const SidebarContext = createContext<LinkType[][] | null>(null)
 export const ErrorContext = createContext<React.Dispatch<React.SetStateAction<string | null>>>(() => console.log("実装されていません"));
 
 
@@ -65,6 +78,7 @@ const getEmployee = /* GraphQL */ `
       username
       firstName
       lastName
+      superiorUsername
       employeeGroupLocalId
       manager
       group {
@@ -75,6 +89,9 @@ const getEmployee = /* GraphQL */ `
         name
         startMonth
       }
+      superior {
+        email
+      }
     }
   }
 `;
@@ -82,6 +99,8 @@ const getEmployee = /* GraphQL */ `
 function App() {
   const [user, setUser] = useState<any>(null);
   const [employee, setEmployee] = useState<Employee | null>(null);
+  const [header, setHeader] = useState<HeaderProps | null>(null);
+  const [sidebar, setSidebar] = useState<LinkType[][] | null>(null)
   const [errorMessage, setErrorMessage] = useState<string | null>(null)
 
   useEffect(() => {
@@ -102,26 +121,62 @@ function App() {
     })()
   }, [user]);
 
+  useEffect(() => {
+    ; (() => {
+      if (employee) {
+        const header: HeaderProps = {
+          companyName: employee.company?.name,
+          groupName: employee.group?.name,
+          lastName: employee.lastName,
+          firstName: employee.firstName
+        }
+        setHeader(header)
+      }
+    })()
+  }, [employee]);
+
+  useEffect(() => {
+    let isManager = false
+    if(employee &&
+      (employee.manager === EmployeeType.MANAGER ||
+      employee.manager === EmployeeType.SUPER_MANAGER)) {
+        isManager = true
+      }
+
+    const sidebar = createSidebarElements(isManager, false)
+    setSidebar(sidebar)
+  }, [employee])
+
 
   return (
     <div>
       <UserContext.Provider value={user}>
         <EmployeeContext.Provider value={employee}>
-          <ErrorContext.Provider value={setErrorMessage}>
-            <BrowserRouter>
-              <Switch>
-                <Route exact path="/" component={ListPerformanceEvalution} />
-                <Route exact path="/reviewee/company/:companyId/reviewee/:reviewee/year/:year" component={RevieweeSheetShow} />
-                <Route exact path="/reviewee/list" component={ListPerformanceEvalution} />
-                <Route exact path="/reviewer/list" component={ProgressReferenceScreen} />
-                <Route exact path="/reviewer/company/:companyId/reviewee/:reviewee/year/:year" component={EvaluationScreen} />
-                <Route exact path="/preview/company/:companyId/reviewee/:reviewee/year/:year" component={PDFPage} />
-                {/* 総合評価参照画面 テスト用 */}
-                <Route exact path={routeBuilder.reviewerEvaluationListPath()} component={EvaluationList} />
-              </Switch>
-              <ErrorMessageView>{errorMessage || undefined}</ErrorMessageView>
-            </BrowserRouter>
-          </ErrorContext.Provider>
+          <HeaderContext.Provider value={header}>
+            <SidebarContext.Provider value={sidebar}>
+              <ErrorContext.Provider value={setErrorMessage}>
+                <BrowserRouter>
+                  <Switch>
+                    <Route exact path="/" component={ListPerformanceEvalution} />
+                    <Route exact path="/reviewee/company/:companyId/reviewee/:reviewee/year/:year" component={RevieweeSheetShow} />
+                    <Route exact path="/reviewee/list" component={ListPerformanceEvalution} />
+                    <Route exact path="/reviewer/list" component={ProgressReferenceScreen} />
+                    <Route exact path="/reviewer/company/:companyId/reviewee/:reviewee/year/:year" component={EvaluationScreen} />
+                    <Route exact path="/preview/company/:companyId/reviewee/:reviewee/year/:year" component={PDFPage} />
+                    <Route exact path={routeBuilder.reviewerEvaluationListPath()} component={EvaluationList} />
+
+                    <Route exact path={routeBuilder.revieweeReportCalendarPath(":date")} component={RevieweeReportList} />
+                    <Route exact path={routeBuilder.revieweeReportNewPath(":date")} component={CreateReportScreen} />
+                    <Route exact path={routeBuilder.revieweeReportEditPath(":date")} component={ChangeReportScreen} />
+                    <Route exact path={routeBuilder.reviewerReportCommentPath(":date", ":username")} component={EditReportScreeen} />
+                    <Route exact path={routeBuilder.reviewerReportEmployeePath()} component={ReportListScreen} />
+                    <Route exact path={routeBuilder.reviewerReportCalendarPaht(":date")} component={ReviewerReportList} />
+                  </Switch>
+                  <ErrorMessageView>{errorMessage || undefined}</ErrorMessageView>
+                </BrowserRouter>
+              </ErrorContext.Provider>
+            </SidebarContext.Provider>
+          </HeaderContext.Provider>
         </EmployeeContext.Provider>
       </UserContext.Provider>
     </div>

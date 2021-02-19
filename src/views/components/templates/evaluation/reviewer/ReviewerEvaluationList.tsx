@@ -1,7 +1,7 @@
 import React from "react";
 import { routeBuilder } from "router";
 import styled from "styled-components";
-import { SelectLabel } from "views/components/atoms/Types";
+import { LinkType, SelectLabel } from "views/components/atoms/Types";
 import Header, { HeaderProps } from "views/components/organisms/common/Header";
 import SidebarManager from "views/components/organisms/common/SidebarManager";
 import EvaluationFilter from "views/components/organisms/evaluation/reviewerList/EvaluationFilter";
@@ -19,6 +19,7 @@ type Props = {
     initTableData: (TableEvaluationListType | null)[] | null
     data: {
         header: HeaderProps | null
+        sidebar: LinkType[][] | null
         years: number[] | null
         groups: SelectLabel[] | null
     }
@@ -104,20 +105,6 @@ export default function (props: Props) {
         },
     ]
 
-    const sidebarMock = [
-        {
-            label: "業績評価一覧",
-            dest: routeBuilder.revieweeListPath()
-        },
-        {
-            label: "進捗参照",
-            dest: routeBuilder.reviewerListPath()
-        }, {
-            label: "総合評価参照",
-            dest: routeBuilder.reviewerEvaluationListPath()
-        }]
-
-
 
     return (
         <>
@@ -126,11 +113,14 @@ export default function (props: Props) {
             />
             <Container>
                 <LeftBox>
-                    <Sidebar>
-                        <SidebarManager
-                            links={sidebarMock}
-                        />
-                    </Sidebar>
+                    <>
+                    {props.data.sidebar ?
+                    <Sidebar
+                        data={props.data.sidebar}
+                    /> :
+                    null}
+                    
+                    </>
                 </LeftBox>
                 <RightBox>
                     <Content>

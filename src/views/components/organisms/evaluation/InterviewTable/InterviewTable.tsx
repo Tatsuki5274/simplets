@@ -1,8 +1,8 @@
 import dateFormat from "dateformat";
 import React from "react";
 import { Table } from "react-bootstrap";
-import TableBodyCell from "views/components/molecules/TableBodyCell";
-import TableHeaderCell from "views/components/molecules/TableHeaderCell";
+import TableBodyCell from "views/components/atoms/TableBodyCell";
+import TableHeaderCell from "views/components/atoms/TableHeaderCell";
 
 type Props = {
     interviewPlanDate: string | null

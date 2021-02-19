@@ -255,6 +255,85 @@ type Objective
 
 }
 
+
+enum ReportWorkingStatus {
+  OK
+  InTask
+  InProblem
+}
+
+type RevieweeReportComment
+{
+  work: String #作業内容
+  other: String #その他コメント
+  status: String  #作業状況コメント
+}
+
+type ReviewerReportComment
+{
+  superior: String #所属長コメント
+}
+
+
+type Superior
+{
+  # lastname, firstname 名前が必要？
+  username: String
+  email: String
+  # superior: Superior  # 階層が必要？
+}
+
+type Report
+@model
+@key(fields: ["reviewee", "date"])
+@key(fields: ["companyID", "date"], name: "report_company_date", queryField: "listReportsCompanyDate")
+# @key(fields: ["companyID", "reviewee"], name: "report_company_reviewee", queryField: "listReportsReviewee")
+# @key(fields: ["companyID", "date"], name: "report_company_date", queryField: "listReportsDate")
+@auth(
+  rules: [
+    {allow: groups, groups: ["Admin"]}
+
+    # オーナーフィールド
+    {allow: owner, ownerField: "reviewee", operations: [create, update, read]}
+    {allow: owner, ownerField: "referencer", operations: [read]}
+    {allow: owner, ownerField: "reviewer", operations: [read, update]}
+  ]
+)
+{
+  reviewee: ID!
+  date: AWSDate!  #1970-01-01Z の形式で格納
+
+  reviewer: [String]
+  companyID: ID
+  referencer: [String] #参照者
+  # superior: Superior # 報告書作成時の所属長を保存する必要がある？
+  
+  revieweeComments: RevieweeReportComment 
+  # @auth(rules: [
+  #     { allow: owner, ownerField: "reviewee"}
+  #     # { allow: owner, ownerField: "reviewee", operations: [create, update, read] }
+  #     # { allow: owner, ownerField: "reviewer", operations: [read] }      
+  #     # { allow: owner, ownerField: "referencer", operations: [read] }      
+  #   ])
+    #   # シングルフィールドの検証
+    #   revieweeTest: String @auth(rules: [
+    #   { allow: owner, ownerField: "reviewee"}
+    #   # { allow: owner, ownerField: "reviewee", operations: [create, update, read] }
+    #   # { allow: owner, ownerField: "reviewer", operations: [read] }      
+    #   # { allow: owner, ownerField: "referencer", operations: [read] }      
+    # ])
+  reviewerComments: ReviewerReportComment 
+  # @auth(rules: [
+  #     { allow: owner, ownerField: "reviewer" }
+  #     # { allow: owner, ownerField: "reviewer", operations: [update, read] }
+  #     # { allow: owner, ownerField: "reviewee", operations: [read] }      
+  #     # { allow: owner, ownerField: "referencer", operations: [read] }      
+  #   ])
+  workStatus: ReportWorkingStatus #作業状況
+  # revieweeEmail: String #報告者のメールアドレス
+  revieweeEmployee: Employee @connection(fields: ["companyID", "reviewee"])  #被評価者
+}
+
 # type Query {
 #   #listSheetsLtGrade: String @function(name: "listSheetsLtGrade_${env}")
 #   # listSheetsLtGrade: [Sheet] @function(name: "listSheetsLtGrade_${env}")

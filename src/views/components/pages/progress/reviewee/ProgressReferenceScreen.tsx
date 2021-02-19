@@ -1,4 +1,4 @@
-import { EmployeeContext, UserContext } from "App";
+import { EmployeeContext, HeaderContext, SidebarContext, UserContext } from "App";
 import { listGroups, listSheets } from "graphql/queries";
 import { GroupDao } from "lib/dao/groupDao";
 import { SheetDao } from "lib/dao/sheetDao";
@@ -14,24 +14,17 @@ export default function () {
     const [cardData, setCardData] = useState<(ProgressReferenceType | null)[] | null>(null);
     const [initCardData, setInitCardData] = useState<(ProgressReferenceType | null)[] | null>(null);
 
-    const [header, setHeader] = useState<HeaderProps | null>(null)
     const [years, setYears] = useState<number[] | null>(null)
     const [groups, setGroups] = useState<SelectLabel[] | null>(null)
 
     const currentUser = useContext(UserContext);
     const currentEmployee = useContext(EmployeeContext);
+    const header = useContext(HeaderContext);
+    const sidebar = useContext(SidebarContext)
 
     useEffect(() => {
         // ヘッダー用社員情報の取得
         if (currentEmployee) {
-            const header: HeaderProps = {
-                companyName: currentEmployee.company?.name,
-                groupName: currentEmployee.group?.name,
-                lastName: currentEmployee.lastName,
-                firstName: currentEmployee.firstName
-            }
-            setHeader(header)
-
             const startMonth = currentEmployee.company?.startMonth
             if (startMonth) {
                 const thisYear = getThisYear(startMonth)
@@ -44,6 +37,7 @@ export default function () {
         }
     }, [currentEmployee])
 
+    
     useEffect(() => {
         // 部署情報の取得
         (async () => {
@@ -131,6 +125,7 @@ export default function () {
             initCardData={initCardData}
             data={{
                 header: header,
+                sidebar: sidebar,
                 years: years,
                 groups: groups
             }}

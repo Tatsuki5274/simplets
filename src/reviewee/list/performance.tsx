@@ -2,10 +2,9 @@ import React, { useContext, useEffect, useState } from 'react';
 import { Button, Table } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Link } from 'react-router-dom';
-import {  EmployeeContext, ErrorContext, UserContext } from 'App';
+import {  EmployeeContext, ErrorContext, HeaderContext, SidebarContext, UserContext } from 'App';
 import { ApprovalStatus, getStatusValue } from 'lib/getStatusValue'
 import * as APIt from 'API';
-import HeaderComponents from 'common/header';
 import { SheetDao } from 'lib/dao/sheetDao';
 import { EmployeeDao } from 'lib/dao/employeeDao';
 import { CategoryDao } from 'lib/dao/categoryDao';
@@ -22,6 +21,7 @@ import Sidebar from 'views/components/templates/Sidebar';
 import Content from 'views/components/templates/Content';
 import Container from 'views/components/templates/Container';
 import Title from 'views/components/molecules/Title';
+import Header from 'views/components/organisms/common/Header';
 
 const sortSheet = (a: Sheet, b: Sheet) => {
   if (a.year && b.year && a.year < b.year) {
@@ -196,27 +196,8 @@ function ListPerformanceEvalution() {
 
   const setError = useContext(ErrorContext)
 
-  //サイドバー
-  let sidebar = [
-    {
-        label: "業績評価一覧",
-        dest: routeBuilder.revieweeListPath()
-  }]
-
-  // SUPER_MANAGER,MANAGERが含まれているか確認
-  if(currentEmployee && (currentEmployee.manager === 'MANAGER' as EmployeeType || currentEmployee.manager === 'SUPER_MANAGER' as EmployeeType)) {
-      sidebar = [
-          {
-              label: "業績評価一覧",
-              dest: routeBuilder.revieweeListPath()
-      }, {
-          label: "進捗参照",
-          dest: routeBuilder.reviewerListPath()
-      }, {
-          label: "総合評価参照",
-          dest: routeBuilder.reviewerEvaluationListPath()
-      }]
-  }
+  const header = useContext(HeaderContext)
+  const sidebar = useContext(SidebarContext)
 
   useEffect(() => {
     ; (async () => {
@@ -318,7 +299,7 @@ function ListPerformanceEvalution() {
               grade: revieweeEmployee.grade || "",
               year: targetYear,
               statusValue: 1,
-              revieweeUsername: revieweeEmployee.username,
+              revieweeUsername: revieweeEmployee.username || "", // unsafe
               secondUsername: revieweeEmployee.superior?.username || "",
               sheetGroupLocalId: revieweeEmployee.employeeGroupLocalId || "",
               companyID: currentUser.attributes['custom:companyId'],
@@ -390,14 +371,14 @@ function ListPerformanceEvalution() {
   return (
     <>
     {/* ヘッダーの表示 */}
-    <HeaderComponents />
+    <Header
+      {...header}
+    />
     <Container>
       <LeftBox>
-        <Sidebar>
-          <SidebarManager
-            links={sidebar}
-          />
-        </Sidebar>
+        <Sidebar
+          data={sidebar}
+        />
       </LeftBox>
       <RightBox>
         <Content>

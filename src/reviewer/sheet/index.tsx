@@ -2,11 +2,10 @@ import React, { useState, useEffect, createContext, useContext } from 'react';
 import { API, graphqlOperation } from 'aws-amplify';
 import { GraphQLResult } from "@aws-amplify/api";
 import {  } from 'react-router';
-import { UserContext} from 'App';
+import { HeaderContext, UserContext} from 'App';
 import { GetSheetQuery, Section, Sheet } from 'API';
 import * as APIt from 'API';
 import { getSheet } from 'graphql/queries';
-import HeaderComponents from 'common/header';
 import { ReviewerSheetPagesStatus2 } from './detail/pages/2.approval';
 import { ReviewerSheetPagesReadonly } from './detail/pages/readonly';
 import { ReviewerSheetPagesStatus3 } from './detail/pages/3.interview';
@@ -14,6 +13,7 @@ import { ReviewerSheetPagesStatus10 } from './detail/pages/10.result';
 import { ReviewerSheetPagesStatus12Second } from './detail/pages/12.confirm/second';
 import { ReviewerSheetPagesStatus12Top } from './detail/pages/12.confirm/top';
 import { ReviewerSheetPagesStatus13 } from './detail/pages/13.firstComment';
+import Header from 'views/components/organisms/common/Header';
 
 export const SheetContext = createContext<
     {
@@ -41,6 +41,10 @@ function EvalutionScreen(props: Props) {
     // sheet 情報取得
     const currentUser = useContext(UserContext);
     const [sheet, setSheet] = useState<Sheet>()
+
+    const header = useContext(HeaderContext);
+    // const sidebar = useContext(SidebarContext)
+
 
     useEffect(() => {
         ; (async () => {
@@ -118,7 +122,9 @@ function EvalutionScreen(props: Props) {
     return (
         <div>
             <SheetContext.Provider value={{sheet: sheet, setSheet: setSheet}}>
-                <HeaderComponents />            
+                <Header
+                    {...header}
+                />
 
                 {(() => {
                     if(sheet.statusValue === 2){

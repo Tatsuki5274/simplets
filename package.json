@@ -5,6 +5,9 @@
   "dependencies": {
     "@apollo/client": "^3.3.6",
     "@aws-amplify/ui-react": "^0.2.16",
+    "@fullcalendar/daygrid": "^5.5.0",
+    "@fullcalendar/interaction": "^5.5.0",
+    "@fullcalendar/react": "^5.5.0",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
@@ -22,6 +25,7 @@
     "bootstrap": "^4.5.2",
     "dateformat": "^3.0.3",
     "formik": "^2.2.0",
+    "fullcalendar": "^5.5.1",
     "graphql": "^15.4.0",
     "jquery": "^3.5.1",
     "node-sass": "^4.14.1",

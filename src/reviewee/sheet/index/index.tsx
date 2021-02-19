@@ -2,8 +2,7 @@ import React, { useState, useEffect, createContext, useContext } from 'react';
 import { Button, Table } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { getSheet } from 'graphql/queries'
-import { EmployeeContext } from 'App';
-import HeaderComponents from 'common/header';//ヘッダーの表示
+import { EmployeeContext, HeaderContext, SidebarContext } from 'App';
 import ApprovalStatusBox from 'common/approvalStatusBox';
 import { SheetDao } from 'lib/dao/sheetDao';
 import { RevieweeSheetObjectiveReadonly } from './components/objective/readonly';
@@ -42,6 +41,7 @@ import Scroll from 'views/components/atoms/Scroll';
 import ScrollTable from 'views/components/molecules/ScrollTable';
 import Container from 'views/components/templates/Container';
 import Title from 'views/components/molecules/Title';
+import Header from 'views/components/organisms/common/Header';
 
 
 export const SheetContext = createContext<
@@ -81,27 +81,9 @@ function RevieweeSheetShow(props: Props) {
     // const handleCloseCareerPlanUpdate = () => setCareerPlanUpdateShow(false);
     // const handleShowCareerPlanUpdate = () => setCareerPlanUpdateShow(true);
 
-    //サイドバー
-    let sidebar = [
-        {
-            label: "業績評価一覧",
-            dest: routeBuilder.revieweeListPath()
-    }]
+    const header = useContext(HeaderContext);
+    const sidebar = useContext(SidebarContext)
 
-    // SUPER_MANAGER,MANAGERが含まれているか確認
-    if(currentEmployee && (currentEmployee.manager === 'MANAGER' as EmployeeType || currentEmployee.manager === 'SUPER_MANAGER' as EmployeeType)) {
-        sidebar = [
-            {
-                label: "業績評価一覧",
-                dest: routeBuilder.revieweeListPath()
-        }, {
-            label: "進捗参照",
-            dest: routeBuilder.reviewerListPath()
-        }, {
-            label: "総合評価参照",
-            dest: routeBuilder.reviewerEvaluationListPath()
-        }]
-    }
 
     //表示用データ
     useEffect(() => {
@@ -132,7 +114,9 @@ function RevieweeSheetShow(props: Props) {
     return (
         <SheetContext.Provider value={{sheet: sheet, setSheet: setSheet}}>
             {/* 共通 */}
-            <HeaderComponents />
+            <Header
+                {...header}
+            />
             {/* <RevieweeSidebar /> */}
 
             <Container>
@@ -145,11 +129,9 @@ function RevieweeSheetShow(props: Props) {
                 </div>
                 {/* <LeftBox><RevieweeSidebar /></LeftBox> */}
                 <LeftBox>
-                    <Sidebar>
-                        <SidebarManager
-                            links={sidebar}
-                        />
-                    </Sidebar>
+                    <Sidebar
+                        data={sidebar}
+                    />
                 </LeftBox>
                 <RightBox>
                     <Content>

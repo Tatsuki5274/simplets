@@ -2,8 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import { Card } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import * as APIt from 'API';
-import { EmployeeContext, ErrorContext, UserContext } from 'App';
-import HeaderComponents from 'common/header';//ヘッダーの表示
+import { EmployeeContext, ErrorContext, HeaderContext, SidebarContext, UserContext } from 'App';
 import style from './progressStyle.module.scss';
 import { Link } from 'react-router-dom';
 import { Field, Form, Formik } from 'formik';
@@ -22,6 +21,9 @@ import Container from 'views/components/templates/Container';
 import Title from 'views/components/molecules/Title';
 import CommandButton from 'views/components/molecules/CommandButton';
 import { Group, Sheet } from 'API';
+import { propStyle } from 'aws-amplify-react';
+import Header from 'views/components/organisms/common/Header';
+
 
 type ViewType = {
 
@@ -129,6 +131,10 @@ function ProgressReferenceList() {
     const currentUser = useContext(UserContext);
     const currentEmployee = useContext(EmployeeContext);
 
+    const header = useContext(HeaderContext);
+    const sidebar = useContext(SidebarContext)
+
+
     const setError = useContext(ErrorContext)
 
     //今日の日付を取得
@@ -145,18 +151,6 @@ function ProgressReferenceList() {
     //選択する部署のデータを取得して昇順でソートして表示する機能
     const [groupList, setGroupList] = useState<Group[]>()
 
-    //サイドバー
-    const sidebarMock = [
-        {
-            label: "業績評価一覧",
-            dest: routeBuilder.revieweeListPath()
-        }, {
-            label: "進捗参照",
-            dest: routeBuilder.reviewerListPath()
-        }, {
-            label: "総合評価参照",
-            dest: routeBuilder.reviewerEvaluationListPath()
-        }]
 
 
 
@@ -305,14 +299,14 @@ function ProgressReferenceList() {
         <div>
             <div id="gage"></div>
             {/* ヘッダーの表示 */}
-            <HeaderComponents />
+            <Header
+                {...header}
+            />
             <Container>
                 <LeftBox>
-                    <Sidebar>
-                        <SidebarManager
-                            links={sidebarMock}
-                        />
-                    </Sidebar>
+                    <Sidebar
+                        data={sidebar}
+                    />
                 </LeftBox>
                 <RightBox>
                     <Content>

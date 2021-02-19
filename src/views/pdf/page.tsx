@@ -33,7 +33,7 @@ const sortCategory = function (a: Section | null, b: Section | null) {
     }
 }
 
-export function PDFPage(props: Props) {
+export function PDFPage(props:Props) {
     const setError = useContext(ErrorContext)
     const [sheet, setSheet] = useState<Sheet | null>(null);
     const [lastOverAllEvaluations, setlastOverAllEvaluations] = useState<Array<number | null> | null>();

@@ -3,7 +3,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { TableEvaluationListType } from "views/components/organisms/evaluation/reviewerList/TableEvaluationList"
 import ReviewerEvaluationList from "views/components/templates/evaluation/reviewer/ReviewerEvaluationList";
 import * as APIt from 'API';
-import { EmployeeContext, ErrorContext, UserContext } from "App";
+import { EmployeeContext, HeaderContext, ErrorContext, UserContext, SidebarContext } from "App";
 import { getStatusValue } from "lib/getStatusValue";
 import { routeBuilder } from "router";
 import { HeaderProps } from "views/components/organisms/common/Header";
@@ -68,10 +68,12 @@ export default function () {
     const [tableData, setTableData] = useState<(TableEvaluationListType | null)[] | null>(null);
     const [initTableData, setInitTableData] = useState<(TableEvaluationListType | null)[] | null>(null);
 
-    const [header, setHeader] = useState<HeaderProps | null>(null)
+    // const [header, setHeader] = useState<HeaderProps | null>(null)
     const [years, setYears] = useState<number[] | null>(null)
     const [groups, setGroups] = useState<SelectLabel[] | null>(null)
     const currentEmployee = useContext(EmployeeContext);
+    const header = useContext(HeaderContext);
+    const sidebar = useContext(SidebarContext)
 
 
     useEffect(()=>{
@@ -156,13 +158,13 @@ export default function () {
     useEffect(()=>{
       // ヘッダー用社員情報の取得
       if(currentEmployee){
-        const header: HeaderProps = {
-          companyName: currentEmployee.company?.name,
-          groupName: currentEmployee.group?.name,
-          lastName: currentEmployee.lastName,
-          firstName: currentEmployee.firstName
-        }
-        setHeader(header)
+        // const header: HeaderProps = {
+        //   companyName: currentEmployee.company?.name,
+        //   groupName: currentEmployee.group?.name,
+        //   lastName: currentEmployee.lastName,
+        //   firstName: currentEmployee.firstName
+        // }
+        // setHeader(header)
 
         const startMonth = currentEmployee.company?.startMonth
         if(startMonth){
@@ -211,6 +213,7 @@ export default function () {
             initTableData={initTableData}
             data={{
               header: header,
+              sidebar: sidebar,
               years: years,
               groups: groups
             }}

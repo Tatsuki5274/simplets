@@ -1,6 +1,6 @@
 import React from "react";
 import { routeBuilder } from "router";
-import { SelectLabel } from "views/components/atoms/Types";
+import { LinkType, SelectLabel } from "views/components/atoms/Types";
 import Header, { HeaderProps } from "views/components/organisms/common/Header";
 import SidebarManager from "views/components/organisms/common/SidebarManager";
 import ProgressCard, { ProgressReferenceType } from "views/components/organisms/progress/ProgressCard";
@@ -18,25 +18,11 @@ type Props = {
     initCardData: (ProgressReferenceType | null)[] | null
     data: {
         header: HeaderProps | null
+        sidebar: LinkType[][] | null
         years: number[] | null
         groups: SelectLabel[] | null
     }
 }
-
-const sidebarMock = [
-    {
-        label: "業績評価一覧",
-        dest: routeBuilder.revieweeListPath()
-    },
-    {
-        label: "進捗参照",
-        dest: routeBuilder.reviewerListPath()
-    },
-    {
-        label: "総合評価参照",
-        dest: routeBuilder.reviewerEvaluationListPath()
-    }
-]
 
 const statusMock = [
     {
@@ -91,11 +77,10 @@ export default function (props: Props) {
             />
             <Container>
                 <LeftBox>
-                    <Sidebar>
-                        <SidebarManager
-                            links={sidebarMock}
-                        />
-                    </Sidebar>
+                    
+                    <Sidebar
+                        data={props.data.sidebar}
+                    />
                 </LeftBox>
                 <RightBox>
                     <Content>

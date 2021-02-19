@@ -1,5 +1,5 @@
 import { Formik } from "formik";
-import { createReport } from "graphql/mutations";
+import { updateReport } from "graphql/mutations";
 import { ReportDao } from "lib/dao/reportDao";
 import React from "react";
 import Text from "views/components/atoms/Text";
@@ -7,48 +7,45 @@ import TextArea from "views/components/atoms/TextArea";
 import CommandButton from "views/components/molecules/CommandButton";
 import RadioButtonSelect from "views/components/molecules/RadioButtonSelect";
 import * as APIt from 'API';
-import { sendEmailMutation } from "lib/sendEmail";
 import { SendEmail } from "App";
-import { Superior } from "views/components/atoms/Types";
+import { sendEmailMutation } from "lib/sendEmail";
 
-export type RevieweeCreateReportType = {
-    date: string
-    companyID: string
-    superior: Superior | null
-    referencer: (string | null)[] | null
-    reviewer: (string | null)[] | null
-    reviewee: string
-    revieweeName: string
-    workStatus: {
+type Props = {
+    workStatusList: {
         value: string
         label: string
     }[]
-}
 
-type Props = {
-    data: RevieweeCreateReportType
+    data: {
+        date: string
+        companyID: string
+        superior: {
+            email: string | null,
+        }
+        reviewee: string
+        revieweeName: string
+        workStatusValue: string
+        reviewerComments: string
+        commentWork: string
+        commentStatus: string
+        commentOther: string
+    }
 }
 
 export default function (props: Props) {
     return (
         <Formik
             initialValues={{
-                commentWork: "",
-                workStatus: props.data.workStatus[0].value,
-                commentStatus: "",
-                commentOther: "",
+                commentWork: props.data.commentWork,
+                workStatus: props.data.workStatusValue,
+                commentStatus: props.data.commentStatus,
+                commentOther: props.data.commentOther,
             }}
             onSubmit={async (values) => {
 
-                const createI: APIt.CreateReportInput = {
+                const updateI: APIt.UpdateReportInput = {
                     companyID: props.data.companyID,
                     date: props.data.date,
-                    referencer: props.data.referencer,
-                    reviewer: props.data.reviewer,
-                    // superior: {
-                    //     email: props.superior ? props.superior.email : null,
-                    //     username: props.superior ? props.superior.username : null,
-                    // },
                     workStatus: values.workStatus as APIt.ReportWorkingStatus,
                     reviewee: props.data.reviewee,
                     revieweeComments: {
@@ -57,10 +54,14 @@ export default function (props: Props) {
                         status: values.commentStatus,
                     },
                 }
-                const createdReport = await ReportDao.create(createReport, createI);
-                if (createdReport) {
+                console.log("updateI", updateI)
+                const updatedReport = await ReportDao.update(updateReport, updateI);
+                console.log("updatedReport", updatedReport)
+                if (updatedReport) {
                     window.alert("保存が完了しました");
                 }
+                console.log("values", values)
+
             }}
         >
             {formik => (
@@ -77,6 +78,7 @@ export default function (props: Props) {
                         <TextArea
                             name="commentWork"
                             onChange={formik.handleChange}
+                            defaultValue={formik.values.commentWork}
                         />
                     </div>
 
@@ -86,8 +88,9 @@ export default function (props: Props) {
                     <div>
                         <RadioButtonSelect
                             name="workStatus"
-                            radioButtons={props.data.workStatus}
+                            radioButtons={props.workStatusList}
                             onChange={formik.handleChange}
+                            defaultIndex={props.workStatusList.findIndex((element) => element.value === formik.values.workStatus)}
                         />
                     </div>
 
@@ -98,6 +101,7 @@ export default function (props: Props) {
                         <TextArea
                             name="commentStatus"
                             onChange={formik.handleChange}
+                            defaultValue={formik.values.commentStatus}
                         />
                     </div>
 
@@ -108,32 +112,40 @@ export default function (props: Props) {
                         <TextArea
                             name="commentOther"
                             onChange={formik.handleChange}
+                            defaultValue={formik.values.commentOther}
                         />
                     </div>
 
+                    <div>
+                        <Text className="reviewerComments">所属長コメント</Text>
+                    </div>
+                    <div>
+                        <Text>{props.data.reviewerComments}</Text>
+                    </div>
+
                     <CommandButton type="submit">保存</CommandButton>
-                    {props.data.superior && props.data.superior.email ?
+                    {props.data.superior.email ?
                         <CommandButton
                             onClick={() => {
                                 if (window.confirm("所属長へメールを送信しますか？")) {
-                                    if (props.data.superior) {
-                                        const sendI: SendEmail = {
-                                            to: [props.data.superior.email],
-                                            subject: `[Simplet's]　作業報告（${props.data.date}）${props.data.revieweeName}`,
-                                            body: `
+                                    const sendI: SendEmail = {
+                                        to: [props.data.superior.email],
+                                        subject: `[Simplet's]　作業報告（${props.data.date}）${props.data.revieweeName}`,
+                                        body: `
 [作業報告]
 ${formik.values.commentWork}
 [作業状況]
-${props.data.workStatus[props.data.workStatus.findIndex((element) => element.value === formik.values.workStatus)].label}
+${props.workStatusList[props.workStatusList.findIndex((element) => element.value === formik.values.workStatus)].label}
 [作業状況コメント]
 ${formik.values.commentStatus}
 [その他コメント]
 ${formik.values.commentOther}
+[所属長コメント]
+${props.data.reviewerComments}
 `
-                                        }
-                                        if (sendEmailMutation(sendI)) {
-                                            window.alert("所属長へのメール送信が完了しました");
-                                        }
+                                    }
+                                    if (sendEmailMutation(sendI)) {
+                                        window.alert("所属長へのメール送信が完了しました");
                                     }
                                 }
                             }}

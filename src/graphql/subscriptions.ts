@@ -173,6 +173,606 @@ export const onDeleteObjective = /* GraphQL */ `
     }
   }
 `;
+export const onCreateReport = /* GraphQL */ `
+  subscription OnCreateReport(
+    $reviewee: String
+    $referencer: String
+    $reviewer: String
+  ) {
+    onCreateReport(
+      reviewee: $reviewee
+      referencer: $referencer
+      reviewer: $reviewer
+    ) {
+      reviewee
+      date
+      reviewer
+      companyID
+      referencer
+      revieweeComments {
+        work
+        other
+        status
+      }
+      reviewerComments {
+        superior
+      }
+      workStatus
+      createdAt
+      updatedAt
+      revieweeEmployee {
+        companyID
+        username
+        localID
+        employeeGroupLocalId
+        superiorUsername
+        firstName
+        lastName
+        grade
+        email
+        group {
+          companyID
+          localID
+          name
+          createdAt
+          updatedAt
+        }
+        company {
+          id
+          name
+          startMonth
+          shortName
+          url
+          createdAt
+          updatedAt
+        }
+        manager
+        isDeleted
+        createdAt
+        updatedAt
+        superior {
+          companyID
+          username
+          localID
+          employeeGroupLocalId
+          superiorUsername
+          firstName
+          lastName
+          grade
+          email
+          group {
+            companyID
+            localID
+            name
+            createdAt
+            updatedAt
+          }
+          company {
+            id
+            name
+            startMonth
+            shortName
+            url
+            createdAt
+            updatedAt
+          }
+          manager
+          isDeleted
+          createdAt
+          updatedAt
+          superior {
+            companyID
+            username
+            localID
+            employeeGroupLocalId
+            superiorUsername
+            firstName
+            lastName
+            grade
+            email
+            group {
+              companyID
+              localID
+              name
+              createdAt
+              updatedAt
+            }
+            company {
+              id
+              name
+              startMonth
+              shortName
+              url
+              createdAt
+              updatedAt
+            }
+            manager
+            isDeleted
+            createdAt
+            updatedAt
+            superior {
+              companyID
+              username
+              localID
+              employeeGroupLocalId
+              superiorUsername
+              firstName
+              lastName
+              grade
+              email
+              group {
+                companyID
+                localID
+                name
+                createdAt
+                updatedAt
+              }
+              company {
+                id
+                name
+                startMonth
+                shortName
+                url
+                createdAt
+                updatedAt
+              }
+              manager
+              isDeleted
+              createdAt
+              updatedAt
+              superior {
+                companyID
+                username
+                localID
+                employeeGroupLocalId
+                superiorUsername
+                firstName
+                lastName
+                grade
+                email
+                group {
+                  companyID
+                  localID
+                  name
+                  createdAt
+                  updatedAt
+                }
+                company {
+                  id
+                  name
+                  startMonth
+                  shortName
+                  url
+                  createdAt
+                  updatedAt
+                }
+                manager
+                isDeleted
+                createdAt
+                updatedAt
+                superior {
+                  companyID
+                  username
+                  localID
+                  employeeGroupLocalId
+                  superiorUsername
+                  firstName
+                  lastName
+                  grade
+                  email
+                  manager
+                  isDeleted
+                  createdAt
+                  updatedAt
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`;
+export const onUpdateReport = /* GraphQL */ `
+  subscription OnUpdateReport(
+    $reviewee: String
+    $referencer: String
+    $reviewer: String
+  ) {
+    onUpdateReport(
+      reviewee: $reviewee
+      referencer: $referencer
+      reviewer: $reviewer
+    ) {
+      reviewee
+      date
+      reviewer
+      companyID
+      referencer
+      revieweeComments {
+        work
+        other
+        status
+      }
+      reviewerComments {
+        superior
+      }
+      workStatus
+      createdAt
+      updatedAt
+      revieweeEmployee {
+        companyID
+        username
+        localID
+        employeeGroupLocalId
+        superiorUsername
+        firstName
+        lastName
+        grade
+        email
+        group {
+          companyID
+          localID
+          name
+          createdAt
+          updatedAt
+        }
+        company {
+          id
+          name
+          startMonth
+          shortName
+          url
+          createdAt
+          updatedAt
+        }
+        manager
+        isDeleted
+        createdAt
+        updatedAt
+        superior {
+          companyID
+          username
+          localID
+          employeeGroupLocalId
+          superiorUsername
+          firstName
+          lastName
+          grade
+          email
+          group {
+            companyID
+            localID
+            name
+            createdAt
+            updatedAt
+          }
+          company {
+            id
+            name
+            startMonth
+            shortName
+            url
+            createdAt
+            updatedAt
+          }
+          manager
+          isDeleted
+          createdAt
+          updatedAt
+          superior {
+            companyID
+            username
+            localID
+            employeeGroupLocalId
+            superiorUsername
+            firstName
+            lastName
+            grade
+            email
+            group {
+              companyID
+              localID
+              name
+              createdAt
+              updatedAt
+            }
+            company {
+              id
+              name
+              startMonth
+              shortName
+              url
+              createdAt
+              updatedAt
+            }
+            manager
+            isDeleted
+            createdAt
+            updatedAt
+            superior {
+              companyID
+              username
+              localID
+              employeeGroupLocalId
+              superiorUsername
+              firstName
+              lastName
+              grade
+              email
+              group {
+                companyID
+                localID
+                name
+                createdAt
+                updatedAt
+              }
+              company {
+                id
+                name
+                startMonth
+                shortName
+                url
+                createdAt
+                updatedAt
+              }
+              manager
+              isDeleted
+              createdAt
+              updatedAt
+              superior {
+                companyID
+                username
+                localID
+                employeeGroupLocalId
+                superiorUsername
+                firstName
+                lastName
+                grade
+                email
+                group {
+                  companyID
+                  localID
+                  name
+                  createdAt
+                  updatedAt
+                }
+                company {
+                  id
+                  name
+                  startMonth
+                  shortName
+                  url
+                  createdAt
+                  updatedAt
+                }
+                manager
+                isDeleted
+                createdAt
+                updatedAt
+                superior {
+                  companyID
+                  username
+                  localID
+                  employeeGroupLocalId
+                  superiorUsername
+                  firstName
+                  lastName
+                  grade
+                  email
+                  manager
+                  isDeleted
+                  createdAt
+                  updatedAt
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`;
+export const onDeleteReport = /* GraphQL */ `
+  subscription OnDeleteReport(
+    $reviewee: String
+    $referencer: String
+    $reviewer: String
+  ) {
+    onDeleteReport(
+      reviewee: $reviewee
+      referencer: $referencer
+      reviewer: $reviewer
+    ) {
+      reviewee
+      date
+      reviewer
+      companyID
+      referencer
+      revieweeComments {
+        work
+        other
+        status
+      }
+      reviewerComments {
+        superior
+      }
+      workStatus
+      createdAt
+      updatedAt
+      revieweeEmployee {
+        companyID
+        username
+        localID
+        employeeGroupLocalId
+        superiorUsername
+        firstName
+        lastName
+        grade
+        email
+        group {
+          companyID
+          localID
+          name
+          createdAt
+          updatedAt
+        }
+        company {
+          id
+          name
+          startMonth
+          shortName
+          url
+          createdAt
+          updatedAt
+        }
+        manager
+        isDeleted
+        createdAt
+        updatedAt
+        superior {
+          companyID
+          username
+          localID
+          employeeGroupLocalId
+          superiorUsername
+          firstName
+          lastName
+          grade
+          email
+          group {
+            companyID
+            localID
+            name
+            createdAt
+            updatedAt
+          }
+          company {
+            id
+            name
+            startMonth
+            shortName
+            url
+            createdAt
+            updatedAt
+          }
+          manager
+          isDeleted
+          createdAt
+          updatedAt
+          superior {
+            companyID
+            username
+            localID
+            employeeGroupLocalId
+            superiorUsername
+            firstName
+            lastName
+            grade
+            email
+            group {
+              companyID
+              localID
+              name
+              createdAt
+              updatedAt
+            }
+            company {
+              id
+              name
+              startMonth
+              shortName
+              url
+              createdAt
+              updatedAt
+            }
+            manager
+            isDeleted
+            createdAt
+            updatedAt
+            superior {
+              companyID
+              username
+              localID
+              employeeGroupLocalId
+              superiorUsername
+              firstName
+              lastName
+              grade
+              email
+              group {
+                companyID
+                localID
+                name
+                createdAt
+                updatedAt
+              }
+              company {
+                id
+                name
+                startMonth
+                shortName
+                url
+                createdAt
+                updatedAt
+              }
+              manager
+              isDeleted
+              createdAt
+              updatedAt
+              superior {
+                companyID
+                username
+                localID
+                employeeGroupLocalId
+                superiorUsername
+                firstName
+                lastName
+                grade
+                email
+                group {
+                  companyID
+                  localID
+                  name
+                  createdAt
+                  updatedAt
+                }
+                company {
+                  id
+                  name
+                  startMonth
+                  shortName
+                  url
+                  createdAt
+                  updatedAt
+                }
+                manager
+                isDeleted
+                createdAt
+                updatedAt
+                superior {
+                  companyID
+                  username
+                  localID
+                  employeeGroupLocalId
+                  superiorUsername
+                  firstName
+                  lastName
+                  grade
+                  email
+                  manager
+                  isDeleted
+                  createdAt
+                  updatedAt
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`;
 export const onCreateEmployee = /* GraphQL */ `
   subscription OnCreateEmployee {
     onCreateEmployee {

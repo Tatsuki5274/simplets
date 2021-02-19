@@ -1,8 +1,8 @@
 import React from "react"
 import { Table } from "react-bootstrap"
 import { Link } from "react-router-dom"
-import TableBodyCell from "views/components/molecules/TableBodyCell"
-import TableHeaderCell from "views/components/molecules/TableHeaderCell"
+import TableBodyCell from "views/components/atoms/TableBodyCell"
+import TableHeaderCell from "views/components/atoms/TableHeaderCell"
 
 export type TableEvaluationListType = {
     // フィルターデータ
