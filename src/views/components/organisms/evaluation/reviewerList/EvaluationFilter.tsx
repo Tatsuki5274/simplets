@@ -3,7 +3,6 @@ import Text from "views/components/atoms/Text";
 import PullDown from "views/components/molecules/PullDown";
 import { TableEvaluationListType } from "./TableEvaluationList";
 import { Formik } from "formik";
-import RadioButtonSelect from "views/components/molecules/RadioButtonSelect";
 import CommandButton from "views/components/molecules/CommandButton";
 import styled from "styled-components";
 

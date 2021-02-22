@@ -1,7 +1,6 @@
 import { ErrorContext } from "App";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect } from "react";
 import styled from "styled-components";
-import ErrorAlert from "../molecules/ErrorAlert";
 import ErrorMessage from "../organisms/ErrorMessage";
 
 type Props = {
@@ -15,14 +14,14 @@ export default function(props: Props){
 
     useEffect(()=>{
         if(props.children){
-            setTimeout(clearError, 5000 );
+            setTimeout(()=> setError(null) , 5000 );
             setError(props.children)
         }
-    }, [props.children])
+    }, [props.children, setError])
 
-    function clearError(){
-        setError(null)
-    }
+    // function clearError(){
+    //     setError(null)
+    // }
 
     function onClick(){
         setError(null)

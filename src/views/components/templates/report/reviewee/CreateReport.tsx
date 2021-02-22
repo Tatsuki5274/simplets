@@ -1,9 +1,7 @@
 import React from "react";
-import { routeBuilder } from "router";
-import { LinkType, Superior } from "views/components/atoms/Types";
+import { LinkType } from "views/components/atoms/Types";
 import Title from "views/components/molecules/Title";
 import Header, { HeaderProps } from "views/components/organisms/common/Header";
-import SidebarManager from "views/components/organisms/common/SidebarManager";
 import CreateReport, { RevieweeCreateReportType } from "views/components/organisms/report/CreateReport";
 import Container from "../../Container";
 import Content from "../../Content";

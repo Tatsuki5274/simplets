@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { Button, Table } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Link } from 'react-router-dom';
-import {  EmployeeContext, ErrorContext, HeaderContext, SidebarContext, UserContext } from 'App';
+import { ErrorContext, HeaderContext, SidebarContext, UserContext } from 'App';
 import { ApprovalStatus, getStatusValue } from 'lib/getStatusValue'
 import * as APIt from 'API';
 import { SheetDao } from 'lib/dao/sheetDao';
@@ -15,8 +15,6 @@ import { getSheetKeys } from 'lib/util';
 import { BooleanType, Category, EmployeeType, Sheet } from 'API';
 import LeftBox from 'views/components/templates/LeftBox';
 import RightBox from 'views/components/templates/RightBox';
-import SidebarManager from 'views/components/organisms/common/SidebarManager';
-import { routeBuilder } from 'router';
 import Sidebar from 'views/components/templates/Sidebar';
 import Content from 'views/components/templates/Content';
 import Container from 'views/components/templates/Container';
@@ -192,7 +190,6 @@ function ListPerformanceEvalution() {
 
   // ログインユーザを取得する
   const currentUser = useContext(UserContext);
-  const currentEmployee = useContext(EmployeeContext);
 
   const setError = useContext(ErrorContext)
 
@@ -234,7 +231,7 @@ function ListPerformanceEvalution() {
         }
       }
     })()
-  }, [currentUser])
+  }, [currentUser, setError])
 
   async function handleClickCreate() {
 

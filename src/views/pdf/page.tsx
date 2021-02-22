@@ -94,7 +94,7 @@ export function PDFPage(props:Props) {
                 }
             }
         })()
-    }, [sheet])
+    }, [sheet, setError])
 
     if (sheet) {
 

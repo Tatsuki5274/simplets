@@ -1,4 +1,3 @@
-import { propStyle } from "aws-amplify-react";
 import React from "react";
 import CellStatusInTask from "views/components/atoms/CellStatusInTask";
 

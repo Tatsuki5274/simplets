@@ -106,7 +106,7 @@ export default function (props: Props) {
                 setReportData(reportItem)
             }
         })()
-    }, [currentEmployee])
+    }, [currentEmployee, props.match.params.date])
 
 
 

@@ -1,4 +1,3 @@
-import ApprovalStatusBox from "common/approvalStatusBox";
 import { getStatusValue } from "lib/getStatusValue";
 import { round } from "lib/util";
 import React from "react";

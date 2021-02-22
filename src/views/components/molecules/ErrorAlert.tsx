@@ -1,4 +1,3 @@
-import { propStyle } from "aws-amplify-react";
 import React from "react";
 import { Alert } from "react-bootstrap";
 import Text from "../atoms/Text";

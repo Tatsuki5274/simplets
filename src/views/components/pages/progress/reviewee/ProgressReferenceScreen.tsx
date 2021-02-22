@@ -6,7 +6,6 @@ import { calcAvg, createGaugeId, getSectionKeys, getSheetKeys, getThisYear } fro
 import React, { useContext, useEffect, useState } from "react";
 import { routeBuilder } from "router";
 import { SelectLabel } from "views/components/atoms/Types";
-import { HeaderProps } from "views/components/organisms/common/Header";
 import { ProgressReferenceType } from "views/components/organisms/progress/ProgressCard";
 import ProgressReference from "views/components/templates/progress/reviewee/ProgressReference";
 

@@ -1,9 +1,7 @@
 import { GetReportQueryVariables, Report } from "API";
 import { EmployeeContext, HeaderContext, SidebarContext } from "App";
-import dateformat from "dateformat";
 import { getReport } from "graphql/queries";
 import { ReportDao } from "lib/dao/reportDao";
-import { createSidebarElements } from "lib/util";
 import React, { useContext, useEffect, useState } from "react";
 import ChangeReport from "views/components/templates/report/reviewee/ChangeReport";
 

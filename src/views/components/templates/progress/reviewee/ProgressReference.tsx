@@ -1,8 +1,6 @@
 import React from "react";
-import { routeBuilder } from "router";
 import { LinkType, SelectLabel } from "views/components/atoms/Types";
 import Header, { HeaderProps } from "views/components/organisms/common/Header";
-import SidebarManager from "views/components/organisms/common/SidebarManager";
 import ProgressCard, { ProgressReferenceType } from "views/components/organisms/progress/ProgressCard";
 import ProgressFilter from "views/components/organisms/progress/ProgressFilter";
 import ProgressTitle from "views/components/organisms/progress/ProgressTitle";

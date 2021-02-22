@@ -1,10 +1,9 @@
-import FullCalendar, { EventInput } from "@fullcalendar/react";
+import { EventInput } from "@fullcalendar/react";
 import { ListReportsQueryVariables } from "API";
 import { HeaderContext, SidebarContext, UserContext } from "App";
 import { listReports } from "graphql/queries";
 import { ReportDao } from "lib/dao/reportDao";
-import React, { useContext, useEffect, useRef, useState } from "react";
-import { HeaderProps } from "views/components/organisms/common/Header";
+import React, { useContext, useEffect, useState } from "react";
 import CalendarView from "views/components/templates/report/reviewee/CalendarView";
 
 type Props = {

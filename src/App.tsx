@@ -28,7 +28,6 @@ import { HeaderProps } from 'views/components/organisms/common/Header';
 import ChangeReportScreen from 'views/components/pages/report/reviewee/ChangeReportScreen';
 import ErrorMessageView from 'views/components/templates/ErrorMessageView';
 import { Employee, EmployeeType } from 'API';
-import ProgressReferenceList from 'reviewer/list/progress';
 import ReviewerReportList from 'views/components/pages/report/reviewer/ReviewerReportListCalendar';
 import { LinkType } from 'views/components/atoms/Types';
 import { createSidebarElements } from 'lib/util';

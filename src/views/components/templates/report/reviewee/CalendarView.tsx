@@ -1,11 +1,10 @@
 import { DateClickArg } from '@fullcalendar/interaction'
-import FullCalendar, { EventClickArg, EventInput } from '@fullcalendar/react'
-import React, { useRef } from 'react'
+import { EventClickArg, EventInput } from '@fullcalendar/react'
+import React from 'react'
 import { useHistory } from 'react-router-dom';
 import { routeBuilder } from 'router';
 import { LinkType } from 'views/components/atoms/Types';
 import Header, { HeaderProps } from "views/components/organisms/common/Header";
-import SidebarManager from 'views/components/organisms/common/SidebarManager';
 import Calendar from 'views/components/organisms/report/Calendar'
 import Container from '../../Container'
 import Content from '../../Content'

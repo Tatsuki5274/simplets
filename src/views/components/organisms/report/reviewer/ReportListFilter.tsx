@@ -1,7 +1,6 @@
-import { GetReportQueryVariables, ListReportsQueryVariables, ReportWorkingStatus } from "API";
+import { ListReportsQueryVariables, ReportWorkingStatus } from "API";
 import { Formik } from "formik";
-import { getEmployee, getReport, listReports } from "graphql/queries";
-import { EmployeeDao } from "lib/dao/employeeDao";
+import { listReports } from "graphql/queries";
 import { ReportDao } from "lib/dao/reportDao";
 import React, { useState } from "react";
 import Text from "views/components/atoms/Text";

@@ -5,8 +5,6 @@ import interactionPlugin, { DateClickArg } from "@fullcalendar/interaction";
 import EventTask from "views/components/molecules/report/EventTask";
 import dateFormat from "dateformat";
 import CommandButton from "views/components/molecules/CommandButton";
-import { Link } from "react-router-dom";
-import { routeBuilder } from "router";
 import { ReportWorkingStatus } from "API";
 import EventOK from "views/components/molecules/report/EventOK";
 import EventProblem from "views/components/molecules/report/EventProblem";

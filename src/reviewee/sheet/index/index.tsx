@@ -1,8 +1,8 @@
 import React, { useState, useEffect, createContext, useContext } from 'react';
-import { Button, Table } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { getSheet } from 'graphql/queries'
-import { EmployeeContext, HeaderContext, SidebarContext } from 'App';
+import { HeaderContext, SidebarContext } from 'App';
 import ApprovalStatusBox from 'common/approvalStatusBox';
 import { SheetDao } from 'lib/dao/sheetDao';
 import { RevieweeSheetObjectiveReadonly } from './components/objective/readonly';
@@ -21,7 +21,6 @@ import { RevieweeSheetObjectiveModalStatus1 } from './components/objectiveModal/
 import { RevieweeSheetObjectiveModalStatus3 } from './components/objectiveModal/status3';
 import { ObjectiveCreateModal } from './components/objectiveCreateModal';
 import { tableHeaderStyle } from 'common/globalStyle.module.scss';
-import style from './indexStyle.module.scss';
 import { getSectionKeys } from 'lib/util';
 import { SubmitButtonStatus2 } from './components/submit/status2';
 import { RevieweeSheetObjectiveEditableStatus1 } from './components/objective/editable/status1';
@@ -34,10 +33,7 @@ import LeftBox from 'views/components/templates/LeftBox';
 import RightBox from 'views/components/templates/RightBox';
 import Content from 'views/components/templates/Content';
 import Sidebar from 'views/components/templates/Sidebar';
-import SidebarManager from 'views/components/organisms/common/SidebarManager';
-import { routeBuilder } from 'router';
-import { EmployeeType, Objective, Section, Sheet } from 'API';
-import Scroll from 'views/components/atoms/Scroll';
+import { Objective, Section, Sheet } from 'API';
 import ScrollTable from 'views/components/molecules/ScrollTable';
 import Container from 'views/components/templates/Container';
 import Title from 'views/components/molecules/Title';
@@ -66,7 +62,6 @@ type Props = {
 function RevieweeSheetShow(props: Props) {
     
     // const sheetId = props.match.params.sheetId;
-    const currentEmployee = useContext(EmployeeContext);
 
     const [sheet, setSheet] = useState<Sheet>();
 
