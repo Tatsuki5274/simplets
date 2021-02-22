@@ -10,6 +10,7 @@ import { routeBuilder } from "router";
 import { ReportWorkingStatus } from "API";
 import EventOK from "views/components/molecules/report/EventOK";
 import EventProblem from "views/components/molecules/report/EventProblem";
+import jaLocale from '@fullcalendar/core/locales/ja';
 import styled from "styled-components";
 // import CalendarEvent from 'views/components/organisms/report/CalendarEvent';
 
@@ -104,6 +105,7 @@ export default function (props: Props) {
                     end: ""
                 }}
                 ref={calendarRef}
+                locale={jaLocale}
             />
         </>
     )
