@@ -39,17 +39,17 @@ export default function CalendarView(props: Props) {
 
     function handleThisMonthClick(target: Date) {
         history.push(routeBuilder.reviewerReportCalendarPaht(target))
-        props.setEvents([])
+        // props.setEvents([])
     }
 
     function handleNextMonthClick(target: Date) {
         history.push(routeBuilder.reviewerReportCalendarPaht(target))
-        props.setEvents([])
+        // props.setEvents([])
     }
 
     function handlePrevMonthClick(target: Date) {
         history.push(routeBuilder.reviewerReportCalendarPaht(target))
-        props.setEvents([])
+        // props.setEvents([])
     }
 
     return (
