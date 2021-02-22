@@ -10,6 +10,7 @@ import { routeBuilder } from "router";
 import { ReportWorkingStatus } from "API";
 import EventOK from "views/components/molecules/report/EventOK";
 import EventProblem from "views/components/molecules/report/EventProblem";
+import styled from "styled-components";
 // import CalendarEvent from 'views/components/organisms/report/CalendarEvent';
 
 type Props = {
@@ -60,30 +61,36 @@ export default function (props: Props) {
 
     return (
         <>
-            <CommandButton
-                onClick={()=>{
-                    if(props.handlePrevMonthClick){
-                        props.handlePrevMonthClick(prevDate)
-                    }
-                    calendarRef.current?.getApi().prev()
-                }}
-            >先月</CommandButton>
-            <CommandButton
-                onClick={()=>{
-                    if(props.handleThisMonthClick){
-                        props.handleThisMonthClick(new Date())
-                    }
-                    calendarRef.current?.getApi().today()
-                }}
-            >今月</CommandButton>
-            <CommandButton
-                onClick={()=>{
-                    if(props.handleNextMonthClick){
-                        props.handleNextMonthClick(nextDate)
-                    }
-                    calendarRef.current?.getApi().next()
-                }}
-            >来月</CommandButton>
+            <SpaceToolbar>
+                <CommandButton
+                    onClick={()=>{
+                        if(props.handlePrevMonthClick){
+                            props.handlePrevMonthClick(prevDate)
+                        }
+                        calendarRef.current?.getApi().prev()
+                    }}
+                >先月</CommandButton>
+            </SpaceToolbar>
+            <SpaceToolbar>
+                <CommandButton
+                    onClick={()=>{
+                        if(props.handleThisMonthClick){
+                            props.handleThisMonthClick(new Date())
+                        }
+                        calendarRef.current?.getApi().today()
+                    }}
+                >今月</CommandButton>
+            </SpaceToolbar>
+            <SpaceToolbar>
+                <CommandButton
+                    onClick={()=>{
+                        if(props.handleNextMonthClick){
+                            props.handleNextMonthClick(nextDate)
+                        }
+                        calendarRef.current?.getApi().next()
+                    }}
+                >来月</CommandButton>
+            </SpaceToolbar>
             <FullCalendar
                 plugins={[dayGridPlugin, interactionPlugin]}
                 initialView="dayGridMonth"
@@ -101,3 +108,8 @@ export default function (props: Props) {
         </>
     )
 }
+
+const SpaceToolbar = styled.div({
+    display: "inline-block",
+    margin: "0 10px",
+})
