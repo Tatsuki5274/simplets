@@ -9,6 +9,7 @@ import RadioButtonSelect from "views/components/molecules/RadioButtonSelect";
 import * as APIt from 'API';
 import { SendEmail } from "App";
 import { sendEmailMutation } from "lib/sendEmail";
+import styled from "styled-components";
 
 type Props = {
     workStatusList: {
@@ -125,13 +126,14 @@ export default function (props: Props) {
 
                     <CommandButton type="submit">保存</CommandButton>
                     {props.data.superior.email ?
-                        <CommandButton
-                            onClick={() => {
-                                if (window.confirm("所属長へメールを送信しますか？")) {
-                                    const sendI: SendEmail = {
-                                        to: [props.data.superior.email],
-                                        subject: `[Simplet's]　作業報告（${props.data.date}）${props.data.revieweeName}`,
-                                        body: `
+                        <SpaceStyle>
+                            <CommandButton
+                                onClick={() => {
+                                    if (window.confirm("所属長へメールを送信しますか？")) {
+                                        const sendI: SendEmail = {
+                                            to: [props.data.superior.email],
+                                            subject: `[Simplet's]　作業報告（${props.data.date}）${props.data.revieweeName}`,
+                                            body: `
 [作業報告]
 ${formik.values.commentWork}
 [作業状況]
@@ -143,13 +145,14 @@ ${formik.values.commentOther}
 [所属長コメント]
 ${props.data.reviewerComments}
 `
+                                        }
+                                        if (sendEmailMutation(sendI)) {
+                                            window.alert("所属長へのメール送信が完了しました");
+                                        }
                                     }
-                                    if (sendEmailMutation(sendI)) {
-                                        window.alert("所属長へのメール送信が完了しました");
-                                    }
-                                }
-                            }}
-                        >所属長へ送信</CommandButton>
+                                }}
+                            >所属長へ送信</CommandButton>
+                        </SpaceStyle>
                         : null
                     }
                 </form>
@@ -157,3 +160,8 @@ ${props.data.reviewerComments}
         </Formik>
     )
 }
+
+const SpaceStyle = styled.div({
+    display: "inline-block",
+    margin: "0 10px",
+})

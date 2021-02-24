@@ -8,6 +8,7 @@ import { ReportDao } from "lib/dao/reportDao";
 import { updateReport } from "graphql/mutations";
 import { SendEmail } from "App";
 import { sendEmailMutation } from "lib/sendEmail";
+import styled from "styled-components";
 
 type Props = {
     revieweeMailAddress: string | null
@@ -98,13 +99,14 @@ export default function (props: Props) {
 
                     <CommandButton type="submit">保存</CommandButton>
                     {props.revieweeMailAddress ?
-                        <CommandButton
-                            onClick={() => {
-                                if (window.confirm("社員へメールを送信しますか？")) {
-                                    const sendI: SendEmail = {
-                                        to: [props.revieweeMailAddress],
-                                        subject: `[Simplet's]　作業報告（${props.date}）所属長からのコメント`,
-                                        body: `
+                        <SpaceStyle>
+                            <CommandButton
+                                onClick={() => {
+                                    if (window.confirm("社員へメールを送信しますか？")) {
+                                        const sendI: SendEmail = {
+                                            to: [props.revieweeMailAddress],
+                                            subject: `[Simplet's]　作業報告（${props.date}）所属長からのコメント`,
+                                            body: `
 [作業報告]
 ${props.commentWork}
 [作業状況]
@@ -116,13 +118,14 @@ ${props.commentOther}
 [所属長コメント]
 ${formik.values.commentReviewer}
 `
+                                        }
+                                        if (sendEmailMutation(sendI)) {
+                                            window.alert("社員へのメール送信が完了しました");
+                                        }
                                     }
-                                    if (sendEmailMutation(sendI)) {
-                                        window.alert("社員へのメール送信が完了しました");
-                                    }
-                                }
-                            }}
-                        >社員に送信</CommandButton>
+                                }}
+                            >社員に送信</CommandButton>
+                        </SpaceStyle>
                         : null
                     }
                 </form>
@@ -130,3 +133,8 @@ ${formik.values.commentReviewer}
         </Formik>
     )
 }
+
+const SpaceStyle = styled.div({
+    display: "inline-block",
+    margin: "0 10px",
+})

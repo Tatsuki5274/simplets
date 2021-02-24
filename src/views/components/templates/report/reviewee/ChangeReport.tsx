@@ -48,7 +48,7 @@ export default function (props: Props) {
                 <RightBox>
                     <Content>
                         <>
-                            <Title>作業報告書変更画面</Title>
+                            <Title>作業報告書入力</Title>
                             <ChangeReport
                                 data={props.data}
                                 workStatusList={props.workStatusList}

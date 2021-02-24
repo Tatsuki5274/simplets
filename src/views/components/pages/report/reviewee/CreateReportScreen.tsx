@@ -4,7 +4,7 @@ import { listEmployeesManager } from "graphql/queries";
 import { EmployeeDao } from "lib/dao/employeeDao";
 import React, { useContext, useEffect, useState } from "react";
 import { Superior } from "views/components/atoms/Types";
-import { RevieweeCreateReportType } from "views/components/organisms/report/CreateReport";
+import { RevieweeCreateReportType } from "views/components/organisms/report/reviewee/CreateReport";
 import CreateReport from "views/components/templates/report/reviewee/CreateReport";
 
 type Props = {

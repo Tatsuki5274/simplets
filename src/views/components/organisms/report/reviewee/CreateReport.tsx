@@ -10,6 +10,7 @@ import * as APIt from 'API';
 import { sendEmailMutation } from "lib/sendEmail";
 import { SendEmail } from "App";
 import { Superior } from "views/components/atoms/Types";
+import styled from "styled-components";
 
 export type RevieweeCreateReportType = {
     date: string
@@ -110,17 +111,17 @@ export default function (props: Props) {
                             onChange={formik.handleChange}
                         />
                     </div>
-
-                    <CommandButton type="submit">保存</CommandButton>
+                        <CommandButton type="submit">保存</CommandButton>
                     {props.data.superior && props.data.superior.email ?
-                        <CommandButton
-                            onClick={() => {
-                                if (window.confirm("所属長へメールを送信しますか？")) {
-                                    if (props.data.superior) {
-                                        const sendI: SendEmail = {
-                                            to: [props.data.superior.email],
-                                            subject: `[Simplet's]　作業報告（${props.data.date}）${props.data.revieweeName}`,
-                                            body: `
+                        <SpaceStyle>
+                            <CommandButton
+                                onClick={() => {
+                                    if (window.confirm("所属長へメールを送信しますか？")) {
+                                        if (props.data.superior) {
+                                            const sendI: SendEmail = {
+                                                to: [props.data.superior.email],
+                                                subject: `[Simplet's]　作業報告（${props.data.date}）${props.data.revieweeName}`,
+                                                body: `
 [作業報告]
 ${formik.values.commentWork}
 [作業状況]
@@ -130,14 +131,15 @@ ${formik.values.commentStatus}
 [その他コメント]
 ${formik.values.commentOther}
 `
-                                        }
-                                        if (sendEmailMutation(sendI)) {
-                                            window.alert("所属長へのメール送信が完了しました");
+                                            }
+                                            if (sendEmailMutation(sendI)) {
+                                                window.alert("所属長へのメール送信が完了しました");
+                                            }
                                         }
                                     }
-                                }
-                            }}
-                        >所属長へ送信</CommandButton>
+                                }}
+                            >所属長へ送信</CommandButton>
+                        </SpaceStyle>
                         : null
                     }
                 </form>
@@ -145,3 +147,8 @@ ${formik.values.commentOther}
         </Formik>
     )
 }
+
+const SpaceStyle = styled.div({
+    display: "inline-block",
+    margin: "0 10px",
+})

@@ -8,13 +8,16 @@ type Props = {
         label: string
     }[]
     name: string
-    onChange : ((event: React.ChangeEvent<HTMLInputElement>) => void) | undefined
+    onChange: ((event: React.ChangeEvent<HTMLInputElement>) => void) | undefined
     defaultIndex?: number
 }
 
 const Styled = styled.div({
 })
 
+const Label = styled.label({
+    marginRight: "10px"
+})
 export default function (props: Props) {
     const defaultIndex = props.defaultIndex || 0
     return (
@@ -22,14 +25,14 @@ export default function (props: Props) {
             {props.radioButtons.map((radioButton, index) => {
                 return (
                     <>
-                        <RadioButton 
+                        <RadioButton
                             name={props.name}
                             onChange={props.onChange}
                             defaultChecked={defaultIndex === index}
                         >{radioButton.value}</RadioButton>
-                        <label>
+                        <Label>
                             {radioButton.label}
-                        </label>
+                        </Label>
                     </>
                 )
             })}

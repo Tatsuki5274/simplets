@@ -2,7 +2,7 @@ import React from "react";
 import { LinkType } from "views/components/atoms/Types";
 import Title from "views/components/molecules/Title";
 import Header, { HeaderProps } from "views/components/organisms/common/Header";
-import CreateReport, { RevieweeCreateReportType } from "views/components/organisms/report/CreateReport";
+import CreateReport, { RevieweeCreateReportType } from "views/components/organisms/report/reviewee/CreateReport";
 import Container from "../../Container";
 import Content from "../../Content";
 import LeftBox from "../../LeftBox";
@@ -30,7 +30,7 @@ export default function (props: Props) {
                 <RightBox>
                     <Content>
                         <>
-                            <Title>作業報告書記載画面</Title>
+                            <Title>作業報告書入力</Title>
                             <CreateReport
                                 data={props.data}
                             />
