@@ -1707,13 +1707,6 @@ export const onCreateSheet = /* GraphQL */ `
           updatedAt
         }
       }
-      group {
-        companyID
-        localID
-        name
-        createdAt
-        updatedAt
-      }
       section {
         items {
           sheetKeys
@@ -2146,13 +2139,6 @@ export const onUpdateSheet = /* GraphQL */ `
           updatedAt
         }
       }
-      group {
-        companyID
-        localID
-        name
-        createdAt
-        updatedAt
-      }
       section {
         items {
           sheetKeys
@@ -2584,13 +2570,6 @@ export const onDeleteSheet = /* GraphQL */ `
           createdAt
           updatedAt
         }
-      }
-      group {
-        companyID
-        localID
-        name
-        createdAt
-        updatedAt
       }
       section {
         items {

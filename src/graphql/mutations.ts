@@ -1146,13 +1146,6 @@ export const createSheet = /* GraphQL */ `
           updatedAt
         }
       }
-      group {
-        companyID
-        localID
-        name
-        createdAt
-        updatedAt
-      }
       section {
         items {
           sheetKeys
@@ -1577,13 +1570,6 @@ export const deleteSheet = /* GraphQL */ `
           createdAt
           updatedAt
         }
-      }
-      group {
-        companyID
-        localID
-        name
-        createdAt
-        updatedAt
       }
       section {
         items {
@@ -2816,13 +2802,6 @@ export const updateSheet = /* GraphQL */ `
           createdAt
           updatedAt
         }
-      }
-      group {
-        companyID
-        localID
-        name
-        createdAt
-        updatedAt
       }
       section {
         items {

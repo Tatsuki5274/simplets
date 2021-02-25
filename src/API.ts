@@ -379,7 +379,6 @@ export type Sheet = {
   updatedAt?: string,
   revieweeEmployee?: Employee,
   secondEmployee?: Employee,
-  group?: Group,
   section?: ModelSectionConnection,
 };
 
@@ -2144,14 +2143,6 @@ export type CreateSheetMutation = {
         updatedAt: string,
       } | null,
     } | null,
-    group?:  {
-      __typename: "Group",
-      companyID: string,
-      localID: string,
-      name: string,
-      createdAt: string,
-      updatedAt: string,
-    } | null,
     section?:  {
       __typename: "ModelSectionConnection",
       items?:  Array< {
@@ -2615,14 +2606,6 @@ export type DeleteSheetMutation = {
         createdAt: string,
         updatedAt: string,
       } | null,
-    } | null,
-    group?:  {
-      __typename: "Group",
-      companyID: string,
-      localID: string,
-      name: string,
-      createdAt: string,
-      updatedAt: string,
     } | null,
     section?:  {
       __typename: "ModelSectionConnection",
@@ -3975,14 +3958,6 @@ export type UpdateSheetMutation = {
         createdAt: string,
         updatedAt: string,
       } | null,
-    } | null,
-    group?:  {
-      __typename: "Group",
-      companyID: string,
-      localID: string,
-      name: string,
-      createdAt: string,
-      updatedAt: string,
     } | null,
     section?:  {
       __typename: "ModelSectionConnection",
@@ -5996,14 +5971,6 @@ export type GetSheetQuery = {
         updatedAt: string,
       } | null,
     } | null,
-    group?:  {
-      __typename: "Group",
-      companyID: string,
-      localID: string,
-      name: string,
-      createdAt: string,
-      updatedAt: string,
-    } | null,
     section?:  {
       __typename: "ModelSectionConnection",
       items?:  Array< {
@@ -6405,14 +6372,6 @@ export type ListSheetsQuery = {
           createdAt: string,
           updatedAt: string,
         } | null,
-      } | null,
-      group?:  {
-        __typename: "Group",
-        companyID: string,
-        localID: string,
-        name: string,
-        createdAt: string,
-        updatedAt: string,
       } | null,
       section?:  {
         __typename: "ModelSectionConnection",
@@ -6818,14 +6777,6 @@ export type ListSheetRevieweeQuery = {
           updatedAt: string,
         } | null,
       } | null,
-      group?:  {
-        __typename: "Group",
-        companyID: string,
-        localID: string,
-        name: string,
-        createdAt: string,
-        updatedAt: string,
-      } | null,
       section?:  {
         __typename: "ModelSectionConnection",
         items?:  Array< {
@@ -7230,14 +7181,6 @@ export type ListSheetYearQuery = {
           updatedAt: string,
         } | null,
       } | null,
-      group?:  {
-        __typename: "Group",
-        companyID: string,
-        localID: string,
-        name: string,
-        createdAt: string,
-        updatedAt: string,
-      } | null,
       section?:  {
         __typename: "ModelSectionConnection",
         items?:  Array< {
@@ -7641,14 +7584,6 @@ export type ListSheetGroupQuery = {
           createdAt: string,
           updatedAt: string,
         } | null,
-      } | null,
-      group?:  {
-        __typename: "Group",
-        companyID: string,
-        localID: string,
-        name: string,
-        createdAt: string,
-        updatedAt: string,
       } | null,
       section?:  {
         __typename: "ModelSectionConnection",
@@ -9718,14 +9653,6 @@ export type OnCreateSheetSubscription = {
         updatedAt: string,
       } | null,
     } | null,
-    group?:  {
-      __typename: "Group",
-      companyID: string,
-      localID: string,
-      name: string,
-      createdAt: string,
-      updatedAt: string,
-    } | null,
     section?:  {
       __typename: "ModelSectionConnection",
       items?:  Array< {
@@ -10192,14 +10119,6 @@ export type OnUpdateSheetSubscription = {
         updatedAt: string,
       } | null,
     } | null,
-    group?:  {
-      __typename: "Group",
-      companyID: string,
-      localID: string,
-      name: string,
-      createdAt: string,
-      updatedAt: string,
-    } | null,
     section?:  {
       __typename: "ModelSectionConnection",
       items?:  Array< {
@@ -10665,14 +10584,6 @@ export type OnDeleteSheetSubscription = {
         createdAt: string,
         updatedAt: string,
       } | null,
-    } | null,
-    group?:  {
-      __typename: "Group",
-      companyID: string,
-      localID: string,
-      name: string,
-      createdAt: string,
-      updatedAt: string,
     } | null,
     section?:  {
       __typename: "ModelSectionConnection",

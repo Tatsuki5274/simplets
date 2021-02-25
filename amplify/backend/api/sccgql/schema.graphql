@@ -167,7 +167,7 @@ type Sheet
   # connection
   sheetGroupLocalId: ID!
   sheetGroupName: String
-  group: Group @connection(fields: ["companyID", "sheetGroupLocalId"])
+  # group: Group @connection(fields: ["companyID", "sheetGroupLocalId"])
   revieweeEmployee: Employee @connection(fields: ["companyID", "revieweeUsername"])  #被評価者
   secondEmployee: Employee @connection(fields: ["companyID", "secondUsername"])  #所属長
   section: [Section] @connection(fields: ["companyID"]) # companyID.reviewee.year

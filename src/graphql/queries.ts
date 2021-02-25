@@ -1814,13 +1814,6 @@ export const getSheet = /* GraphQL */ `
           updatedAt
         }
       }
-      group {
-        companyID
-        localID
-        name
-        createdAt
-        updatedAt
-      }
       section {
         items {
           sheetKeys
@@ -2195,13 +2188,6 @@ export const listSheets = /* GraphQL */ `
             createdAt
             updatedAt
           }
-        }
-        group {
-          companyID
-          localID
-          name
-          createdAt
-          updatedAt
         }
         section {
           items {
@@ -2580,13 +2566,6 @@ export const listSheetReviewee = /* GraphQL */ `
             updatedAt
           }
         }
-        group {
-          companyID
-          localID
-          name
-          createdAt
-          updatedAt
-        }
         section {
           items {
             sheetKeys
@@ -2964,13 +2943,6 @@ export const listSheetYear = /* GraphQL */ `
             updatedAt
           }
         }
-        group {
-          companyID
-          localID
-          name
-          createdAt
-          updatedAt
-        }
         section {
           items {
             sheetKeys
@@ -3347,13 +3319,6 @@ export const listSheetGroup = /* GraphQL */ `
             createdAt
             updatedAt
           }
-        }
-        group {
-          companyID
-          localID
-          name
-          createdAt
-          updatedAt
         }
         section {
           items {
