@@ -20,6 +20,7 @@ type Props = {
 export default function (props: Props) {
     const [report, setReport] = useState<Report | null>();
     const [revieweeMailAddress, setRevieweeMailMailAddress] = useState<string | null>(null);
+    const [revieweeName, setRevieweeName] = useState<string | null>(null);
 
     const header = useContext(HeaderContext);
     const sidebar = useContext(SidebarContext)
@@ -48,6 +49,7 @@ export default function (props: Props) {
                 const revieweeItem = await EmployeeDao.get(getEmployee, getI)
                 if (revieweeItem && revieweeItem.email) {
                     setRevieweeMailMailAddress(revieweeItem.email)
+                    setRevieweeName(`${revieweeItem.lastName} ${revieweeItem.firstName}`)
                 }
             }
         })()
@@ -97,6 +99,7 @@ export default function (props: Props) {
                     commentOther: report.revieweeComments?.other || "",
                     commentReviewer: report.reviewerComments?.superior || "",
                     reviewee: report.reviewee || "",
+                    revieweeName: revieweeName || "",
                 }}
             /> : null
     )

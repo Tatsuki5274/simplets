@@ -10,6 +10,7 @@ import * as APIt from 'API';
 import { SendEmail } from "App";
 import { sendEmailMutation } from "lib/sendEmail";
 import styled from "styled-components";
+import { routeBuilder } from "router";
 
 type Props = {
     workStatusList: {
@@ -130,6 +131,10 @@ export default function (props: Props) {
                             <CommandButton
                                 onClick={() => {
                                     if (window.confirm("所属長へメールを送信しますか？")) {
+                                        const protocol = window.location.protocol;
+                                        const hostName = window.location.host;
+                                        const hostUrl = protocol + '//' + hostName;
+
                                         const sendI: SendEmail = {
                                             to: [props.data.superior.email],
                                             subject: `[Simplet's]　作業報告（${props.data.date}）${props.data.revieweeName}`,
@@ -144,6 +149,13 @@ ${formik.values.commentStatus}
 ${formik.values.commentOther}
 [所属長コメント]
 ${props.data.reviewerComments}
+
+以下のURLにアクセスし確認をおこなってください。
+${routeBuilder.reviewerReportCommentPath(props.data.date, props.data.reviewee, hostUrl)}
+
+# 本メールは${props.data.superior.email}宛にお送りしています。
+# 本メールはシステムより自動送信されています。
+# 本メールに返信されましても、返答できませんのでご了承ください。
 `
                                         }
                                         if (sendEmailMutation(sendI)) {

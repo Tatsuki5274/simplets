@@ -9,6 +9,7 @@ import { updateReport } from "graphql/mutations";
 import { SendEmail } from "App";
 import { sendEmailMutation } from "lib/sendEmail";
 import styled from "styled-components";
+import { routeBuilder } from "router";
 
 type Props = {
     revieweeMailAddress: string | null
@@ -20,6 +21,7 @@ type Props = {
     commentOther: string
     commentReviewer: string
     reviewee: string
+    revieweeName: string
 }
 
 export default function (props: Props) {
@@ -47,6 +49,10 @@ export default function (props: Props) {
 
                     <div>
                         <Text>作業報告 {props.date}</Text>
+                    </div>
+
+                    <div>
+                        <Text>{`作業報告者 ${props.revieweeName}`}</Text>
                     </div>
 
                     <div>
@@ -103,6 +109,10 @@ export default function (props: Props) {
                             <CommandButton
                                 onClick={() => {
                                     if (window.confirm("社員へメールを送信しますか？")) {
+                                        const protocol = window.location.protocol;
+                                        const hostName = window.location.host;
+                                        const hostUrl = protocol + '//' + hostName;
+
                                         const sendI: SendEmail = {
                                             to: [props.revieweeMailAddress],
                                             subject: `[Simplet's]　作業報告（${props.date}）所属長からのコメント`,
@@ -117,6 +127,13 @@ ${props.commentStatus}
 ${props.commentOther}
 [所属長コメント]
 ${formik.values.commentReviewer}
+
+以下のURLにアクセスし確認をおこなってください。
+${routeBuilder.revieweeReportEditPath(props.date, hostUrl)}
+
+# 本メールは${props.revieweeMailAddress}宛にお送りしています。
+# 本メールはシステムより自動送信されています。
+# 本メールに返信されましても、返答できませんのでご了承ください。
 `
                                         }
                                         if (sendEmailMutation(sendI)) {
