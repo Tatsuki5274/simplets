@@ -148,7 +148,7 @@ function EvalutionScreen(props: Props) {
                             return <ReviewerSheetPagesReadonly sheet={sheet} sections={sectionItems} />
                         }
 
-                    }else if(sheet.statusValue === 13){
+                    }else if(sheet.statusValue === 13 && currentUser && sheet.topReviewers?.includes(currentUser.username)){
                         // 部門長が変更可能なコンポーネントを返却
                         return <ReviewerSheetPagesStatus13 />
                     }else if(sheet.statusValue === 14){
