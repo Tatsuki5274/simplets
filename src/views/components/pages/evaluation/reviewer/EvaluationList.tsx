@@ -110,15 +110,15 @@ export default function () {
                             if (!sheet.year) return false
                             return sheet.year - 2 === comSheet.year
                         })?.overAllEvaluation || null
-                        if(sheet.group?.localID && sheet.year && sheet.statusValue && sheet.revieweeEmployee){
+                        if(sheet.sheetGroupLocalId && sheet.year && sheet.statusValue && sheet.revieweeEmployee){
                             ret = {
                                 data: {
-                                    groupLocalId: sheet.group?.localID,
+                                    groupLocalId: sheet.sheetGroupLocalId,
                                     year: sheet.year,
                                     statusValue: sheet.statusValue,
                                     localId: sheet.revieweeEmployee.localID || "" // unsafe
                                 },
-                                groupName: sheet.group?.name || "",
+                                groupName: sheet.sheetGroupName || "",
                                 name: `${sheet.revieweeEmployee?.lastName} ${sheet.revieweeEmployee?.firstName}`,
                                 status: sheet.statusValue ? getStatusValue(sheet.statusValue) : "",
                                 preview: preview,

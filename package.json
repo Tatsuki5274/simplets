@@ -47,7 +47,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "amplify:scriptgraphql": "cd amplify/backend/function/scriptGraphQL/src && tsc"
+    "amplify:scriptgraphql": "cp src/API.ts amplify/backend/function/scriptGraphQL/src && cp -R src/graphql amplify/backend/function/scriptGraphQL/src/ && cd amplify/backend/function/scriptGraphQL/src && tsc"
   },
   "eslintConfig": {
     "extends": "react-app"

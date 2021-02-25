@@ -68,13 +68,13 @@ export default function () {
                 if (sheets) {
                     const result = sheets.map(sheet => {
                         const data: ProgressReferenceType = {
-                            groupId: sheet.group ? sheet.group.localID || "" : "",
+                            groupId: sheet.sheetGroupLocalId || "",
                             year: sheet.year || -1, // unsafe
                             employeeId: sheet.revieweeEmployee ? sheet.revieweeEmployee.localID || "" : "",
                             employeeName: sheet.revieweeEmployee ? sheet.revieweeEmployee.lastName || "" + sheet.revieweeEmployee.firstName || "" : "",
-                            groupName: sheet.group ? sheet.group.name || "" : "",
+                            groupName: sheet.sheetGroupName || "",
                             avg: 1,
-                            gaugeId: sheet.group ? createGaugeId(`chart-${sheet.group?.localID}-${getSheetKeys(sheet)}`) : null,
+                            gaugeId: sheet.sheetGroupLocalId ? createGaugeId(`chart-${sheet.sheetGroupLocalId}-${getSheetKeys(sheet)}`) : null,
                             statusValue: sheet.statusValue || 0,
                             dest: routeBuilder.reviewerDetailPath(sheet.companyID || "", sheet.reviewee || "", sheet.year?.toString() || ""),   // unsafe
                             objective: sheet.section?.items?.map(sec => {

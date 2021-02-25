@@ -4,6 +4,8 @@ type Company #会社
   rules: [
     {allow: groups, groups: ["Admin"]}
     {allow: private}
+
+    {allow: private, provider: iam ,operations:[read]}
   ]
 )
 {
@@ -77,6 +79,8 @@ type Group #部門
   rules: [
     {allow: groups, groups: ["Admin"]}
     {allow: private}
+
+    {allow: private, provider: iam ,operations:[read]}
   ]
 )
 {
@@ -162,6 +166,7 @@ type Sheet
 
   # connection
   sheetGroupLocalId: ID!
+  sheetGroupName: String
   group: Group @connection(fields: ["companyID", "sheetGroupLocalId"])
   revieweeEmployee: Employee @connection(fields: ["companyID", "revieweeUsername"])  #被評価者
   secondEmployee: Employee @connection(fields: ["companyID", "secondUsername"])  #所属長
@@ -187,7 +192,7 @@ type Section
     {allow: owner, ownerField: "reviewee", operations: [create, update, read, delete]}
     {allow: owner, ownerField: "referencer", operations: [read]}
 
-    {allow: private, provider: iam ,operations:[read, update]}
+    {allow: private, provider: iam ,operations:[read]}
   ]
 )
 {
@@ -221,6 +226,8 @@ type Objective
     {allow: owner, ownerField: "secondReviewers", operations: [update, read]}
     {allow: owner, ownerField: "reviewee", operations: [create, update, read, delete]}
     {allow: owner, ownerField: "referencer", operations: [read]}
+
+    { allow: private, provider: iam, operations: [read] }
   ]
 )
 {
@@ -324,9 +331,9 @@ type Report
     # ])
   reviewerComments: ReviewerReportComment 
   # @auth(rules: [
-  #     { allow: owner, ownerField: "reviewer" }
+  #     # { allow: owner, ownerField: "reviewer" }
   #     # { allow: owner, ownerField: "reviewer", operations: [update, read] }
-  #     # { allow: owner, ownerField: "reviewee", operations: [read] }      
+  #     { allow: owner, ownerField: "reviewee", operations: [read] }      
   #     # { allow: owner, ownerField: "referencer", operations: [read] }      
   #   ])
   workStatus: ReportWorkingStatus #作業状況

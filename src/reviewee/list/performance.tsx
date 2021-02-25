@@ -51,6 +51,9 @@ const getEmployee = /* GraphQL */ `
         name
         startMonth
       }
+      group {
+        name
+      }
     }
   }
 `;
@@ -299,6 +302,7 @@ function ListPerformanceEvalution() {
               revieweeUsername: revieweeEmployee.username || "", // unsafe
               secondUsername: revieweeEmployee.superior?.username || "",
               sheetGroupLocalId: revieweeEmployee.employeeGroupLocalId || "",
+              sheetGroupName: revieweeEmployee.group?.name || null,
               companyID: currentUser.attributes['custom:companyId'],
               reviewee: currentUser.username,
               secondReviewers: [revieweeEmployee.superior.username] ,

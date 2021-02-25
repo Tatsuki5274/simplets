@@ -1,8 +1,7 @@
-/* tslint:disable */
-/* eslint-disable */
-// this is an auto generated file. This will be overwritten
-
-export const getReport = /* GraphQL */ `
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.listObjectives = exports.getObjective = exports.listSections = exports.getSection = exports.listSheetGroup = exports.listSheetYear = exports.listSheetReviewee = exports.listSheets = exports.getSheet = exports.getCategory = exports.listCategorys = exports.getGroup = exports.listGroups = exports.listEmployeesManager = exports.listEmployeeLocalId = exports.getEmployee = exports.listEmployees = exports.getCompany = exports.listCompanys = exports.listReportsCompanyDate = exports.listReports = exports.getReport = void 0;
+exports.getReport = `
   query GetReport($reviewee: ID!, $date: AWSDate!) {
     getReport(reviewee: $reviewee, date: $date) {
       reviewee
@@ -194,7 +193,7 @@ export const getReport = /* GraphQL */ `
     }
   }
 `;
-export const listReports = /* GraphQL */ `
+exports.listReports = `
   query ListReports(
     $reviewee: ID
     $date: ModelStringKeyConditionInput
@@ -372,7 +371,7 @@ export const listReports = /* GraphQL */ `
     }
   }
 `;
-export const listReportsCompanyDate = /* GraphQL */ `
+exports.listReportsCompanyDate = `
   query ListReportsCompanyDate(
     $companyID: ID
     $date: ModelStringKeyConditionInput
@@ -550,7 +549,7 @@ export const listReportsCompanyDate = /* GraphQL */ `
     }
   }
 `;
-export const listCompanys = /* GraphQL */ `
+exports.listCompanys = `
   query ListCompanys(
     $filter: ModelCompanyFilterInput
     $limit: Int
@@ -570,7 +569,7 @@ export const listCompanys = /* GraphQL */ `
     }
   }
 `;
-export const getCompany = /* GraphQL */ `
+exports.getCompany = `
   query GetCompany($id: ID!) {
     getCompany(id: $id) {
       id
@@ -583,7 +582,7 @@ export const getCompany = /* GraphQL */ `
     }
   }
 `;
-export const listEmployees = /* GraphQL */ `
+exports.listEmployees = `
   query ListEmployees(
     $companyID: ID
     $username: ModelIDKeyConditionInput
@@ -774,7 +773,7 @@ export const listEmployees = /* GraphQL */ `
     }
   }
 `;
-export const getEmployee = /* GraphQL */ `
+exports.getEmployee = `
   query GetEmployee($companyID: ID!, $username: ID!) {
     getEmployee(companyID: $companyID, username: $username) {
       companyID
@@ -979,7 +978,7 @@ export const getEmployee = /* GraphQL */ `
     }
   }
 `;
-export const listEmployeeLocalId = /* GraphQL */ `
+exports.listEmployeeLocalId = `
   query ListEmployeeLocalId(
     $companyID: ID
     $localID: ModelIDKeyConditionInput
@@ -1170,7 +1169,7 @@ export const listEmployeeLocalId = /* GraphQL */ `
     }
   }
 `;
-export const listEmployeesManager = /* GraphQL */ `
+exports.listEmployeesManager = `
   query ListEmployeesManager(
     $companyID: ID
     $managerIsDeleted: ModelEmployeeEmployee_managerCompositeKeyConditionInput
@@ -1361,7 +1360,7 @@ export const listEmployeesManager = /* GraphQL */ `
     }
   }
 `;
-export const listGroups = /* GraphQL */ `
+exports.listGroups = `
   query ListGroups(
     $companyID: ID
     $localID: ModelIDKeyConditionInput
@@ -1389,7 +1388,7 @@ export const listGroups = /* GraphQL */ `
     }
   }
 `;
-export const getGroup = /* GraphQL */ `
+exports.getGroup = `
   query GetGroup($companyID: ID!, $localID: ID!) {
     getGroup(companyID: $companyID, localID: $localID) {
       companyID
@@ -1400,7 +1399,7 @@ export const getGroup = /* GraphQL */ `
     }
   }
 `;
-export const listCategorys = /* GraphQL */ `
+exports.listCategorys = `
   query ListCategorys(
     $companyID: ID
     $localID: ModelIDKeyConditionInput
@@ -1428,7 +1427,7 @@ export const listCategorys = /* GraphQL */ `
     }
   }
 `;
-export const getCategory = /* GraphQL */ `
+exports.getCategory = `
   query GetCategory($companyID: ID!, $localID: ID!) {
     getCategory(companyID: $companyID, localID: $localID) {
       companyID
@@ -1439,7 +1438,7 @@ export const getCategory = /* GraphQL */ `
     }
   }
 `;
-export const getSheet = /* GraphQL */ `
+exports.getSheet = `
   query GetSheet($companyID: ID!, $reviewee: String!, $year: Int!) {
     getSheet(companyID: $companyID, reviewee: $reviewee, year: $year) {
       companyID
@@ -1868,7 +1867,7 @@ export const getSheet = /* GraphQL */ `
     }
   }
 `;
-export const listSheets = /* GraphQL */ `
+exports.listSheets = `
   query ListSheets(
     $companyID: ID
     $revieweeYear: ModelSheetPrimaryCompositeKeyConditionInput
@@ -2252,7 +2251,7 @@ export const listSheets = /* GraphQL */ `
     }
   }
 `;
-export const listSheetReviewee = /* GraphQL */ `
+exports.listSheetReviewee = `
   query ListSheetReviewee(
     $companyID: ID
     $reviewee: ModelStringKeyConditionInput
@@ -2636,7 +2635,7 @@ export const listSheetReviewee = /* GraphQL */ `
     }
   }
 `;
-export const listSheetYear = /* GraphQL */ `
+exports.listSheetYear = `
   query ListSheetYear(
     $companyID: ID
     $year: ModelIntKeyConditionInput
@@ -3020,7 +3019,7 @@ export const listSheetYear = /* GraphQL */ `
     }
   }
 `;
-export const listSheetGroup = /* GraphQL */ `
+exports.listSheetGroup = `
   query ListSheetGroup(
     $companyID: ID
     $sheetGroupLocalId: ModelIDKeyConditionInput
@@ -3404,7 +3403,7 @@ export const listSheetGroup = /* GraphQL */ `
     }
   }
 `;
-export const getSection = /* GraphQL */ `
+exports.getSection = `
   query GetSection($sheetKeys: ID!, $sectionCategoryLocalId: ID!) {
     getSection(
       sheetKeys: $sheetKeys
@@ -3452,7 +3451,7 @@ export const getSection = /* GraphQL */ `
     }
   }
 `;
-export const listSections = /* GraphQL */ `
+exports.listSections = `
   query ListSections(
     $sheetKeys: ID
     $sectionCategoryLocalId: ModelIDKeyConditionInput
@@ -3514,7 +3513,7 @@ export const listSections = /* GraphQL */ `
     }
   }
 `;
-export const getObjective = /* GraphQL */ `
+exports.getObjective = `
   query GetObjective($sectionKeys: ID!, $createdAt: AWSDateTime!) {
     getObjective(sectionKeys: $sectionKeys, createdAt: $createdAt) {
       sectionKeys
@@ -3537,7 +3536,7 @@ export const getObjective = /* GraphQL */ `
     }
   }
 `;
-export const listObjectives = /* GraphQL */ `
+exports.listObjectives = `
   query ListObjectives(
     $sectionKeys: ID
     $createdAt: ModelStringKeyConditionInput

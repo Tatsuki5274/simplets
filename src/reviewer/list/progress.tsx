@@ -239,7 +239,7 @@ function ProgressReferenceList() {
     const setView = (listItems: Sheet[]) => {
         // 画面表示に必要な情報を加工する処理
         let viewTemp: ViewType[] | null = listItems.map((sheet) => {
-            if (sheet.revieweeEmployee && sheet.group && sheet.section) {
+            if (sheet.revieweeEmployee && sheet && sheet.section) {
                 return {
 
                     sheetKey: getSheetKeys(sheet).replace(/[.@]/g, '-'),
@@ -247,8 +247,8 @@ function ProgressReferenceList() {
                     year: String(sheet.year),
                     reviewee: sheet.reviewee || "", // unsafe
                     statusValue: sheet.statusValue || 0,    // unsafe
-                    groupName: sheet.group?.name || "",
-                    groupId: sheet.group.localID || "",
+                    groupName: sheet.sheetGroupName || "",
+                    groupId: sheet.sheetGroupLocalId || "",
                     revieweeName: {
                         firstName: sheet.revieweeEmployee.firstName || "",
                         lastName: sheet.revieweeEmployee.lastName || ""
