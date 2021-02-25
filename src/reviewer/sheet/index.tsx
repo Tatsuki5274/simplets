@@ -1,9 +1,7 @@
 import React, { useState, useEffect, createContext, useContext } from 'react';
-import { API, graphqlOperation } from 'aws-amplify';
-import { GraphQLResult } from "@aws-amplify/api";
 import {  } from 'react-router';
 import { HeaderContext, UserContext} from 'App';
-import { GetSheetQuery, Section, Sheet } from 'API';
+import { Section, Sheet } from 'API';
 import * as APIt from 'API';
 import { getSheet } from 'graphql/queries';
 import { ReviewerSheetPagesStatus2 } from './detail/pages/2.approval';
@@ -14,6 +12,7 @@ import { ReviewerSheetPagesStatus12Second } from './detail/pages/12.confirm/seco
 import { ReviewerSheetPagesStatus12Top } from './detail/pages/12.confirm/top';
 import { ReviewerSheetPagesStatus13 } from './detail/pages/13.firstComment';
 import Header from 'views/components/organisms/common/Header';
+import { SheetDao } from 'lib/dao/sheetDao';
 
 export const SheetContext = createContext<
     {
@@ -55,16 +54,21 @@ function EvalutionScreen(props: Props) {
                 reviewee: props.match.params.reviewee,
                 year: parseInt(props.match.params.year),
             }
-            let response;
-            try {
-                response = (await API.graphql(graphqlOperation(getSheet, input))
-                ) as GraphQLResult<GetSheetQuery>;
-            } catch (e) {
-                console.log("エラーを無視しています", e)
-                response = e;
+            // let response;
+            // try {
+            //     response = (await API.graphql(graphqlOperation(getSheet, input))
+            //     ) as GraphQLResult<GetSheetQuery>;
+            // } catch (e) {
+            //     console.log("エラーを無視しています", e)
+            //     response = e;
+            // }
+            // const sheetItem: Sheet = response.data?.getSheet as Sheet;
+            const sheetItem = await SheetDao.get(getSheet, input)
+            if(sheetItem){
+                setSheet(sheetItem)
+            }else{
+                console.error("シートの取得に失敗しました")
             }
-            const sheetItem: Sheet = response.data?.getSheet as Sheet;
-            setSheet(sheetItem);
         })()
     }, [props.match.params.companyId, props.match.params.reviewee, props.match.params.year]);
 
