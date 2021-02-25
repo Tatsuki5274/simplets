@@ -11,8 +11,8 @@ import { GroupDao } from "lib/dao/groupDao";
 import { listGroups } from "graphql/queries";
 import { SelectLabel } from "views/components/atoms/Types";
 
-const listSheetReviewee = /* GraphQL */ `
-  query ListSheetReviewee(
+const listSheets = /* GraphQL */ `
+  query listSheets(
     $companyID: ID
     $revieweeYear: ModelSheetPrimaryCompositeKeyConditionInput
     $filter: ModelSheetFilterInput
@@ -36,10 +36,8 @@ const listSheetReviewee = /* GraphQL */ `
         revieweeUsername
         secondUsername
         statusValue
-        group {
-          name
-          localID
-        }
+        sheetGroupLocalId
+        sheetGroupName
         referencer
         reviewee
         topReviewers
@@ -86,7 +84,7 @@ export default function () {
                       }
                     }
                   };
-                const sheets = await SheetDao.list(listSheetReviewee, listQV)
+                const sheets = await SheetDao.list(listSheets, listQV)
                 console.log("sheets", sheets)
                 if(sheets){
                     const obj: (TableEvaluationListType | null)[] = sheets.map(sheet => {
