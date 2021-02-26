@@ -69,6 +69,7 @@ type Employee #社員
   company: Company @connection (fields: ["companyID"])
 
   manager: EmployeeType!  #マネージャー
+  isCompanyAdmin: Boolean
   isDeleted: BooleanType!
 }
 

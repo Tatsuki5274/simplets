@@ -76,6 +76,7 @@ export const createEmployee = /* GraphQL */ `
       grade
       email
       manager
+      isCompanyAdmin
       isDeleted
       createdAt
       updatedAt
@@ -99,6 +100,7 @@ export const createEmployee = /* GraphQL */ `
         grade
         email
         manager
+        isCompanyAdmin
         isDeleted
         createdAt
         updatedAt
@@ -122,6 +124,7 @@ export const createEmployee = /* GraphQL */ `
           grade
           email
           manager
+          isCompanyAdmin
           isDeleted
           createdAt
           updatedAt
@@ -145,6 +148,7 @@ export const createEmployee = /* GraphQL */ `
             grade
             email
             manager
+            isCompanyAdmin
             isDeleted
             createdAt
             updatedAt
@@ -168,6 +172,7 @@ export const createEmployee = /* GraphQL */ `
               grade
               email
               manager
+              isCompanyAdmin
               isDeleted
               createdAt
               updatedAt
@@ -191,6 +196,7 @@ export const createEmployee = /* GraphQL */ `
                 grade
                 email
                 manager
+                isCompanyAdmin
                 isDeleted
                 createdAt
                 updatedAt
@@ -214,6 +220,7 @@ export const createEmployee = /* GraphQL */ `
                   grade
                   email
                   manager
+                  isCompanyAdmin
                   isDeleted
                   createdAt
                   updatedAt
@@ -284,6 +291,7 @@ export const updateEmployee = /* GraphQL */ `
       grade
       email
       manager
+      isCompanyAdmin
       isDeleted
       createdAt
       updatedAt
@@ -307,6 +315,7 @@ export const updateEmployee = /* GraphQL */ `
         grade
         email
         manager
+        isCompanyAdmin
         isDeleted
         createdAt
         updatedAt
@@ -330,6 +339,7 @@ export const updateEmployee = /* GraphQL */ `
           grade
           email
           manager
+          isCompanyAdmin
           isDeleted
           createdAt
           updatedAt
@@ -353,6 +363,7 @@ export const updateEmployee = /* GraphQL */ `
             grade
             email
             manager
+            isCompanyAdmin
             isDeleted
             createdAt
             updatedAt
@@ -376,6 +387,7 @@ export const updateEmployee = /* GraphQL */ `
               grade
               email
               manager
+              isCompanyAdmin
               isDeleted
               createdAt
               updatedAt
@@ -399,6 +411,7 @@ export const updateEmployee = /* GraphQL */ `
                 grade
                 email
                 manager
+                isCompanyAdmin
                 isDeleted
                 createdAt
                 updatedAt
@@ -422,6 +435,7 @@ export const updateEmployee = /* GraphQL */ `
                   grade
                   email
                   manager
+                  isCompanyAdmin
                   isDeleted
                   createdAt
                   updatedAt
@@ -492,6 +506,7 @@ export const deleteEmployee = /* GraphQL */ `
       grade
       email
       manager
+      isCompanyAdmin
       isDeleted
       createdAt
       updatedAt
@@ -515,6 +530,7 @@ export const deleteEmployee = /* GraphQL */ `
         grade
         email
         manager
+        isCompanyAdmin
         isDeleted
         createdAt
         updatedAt
@@ -538,6 +554,7 @@ export const deleteEmployee = /* GraphQL */ `
           grade
           email
           manager
+          isCompanyAdmin
           isDeleted
           createdAt
           updatedAt
@@ -561,6 +578,7 @@ export const deleteEmployee = /* GraphQL */ `
             grade
             email
             manager
+            isCompanyAdmin
             isDeleted
             createdAt
             updatedAt
@@ -584,6 +602,7 @@ export const deleteEmployee = /* GraphQL */ `
               grade
               email
               manager
+              isCompanyAdmin
               isDeleted
               createdAt
               updatedAt
@@ -607,6 +626,7 @@ export const deleteEmployee = /* GraphQL */ `
                 grade
                 email
                 manager
+                isCompanyAdmin
                 isDeleted
                 createdAt
                 updatedAt
@@ -630,6 +650,7 @@ export const deleteEmployee = /* GraphQL */ `
                   grade
                   email
                   manager
+                  isCompanyAdmin
                   isDeleted
                   createdAt
                   updatedAt
@@ -817,6 +838,7 @@ export const createSheet = /* GraphQL */ `
         grade
         email
         manager
+        isCompanyAdmin
         isDeleted
         createdAt
         updatedAt
@@ -840,6 +862,7 @@ export const createSheet = /* GraphQL */ `
           grade
           email
           manager
+          isCompanyAdmin
           isDeleted
           createdAt
           updatedAt
@@ -863,6 +886,7 @@ export const createSheet = /* GraphQL */ `
             grade
             email
             manager
+            isCompanyAdmin
             isDeleted
             createdAt
             updatedAt
@@ -886,6 +910,7 @@ export const createSheet = /* GraphQL */ `
               grade
               email
               manager
+              isCompanyAdmin
               isDeleted
               createdAt
               updatedAt
@@ -909,6 +934,7 @@ export const createSheet = /* GraphQL */ `
                 grade
                 email
                 manager
+                isCompanyAdmin
                 isDeleted
                 createdAt
                 updatedAt
@@ -932,6 +958,7 @@ export const createSheet = /* GraphQL */ `
                   grade
                   email
                   manager
+                  isCompanyAdmin
                   isDeleted
                   createdAt
                   updatedAt
@@ -987,6 +1014,7 @@ export const createSheet = /* GraphQL */ `
         grade
         email
         manager
+        isCompanyAdmin
         isDeleted
         createdAt
         updatedAt
@@ -1010,6 +1038,7 @@ export const createSheet = /* GraphQL */ `
           grade
           email
           manager
+          isCompanyAdmin
           isDeleted
           createdAt
           updatedAt
@@ -1033,6 +1062,7 @@ export const createSheet = /* GraphQL */ `
             grade
             email
             manager
+            isCompanyAdmin
             isDeleted
             createdAt
             updatedAt
@@ -1056,6 +1086,7 @@ export const createSheet = /* GraphQL */ `
               grade
               email
               manager
+              isCompanyAdmin
               isDeleted
               createdAt
               updatedAt
@@ -1079,6 +1110,7 @@ export const createSheet = /* GraphQL */ `
                 grade
                 email
                 manager
+                isCompanyAdmin
                 isDeleted
                 createdAt
                 updatedAt
@@ -1102,6 +1134,7 @@ export const createSheet = /* GraphQL */ `
                   grade
                   email
                   manager
+                  isCompanyAdmin
                   isDeleted
                   createdAt
                   updatedAt
@@ -1242,6 +1275,7 @@ export const deleteSheet = /* GraphQL */ `
         grade
         email
         manager
+        isCompanyAdmin
         isDeleted
         createdAt
         updatedAt
@@ -1265,6 +1299,7 @@ export const deleteSheet = /* GraphQL */ `
           grade
           email
           manager
+          isCompanyAdmin
           isDeleted
           createdAt
           updatedAt
@@ -1288,6 +1323,7 @@ export const deleteSheet = /* GraphQL */ `
             grade
             email
             manager
+            isCompanyAdmin
             isDeleted
             createdAt
             updatedAt
@@ -1311,6 +1347,7 @@ export const deleteSheet = /* GraphQL */ `
               grade
               email
               manager
+              isCompanyAdmin
               isDeleted
               createdAt
               updatedAt
@@ -1334,6 +1371,7 @@ export const deleteSheet = /* GraphQL */ `
                 grade
                 email
                 manager
+                isCompanyAdmin
                 isDeleted
                 createdAt
                 updatedAt
@@ -1357,6 +1395,7 @@ export const deleteSheet = /* GraphQL */ `
                   grade
                   email
                   manager
+                  isCompanyAdmin
                   isDeleted
                   createdAt
                   updatedAt
@@ -1412,6 +1451,7 @@ export const deleteSheet = /* GraphQL */ `
         grade
         email
         manager
+        isCompanyAdmin
         isDeleted
         createdAt
         updatedAt
@@ -1435,6 +1475,7 @@ export const deleteSheet = /* GraphQL */ `
           grade
           email
           manager
+          isCompanyAdmin
           isDeleted
           createdAt
           updatedAt
@@ -1458,6 +1499,7 @@ export const deleteSheet = /* GraphQL */ `
             grade
             email
             manager
+            isCompanyAdmin
             isDeleted
             createdAt
             updatedAt
@@ -1481,6 +1523,7 @@ export const deleteSheet = /* GraphQL */ `
               grade
               email
               manager
+              isCompanyAdmin
               isDeleted
               createdAt
               updatedAt
@@ -1504,6 +1547,7 @@ export const deleteSheet = /* GraphQL */ `
                 grade
                 email
                 manager
+                isCompanyAdmin
                 isDeleted
                 createdAt
                 updatedAt
@@ -1527,6 +1571,7 @@ export const deleteSheet = /* GraphQL */ `
                   grade
                   email
                   manager
+                  isCompanyAdmin
                   isDeleted
                   createdAt
                   updatedAt
@@ -1873,6 +1918,7 @@ export const createReport = /* GraphQL */ `
         grade
         email
         manager
+        isCompanyAdmin
         isDeleted
         createdAt
         updatedAt
@@ -1896,6 +1942,7 @@ export const createReport = /* GraphQL */ `
           grade
           email
           manager
+          isCompanyAdmin
           isDeleted
           createdAt
           updatedAt
@@ -1919,6 +1966,7 @@ export const createReport = /* GraphQL */ `
             grade
             email
             manager
+            isCompanyAdmin
             isDeleted
             createdAt
             updatedAt
@@ -1942,6 +1990,7 @@ export const createReport = /* GraphQL */ `
               grade
               email
               manager
+              isCompanyAdmin
               isDeleted
               createdAt
               updatedAt
@@ -1965,6 +2014,7 @@ export const createReport = /* GraphQL */ `
                 grade
                 email
                 manager
+                isCompanyAdmin
                 isDeleted
                 createdAt
                 updatedAt
@@ -1988,6 +2038,7 @@ export const createReport = /* GraphQL */ `
                   grade
                   email
                   manager
+                  isCompanyAdmin
                   isDeleted
                   createdAt
                   updatedAt
@@ -2068,6 +2119,7 @@ export const updateReport = /* GraphQL */ `
         grade
         email
         manager
+        isCompanyAdmin
         isDeleted
         createdAt
         updatedAt
@@ -2091,6 +2143,7 @@ export const updateReport = /* GraphQL */ `
           grade
           email
           manager
+          isCompanyAdmin
           isDeleted
           createdAt
           updatedAt
@@ -2114,6 +2167,7 @@ export const updateReport = /* GraphQL */ `
             grade
             email
             manager
+            isCompanyAdmin
             isDeleted
             createdAt
             updatedAt
@@ -2137,6 +2191,7 @@ export const updateReport = /* GraphQL */ `
               grade
               email
               manager
+              isCompanyAdmin
               isDeleted
               createdAt
               updatedAt
@@ -2160,6 +2215,7 @@ export const updateReport = /* GraphQL */ `
                 grade
                 email
                 manager
+                isCompanyAdmin
                 isDeleted
                 createdAt
                 updatedAt
@@ -2183,6 +2239,7 @@ export const updateReport = /* GraphQL */ `
                   grade
                   email
                   manager
+                  isCompanyAdmin
                   isDeleted
                   createdAt
                   updatedAt
@@ -2263,6 +2320,7 @@ export const deleteReport = /* GraphQL */ `
         grade
         email
         manager
+        isCompanyAdmin
         isDeleted
         createdAt
         updatedAt
@@ -2286,6 +2344,7 @@ export const deleteReport = /* GraphQL */ `
           grade
           email
           manager
+          isCompanyAdmin
           isDeleted
           createdAt
           updatedAt
@@ -2309,6 +2368,7 @@ export const deleteReport = /* GraphQL */ `
             grade
             email
             manager
+            isCompanyAdmin
             isDeleted
             createdAt
             updatedAt
@@ -2332,6 +2392,7 @@ export const deleteReport = /* GraphQL */ `
               grade
               email
               manager
+              isCompanyAdmin
               isDeleted
               createdAt
               updatedAt
@@ -2355,6 +2416,7 @@ export const deleteReport = /* GraphQL */ `
                 grade
                 email
                 manager
+                isCompanyAdmin
                 isDeleted
                 createdAt
                 updatedAt
@@ -2378,6 +2440,7 @@ export const deleteReport = /* GraphQL */ `
                   grade
                   email
                   manager
+                  isCompanyAdmin
                   isDeleted
                   createdAt
                   updatedAt
@@ -2474,6 +2537,7 @@ export const updateSheet = /* GraphQL */ `
         grade
         email
         manager
+        isCompanyAdmin
         isDeleted
         createdAt
         updatedAt
@@ -2497,6 +2561,7 @@ export const updateSheet = /* GraphQL */ `
           grade
           email
           manager
+          isCompanyAdmin
           isDeleted
           createdAt
           updatedAt
@@ -2520,6 +2585,7 @@ export const updateSheet = /* GraphQL */ `
             grade
             email
             manager
+            isCompanyAdmin
             isDeleted
             createdAt
             updatedAt
@@ -2543,6 +2609,7 @@ export const updateSheet = /* GraphQL */ `
               grade
               email
               manager
+              isCompanyAdmin
               isDeleted
               createdAt
               updatedAt
@@ -2566,6 +2633,7 @@ export const updateSheet = /* GraphQL */ `
                 grade
                 email
                 manager
+                isCompanyAdmin
                 isDeleted
                 createdAt
                 updatedAt
@@ -2589,6 +2657,7 @@ export const updateSheet = /* GraphQL */ `
                   grade
                   email
                   manager
+                  isCompanyAdmin
                   isDeleted
                   createdAt
                   updatedAt
@@ -2644,6 +2713,7 @@ export const updateSheet = /* GraphQL */ `
         grade
         email
         manager
+        isCompanyAdmin
         isDeleted
         createdAt
         updatedAt
@@ -2667,6 +2737,7 @@ export const updateSheet = /* GraphQL */ `
           grade
           email
           manager
+          isCompanyAdmin
           isDeleted
           createdAt
           updatedAt
@@ -2690,6 +2761,7 @@ export const updateSheet = /* GraphQL */ `
             grade
             email
             manager
+            isCompanyAdmin
             isDeleted
             createdAt
             updatedAt
@@ -2713,6 +2785,7 @@ export const updateSheet = /* GraphQL */ `
               grade
               email
               manager
+              isCompanyAdmin
               isDeleted
               createdAt
               updatedAt
@@ -2736,6 +2809,7 @@ export const updateSheet = /* GraphQL */ `
                 grade
                 email
                 manager
+                isCompanyAdmin
                 isDeleted
                 createdAt
                 updatedAt
@@ -2759,6 +2833,7 @@ export const updateSheet = /* GraphQL */ `
                   grade
                   email
                   manager
+                  isCompanyAdmin
                   isDeleted
                   createdAt
                   updatedAt
