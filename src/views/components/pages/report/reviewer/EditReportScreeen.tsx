@@ -1,8 +1,6 @@
 import { HeaderContext, SidebarContext } from "App";
-import { GetEmployeeQueryVariables, GetReportQueryVariables, Report } from "API";
-import { EmployeeContext } from "App";
-import { getEmployee, getReport } from "graphql/queries";
-import { EmployeeDao } from "lib/dao/employeeDao";
+import { GetReportQueryVariables, Report } from "API";
+import { getReport } from "graphql/queries";
 import { ReportDao } from "lib/dao/reportDao";
 import React, { useContext, useEffect, useState } from "react";
 import EditReport from "views/components/templates/report/reviewer/EditReport";
@@ -24,7 +22,6 @@ export default function (props: Props) {
 
     const header = useContext(HeaderContext);
     const sidebar = useContext(SidebarContext)
-    const currentEmployee = useContext(EmployeeContext);
 
     useEffect(() => {
         (async () => {
@@ -35,25 +32,13 @@ export default function (props: Props) {
             const reportItem = await ReportDao.get(getReport, getI)
             if (reportItem) {
                 setReport(reportItem)
+                if (reportItem.revieweeEmployee) {
+                    setRevieweeMailMailAddress(reportItem.revieweeEmployee.email || null)
+                    setRevieweeName(reportItem.revieweeEmployee ? `${reportItem.revieweeEmployee.lastName} ${reportItem.revieweeEmployee.firstName}` : null)
+                }
             }
         })()
     }, [props])
-
-    useEffect(() => {
-        (async () => {
-            if (currentEmployee) {
-                const getI: GetEmployeeQueryVariables = {
-                    companyID: currentEmployee.companyID,
-                    username: props.match.params.sub
-                }
-                const revieweeItem = await EmployeeDao.get(getEmployee, getI)
-                if (revieweeItem && revieweeItem.email) {
-                    setRevieweeMailMailAddress(revieweeItem.email)
-                    setRevieweeName(`${revieweeItem.lastName} ${revieweeItem.firstName}`)
-                }
-            }
-        })()
-    }, [currentEmployee, props])
 
     const mockData = {
             header: header,

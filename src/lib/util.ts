@@ -195,3 +195,22 @@ export function getReportStatusString(status: ReportWorkingStatus): string{
     }
     return result
 }
+
+/**
+ * 
+ * @param str 文字列
+ * @returns 文字列の高さを返却
+ */
+export function CountLine(str: string): number {
+    const num = str.match(/\r\n|\n/g);
+    let line = 0
+    if (num != null) {
+        line = num.length + 1;
+        if (line <= 5) {
+            line = 5
+        }
+    } else {
+        line = 5;
+    }
+    return line
+}

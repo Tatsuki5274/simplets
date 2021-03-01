@@ -10,6 +10,7 @@ import { SendEmail } from "App";
 import { sendEmailMutation } from "lib/sendEmail";
 import styled from "styled-components";
 import { routeBuilder } from "router";
+import { CountLine } from "lib/util";
 
 type Props = {
     revieweeMailAddress: string | null
@@ -50,59 +51,62 @@ export default function (props: Props) {
                 <form onSubmit={formik.handleSubmit}>
 
                     <div>
-                        <Text>作業報告 {props.date}</Text>
+                        <Text>作業報告 {props.date.replace(/-/g,'/')}</Text>
                     </div>
 
-                    <div>
+                    <ReportStyle>
                         <Text>{`作業報告者 ${props.revieweeName}`}</Text>
-                    </div>
+                    </ReportStyle>
 
                     <div>
                         <Text className="commentWork">【作業報告】</Text>
                     </div>
-                    <div>
+                    <ReportStyle>
                         <Text className="commentWork">
                             {props.commentWork}
                         </Text>
-                    </div>
+                    </ReportStyle>
 
                     <div>
                         <Text className="workStatus">【作業状況】</Text>
                     </div>
-                    <div>
+                    <ReportStyle>
                         <Text className="workStatus">
                             {props.workStatus}
                         </Text>
-                    </div>
+                    </ReportStyle>
 
                     <div>
                         <Text className="commentStatus">【作業状況】</Text>
                     </div>
-                    <div>
+                    <ReportStyle>
                         <Text className="commentStatus">
                             {props.commentStatus}
                         </Text>
-                    </div>
+                    </ReportStyle>
 
                     <div>
                         <Text className="commentOther">【その他】</Text>
                     </div>
-                    <div>
+                    <ReportStyle>
                         <Text className="commentOther">
                             {props.commentOther}
                         </Text>
-                    </div>
+                    </ReportStyle>
 
                     <div>
                         <Text className="commentReviewer">【所属長コメント】</Text>
                     </div>
-                    <div>
+                    <ReportStyle>
                         <TextArea
                             name="commentReviewer"
                             onChange={formik.handleChange}
                             defaultValue={formik.values.commentReviewer}
+                            style={StyledTextarea}
+                            rows={CountLine(formik.values.commentReviewer)}
+                            
                         />
-                    </div>
+                    </ReportStyle>
 
 
                     <CommandButton type="submit">保存</CommandButton>
@@ -156,4 +160,13 @@ ${routeBuilder.revieweeReportEditPath(props.date, hostUrl)}
 const SpaceStyle = styled.div({
     display: "inline-block",
     margin: "0 10px",
+})
+
+const StyledTextarea: React.CSSProperties = {
+    width: "50%",
+}
+
+const ReportStyle = styled.div({
+    marginBottom: "20px",
+    whiteSpace: "pre-line",
 })
