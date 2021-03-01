@@ -57,17 +57,6 @@ export default function (props: Props) {
                 label: "問題が発生している"
             },
         ],
-        data: {
-            revieweeMailAddress: "yhamazaki@sisco-consulting.co.jp",
-            date: "2021/02/01",
-            commentWork: "A社案件作業実施",
-            workStatus: "順調に作業できている",
-            commentStatus: "作業状況",
-            commentOther: "その他コメント",
-            commentReviewer: "報告ありがとうございます",
-            reviewee: "yhamazaki@sisco-consulting.co.jp",
-        },
-
     }
 
     return (

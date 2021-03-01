@@ -39,7 +39,7 @@ export default function(props: Props){
                 if (reports) {
                     eventItems = reports.map(report => {
                         return {
-                            title: `${report.revieweeEmployee?.group?.name} ${report.revieweeEmployee?.lastName}${report.revieweeEmployee?.firstName}`,
+                            title: `${report.revieweeEmployee?.lastName}${report.revieweeEmployee?.firstName}`,
                             date: report.date,
                             sub: report.sub,
                             workStatus: report.workStatus

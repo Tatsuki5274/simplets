@@ -116,7 +116,7 @@ export default function (props: Props) {
 
             }
         })()
-    }, [currentEmployee, props.match.params.date, currentUser])
+    }, [currentEmployee, props.match.params.date, currentUser, setError])
 
 
 

@@ -1,7 +1,7 @@
 import { EventInput } from "@fullcalendar/react";
-import { ListReportsQueryVariables, ListReportsRevieweeQueryVariables } from "API";
+import { ListReportsRevieweeQueryVariables } from "API";
 import { HeaderContext, SidebarContext, UserContext } from "App";
-import { listReports, listReportsReviewee } from "graphql/queries";
+import { listReportsReviewee } from "graphql/queries";
 import { ReportDao } from "lib/dao/reportDao";
 import React, { useContext, useEffect, useState } from "react";
 import CalendarView from "views/components/templates/report/reviewee/CalendarView";

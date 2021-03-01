@@ -1,4 +1,4 @@
-import { ListReportsQueryVariables, ListReportsRevieweeQueryVariables, ReportWorkingStatus } from "API";
+import { ListReportsRevieweeQueryVariables, ReportWorkingStatus } from "API";
 import { Formik } from "formik";
 import { listReports } from "graphql/queries";
 import { ReportDao } from "lib/dao/reportDao";
