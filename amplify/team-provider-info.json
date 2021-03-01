@@ -87,14 +87,14 @@
   },
   "demo": {
     "awscloudformation": {
-      "AuthRoleName": "amplify-sccsystem-demo-135418-authRole",
-      "UnauthRoleArn": "arn:aws:iam::251893532135:role/amplify-sccsystem-demo-135418-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::251893532135:role/amplify-sccsystem-demo-135418-authRole",
+      "AuthRoleName": "amplify-sccsystem-demo-172359-authRole",
+      "UnauthRoleArn": "arn:aws:iam::251893532135:role/amplify-sccsystem-demo-172359-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::251893532135:role/amplify-sccsystem-demo-172359-authRole",
       "Region": "ap-northeast-1",
-      "DeploymentBucketName": "amplify-sccsystem-demo-135418-deployment",
-      "UnauthRoleName": "amplify-sccsystem-demo-135418-unauthRole",
-      "StackName": "amplify-sccsystem-demo-135418",
-      "StackId": "arn:aws:cloudformation:ap-northeast-1:251893532135:stack/amplify-sccsystem-demo-135418/86c49010-726e-11eb-ba4c-0626bbfb7dda",
+      "DeploymentBucketName": "amplify-sccsystem-demo-172359-deployment",
+      "UnauthRoleName": "amplify-sccsystem-demo-172359-unauthRole",
+      "StackName": "amplify-sccsystem-demo-172359",
+      "StackId": "arn:aws:cloudformation:ap-northeast-1:251893532135:stack/amplify-sccsystem-demo-172359/7a547e70-7a67-11eb-a3b4-0e1036a490a1",
       "AmplifyAppId": "d5cvlroqr6enf"
     },
     "categories": {
@@ -103,16 +103,16 @@
       },
       "function": {
         "approvalStatusManager": {
-          "deploymentBucketName": "amplify-sccsystem-demo-135418-deployment",
+          "deploymentBucketName": "amplify-sccsystem-demo-172359-deployment",
           "s3Key": "amplify-builds/approvalStatusManager-2b5a664e783654343558-build.zip"
         },
         "sendEmail": {
-          "deploymentBucketName": "amplify-sccsystem-demo-135418-deployment",
+          "deploymentBucketName": "amplify-sccsystem-demo-172359-deployment",
           "s3Key": "amplify-builds/sendEmail-704e69774d4952544c75-build.zip"
         },
         "scriptGraphQL": {
-          "deploymentBucketName": "amplify-sccsystem-demo-135418-deployment",
-          "s3Key": "amplify-builds/scriptGraphQL-644f6435557864683858-build.zip"
+          "deploymentBucketName": "amplify-sccsystem-demo-172359-deployment",
+          "s3Key": "amplify-builds/scriptGraphQL-766f2f452f74376c3852-build.zip"
         }
       }
     }
