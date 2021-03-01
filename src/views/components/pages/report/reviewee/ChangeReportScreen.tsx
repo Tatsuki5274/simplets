@@ -51,24 +51,7 @@ export default function (props: Props) {
                 label: "問題が発生している"
             },
         ],
-        // data: {
-        //     date: "2021-01-01",
-        //     companyID: "SCC",
-        //     superior: {
-        //         email: "yhamazaki+superior1@sisco-consulting.co.jp",
-        //         username: "テスト所属長"
-        //     },
-        //     referencer: ["yhamazaki+superior1@sisco-consulting.co.jp", "yhamazaki+superior2@sisco-consulting.co.jp"],
-        //     reviewer: ["yhamazaki+superior1@sisco-consulting.co.jp"],
-        //     reviewee: "yhamazaki@sisco-consulting.co.jp",
-        //     revieweeName: "テスト テスト",
-        //     workStatusValue: "InTask",
-        //     reviewerComments: "テスト",
-        //     commentWork: "commentWork",
-        //     commentStatus: "commentStatus",
-        //     commentOther: "commentOther",
-
-        // },
+        
     }
     return (
         report ?

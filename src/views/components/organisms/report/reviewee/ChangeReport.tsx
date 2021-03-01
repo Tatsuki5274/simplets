@@ -11,6 +11,7 @@ import { SendEmail } from "App";
 import { sendEmailMutation } from "lib/sendEmail";
 import styled from "styled-components";
 import { routeBuilder } from "router";
+import { CountLine } from "lib/util";
 
 type Props = {
     workStatusList: {
@@ -71,61 +72,67 @@ export default function (props: Props) {
             {formik => (
                 <form onSubmit={formik.handleSubmit}>
 
-                    <div>
-                        <Text>作業報告 {props.data.date}</Text>
-                    </div>
+                    <ReportStyle>
+                        <Text>{`作業報告 ${props.data.date.replace(/-/g,'/')}`}</Text>
+                    </ReportStyle>
 
                     <div>
                         <Text className="commentWork">【作業報告】</Text>
                     </div>
-                    <div>
+                    <ReportStyle>
                         <TextArea
                             name="commentWork"
                             onChange={formik.handleChange}
                             defaultValue={formik.values.commentWork}
+                            rows={CountLine(formik.values.commentWork)}
+                            style={StyledTextarea}
                         />
-                    </div>
+                    </ReportStyle>
 
                     <div>
                         <Text className="workStatus">【作業状況】</Text>
                     </div>
-                    <div>
+                    <ReportStyle>
                         <RadioButtonSelect
                             name="workStatus"
                             radioButtons={props.workStatusList}
                             onChange={formik.handleChange}
                             defaultIndex={props.workStatusList.findIndex((element) => element.value === formik.values.workStatus)}
                         />
-                    </div>
+                    </ReportStyle>
 
                     <div>
                         <Text className="commentStatus">【作業状況】</Text>
                     </div>
-                    <div>
+                    <ReportStyle>
                         <TextArea
                             name="commentStatus"
                             onChange={formik.handleChange}
                             defaultValue={formik.values.commentStatus}
+                            rows={CountLine(formik.values.commentStatus)}
+                            style={StyledTextarea}
                         />
-                    </div>
+                    </ReportStyle>
 
                     <div>
                         <Text className="commentOther">【その他】</Text>
                     </div>
-                    <div>
+                    <ReportStyle>
                         <TextArea
                             name="commentOther"
                             onChange={formik.handleChange}
                             defaultValue={formik.values.commentOther}
+                            rows={CountLine(formik.values.commentOther)}
+                            style={StyledTextarea}
                         />
-                    </div>
+                    </ReportStyle>
 
                     <div>
-                        <Text className="reviewerComments">所属長コメント</Text>
+                        <Text className="reviewerComments">【所属長コメント】</Text>
                     </div>
-                    <div>
+                    <ReviewerCommentStyle>
                         <Text>{props.data.reviewerComments}</Text>
-                    </div>
+                    </ReviewerCommentStyle>
 
                     <CommandButton type="submit">保存</CommandButton>
                     {props.data.superior.email ?
@@ -178,4 +185,17 @@ ${routeBuilder.reviewerReportCommentPath(props.data.date, props.data.reviewee, h
 const SpaceStyle = styled.div({
     display: "inline-block",
     margin: "0 10px",
+})
+
+const ReviewerCommentStyle = styled.div({
+    whiteSpace: "pre-line",
+    marginBottom: "20px",
+})
+
+const StyledTextarea: React.CSSProperties = {
+    width: "50%",
+}
+
+const ReportStyle = styled.div({
+    marginBottom: "20px",
 })
