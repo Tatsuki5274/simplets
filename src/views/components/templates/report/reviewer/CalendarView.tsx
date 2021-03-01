@@ -3,7 +3,9 @@ import { EventClickArg, EventInput } from '@fullcalendar/react'
 import React from 'react'
 import { useHistory } from 'react-router-dom';
 import { routeBuilder } from 'router';
+import styled from 'styled-components';
 import { LinkType } from 'views/components/atoms/Types';
+import Title from 'views/components/molecules/Title';
 import Header, { HeaderProps } from "views/components/organisms/common/Header";
 import Calendar from 'views/components/organisms/report/Calendar'
 import Container from '../../Container'
@@ -76,6 +78,10 @@ export default function CalendarView(props: Props) {
                 <RightBox>
                     <Content>
                         <>
+                            <TitleStyle>
+                                <Title>{`報告参照 カレンダー`}</Title>
+                            </TitleStyle>
+                            
                             <Calendar
                                 events={props.events}
                                 handleDateClick={handleDateClick}
@@ -94,3 +100,7 @@ export default function CalendarView(props: Props) {
         </>
     )
 }
+
+const TitleStyle = styled.div({
+    paddingBottom: "10px"
+})
