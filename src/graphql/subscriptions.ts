@@ -13,8 +13,9 @@ export const onCreateReport = /* GraphQL */ `
       referencer: $referencer
       reviewer: $reviewer
     ) {
-      reviewee
+      sub
       date
+      reviewee
       reviewer
       companyID
       referencer
@@ -219,8 +220,9 @@ export const onUpdateReport = /* GraphQL */ `
       referencer: $referencer
       reviewer: $reviewer
     ) {
-      reviewee
+      sub
       date
+      reviewee
       reviewer
       companyID
       referencer
@@ -425,8 +427,9 @@ export const onDeleteReport = /* GraphQL */ `
       referencer: $referencer
       reviewer: $reviewer
     ) {
-      reviewee
+      sub
       date
+      reviewee
       reviewer
       companyID
       referencer

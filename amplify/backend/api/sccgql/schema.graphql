@@ -293,7 +293,8 @@ type Superior
 
 type Report
 @model
-@key(fields: ["reviewee", "date"])
+@key(fields: ["sub", "date"])
+@key(fields: ["reviewee", "date"], name: "report_reviewee", queryField: "listReportsReviewee")
 @key(fields: ["companyID", "date"], name: "report_company_date", queryField: "listReportsCompanyDate")
 # @key(fields: ["companyID", "reviewee"], name: "report_company_reviewee", queryField: "listReportsReviewee")
 # @key(fields: ["companyID", "date"], name: "report_company_date", queryField: "listReportsDate")
@@ -308,9 +309,10 @@ type Report
   ]
 )
 {
-  reviewee: ID!
+  sub: ID!
   date: AWSDate!  #1970-01-01Z の形式で格納
 
+  reviewee: ID
   reviewer: [String]
   companyID: ID
   referencer: [String] #参照者

@@ -152,4 +152,27 @@ export const ReportDao = {
         }
         return null
     },
+    listReviewee: async (query: string, params: APIt.ListReportsRevieweeQueryVariables): Promise<Report[] | null> => {
+        try {
+            const listQV: APIt.ListReportsRevieweeQueryVariables = params
+            const listGQL = await graphqlQuery
+                <APIt.ListReportsRevieweeQueryVariables, APIt.ListReportsRevieweeQuery>
+                (query, listQV)
+            if (listGQL.data) {
+                const listQ: APIt.ListReportsRevieweeQuery = listGQL.data;
+                if (listQ.listReportsReviewee && listQ.listReportsReviewee.items) {
+                    const gotReportsCompanyDate = listQ.listReportsReviewee.items as Report[]
+                    return gotReportsCompanyDate
+                } else console.error("情報の取得に失敗しました")
+            } else console.error("情報の取得に失敗しました")
+        } catch (e) {
+            if (e && e.data && e.data.listReportsCompanyDate) {
+                console.error("違反があります", e.errors)
+                return e.data.listReportsCompanyDate.items as Report[]
+            } else {
+                console.error(e)
+            }
+        }
+        return null
+    },
 }

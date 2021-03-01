@@ -14,6 +14,7 @@ type Props = {
     sidebar: LinkType[][] | null
 
     data: {
+        sub: string
         revieweeMailAddress: string | null
         // date: Date
         date: string

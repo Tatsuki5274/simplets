@@ -33,7 +33,7 @@ export default function CalendarView(props: Props) {
 
     function handleEventClick(arg: EventClickArg){
         if(arg.event.start){
-            history.push(routeBuilder.reviewerReportCommentPath(arg.event.start, arg.event.extendedProps.username))
+            history.push(routeBuilder.reviewerReportCommentPath(arg.event.start, arg.event.extendedProps.sub))
         }
     }
 

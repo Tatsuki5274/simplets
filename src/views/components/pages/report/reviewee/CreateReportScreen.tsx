@@ -1,5 +1,5 @@
 import { BooleanType, EmployeeType } from "API";
-import { EmployeeContext, HeaderContext, SidebarContext } from "App";
+import { EmployeeContext, ErrorContext, HeaderContext, SidebarContext, UserContext } from "App";
 import { listEmployeesManager } from "graphql/queries";
 import { EmployeeDao } from "lib/dao/employeeDao";
 import React, { useContext, useEffect, useState } from "react";
@@ -41,6 +41,10 @@ export default function (props: Props) {
     const sidebar = useContext(SidebarContext)
 
     const currentEmployee = useContext(EmployeeContext);
+    const currentUser = useContext(UserContext);
+    const setError = useContext(ErrorContext)
+
+
     const [reportData, setReportData] = useState<RevieweeCreateReportType>()
 
     useEffect(() => {
@@ -92,21 +96,27 @@ export default function (props: Props) {
                     });
                 }
                 const managers = listSuperManagers.concat(listGroupManagers)
-
-                const reportItem: RevieweeCreateReportType = {
-                    date: props.match.params.date,
-                    companyID: currentEmployee.companyID || "",
-                    superior: superiorItem,
-                    referencer: managers,
-                    reviewer: [currentEmployee.superiorUsername || ""],
-                    reviewee: currentEmployee.username || "",
-                    revieweeName: `${currentEmployee.lastName}${currentEmployee.firstName}`,
-                    workStatus: mockData.data.workStatus,
+                if(currentUser?.attributes.sub){
+                    const reportItem: RevieweeCreateReportType = {
+                        sub: currentUser.attributes.sub,
+                        date: props.match.params.date,
+                        companyID: currentEmployee.companyID || "",
+                        superior: superiorItem,
+                        referencer: managers,
+                        reviewer: [currentEmployee.superiorUsername || ""],
+                        reviewee: currentEmployee.username || "",
+                        revieweeName: `${currentEmployee.lastName}${currentEmployee.firstName}`,
+                        workStatus: mockData.data.workStatus,
+                    }
+                    setReportData(reportItem)
+                }else{
+                    console.error("認証情報が取得できません")
+                    setError("認証情報が取得できません")
                 }
-                setReportData(reportItem)
+
             }
         })()
-    }, [currentEmployee, props.match.params.date])
+    }, [currentEmployee, props.match.params.date, currentUser])
 
 
 

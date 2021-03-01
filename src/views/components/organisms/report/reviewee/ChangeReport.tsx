@@ -24,6 +24,7 @@ type Props = {
         superior: {
             email: string | null,
         }
+        sub: string
         reviewee: string
         revieweeName: string
         workStatusValue: string
@@ -46,6 +47,7 @@ export default function (props: Props) {
             onSubmit={async (values) => {
 
                 const updateI: APIt.UpdateReportInput = {
+                    sub: props.data.sub,
                     companyID: props.data.companyID,
                     date: props.data.date,
                     workStatus: values.workStatus as APIt.ReportWorkingStatus,

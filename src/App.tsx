@@ -47,7 +47,8 @@ export type SendEmail = Omit<Exclude<APIt.sendEmailInput, null>, '__typename'>;
 type User = {
   username: string
   attributes: {
-    "custom:companyId": string
+    "custom:companyId": string,
+    sub: string
   }
 }
 export const UserContext = createContext<User | null>(null)
@@ -167,7 +168,7 @@ function App() {
                     <Route exact path={routeBuilder.revieweeReportCalendarPath(":date")} component={RevieweeReportList} />
                     <Route exact path={routeBuilder.revieweeReportNewPath(":date")} component={CreateReportScreen} />
                     <Route exact path={routeBuilder.revieweeReportEditPath(":date")} component={ChangeReportScreen} />
-                    <Route exact path={routeBuilder.reviewerReportCommentPath(":date", ":username")} component={EditReportScreeen} />
+                    <Route exact path={routeBuilder.reviewerReportCommentPath(":date", ":sub")} component={EditReportScreeen} />
                     <Route exact path={routeBuilder.reviewerReportEmployeePath()} component={ReportListScreen} />
                     <Route exact path={routeBuilder.reviewerReportCalendarPaht(":date")} component={ReviewerReportList} />
                   </Switch>

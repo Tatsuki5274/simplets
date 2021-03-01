@@ -15,6 +15,7 @@ import { routeBuilder } from "router";
 
 export type RevieweeCreateReportType = {
     date: string
+    sub: string
     companyID: string
     superior: Superior | null
     referencer: (string | null)[] | null
@@ -43,6 +44,7 @@ export default function (props: Props) {
             onSubmit={async (values) => {
 
                 const createI: APIt.CreateReportInput = {
+                    sub: props.data.sub,
                     companyID: props.data.companyID,
                     date: props.data.date,
                     referencer: props.data.referencer,

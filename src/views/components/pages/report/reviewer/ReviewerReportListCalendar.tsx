@@ -41,7 +41,7 @@ export default function(props: Props){
                         return {
                             title: `${report.revieweeEmployee?.group?.name} ${report.revieweeEmployee?.lastName}${report.revieweeEmployee?.firstName}`,
                             date: report.date,
-                            username: report.reviewee,
+                            sub: report.sub,
                             workStatus: report.workStatus
                         }
                     })

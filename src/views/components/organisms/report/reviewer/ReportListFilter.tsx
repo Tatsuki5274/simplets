@@ -1,4 +1,4 @@
-import { ListReportsQueryVariables, ReportWorkingStatus } from "API";
+import { ListReportsQueryVariables, ListReportsRevieweeQueryVariables, ReportWorkingStatus } from "API";
 import { Formik } from "formik";
 import { listReports } from "graphql/queries";
 import { ReportDao } from "lib/dao/reportDao";
@@ -57,7 +57,7 @@ export default function (props:Props) {
             }}
             onSubmit={async (values) => {
                 console.log("values", values)
-                const reportItem: ListReportsQueryVariables = {
+                const reportItem: ListReportsRevieweeQueryVariables = {
                     reviewee: values.reviewee,
                     date: {
                         between: [values.reportStartDate, values.reportEndDate]
@@ -65,7 +65,7 @@ export default function (props:Props) {
                 }
                 console.log("reportItem", reportItem)
                 let result :ReviewerReportListEmployeeType[] | null = null
-                const reports = await ReportDao.list(listReports, reportItem)
+                const reports = await ReportDao.listReviewee(listReports, reportItem)
                 if (reports) {
                     console.log("reports", reports)
                     result = reports.map(report =>{

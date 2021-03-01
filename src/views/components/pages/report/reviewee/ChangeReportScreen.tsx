@@ -1,5 +1,5 @@
 import { GetReportQueryVariables, Report } from "API";
-import { EmployeeContext, HeaderContext, SidebarContext } from "App";
+import { EmployeeContext, HeaderContext, SidebarContext, UserContext } from "App";
 import { getReport } from "graphql/queries";
 import { ReportDao } from "lib/dao/reportDao";
 import React, { useContext, useEffect, useState } from "react";
@@ -18,20 +18,21 @@ export default function (props: Props) {
     const sidebar = useContext(SidebarContext)
 
     const currentEmployee = useContext(EmployeeContext);
+    const currentUser = useContext(UserContext);
     const [report, setReport] = useState<Report | null>();
 
     useEffect(() => {
         (async () => {
-            if (currentEmployee) {
+            if (currentUser) {
                 const getI: GetReportQueryVariables = {
+                    sub: currentUser?.attributes.sub,
                     date: String(props.match.params.date),
-                    reviewee: currentEmployee?.username,
                 }
                 const reportItem = await ReportDao.get(getReport, getI)
                 setReport(reportItem)
             }
         })()
-    }, [props, currentEmployee])
+    }, [props, currentUser])
 
     const mockData = {
         header: header,
@@ -76,6 +77,7 @@ export default function (props: Props) {
                 sidebar={mockData.sidebar}
                 workStatusList={mockData.workStatusList}
                 data={{
+                    sub: report.sub || "",
                     date: report.date || "",
                     companyID: report.companyID || "",
                     superior: {

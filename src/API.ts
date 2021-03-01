@@ -543,8 +543,9 @@ export type DeleteObjectiveInput = {
 };
 
 export type CreateReportInput = {
-  reviewee: string,
+  sub: string,
   date: string,
+  reviewee?: string | null,
   reviewer?: Array< string | null > | null,
   companyID?: string | null,
   referencer?: Array< string | null > | null,
@@ -585,8 +586,9 @@ export type ModelReportWorkingStatusInput = {
 
 export type Report = {
   __typename: "Report",
-  reviewee?: string,
+  sub?: string,
   date?: string,
+  reviewee?: string | null,
   reviewer?: Array< string | null > | null,
   companyID?: string | null,
   referencer?: Array< string | null > | null,
@@ -611,8 +613,9 @@ export type ReviewerReportComment = {
 };
 
 export type UpdateReportInput = {
-  reviewee: string,
+  sub: string,
   date: string,
+  reviewee?: string | null,
   reviewer?: Array< string | null > | null,
   companyID?: string | null,
   referencer?: Array< string | null > | null,
@@ -622,7 +625,7 @@ export type UpdateReportInput = {
 };
 
 export type DeleteReportInput = {
-  reviewee: string,
+  sub: string,
   date: string,
 };
 
@@ -670,8 +673,9 @@ export type ModelStringKeyConditionInput = {
 };
 
 export type ModelReportFilterInput = {
-  reviewee?: ModelIDInput | null,
+  sub?: ModelIDInput | null,
   date?: ModelStringInput | null,
+  reviewee?: ModelIDInput | null,
   reviewer?: ModelStringInput | null,
   companyID?: ModelIDInput | null,
   referencer?: ModelStringInput | null,
@@ -2967,8 +2971,9 @@ export type CreateReportMutationVariables = {
 export type CreateReportMutation = {
   createReport?:  {
     __typename: "Report",
-    reviewee: string,
+    sub: string,
     date: string,
+    reviewee?: string | null,
     reviewer?: Array< string | null > | null,
     companyID?: string | null,
     referencer?: Array< string | null > | null,
@@ -3188,8 +3193,9 @@ export type UpdateReportMutationVariables = {
 export type UpdateReportMutation = {
   updateReport?:  {
     __typename: "Report",
-    reviewee: string,
+    sub: string,
     date: string,
+    reviewee?: string | null,
     reviewer?: Array< string | null > | null,
     companyID?: string | null,
     referencer?: Array< string | null > | null,
@@ -3409,8 +3415,9 @@ export type DeleteReportMutationVariables = {
 export type DeleteReportMutation = {
   deleteReport?:  {
     __typename: "Report",
-    reviewee: string,
+    sub: string,
     date: string,
+    reviewee?: string | null,
     reviewer?: Array< string | null > | null,
     companyID?: string | null,
     referencer?: Array< string | null > | null,
@@ -4099,15 +4106,16 @@ export type UpdateSheetMutation = {
 };
 
 export type GetReportQueryVariables = {
-  reviewee?: string,
+  sub?: string,
   date?: string,
 };
 
 export type GetReportQuery = {
   getReport?:  {
     __typename: "Report",
-    reviewee: string,
+    sub: string,
     date: string,
+    reviewee?: string | null,
     reviewer?: Array< string | null > | null,
     companyID?: string | null,
     referencer?: Array< string | null > | null,
@@ -4320,7 +4328,7 @@ export type GetReportQuery = {
 };
 
 export type ListReportsQueryVariables = {
-  reviewee?: string | null,
+  sub?: string | null,
   date?: ModelStringKeyConditionInput | null,
   filter?: ModelReportFilterInput | null,
   limit?: number | null,
@@ -4333,8 +4341,204 @@ export type ListReportsQuery = {
     __typename: "ModelReportConnection",
     items?:  Array< {
       __typename: "Report",
-      reviewee: string,
+      sub: string,
       date: string,
+      reviewee?: string | null,
+      reviewer?: Array< string | null > | null,
+      companyID?: string | null,
+      referencer?: Array< string | null > | null,
+      revieweeComments?:  {
+        __typename: "RevieweeReportComment",
+        work?: string | null,
+        other?: string | null,
+        status?: string | null,
+      } | null,
+      reviewerComments?:  {
+        __typename: "ReviewerReportComment",
+        superior?: string | null,
+      } | null,
+      workStatus?: ReportWorkingStatus | null,
+      createdAt: string,
+      updatedAt: string,
+      revieweeEmployee?:  {
+        __typename: "Employee",
+        companyID: string,
+        username: string,
+        localID: string,
+        employeeGroupLocalId: string,
+        superiorUsername: string,
+        firstName: string,
+        lastName: string,
+        grade: string,
+        email: string,
+        manager: EmployeeType,
+        isCompanyAdmin?: boolean | null,
+        isDeleted: BooleanType,
+        createdAt: string,
+        updatedAt: string,
+        company?:  {
+          __typename: "Company",
+          id: string,
+          name: string,
+          startMonth: number,
+          shortName?: string | null,
+          url?: string | null,
+          createdAt: string,
+          updatedAt: string,
+        } | null,
+        superior?:  {
+          __typename: "Employee",
+          companyID: string,
+          username: string,
+          localID: string,
+          employeeGroupLocalId: string,
+          superiorUsername: string,
+          firstName: string,
+          lastName: string,
+          grade: string,
+          email: string,
+          manager: EmployeeType,
+          isCompanyAdmin?: boolean | null,
+          isDeleted: BooleanType,
+          createdAt: string,
+          updatedAt: string,
+          company?:  {
+            __typename: "Company",
+            id: string,
+            name: string,
+            startMonth: number,
+            shortName?: string | null,
+            url?: string | null,
+            createdAt: string,
+            updatedAt: string,
+          } | null,
+          superior?:  {
+            __typename: "Employee",
+            companyID: string,
+            username: string,
+            localID: string,
+            employeeGroupLocalId: string,
+            superiorUsername: string,
+            firstName: string,
+            lastName: string,
+            grade: string,
+            email: string,
+            manager: EmployeeType,
+            isCompanyAdmin?: boolean | null,
+            isDeleted: BooleanType,
+            createdAt: string,
+            updatedAt: string,
+            company?:  {
+              __typename: "Company",
+              id: string,
+              name: string,
+              startMonth: number,
+              shortName?: string | null,
+              url?: string | null,
+              createdAt: string,
+              updatedAt: string,
+            } | null,
+            superior?:  {
+              __typename: "Employee",
+              companyID: string,
+              username: string,
+              localID: string,
+              employeeGroupLocalId: string,
+              superiorUsername: string,
+              firstName: string,
+              lastName: string,
+              grade: string,
+              email: string,
+              manager: EmployeeType,
+              isCompanyAdmin?: boolean | null,
+              isDeleted: BooleanType,
+              createdAt: string,
+              updatedAt: string,
+              company?:  {
+                __typename: "Company",
+                id: string,
+                name: string,
+                startMonth: number,
+                shortName?: string | null,
+                url?: string | null,
+                createdAt: string,
+                updatedAt: string,
+              } | null,
+              superior?:  {
+                __typename: "Employee",
+                companyID: string,
+                username: string,
+                localID: string,
+                employeeGroupLocalId: string,
+                superiorUsername: string,
+                firstName: string,
+                lastName: string,
+                grade: string,
+                email: string,
+                manager: EmployeeType,
+                isCompanyAdmin?: boolean | null,
+                isDeleted: BooleanType,
+                createdAt: string,
+                updatedAt: string,
+              } | null,
+              group?:  {
+                __typename: "Group",
+                companyID: string,
+                localID: string,
+                name: string,
+                createdAt: string,
+                updatedAt: string,
+              } | null,
+            } | null,
+            group?:  {
+              __typename: "Group",
+              companyID: string,
+              localID: string,
+              name: string,
+              createdAt: string,
+              updatedAt: string,
+            } | null,
+          } | null,
+          group?:  {
+            __typename: "Group",
+            companyID: string,
+            localID: string,
+            name: string,
+            createdAt: string,
+            updatedAt: string,
+          } | null,
+        } | null,
+        group?:  {
+          __typename: "Group",
+          companyID: string,
+          localID: string,
+          name: string,
+          createdAt: string,
+          updatedAt: string,
+        } | null,
+      } | null,
+    } | null > | null,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type ListReportsRevieweeQueryVariables = {
+  reviewee?: string | null,
+  date?: ModelStringKeyConditionInput | null,
+  sortDirection?: ModelSortDirection | null,
+  filter?: ModelReportFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListReportsRevieweeQuery = {
+  listReportsReviewee?:  {
+    __typename: "ModelReportConnection",
+    items?:  Array< {
+      __typename: "Report",
+      sub: string,
+      date: string,
+      reviewee?: string | null,
       reviewer?: Array< string | null > | null,
       companyID?: string | null,
       referencer?: Array< string | null > | null,
@@ -4527,8 +4731,9 @@ export type ListReportsCompanyDateQuery = {
     __typename: "ModelReportConnection",
     items?:  Array< {
       __typename: "Report",
-      reviewee: string,
+      sub: string,
       date: string,
+      reviewee?: string | null,
       reviewer?: Array< string | null > | null,
       companyID?: string | null,
       referencer?: Array< string | null > | null,
@@ -8006,8 +8211,9 @@ export type OnCreateReportSubscriptionVariables = {
 export type OnCreateReportSubscription = {
   onCreateReport?:  {
     __typename: "Report",
-    reviewee: string,
+    sub: string,
     date: string,
+    reviewee?: string | null,
     reviewer?: Array< string | null > | null,
     companyID?: string | null,
     referencer?: Array< string | null > | null,
@@ -8228,8 +8434,9 @@ export type OnUpdateReportSubscriptionVariables = {
 export type OnUpdateReportSubscription = {
   onUpdateReport?:  {
     __typename: "Report",
-    reviewee: string,
+    sub: string,
     date: string,
+    reviewee?: string | null,
     reviewer?: Array< string | null > | null,
     companyID?: string | null,
     referencer?: Array< string | null > | null,
@@ -8450,8 +8657,9 @@ export type OnDeleteReportSubscriptionVariables = {
 export type OnDeleteReportSubscription = {
   onDeleteReport?:  {
     __typename: "Report",
-    reviewee: string,
+    sub: string,
     date: string,
+    reviewee?: string | null,
     reviewer?: Array< string | null > | null,
     companyID?: string | null,
     referencer?: Array< string | null > | null,

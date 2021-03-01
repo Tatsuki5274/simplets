@@ -87,12 +87,12 @@ export function createSidebarElements(isManager: boolean, isAdmin: boolean): { l
                 dest: routeBuilder.revieweeListPath()
             },
         ]
-        // , [
-        //     {
-        //         label: "作業報告入力",
-        //         dest: routeBuilder.revieweeReportCalendarPath(today)
-        //     },
-        // ]
+        , [
+            {
+                label: "作業報告入力",
+                dest: routeBuilder.revieweeReportCalendarPath(today)
+            },
+        ]
     ]
     const managerContents = [
         [
@@ -104,16 +104,16 @@ export function createSidebarElements(isManager: boolean, isAdmin: boolean): { l
                 dest: routeBuilder.reviewerEvaluationListPath()
             }
         ]
-        // , [
-        //     {
-        //         label: "報告参照カレンダー",
-        //         dest: routeBuilder.reviewerReportCalendarPaht(today)
-        //     }, {
-        //         label: "報告参照社員",
-        //         dest: routeBuilder.reviewerReportEmployeePath()
-        //     }
+        , [
+            {
+                label: "報告参照カレンダー",
+                dest: routeBuilder.reviewerReportCalendarPaht(today)
+            }, {
+                label: "報告参照社員",
+                dest: routeBuilder.reviewerReportEmployeePath()
+            }
 
-        // ]
+        ]
     ]
 
     const adminContents = [

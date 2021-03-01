@@ -14,6 +14,7 @@ import { routeBuilder } from "router";
 type Props = {
     revieweeMailAddress: string | null
     // date: Date
+    sub: string
     date: string
     commentWork: string
     workStatus: string
@@ -32,6 +33,7 @@ export default function (props: Props) {
             }}
             onSubmit={async (values) => {
                 const updateI: APIt.UpdateReportInput = {
+                    sub: props.sub,
                     date: props.date,
                     reviewee: props.reviewee,
                     reviewerComments: {

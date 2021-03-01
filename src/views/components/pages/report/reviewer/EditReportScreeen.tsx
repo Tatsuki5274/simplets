@@ -12,7 +12,7 @@ type Props = {
     match: {
         params: {
             date: string
-            username: string
+            sub: string
         }
     }
 }
@@ -30,7 +30,7 @@ export default function (props: Props) {
         (async () => {
             const getI: GetReportQueryVariables = {
                 date: props.match.params.date,
-                reviewee: props.match.params.username,
+                sub: props.match.params.sub,
             }
             const reportItem = await ReportDao.get(getReport, getI)
             if (reportItem) {
@@ -44,7 +44,7 @@ export default function (props: Props) {
             if (currentEmployee) {
                 const getI: GetEmployeeQueryVariables = {
                     companyID: currentEmployee.companyID,
-                    username: props.match.params.username
+                    username: props.match.params.sub
                 }
                 const revieweeItem = await EmployeeDao.get(getEmployee, getI)
                 if (revieweeItem && revieweeItem.email) {
@@ -91,6 +91,7 @@ export default function (props: Props) {
                 header={mockData.header}
                 sidebar={mockData.sidebar}
                 data={{
+                    sub: report.sub || "",
                     revieweeMailAddress: revieweeMailAddress,
                     date: report.date || "",
                     commentWork: report.revieweeComments?.work || "",

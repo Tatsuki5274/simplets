@@ -1891,8 +1891,9 @@ export const createReport = /* GraphQL */ `
     $condition: ModelReportConditionInput
   ) {
     createReport(input: $input, condition: $condition) {
-      reviewee
+      sub
       date
+      reviewee
       reviewer
       companyID
       referencer
@@ -2092,8 +2093,9 @@ export const updateReport = /* GraphQL */ `
     $condition: ModelReportConditionInput
   ) {
     updateReport(input: $input, condition: $condition) {
-      reviewee
+      sub
       date
+      reviewee
       reviewer
       companyID
       referencer
@@ -2293,8 +2295,9 @@ export const deleteReport = /* GraphQL */ `
     $condition: ModelReportConditionInput
   ) {
     deleteReport(input: $input, condition: $condition) {
-      reviewee
+      sub
       date
+      reviewee
       reviewer
       companyID
       referencer

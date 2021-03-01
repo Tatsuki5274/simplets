@@ -18,6 +18,7 @@ type Props = {
     }[]
 
     data: {
+        sub: string
         date: string
         companyID: string
         superior: {
