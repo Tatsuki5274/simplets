@@ -1,17 +1,19 @@
-import { Formik } from "formik";
+import { ErrorMessage, Formik } from "formik";
 import { createReport } from "graphql/mutations";
 import { ReportDao } from "lib/dao/reportDao";
-import React from "react";
+import React, { useContext } from "react";
 import Text from "views/components/atoms/Text";
 import TextArea from "views/components/atoms/TextArea";
 import CommandButton from "views/components/molecules/CommandButton";
 import RadioButtonSelect from "views/components/molecules/RadioButtonSelect";
 import * as APIt from 'API';
 import { sendEmailMutation } from "lib/sendEmail";
-import { SendEmail } from "App";
+import { ErrorContext, SendEmail } from "App";
 import { Superior } from "views/components/atoms/Types";
 import styled from "styled-components";
 import { routeBuilder } from "router";
+import * as Yup from 'yup';
+import ErrorText from "views/components/atoms/ErrorText";
 
 export type RevieweeCreateReportType = {
     date: string
@@ -33,6 +35,7 @@ type Props = {
 }
 
 export default function (props: Props) {
+    const setError = useContext(ErrorContext)
     return (
         <Formik
             initialValues={{
@@ -41,6 +44,11 @@ export default function (props: Props) {
                 commentStatus: "",
                 commentOther: "",
             }}
+            validationSchema={Yup.object({
+                commentWork: Yup.string().typeError('作業報告を入力してください').required('作業報告を入力してください'),
+                commentStatus: Yup.string().typeError('作業状況を入力してください').required('作業状況を入力してください'),
+                commentOther: Yup.string().typeError('コメントを入力してください').required('コメントを入力してください'),
+            })}
             onSubmit={async (values) => {
 
                 const createI: APIt.CreateReportInput = {
@@ -49,10 +57,6 @@ export default function (props: Props) {
                     date: props.data.date,
                     referencer: props.data.referencer,
                     reviewer: props.data.reviewer,
-                    // superior: {
-                    //     email: props.superior ? props.superior.email : null,
-                    //     username: props.superior ? props.superior.username : null,
-                    // },
                     workStatus: values.workStatus as APIt.ReportWorkingStatus,
                     reviewee: props.data.reviewee,
                     revieweeComments: {
@@ -64,6 +68,9 @@ export default function (props: Props) {
                 const createdReport = await ReportDao.create(createReport, createI);
                 if (createdReport) {
                     window.alert("保存が完了しました");
+                } else {
+                    console.error("報告書の保存に失敗しました");
+                    setError("報告書の保存に失敗しました")
                 }
             }}
         >
@@ -84,6 +91,11 @@ export default function (props: Props) {
                             rows={5}
                             style={StyledTextarea}
                         />
+                        <ErrorText>
+                            <ErrorMessage
+                                name="commentWork"
+                            />
+                        </ErrorText>
                     </ReportStyle>
 
                     <div>
@@ -107,6 +119,11 @@ export default function (props: Props) {
                             rows={5}
                             style={StyledTextarea}
                         />
+                        <ErrorText>
+                            <ErrorMessage
+                                name="commentStatus"
+                            />
+                        </ErrorText>
                     </ReportStyle>
 
                     <div>
@@ -119,6 +136,11 @@ export default function (props: Props) {
                             rows={5}
                             style={StyledTextarea}
                         />
+                        <ErrorText>
+                            <ErrorMessage
+                                name="commentOther"
+                            />
+                        </ErrorText>
                     </ReportStyle>
 
                     <CommandButton type="submit">保存</CommandButton>

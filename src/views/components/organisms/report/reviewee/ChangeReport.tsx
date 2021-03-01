@@ -1,17 +1,19 @@
-import { Formik } from "formik";
+import { ErrorMessage, Formik } from "formik";
 import { updateReport } from "graphql/mutations";
 import { ReportDao } from "lib/dao/reportDao";
-import React from "react";
+import React, { useContext } from "react";
 import Text from "views/components/atoms/Text";
 import TextArea from "views/components/atoms/TextArea";
 import CommandButton from "views/components/molecules/CommandButton";
 import RadioButtonSelect from "views/components/molecules/RadioButtonSelect";
 import * as APIt from 'API';
-import { SendEmail } from "App";
+import { ErrorContext, SendEmail } from "App";
 import { sendEmailMutation } from "lib/sendEmail";
 import styled from "styled-components";
 import { routeBuilder } from "router";
 import { CountLine } from "lib/util";
+import * as Yup from 'yup';
+import ErrorText from "views/components/atoms/ErrorText";
 
 type Props = {
     workStatusList: {
@@ -37,6 +39,8 @@ type Props = {
 }
 
 export default function (props: Props) {
+    const setError = useContext(ErrorContext)
+
     return (
         <Formik
             initialValues={{
@@ -45,6 +49,11 @@ export default function (props: Props) {
                 commentStatus: props.data.commentStatus,
                 commentOther: props.data.commentOther,
             }}
+            validationSchema={Yup.object({
+                commentWork: Yup.string().typeError('作業報告を入力してください').required('作業報告を入力してください'),
+                commentStatus: Yup.string().typeError('作業状況を入力してください').required('作業状況を入力してください'),
+                commentOther: Yup.string().typeError('コメントを入力してください').required('コメントを入力してください'),
+            })}
             onSubmit={async (values) => {
 
                 const updateI: APIt.UpdateReportInput = {
@@ -64,8 +73,10 @@ export default function (props: Props) {
                 console.log("updatedReport", updatedReport)
                 if (updatedReport) {
                     window.alert("保存が完了しました");
+                } else {
+                    console.error("報告書の保存に失敗しました");
+                    setError("報告書の保存に失敗しました")
                 }
-                console.log("values", values)
 
             }}
         >
@@ -87,6 +98,11 @@ export default function (props: Props) {
                             rows={CountLine(formik.values.commentWork)}
                             style={StyledTextarea}
                         />
+                        <ErrorText>
+                            <ErrorMessage
+                                name="commentWork"
+                            />
+                        </ErrorText>
                     </ReportStyle>
 
                     <div>
@@ -112,6 +128,11 @@ export default function (props: Props) {
                             rows={CountLine(formik.values.commentStatus)}
                             style={StyledTextarea}
                         />
+                        <ErrorText>
+                            <ErrorMessage
+                                name="commentStatus"
+                            />
+                        </ErrorText>
                     </ReportStyle>
 
                     <div>
@@ -125,6 +146,11 @@ export default function (props: Props) {
                             rows={CountLine(formik.values.commentOther)}
                             style={StyledTextarea}
                         />
+                        <ErrorText>
+                            <ErrorMessage
+                                name="commentOther"
+                            />
+                        </ErrorText>
                     </ReportStyle>
 
                     <div>
