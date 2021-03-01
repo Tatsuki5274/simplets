@@ -8,11 +8,6 @@ import { ReviewerReportFilterEmployeeType } from "views/components/organisms/rep
 import { ReviewerReportListEmployeeType } from "views/components/organisms/report/reviewer/TableReportList";
 import ReportList from "views/components/templates/report/reviewer/ReportList";
 
-const mockData = {
-    revieweeName: "テスト テスト",
-}
-
-
 export default function () {
     const header = useContext(HeaderContext);
     const sidebar = useContext(SidebarContext)
@@ -73,7 +68,6 @@ export default function () {
     
     return (
         <ReportList
-            revieweeName={mockData.revieweeName}
             data={table}
             setTable={setTable}
             filter={{

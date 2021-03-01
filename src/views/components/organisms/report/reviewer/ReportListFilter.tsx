@@ -3,6 +3,7 @@ import { Formik } from "formik";
 import { listReports } from "graphql/queries";
 import { ReportDao } from "lib/dao/reportDao";
 import React, { useState } from "react";
+import styled from "styled-components";
 import Text from "views/components/atoms/Text";
 import TextField from "views/components/atoms/TextField";
 import { SelectLabel } from "views/components/atoms/Types";
@@ -24,7 +25,7 @@ type Props = {
     setTable: React.Dispatch<React.SetStateAction<ReviewerReportListEmployeeType[] | null>>
 }
 
-function generateRevieweeLabel(input: ReviewerReportFilterEmployeeType[]){
+function generateRevieweeLabel(input: ReviewerReportFilterEmployeeType[]) {
     return input.map(datum => {
         return {
             label: `${datum.groupName} ${datum.lastName}${datum.firlstName}`,
@@ -33,13 +34,13 @@ function generateRevieweeLabel(input: ReviewerReportFilterEmployeeType[]){
     })
 }
 
-export default function (props:Props) {
+export default function (props: Props) {
     const [reviewees, setReviewees] = useState<SelectLabel[]>(generateRevieweeLabel(props.reviewee))
-    function handleChangeGroup(event: React.ChangeEvent<HTMLSelectElement>){
+    function handleChangeGroup(event: React.ChangeEvent<HTMLSelectElement>) {
         const value = event.target.value
-        if(value === "all"){
+        if (value === "all") {
             setReviewees(generateRevieweeLabel(props.reviewee))
-        }else{
+        } else {
             const filteredReviewees = props.reviewee.filter(reviewee => {
                 return reviewee.groupLocalId === value
             })
@@ -64,56 +65,76 @@ export default function (props:Props) {
                     }
                 }
                 console.log("reportItem", reportItem)
-                let result :ReviewerReportListEmployeeType[] | null = null
+                let result: ReviewerReportListEmployeeType[] | null = null
                 const reports = await ReportDao.listReviewee(listReports, reportItem)
                 if (reports) {
                     console.log("reports", reports)
-                    result = reports.map(report =>{
+                    result = reports.map(report => {
                         return {
-                            commentOther : report.revieweeComments?.other || "",
+                            commentOther: report.revieweeComments?.other || "",
                             commentStatus: report.revieweeComments?.status || "",
                             commentSuperior: report.reviewerComments?.superior || "",
                             commentWork: report.revieweeComments?.work || "",
                             workStatus: report.workStatus || ReportWorkingStatus.OK,
                             date: report.date || ""
                         }
-                    })      
+                    })
                 }
                 props.setTable(result)
             }}
         >
             {formik => (
                 <form onSubmit={formik.handleSubmit}>
-                    <Text>作業報告表示期間</Text>
-                    <TextField
-                        type="date"
-                        name="reportStartDate"
-                        onChange={formik.handleChange}
-                    />
-                    <Text>〜</Text>
-                    <TextField
-                        type="date"
-                        name="reportEndDate"
-                        onChange={formik.handleChange}
-                    />
+                    <div>
+                        <Text>作業報告表示期間</Text>
+                    </div>
+                    
+                    <ReportFilterStyle>
+                        <TextField
+                            type="date"
+                            name="reportStartDate"
+                            onChange={formik.handleChange}
+                        />
+                        <Text>〜</Text>
+                        <TextField
+                            type="date"
+                            name="reportEndDate"
+                            onChange={formik.handleChange}
+                        />
+                    </ReportFilterStyle>
 
-                    <Text>部門</Text>
-                    <PullDown
-                        name="group"
-                        handleChange={handleChangeGroup}
-                        options={props.groups}
-                    ></PullDown>
+                    <ReportFilterStyle>
+                        <Text style={TextStyle}>部門</Text>
+                        <PullDown
+                            name="group"
+                            handleChange={handleChangeGroup}
+                            options={props.groups}
+                            style={InputStyle}
+                        ></PullDown>
 
-                    <Text>社員</Text>
-                    <PullDown
-                        name="reviewee"
-                        handleChange={formik.handleChange}
-                        options={reviewees}
-                    ></PullDown>
+                        <Text style={TextStyle}>社員</Text>
+                        <PullDown
+                            name="reviewee"
+                            handleChange={formik.handleChange}
+                            options={reviewees}
+                        ></PullDown>
+                    </ReportFilterStyle>
 
                     <CommandButton type="submit">確認</CommandButton>
                 </form>
             )}
         </Formik>
     )
+}
+
+const ReportFilterStyle = styled.div({
+    paddingBottom: "20px",
+})
+
+const TextStyle : React.CSSProperties = {
+    marginRight: "10px",
+}
+
+const InputStyle : React.CSSProperties = {
+    marginRight: "30px",
 }

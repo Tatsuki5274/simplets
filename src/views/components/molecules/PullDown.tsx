@@ -7,6 +7,7 @@ type Props =  {
         value: string
         label: string
     }[]
+    style?: React.CSSProperties
 }
 
 export default function (props: Props) {
@@ -14,6 +15,7 @@ export default function (props: Props) {
         <select
             onChange={props.handleChange}
             name={props.name}
+            style={props.style}
         >
             {props.options.map(option => {
                 return (

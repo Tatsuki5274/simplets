@@ -1,5 +1,6 @@
 import { ReportWorkingStatus } from "API";
 import React from "react";
+import styled from "styled-components";
 import Text from "views/components/atoms/Text";
 import { LinkType, SelectLabel } from "views/components/atoms/Types";
 import Title from "views/components/molecules/Title";
@@ -13,7 +14,6 @@ import RightBox from "../../RightBox";
 import Sidebar from "../../Sidebar";
 
 type Props = {
-    revieweeName: string
     data: {
         // date: Date,
         date: string,
@@ -47,15 +47,19 @@ export default function (props: Props) {
                 <RightBox>
                     <Content>
                         <>
-                            <Title>作業報告書表示画面</Title>
-                            {props.filter && props.filter.groups && props.filter.reviewee? 
-                            <ReportListFilter
-                                groups={props.filter.groups}
-                                reviewee={props.filter.reviewee}
-                                setTable={props.setTable}
-                            /> : null}
+                            <ReportListStyle>
+                                <Title>報告参照　社員</Title>
+                            </ReportListStyle>
 
-                            <Text>報告者　{props.revieweeName}</Text>
+                            {props.filter && props.filter.groups && props.filter.reviewee ?
+                                <ReportListStyle>
+                                    <ReportListFilter
+                                        groups={props.filter.groups}
+                                        reviewee={props.filter.reviewee}
+                                        setTable={props.setTable}
+                                    />
+                                </ReportListStyle> : null}
+
                             <TableReportList
                                 data={props.data}
                             />
@@ -66,3 +70,7 @@ export default function (props: Props) {
         </>
     )
 }
+
+const ReportListStyle = styled.div({
+    paddingBottom: "10px"
+})
