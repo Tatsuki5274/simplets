@@ -22,11 +22,11 @@
         },
         "sendEmail": {
           "deploymentBucketName": "amplify-sccsystem-dev-115621-deployment",
-          "s3Key": "amplify-builds/sendEmail-2b307a585a793636466f-build.zip"
+          "s3Key": "amplify-builds/sendEmail-704e69774d4952544c75-build.zip"
         },
         "scriptGraphQL": {
           "deploymentBucketName": "amplify-sccsystem-dev-115621-deployment",
-          "s3Key": "amplify-builds/scriptGraphQL-644f6435557864683858-build.zip"
+          "s3Key": "amplify-builds/scriptGraphQL-317073355556784a6955-build.zip"
         }
       }
     }

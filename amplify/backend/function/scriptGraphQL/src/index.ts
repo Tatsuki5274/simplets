@@ -1,6 +1,7 @@
 /* Amplify Params - DO NOT EDIT
 	API_SCCGQL_GRAPHQLAPIENDPOINTOUTPUT
 	API_SCCGQL_GRAPHQLAPIIDOUTPUT
+    AUTH_SCCSYSTEME53C89F0_USERPOOLID
 	ENV
 	REGION
 Amplify Params - DO NOT EDIT */
@@ -10,42 +11,43 @@ import { ListSheetsQuery, UpdateSheetMutationVariables } from "./API";
 import { executeMutation, executeQuery } from "./client";
 import { updateSheet } from "./graphql/mutations";
 import { listSheets } from "./graphql/queries";
+import addEmployeesSub from "./scripts/addEmployeesSub";
+import addGroupName from "./scripts/addGroupName";
+
+enum ScriptTarget {
+    ADD_GROUP_NAME="ADD_GROUP_NAME",
+    ADD_EMPLOYEES_SUB="ADD_EMPLOYEES_SUB",
+}
+
+type Event = {
+    target: ScriptTarget
+}
 
 //exports.handler = async (event) => {
-export const handler = async (event: any) => {
+export const handler = async (event: Event) => {
     // TODO implement
     console.log("event:",event)
+
+    let response = {
+        statusCode: 200,
+        body: JSON.stringify('Empty'),
+    };
     try{
-        const listSheetItems: ApolloQueryResult<ListSheetsQuery> | null  = await executeQuery(listSheets,{})
-        // console.log("sheets", JSON.stringify(listSheetItems, null, 2));
-
-        if(listSheetItems?.data.listSheets?.items){
-            for(const sheet of listSheetItems.data.listSheets.items){
-                if(sheet?.companyID && sheet.group?.name){
-                    const param: UpdateSheetMutationVariables = {
-                        input: {
-                            companyID: sheet.companyID,
-                            year: sheet.year,
-                            reviewee: sheet.reviewee,
-                            sheetGroupName: sheet.group.name
-                        }
-                    }
-                    try{
-                        const result = await executeMutation(updateSheet, param)
-                        console.log("result", JSON.stringify(result, null, 2))
-                    }catch(err){
-                        console.log("error", err)
-                    }
-
-                }else{
-                    console.log("必要な情報の取得に失敗しました", sheet)
-                }
-            }
+        switch(event.target){
+            case ScriptTarget.ADD_GROUP_NAME:
+                await addGroupName()
+                break
+            case ScriptTarget.ADD_EMPLOYEES_SUB:
+                await addEmployeesSub()
+                break
+            default:
+                throw new Error("不明なイベントが指定されました");
         }
-    }catch(err){
-        console.log("err", err)
-    }
+    }catch(e){
+        console.log("例外", e)
+    }finally{
 
+    }
 
 
 
@@ -67,14 +69,6 @@ export const handler = async (event: any) => {
     // console.log("listSectionItem", JSON.stringify(listSectionItem, null, 2));
     // // const mutationSection = executeMutation(updateSection,listSectionItem)
     // // console.log("mutationSection", JSON.stringify(mutationSection, null, 2));
-    const response = {
-        statusCode: 200,
-    //  Uncomment below to enable CORS requests
-    //  headers: {
-    //      "Access-Control-Allow-Origin": "*",
-    //      "Access-Control-Allow-Headers": "*"
-    //  }, 
-        body: JSON.stringify('Done!'),
-    };
+
     return response;
 };

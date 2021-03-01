@@ -48,6 +48,8 @@ type Employee #社員
     { allow: private, provider: iam, operations: [read] }
 
     {allow: private}
+
+    { allow: private, provider: iam, operations: [read, update] }
   ]
 )
 @model
@@ -64,6 +66,7 @@ type Employee #社員
   lastName: String!
   grade: String! #等級
   email: String!
+  sub: String #cognito 被験者
   superior: Employee @connection(fields: ["companyID", "superiorUsername"])  #上司(所属長や部門長)
   group: Group @connection(fields: ["companyID", "employeeGroupLocalId"])  #所属部門
   company: Company @connection (fields: ["companyID"])

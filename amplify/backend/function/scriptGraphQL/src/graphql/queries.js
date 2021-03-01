@@ -1,11 +1,12 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.listObjectives = exports.getObjective = exports.listSections = exports.getSection = exports.listSheetGroup = exports.listSheetYear = exports.listSheetReviewee = exports.listSheets = exports.getSheet = exports.getCategory = exports.listCategorys = exports.getGroup = exports.listGroups = exports.listEmployeesManager = exports.listEmployeeLocalId = exports.getEmployee = exports.listEmployees = exports.getCompany = exports.listCompanys = exports.listReportsCompanyDate = exports.listReports = exports.getReport = void 0;
+exports.listObjectives = exports.getObjective = exports.listSections = exports.getSection = exports.listSheetGroup = exports.listSheetYear = exports.listSheetReviewee = exports.listSheets = exports.getSheet = exports.getCategory = exports.listCategorys = exports.getGroup = exports.listGroups = exports.listEmployeesManager = exports.listEmployeeLocalId = exports.getEmployee = exports.listEmployees = exports.getCompany = exports.listCompanys = exports.listReportsCompanyDate = exports.listReportsReviewee = exports.listReports = exports.getReport = void 0;
 exports.getReport = `
-  query GetReport($reviewee: ID!, $date: AWSDate!) {
-    getReport(reviewee: $reviewee, date: $date) {
-      reviewee
+  query GetReport($sub: ID!, $date: AWSDate!) {
+    getReport(sub: $sub, date: $date) {
+      sub
       date
+      reviewee
       reviewer
       companyID
       referencer
@@ -30,7 +31,9 @@ exports.getReport = `
         lastName
         grade
         email
+        sub
         manager
+        isCompanyAdmin
         isDeleted
         createdAt
         updatedAt
@@ -53,7 +56,9 @@ exports.getReport = `
           lastName
           grade
           email
+          sub
           manager
+          isCompanyAdmin
           isDeleted
           createdAt
           updatedAt
@@ -76,7 +81,9 @@ exports.getReport = `
             lastName
             grade
             email
+            sub
             manager
+            isCompanyAdmin
             isDeleted
             createdAt
             updatedAt
@@ -99,7 +106,9 @@ exports.getReport = `
               lastName
               grade
               email
+              sub
               manager
+              isCompanyAdmin
               isDeleted
               createdAt
               updatedAt
@@ -122,7 +131,9 @@ exports.getReport = `
                 lastName
                 grade
                 email
+                sub
                 manager
+                isCompanyAdmin
                 isDeleted
                 createdAt
                 updatedAt
@@ -145,7 +156,9 @@ exports.getReport = `
                   lastName
                   grade
                   email
+                  sub
                   manager
+                  isCompanyAdmin
                   isDeleted
                   createdAt
                   updatedAt
@@ -195,7 +208,7 @@ exports.getReport = `
 `;
 exports.listReports = `
   query ListReports(
-    $reviewee: ID
+    $sub: ID
     $date: ModelStringKeyConditionInput
     $filter: ModelReportFilterInput
     $limit: Int
@@ -203,7 +216,7 @@ exports.listReports = `
     $sortDirection: ModelSortDirection
   ) {
     listReports(
-      reviewee: $reviewee
+      sub: $sub
       date: $date
       filter: $filter
       limit: $limit
@@ -211,8 +224,9 @@ exports.listReports = `
       sortDirection: $sortDirection
     ) {
       items {
-        reviewee
+        sub
         date
+        reviewee
         reviewer
         companyID
         referencer
@@ -237,7 +251,9 @@ exports.listReports = `
           lastName
           grade
           email
+          sub
           manager
+          isCompanyAdmin
           isDeleted
           createdAt
           updatedAt
@@ -260,7 +276,9 @@ exports.listReports = `
             lastName
             grade
             email
+            sub
             manager
+            isCompanyAdmin
             isDeleted
             createdAt
             updatedAt
@@ -283,7 +301,9 @@ exports.listReports = `
               lastName
               grade
               email
+              sub
               manager
+              isCompanyAdmin
               isDeleted
               createdAt
               updatedAt
@@ -306,7 +326,9 @@ exports.listReports = `
                 lastName
                 grade
                 email
+                sub
                 manager
+                isCompanyAdmin
                 isDeleted
                 createdAt
                 updatedAt
@@ -329,7 +351,198 @@ exports.listReports = `
                   lastName
                   grade
                   email
+                  sub
                   manager
+                  isCompanyAdmin
+                  isDeleted
+                  createdAt
+                  updatedAt
+                }
+                group {
+                  companyID
+                  localID
+                  name
+                  createdAt
+                  updatedAt
+                }
+              }
+              group {
+                companyID
+                localID
+                name
+                createdAt
+                updatedAt
+              }
+            }
+            group {
+              companyID
+              localID
+              name
+              createdAt
+              updatedAt
+            }
+          }
+          group {
+            companyID
+            localID
+            name
+            createdAt
+            updatedAt
+          }
+        }
+      }
+      nextToken
+    }
+  }
+`;
+exports.listReportsReviewee = `
+  query ListReportsReviewee(
+    $reviewee: ID
+    $date: ModelStringKeyConditionInput
+    $sortDirection: ModelSortDirection
+    $filter: ModelReportFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listReportsReviewee(
+      reviewee: $reviewee
+      date: $date
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        sub
+        date
+        reviewee
+        reviewer
+        companyID
+        referencer
+        revieweeComments {
+          work
+          other
+          status
+        }
+        reviewerComments {
+          superior
+        }
+        workStatus
+        createdAt
+        updatedAt
+        revieweeEmployee {
+          companyID
+          username
+          localID
+          employeeGroupLocalId
+          superiorUsername
+          firstName
+          lastName
+          grade
+          email
+          sub
+          manager
+          isCompanyAdmin
+          isDeleted
+          createdAt
+          updatedAt
+          company {
+            id
+            name
+            startMonth
+            shortName
+            url
+            createdAt
+            updatedAt
+          }
+          superior {
+            companyID
+            username
+            localID
+            employeeGroupLocalId
+            superiorUsername
+            firstName
+            lastName
+            grade
+            email
+            sub
+            manager
+            isCompanyAdmin
+            isDeleted
+            createdAt
+            updatedAt
+            company {
+              id
+              name
+              startMonth
+              shortName
+              url
+              createdAt
+              updatedAt
+            }
+            superior {
+              companyID
+              username
+              localID
+              employeeGroupLocalId
+              superiorUsername
+              firstName
+              lastName
+              grade
+              email
+              sub
+              manager
+              isCompanyAdmin
+              isDeleted
+              createdAt
+              updatedAt
+              company {
+                id
+                name
+                startMonth
+                shortName
+                url
+                createdAt
+                updatedAt
+              }
+              superior {
+                companyID
+                username
+                localID
+                employeeGroupLocalId
+                superiorUsername
+                firstName
+                lastName
+                grade
+                email
+                sub
+                manager
+                isCompanyAdmin
+                isDeleted
+                createdAt
+                updatedAt
+                company {
+                  id
+                  name
+                  startMonth
+                  shortName
+                  url
+                  createdAt
+                  updatedAt
+                }
+                superior {
+                  companyID
+                  username
+                  localID
+                  employeeGroupLocalId
+                  superiorUsername
+                  firstName
+                  lastName
+                  grade
+                  email
+                  sub
+                  manager
+                  isCompanyAdmin
                   isDeleted
                   createdAt
                   updatedAt
@@ -389,8 +602,9 @@ exports.listReportsCompanyDate = `
       nextToken: $nextToken
     ) {
       items {
-        reviewee
+        sub
         date
+        reviewee
         reviewer
         companyID
         referencer
@@ -415,7 +629,9 @@ exports.listReportsCompanyDate = `
           lastName
           grade
           email
+          sub
           manager
+          isCompanyAdmin
           isDeleted
           createdAt
           updatedAt
@@ -438,7 +654,9 @@ exports.listReportsCompanyDate = `
             lastName
             grade
             email
+            sub
             manager
+            isCompanyAdmin
             isDeleted
             createdAt
             updatedAt
@@ -461,7 +679,9 @@ exports.listReportsCompanyDate = `
               lastName
               grade
               email
+              sub
               manager
+              isCompanyAdmin
               isDeleted
               createdAt
               updatedAt
@@ -484,7 +704,9 @@ exports.listReportsCompanyDate = `
                 lastName
                 grade
                 email
+                sub
                 manager
+                isCompanyAdmin
                 isDeleted
                 createdAt
                 updatedAt
@@ -507,7 +729,9 @@ exports.listReportsCompanyDate = `
                   lastName
                   grade
                   email
+                  sub
                   manager
+                  isCompanyAdmin
                   isDeleted
                   createdAt
                   updatedAt
@@ -609,7 +833,9 @@ exports.listEmployees = `
         lastName
         grade
         email
+        sub
         manager
+        isCompanyAdmin
         isDeleted
         createdAt
         updatedAt
@@ -632,7 +858,9 @@ exports.listEmployees = `
           lastName
           grade
           email
+          sub
           manager
+          isCompanyAdmin
           isDeleted
           createdAt
           updatedAt
@@ -655,7 +883,9 @@ exports.listEmployees = `
             lastName
             grade
             email
+            sub
             manager
+            isCompanyAdmin
             isDeleted
             createdAt
             updatedAt
@@ -678,7 +908,9 @@ exports.listEmployees = `
               lastName
               grade
               email
+              sub
               manager
+              isCompanyAdmin
               isDeleted
               createdAt
               updatedAt
@@ -701,7 +933,9 @@ exports.listEmployees = `
                 lastName
                 grade
                 email
+                sub
                 manager
+                isCompanyAdmin
                 isDeleted
                 createdAt
                 updatedAt
@@ -724,7 +958,9 @@ exports.listEmployees = `
                   lastName
                   grade
                   email
+                  sub
                   manager
+                  isCompanyAdmin
                   isDeleted
                   createdAt
                   updatedAt
@@ -785,7 +1021,9 @@ exports.getEmployee = `
       lastName
       grade
       email
+      sub
       manager
+      isCompanyAdmin
       isDeleted
       createdAt
       updatedAt
@@ -808,7 +1046,9 @@ exports.getEmployee = `
         lastName
         grade
         email
+        sub
         manager
+        isCompanyAdmin
         isDeleted
         createdAt
         updatedAt
@@ -831,7 +1071,9 @@ exports.getEmployee = `
           lastName
           grade
           email
+          sub
           manager
+          isCompanyAdmin
           isDeleted
           createdAt
           updatedAt
@@ -854,7 +1096,9 @@ exports.getEmployee = `
             lastName
             grade
             email
+            sub
             manager
+            isCompanyAdmin
             isDeleted
             createdAt
             updatedAt
@@ -877,7 +1121,9 @@ exports.getEmployee = `
               lastName
               grade
               email
+              sub
               manager
+              isCompanyAdmin
               isDeleted
               createdAt
               updatedAt
@@ -900,7 +1146,9 @@ exports.getEmployee = `
                 lastName
                 grade
                 email
+                sub
                 manager
+                isCompanyAdmin
                 isDeleted
                 createdAt
                 updatedAt
@@ -923,7 +1171,9 @@ exports.getEmployee = `
                   lastName
                   grade
                   email
+                  sub
                   manager
+                  isCompanyAdmin
                   isDeleted
                   createdAt
                   updatedAt
@@ -1005,7 +1255,9 @@ exports.listEmployeeLocalId = `
         lastName
         grade
         email
+        sub
         manager
+        isCompanyAdmin
         isDeleted
         createdAt
         updatedAt
@@ -1028,7 +1280,9 @@ exports.listEmployeeLocalId = `
           lastName
           grade
           email
+          sub
           manager
+          isCompanyAdmin
           isDeleted
           createdAt
           updatedAt
@@ -1051,7 +1305,9 @@ exports.listEmployeeLocalId = `
             lastName
             grade
             email
+            sub
             manager
+            isCompanyAdmin
             isDeleted
             createdAt
             updatedAt
@@ -1074,7 +1330,9 @@ exports.listEmployeeLocalId = `
               lastName
               grade
               email
+              sub
               manager
+              isCompanyAdmin
               isDeleted
               createdAt
               updatedAt
@@ -1097,7 +1355,9 @@ exports.listEmployeeLocalId = `
                 lastName
                 grade
                 email
+                sub
                 manager
+                isCompanyAdmin
                 isDeleted
                 createdAt
                 updatedAt
@@ -1120,7 +1380,9 @@ exports.listEmployeeLocalId = `
                   lastName
                   grade
                   email
+                  sub
                   manager
+                  isCompanyAdmin
                   isDeleted
                   createdAt
                   updatedAt
@@ -1196,7 +1458,9 @@ exports.listEmployeesManager = `
         lastName
         grade
         email
+        sub
         manager
+        isCompanyAdmin
         isDeleted
         createdAt
         updatedAt
@@ -1219,7 +1483,9 @@ exports.listEmployeesManager = `
           lastName
           grade
           email
+          sub
           manager
+          isCompanyAdmin
           isDeleted
           createdAt
           updatedAt
@@ -1242,7 +1508,9 @@ exports.listEmployeesManager = `
             lastName
             grade
             email
+            sub
             manager
+            isCompanyAdmin
             isDeleted
             createdAt
             updatedAt
@@ -1265,7 +1533,9 @@ exports.listEmployeesManager = `
               lastName
               grade
               email
+              sub
               manager
+              isCompanyAdmin
               isDeleted
               createdAt
               updatedAt
@@ -1288,7 +1558,9 @@ exports.listEmployeesManager = `
                 lastName
                 grade
                 email
+                sub
                 manager
+                isCompanyAdmin
                 isDeleted
                 createdAt
                 updatedAt
@@ -1311,7 +1583,9 @@ exports.listEmployeesManager = `
                   lastName
                   grade
                   email
+                  sub
                   manager
+                  isCompanyAdmin
                   isDeleted
                   createdAt
                   updatedAt
@@ -1483,7 +1757,9 @@ exports.getSheet = `
         lastName
         grade
         email
+        sub
         manager
+        isCompanyAdmin
         isDeleted
         createdAt
         updatedAt
@@ -1506,7 +1782,9 @@ exports.getSheet = `
           lastName
           grade
           email
+          sub
           manager
+          isCompanyAdmin
           isDeleted
           createdAt
           updatedAt
@@ -1529,7 +1807,9 @@ exports.getSheet = `
             lastName
             grade
             email
+            sub
             manager
+            isCompanyAdmin
             isDeleted
             createdAt
             updatedAt
@@ -1552,7 +1832,9 @@ exports.getSheet = `
               lastName
               grade
               email
+              sub
               manager
+              isCompanyAdmin
               isDeleted
               createdAt
               updatedAt
@@ -1575,7 +1857,9 @@ exports.getSheet = `
                 lastName
                 grade
                 email
+                sub
                 manager
+                isCompanyAdmin
                 isDeleted
                 createdAt
                 updatedAt
@@ -1598,7 +1882,9 @@ exports.getSheet = `
                   lastName
                   grade
                   email
+                  sub
                   manager
+                  isCompanyAdmin
                   isDeleted
                   createdAt
                   updatedAt
@@ -1653,7 +1939,9 @@ exports.getSheet = `
         lastName
         grade
         email
+        sub
         manager
+        isCompanyAdmin
         isDeleted
         createdAt
         updatedAt
@@ -1676,7 +1964,9 @@ exports.getSheet = `
           lastName
           grade
           email
+          sub
           manager
+          isCompanyAdmin
           isDeleted
           createdAt
           updatedAt
@@ -1699,7 +1989,9 @@ exports.getSheet = `
             lastName
             grade
             email
+            sub
             manager
+            isCompanyAdmin
             isDeleted
             createdAt
             updatedAt
@@ -1722,7 +2014,9 @@ exports.getSheet = `
               lastName
               grade
               email
+              sub
               manager
+              isCompanyAdmin
               isDeleted
               createdAt
               updatedAt
@@ -1745,7 +2039,9 @@ exports.getSheet = `
                 lastName
                 grade
                 email
+                sub
                 manager
+                isCompanyAdmin
                 isDeleted
                 createdAt
                 updatedAt
@@ -1768,7 +2064,9 @@ exports.getSheet = `
                   lastName
                   grade
                   email
+                  sub
                   manager
+                  isCompanyAdmin
                   isDeleted
                   createdAt
                   updatedAt
@@ -1812,13 +2110,6 @@ exports.getSheet = `
           createdAt
           updatedAt
         }
-      }
-      group {
-        companyID
-        localID
-        name
-        createdAt
-        updatedAt
       }
       section {
         items {
@@ -1927,7 +2218,9 @@ exports.listSheets = `
           lastName
           grade
           email
+          sub
           manager
+          isCompanyAdmin
           isDeleted
           createdAt
           updatedAt
@@ -1950,7 +2243,9 @@ exports.listSheets = `
             lastName
             grade
             email
+            sub
             manager
+            isCompanyAdmin
             isDeleted
             createdAt
             updatedAt
@@ -1973,7 +2268,9 @@ exports.listSheets = `
               lastName
               grade
               email
+              sub
               manager
+              isCompanyAdmin
               isDeleted
               createdAt
               updatedAt
@@ -1996,7 +2293,9 @@ exports.listSheets = `
                 lastName
                 grade
                 email
+                sub
                 manager
+                isCompanyAdmin
                 isDeleted
                 createdAt
                 updatedAt
@@ -2019,7 +2318,9 @@ exports.listSheets = `
                   lastName
                   grade
                   email
+                  sub
                   manager
+                  isCompanyAdmin
                   isDeleted
                   createdAt
                   updatedAt
@@ -2066,7 +2367,9 @@ exports.listSheets = `
           lastName
           grade
           email
+          sub
           manager
+          isCompanyAdmin
           isDeleted
           createdAt
           updatedAt
@@ -2089,7 +2392,9 @@ exports.listSheets = `
             lastName
             grade
             email
+            sub
             manager
+            isCompanyAdmin
             isDeleted
             createdAt
             updatedAt
@@ -2112,7 +2417,9 @@ exports.listSheets = `
               lastName
               grade
               email
+              sub
               manager
+              isCompanyAdmin
               isDeleted
               createdAt
               updatedAt
@@ -2135,7 +2442,9 @@ exports.listSheets = `
                 lastName
                 grade
                 email
+                sub
                 manager
+                isCompanyAdmin
                 isDeleted
                 createdAt
                 updatedAt
@@ -2158,7 +2467,9 @@ exports.listSheets = `
                   lastName
                   grade
                   email
+                  sub
                   manager
+                  isCompanyAdmin
                   isDeleted
                   createdAt
                   updatedAt
@@ -2194,13 +2505,6 @@ exports.listSheets = `
             createdAt
             updatedAt
           }
-        }
-        group {
-          companyID
-          localID
-          name
-          createdAt
-          updatedAt
         }
         section {
           items {
@@ -2311,7 +2615,9 @@ exports.listSheetReviewee = `
           lastName
           grade
           email
+          sub
           manager
+          isCompanyAdmin
           isDeleted
           createdAt
           updatedAt
@@ -2334,7 +2640,9 @@ exports.listSheetReviewee = `
             lastName
             grade
             email
+            sub
             manager
+            isCompanyAdmin
             isDeleted
             createdAt
             updatedAt
@@ -2357,7 +2665,9 @@ exports.listSheetReviewee = `
               lastName
               grade
               email
+              sub
               manager
+              isCompanyAdmin
               isDeleted
               createdAt
               updatedAt
@@ -2380,7 +2690,9 @@ exports.listSheetReviewee = `
                 lastName
                 grade
                 email
+                sub
                 manager
+                isCompanyAdmin
                 isDeleted
                 createdAt
                 updatedAt
@@ -2403,7 +2715,9 @@ exports.listSheetReviewee = `
                   lastName
                   grade
                   email
+                  sub
                   manager
+                  isCompanyAdmin
                   isDeleted
                   createdAt
                   updatedAt
@@ -2450,7 +2764,9 @@ exports.listSheetReviewee = `
           lastName
           grade
           email
+          sub
           manager
+          isCompanyAdmin
           isDeleted
           createdAt
           updatedAt
@@ -2473,7 +2789,9 @@ exports.listSheetReviewee = `
             lastName
             grade
             email
+            sub
             manager
+            isCompanyAdmin
             isDeleted
             createdAt
             updatedAt
@@ -2496,7 +2814,9 @@ exports.listSheetReviewee = `
               lastName
               grade
               email
+              sub
               manager
+              isCompanyAdmin
               isDeleted
               createdAt
               updatedAt
@@ -2519,7 +2839,9 @@ exports.listSheetReviewee = `
                 lastName
                 grade
                 email
+                sub
                 manager
+                isCompanyAdmin
                 isDeleted
                 createdAt
                 updatedAt
@@ -2542,7 +2864,9 @@ exports.listSheetReviewee = `
                   lastName
                   grade
                   email
+                  sub
                   manager
+                  isCompanyAdmin
                   isDeleted
                   createdAt
                   updatedAt
@@ -2578,13 +2902,6 @@ exports.listSheetReviewee = `
             createdAt
             updatedAt
           }
-        }
-        group {
-          companyID
-          localID
-          name
-          createdAt
-          updatedAt
         }
         section {
           items {
@@ -2695,7 +3012,9 @@ exports.listSheetYear = `
           lastName
           grade
           email
+          sub
           manager
+          isCompanyAdmin
           isDeleted
           createdAt
           updatedAt
@@ -2718,7 +3037,9 @@ exports.listSheetYear = `
             lastName
             grade
             email
+            sub
             manager
+            isCompanyAdmin
             isDeleted
             createdAt
             updatedAt
@@ -2741,7 +3062,9 @@ exports.listSheetYear = `
               lastName
               grade
               email
+              sub
               manager
+              isCompanyAdmin
               isDeleted
               createdAt
               updatedAt
@@ -2764,7 +3087,9 @@ exports.listSheetYear = `
                 lastName
                 grade
                 email
+                sub
                 manager
+                isCompanyAdmin
                 isDeleted
                 createdAt
                 updatedAt
@@ -2787,7 +3112,9 @@ exports.listSheetYear = `
                   lastName
                   grade
                   email
+                  sub
                   manager
+                  isCompanyAdmin
                   isDeleted
                   createdAt
                   updatedAt
@@ -2834,7 +3161,9 @@ exports.listSheetYear = `
           lastName
           grade
           email
+          sub
           manager
+          isCompanyAdmin
           isDeleted
           createdAt
           updatedAt
@@ -2857,7 +3186,9 @@ exports.listSheetYear = `
             lastName
             grade
             email
+            sub
             manager
+            isCompanyAdmin
             isDeleted
             createdAt
             updatedAt
@@ -2880,7 +3211,9 @@ exports.listSheetYear = `
               lastName
               grade
               email
+              sub
               manager
+              isCompanyAdmin
               isDeleted
               createdAt
               updatedAt
@@ -2903,7 +3236,9 @@ exports.listSheetYear = `
                 lastName
                 grade
                 email
+                sub
                 manager
+                isCompanyAdmin
                 isDeleted
                 createdAt
                 updatedAt
@@ -2926,7 +3261,9 @@ exports.listSheetYear = `
                   lastName
                   grade
                   email
+                  sub
                   manager
+                  isCompanyAdmin
                   isDeleted
                   createdAt
                   updatedAt
@@ -2962,13 +3299,6 @@ exports.listSheetYear = `
             createdAt
             updatedAt
           }
-        }
-        group {
-          companyID
-          localID
-          name
-          createdAt
-          updatedAt
         }
         section {
           items {
@@ -3079,7 +3409,9 @@ exports.listSheetGroup = `
           lastName
           grade
           email
+          sub
           manager
+          isCompanyAdmin
           isDeleted
           createdAt
           updatedAt
@@ -3102,7 +3434,9 @@ exports.listSheetGroup = `
             lastName
             grade
             email
+            sub
             manager
+            isCompanyAdmin
             isDeleted
             createdAt
             updatedAt
@@ -3125,7 +3459,9 @@ exports.listSheetGroup = `
               lastName
               grade
               email
+              sub
               manager
+              isCompanyAdmin
               isDeleted
               createdAt
               updatedAt
@@ -3148,7 +3484,9 @@ exports.listSheetGroup = `
                 lastName
                 grade
                 email
+                sub
                 manager
+                isCompanyAdmin
                 isDeleted
                 createdAt
                 updatedAt
@@ -3171,7 +3509,9 @@ exports.listSheetGroup = `
                   lastName
                   grade
                   email
+                  sub
                   manager
+                  isCompanyAdmin
                   isDeleted
                   createdAt
                   updatedAt
@@ -3218,7 +3558,9 @@ exports.listSheetGroup = `
           lastName
           grade
           email
+          sub
           manager
+          isCompanyAdmin
           isDeleted
           createdAt
           updatedAt
@@ -3241,7 +3583,9 @@ exports.listSheetGroup = `
             lastName
             grade
             email
+            sub
             manager
+            isCompanyAdmin
             isDeleted
             createdAt
             updatedAt
@@ -3264,7 +3608,9 @@ exports.listSheetGroup = `
               lastName
               grade
               email
+              sub
               manager
+              isCompanyAdmin
               isDeleted
               createdAt
               updatedAt
@@ -3287,7 +3633,9 @@ exports.listSheetGroup = `
                 lastName
                 grade
                 email
+                sub
                 manager
+                isCompanyAdmin
                 isDeleted
                 createdAt
                 updatedAt
@@ -3310,7 +3658,9 @@ exports.listSheetGroup = `
                   lastName
                   grade
                   email
+                  sub
                   manager
+                  isCompanyAdmin
                   isDeleted
                   createdAt
                   updatedAt
@@ -3346,13 +3696,6 @@ exports.listSheetGroup = `
             createdAt
             updatedAt
           }
-        }
-        group {
-          companyID
-          localID
-          name
-          createdAt
-          updatedAt
         }
         section {
           items {

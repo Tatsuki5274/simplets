@@ -8,48 +8,41 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.handler = void 0;
-const client_1 = require("./client");
-const mutations_1 = require("./graphql/mutations");
-const queries_1 = require("./graphql/queries");
+const addEmployeesSub_1 = __importDefault(require("./scripts/addEmployeesSub"));
+const addGroupName_1 = __importDefault(require("./scripts/addGroupName"));
+var ScriptTarget;
+(function (ScriptTarget) {
+    ScriptTarget["ADD_GROUP_NAME"] = "ADD_GROUP_NAME";
+    ScriptTarget["ADD_EMPLOYEES_SUB"] = "ADD_EMPLOYEES_SUB";
+})(ScriptTarget || (ScriptTarget = {}));
 const handler = (event) => __awaiter(void 0, void 0, void 0, function* () {
-    var _a, _b;
     console.log("event:", event);
+    let response = {
+        statusCode: 200,
+        body: JSON.stringify('Empty'),
+    };
     try {
-        const listSheetItems = yield client_1.executeQuery(queries_1.listSheets, {});
-        if ((_a = listSheetItems === null || listSheetItems === void 0 ? void 0 : listSheetItems.data.listSheets) === null || _a === void 0 ? void 0 : _a.items) {
-            for (const sheet of listSheetItems.data.listSheets.items) {
-                if ((sheet === null || sheet === void 0 ? void 0 : sheet.companyID) && ((_b = sheet.group) === null || _b === void 0 ? void 0 : _b.name)) {
-                    const param = {
-                        input: {
-                            companyID: sheet.companyID,
-                            year: sheet.year,
-                            reviewee: sheet.reviewee,
-                            sheetGroupName: sheet.group.name
-                        }
-                    };
-                    try {
-                        const result = yield client_1.executeMutation(mutations_1.updateSheet, param);
-                        console.log("result", JSON.stringify(result, null, 2));
-                    }
-                    catch (err) {
-                        console.log("error", err);
-                    }
-                }
-                else {
-                    console.log("必要な情報の取得に失敗しました", sheet);
-                }
-            }
+        switch (event.target) {
+            case ScriptTarget.ADD_GROUP_NAME:
+                yield addGroupName_1.default();
+                break;
+            case ScriptTarget.ADD_EMPLOYEES_SUB:
+                yield addEmployeesSub_1.default();
+                break;
+            default:
+                throw new Error("不明なイベントが指定されました");
         }
     }
-    catch (err) {
-        console.log("err", err);
+    catch (e) {
+        console.log("例外", e);
     }
-    const response = {
-        statusCode: 200,
-        body: JSON.stringify('Done!'),
-    };
+    finally {
+    }
     return response;
 });
 exports.handler = handler;

@@ -32,6 +32,7 @@ export const getReport = /* GraphQL */ `
         lastName
         grade
         email
+        sub
         manager
         isCompanyAdmin
         isDeleted
@@ -56,6 +57,7 @@ export const getReport = /* GraphQL */ `
           lastName
           grade
           email
+          sub
           manager
           isCompanyAdmin
           isDeleted
@@ -80,6 +82,7 @@ export const getReport = /* GraphQL */ `
             lastName
             grade
             email
+            sub
             manager
             isCompanyAdmin
             isDeleted
@@ -104,6 +107,7 @@ export const getReport = /* GraphQL */ `
               lastName
               grade
               email
+              sub
               manager
               isCompanyAdmin
               isDeleted
@@ -128,6 +132,7 @@ export const getReport = /* GraphQL */ `
                 lastName
                 grade
                 email
+                sub
                 manager
                 isCompanyAdmin
                 isDeleted
@@ -152,6 +157,7 @@ export const getReport = /* GraphQL */ `
                   lastName
                   grade
                   email
+                  sub
                   manager
                   isCompanyAdmin
                   isDeleted
@@ -246,6 +252,7 @@ export const listReports = /* GraphQL */ `
           lastName
           grade
           email
+          sub
           manager
           isCompanyAdmin
           isDeleted
@@ -270,6 +277,7 @@ export const listReports = /* GraphQL */ `
             lastName
             grade
             email
+            sub
             manager
             isCompanyAdmin
             isDeleted
@@ -294,6 +302,7 @@ export const listReports = /* GraphQL */ `
               lastName
               grade
               email
+              sub
               manager
               isCompanyAdmin
               isDeleted
@@ -318,6 +327,7 @@ export const listReports = /* GraphQL */ `
                 lastName
                 grade
                 email
+                sub
                 manager
                 isCompanyAdmin
                 isDeleted
@@ -342,6 +352,7 @@ export const listReports = /* GraphQL */ `
                   lastName
                   grade
                   email
+                  sub
                   manager
                   isCompanyAdmin
                   isDeleted
@@ -430,6 +441,7 @@ export const listReportsReviewee = /* GraphQL */ `
           lastName
           grade
           email
+          sub
           manager
           isCompanyAdmin
           isDeleted
@@ -454,6 +466,7 @@ export const listReportsReviewee = /* GraphQL */ `
             lastName
             grade
             email
+            sub
             manager
             isCompanyAdmin
             isDeleted
@@ -478,6 +491,7 @@ export const listReportsReviewee = /* GraphQL */ `
               lastName
               grade
               email
+              sub
               manager
               isCompanyAdmin
               isDeleted
@@ -502,6 +516,7 @@ export const listReportsReviewee = /* GraphQL */ `
                 lastName
                 grade
                 email
+                sub
                 manager
                 isCompanyAdmin
                 isDeleted
@@ -526,6 +541,7 @@ export const listReportsReviewee = /* GraphQL */ `
                   lastName
                   grade
                   email
+                  sub
                   manager
                   isCompanyAdmin
                   isDeleted
@@ -614,6 +630,7 @@ export const listReportsCompanyDate = /* GraphQL */ `
           lastName
           grade
           email
+          sub
           manager
           isCompanyAdmin
           isDeleted
@@ -638,6 +655,7 @@ export const listReportsCompanyDate = /* GraphQL */ `
             lastName
             grade
             email
+            sub
             manager
             isCompanyAdmin
             isDeleted
@@ -662,6 +680,7 @@ export const listReportsCompanyDate = /* GraphQL */ `
               lastName
               grade
               email
+              sub
               manager
               isCompanyAdmin
               isDeleted
@@ -686,6 +705,7 @@ export const listReportsCompanyDate = /* GraphQL */ `
                 lastName
                 grade
                 email
+                sub
                 manager
                 isCompanyAdmin
                 isDeleted
@@ -710,6 +730,7 @@ export const listReportsCompanyDate = /* GraphQL */ `
                   lastName
                   grade
                   email
+                  sub
                   manager
                   isCompanyAdmin
                   isDeleted
@@ -813,6 +834,7 @@ export const listEmployees = /* GraphQL */ `
         lastName
         grade
         email
+        sub
         manager
         isCompanyAdmin
         isDeleted
@@ -837,6 +859,7 @@ export const listEmployees = /* GraphQL */ `
           lastName
           grade
           email
+          sub
           manager
           isCompanyAdmin
           isDeleted
@@ -861,6 +884,7 @@ export const listEmployees = /* GraphQL */ `
             lastName
             grade
             email
+            sub
             manager
             isCompanyAdmin
             isDeleted
@@ -885,6 +909,7 @@ export const listEmployees = /* GraphQL */ `
               lastName
               grade
               email
+              sub
               manager
               isCompanyAdmin
               isDeleted
@@ -909,6 +934,7 @@ export const listEmployees = /* GraphQL */ `
                 lastName
                 grade
                 email
+                sub
                 manager
                 isCompanyAdmin
                 isDeleted
@@ -933,6 +959,7 @@ export const listEmployees = /* GraphQL */ `
                   lastName
                   grade
                   email
+                  sub
                   manager
                   isCompanyAdmin
                   isDeleted
@@ -995,6 +1022,7 @@ export const getEmployee = /* GraphQL */ `
       lastName
       grade
       email
+      sub
       manager
       isCompanyAdmin
       isDeleted
@@ -1019,6 +1047,7 @@ export const getEmployee = /* GraphQL */ `
         lastName
         grade
         email
+        sub
         manager
         isCompanyAdmin
         isDeleted
@@ -1043,6 +1072,7 @@ export const getEmployee = /* GraphQL */ `
           lastName
           grade
           email
+          sub
           manager
           isCompanyAdmin
           isDeleted
@@ -1067,6 +1097,7 @@ export const getEmployee = /* GraphQL */ `
             lastName
             grade
             email
+            sub
             manager
             isCompanyAdmin
             isDeleted
@@ -1091,6 +1122,7 @@ export const getEmployee = /* GraphQL */ `
               lastName
               grade
               email
+              sub
               manager
               isCompanyAdmin
               isDeleted
@@ -1115,6 +1147,7 @@ export const getEmployee = /* GraphQL */ `
                 lastName
                 grade
                 email
+                sub
                 manager
                 isCompanyAdmin
                 isDeleted
@@ -1139,6 +1172,7 @@ export const getEmployee = /* GraphQL */ `
                   lastName
                   grade
                   email
+                  sub
                   manager
                   isCompanyAdmin
                   isDeleted
@@ -1222,6 +1256,7 @@ export const listEmployeeLocalId = /* GraphQL */ `
         lastName
         grade
         email
+        sub
         manager
         isCompanyAdmin
         isDeleted
@@ -1246,6 +1281,7 @@ export const listEmployeeLocalId = /* GraphQL */ `
           lastName
           grade
           email
+          sub
           manager
           isCompanyAdmin
           isDeleted
@@ -1270,6 +1306,7 @@ export const listEmployeeLocalId = /* GraphQL */ `
             lastName
             grade
             email
+            sub
             manager
             isCompanyAdmin
             isDeleted
@@ -1294,6 +1331,7 @@ export const listEmployeeLocalId = /* GraphQL */ `
               lastName
               grade
               email
+              sub
               manager
               isCompanyAdmin
               isDeleted
@@ -1318,6 +1356,7 @@ export const listEmployeeLocalId = /* GraphQL */ `
                 lastName
                 grade
                 email
+                sub
                 manager
                 isCompanyAdmin
                 isDeleted
@@ -1342,6 +1381,7 @@ export const listEmployeeLocalId = /* GraphQL */ `
                   lastName
                   grade
                   email
+                  sub
                   manager
                   isCompanyAdmin
                   isDeleted
@@ -1419,6 +1459,7 @@ export const listEmployeesManager = /* GraphQL */ `
         lastName
         grade
         email
+        sub
         manager
         isCompanyAdmin
         isDeleted
@@ -1443,6 +1484,7 @@ export const listEmployeesManager = /* GraphQL */ `
           lastName
           grade
           email
+          sub
           manager
           isCompanyAdmin
           isDeleted
@@ -1467,6 +1509,7 @@ export const listEmployeesManager = /* GraphQL */ `
             lastName
             grade
             email
+            sub
             manager
             isCompanyAdmin
             isDeleted
@@ -1491,6 +1534,7 @@ export const listEmployeesManager = /* GraphQL */ `
               lastName
               grade
               email
+              sub
               manager
               isCompanyAdmin
               isDeleted
@@ -1515,6 +1559,7 @@ export const listEmployeesManager = /* GraphQL */ `
                 lastName
                 grade
                 email
+                sub
                 manager
                 isCompanyAdmin
                 isDeleted
@@ -1539,6 +1584,7 @@ export const listEmployeesManager = /* GraphQL */ `
                   lastName
                   grade
                   email
+                  sub
                   manager
                   isCompanyAdmin
                   isDeleted
@@ -1712,6 +1758,7 @@ export const getSheet = /* GraphQL */ `
         lastName
         grade
         email
+        sub
         manager
         isCompanyAdmin
         isDeleted
@@ -1736,6 +1783,7 @@ export const getSheet = /* GraphQL */ `
           lastName
           grade
           email
+          sub
           manager
           isCompanyAdmin
           isDeleted
@@ -1760,6 +1808,7 @@ export const getSheet = /* GraphQL */ `
             lastName
             grade
             email
+            sub
             manager
             isCompanyAdmin
             isDeleted
@@ -1784,6 +1833,7 @@ export const getSheet = /* GraphQL */ `
               lastName
               grade
               email
+              sub
               manager
               isCompanyAdmin
               isDeleted
@@ -1808,6 +1858,7 @@ export const getSheet = /* GraphQL */ `
                 lastName
                 grade
                 email
+                sub
                 manager
                 isCompanyAdmin
                 isDeleted
@@ -1832,6 +1883,7 @@ export const getSheet = /* GraphQL */ `
                   lastName
                   grade
                   email
+                  sub
                   manager
                   isCompanyAdmin
                   isDeleted
@@ -1888,6 +1940,7 @@ export const getSheet = /* GraphQL */ `
         lastName
         grade
         email
+        sub
         manager
         isCompanyAdmin
         isDeleted
@@ -1912,6 +1965,7 @@ export const getSheet = /* GraphQL */ `
           lastName
           grade
           email
+          sub
           manager
           isCompanyAdmin
           isDeleted
@@ -1936,6 +1990,7 @@ export const getSheet = /* GraphQL */ `
             lastName
             grade
             email
+            sub
             manager
             isCompanyAdmin
             isDeleted
@@ -1960,6 +2015,7 @@ export const getSheet = /* GraphQL */ `
               lastName
               grade
               email
+              sub
               manager
               isCompanyAdmin
               isDeleted
@@ -1984,6 +2040,7 @@ export const getSheet = /* GraphQL */ `
                 lastName
                 grade
                 email
+                sub
                 manager
                 isCompanyAdmin
                 isDeleted
@@ -2008,6 +2065,7 @@ export const getSheet = /* GraphQL */ `
                   lastName
                   grade
                   email
+                  sub
                   manager
                   isCompanyAdmin
                   isDeleted
@@ -2161,6 +2219,7 @@ export const listSheets = /* GraphQL */ `
           lastName
           grade
           email
+          sub
           manager
           isCompanyAdmin
           isDeleted
@@ -2185,6 +2244,7 @@ export const listSheets = /* GraphQL */ `
             lastName
             grade
             email
+            sub
             manager
             isCompanyAdmin
             isDeleted
@@ -2209,6 +2269,7 @@ export const listSheets = /* GraphQL */ `
               lastName
               grade
               email
+              sub
               manager
               isCompanyAdmin
               isDeleted
@@ -2233,6 +2294,7 @@ export const listSheets = /* GraphQL */ `
                 lastName
                 grade
                 email
+                sub
                 manager
                 isCompanyAdmin
                 isDeleted
@@ -2257,6 +2319,7 @@ export const listSheets = /* GraphQL */ `
                   lastName
                   grade
                   email
+                  sub
                   manager
                   isCompanyAdmin
                   isDeleted
@@ -2305,6 +2368,7 @@ export const listSheets = /* GraphQL */ `
           lastName
           grade
           email
+          sub
           manager
           isCompanyAdmin
           isDeleted
@@ -2329,6 +2393,7 @@ export const listSheets = /* GraphQL */ `
             lastName
             grade
             email
+            sub
             manager
             isCompanyAdmin
             isDeleted
@@ -2353,6 +2418,7 @@ export const listSheets = /* GraphQL */ `
               lastName
               grade
               email
+              sub
               manager
               isCompanyAdmin
               isDeleted
@@ -2377,6 +2443,7 @@ export const listSheets = /* GraphQL */ `
                 lastName
                 grade
                 email
+                sub
                 manager
                 isCompanyAdmin
                 isDeleted
@@ -2401,6 +2468,7 @@ export const listSheets = /* GraphQL */ `
                   lastName
                   grade
                   email
+                  sub
                   manager
                   isCompanyAdmin
                   isDeleted
@@ -2548,6 +2616,7 @@ export const listSheetReviewee = /* GraphQL */ `
           lastName
           grade
           email
+          sub
           manager
           isCompanyAdmin
           isDeleted
@@ -2572,6 +2641,7 @@ export const listSheetReviewee = /* GraphQL */ `
             lastName
             grade
             email
+            sub
             manager
             isCompanyAdmin
             isDeleted
@@ -2596,6 +2666,7 @@ export const listSheetReviewee = /* GraphQL */ `
               lastName
               grade
               email
+              sub
               manager
               isCompanyAdmin
               isDeleted
@@ -2620,6 +2691,7 @@ export const listSheetReviewee = /* GraphQL */ `
                 lastName
                 grade
                 email
+                sub
                 manager
                 isCompanyAdmin
                 isDeleted
@@ -2644,6 +2716,7 @@ export const listSheetReviewee = /* GraphQL */ `
                   lastName
                   grade
                   email
+                  sub
                   manager
                   isCompanyAdmin
                   isDeleted
@@ -2692,6 +2765,7 @@ export const listSheetReviewee = /* GraphQL */ `
           lastName
           grade
           email
+          sub
           manager
           isCompanyAdmin
           isDeleted
@@ -2716,6 +2790,7 @@ export const listSheetReviewee = /* GraphQL */ `
             lastName
             grade
             email
+            sub
             manager
             isCompanyAdmin
             isDeleted
@@ -2740,6 +2815,7 @@ export const listSheetReviewee = /* GraphQL */ `
               lastName
               grade
               email
+              sub
               manager
               isCompanyAdmin
               isDeleted
@@ -2764,6 +2840,7 @@ export const listSheetReviewee = /* GraphQL */ `
                 lastName
                 grade
                 email
+                sub
                 manager
                 isCompanyAdmin
                 isDeleted
@@ -2788,6 +2865,7 @@ export const listSheetReviewee = /* GraphQL */ `
                   lastName
                   grade
                   email
+                  sub
                   manager
                   isCompanyAdmin
                   isDeleted
@@ -2935,6 +3013,7 @@ export const listSheetYear = /* GraphQL */ `
           lastName
           grade
           email
+          sub
           manager
           isCompanyAdmin
           isDeleted
@@ -2959,6 +3038,7 @@ export const listSheetYear = /* GraphQL */ `
             lastName
             grade
             email
+            sub
             manager
             isCompanyAdmin
             isDeleted
@@ -2983,6 +3063,7 @@ export const listSheetYear = /* GraphQL */ `
               lastName
               grade
               email
+              sub
               manager
               isCompanyAdmin
               isDeleted
@@ -3007,6 +3088,7 @@ export const listSheetYear = /* GraphQL */ `
                 lastName
                 grade
                 email
+                sub
                 manager
                 isCompanyAdmin
                 isDeleted
@@ -3031,6 +3113,7 @@ export const listSheetYear = /* GraphQL */ `
                   lastName
                   grade
                   email
+                  sub
                   manager
                   isCompanyAdmin
                   isDeleted
@@ -3079,6 +3162,7 @@ export const listSheetYear = /* GraphQL */ `
           lastName
           grade
           email
+          sub
           manager
           isCompanyAdmin
           isDeleted
@@ -3103,6 +3187,7 @@ export const listSheetYear = /* GraphQL */ `
             lastName
             grade
             email
+            sub
             manager
             isCompanyAdmin
             isDeleted
@@ -3127,6 +3212,7 @@ export const listSheetYear = /* GraphQL */ `
               lastName
               grade
               email
+              sub
               manager
               isCompanyAdmin
               isDeleted
@@ -3151,6 +3237,7 @@ export const listSheetYear = /* GraphQL */ `
                 lastName
                 grade
                 email
+                sub
                 manager
                 isCompanyAdmin
                 isDeleted
@@ -3175,6 +3262,7 @@ export const listSheetYear = /* GraphQL */ `
                   lastName
                   grade
                   email
+                  sub
                   manager
                   isCompanyAdmin
                   isDeleted
@@ -3322,6 +3410,7 @@ export const listSheetGroup = /* GraphQL */ `
           lastName
           grade
           email
+          sub
           manager
           isCompanyAdmin
           isDeleted
@@ -3346,6 +3435,7 @@ export const listSheetGroup = /* GraphQL */ `
             lastName
             grade
             email
+            sub
             manager
             isCompanyAdmin
             isDeleted
@@ -3370,6 +3460,7 @@ export const listSheetGroup = /* GraphQL */ `
               lastName
               grade
               email
+              sub
               manager
               isCompanyAdmin
               isDeleted
@@ -3394,6 +3485,7 @@ export const listSheetGroup = /* GraphQL */ `
                 lastName
                 grade
                 email
+                sub
                 manager
                 isCompanyAdmin
                 isDeleted
@@ -3418,6 +3510,7 @@ export const listSheetGroup = /* GraphQL */ `
                   lastName
                   grade
                   email
+                  sub
                   manager
                   isCompanyAdmin
                   isDeleted
@@ -3466,6 +3559,7 @@ export const listSheetGroup = /* GraphQL */ `
           lastName
           grade
           email
+          sub
           manager
           isCompanyAdmin
           isDeleted
@@ -3490,6 +3584,7 @@ export const listSheetGroup = /* GraphQL */ `
             lastName
             grade
             email
+            sub
             manager
             isCompanyAdmin
             isDeleted
@@ -3514,6 +3609,7 @@ export const listSheetGroup = /* GraphQL */ `
               lastName
               grade
               email
+              sub
               manager
               isCompanyAdmin
               isDeleted
@@ -3538,6 +3634,7 @@ export const listSheetGroup = /* GraphQL */ `
                 lastName
                 grade
                 email
+                sub
                 manager
                 isCompanyAdmin
                 isDeleted
@@ -3562,6 +3659,7 @@ export const listSheetGroup = /* GraphQL */ `
                   lastName
                   grade
                   email
+                  sub
                   manager
                   isCompanyAdmin
                   isDeleted

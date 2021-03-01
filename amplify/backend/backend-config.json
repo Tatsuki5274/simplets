@@ -63,6 +63,13 @@
       "service": "Lambda",
       "dependsOn": [
         {
+          "category": "auth",
+          "resourceName": "sccsysteme53c89f0",
+          "attributes": [
+            "UserPoolId"
+          ]
+        },
+        {
           "category": "api",
           "resourceName": "sccgql",
           "attributes": [
