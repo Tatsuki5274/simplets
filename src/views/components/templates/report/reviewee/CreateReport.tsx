@@ -1,4 +1,5 @@
 import React from "react";
+import styled from "styled-components";
 import { LinkType } from "views/components/atoms/Types";
 import Title from "views/components/molecules/Title";
 import Header, { HeaderProps } from "views/components/organisms/common/Header";
@@ -30,10 +31,12 @@ export default function (props: Props) {
                 <RightBox>
                     <Content>
                         <>
-                            <Title>作業報告書入力</Title>
-                            <CreateReport
-                                data={props.data}
-                            />
+                            <Title>作業報告入力</Title>
+                            <CreateReportStyle>
+                                <CreateReport
+                                    data={props.data}
+                                />
+                            </CreateReportStyle>
                         </>
                     </Content>
                 </RightBox>
@@ -41,3 +44,7 @@ export default function (props: Props) {
         </>
     )
 }
+
+const CreateReportStyle = styled.div({
+    paddingTop: "10px",
+})

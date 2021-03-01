@@ -70,51 +70,58 @@ export default function (props: Props) {
             {formik => (
                 <form onSubmit={formik.handleSubmit}>
 
-                    <div>
-                        <Text>作業報告 {props.data.date}</Text>
-                    </div>
+                    <ReportStyle>
+                        <Text>{`作業報告 ${props.data.date.replace(/-/g, '/')}`}</Text>
+                    </ReportStyle>
 
                     <div>
                         <Text className="commentWork">【作業報告】</Text>
                     </div>
-                    <div>
+                    <ReportStyle>
                         <TextArea
                             name="commentWork"
                             onChange={formik.handleChange}
+                            rows={5}
+                            style={StyledTextarea}
                         />
-                    </div>
+                    </ReportStyle>
 
                     <div>
                         <Text className="workStatus">【作業状況】</Text>
                     </div>
-                    <div>
+                    <ReportStyle>
                         <RadioButtonSelect
                             name="workStatus"
                             radioButtons={props.data.workStatus}
                             onChange={formik.handleChange}
                         />
-                    </div>
+                    </ReportStyle>
 
                     <div>
                         <Text className="commentStatus">【作業状況】</Text>
                     </div>
-                    <div>
+                    <ReportStyle>
                         <TextArea
                             name="commentStatus"
                             onChange={formik.handleChange}
+                            rows={5}
+                            style={StyledTextarea}
                         />
-                    </div>
+                    </ReportStyle>
 
                     <div>
                         <Text className="commentOther">【その他】</Text>
                     </div>
-                    <div>
+                    <ReportStyle>
                         <TextArea
                             name="commentOther"
                             onChange={formik.handleChange}
+                            rows={5}
+                            style={StyledTextarea}
                         />
-                    </div>
-                        <CommandButton type="submit">保存</CommandButton>
+                    </ReportStyle>
+
+                    <CommandButton type="submit">保存</CommandButton>
                     {props.data.superior && props.data.superior.email ?
                         <SpaceStyle>
                             <CommandButton
@@ -165,4 +172,12 @@ ${routeBuilder.reviewerReportCommentPath(props.data.date, props.data.reviewee, h
 const SpaceStyle = styled.div({
     display: "inline-block",
     margin: "0 10px",
+})
+
+const StyledTextarea: React.CSSProperties = {
+    width: "50%",
+}
+
+const ReportStyle = styled.div({
+    marginBottom: "20px",
 })
