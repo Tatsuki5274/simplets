@@ -11,8 +11,7 @@ import { Section, Sheet } from "API";
 type Props = {
     match: {
         params: {
-            companyId: string
-            reviewee: string
+            sub: string
             year: string
         }
     }
@@ -39,7 +38,10 @@ export function PDFPage(props:Props) {
     const [lastOverAllEvaluations, setlastOverAllEvaluations] = useState<Array<number | null> | null>();
     useEffect(() => {
         (async () => {
-            const res = await SheetDao.get(getSheet, { companyID: props.match.params.companyId, reviewee: props.match.params.reviewee, year: parseInt(props.match.params.year) })
+            const res = await SheetDao.get(getSheet, {
+                sub: props.match.params.sub,
+                year: parseInt(props.match.params.year)
+            })
 
             res?.section?.items?.forEach((section) => {
                 section?.objective?.items?.sort(sortObjective)
@@ -47,7 +49,7 @@ export function PDFPage(props:Props) {
             res?.section?.items?.sort(sortCategory)
             setSheet(res)
         })()
-    }, [props.match.params.companyId, props.match.params.year, props.match.params.reviewee])
+    }, [props.match.params.sub, props.match.params.year])
 
     useEffect(() => {
         (async () => {

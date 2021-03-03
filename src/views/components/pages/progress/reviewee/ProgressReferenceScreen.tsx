@@ -1,5 +1,5 @@
 import { EmployeeContext, HeaderContext, SidebarContext, UserContext } from "App";
-import { listGroups, listSheets } from "graphql/queries";
+import { listGroups, listSheetReviewee, listSheets } from "graphql/queries";
 import { GroupDao } from "lib/dao/groupDao";
 import { SheetDao } from "lib/dao/sheetDao";
 import { calcAvg, createGaugeId, getSectionKeys, getSheetKeys, getThisYear } from "lib/util";
@@ -64,7 +64,7 @@ export default function () {
     useEffect(() => {
         (async () => {
             if (currentUser && years) {
-                const sheets = await SheetDao.list(listSheets, { companyID: currentUser.attributes["custom:companyId"], })
+                const sheets = await SheetDao.listReviewee(listSheetReviewee, { companyID: currentUser.attributes["custom:companyId"], })
                 if (sheets) {
                     const result = sheets.map(sheet => {
                         const data: ProgressReferenceType = {
@@ -76,7 +76,7 @@ export default function () {
                             avg: 1,
                             gaugeId: sheet.sheetGroupLocalId ? createGaugeId(`chart-${sheet.sheetGroupLocalId}-${getSheetKeys(sheet)}`) : null,
                             statusValue: sheet.statusValue || 0,
-                            dest: routeBuilder.reviewerDetailPath(sheet.companyID || "", sheet.reviewee || "", sheet.year?.toString() || ""),   // unsafe
+                            dest: routeBuilder.reviewerDetailPath(sheet.sub || "", sheet.year?.toString() || ""),   // unsafe
                             objective: sheet.section?.items?.map(sec => {
                                 if (sec && sec.sectionCategoryLocalId) {
                                     

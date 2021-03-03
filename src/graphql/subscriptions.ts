@@ -1416,8 +1416,9 @@ export const onCreateSheet = /* GraphQL */ `
       reviewee: $reviewee
       referencer: $referencer
     ) {
-      companyID
+      sub
       year
+      companyID
       grade
       careerPlan
       careerPlanComment
@@ -1872,8 +1873,9 @@ export const onUpdateSheet = /* GraphQL */ `
       reviewee: $reviewee
       referencer: $referencer
     ) {
-      companyID
+      sub
       year
+      companyID
       grade
       careerPlan
       careerPlanComment
@@ -2328,8 +2330,9 @@ export const onDeleteSheet = /* GraphQL */ `
       reviewee: $reviewee
       referencer: $referencer
     ) {
-      companyID
+      sub
       year
+      companyID
       grade
       careerPlan
       careerPlanComment

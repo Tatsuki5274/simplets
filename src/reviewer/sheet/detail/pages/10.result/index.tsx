@@ -72,7 +72,7 @@ export const ReviewerSheetPagesStatus10 = (props: Props) => {
                             })}
                             onSubmit={async (values) => {
                                 if (sheet) {
-                                    if (sheet.companyID && sheet.reviewee && sheet.year) {
+                                    if (sheet.sub && sheet.year) {
                                         let isValid = true
                                         for (const key in values.lastEvaluation) {
                                             if (!values.lastEvaluation[key]) isValid = false
@@ -84,8 +84,7 @@ export const ReviewerSheetPagesStatus10 = (props: Props) => {
 
                                                 const work = commandWorkFlow(Command.SUP1_INPUT_SCORE, sheet)
                                                 const data: UpdateSheetInput = {
-                                                    companyID: sheet.companyID,
-                                                    reviewee: sheet.reviewee,
+                                                    sub: sheet.sub,
                                                     year: sheet.year,
                                                     secondComment: values.secondComment,
                                                     secondCheckDate: formatAWSDate(new Date()),
@@ -148,11 +147,10 @@ export const ReviewerSheetPagesStatus10 = (props: Props) => {
                                         {/* ステータスによってボタンの出し分け */}
                                         <Form.Group>
                                             <Button className={buttonComponentStyle} onClick={async () => {
-                                                if(sheet.companyID && sheet.reviewee && sheet.year){
+                                                if(sheet.sub && sheet.year){
                                                     console.log("formik", formik.values)
                                                     const data: UpdateSheetInput = {
-                                                        companyID: sheet.companyID,
-                                                        reviewee: sheet.reviewee,
+                                                        sub: sheet.sub,
                                                         year: sheet.year,
                                                         secondComment: formik.values.secondComment,
                                                         secondCheckDate: formatAWSDate(new Date()),

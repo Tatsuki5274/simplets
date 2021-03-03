@@ -13,14 +13,17 @@ import { updateSheet } from "./graphql/mutations";
 import { listSheets } from "./graphql/queries";
 import addEmployeesSub from "./scripts/addEmployeesSub";
 import addGroupName from "./scripts/addGroupName";
+import importOldSheets from "./scripts/importOldSheets";
 
 enum ScriptTarget {
     ADD_GROUP_NAME="ADD_GROUP_NAME",
     ADD_EMPLOYEES_SUB="ADD_EMPLOYEES_SUB",
+    IMPORT_OLD_SHEETS="IMPORT_OLD_SHEETS",
 }
 
 type Event = {
     target: ScriptTarget
+    isPreview?: boolean
 }
 
 //exports.handler = async (event) => {
@@ -39,6 +42,9 @@ export const handler = async (event: Event) => {
                 break
             case ScriptTarget.ADD_EMPLOYEES_SUB:
                 await addEmployeesSub()
+                break
+            case ScriptTarget.IMPORT_OLD_SHEETS:
+                await importOldSheets(event.isPreview)
                 break
             default:
                 throw new Error("不明なイベントが指定されました");

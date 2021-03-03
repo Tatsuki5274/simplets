@@ -62,13 +62,12 @@ export const ReviewerSheetPagesStatus2 = ()=>{
                                 InterviewMid3Date: sheet.InterviewMid3Date,
                             }}
                             onSubmit={ async (values) => {
-                                if(sheet && sheet.companyID && sheet.reviewee && sheet.year){
+                                if(sheet && sheet.sub && sheet.year){
                                     if(window.confirm("目標承認が社員に通知されます。よろしいでしょうか。")){
                                         const work = commandWorkFlow(Command.SUP1_APPLOVAL, sheet)
                                         const data: UpdateSheetInput = {
-                                            companyID: sheet.companyID || "",   // unsafe
-                                            reviewee: sheet.reviewee || "", // unsafe
-                                            year: sheet.year || 0,  // unsafe
+                                            sub: sheet.sub,
+                                            year: sheet.year,
                                             statusValue: work.sheet.statusValue,
                                             careerPlanComment: values.careerPlanComment,
                                             interviewPlanComment: values.interviewPlanComment,
@@ -130,10 +129,9 @@ export const ReviewerSheetPagesStatus2 = ()=>{
                                         {/* ステータスによってボタンの出し分け */}
                                         <Form.Group>
                                             <Button className={buttonComponentStyle} onClick={async () => {
-                                                if(sheet.companyID && sheet.reviewee && sheet.year){
+                                                if(sheet.sub && sheet.year){
                                                     const data: UpdateSheetInput = {
-                                                        companyID: sheet.companyID,
-                                                        reviewee: sheet.reviewee,
+                                                        sub: sheet.sub,
                                                         year: sheet.year,
                                                         careerPlanComment: formik.values.careerPlanComment,
                                                         interviewPlanComment: formik.values.interviewPlanComment,

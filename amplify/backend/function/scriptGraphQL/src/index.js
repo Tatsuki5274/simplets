@@ -15,10 +15,12 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.handler = void 0;
 const addEmployeesSub_1 = __importDefault(require("./scripts/addEmployeesSub"));
 const addGroupName_1 = __importDefault(require("./scripts/addGroupName"));
+const importOldSheets_1 = __importDefault(require("./scripts/importOldSheets"));
 var ScriptTarget;
 (function (ScriptTarget) {
     ScriptTarget["ADD_GROUP_NAME"] = "ADD_GROUP_NAME";
     ScriptTarget["ADD_EMPLOYEES_SUB"] = "ADD_EMPLOYEES_SUB";
+    ScriptTarget["IMPORT_OLD_SHEETS"] = "IMPORT_OLD_SHEETS";
 })(ScriptTarget || (ScriptTarget = {}));
 const handler = (event) => __awaiter(void 0, void 0, void 0, function* () {
     console.log("event:", event);
@@ -33,6 +35,9 @@ const handler = (event) => __awaiter(void 0, void 0, void 0, function* () {
                 break;
             case ScriptTarget.ADD_EMPLOYEES_SUB:
                 yield addEmployeesSub_1.default();
+                break;
+            case ScriptTarget.IMPORT_OLD_SHEETS:
+                yield importOldSheets_1.default(event.isPreview);
                 break;
             default:
                 throw new Error("不明なイベントが指定されました");

@@ -20,6 +20,7 @@ import Content from 'views/components/templates/Content';
 import Container from 'views/components/templates/Container';
 import Title from 'views/components/molecules/Title';
 import Header from 'views/components/organisms/common/Header';
+import { routeBuilder } from 'router';
 
 const sortSheet = (a: Sheet, b: Sheet) => {
   if (a.year && b.year && a.year < b.year) {
@@ -75,6 +76,7 @@ const listSheetReviewee = /* GraphQL */ `
       nextToken: $nextToken
     ) {
       items {
+        sub
         companyID
         year
         grade
@@ -154,6 +156,7 @@ const createSheet = /* GraphQL */ `
     $condition: ModelSheetConditionInput
   ) {
     createSheet(input: $input, condition: $condition) {
+      sub
       companyID
       year
       grade
@@ -296,6 +299,7 @@ function ListPerformanceEvalution() {
           if (targetYear && revieweeEmployee.username && revieweeEmployee.superior?.username) {
             //シートを作成
             const createdSheet = await SheetDao.create(createSheet, {
+              sub: currentUser.attributes.sub,
               grade: revieweeEmployee.grade || "",
               year: targetYear,
               statusValue: 1,
@@ -417,12 +421,12 @@ function ListPerformanceEvalution() {
 
                   return (
                     <tr key={sheet.sheetGroupLocalId}>
-                      <td><Link to={`/reviewee/company/${sheet.companyID}/reviewee/${sheet.reviewee}/year/${sheet.year}`}>{editName}</Link></td>
+                      <td><Link to={routeBuilder.revieweeDetailPath(sheet.sub || "", sheet.year?.toString() || "")}>{editName}</Link></td>
                       <td>{sheet.year}</td>
                       <td>{sheet.secondEmployee ? sheet.secondEmployee.lastName : ""}{sheet.secondEmployee ? sheet.secondEmployee.firstName : ""}</td>
                       <td><DisplaySheetAverage sheet={sheet} /></td>
                       <td>{getStatusValue(sheet.statusValue || -1)}</td>
-                      <td><a href={`/preview/company/${sheet.companyID}/reviewee/${sheet.reviewee}/year/${sheet.year}`}>プレビュー</a></td>
+                      <td><a href={routeBuilder.previewPath(sheet.sub || "", sheet.year?.toString() || "")}>プレビュー</a></td>
                     </tr>
                   )
                 })}

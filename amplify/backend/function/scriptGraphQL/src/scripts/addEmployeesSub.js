@@ -12,6 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.getUsersFromUserPool = void 0;
 const aws_sdk_1 = __importDefault(require("aws-sdk"));
 const process_1 = require("process");
 const client_1 = require("../client");
@@ -47,6 +48,7 @@ function getUsersFromUserPool() {
         }
     });
 }
+exports.getUsersFromUserPool = getUsersFromUserPool;
 function default_1() {
     var _a, _b;
     return __awaiter(this, void 0, void 0, function* () {

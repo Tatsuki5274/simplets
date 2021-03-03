@@ -44,14 +44,12 @@ export const ReviewerSheetPagesStatus12Second = () => {
 
                             }}
                             onSubmit={async () => {
-                                if (sheet) {
+                                if (sheet && sheet.sub && sheet.year) {
                                     if(window.confirm("部門長に確認依頼を送信しますか？")){
-
                                         const work = commandWorkFlow(Command.SUP1_CONFIRM, sheet)
                                         const data: UpdateSheetInput = {
-                                            companyID: sheet.companyID || "",
-                                            reviewee: sheet.reviewee || "",
-                                            year: sheet.year || 0,
+                                            sub: sheet.sub,
+                                            year: sheet.year,
                                             statusValue: work.sheet.statusValue
                                         }
                                         let updatedSheet = await SheetDao.update(updateSheet, data);

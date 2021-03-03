@@ -158,11 +158,11 @@ function App() {
                 <BrowserRouter>
                   <Switch>
                     <Route exact path="/" component={ListPerformanceEvalution} />
-                    <Route exact path="/reviewee/company/:companyId/reviewee/:reviewee/year/:year" component={RevieweeSheetShow} />
+                    <Route exact path={routeBuilder.revieweeDetailPath(":sub", ":year")} component={RevieweeSheetShow} />
                     <Route exact path="/reviewee/list" component={ListPerformanceEvalution} />
                     <Route exact path="/reviewer/list" component={ProgressReferenceScreen} />
-                    <Route exact path="/reviewer/company/:companyId/reviewee/:reviewee/year/:year" component={EvaluationScreen} />
-                    <Route exact path="/preview/company/:companyId/reviewee/:reviewee/year/:year" component={PDFPage} />
+                    <Route exact path={routeBuilder.reviewerDetailPath(":sub", ":year")} component={EvaluationScreen} />
+                    <Route exact path={routeBuilder.previewPath(":sub", ":year")} component={PDFPage} />
                     <Route exact path={routeBuilder.reviewerEvaluationListPath()} component={EvaluationList} />
 
                     <Route exact path={routeBuilder.revieweeReportCalendarPath(":date")} component={RevieweeReportList} />

@@ -18,12 +18,11 @@ export const SubmitButtonStatus11 = () => {
         return (
             <Button
                 onClick={async () => {
-                    if (sheet.companyID && sheet.reviewee && sheet.year) {
+                    if (sheet.sub && sheet.year) {
                         if (window.confirm("評価確認を完了しますか？")) {
                             const work = commandWorkFlow(Command.REVIEWEE_CONFIRM_SCORE, sheet)
                             let updatedSheet = await SheetDao.update(updateSheet, {
-                                companyID: sheet.companyID,
-                                reviewee: sheet.reviewee,
+                                sub: sheet.sub,
                                 year: sheet.year,
                                 statusValue: sheet.statusValue,
                                 selfCheckDate: formatAWSDate(new Date()),

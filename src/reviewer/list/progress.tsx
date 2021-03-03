@@ -206,32 +206,32 @@ function ProgressReferenceList() {
         const today: Date = new Date();
         ; (async () => {
             if (currentUser) {
-                const listYearQV: APIt.ListSheetYearQueryVariables = {
-                    companyID: currentUser.attributes["custom:companyId"],
-                    year: {
-                        eq: thisYear
-                    }
-                };
+                // const listYearQV: APIt.ListSheetYearQueryVariables = {
+                //     companyID: currentUser.attributes["custom:companyId"],
+                //     year: {
+                //         eq: thisYear
+                //     }
+                // };
 
-                const listItems = await SheetDao.listYear(listSheetYear, listYearQV)
-                if (listItems) {
-                    // setSheets(listItems)
-                    listItems.sort(function (a, b) {
-                        // 部署コードの照準、社員番号の昇順にソート
-                        if (a.revieweeEmployee?.group && b.revieweeEmployee?.group) {
-                            if (a.revieweeEmployee.group.localID && b.revieweeEmployee.group.localID){
-                                if (a.revieweeEmployee.group.localID > b.revieweeEmployee.group.localID) return 1
-                                if (a.revieweeEmployee.group.localID < b.revieweeEmployee.group.localID) return -1
-                            }
-                            if(a.revieweeEmployee.localID && b.revieweeEmployee.localID){
-                                if (a.revieweeEmployee.localID > b.revieweeEmployee.localID) return 1
-                                if (a.revieweeEmployee.localID < b.revieweeEmployee.localID) return -1
-                            }
-                        }
-                        return 0
-                    })
-                    setView(listItems)
-                }
+                // const listItems = await SheetDao.listYear(listSheetYear, listYearQV)
+                // if (listItems) {
+                //     // setSheets(listItems)
+                //     listItems.sort(function (a, b) {
+                //         // 部署コードの照準、社員番号の昇順にソート
+                //         if (a.revieweeEmployee?.group && b.revieweeEmployee?.group) {
+                //             if (a.revieweeEmployee.group.localID && b.revieweeEmployee.group.localID){
+                //                 if (a.revieweeEmployee.group.localID > b.revieweeEmployee.group.localID) return 1
+                //                 if (a.revieweeEmployee.group.localID < b.revieweeEmployee.group.localID) return -1
+                //             }
+                //             if(a.revieweeEmployee.localID && b.revieweeEmployee.localID){
+                //                 if (a.revieweeEmployee.localID > b.revieweeEmployee.localID) return 1
+                //                 if (a.revieweeEmployee.localID < b.revieweeEmployee.localID) return -1
+                //             }
+                //         }
+                //         return 0
+                //     })
+                //     setView(listItems)
+                // }
             }
         })()
     }, [currentUser])
@@ -318,27 +318,27 @@ function ProgressReferenceList() {
                                     groupId: "all",
                                 }}
                                 onSubmit={async (values) => {
-                                    let filter: APIt.ListSheetYearQueryVariables = {
-                                        companyID: currentUser?.attributes["custom:companyId"],
-                                        year: {
-                                            eq: values.year
-                                        },
-                                    }
-                                    if (values.groupId !== "all") filter = {
-                                        companyID: currentUser?.attributes["custom:companyId"],
-                                        year: {
-                                            eq: values.year
-                                        },
-                                        filter: {
-                                            sheetGroupLocalId: { eq: values.groupId } //選択した部署情報
-                                        }
-                                    }
-                                    const listItems = await SheetDao.listYear(listSheetYear, filter)
-                                    console.log(listItems)
+                                    // let filter: APIt.ListSheetYearQueryVariables = {
+                                    //     companyID: currentUser?.attributes["custom:companyId"],
+                                    //     year: {
+                                    //         eq: values.year
+                                    //     },
+                                    // }
+                                    // if (values.groupId !== "all") filter = {
+                                    //     companyID: currentUser?.attributes["custom:companyId"],
+                                    //     year: {
+                                    //         eq: values.year
+                                    //     },
+                                    //     filter: {
+                                    //         sheetGroupLocalId: { eq: values.groupId } //選択した部署情報
+                                    //     }
+                                    // }
+                                    // const listItems = await SheetDao.listYear(listSheetYear, filter)
+                                    // console.log(listItems)
 
-                                    if (listItems) {
-                                        setView(listItems)
-                                    }
+                                    // if (listItems) {
+                                    //     setView(listItems)
+                                    // }
                                 }}
                             >
                                 {(formik) => (

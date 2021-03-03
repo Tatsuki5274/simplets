@@ -17,12 +17,11 @@ export const SubmitButtonStatus1 = () => {
         return (
             <Button
                 onClick={async () => {
-                    if (sheet.companyID && sheet.reviewee && sheet.year) {
+                    if (sheet.sub && sheet.year) {
                         if (window.confirm("目標を提出しますか？")) {
                             const work = commandWorkFlow(Command.REVIEWEE_SUBMIT, sheet)
                             let updatedSheet = await SheetDao.update(updateSheet, {
-                                companyID: sheet.companyID,
-                                reviewee: sheet.reviewee,
+                                sub: sheet.sub,
                                 year: sheet.year,
                                 statusValue: sheet.statusValue
                             });

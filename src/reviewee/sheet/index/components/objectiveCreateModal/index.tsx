@@ -37,7 +37,10 @@ export function ObjectiveCreateModal(props: Props){
 
     useEffect(() => {
         ; (async () => {
-            const sheet = await SheetDao.get(getSheet, { companyID: currentUser?.attributes["custom:companyId"] || "", reviewee: currentUser?.username || "", year: props.year })
+            const sheet = await SheetDao.get(getSheet, {
+                sub: currentUser?.attributes.sub,
+                year: props.year
+            })
             if (sheet && sheet.section && sheet.section.items) {
                 sheet.section.items.sort(function (a, b) {
                     if (a?.sectionCategoryLocalId && b?.sectionCategoryLocalId && a.sectionCategoryLocalId > b.sectionCategoryLocalId) {

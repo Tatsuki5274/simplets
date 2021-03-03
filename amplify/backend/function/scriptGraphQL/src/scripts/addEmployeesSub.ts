@@ -8,7 +8,7 @@ import { listEmployees } from "../graphql/queries";
 
 var cognitoidentityserviceprovider = new AWS.CognitoIdentityServiceProvider();
 
-async function getUsersFromUserPool() {
+export async function getUsersFromUserPool() {
     const userPoolId = env.AUTH_SCCSYSTEME53C89F0_USERPOOLID
     console.log("ユーザープール", userPoolId)
 

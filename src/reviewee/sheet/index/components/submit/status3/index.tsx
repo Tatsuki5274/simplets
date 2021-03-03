@@ -39,13 +39,12 @@ export const SubmitButtonStatus3 = () => {
             <div>
             <Button className={buttonComponentStyle}
                 onClick={async () => {
-                    if (sheet.companyID && sheet.reviewee && sheet.year) {
+                    if (sheet.sub && sheet.year) {
                         if (validSheet(sheet)) {
                             if (window.confirm("実績と自己評価を提出しますか？")) {
                                 const work = commandWorkFlow(Command.REVIEWEE_INPUT_RESULT, sheet)
                                 let updatedSheet = await SheetDao.update(updateSheet, {
-                                    companyID: sheet.companyID,
-                                    reviewee: sheet.reviewee,
+                                    sub: sheet.sub,
                                     year: sheet.year,
                                     statusValue: sheet.statusValue
                                 });
@@ -76,12 +75,11 @@ export const SubmitButtonStatus3 = () => {
             </Button>
                 <Button className={buttonComponentStyle}
                     onClick={async () => {
-                        if (sheet.companyID && sheet.reviewee && sheet.year) {
+                        if (sheet.sub && sheet.year) {
                             if (window.confirm("承認内容の引き戻しを行い、目標設定中のステータスに変更しますか？")) {
                                 const work = commandWorkFlow(Command.REVIWEE_PULLBACK_APPROVAL, sheet)
                                 let updatedSheet = await SheetDao.update(updateSheet, {
-                                    companyID: sheet.companyID,
-                                    reviewee: sheet.reviewee,
+                                    sub: sheet.sub,
                                     year: sheet.year,
                                     statusValue: work.sheet.statusValue
                                 });

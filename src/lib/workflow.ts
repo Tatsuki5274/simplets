@@ -1,5 +1,6 @@
 import { Employee, Sheet } from "API";
 import { SendEmail } from "App";
+import { routeBuilder } from "router";
 
 export enum Command {
     REVIEWEE_SUBMIT,
@@ -173,8 +174,8 @@ function getMailObject(key: number, sheet: Sheet, reason?: string): SendEmail | 
             const protocol = window.location.protocol;
             const hostName = window.location.host;
             const hostUrl = protocol + '//' + hostName;
-            const revieweeUrl = `${hostUrl}/reviewee/company/${sheet.companyID}/reviewee/${sheet.reviewee}/year/${sheet.year}`;
-            const reviewerUrl = `${hostUrl}/reviewer/company/${sheet.companyID}/reviewee/${sheet.reviewee}/year/${sheet.year}`;
+            const revieweeUrl = routeBuilder.revieweeDetailPath(sheet.sub || "", sheet.year?.toString() || "");
+            const reviewerUrl = routeBuilder.reviewerDetailPath(sheet.sub || "", sheet.year?.toString() || "");
 
 
             switch (key) {

@@ -4,11 +4,11 @@ import dateFormat from "dateformat"
 
 // パスを生成する関数
 export const routeBuilder = {
-    revieweeDetailPath: (companyId: string, reviewee: string, year: string, host?: string)=>{
-        return `${host || ""}/reviewee/company/${companyId}/reviewee/${reviewee}/year/${year}`
+    revieweeDetailPath: (sub: string, year: string, host?: string)=>{
+        return `${host || ""}/reviewee/${sub}/${year}`
     },
-    reviewerDetailPath: (companyId: string, reviewee: string, year: string, host?: string)=>{
-        return `${host || ""}/reviewer/company/${companyId}/reviewee/${reviewee}/year/${year}`
+    reviewerDetailPath: (sub: string, year: string, host?: string)=>{
+        return `${host || ""}/reviewer/${sub}/${year}`
     },
     revieweeListPath: (host?: string) =>{
         return `${host || ""}/reviewee/list`
@@ -38,11 +38,11 @@ export const routeBuilder = {
         else dateStr = dateFormat(date, "yyyy-mm-dd")
         return `${host || ""}/reviewee/report/edit/${dateStr}`
     },
-    reviewerReportCommentPath: (date: Date | string, username: string, host?: string) => {
+    reviewerReportCommentPath: (date: Date | string, sub: string, host?: string) => {
         let dateStr: string = ""
         if(typeof date === "string") dateStr = date
         else dateStr = dateFormat(date, "yyyy-mm-dd")
-        return `${host || ""}/reviewer/report/edit/${dateStr}/${username}`
+        return `${host || ""}/reviewer/report/edit/${sub}/${dateStr}`
     },
     reviewerReportEmployeePath: (host?: string) => {
         return `${host || ""}/reviewer/report/employee`
@@ -53,7 +53,7 @@ export const routeBuilder = {
         else dateStr = dateFormat(date, "yyyy-mm")
         return `${host || ""}/reviewer/report/calendar/${dateStr}`
     },
-    previewPath: (companyId: string, reviewee: string, year: string, host?: string)=>{
-        return `${host || ""}/preview/company/${companyId}/reviewee/${reviewee}/year/${year}`
+    previewPath: (sub: string, year: string, host?: string)=>{
+        return `${host || ""}/preview/${sub}/${year}`
     },
 }

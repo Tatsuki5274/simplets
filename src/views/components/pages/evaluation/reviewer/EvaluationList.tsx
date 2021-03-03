@@ -8,7 +8,7 @@ import { getStatusValue } from "lib/getStatusValue";
 import { routeBuilder } from "router";
 import { getThisYear } from "lib/util";
 import { GroupDao } from "lib/dao/groupDao";
-import { listGroups } from "graphql/queries";
+import { listGroups, listSheetReviewee } from "graphql/queries";
 import { SelectLabel } from "views/components/atoms/Types";
 
 const listSheets = /* GraphQL */ `
@@ -75,16 +75,15 @@ export default function () {
     useEffect(()=>{
         if(currentUser){
             (async ()=>{
-                const companyID = currentUser.attributes["custom:companyId"]
-                const listQV: APIt.ListSheetsQueryVariables = {
-                    companyID: companyID,
+                const listQV: APIt.ListSheetRevieweeQueryVariables = {
+                    companyID: currentUser.attributes["custom:companyId"],
                     filter: {
                       revieweeUsername: {
                         ne: currentUser.username
                       }
                     }
                   };
-                const sheets = await SheetDao.list(listSheets, listQV)
+                const sheets = await SheetDao.listReviewee(listSheetReviewee, listQV)
                 console.log("sheets", sheets)
                 if(sheets){
                     const obj: (TableEvaluationListType | null)[] = sheets.map(sheet => {
@@ -96,7 +95,7 @@ export default function () {
                         if(sheet.revieweeEmployee?.username){
                             preview = {
                                 label: "プレビュー",
-                                dest: routeBuilder.previewPath(sheet.companyID || "", sheet.revieweeEmployee?.username, sheet.year?.toString() || "") // unsafe
+                                dest: routeBuilder.previewPath(sheet.sub || "", sheet.year?.toString() || "") // unsafe
                             }
                         }
                         const lastYearsAgoOverAllEvaluation = sheets.find(comSheet => {

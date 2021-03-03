@@ -26,10 +26,9 @@ export const ReviewerSheetPagesStatus3 = (props: Props) => {
     const handleShow = () => setIsRemandModal(true);
 
     const onSubmit = async (values: Sheet) => {
-        if(props.sheet.companyID && props.sheet.reviewee && props.sheet.year){
+        if(props.sheet.sub && props.sheet.year){
             const data: UpdateSheetInput = {
-                companyID: props.sheet.companyID,
-                reviewee: props.sheet.reviewee,
+                sub: props.sheet.sub,
                 year: props.sheet.year,
                 careerPlanComment: values.careerPlanComment,
                 interviewPlanComment: values.interviewPlanComment,

@@ -44,11 +44,10 @@ export const RemandModal = (props: Props)=>{
                         let updatedSheet: Sheet | null = null;
 
                         //sheet更新処理
-                        if (work && work.sheet.companyID && work.sheet.reviewee && work.sheet.year) {
+                        if (work && sheet.sub && sheet.year) {
                             const updateI: APIt.UpdateSheetInput = {
-                                companyID: work.sheet.companyID,
-                                reviewee: work.sheet.reviewee,
-                                year: work.sheet.year,
+                                sub: sheet.sub,
+                                year: sheet.year,
                                 statusValue: work.sheet.statusValue
                             };
                             updatedSheet = await SheetDao.update(updateSheet, updateI);

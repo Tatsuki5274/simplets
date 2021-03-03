@@ -27,8 +27,7 @@ export const SheetContext = createContext<
 type Props = {
     match: {
         params: {
-            companyId: string
-            reviewee: string
+            sub: string
             year: string
         }
     }
@@ -50,8 +49,7 @@ function EvalutionScreen(props: Props) {
             //const sheetId = props.match.params.sheetId;
 
             const input: APIt.GetSheetQueryVariables = {
-                companyID: props.match.params.companyId,
-                reviewee: props.match.params.reviewee,
+                sub: props.match.params.sub,
                 year: parseInt(props.match.params.year),
             }
             // let response;
@@ -70,7 +68,7 @@ function EvalutionScreen(props: Props) {
                 console.error("シートの取得に失敗しました")
             }
         })()
-    }, [props.match.params.companyId, props.match.params.reviewee, props.match.params.year]);
+    }, [props.match.params.sub, props.match.params.year]);
 
     // lastEvalutation 更新
     // async function handleChangeObjective(event: any) {

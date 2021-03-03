@@ -119,10 +119,10 @@ type Category
 
 type Sheet
 @model
-@key(fields: ["companyID", "reviewee", "year"])
+@key(fields: ["sub", "year"])
 @key(fields: ["companyID", "reviewee"], name: "sheet_reviewee", queryField: "listSheetReviewee")
-@key(fields: ["companyID", "year"], name: "sheet_year", queryField: "listSheetYear")
-@key(fields: ["companyID", "sheetGroupLocalId"], name: "sheet_group", queryField: "listSheetGroup")
+# @key(fields: ["companyID", "year"], name: "sheet_year", queryField: "listSheetYear")
+# @key(fields: ["companyID", "sheetGroupLocalId"], name: "sheet_group", queryField: "listSheetGroup")
 @auth(
   rules: [
     {allow: groups, groups: ["Admin"]}
@@ -133,15 +133,15 @@ type Sheet
     {allow: owner, ownerField: "reviewee", operations: [create, update, read]}
     {allow: owner, ownerField: "referencer", operations: [read]}
 
-    { allow: private, provider: iam, operations: [read, update] }
+    { allow: private, provider: iam, operations: [create, read, update] }
     
   ]
 )
 {
-  companyID: ID!
+  sub: String!
   year: Int!  #実施年度
-  # sheetSectionKey: String!
 
+  companyID: ID!
   grade: String! #等級
   careerPlan: String  #キャリア計画本人希望
   careerPlanComment: String #話し合い結果コメント

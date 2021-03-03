@@ -26,8 +26,9 @@ export const RevieweeSheetCareerModal = (props: Props) => {
             }}
             onSubmit={async (values)=>{
                 if(sheet && setSheet){
-                    if(sheet.companyID && sheet.reviewee && sheet.year){
+                    if(sheet.sub && sheet.year){
                         const updateI: APIt.UpdateSheetInput = {
+                            sub: sheet.sub,
                             companyID: sheet.companyID,
                             reviewee: sheet.reviewee,
                             year: sheet.year,

@@ -1415,8 +1415,9 @@ exports.onCreateSheet = `
       reviewee: $reviewee
       referencer: $referencer
     ) {
-      companyID
+      sub
       year
+      companyID
       grade
       careerPlan
       careerPlanComment
@@ -1871,8 +1872,9 @@ exports.onUpdateSheet = `
       reviewee: $reviewee
       referencer: $referencer
     ) {
-      companyID
+      sub
       year
+      companyID
       grade
       careerPlan
       careerPlanComment
@@ -2327,8 +2329,9 @@ exports.onDeleteSheet = `
       reviewee: $reviewee
       referencer: $referencer
     ) {
-      companyID
+      sub
       year
+      companyID
       grade
       careerPlan
       careerPlanComment

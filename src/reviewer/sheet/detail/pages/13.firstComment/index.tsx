@@ -45,13 +45,12 @@ export const ReviewerSheetPagesStatus13 = () => {
                                 firstComment: Yup.string().typeError('コメントを入力してください').required('コメントを入力してください'),
                             })}
                             onSubmit={async (values) => {
-                                if (sheet) {
+                                if (sheet && sheet.sub && sheet.year) {
                                     if (window.confirm("最終承認を行いますか？")) {
                                         const work = commandWorkFlow(Command.SUP2_DONE, sheet)
                                         const data: UpdateSheetInput = {
-                                            companyID: sheet.companyID || "",
-                                            reviewee: sheet.reviewee || "",
-                                            year: sheet.year || 0,
+                                            sub: sheet.sub,
+                                            year: sheet.year,
                                             statusValue: work.sheet.statusValue,
                                             firstComment: values.firstComment,
                                             firstCheckDate: formatAWSDate(new Date()),
@@ -104,22 +103,24 @@ export const ReviewerSheetPagesStatus13 = () => {
                                         {/* ステータスによってボタンの出し分け */}
                                         <Form.Group>
                                             <Button className={buttonComponentStyle} onClick={async () => {
-                                                const formikData: UpdateSheetInput = {
-                                                    companyID: sheet.companyID || "",
-                                                    reviewee: sheet.reviewee || "",
-                                                    year: sheet.year || 0,
-                                                    firstComment: formik.values.firstComment,
-                                                    firstCheckDate: formatAWSDate(new Date()),
+                                                if(sheet.year && sheet.sub){
+                                                    const formikData: UpdateSheetInput = {
+                                                        sub: sheet.sub,
+                                                        year: sheet.year,
+                                                        firstComment: formik.values.firstComment,
+                                                        firstCheckDate: formatAWSDate(new Date()),
+                                                    }
+                                                    const updatedSheet = await SheetDao.update(updateSheet, formikData)
+    
+                                                    // const updatedSheet = runUpdateSheet(props.values);
+                                                    if (updatedSheet) {
+                                                        console.log("保存成功")
+                                                    } else {
+                                                        setError("保存失敗")
+                                                        console.error("保存失敗", updatedSheet)
+                                                    }
                                                 }
-                                                const updatedSheet = await SheetDao.update(updateSheet, formikData)
-
-                                                // const updatedSheet = runUpdateSheet(props.values);
-                                                if (updatedSheet) {
-                                                    console.log("保存成功")
-                                                } else {
-                                                    setError("保存失敗")
-                                                    console.error("保存失敗", updatedSheet)
-                                                }
+                                 
                                             }}>保存</Button>
 
                                             <Button type="submit" className={buttonComponentStyle}>最終承認</Button>

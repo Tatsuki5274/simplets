@@ -45,13 +45,12 @@ export const ReviewerSheetPagesStatus12Top = () => {
                             }}
                             onSubmit={async () => {
                                 if (sheet) {
-                                    if (sheet.companyID && sheet.reviewee && sheet.year) {
+                                    if (sheet.sub && sheet.year) {
                                         if (window.confirm("最終承認を行いますか？")) {
 
                                             const work = commandWorkFlow(Command.SUP1_DONE, sheet)
                                             const data: UpdateSheetInput = {
-                                                companyID: sheet.companyID,
-                                                reviewee: sheet.reviewee, 
+                                                sub: sheet.sub,
                                                 year: sheet.year,
                                                 statusValue: work.sheet.statusValue
                                             }
