@@ -104,6 +104,10 @@ export default function (props: Props) {
                 }}
                 ref={calendarRef}
                 locale={jaLocale}
+                dayMaxEventRows={true}
+                views={{dayGridMonth: {
+                    dayMaxEventRows: 5  //5件以上ある場合は「他x件」と表示する
+                }}}
             />
         </>
     )
