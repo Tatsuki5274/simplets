@@ -7,6 +7,7 @@ import { updateObjective } from "graphql/mutations";
 import { inputFieldStyle } from "common/globalStyle.module.scss";
 import * as Yup from 'yup';
 import { Objective } from "API";
+import ErrorText from "views/components/atoms/ErrorText";
 
 type Props = {
     objective: Objective,
@@ -140,7 +141,11 @@ export const RevieweeSheetObjectiveModalStatus3 = (props: Props)=>{
                                             <option value='2'>2</option>
                                             <option value='1'>1</option>
                                         </Form.Control>
-                                        <p><ErrorMessage name="selfEvaluation" /></p>
+                                        <p>
+                                            <ErrorText>
+                                                <ErrorMessage name="selfEvaluation" />
+                                            </ErrorText>
+                                        </p>
                                     </Col>
                                 </Row>
                                 <Row>
@@ -154,7 +159,11 @@ export const RevieweeSheetObjectiveModalStatus3 = (props: Props)=>{
                                             className={inputFieldStyle}
                                             rows={5}
                                         />
-                                        <p><ErrorMessage name="result" /></p>
+                                        <p>
+                                            <ErrorText>
+                                                <ErrorMessage name="result" />
+                                            </ErrorText>
+                                        </p>
                                     </Col>
                                 </Row>
                             </Modal.Body>

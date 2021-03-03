@@ -7,6 +7,7 @@ import { updateObjective } from "graphql/mutations";
 import { inputFieldStyle } from "common/globalStyle.module.scss";
 import * as Yup from 'yup';
 import { Objective } from "API";
+import ErrorText from "views/components/atoms/ErrorText";
 
 type Props = {
     objective: Objective,
@@ -75,7 +76,11 @@ export const RevieweeSheetObjectiveModalStatus1 = (props: Props)=>{
                                             className={inputFieldStyle}
                                             rows={5}
                                         />
-                                        <p><ErrorMessage name="content" /></p>
+                                        <p>
+                                            <ErrorText>
+                                                <ErrorMessage name="content" />
+                                            </ErrorText>
+                                        </p>
                                     </Col>
                                 </Row>
                                 <Row>
@@ -88,7 +93,11 @@ export const RevieweeSheetObjectiveModalStatus1 = (props: Props)=>{
                                             defaultValue={props.objective.expStartDate || undefined}
                                             className={inputFieldStyle}
                                         />
-                                        <p><ErrorMessage name="expStartDate" /></p>
+                                        <p>
+                                            <ErrorText>
+                                                <ErrorMessage name="expStartDate" />
+                                            </ErrorText>
+                                        </p>
                                     </Col>
                                 </Row>
                                 <Row>
@@ -101,7 +110,11 @@ export const RevieweeSheetObjectiveModalStatus1 = (props: Props)=>{
                                             defaultValue={props.objective.expDoneDate || undefined}
                                             className={inputFieldStyle}
                                         />
-                                        <p><ErrorMessage name="expDoneDate" /></p>
+                                        <p>
+                                            <ErrorText>
+                                                <ErrorMessage name="expDoneDate" />
+                                            </ErrorText>
+                                        </p>
                                     </Col>
                                 </Row>
                                 <Row>
@@ -118,7 +131,11 @@ export const RevieweeSheetObjectiveModalStatus1 = (props: Props)=>{
                                             <option value="B">B</option>
                                             <option value="C">C</option>
                                         </Form.Control>
-                                        <p><ErrorMessage name="priority" /></p>
+                                        <p>
+                                            <ErrorText>
+                                                <ErrorMessage name="priority" />
+                                            </ErrorText>
+                                        </p>
                                     </Col>
                                 </Row>
                                 <p>※使用しているブラウザがSafariの場合、開始予定日と完了予定日は yyyy-mm-dd 形式で入力してください</p>

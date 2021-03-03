@@ -3,6 +3,7 @@ import { inputFieldStyle } from "common/globalStyle.module.scss";
 import { ErrorMessage } from "formik";
 import React from "react"
 import { Badge, Form, Table } from "react-bootstrap"
+import ErrorText from "views/components/atoms/ErrorText";
 import style from '../../common/style.module.scss';
 
 
@@ -28,7 +29,9 @@ export const ReviewerSheetDetailYearlyEditableSecond = (props: Props) => {
                                 name="secondComment"
                                 defaultValue={props.sheet.secondComment || ""}>
                             </Form.Control>
-                            <ErrorMessage name="secondComment" />
+                            <ErrorText>
+                                <ErrorMessage name="secondComment" />
+                            </ErrorText>
                         </td>
                     </tr>
                     <tr>
@@ -49,7 +52,9 @@ export const ReviewerSheetDetailYearlyEditableSecond = (props: Props) => {
                                 <option>2</option>
                                 <option>1</option>
                             </Form.Control>
-                            <ErrorMessage name="overAllEvaluation" />
+                            <ErrorText>
+                                <ErrorMessage name="overAllEvaluation" />
+                            </ErrorText>
                         </td>
                     </tr>
                     <tr>

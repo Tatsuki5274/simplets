@@ -2,6 +2,7 @@ import { Sheet } from "API";
 import { ErrorMessage } from "formik";
 import React from "react"
 import { Badge, Form, Table } from "react-bootstrap"
+import ErrorText from "views/components/atoms/ErrorText";
 import style from '../../common/style.module.scss';
 
 
@@ -43,7 +44,9 @@ export const ReviewerSheetDetailYearlyEditableTop = (props: Props) => {
                                 name="firstComment"
                                 defaultValue={props.sheet.firstComment || ""}>
                             </Form.Control>
-                            <ErrorMessage name="firstComment" />
+                            <ErrorText>
+                                <ErrorMessage name="firstComment" />
+                            </ErrorText>
                         </td>
                     </tr>
                 </tbody>
