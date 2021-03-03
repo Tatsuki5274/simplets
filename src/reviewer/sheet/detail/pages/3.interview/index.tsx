@@ -8,6 +8,7 @@ import { SheetDao } from "lib/dao/sheetDao";
 import React, { useContext, useState } from "react"
 import { Container, Button, Form } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { routeBuilder } from "router";
 import { ReviewerSheetDetailCareerEditable } from "../../components/career/editable";
 import { ReviewerSheetDetailInterviewEditable } from "../../components/interview/editable";
 import { ReviewerSheetDetailObjectiveReadonly } from "../../components/objective/readonly";
@@ -64,7 +65,7 @@ export const ReviewerSheetPagesStatus3 = (props: Props) => {
             {/* 評価画面 */}
             <div>
                 <Container>
-                    <Link to={`/reviewer/list`} >
+                    <Link to={routeBuilder.reviewerListPath()} >
                         <Button >戻る</Button>
                     </Link>
                     <ApprovalStatusBox statusValue={props.sheet.statusValue || -1} />

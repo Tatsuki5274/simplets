@@ -38,6 +38,7 @@ import ScrollTable from 'views/components/molecules/ScrollTable';
 import Container from 'views/components/templates/Container';
 import Title from 'views/components/molecules/Title';
 import Header from 'views/components/organisms/common/Header';
+import { routeBuilder } from 'router';
 
 
 export const SheetContext = createContext<
@@ -134,7 +135,7 @@ function RevieweeSheetShow(props: Props) {
                 <RightBox>
                     <Content>
                         <>
-                            <Link to={`/reviewee/list`} >
+                            <Link to={routeBuilder.revieweeListPath()} >
                                 <Button >戻る</Button>
                             </Link>
                             <ApprovalStatusBox statusValue={sheet.statusValue || -1} />

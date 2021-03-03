@@ -17,6 +17,7 @@ import { ReviewerSheetDetailObjectiveReadonly } from "../../components/objective
 import { ReviewerSheetDetailYearlyEditableTop } from "../../components/yearly/editable/top";
 import * as Yup from 'yup';
 import { buttonComponentStyle } from "common/globalStyle.module.scss";
+import { routeBuilder } from "router";
 
 
 export const ReviewerSheetPagesStatus13 = () => {
@@ -32,7 +33,7 @@ export const ReviewerSheetPagesStatus13 = () => {
                 {/* 評価画面 */}
                 <div>
                     <Container>
-                        <Link to={`/reviewer/list`} >
+                        <Link to={routeBuilder.reviewerListPath()} >
                             <Button >戻る</Button>
                         </Link>
                         <ApprovalStatusBox statusValue={sheet && (sheet.statusValue || -1)} />

@@ -7,6 +7,7 @@ import { ReviewerSheetDetailInterviewReadonly } from "../../components/interview
 import { ReviewerSheetDetailYearlyReadonly } from "../../components/yearly/readonly";
 import { ReviewerSheetDetailObjectiveReadonly } from "../../components/objective/readonly";
 import { Section, Sheet } from "API";
+import { routeBuilder } from "router";
 
 type Props = {
     sheet: Sheet,
@@ -19,7 +20,7 @@ export const ReviewerSheetPagesReadonly = (props: Props)=>{
             {/* 評価画面 */}
             <div>
                 <Container>
-                    <Link to={`/reviewer/list`} >
+                    <Link to={routeBuilder.reviewerListPath()} >
                         <Button >戻る</Button>
                     </Link>
                     <ApprovalStatusBox statusValue={props.sheet.statusValue || -1}/>

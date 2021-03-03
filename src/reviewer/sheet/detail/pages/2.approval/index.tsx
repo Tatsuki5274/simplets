@@ -16,6 +16,7 @@ import { SheetContext } from "reviewer/sheet";
 import { ReviewerSheetDetailCareerEditable } from "../../components/career/editable";
 import { ReviewerSheetDetailInterviewEditable } from "../../components/interview/editable";
 import { buttonComponentStyle } from "common/globalStyle.module.scss";
+import { routeBuilder } from "router";
 
 // type Props = {
 //     sheet: Sheet,
@@ -44,7 +45,7 @@ export const ReviewerSheetPagesStatus2 = ()=>{
                 {/* 評価画面 */}
                 <div>
                     <Container>
-                        <Link to={`/reviewer/list`} >
+                        <Link to={routeBuilder.reviewerListPath()} >
                             <Button >戻る</Button>
                         </Link>
                         <ApprovalStatusBox statusValue={sheet && (sheet.statusValue || -1)}/>

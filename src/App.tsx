@@ -159,8 +159,8 @@ function App() {
                   <Switch>
                     <Route exact path="/" component={ListPerformanceEvalution} />
                     <Route exact path={routeBuilder.revieweeDetailPath(":sub", ":year")} component={RevieweeSheetShow} />
-                    <Route exact path="/reviewee/list" component={ListPerformanceEvalution} />
-                    <Route exact path="/reviewer/list" component={ProgressReferenceScreen} />
+                    <Route exact path={routeBuilder.revieweeListPath()} component={ListPerformanceEvalution} />
+                    <Route exact path={routeBuilder.reviewerListPath()} component={ProgressReferenceScreen} />
                     <Route exact path={routeBuilder.reviewerDetailPath(":sub", ":year")} component={EvaluationScreen} />
                     <Route exact path={routeBuilder.previewPath(":sub", ":year")} component={PDFPage} />
                     <Route exact path={routeBuilder.reviewerEvaluationListPath()} component={EvaluationList} />

@@ -5,19 +5,19 @@ import dateFormat from "dateformat"
 // パスを生成する関数
 export const routeBuilder = {
     revieweeDetailPath: (sub: string, year: string, host?: string)=>{
-        return `${host || ""}/reviewee/${sub}/${year}`
+        return `${host || ""}/reviewee/evaluation/${sub}/${year}`
     },
     reviewerDetailPath: (sub: string, year: string, host?: string)=>{
-        return `${host || ""}/reviewer/${sub}/${year}`
+        return `${host || ""}/reviewer/evaluation/${sub}/${year}`
     },
     revieweeListPath: (host?: string) =>{
-        return `${host || ""}/reviewee/list`
+        return `${host || ""}/reviewee/ref/evaluation/list`
     },
     reviewerListPath: (host?: string) =>{
-        return `${host || ""}/reviewer/list`
+        return `${host || ""}/reviewer/ref/evaluation/list/progress`
     },
     reviewerEvaluationListPath: (host?: string) =>{
-        return `${host || ""}/reviewer/evaluationlist`
+        return `${host || ""}/reviewer/ref/evaluation/list/rate`
     },
 
     revieweeReportCalendarPath: (date: Date | string, host?: string) => {

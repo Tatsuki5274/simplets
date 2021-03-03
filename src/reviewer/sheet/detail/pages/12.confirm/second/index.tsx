@@ -11,6 +11,7 @@ import React, { useContext } from "react"
 import { Container, Button, Form } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { SheetContext } from "reviewer/sheet";
+import { routeBuilder } from "router";
 import { ReviewerSheetDetailCareerReadonly } from "../../../components/career/readonly";
 import { ReviewerSheetDetailInterviewReadonly } from "../../../components/interview/readonly";
 import { ReviewerSheetDetailObjectiveReadonly } from "../../../components/objective/readonly";
@@ -34,7 +35,7 @@ export const ReviewerSheetPagesStatus12Second = () => {
                 {/* 評価画面 */}
                 <div>
                     <Container>
-                        <Link to={`/reviewer/list`} >
+                        <Link to={routeBuilder.reviewerListPath()} >
                             <Button >戻る</Button>
                         </Link>
                         <ApprovalStatusBox statusValue={sheet && (sheet.statusValue || -1)} />
