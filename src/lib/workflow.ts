@@ -174,8 +174,8 @@ function getMailObject(key: number, sheet: Sheet, reason?: string): SendEmail | 
             const protocol = window.location.protocol;
             const hostName = window.location.host;
             const hostUrl = protocol + '//' + hostName;
-            const revieweeUrl = routeBuilder.revieweeDetailPath(sheet.sub || "", sheet.year?.toString() || "");
-            const reviewerUrl = routeBuilder.reviewerDetailPath(sheet.sub || "", sheet.year?.toString() || "");
+            const revieweeUrl = routeBuilder.revieweeDetailPath(sheet.sub || "", sheet.year?.toString() || "", hostUrl);
+            const reviewerUrl = routeBuilder.reviewerDetailPath(sheet.sub || "", sheet.year?.toString() || "", hostUrl);
 
 
             switch (key) {
@@ -386,7 +386,7 @@ ${sup1.name}様:
 社員: ${reviewee.name} 承認依頼引き戻し
 ---------------------------------------------------------------------- 
 
-    ${reviewerUrl} 
+${reviewerUrl} 
 
 # 本メールは${sup1.email}宛にお送りしています。 
 # 本メールはシステムより自動送信されています。 
@@ -405,7 +405,7 @@ ${sup1.name}様:
 社員: ${reviewee.name} 提出済み目標引き戻し
 ---------------------------------------------------------------------- 
 
-    ${reviewerUrl}
+${reviewerUrl}
 
 # 本メールは${sup1.email}宛にお送りしています。 
 # 本メールはシステムより自動送信されています。 

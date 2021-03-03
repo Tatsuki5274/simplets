@@ -264,36 +264,36 @@ function ListPerformanceEvalution() {
           console.log("categorys", categorys)
 
           //全ての社内特権マネージャーの情報を取得
-          const superManagers = await EmployeeDao.listManager(listEmployeesManager, {
+          const superManagersI: APIt.ListEmployeesQueryVariables = {
             companyID: currentUser.attributes["custom:companyId"],
-            managerIsDeleted: {
-              eq: {
-                manager: 'SUPER_MANAGER' as EmployeeType,
-                isDeleted: 'FALSE' as BooleanType
+            filter: {
+              manager: {
+                eq: EmployeeType.SUPER_MANAGER,
               }
             }
-          })
-          const groupManagers = await EmployeeDao.listManager(listEmployeesManager, {
+          }
+
+          const groupManagersI: APIt.ListEmployeesQueryVariables = {
             companyID: currentUser.attributes["custom:companyId"],
-            managerIsDeleted: {
-              eq: {
-                manager: 'MANAGER' as EmployeeType,
-                isDeleted: 'FALSE' as BooleanType
-              }
-            }, filter: {
+            filter: {
               employeeGroupLocalId: {
                 eq: revieweeEmployee?.employeeGroupLocalId
+              },
+              manager: {
+                eq: EmployeeType.MANAGER,
               }
             }
-          })
-          console.log("superManagers", superManagers)
-          console.log("groupManagers", groupManagers)
+          }
+          const superManagers = await EmployeeDao.listManager(listEmployeesManager, superManagersI)
+          const groupManagers = await EmployeeDao.listManager(listEmployeesManager, groupManagersI)
+          // console.log("superManagers", superManagers)
+          // console.log("groupManagers", groupManagers)
           let listSuperManagers: Array<string> = [];
           let listGroupManagers: Array<string> = [];
           superManagers?.forEach(element => listSuperManagers.push(element.username || ""))
           groupManagers?.forEach(element => listGroupManagers.push(element.username || ""))
-          console.log("listSuperManagers", listSuperManagers)
-          console.log("listGroupManagers", listGroupManagers)
+          // console.log("listSuperManagers", listSuperManagers)
+          // console.log("listGroupManagers", listGroupManagers)
           const managers = listSuperManagers.concat(listGroupManagers)
 
           if (targetYear && revieweeEmployee.username && revieweeEmployee.superior?.username) {
