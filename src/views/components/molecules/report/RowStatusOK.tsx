@@ -1,5 +1,6 @@
 import React from "react";
 import CellStatusOK from "views/components/atoms/CellStatusOK";
+import StyledTableBodyCell from "views/components/atoms/StyledTableBodyCell";
 
 type Props = {
     // date: Date
@@ -14,10 +15,10 @@ export default function (props: Props) {
     return (
         <tr>
             <CellStatusOK>{props.date}</CellStatusOK>
-            <td>{props.commentStatus}</td>
-            <td>{props.commentWork}</td>
-            <td>{props.commentOther}</td>
-            <td>{props.commentSuperior}</td>
+            <StyledTableBodyCell>{props.commentStatus}</StyledTableBodyCell>
+            <StyledTableBodyCell>{props.commentWork}</StyledTableBodyCell>
+            <StyledTableBodyCell>{props.commentOther}</StyledTableBodyCell>
+            <StyledTableBodyCell>{props.commentSuperior}</StyledTableBodyCell>
         </tr>
     )
 }

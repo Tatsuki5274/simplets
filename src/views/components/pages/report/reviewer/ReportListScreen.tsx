@@ -54,8 +54,8 @@ export default function () {
                   firlstName: reviewee.firstName || "",
                   lastName: reviewee.lastName || "",
                   groupLocalId: reviewee.employeeGroupLocalId || "",
-                  groupName: reviewee.group?.name || ""
-                  // label: `${reviewee.group?.name} ${reviewee.lastName} ${reviewee.firstName}` ||  "",
+                  groupName: reviewee.group?.name || "",
+                  sub: reviewee.sub || "",
                 }
               })
               setReviewee(revieweesLabel)

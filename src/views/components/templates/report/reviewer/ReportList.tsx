@@ -1,7 +1,6 @@
 import { ReportWorkingStatus } from "API";
 import React from "react";
 import styled from "styled-components";
-import Text from "views/components/atoms/Text";
 import { LinkType, SelectLabel } from "views/components/atoms/Types";
 import Title from "views/components/molecules/Title";
 import Header, { HeaderProps } from "views/components/organisms/common/Header";

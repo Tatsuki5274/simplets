@@ -1,4 +1,4 @@
-import { ListReportsRevieweeQueryVariables, ReportWorkingStatus } from "API";
+import { ListReportsQueryVariables, ReportWorkingStatus } from "API";
 import { Formik } from "formik";
 import { listReports } from "graphql/queries";
 import { ReportDao } from "lib/dao/reportDao";
@@ -17,6 +17,7 @@ export type ReviewerReportFilterEmployeeType = {
     groupName: string
     groupLocalId: string
     username: string
+    sub: string
 }
 
 type Props = {
@@ -29,7 +30,7 @@ function generateRevieweeLabel(input: ReviewerReportFilterEmployeeType[]) {
     return input.map(datum => {
         return {
             label: `${datum.groupName} ${datum.lastName}${datum.firlstName}`,
-            value: datum.username
+            value: datum.sub
         }
     })
 }
@@ -54,21 +55,19 @@ export default function (props: Props) {
             initialValues={{
                 reportStartDate: "",
                 reportEndDate: "",
-                reviewee: "",
+                reviewee: props.reviewee[0].sub,
             }}
             onSubmit={async (values) => {
-                console.log("values", values)
-                const reportItem: ListReportsRevieweeQueryVariables = {
-                    reviewee: values.reviewee,
+                const reportItem: ListReportsQueryVariables = {
+                    sub: values.reviewee,
                     date: {
                         between: [values.reportStartDate, values.reportEndDate]
-                    }
+                    },
+
                 }
-                console.log("reportItem", reportItem)
                 let result: ReviewerReportListEmployeeType[] | null = null
-                const reports = await ReportDao.listReviewee(listReports, reportItem)
+                const reports = await ReportDao.list(listReports, reportItem)
                 if (reports) {
-                    console.log("reports", reports)
                     result = reports.map(report => {
                         return {
                             commentOther: report.revieweeComments?.other || "",
@@ -79,6 +78,8 @@ export default function (props: Props) {
                             date: report.date || ""
                         }
                     })
+                } else {
+                    window.alert("条件に一致する報告書はありません。")
                 }
                 props.setTable(result)
             }}
