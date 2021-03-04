@@ -4,6 +4,7 @@ import RowHeader from "views/components/molecules/report/RowHeader";
 import RowStatusInTask from "views/components/molecules/report/RowStatusInTask";
 import RowStatusOK from "views/components/molecules/report/RowStatusOK";
 import RowStatusProblem from "views/components/molecules/report/RowStatusProblem";
+import ScrollTable from "views/components/molecules/ScrollTable";
 
 export type ReviewerReportListEmployeeType = {
     date: string
@@ -20,7 +21,7 @@ type Props = {
 
 export default function (props: Props) {
     return (
-        <table>
+        <ScrollTable>
             <thead>
                 <RowHeader />
             </thead>
@@ -33,6 +34,6 @@ export default function (props: Props) {
                     )
                 }) : null}
             </tbody>
-        </table>
+        </ScrollTable>
     )
 }

@@ -95,12 +95,14 @@ export default function (props: Props) {
                             type="date"
                             name="reportStartDate"
                             onChange={formik.handleChange}
+                            placeholder="yyyy-mm-dd"
                         />
                         <Text>〜</Text>
                         <TextField
                             type="date"
                             name="reportEndDate"
                             onChange={formik.handleChange}
+                            placeholder="yyyy-mm-dd"
                         />
                     </ReportFilterStyle>
 
@@ -120,6 +122,9 @@ export default function (props: Props) {
                             options={reviewees}
                         ></PullDown>
                     </ReportFilterStyle>
+
+                    <p>※使用しているブラウザがSafariの場合、作業報告表示期間は yyyy-mm-dd 形式で入力してください</p>
+                    <p>例：2020年1月1日　→　2020-01-01</p>
 
                     <CommandButton type="submit">確認</CommandButton>
                 </form>

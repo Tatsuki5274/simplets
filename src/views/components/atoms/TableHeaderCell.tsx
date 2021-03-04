@@ -11,6 +11,6 @@ export default function(props: Props){
     </Styled>
 }
 
-const Styled = styled.th({
+const Styled = styled.td({
     backgroundColor: "#8080804d"
 })
