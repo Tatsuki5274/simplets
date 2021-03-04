@@ -37,6 +37,19 @@ export default function(props: Props){
 
                 let eventItems: EventInput[]
                 if (reports) {
+                    reports.sort((a, b) => {
+                        if (a.revieweeEmployee?.employeeGroupLocalId &&
+                            b.revieweeEmployee?.employeeGroupLocalId &&
+                            a.revieweeEmployee?.localID &&
+                            b.revieweeEmployee?.localID){
+
+                            if (a.revieweeEmployee.employeeGroupLocalId > b.revieweeEmployee.employeeGroupLocalId) return 1
+                            if (a.revieweeEmployee.employeeGroupLocalId < b.revieweeEmployee.employeeGroupLocalId) return -1
+                            if (a.revieweeEmployee.localID > b.revieweeEmployee.localID) return 1
+                            if (a.revieweeEmployee.localID < b.revieweeEmployee.localID) return -1
+                        }
+                        return 0
+                    })
                     eventItems = reports.map(report => {
                         return {
                             title: `${report.revieweeEmployee?.lastName}${report.revieweeEmployee?.firstName}`,
