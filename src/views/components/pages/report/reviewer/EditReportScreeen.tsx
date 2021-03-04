@@ -1,10 +1,12 @@
-import { HeaderContext, SidebarContext } from "App";
+import { HeaderContext, SidebarContext, UserContext } from "App";
 import { GetReportQueryVariables, Report } from "API";
 import { getReport } from "graphql/queries";
 import { ReportDao } from "lib/dao/reportDao";
 import React, { useContext, useEffect, useState } from "react";
 import EditReport from "views/components/templates/report/reviewer/EditReport";
 import { getReportStatusString } from "lib/util";
+import ReferenceReport from "views/components/organisms/report/reviewer/ReferenceReport";
+import TReferenceReport from "views/components/templates/report/reviewer/TReferenceReport";
 
 type Props = {
     match: {
@@ -19,6 +21,7 @@ export default function (props: Props) {
     const [report, setReport] = useState<Report | null>();
     const [revieweeMailAddress, setRevieweeMailMailAddress] = useState<string | null>(null);
     const [revieweeName, setRevieweeName] = useState<string | null>(null);
+    const currentUser = useContext(UserContext);
 
     const header = useContext(HeaderContext);
     const sidebar = useContext(SidebarContext)
@@ -59,23 +62,49 @@ export default function (props: Props) {
         ],
     }
 
-    return (
-        report ?
-            <EditReport
-                header={mockData.header}
-                sidebar={mockData.sidebar}
-                data={{
-                    sub: report.sub || "",
-                    revieweeMailAddress: revieweeMailAddress,
-                    date: report.date || "",
-                    commentWork: report.revieweeComments?.work || "",
-                    workStatus: report.workStatus ? getReportStatusString(report.workStatus) : "",
-                    commentStatus: report.revieweeComments?.status || "",
-                    commentOther: report.revieweeComments?.other || "",
-                    commentReviewer: report.reviewerComments?.superior || "",
-                    reviewee: report.reviewee || "",
-                    revieweeName: revieweeName || "",
-                }}
-            /> : null
-    )
+    if(report){
+        if(report.reviewer?.includes(currentUser?.username || "")){
+            // 所属長が開いた場合
+            return (
+                <EditReport
+                    header={mockData.header}
+                    sidebar={mockData.sidebar}
+                    data={{
+                        sub: report.sub || "",
+                        revieweeMailAddress: revieweeMailAddress,
+                        date: report.date || "",
+                        commentWork: report.revieweeComments?.work || "",
+                        workStatus: report.workStatus ? getReportStatusString(report.workStatus) : "",
+                        commentStatus: report.revieweeComments?.status || "",
+                        commentOther: report.revieweeComments?.other || "",
+                        commentReviewer: report.reviewerComments?.superior || "",
+                        reviewee: report.reviewee || "",
+                        revieweeName: revieweeName || "",
+                    }}
+                />
+            )
+        }else {
+            return (
+                <TReferenceReport
+                    header={mockData.header}
+                    sidebar={mockData.sidebar}
+                    data={{
+                        sub: report.sub || "",
+                        revieweeMailAddress: revieweeMailAddress,
+                        date: report.date || "",
+                        commentWork: report.revieweeComments?.work || "",
+                        workStatus: report.workStatus ? getReportStatusString(report.workStatus) : "",
+                        commentStatus: report.revieweeComments?.status || "",
+                        commentOther: report.revieweeComments?.other || "",
+                        commentReviewer: report.reviewerComments?.superior || "",
+                        reviewee: report.reviewee || "",
+                        revieweeName: revieweeName || "",
+                    }}
+                />
+            )
+        }
+
+    }
+
+    return null
 }

@@ -108,10 +108,11 @@ export function createSidebarElements(isManager: boolean, isAdmin: boolean): { l
             {
                 label: "報告参照カレンダー",
                 dest: routeBuilder.reviewerReportCalendarPaht(today)
-            }, {
-                label: "報告参照社員",
-                dest: routeBuilder.reviewerReportEmployeePath()
             }
+            // , {
+            //     label: "報告参照社員",
+            //     dest: routeBuilder.reviewerReportEmployeePath()
+            // }
 
         ]
     ]
