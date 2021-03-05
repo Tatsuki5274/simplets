@@ -30,8 +30,8 @@ export default function CalendarView(props: Props) {
     // const calendarRef = useRef<FullCalendar | null>(null)
 
     function handleDateClick(arg: DateClickArg) { // bind with an arrow function
-        console.log(JSON.stringify(arg.dateStr))
-        history.push(routeBuilder.revieweeReportNewPath(arg.date))
+        // console.log(JSON.stringify(arg.dateStr))
+        history.push(routeBuilder.revieweeReportEditPath(arg.date))
     }
 
     function handleEventClick(arg: EventClickArg){

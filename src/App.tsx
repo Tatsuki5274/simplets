@@ -21,7 +21,6 @@ import { EmployeeDao } from 'lib/dao/employeeDao';
 import EvaluationList from 'views/components/pages/evaluation/reviewer/EvaluationList';　//総合評価参照画面 テスト用
 import { routeBuilder } from 'router';
 import RevieweeReportList from 'views/components/pages/report/reviewee/RevieweeReportList';
-import CreateReportScreen from 'views/components/pages/report/reviewee/CreateReportScreen';
 import EditReportScreeen from 'views/components/pages/report/reviewer/EditReportScreeen';
 import ReportListScreen from 'views/components/pages/report/reviewer/ReportListScreen';
 import { HeaderProps } from 'views/components/organisms/common/Header';
@@ -168,7 +167,6 @@ function App() {
                     <Route exact path={routeBuilder.reviewerEvaluationListPath()} component={EvaluationList} />
 
                     <Route exact path={routeBuilder.revieweeReportCalendarPath(":date")} component={RevieweeReportList} />
-                    <Route exact path={routeBuilder.revieweeReportNewPath(":date")} component={CreateReportScreen} />
                     <Route exact path={routeBuilder.revieweeReportEditPath(":date")} component={ChangeReportScreen} />
                     <Route exact path={routeBuilder.reviewerReportCommentPath(":date", ":sub")} component={EditReportScreeen} />
                     <Route exact path={routeBuilder.reviewerReportEmployeePath()} component={ReportListScreen} />

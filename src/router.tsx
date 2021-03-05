@@ -26,12 +26,6 @@ export const routeBuilder = {
         else dateStr = dateFormat(date, "yyyy-mm")
         return `${host || ""}/reviewee/report/calendar/${dateStr}`
     },
-    revieweeReportNewPath: (date: Date | string, host?: string) => {
-        let dateStr: string = ""
-        if(typeof date === "string") dateStr = date
-        else dateStr = dateFormat(date, "yyyy-mm-dd")
-        return `${host || ""}/reviewee/report/new/${dateStr}`
-    },
     revieweeReportEditPath: (date: Date | string, host?: string) => {
         let dateStr: string = ""
         if(typeof date === "string") dateStr = date

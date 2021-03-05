@@ -1,9 +1,13 @@
-import { GetReportQueryVariables, Report } from "API";
-import { EmployeeContext, HeaderContext, SidebarContext, UserContext } from "App";
-import { getReport } from "graphql/queries";
+import { EmployeeType, GetReportQueryVariables, Report } from "API";
+import { EmployeeContext, ErrorContext, HeaderContext, SidebarContext, UserContext } from "App";
+import { getReport, listEmployees } from "graphql/queries";
+import { EmployeeDao } from "lib/dao/employeeDao";
 import { ReportDao } from "lib/dao/reportDao";
 import React, { useContext, useEffect, useState } from "react";
+import { Superior } from "views/components/atoms/Types";
+import { RevieweeCreateReportType } from "views/components/organisms/report/reviewee/CreateReport";
 import ChangeReport from "views/components/templates/report/reviewee/ChangeReport";
+import CreateReport from "views/components/templates/report/reviewee/CreateReport";
 
 type Props = {
     match: {
@@ -15,12 +19,14 @@ type Props = {
 
 export default function (props: Props) {
     const header = useContext(HeaderContext);
-    const sidebar = useContext(SidebarContext)
+    const sidebar = useContext(SidebarContext);
+    const setError = useContext(ErrorContext)
 
     const currentEmployee = useContext(EmployeeContext);
     const currentUser = useContext(UserContext);
     const [report, setReport] = useState<Report | null>();
-
+    const [reportData, setReportData] = useState<RevieweeCreateReportType>()
+    
     useEffect(() => {
         (async () => {
             if (currentUser) {
@@ -29,10 +35,74 @@ export default function (props: Props) {
                     date: String(props.match.params.date),
                 }
                 const reportItem = await ReportDao.get(getReport, getI)
-                setReport(reportItem)
+
+                if (reportItem) {
+                    setReport(reportItem)
+                } else {
+                    if (currentEmployee) {
+                        const superiorItem: Superior = {
+                            email: currentEmployee.superior?.email || "",
+                            username: currentEmployee.superiorUsername || null,
+                        }
+
+                        // 参照者の情報を取得
+                        const superManagers = await EmployeeDao.list(listEmployees, {
+                            companyID: currentEmployee.companyID,
+                            filter: {
+                                manager: {
+                                    eq: EmployeeType.SUPER_MANAGER,
+                                }
+                            }
+                        })
+                        const groupManagers = await EmployeeDao.list(listEmployees, {
+                            companyID: currentEmployee.companyID,
+                            filter: {
+                                manager: {
+                                    eq: EmployeeType.MANAGER,
+                                }
+                            }
+                        })
+                        let listSuperManagers: Array<string> = [];
+                        let listGroupManagers: Array<string> = [];
+                        if (superManagers) {
+                            superManagers.forEach(element => {
+                                if (element.username) {
+                                    listSuperManagers.push(element.username)
+                                }
+                            });
+                        }
+                        if (groupManagers) {
+                            groupManagers.forEach(element => {
+                                if (element.username) {
+                                    listGroupManagers.push(element.username)
+                                }
+                            });
+                        }
+                        const managers = listSuperManagers.concat(listGroupManagers)
+                        if (currentUser?.attributes.sub) {
+                            const reportItem: RevieweeCreateReportType = {
+                                sub: currentUser.attributes.sub,
+                                date: String(props.match.params.date),
+                                companyID: currentEmployee.companyID || "",
+                                superior: superiorItem,
+                                superiorName: `${currentEmployee.superior?.lastName || ""} ${currentEmployee.superior?.firstName || ""}`,
+                                referencer: managers,
+                                reviewer: [currentEmployee.superiorUsername || ""],
+                                reviewee: currentEmployee.username || "",
+                                revieweeName: `${currentEmployee.lastName}${currentEmployee.firstName}`,
+                                workStatus: mockData.workStatusList,
+                            }
+                            setReportData(reportItem)
+                        } else {
+                            console.error("認証情報が取得できません")
+                            setError("認証情報が取得できません")
+                        }
+
+                    }
+                }
             }
         })()
-    }, [props, currentUser])
+    }, [currentEmployee, props.match.params.date, currentUser, setError])
 
     const mockData = {
         header: header,
@@ -76,6 +146,13 @@ export default function (props: Props) {
                     commentOther: report.revieweeComments?.other || "",
 
                 }}
-            /> : null
+            />
+            : reportData ?
+                <CreateReport
+                    header={mockData.header}
+                    sidebar={mockData.sidebar}
+                    data={reportData}
+                />
+                : null
     )
 }
