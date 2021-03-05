@@ -426,7 +426,13 @@ function ListPerformanceEvalution() {
                       <td>{sheet.secondEmployee ? sheet.secondEmployee.lastName : ""}{sheet.secondEmployee ? sheet.secondEmployee.firstName : ""}</td>
                       <td><DisplaySheetAverage sheet={sheet} /></td>
                       <td>{getStatusValue(sheet.statusValue || -1)}</td>
-                      <td><a href={routeBuilder.previewPath(sheet.sub || "", sheet.year?.toString() || "")}>プレビュー</a></td>
+                      <td>
+                        <a
+                          href={routeBuilder.previewPath(sheet.sub || "", sheet.year?.toString() || "")}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >プレビュー</a>
+                      </td>
                     </tr>
                   )
                 })}

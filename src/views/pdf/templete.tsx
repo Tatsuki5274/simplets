@@ -28,7 +28,7 @@ const outputDate = (dateStr: string) => {
 
 // Create Document Component
 export const PDFTemplete = (props: Props) => {
-  const history = useHistory();
+  // const history = useHistory();
 
   return (
     <ReactToPdf
@@ -50,10 +50,10 @@ export const PDFTemplete = (props: Props) => {
       ) => (
 
         <div>
-          <Button
+          {/* <Button
             onClick={() => history.goBack()}
             className={buttonComponentStyle}
-          >戻る</Button>
+          >戻る</Button> */}
           {/* <Button onClick={toPdf} className={buttonComponentStyle}>PDFをダウンロード</Button> */}
 
           <div ref={targetRef} className={style.PDFScreenStyle}>

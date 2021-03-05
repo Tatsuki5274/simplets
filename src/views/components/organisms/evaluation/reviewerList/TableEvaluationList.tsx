@@ -57,7 +57,10 @@ export default function (props:Props) {
                                     <TableBodyCell>{evaluationList?.lastYearsAgoOverAllEvaluation ? String(evaluationList.lastYearsAgoOverAllEvaluation) : "未評価"}</TableBodyCell>
                                     <TableBodyCell>{evaluationList?.twoYearsAgoOverAllEvaluation ? String(evaluationList.twoYearsAgoOverAllEvaluation) : "未評価"}</TableBodyCell>
                                     <TableBodyCell>
-                                        <Link to={evaluationList?.preview.dest || ""}>
+                                        <Link
+                                            to={evaluationList?.preview.dest || ""}
+                                            target="_blank"
+                                        >
                                             {evaluationList?.preview.label || ""}
                                         </Link>
                                     </TableBodyCell>
