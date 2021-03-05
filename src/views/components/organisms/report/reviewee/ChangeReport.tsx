@@ -14,6 +14,7 @@ import { routeBuilder } from "router";
 import { CountLine } from "lib/util";
 import * as Yup from 'yup';
 import ErrorText from "views/components/atoms/ErrorText";
+import RequiredLabel from "views/components/molecules/RequiredLabel";
 
 type Props = {
     workStatusList: {
@@ -89,6 +90,7 @@ export default function (props: Props) {
 
                     <div>
                         <Text className="commentWork">【作業報告】</Text>
+                        <RequiredLabel />
                     </div>
                     <ReportStyle>
                         <TextArea
@@ -107,6 +109,7 @@ export default function (props: Props) {
 
                     <div>
                         <Text className="workStatus">【作業状況】</Text>
+                        <RequiredLabel />
                     </div>
                     <ReportStyle>
                         <RadioButtonSelect
@@ -119,6 +122,7 @@ export default function (props: Props) {
 
                     <div>
                         <Text className="commentStatus">【作業状況】</Text>
+                        <RequiredLabel />
                     </div>
                     <ReportStyle>
                         <TextArea
@@ -137,6 +141,7 @@ export default function (props: Props) {
 
                     <div>
                         <Text className="commentOther">【その他】</Text>
+                        <RequiredLabel />
                     </div>
                     <ReportStyle>
                         <TextArea
@@ -164,16 +169,34 @@ export default function (props: Props) {
                     {props.data.superior.email ?
                         <SpaceStyle>
                             <CommandButton
-                                onClick={() => {
-                                    if (window.confirm("所属長へメールを送信しますか？")) {
-                                        const protocol = window.location.protocol;
-                                        const hostName = window.location.host;
-                                        const hostUrl = protocol + '//' + hostName;
+                                onClick={async () => {
+                                    if (window.confirm("入力内容を保存して、所属長へメールを送信しますか？")) {
+                                        if (formik.values.workStatus && formik.values.commentWork && formik.values.commentOther && formik.values.commentStatus) {
+                                            const updateI: APIt.UpdateReportInput = {
+                                                sub: props.data.sub,
+                                                companyID: props.data.companyID,
+                                                date: props.data.date,
+                                                workStatus: formik.values.workStatus as APIt.ReportWorkingStatus,
+                                                reviewee: props.data.reviewee,
+                                                revieweeComments: {
+                                                    work: formik.values.commentWork,
+                                                    other: formik.values.commentOther,
+                                                    status: formik.values.commentStatus,
+                                                },
+                                            }
+                                            console.log("updateI", updateI)
+                                            const updatedReport = await ReportDao.update(updateReport, updateI);
+                                            console.log("updatedReport", updatedReport)
+                                            if (updatedReport) {
 
-                                        const sendI: SendEmail = {
-                                            to: [props.data.superior.email],
-                                            subject: `[Simplet's]　作業報告（${props.data.date}）${props.data.revieweeName}`,
-                                            body: `
+                                                const protocol = window.location.protocol;
+                                                const hostName = window.location.host;
+                                                const hostUrl = protocol + '//' + hostName;
+
+                                                const sendI: SendEmail = {
+                                                    to: [props.data.superior.email],
+                                                    subject: `[Simplet's]　作業報告（${props.data.date}）${props.data.revieweeName}`,
+                                                    body: `
 [作業報告]
 ${formik.values.commentWork}
 [作業状況]
@@ -192,9 +215,16 @@ ${routeBuilder.reviewerReportCommentPath(props.data.date, props.data.sub, hostUr
 # 本メールはシステムより自動送信されています。
 # 本メールに返信されましても、返答できませんのでご了承ください。
 `
-                                        }
-                                        if (sendEmailMutation(sendI)) {
-                                            window.alert("所属長へのメール送信が完了しました");
+                                                }
+                                                if (sendEmailMutation(sendI)) {
+                                                    window.alert("所属長へのメール送信が完了しました");
+                                                }
+                                            } else {
+                                                console.error("報告書の保存に失敗しました");
+                                                setError("報告書の保存に失敗しました")
+                                            }
+                                        } else {
+                                            window.alert("必須項目を入力してください");
                                         }
                                     }
                                 }}
