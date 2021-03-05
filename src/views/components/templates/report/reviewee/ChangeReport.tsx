@@ -24,6 +24,7 @@ type Props = {
         companyID: string
         superior: {
             email: string | null,
+            name: string,
         }
         reviewee: string
         revieweeName: string

@@ -21,6 +21,7 @@ export type RevieweeCreateReportType = {
     sub: string
     companyID: string
     superior: Superior | null
+    superiorName: string
     referencer: (string | null)[] | null
     reviewer: (string | null)[] | null
     reviewee: string
@@ -179,8 +180,12 @@ export default function (props: Props) {
 
                                                     const sendI: SendEmail = {
                                                         to: [props.data.superior.email],
-                                                        subject: `[Simplet's]　作業報告（${props.data.date}）${props.data.revieweeName}`,
+                                                        subject: `[Simplet's]　作業報告（${props.data.date.replace(/-/g,'/')}）${props.data.revieweeName}`,
                                                         body: `
+${props.data.superiorName}様:
+
+作業報告が入力されました。
+
 [作業報告]
 ${formik.values.commentWork}
 [作業状況]
@@ -191,7 +196,7 @@ ${formik.values.commentStatus}
 ${formik.values.commentOther}
 
 以下のURLにアクセスし確認をおこなってください。
-${routeBuilder.reviewerReportCommentPath(props.data.date, props.data.reviewee, hostUrl)}
+${routeBuilder.reviewerReportCommentPath(props.data.date, props.data.sub, hostUrl)}
 
 # 本メールは${props.data.superior.email}宛にお送りしています。
 # 本メールはシステムより自動送信されています。

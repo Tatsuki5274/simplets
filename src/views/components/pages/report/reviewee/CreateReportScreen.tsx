@@ -102,6 +102,7 @@ export default function (props: Props) {
                         date: props.match.params.date,
                         companyID: currentEmployee.companyID || "",
                         superior: superiorItem,
+                        superiorName: `${currentEmployee.superior?.lastName || ""} ${currentEmployee.superior?.firstName || ""}`,
                         referencer: managers,
                         reviewer: [currentEmployee.superiorUsername || ""],
                         reviewee: currentEmployee.username || "",

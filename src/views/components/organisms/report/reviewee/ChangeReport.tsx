@@ -27,6 +27,7 @@ type Props = {
         companyID: string
         superior: {
             email: string | null,
+            name: string,
         }
         sub: string
         reviewee: string
@@ -195,8 +196,12 @@ export default function (props: Props) {
 
                                                 const sendI: SendEmail = {
                                                     to: [props.data.superior.email],
-                                                    subject: `[Simplet's]　作業報告（${props.data.date}）${props.data.revieweeName}`,
+                                                    subject: `[Simplet's]　作業報告（${props.data.date.replace(/-/g,'/')}）${props.data.revieweeName}`,
                                                     body: `
+${props.data.superior.name}様:
+
+作業報告が入力されました。
+
 [作業報告]
 ${formik.values.commentWork}
 [作業状況]

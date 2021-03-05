@@ -65,6 +65,7 @@ export default function (props: Props) {
                     companyID: report.companyID || "",
                     superior: {
                         email: currentEmployee?.superior?.email || null,
+                        name: `${currentEmployee?.superior?.lastName || ""} ${currentEmployee?.superior?.firstName || ""}`,
                     },
                     reviewee: report.reviewee || "",
                     revieweeName: currentEmployee && currentEmployee.lastName && currentEmployee.firstName ? currentEmployee.lastName + currentEmployee.firstName : "",

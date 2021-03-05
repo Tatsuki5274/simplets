@@ -91,6 +91,8 @@ const getEmployee = /* GraphQL */ `
       }
       superior {
         email
+        firstName
+        lastName
       }
     }
   }

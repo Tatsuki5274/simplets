@@ -113,16 +113,34 @@ export default function (props: Props) {
                     {props.revieweeMailAddress ?
                         <SpaceStyle>
                             <CommandButton
-                                onClick={() => {
-                                    if (window.confirm("社員へメールを送信しますか？")) {
-                                        const protocol = window.location.protocol;
-                                        const hostName = window.location.host;
-                                        const hostUrl = protocol + '//' + hostName;
+                                onClick={async () => {
+                                    if (window.confirm("入力内容を保存して、社員へメールを送信しますか？")) {
+                                        if (formik.values.commentReviewer) {
 
-                                        const sendI: SendEmail = {
-                                            to: [props.revieweeMailAddress],
-                                            subject: `[Simplet's]　作業報告（${props.date}）所属長からのコメント`,
-                                            body: `
+                                            const updateI: APIt.UpdateReportInput = {
+                                                sub: props.sub,
+                                                date: props.date,
+                                                reviewee: props.reviewee,
+                                                reviewerComments: {
+                                                    superior: formik.values.commentReviewer
+                                                },
+                                            }
+                                            const updatedReport = await ReportDao.update(updateReport, updateI);
+                                            if (updatedReport) {
+
+                                                const protocol = window.location.protocol;
+                                                const hostName = window.location.host;
+                                                const hostUrl = protocol + '//' + hostName;
+
+                                                const sendI: SendEmail = {
+                                                    to: [props.revieweeMailAddress],
+                                                    subject: `[Simplet's]　作業報告（${props.date.replace(/-/g,'/')}）所属長からのコメント`,
+                                                    body: `
+
+${props.revieweeName}様:
+
+所属長がコメントを入力しました。
+
 [作業報告]
 ${props.commentWork}
 [作業状況]
@@ -141,9 +159,13 @@ ${routeBuilder.revieweeReportEditPath(props.date, hostUrl)}
 # 本メールはシステムより自動送信されています。
 # 本メールに返信されましても、返答できませんのでご了承ください。
 `
-                                        }
-                                        if (sendEmailMutation(sendI)) {
-                                            window.alert("社員へのメール送信が完了しました");
+                                                }
+                                                if (sendEmailMutation(sendI)) {
+                                                    window.alert("社員へのメール送信が完了しました");
+                                                }
+                                            }
+                                        } else {
+                                            window.alert("所属長コメントを入力してください");
                                         }
                                     }
                                 }}
