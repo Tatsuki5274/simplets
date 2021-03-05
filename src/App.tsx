@@ -1,6 +1,5 @@
 //React
 import React, { createContext, useEffect, useState } from 'react';
-import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { ConfirmSignIn, ConfirmSignUp, ForgotPassword, RequireNewPassword, SignUp, VerifyContact, withAuthenticator } from 'aws-amplify-react';
 
 //Amplify
@@ -12,25 +11,14 @@ import awsconfig from './aws-exports';
 import * as APIt from 'API';
 
 //カスタムコンポーネント
-import RevieweeSheetShow from "reviewee/sheet/index/index"
-import ListPerformanceEvalution from 'reviewee/list/performance';
-import EvaluationScreen from "reviewer/sheet";
-import { PDFPage } from 'views/pdf/page';
 import MySignIn from 'views/auth/signIn';
 import { EmployeeDao } from 'lib/dao/employeeDao';
-import EvaluationList from 'views/components/pages/evaluation/reviewer/EvaluationList';　//総合評価参照画面 テスト用
-import { routeBuilder } from 'router';
-import RevieweeReportList from 'views/components/pages/report/reviewee/RevieweeReportList';
-import EditReportScreeen from 'views/components/pages/report/reviewer/EditReportScreeen';
-import ReportListScreen from 'views/components/pages/report/reviewer/ReportListScreen';
+import Router from 'router';
 import { HeaderProps } from 'views/components/organisms/common/Header';
-import ChangeReportScreen from 'views/components/pages/report/reviewee/ChangeReportScreen';
 import ErrorMessageView from 'views/components/templates/ErrorMessageView';
 import { Employee, EmployeeType } from 'API';
-import ReviewerReportList from 'views/components/pages/report/reviewer/ReviewerReportListCalendar';
 import { LinkType } from 'views/components/atoms/Types';
 import { createSidebarElements } from 'lib/util';
-import ProgressReferenceScreen from 'views/components/pages/progress/reviewee/ProgressReferenceScreen';
 Amplify.configure(awsconfig);
 
 // export type Sheet = Omit<Exclude<APIt.GetSheetQuery['getSheet'], null>, '__typename'>;
@@ -156,24 +144,8 @@ function App() {
           <HeaderContext.Provider value={header}>
             <SidebarContext.Provider value={sidebar}>
               <ErrorContext.Provider value={setErrorMessage}>
-                <BrowserRouter>
-                  <Switch>
-                    <Route exact path="/" component={ListPerformanceEvalution} />
-                    <Route exact path={routeBuilder.revieweeDetailPath(":sub", ":year")} component={RevieweeSheetShow} />
-                    <Route exact path={routeBuilder.revieweeListPath()} component={ListPerformanceEvalution} />
-                    <Route exact path={routeBuilder.reviewerListPath()} component={ProgressReferenceScreen} />
-                    <Route exact path={routeBuilder.reviewerDetailPath(":sub", ":year")} component={EvaluationScreen} />
-                    <Route exact path={routeBuilder.previewPath(":sub", ":year")} component={PDFPage} />
-                    <Route exact path={routeBuilder.reviewerEvaluationListPath()} component={EvaluationList} />
-
-                    <Route exact path={routeBuilder.revieweeReportCalendarPath(":date")} component={RevieweeReportList} />
-                    <Route exact path={routeBuilder.revieweeReportEditPath(":date")} component={ChangeReportScreen} />
-                    <Route exact path={routeBuilder.reviewerReportCommentPath(":date", ":sub")} component={EditReportScreeen} />
-                    <Route exact path={routeBuilder.reviewerReportEmployeePath()} component={ReportListScreen} />
-                    <Route exact path={routeBuilder.reviewerReportCalendarPaht(":date")} component={ReviewerReportList} />
-                  </Switch>
-                  <ErrorMessageView>{errorMessage || undefined}</ErrorMessageView>
-                </BrowserRouter>
+                <Router/>
+                <ErrorMessageView>{errorMessage || undefined}</ErrorMessageView>
               </ErrorContext.Provider>
             </SidebarContext.Provider>
           </HeaderContext.Provider>

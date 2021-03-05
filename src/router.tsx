@@ -1,6 +1,39 @@
-// 今後、ルーティング設定をここに移動
-
 import dateFormat from "dateformat"
+import RevieweeSheetShow from "reviewee/sheet/index/index"
+import ListPerformanceEvalution from 'reviewee/list/performance';
+import EvaluationScreen from "reviewer/sheet";
+import { PDFPage } from 'views/pdf/page';
+import EvaluationList from 'views/components/pages/evaluation/reviewer/EvaluationList';　//総合評価参照画面 テスト用
+import RevieweeReportList from 'views/components/pages/report/reviewee/RevieweeReportList';
+import EditReportScreeen from 'views/components/pages/report/reviewer/EditReportScreeen';
+import ReportListScreen from 'views/components/pages/report/reviewer/ReportListScreen';
+import ChangeReportScreen from 'views/components/pages/report/reviewee/ChangeReportScreen';
+import ReviewerReportList from 'views/components/pages/report/reviewer/ReviewerReportListCalendar';
+import ProgressReferenceScreen from 'views/components/pages/progress/reviewee/ProgressReferenceScreen';
+import React from "react";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
+
+export default function Router(){
+    return (
+        <BrowserRouter>
+        <Switch>
+          <Route exact path="/" component={ListPerformanceEvalution} />
+          <Route exact path={routeBuilder.revieweeDetailPath(":sub", ":year")} component={RevieweeSheetShow} />
+          <Route exact path={routeBuilder.revieweeListPath()} component={ListPerformanceEvalution} />
+          <Route exact path={routeBuilder.reviewerListPath()} component={ProgressReferenceScreen} />
+          <Route exact path={routeBuilder.reviewerDetailPath(":sub", ":year")} component={EvaluationScreen} />
+          <Route exact path={routeBuilder.previewPath(":sub", ":year")} component={PDFPage} />
+          <Route exact path={routeBuilder.reviewerEvaluationListPath()} component={EvaluationList} />
+
+          <Route exact path={routeBuilder.revieweeReportCalendarPath(":date")} component={RevieweeReportList} />
+          <Route exact path={routeBuilder.revieweeReportEditPath(":date")} component={ChangeReportScreen} />
+          <Route exact path={routeBuilder.reviewerReportCommentPath(":date", ":sub")} component={EditReportScreeen} />
+          <Route exact path={routeBuilder.reviewerReportEmployeePath()} component={ReportListScreen} />
+          <Route exact path={routeBuilder.reviewerReportCalendarPaht(":date")} component={ReviewerReportList} />
+        </Switch>
+      </BrowserRouter>
+    )
+}
 
 // パスを生成する関数
 export const routeBuilder = {
