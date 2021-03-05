@@ -80,7 +80,7 @@ export default function (props: Props) {
                 }
                 let result: ReviewerReportListEmployeeType[] | null = null
                 const reports = await ReportDao.list(listReports, reportItem)
-                if (reports) {
+                if (reports && reports.length !== 0) {
                     result = reports.map(report => {
                         return {
                             commentOther: report.revieweeComments?.other || "",
