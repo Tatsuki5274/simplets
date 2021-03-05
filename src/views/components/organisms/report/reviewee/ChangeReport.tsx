@@ -186,7 +186,7 @@ ${formik.values.commentOther}
 ${props.data.reviewerComments}
 
 以下のURLにアクセスし確認をおこなってください。
-${routeBuilder.reviewerReportCommentPath(props.data.date, props.data.reviewee, hostUrl)}
+${routeBuilder.reviewerReportCommentPath(props.data.date, props.data.sub, hostUrl)}
 
 # 本メールは${props.data.superior.email}宛にお送りしています。
 # 本メールはシステムより自動送信されています。
