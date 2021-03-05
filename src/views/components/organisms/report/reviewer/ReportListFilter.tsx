@@ -10,6 +10,8 @@ import { SelectLabel } from "views/components/atoms/Types";
 import CommandButton from "views/components/molecules/CommandButton";
 import PullDown from "views/components/molecules/PullDown";
 import { ReviewerReportListEmployeeType } from "./TableReportList";
+import dateFormat from "dateformat"
+
 
 export type ReviewerReportFilterEmployeeType = {
     firlstName: string
@@ -36,7 +38,17 @@ function generateRevieweeLabel(input: ReviewerReportFilterEmployeeType[]) {
 }
 
 export default function (props: Props) {
+    const today = new Date()
+    const startOfMonth = new Date()
+    startOfMonth.setDate(1)
+    const endOfMonth = new Date(today.getFullYear(), today.getMonth() + 1, 0)
+
     const [reviewees, setReviewees] = useState<SelectLabel[]>(generateRevieweeLabel(props.reviewee))
+
+    function dateFormater(date: Date){
+        return dateFormat(date, "yyyy-mm-dd")
+    }
+
     function handleChangeGroup(event: React.ChangeEvent<HTMLSelectElement>) {
         const value = event.target.value
         if (value === "all") {
@@ -53,8 +65,8 @@ export default function (props: Props) {
     return (
         <Formik
             initialValues={{
-                reportStartDate: "",
-                reportEndDate: "",
+                reportStartDate: dateFormater(startOfMonth),
+                reportEndDate: dateFormater(endOfMonth),
                 reviewee: props.reviewee[0].sub,
             }}
             onSubmit={async (values) => {
@@ -96,6 +108,7 @@ export default function (props: Props) {
                             name="reportStartDate"
                             onChange={formik.handleChange}
                             placeholder="yyyy-mm-dd"
+                            defaultValue={dateFormater(startOfMonth)}
                         />
                         <Text>〜</Text>
                         <TextField
@@ -103,6 +116,7 @@ export default function (props: Props) {
                             name="reportEndDate"
                             onChange={formik.handleChange}
                             placeholder="yyyy-mm-dd"
+                            defaultValue={dateFormater(endOfMonth)}
                         />
                     </ReportFilterStyle>
 
