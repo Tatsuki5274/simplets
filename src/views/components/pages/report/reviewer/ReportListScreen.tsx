@@ -56,7 +56,17 @@ export default function () {
                   groupLocalId: reviewee.employeeGroupLocalId || "",
                   groupName: reviewee.group?.name || "",
                   sub: reviewee.sub || "",
+                  localId: reviewee.localID || "",
                 }
+              })
+              revieweesLabel.sort((a, b) => {
+                if (a && b) {
+                  if (a.groupLocalId > b.groupLocalId) return 1
+                  if (a.groupLocalId < b.groupLocalId) return -1
+                  if (a.localId > b.localId) return 1
+                  if (a.localId < b.localId) return -1
+                }
+                return 0
               })
               setReviewee(revieweesLabel)
             }

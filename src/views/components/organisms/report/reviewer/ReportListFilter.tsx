@@ -20,6 +20,7 @@ export type ReviewerReportFilterEmployeeType = {
     groupLocalId: string
     username: string
     sub: string
+    localId: string
 }
 
 type Props = {
