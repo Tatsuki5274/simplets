@@ -17,5 +17,6 @@ export default function(props: Props){
 }
 
 const Styled = styled.div({
-    backgroundColor: "red"
+    backgroundColor: "tomato",
+    color: "black",
 })
