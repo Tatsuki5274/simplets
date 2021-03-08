@@ -7,6 +7,7 @@ import EditReport from "views/components/templates/report/reviewer/EditReport";
 import { getReportStatusString } from "lib/util";
 import ReferenceReport from "views/components/organisms/report/reviewer/ReferenceReport";
 import TReferenceReport from "views/components/templates/report/reviewer/TReferenceReport";
+import Error from "views/components/templates/Error";
 
 type Props = {
     match: {
@@ -18,7 +19,7 @@ type Props = {
 }
 
 export default function (props: Props) {
-    const [report, setReport] = useState<Report | null>();
+    const [report, setReport] = useState<Report | null | undefined>(undefined);
     const [revieweeMailAddress, setRevieweeMailMailAddress] = useState<string | null>(null);
     const [revieweeName, setRevieweeName] = useState<string | null>(null);
     const currentUser = useContext(UserContext);
@@ -33,8 +34,8 @@ export default function (props: Props) {
                 sub: props.match.params.sub,
             }
             const reportItem = await ReportDao.get(getReport, getI)
+            setReport(reportItem)
             if (reportItem) {
-                setReport(reportItem)
                 if (reportItem.revieweeEmployee) {
                     setRevieweeMailMailAddress(reportItem.revieweeEmployee.email || null)
                     setRevieweeName(reportItem.revieweeEmployee ? `${reportItem.revieweeEmployee.lastName} ${reportItem.revieweeEmployee.firstName}` : null)
@@ -104,6 +105,8 @@ export default function (props: Props) {
             )
         }
 
+    }else if(report === null){
+        return <Error>リソースが見つかりませんでした。該当の報告書は削除されている可能性があります。</Error>
     }
 
     return null
