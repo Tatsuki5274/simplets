@@ -30,20 +30,38 @@ function CalendarEvent(eventInfo: EventContentArg) {
     // 色を変える分岐を作成する
     if (status) {
         if(status === ReportWorkingStatus.OK){
-            return <EventOK
-                title={eventInfo.event.title}
-            />
+            return (
+                <EventStyle>
+                    <EventOK
+                        title={eventInfo.event.title}
+                    />
+                </EventStyle>
+            )
         }else if(status === ReportWorkingStatus.InTask){
-            return <EventTask
-                title={eventInfo.event.title}
-            />
+            return (
+                <EventStyle>
+                    <EventTask
+                        title={eventInfo.event.title}
+                    />
+                </EventStyle>
+            )
         }else if(status === ReportWorkingStatus.InProblem){
-            return <EventProblem
-                title={eventInfo.event.title}
-            />
+            return (
+                <EventStyle>
+                    <EventProblem
+                        title={eventInfo.event.title}
+                    />
+                </EventStyle>
+            )
         }
     }
 }
+
+const EventStyle = styled.div({
+    textOverflow: "ellipsis",
+    whiteSpace: "nowrap",
+    overflow: "hidden"
+})
 
 export default function (props: Props) {
     const calendarRef = useRef<FullCalendar | null>(null)
