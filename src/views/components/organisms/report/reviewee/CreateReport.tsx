@@ -36,21 +36,33 @@ type Props = {
     data: RevieweeCreateReportType
 }
 
+const validate = (values: { commentWork: string | null; workStatus: string; commentStatus: string; }) => {
+    let errors: { commentWork?: string; commentStatus?: string; } = {};
+
+    if (values.workStatus !== 'OK' && !values.commentStatus) {
+        errors.commentStatus = '作業状況を入力してください';
+    }
+    if (!values.commentWork) {
+        errors.commentWork = '作業報告を入力してください'
+    }
+    return errors;
+};
+
 export default function (props: Props) {
     const setError = useContext(ErrorContext)
     return (
         <Formik
             initialValues={{
-                commentWork: null,
+                commentWork: "",
                 workStatus: props.data.workStatus[0].value,
-                commentStatus: null,
-                commentOther: null,
+                commentStatus: "",
+                commentOther: "",
             }}
-            validationSchema={Yup.object({
-                commentWork: Yup.string().typeError('作業報告を入力してください').required('作業報告を入力してください'),
-                commentStatus: Yup.string().typeError('作業状況を入力してください').required('作業状況を入力してください'),
-                commentOther: Yup.string().typeError('コメントを入力してください').required('コメントを入力してください'),
-            })}
+            // validationSchema={Yup.object({
+            //     commentWork: Yup.string().typeError('作業報告を入力してください').required('作業報告を入力してください'),
+            //     commentStatus: Yup.string().typeError('作業状況を入力してください').required('作業状況を入力してください'),
+            // })}
+            validate={validate}
             onSubmit={async (values) => {
 
                 const createI: APIt.CreateReportInput = {
@@ -115,7 +127,12 @@ export default function (props: Props) {
 
                     <div>
                         <Text className="commentStatus">【作業状況】</Text>
+                        {/* {formik.values.workStatus !== 'OK' ?
+                            <RequiredLabel />
+                            : null
+                        } */}
                         <RequiredLabel />
+                        <Text>(”課題はあるが作業できている”か”問題が発生している”を選択した場合は入力必須)</Text>
                     </div>
                     <ReportStyle>
                         <TextArea
@@ -133,7 +150,6 @@ export default function (props: Props) {
 
                     <div>
                         <Text className="commentOther">【その他】</Text>
-                        <RequiredLabel />
                     </div>
                     <ReportStyle>
                         <TextArea
@@ -142,11 +158,6 @@ export default function (props: Props) {
                             rows={5}
                             style={StyledTextarea}
                         />
-                        <ErrorText>
-                            <ErrorMessage
-                                name="commentOther"
-                            />
-                        </ErrorText>
                     </ReportStyle>
 
                     <CommandButton type="submit">保存</CommandButton>
@@ -156,7 +167,7 @@ export default function (props: Props) {
                                 onClick={async () => {
                                     if (window.confirm("入力内容を保存して、所属長へメールを送信しますか？")) {
                                         if (props.data.superior) {
-                                            if (formik.values.workStatus && formik.values.commentWork && formik.values.commentOther && formik.values.commentStatus) {
+                                            if (formik.values.workStatus && (formik.values.workStatus === 'OK' || formik.values.commentStatus) && formik.values.commentWork) {
                                                 const createI: APIt.CreateReportInput = {
                                                     sub: props.data.sub,
                                                     companyID: props.data.companyID,
@@ -191,9 +202,9 @@ ${formik.values.commentWork}
 [作業状況]
 ${props.data.workStatus[props.data.workStatus.findIndex((element) => element.value === formik.values.workStatus)].label}
 [作業状況コメント]
-${formik.values.commentStatus}
+${formik.values.commentStatus || ""}
 [その他コメント]
-${formik.values.commentOther}
+${formik.values.commentOther || ""}
 
 以下のURLにアクセスし確認をおこなってください。
 ${routeBuilder.reviewerReportCommentPath(props.data.date, props.data.sub, hostUrl)}
