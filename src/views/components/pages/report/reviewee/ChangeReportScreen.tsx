@@ -3,6 +3,7 @@ import { EmployeeContext, ErrorContext, HeaderContext, SidebarContext, UserConte
 import { getReport, listEmployees } from "graphql/queries";
 import { EmployeeDao } from "lib/dao/employeeDao";
 import { ReportDao } from "lib/dao/reportDao";
+import { getReviewers } from "lib/util";
 import React, { useContext, useEffect, useState } from "react";
 import { Superior } from "views/components/atoms/Types";
 import { RevieweeCreateReportType } from "views/components/organisms/report/reviewee/CreateReport";
@@ -45,40 +46,8 @@ export default function (props: Props) {
                             username: currentEmployee.superiorUsername || null,
                         }
 
-                        // 参照者の情報を取得
-                        const superManagers = await EmployeeDao.list(listEmployees, {
-                            companyID: currentEmployee.companyID,
-                            filter: {
-                                manager: {
-                                    eq: EmployeeType.SUPER_MANAGER,
-                                }
-                            }
-                        })
-                        const groupManagers = await EmployeeDao.list(listEmployees, {
-                            companyID: currentEmployee.companyID,
-                            filter: {
-                                manager: {
-                                    eq: EmployeeType.MANAGER,
-                                }
-                            }
-                        })
-                        let listSuperManagers: Array<string> = [];
-                        let listGroupManagers: Array<string> = [];
-                        if (superManagers) {
-                            superManagers.forEach(element => {
-                                if (element.username) {
-                                    listSuperManagers.push(element.username)
-                                }
-                            });
-                        }
-                        if (groupManagers) {
-                            groupManagers.forEach(element => {
-                                if (element.username) {
-                                    listGroupManagers.push(element.username)
-                                }
-                            });
-                        }
-                        const managers = listSuperManagers.concat(listGroupManagers)
+                        const managers = (await getReviewers(currentUser.username, currentUser.attributes["custom:companyId"])).referencer
+
                         if (currentUser?.attributes.sub) {
                             const reportItem: RevieweeCreateReportType = {
                                 sub: currentUser.attributes.sub,

@@ -1,6 +1,9 @@
 import { routeBuilder } from "router";
-import { Objective, ReportWorkingStatus, Section, Sheet } from "API";
+import { EmployeeType, GetEmployeeQueryVariables, ListEmployeesQueryVariables, Objective, ReportWorkingStatus, Section, Sheet } from "API";
 import dateFormat from "dateformat";
+import { EmployeeDao } from "./dao/employeeDao";
+import { getEmployee, listEmployees } from "graphql/queries";
+import { string } from "yup";
 
 /**
  * 
@@ -214,4 +217,72 @@ export function CountLine(str: string): number {
         line = 5;
     }
     return line
+}
+
+/**
+ * 
+ * @param reviewee 社員
+ * @param companyId 会社ID
+ * @returns 所属長,部門長,参照者を返却
+ */
+export async function getReviewers(reviewee: string, companyId: string) {
+    let result: {
+        topReviewers: string[] | null,
+        secondReviewers: string[] | null,
+        referencer: string[] | null
+    } 
+    result = {
+        topReviewers: null,
+        secondReviewers: null,
+        referencer: null
+    }
+
+    const getI: GetEmployeeQueryVariables = {
+        username: reviewee,
+        companyID: companyId,
+    }
+    const revieweeEmployee = await EmployeeDao.get(getEmployee, getI);
+
+    if (revieweeEmployee) {
+        //上司情報を取得
+        if (revieweeEmployee.superior?.username) {
+            result.secondReviewers = [revieweeEmployee.superior.username]
+            if (revieweeEmployee.superior.superior?.username) {
+                result.topReviewers = [revieweeEmployee.superior.superior.username]
+            }
+        }
+
+        //参照者情報を取得
+        const superManagersI: ListEmployeesQueryVariables = {
+            companyID: revieweeEmployee?.companyID,
+            filter: {
+                manager: {
+                    eq: EmployeeType.SUPER_MANAGER,
+                }
+            }
+        }
+
+        const groupManagersI: ListEmployeesQueryVariables = {
+            companyID: revieweeEmployee?.companyID,
+            filter: {
+                employeeGroupLocalId: {
+                    eq: revieweeEmployee?.employeeGroupLocalId
+                },
+                manager: {
+                    eq: EmployeeType.MANAGER,
+                }
+            }
+        }
+        const superManagers = await EmployeeDao.list(listEmployees, superManagersI)
+        const groupManagers = await EmployeeDao.list(listEmployees, groupManagersI)
+
+        let listSuperManagers: Array<string> = [];
+        let listGroupManagers: Array<string> = [];
+        superManagers?.forEach(element => listSuperManagers.push(element.username || ""))
+        groupManagers?.forEach(element => listGroupManagers.push(element.username || ""))
+
+        const managers = listSuperManagers.concat(listGroupManagers)
+        result.referencer = managers
+    }
+    return result
 }

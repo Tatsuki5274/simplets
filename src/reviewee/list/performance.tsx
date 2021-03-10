@@ -11,7 +11,7 @@ import { CategoryDao } from 'lib/dao/categoryDao';
 import { SectionDao } from 'lib/dao/sectionDao';
 import { DisplaySheetAverage } from './components/average';
 import { tableHeaderStyle } from 'common/globalStyle.module.scss';
-import { getSheetKeys } from 'lib/util';
+import { getReviewers, getSheetKeys } from 'lib/util';
 import { BooleanType, Category, EmployeeType, Sheet } from 'API';
 import LeftBox from 'views/components/templates/LeftBox';
 import RightBox from 'views/components/templates/RightBox';
@@ -246,55 +246,16 @@ function ListPerformanceEvalution() {
 
 
       if (revieweeEmployee) {
-        let revieweeEmployeeSuperior: Array<string> | null = null
-
-        //上司情報取得
-        if (revieweeEmployee.superior?.username) {
-          revieweeEmployeeSuperior = []
-          revieweeEmployeeSuperior.push(revieweeEmployee.superior.username)
-          if (revieweeEmployee.superior.superior?.username) {
-            revieweeEmployeeSuperior.push(revieweeEmployee.superior.superior.username)
-          }
-        }
-
 
         //カテゴリを取得する
         const categorys = await CategoryDao.list(listCategorys, { companyID: currentUser.attributes['custom:companyId'] });
         if (categorys) {
           console.log("categorys", categorys)
 
-          //全ての社内特権マネージャーの情報を取得
-          const superManagersI: APIt.ListEmployeesQueryVariables = {
-            companyID: currentUser.attributes["custom:companyId"],
-            filter: {
-              manager: {
-                eq: EmployeeType.SUPER_MANAGER,
-              }
-            }
-          }
-
-          const groupManagersI: APIt.ListEmployeesQueryVariables = {
-            companyID: currentUser.attributes["custom:companyId"],
-            filter: {
-              employeeGroupLocalId: {
-                eq: revieweeEmployee?.employeeGroupLocalId
-              },
-              manager: {
-                eq: EmployeeType.MANAGER,
-              }
-            }
-          }
-          const superManagers = await EmployeeDao.listManager(listEmployeesManager, superManagersI)
-          const groupManagers = await EmployeeDao.listManager(listEmployeesManager, groupManagersI)
-          // console.log("superManagers", superManagers)
-          // console.log("groupManagers", groupManagers)
-          let listSuperManagers: Array<string> = [];
-          let listGroupManagers: Array<string> = [];
-          superManagers?.forEach(element => listSuperManagers.push(element.username || ""))
-          groupManagers?.forEach(element => listGroupManagers.push(element.username || ""))
-          // console.log("listSuperManagers", listSuperManagers)
-          // console.log("listGroupManagers", listGroupManagers)
-          const managers = listSuperManagers.concat(listGroupManagers)
+          const reviewers = (await getReviewers(currentUser.username,currentUser.attributes['custom:companyId']));
+          const managers = reviewers.referencer;
+          const topReviewers = reviewers.topReviewers;
+          const secondReviewers = reviewers.secondReviewers;
 
           if (targetYear && revieweeEmployee.username && revieweeEmployee.superior?.username) {
             //シートを作成
@@ -309,8 +270,8 @@ function ListPerformanceEvalution() {
               sheetGroupName: revieweeEmployee.group?.name || null,
               companyID: currentUser.attributes['custom:companyId'],
               reviewee: currentUser.username,
-              secondReviewers: [revieweeEmployee.superior.username] ,
-              topReviewers: [revieweeEmployee.superior?.superior?.username || ""],
+              secondReviewers: secondReviewers ,
+              topReviewers: topReviewers,
               referencer: managers
 
             })
