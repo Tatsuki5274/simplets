@@ -59,16 +59,25 @@ export default function (props: Props) {
                 return reviewee.groupLocalId === value
             })
             const reviewees = generateRevieweeLabel(filteredReviewees)
-            setReviewees(reviewees)
+            if (reviewees && reviewees.length === 0) {
+                const emptyData: SelectLabel[] = [{
+                    label: "",
+                    value: "",
+                }]
+                setReviewees(emptyData)
+            } else {
+                setReviewees(reviewees)
+            }
         }
     }
 
     return (
         <Formik
+            enableReinitialize
             initialValues={{
                 reportStartDate: dateFormater(startOfMonth),
                 reportEndDate: dateFormater(endOfMonth),
-                reviewee: props.reviewee[0].sub,
+                reviewee: reviewees[0].value,
             }}
             onSubmit={async (values) => {
                 const reportItem: ListReportsQueryVariables = {
