@@ -12,7 +12,6 @@ import { ErrorContext, SendEmail } from "App";
 import { Superior } from "views/components/atoms/Types";
 import styled from "styled-components";
 import { routeBuilder } from "router";
-import * as Yup from 'yup';
 import ErrorText from "views/components/atoms/ErrorText";
 import RequiredLabel from "views/components/molecules/RequiredLabel";
 
@@ -40,7 +39,7 @@ const validate = (values: { commentWork: string | null; workStatus: string; comm
     let errors: { commentWork?: string; commentStatus?: string; } = {};
 
     if (values.workStatus !== 'OK' && !values.commentStatus) {
-        errors.commentStatus = '作業状況を入力してください';
+        errors.commentStatus = '”課題はあるが作業できている” または ”問題が発生している” を選択した場合は入力してください';
     }
     if (!values.commentWork) {
         errors.commentWork = '作業報告を入力してください'
@@ -127,12 +126,10 @@ export default function (props: Props) {
 
                     <div>
                         <Text className="commentStatus">【作業状況】</Text>
-                        {/* {formik.values.workStatus !== 'OK' ?
+                        {formik.values.workStatus !== 'OK' ?
                             <RequiredLabel />
                             : null
-                        } */}
-                        <RequiredLabel />
-                        <Text>(”課題はあるが作業できている”か”問題が発生している”を選択した場合は入力必須)</Text>
+                        }
                     </div>
                     <ReportStyle>
                         <TextArea
@@ -199,10 +196,13 @@ ${props.data.superiorName}様:
 
 [作業報告]
 ${formik.values.commentWork}
+
 [作業状況]
 ${props.data.workStatus[props.data.workStatus.findIndex((element) => element.value === formik.values.workStatus)].label}
+
 [作業状況コメント]
 ${formik.values.commentStatus || ""}
+
 [その他コメント]
 ${formik.values.commentOther || ""}
 
