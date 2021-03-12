@@ -143,12 +143,16 @@ ${props.revieweeName}様:
 
 [作業報告]
 ${props.commentWork}
+
 [作業状況]
 ${props.workStatus}
+
 [作業状況コメント]
-${props.commentStatus}
+${props.commentStatus || ""}
+
 [その他コメント]
-${props.commentOther}
+${props.commentOther || ""}
+
 [所属長コメント]
 ${formik.values.commentReviewer}
 
