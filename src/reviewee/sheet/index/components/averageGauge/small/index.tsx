@@ -1,5 +1,5 @@
 import { Section } from "API"
-import { calcAvg, getSectionKeys, round } from "lib/util"
+import { calcAvg, createGaugeId, getSectionKeys, round } from "lib/util"
 import React from "react"
 import { SmallGage } from "../../gage/small"
 
@@ -21,7 +21,7 @@ export const AverageSmallGaugeBox = (props: Props) => {
     return (
         <h4>
             {props.section.sectionCategoryName}
-            {avg || avg === 0 ? <SmallGage value={parseInt(round(avg, 2).toFixed(1))} id={getSectionKeys(props.section).replace(/[.@]/g,'-')} /> : null}
+            {avg || avg === 0 ? <SmallGage value={parseInt(round(avg, 2).toFixed(1))} id={createGaugeId(getSectionKeys(props.section))} /> : null}
         </h4>
     )
 }

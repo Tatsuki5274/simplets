@@ -5,10 +5,11 @@ import React, { useContext } from "react"
 import { Button, FormControl, InputGroup, Modal } from "react-bootstrap"
 import { SheetContext } from "reviewer/sheet"
 import * as APIt from 'API';
-import { updateSheet } from "graphql/mutations"
+import { updateObjective, updateSheet } from "graphql/mutations"
 import { sendEmailMutation } from "lib/sendEmail"
 import { Sheet } from "API"
 import { SheetDao } from "lib/dao/sheetDao"
+import { ObjectiveDao } from "lib/dao/objectiveDao"
 
 /**
  * 
@@ -45,12 +46,37 @@ export const RemandModal = (props: Props)=>{
 
                         //sheet更新処理
                         if (work && sheet.sub && sheet.year) {
-                            const updateI: APIt.UpdateSheetInput = {
-                                sub: sheet.sub,
-                                year: sheet.year,
-                                statusValue: work.sheet.statusValue
-                            };
-                            updatedSheet = await SheetDao.update(updateSheet, updateI);
+                            if (work.sheet.statusValue === 3) {
+                                const updateI: APIt.UpdateSheetInput = {
+                                    sub: sheet.sub,
+                                    year: sheet.year,
+                                    statusValue: work.sheet.statusValue,
+                                    overAllEvaluation: null,
+                                    secondComment: null,
+                                    secondCheckDate: null,
+                                };
+                                updatedSheet = await SheetDao.update(updateSheet, updateI);
+
+                                sheet?.section?.items?.map(sec => {
+                                    sec?.objective?.items?.map(async obj => {
+                                        if (obj && obj.sectionKeys && obj.createdAt) {
+                                            const updateI: APIt.UpdateObjectiveInput = {
+                                                sectionKeys: obj.sectionKeys,
+                                                createdAt: obj?.createdAt,
+                                                lastEvaluation: null,
+                                            }
+                                            const updatedObjective = await ObjectiveDao.update(updateObjective, updateI);
+                                        }
+                                    })
+                                })
+                            } else {
+                                const updateI: APIt.UpdateSheetInput = {
+                                    sub: sheet.sub,
+                                    year: sheet.year,
+                                    statusValue: work.sheet.statusValue
+                                };
+                                updatedSheet = await SheetDao.update(updateSheet, updateI);
+                            }
                         }
 
                         //メール送信処理

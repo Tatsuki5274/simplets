@@ -27,7 +27,7 @@ export const RevieweeSheetObjectiveReadonly = (props: Props) => {
             <td></td>
             <td>{props.objective.content}</td>
             <td>{props.objective.result}</td>
-            <td>{props.objective.progress || "-"}</td>
+            <td>{props.objective.progress || props.objective.progress === 0 ? props.objective.progress : "-"}</td>
             <td>{props.objective.priority}</td>
             <td>{props.objective.expStartDate?.replace(/-/g,'/')}</td>
             <td className={expDoneDateStyle}>{props.objective.expDoneDate?.replace(/-/g,'/')}</td>

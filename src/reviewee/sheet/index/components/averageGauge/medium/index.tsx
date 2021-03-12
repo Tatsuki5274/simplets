@@ -1,5 +1,5 @@
 import { Sheet } from "API"
-import { calcAvg, getSheetKeys, round } from "lib/util"
+import { calcAvg, createGaugeId, getSheetKeys, round } from "lib/util"
 import React from "react"
 import { MediumGage } from "../../gage/medium"
 
@@ -34,7 +34,7 @@ export const AverageMediumGaugeBox = (props: Props) => {
 
     return (
         <h4>
-            {avg ? <MediumGage value={parseInt(round(avg, 2).toFixed(1))} id={getSheetKeys(props.sheet).replace(/[.@]/g,'-')} /> : null}
+            {avg ? <MediumGage value={parseInt(round(avg, 2).toFixed(1))} id={createGaugeId(getSheetKeys(props.sheet))} /> : null}
         </h4>
     )
 }
