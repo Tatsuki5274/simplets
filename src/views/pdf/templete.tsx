@@ -1,8 +1,6 @@
 import React from 'react';
-import { Button, Col, Row, Table } from 'react-bootstrap';
+import { Col, Row, Table } from 'react-bootstrap';
 import dateFormat from 'dateformat';
-import { useHistory } from 'react-router-dom';
-import { buttonComponentStyle } from 'common/globalStyle.module.scss';
 import style from './common/style.module.scss';
 import { getSectionKeys } from 'lib/util';
 import { Sheet } from 'API';
@@ -81,6 +79,8 @@ export const PDFTemplete = (props: Props) => {
                   <td>{props.sheet.revieweeEmployee?.lastName} {props.sheet.revieweeEmployee?.firstName}</td>
                   <th>所属長氏名</th>
                   <td>{props.sheet.revieweeEmployee?.superior?.lastName} {props.sheet.revieweeEmployee?.superior?.firstName}</td>
+                  <th>部門長氏名</th>
+                  <td>{props.sheet.revieweeEmployee?.superior?.superior?.lastName} {props.sheet.revieweeEmployee?.superior?.superior?.firstName}</td>
                 </Table>
               </Col>
             </Row>
@@ -250,7 +250,7 @@ export const PDFTemplete = (props: Props) => {
                     lg={5}
                     xl={5}
                   >
-                    <div>総合評価（所属長記入）＝＝＝＝⇒</div>
+                    <div></div>
                   </Col>
 
                   <Col
@@ -273,7 +273,7 @@ export const PDFTemplete = (props: Props) => {
                         <td>{props.gradeString}</td>
                         <td>{props.twoYearsAgoOverAllEvaluation ? props.twoYearsAgoOverAllEvaluation : "-"}</td>
                         <td>{props.lastYearsAgoOverAllEvaluation ? props.lastYearsAgoOverAllEvaluation : "-"}</td>
-                        <td>{props.sheet.overAllEvaluation}</td>
+                        <td>{props.sheet.overAllEvaluation || "-"}</td>
                       </tbody>
                     </Table>
                   </Col>
@@ -362,36 +362,25 @@ export const PDFTemplete = (props: Props) => {
                 <Table bordered className={style.PDFTableStyle}>
                   <thead>
                     <tr>
-                      <td>目的</td>
-                      <td>実施日時</td>
-                      <td>内容（所属長記入）</td>
+                      <td></td>
+                      <td>内容</td>
                       <td>本人確認</td>
-                      <td>所属長確認</td>
                     </tr>
                   </thead>
                   <tbody>
                     <tr>
-                      <td>業績評価（必須）</td>
-                      <td>
-                        {/* {props.sheet.secondCheckDate} */}
-                        {props.sheet.secondCheckDate ?
-                          <span>
-                            {outputDate(props.sheet.secondCheckDate)}
-                          </span> : null}
-                      </td>
-                      <td>{props.sheet.secondComment}</td>
+                      <td rowSpan={3}>所属長コメント</td>
+                      <td rowSpan={3}>{props.sheet.secondComment}</td>
                       <td>{props.sheet.selfCheckDate ? props.sheet.selfCheckDate : "-"}</td>
+                    </tr>
+                    <tr>
+                      <td>所属長確認</td>
+                    </tr>
+                    <tr>
                       <td>{props.sheet.secondCheckDate ? props.sheet.secondCheckDate : "-"}</td>
                     </tr>
                     <tr>
-                      <td>総合評価に関する部門長コメント</td>
-                      <td>
-                        {/* {props.sheet.firstCheckDate} */}
-                        {props.sheet.firstCheckDate ?
-                          <span>
-                            {outputDate(props.sheet.firstCheckDate)}
-                          </span> : null}
-                      </td>
+                      <td>部門長コメント</td>
                       <td>{props.sheet.firstComment}</td>
                       <td>{props.sheet.firstCheckDate ? props.sheet.firstCheckDate : "-"}</td>
                     </tr>

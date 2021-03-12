@@ -1,11 +1,10 @@
-import { ErrorContext } from "App";
+import { ErrorContext, UserContext } from "App";
 import { getSheet, listSheetReviewee } from "graphql/queries";
 import { SheetDao } from "lib/dao/sheetDao";
 import React, { useContext, useEffect, useState } from "react";
 import { PDFTemplete } from "./templete";
 import * as APIt from 'API';
 import { getStatusValue } from "lib/getStatusValue";
-import { PDFTempleteStatus10 } from "./templeteStatus10";
 import { Section, Sheet } from "API";
 
 type Props = {
@@ -33,6 +32,7 @@ const sortCategory = function (a: Section | null, b: Section | null) {
 }
 
 export function PDFPage(props:Props) {
+    const currentUser = useContext(UserContext)
     const setError = useContext(ErrorContext)
     const [sheet, setSheet] = useState<Sheet | null>(null);
     const [lastOverAllEvaluations, setlastOverAllEvaluations] = useState<Array<number | null> | null>();
@@ -42,6 +42,10 @@ export function PDFPage(props:Props) {
                 sub: props.match.params.sub,
                 year: parseInt(props.match.params.year)
             })
+            
+            if (res && currentUser && res.statusValue === 10 && res.revieweeUsername === currentUser.username) {
+                res.overAllEvaluation = null;
+            }
 
             res?.section?.items?.forEach((section) => {
                 section?.objective?.items?.sort(sortObjective)
@@ -49,7 +53,7 @@ export function PDFPage(props:Props) {
             res?.section?.items?.sort(sortCategory)
             setSheet(res)
         })()
-    }, [props.match.params.sub, props.match.params.year])
+    }, [currentUser,props.match.params.sub, props.match.params.year])
 
     useEffect(() => {
         (async () => {
@@ -99,23 +103,14 @@ export function PDFPage(props:Props) {
     }, [sheet, setError])
 
     if (sheet) {
-
         return (
-            sheet.statusValue === 10 ?
-                <PDFTempleteStatus10
-                    sheet={sheet}
-                    approvalStatusString={getStatusValue(sheet.statusValue || -1)}
-                    gradeString={`${sheet.grade}`}
-                    lastYearsAgoOverAllEvaluation={lastOverAllEvaluations && lastOverAllEvaluations[0] ? lastOverAllEvaluations[0] : null}
-                    twoYearsAgoOverAllEvaluation={lastOverAllEvaluations && lastOverAllEvaluations[1] ? lastOverAllEvaluations[1] : null}
-                /> :
-                <PDFTemplete
-                    sheet={sheet}
-                    approvalStatusString={getStatusValue(sheet.statusValue || -1)}
-                    gradeString={`${sheet.grade}`}
-                    lastYearsAgoOverAllEvaluation={lastOverAllEvaluations && lastOverAllEvaluations[0] ? lastOverAllEvaluations[0] : null}
-                    twoYearsAgoOverAllEvaluation={lastOverAllEvaluations && lastOverAllEvaluations[1] ? lastOverAllEvaluations[1] : null}
-                />
+            <PDFTemplete
+                sheet={sheet}
+                approvalStatusString={getStatusValue(sheet.statusValue || -1)}
+                gradeString={`${sheet.grade}`}
+                lastYearsAgoOverAllEvaluation={lastOverAllEvaluations && lastOverAllEvaluations[0] ? lastOverAllEvaluations[0] : null}
+                twoYearsAgoOverAllEvaluation={lastOverAllEvaluations && lastOverAllEvaluations[1] ? lastOverAllEvaluations[1] : null}
+            />
         )
     } else {
         return null;
