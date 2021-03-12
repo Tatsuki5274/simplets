@@ -59,8 +59,9 @@ function CalendarEvent(eventInfo: EventContentArg) {
 
 const EventStyle = styled.div({
     textOverflow: "ellipsis",
-    whiteSpace: "nowrap",
-    overflow: "hidden"
+    whiteSpace: "pre",
+    overflow: "hidden",
+    maxHeight: "1.4em",
 })
 
 export default function (props: Props) {
