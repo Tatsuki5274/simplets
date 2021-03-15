@@ -72,13 +72,13 @@ export const ReviewerSheetPagesStatus2 = ()=>{
                                             statusValue: work.sheet.statusValue,
                                             careerPlanComment: values.careerPlanComment,
                                             interviewPlanComment: values.interviewPlanComment,
-                                            interviewPlanDate: values.interviewPlanDate,
+                                            interviewPlanDate: values.interviewPlanDate !== "" ? values.interviewPlanDate : null,
                                             InterviewMid1Comment: values.InterviewMid1Comment,
-                                            InterviewMid1Date: values.InterviewMid1Date,
+                                            InterviewMid1Date: values.InterviewMid1Date !== "" ? values.InterviewMid1Date : null,
                                             InterviewMid2Comment: values.InterviewMid2Comment,
-                                            InterviewMid2Date: values.InterviewMid2Date,
+                                            InterviewMid2Date: values.InterviewMid2Date !== "" ? values.InterviewMid2Date : null,
                                             InterviewMid3Comment: values.InterviewMid3Comment,
-                                            InterviewMid3Date: values.InterviewMid3Date,
+                                            InterviewMid3Date: values.InterviewMid3Date !== "" ? values.InterviewMid3Date : null,
                                         }
                                         let updatedSheet = await SheetDao.update(updateSheet, data);
                                         
@@ -130,19 +130,20 @@ export const ReviewerSheetPagesStatus2 = ()=>{
                                         {/* ステータスによってボタンの出し分け */}
                                         <Form.Group>
                                             <Button className={buttonComponentStyle} onClick={async () => {
+                                                console.log("formik.values",formik.values)
                                                 if(sheet.sub && sheet.year){
                                                     const data: UpdateSheetInput = {
                                                         sub: sheet.sub,
                                                         year: sheet.year,
                                                         careerPlanComment: formik.values.careerPlanComment,
                                                         interviewPlanComment: formik.values.interviewPlanComment,
-                                                        interviewPlanDate: formik.values.interviewPlanDate,
+                                                        interviewPlanDate: formik.values.interviewPlanDate !== "" ? formik.values.interviewPlanDate : null,
                                                         InterviewMid1Comment: formik.values.InterviewMid1Comment,
-                                                        InterviewMid1Date: formik.values.InterviewMid1Date,
+                                                        InterviewMid1Date: formik.values.InterviewMid1Date !== "" ? formik.values.InterviewMid1Date : null,
                                                         InterviewMid2Comment: formik.values.InterviewMid2Comment,
-                                                        InterviewMid2Date: formik.values.InterviewMid2Date,
+                                                        InterviewMid2Date: formik.values.InterviewMid2Date !== "" ? formik.values.InterviewMid2Date : null,
                                                         InterviewMid3Comment: formik.values.InterviewMid3Comment,
-                                                        InterviewMid3Date: formik.values.InterviewMid3Date,
+                                                        InterviewMid3Date: formik.values.InterviewMid3Date !== "" ? formik.values.InterviewMid3Date : null,
                                                     }
                                                     const updatedSheet = await SheetDao.update(updateSheet, data);
     

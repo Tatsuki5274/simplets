@@ -33,13 +33,13 @@ export const ReviewerSheetPagesStatus3 = (props: Props) => {
                 year: props.sheet.year,
                 careerPlanComment: values.careerPlanComment,
                 interviewPlanComment: values.interviewPlanComment,
-                interviewPlanDate: values.interviewPlanDate,
+                interviewPlanDate: values.interviewPlanDate !== "" ? values.interviewPlanDate : null,
                 InterviewMid1Comment: values.InterviewMid1Comment,
-                InterviewMid1Date: values.InterviewMid1Date,
+                InterviewMid1Date: values.InterviewMid1Date !== "" ? values.InterviewMid1Date : null,
                 InterviewMid2Comment: values.InterviewMid2Comment,
-                InterviewMid2Date: values.InterviewMid2Date,
+                InterviewMid2Date: values.InterviewMid2Date !== "" ? values.InterviewMid2Date : null,
                 InterviewMid3Comment: values.InterviewMid3Comment,
-                InterviewMid3Date: values.InterviewMid3Date,
+                InterviewMid3Date: values.InterviewMid3Date !== "" ? values.InterviewMid3Date : null,
             }
             const updatedSheet = await SheetDao.update(updateSheet, data)
     
