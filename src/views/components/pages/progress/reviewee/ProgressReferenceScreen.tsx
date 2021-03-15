@@ -86,7 +86,7 @@ export default function () {
                                         avg: sec && sec.objective && sec.objective.items ?
                                             calcAvg(sec.objective.items.map((obj) => {
 
-                                                return obj ? obj.progress || null : null
+                                                return obj && obj.progress ? obj.progress : obj && obj.progress === 0 ? 0 : null
                                             })) : null,
                                         gaugeId: createGaugeId(`chart-${getSectionKeys(sec)}`),
                                     }

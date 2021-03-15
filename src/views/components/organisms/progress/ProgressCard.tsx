@@ -43,9 +43,9 @@ export default function (props: Props) {
                 &nbsp;
                 {props.groupName}
                 &nbsp;
-                {props.avg ?
+                {typeof props.avg === "number" ?
                     `${round(props.avg, 2).toFixed(1)}%` : null}
-                {props.avg && props.gaugeId ?
+                {typeof props.avg === "number" && props.gaugeId ?
                     <GaugeSheet
                         id={props.gaugeId}
                         value={props.avg / 100}
