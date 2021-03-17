@@ -136,6 +136,9 @@ Resources:
         - Name: companyId
           Mutable: 'true'
           AttributeDataType: String
+        - Name: isCompanyAdmin
+          Mutable: 'true'
+          AttributeDataType: Boolean
       AutoVerifiedAttributes:
         Ref: autoVerifiedAttributes
       EmailVerificationMessage:
