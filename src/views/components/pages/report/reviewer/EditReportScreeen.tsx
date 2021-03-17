@@ -19,9 +19,10 @@ type Props = {
 }
 
 export default function (props: Props) {
-    const [report, setReport] = useState<Report | null | undefined>(undefined);
+    const [report, setReport] = useState<Report | null>(null);
     const [revieweeMailAddress, setRevieweeMailMailAddress] = useState<string | null>(null);
     const [revieweeName, setRevieweeName] = useState<string | null>(null);
+    const [isLoaded, setIsLoaded] = useState<boolean>(false);
     const currentUser = useContext(UserContext);
 
     const header = useContext(HeaderContext);
@@ -34,6 +35,7 @@ export default function (props: Props) {
                 sub: props.match.params.sub,
             }
             const reportItem = await ReportDao.get(getReport, getI)
+            setIsLoaded(true);  // 読み込み完了
             setReport(reportItem)
             if (reportItem) {
                 if (reportItem.revieweeEmployee) {
@@ -63,50 +65,52 @@ export default function (props: Props) {
         ],
     }
 
-    if(report){
-        if(report.reviewer?.includes(currentUser?.username || "")){
-            // 所属長が開いた場合
-            return (
-                <EditReport
-                    header={mockData.header}
-                    sidebar={mockData.sidebar}
-                    data={{
-                        sub: report.sub || "",
-                        revieweeMailAddress: revieweeMailAddress,
-                        date: report.date || "",
-                        commentWork: report.revieweeComments?.work || "",
-                        workStatus: report.workStatus ? getReportStatusString(report.workStatus) : "",
-                        commentStatus: report.revieweeComments?.status || "",
-                        commentOther: report.revieweeComments?.other || "",
-                        commentReviewer: report.reviewerComments?.superior || "",
-                        reviewee: report.reviewee || "",
-                        revieweeName: revieweeName || "",
-                    }}
-                />
-            )
-        }else {
-            return (
-                <TReferenceReport
-                    header={mockData.header}
-                    sidebar={mockData.sidebar}
-                    data={{
-                        sub: report.sub || "",
-                        revieweeMailAddress: revieweeMailAddress,
-                        date: report.date || "",
-                        commentWork: report.revieweeComments?.work || "",
-                        workStatus: report.workStatus ? getReportStatusString(report.workStatus) : "",
-                        commentStatus: report.revieweeComments?.status || "",
-                        commentOther: report.revieweeComments?.other || "",
-                        commentReviewer: report.reviewerComments?.superior || "",
-                        reviewee: report.reviewee || "",
-                        revieweeName: revieweeName || "",
-                    }}
-                />
-            )
+    if(isLoaded){
+        if(report){
+            if(report.reviewer?.includes(currentUser?.username || "")){
+                // 所属長が開いた場合
+                return (
+                    <EditReport
+                        header={mockData.header}
+                        sidebar={mockData.sidebar}
+                        data={{
+                            sub: report.sub || "",
+                            revieweeMailAddress: revieweeMailAddress,
+                            date: report.date || "",
+                            commentWork: report.revieweeComments?.work || "",
+                            workStatus: report.workStatus ? getReportStatusString(report.workStatus) : "",
+                            commentStatus: report.revieweeComments?.status || "",
+                            commentOther: report.revieweeComments?.other || "",
+                            commentReviewer: report.reviewerComments?.superior || "",
+                            reviewee: report.reviewee || "",
+                            revieweeName: revieweeName || "",
+                        }}
+                    />
+                )
+            }else {
+                return (
+                    <TReferenceReport
+                        header={mockData.header}
+                        sidebar={mockData.sidebar}
+                        data={{
+                            sub: report.sub || "",
+                            revieweeMailAddress: revieweeMailAddress,
+                            date: report.date || "",
+                            commentWork: report.revieweeComments?.work || "",
+                            workStatus: report.workStatus ? getReportStatusString(report.workStatus) : "",
+                            commentStatus: report.revieweeComments?.status || "",
+                            commentOther: report.revieweeComments?.other || "",
+                            commentReviewer: report.reviewerComments?.superior || "",
+                            reviewee: report.reviewee || "",
+                            revieweeName: revieweeName || "",
+                        }}
+                    />
+                )
+            }
+        }else{
+            return <Error>リソースが見つかりませんでした。該当の報告書は削除されている可能性があります。</Error>
         }
 
-    }else if(report === null){
-        return <Error>リソースが見つかりませんでした。該当の報告書は削除されている可能性があります。</Error>
     }
 
     return null
