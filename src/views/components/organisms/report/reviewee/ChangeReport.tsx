@@ -1,5 +1,5 @@
 import { ErrorMessage, Formik } from "formik";
-import { updateReport } from "graphql/mutations";
+import { deleteReport, updateReport } from "graphql/mutations";
 import { ReportDao } from "lib/dao/reportDao";
 import React, { useContext } from "react";
 import Text from "views/components/atoms/Text";
@@ -14,6 +14,8 @@ import { routeBuilder } from "router";
 import { CountLine } from "lib/util";
 import ErrorText from "views/components/atoms/ErrorText";
 import RequiredLabel from "views/components/molecules/RequiredLabel";
+import ButtonNegative from "views/components/molecules/ButtonNegative";
+import { useHistory } from "react-router";
 
 type Props = {
     workStatusList: {
@@ -53,6 +55,7 @@ const validate = (values: { commentWork: string | null; workStatus: string; comm
 
 export default function (props: Props) {
     const setError = useContext(ErrorContext)
+    const history = useHistory();
 
     return (
         <Formik
@@ -81,9 +84,9 @@ export default function (props: Props) {
                         status: values.commentStatus,
                     },
                 }
-                console.log("updateI", updateI)
+                // console.log("updateI", updateI)
                 const updatedReport = await ReportDao.update(updateReport, updateI);
-                console.log("updatedReport", updatedReport)
+                // console.log("updatedReport", updatedReport)
                 if (updatedReport) {
                     window.alert("保存が完了しました");
                 } else {
@@ -193,9 +196,9 @@ export default function (props: Props) {
                                                     status: formik.values.commentStatus,
                                                 },
                                             }
-                                            console.log("updateI", updateI)
+                                            // console.log("updateI", updateI)
                                             const updatedReport = await ReportDao.update(updateReport, updateI);
-                                            console.log("updatedReport", updatedReport)
+                                            // console.log("updatedReport", updatedReport)
                                             if (updatedReport) {
 
                                                 const protocol = window.location.protocol;
@@ -249,6 +252,27 @@ ${routeBuilder.reviewerReportCommentPath(props.data.date, props.data.sub, hostUr
                         </SpaceStyle>
                         : null
                     }
+
+                    <ButtonNegative onClick={async () => {
+                        if (window.confirm("削除してもよろしいですか？")) {
+                            const deleteI: APIt.DeleteReportInput = {
+                                date: props.data.date,
+                                sub: props.data.sub,
+                            }
+
+                            const deleteItem = await ReportDao.delete(deleteReport, deleteI);
+
+                            if (deleteItem) {
+                                window.alert("削除が完了しました。");
+                                history.goBack();
+                            } else {
+                                console.error("報告書の削除に失敗しました");
+                                setError("報告書の削除に失敗しました")
+                            }
+                        }
+                    }}>
+                        削除
+                    </ButtonNegative>
                 </form>
             )}
         </Formik>

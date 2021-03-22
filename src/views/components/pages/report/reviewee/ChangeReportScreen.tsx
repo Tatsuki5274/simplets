@@ -1,7 +1,6 @@
-import { EmployeeType, GetReportQueryVariables, Report } from "API";
+import { GetReportQueryVariables, Report } from "API";
 import { EmployeeContext, ErrorContext, HeaderContext, SidebarContext, UserContext } from "App";
-import { getReport, listEmployees } from "graphql/queries";
-import { EmployeeDao } from "lib/dao/employeeDao";
+import { getReport } from "graphql/queries";
 import { ReportDao } from "lib/dao/reportDao";
 import { getReviewers } from "lib/util";
 import React, { useContext, useEffect, useState } from "react";
