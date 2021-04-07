@@ -1,0 +1,54 @@
+{
+  "typeName": "Mutation",
+  "fieldName": "updateOwners",
+  "arguments": {},
+  "identity": {
+      "sub": "a06c07e7-e067-48eb-b853-5642fbedbfbe",
+      "issuer": "https://cognito-idp.ap-northeast-1.amazonaws.com/ap-northeast-1_Ix36JPBYl",
+      "cognito:username": "twatanabe@sisco-consulting.co.jp",
+      "username": "twatanabe@sisco-consulting.co.jp",
+      "sourceIp": "::ffff:192.168.1.26",
+      "claims": {
+          "sub": "a06c07e7-e067-48eb-b853-5642fbedbfbe",
+          "cognito:groups": [
+              "SCC",
+              "Admin"
+          ],
+          "email_verified": true,
+          "iss": "https://cognito-idp.ap-northeast-1.amazonaws.com/ap-northeast-1_Ix36JPBYl",
+          "phone_number_verified": false,
+          "custom:companyId": "SCC",
+          "cognito:username": "twatanabe@sisco-consulting.co.jp",
+          "aud": "6dacmfchlcd39jfn7im18hg059",
+          "event_id": "5c663ddb-b4a2-4512-a5db-6e02f46f0085",
+          "token_use": "id",
+          "auth_time": 1614931651,
+          "phone_number": "+10352134561",
+          "exp": 1615960257,
+          "iat": 1615956658,
+          "email": "twatanabe@sisco-consulting.co.jp"
+      },
+      "defaultAuthStrategy": "ALLOW"
+  },
+  "source": null,
+  "request": {
+      "headers": {
+          "host": "192.168.1.26:20002",
+          "connection": "keep-alive",
+          "content-length": "102",
+          "accept": "*/*",
+          "dnt": "1",
+          "authorization": "eyJraWQiOiJKTGZ4NDNuSVY0bFJaTWRwSVdUTEhlcGVpN3RpaXR1RFZiY3ZHSTZpalZzPSIsImFsZyI6IlJTMjU2In0.eyJzdWIiOiJhMDZjMDdlNy1lMDY3LTQ4ZWItYjg1My01NjQyZmJlZGJmYmUiLCJjb2duaXRvOmdyb3VwcyI6WyJTQ0MiLCJBZG1pbiJdLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwiaXNzIjoiaHR0cHM6XC9cL2NvZ25pdG8taWRwLmFwLW5vcnRoZWFzdC0xLmFtYXpvbmF3cy5jb21cL2FwLW5vcnRoZWFzdC0xX0l4MzZKUEJZbCIsInBob25lX251bWJlcl92ZXJpZmllZCI6ZmFsc2UsImN1c3RvbTpjb21wYW55SWQiOiJTQ0MiLCJjb2duaXRvOnVzZXJuYW1lIjoidHdhdGFuYWJlQHNpc2NvLWNvbnN1bHRpbmcuY28uanAiLCJhdWQiOiI2ZGFjbWZjaGxjZDM5amZuN2ltMThoZzA1OSIsImV2ZW50X2lkIjoiNWM2NjNkZGItYjRhMi00NTEyLWE1ZGItNmUwMmY0NmYwMDg1IiwidG9rZW5fdXNlIjoiaWQiLCJhdXRoX3RpbWUiOjE2MTQ5MzE2NTEsInBob25lX251bWJlciI6IisxMDM1MjEzNDU2MSIsImV4cCI6MTYxNTk2MDI1NywiaWF0IjoxNjE1OTU2NjU4LCJlbWFpbCI6InR3YXRhbmFiZUBzaXNjby1jb25zdWx0aW5nLmNvLmpwIn0.cXdxSVFnQR0EBoOnZy8GxU2ew2Aq3ZSrD-p_H3DJtSREI6K10IWiHTKYwbhdVL4QA2q-lBs6pwPe8UHwSy88I7M8p7CRNEyL7Qc04_MxCgq2KAOjQ3BFEJW_OYj1KwbRnekpQMAILoBfQByD30KWQwJOUJhNSOAuXTYfIKiA8bT1Leh_HaEV-wKcmyDcfeRpBuwcZmnt8VXDvgtTrndGTtdL8ZW39Auynm7l1ICctDGeFVh8XFd0pY-zqf_FtkVKBZO-7E10Ytp1ilb_z1KynrPnTjx9afTpIPrclSb_Eoav8QBAZVmfVy_hZbQBMaU1RGXjN3VC9mtAxnAO_m7Dgw",
+          "x-amz-user-agent": "aws-amplify/2.0.3",
+          "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 11_2_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Safari/537.36",
+          "content-type": "application/json",
+          "origin": "http://localhost:3000",
+          "referer": "http://192.168.1.26/",
+          "accept-encoding": "gzip, deflate",
+          "accept-language": "ja-JP,ja;q=0.9,en-JP;q=0.8,en;q=0.7,en-US;q=0.6"
+      }
+  },
+  "prev": {
+      "result": {}
+  }
+}

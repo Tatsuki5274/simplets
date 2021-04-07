@@ -1,0 +1,27 @@
+{
+  "permissions": {
+    "auth": {
+      "sccsysteme53c89f0": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ]
+    },
+    "api": {
+      "sccgql": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ]
+    }
+  },
+  "lambdaLayers": [
+    {
+      "type": "ProjectLayer",
+      "resourceName": "modules",
+      "version": 1
+    }
+  ]
+}

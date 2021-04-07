@@ -1,0 +1,19 @@
+{
+  "lambdaLayers": [
+    {
+      "type": "ProjectLayer",
+      "resourceName": "modules",
+      "version": 1
+    }
+  ],
+  "permissions": {
+    "api": {
+      "sccgql": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ]
+    }
+  }
+}

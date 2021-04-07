@@ -309,6 +309,8 @@ type Report
     {allow: owner, ownerField: "reviewee", operations: [create, update, read]}
     {allow: owner, ownerField: "referencer", operations: [read]}
     {allow: owner, ownerField: "reviewer", operations: [read, update]}
+
+    {allow: private, provider: iam, operations: [read,update] }
   ]
 )
 {
@@ -380,6 +382,13 @@ type Mutation{
   sendEmail(input: sendEmailInput): String
     @function(name: "sendEmail-${env}")
     @auth(rules:[
+      {allow: private}
+    ])
+
+  # 管理者による既存データの所有権更新処理
+  updateOwners: String
+    @function(name: "resolvers-${env}")
+    @auth(rules: [
       {allow: private}
     ])
 }

@@ -1,0 +1,90 @@
+{
+  "Records":[
+     {
+        "eventID":"1",
+        "eventName":"INSERT",
+        "eventVersion":"1.0",
+        "eventSource":"aws:dynamodb",
+        "awsRegion":"ap-northeast-1",
+        "dynamodb":{
+           "Keys":{
+              "Id":{
+                 "N":"101"
+              }
+           },
+           "NewImage":{
+              "Message":{
+                 "S":"New item!"
+              },
+              "Id":{
+                 "N":"101"
+              }
+           },
+           "SequenceNumber":"111",
+           "SizeBytes":26,
+           "StreamViewType":"NEW_AND_OLD_IMAGES"
+        },
+        "eventSourceARN": "arn:aws:dynamodb:ap-northeast-1:894246227847:table/Sheet-32u27eia4fbxxnlsctqalnh6ey-dev/stream/2020-12-22T05:07:21.407"
+      },
+     {
+        "eventID":"2",
+        "eventName":"MODIFY",
+        "eventVersion":"1.0",
+        "eventSource":"aws:dynamodb",
+        "awsRegion":"us-east-1",
+        "dynamodb":{
+           "Keys":{
+              "Id":{
+                 "N":"101"
+              }
+           },
+           "NewImage":{
+              "Message":{
+                 "S":"This item has changed"
+              },
+              "Id":{
+                 "N":"101"
+              }
+           },
+           "OldImage":{
+              "Message":{
+                 "S":"New item!"
+              },
+              "Id":{
+                 "N":"101"
+              }
+           },
+           "SequenceNumber":"222",
+           "SizeBytes":59,
+           "StreamViewType":"NEW_AND_OLD_IMAGES"
+        },
+        "eventSourceARN": "arn:aws:dynamodb:ap-northeast-1:894246227847:table/Sheet-32u27eia4fbxxnlsctqalnh6ey-dev/stream/2020-12-22T05:07:21.407"
+     },
+     {
+        "eventID":"3",
+        "eventName":"REMOVE",
+        "eventVersion":"1.0",
+        "eventSource":"aws:dynamodb",
+        "awsRegion":"us-east-1",
+        "dynamodb":{
+           "Keys":{
+              "Id":{
+                 "N":"101"
+              }
+           },
+           "OldImage":{
+              "Message":{
+                 "S":"This item has changed"
+              },
+              "Id":{
+                 "N":"101"
+              }
+           },
+           "SequenceNumber":"333",
+           "SizeBytes":38,
+           "StreamViewType":"NEW_AND_OLD_IMAGES"
+        },
+        "eventSourceARN": "arn:aws:dynamodb:ap-northeast-1:894246227847:table/Sheet-32u27eia4fbxxnlsctqalnh6ey-dev/stream/2020-12-22T05:07:21.407"
+     }
+  ]
+}

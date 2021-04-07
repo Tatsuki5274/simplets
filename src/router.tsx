@@ -12,6 +12,15 @@ import ReviewerReportList from 'views/components/pages/report/reviewer/ReviewerR
 import ProgressReferenceScreen from 'views/components/pages/progress/reviewee/ProgressReferenceScreen';
 import React from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
+import AdminEmployeeList from "views/components/pages/admin/employee/AdminEmployeeList";
+import AdminEmployeeCreate from "views/components/pages/admin/employee/AdminEmployeeCreate";
+import AdminEmployeeEdit from "views/components/pages/admin/employee/AdminEmployeeEdit";
+import AdminGroupCreatePage from "views/components/pages/admin/group/AdminGroupCreatePage";
+import AdminGroupListPage from "views/components/pages/admin/group/AdminGroupListPage";
+import AdminGroupChangePage from "views/components/pages/admin/group/AdminGroupChangePage";
+import AdminCategoryListPage from "views/components/pages/admin/category/AdminCategoryListPage";
+import AdminCategoryEditPage from "views/components/pages/admin/category/AdminCategoryEditPage";
+import AdminCategoryCreatePage from "views/components/pages/admin/category/AdminCategoryCreatePage";
 
 export default function Router(){
     return (
@@ -30,6 +39,22 @@ export default function Router(){
           <Route exact path={routeBuilder.reviewerReportCommentPath(":date", ":sub")} component={EditReportScreeen} />
           <Route exact path={routeBuilder.reviewerReportEmployeePath()} component={ReportListScreen} />
           <Route exact path={routeBuilder.reviewerReportCalendarPaht(":date")} component={ReviewerReportList} />
+
+            {/* 管理画面 */}
+            {/* 社員管理画面 */}
+            <Route exact path={routeBuilder.adminEmployeeListPath()} component={AdminEmployeeList} />
+            <Route exact path={routeBuilder.adminEmployeeNewPath()} component={AdminEmployeeCreate} />
+            <Route exact path={routeBuilder.adminEmployeeEditPath(":employeeId")} component={AdminEmployeeEdit} />
+
+            {/* 部署管理画面 */}
+            <Route exact path={routeBuilder.adminGroupNewPath()} component={AdminGroupCreatePage}/>
+            <Route exact path={routeBuilder.adminGroupEditPath(":groupLocalId")} component={AdminGroupChangePage}/>
+            <Route exact path={routeBuilder.adminGroupListPath()} component={AdminGroupListPage}/>
+
+            {/* カテゴリ管理画面 */}
+            <Route exact path={routeBuilder.adminCategoryNewPath()} component={AdminCategoryCreatePage}/>
+            <Route exact path={routeBuilder.adminCategoryEditPath(":categoryLocalId")} component={AdminCategoryEditPage}/>
+            <Route exact path={routeBuilder.adminCategoryListPath()} component={AdminCategoryListPage} />
         </Switch>
       </BrowserRouter>
     )
@@ -82,5 +107,35 @@ export const routeBuilder = {
     },
     previewPath: (sub: string, year: string, host?: string)=>{
         return `${host || ""}/preview/${sub}/${year}`
+    },
+
+    adminEmployeeNewPath: (host?: string) => {
+        return `${host || ""}/admin/employee/new`
+    },
+    adminEmployeeEditPath: (employeeId: string, host?: string) => {
+        return `${host || ""}/admin/employee/${employeeId}/edit`
+    },
+    adminEmployeeListPath: (host?: string) => {
+        return `${host || ""}/admin/employee/list`
+    },
+
+    adminGroupNewPath: (host?: string) => {
+        return `${host || ""}/admin/group/new`
+    },
+    adminGroupEditPath: (groupId: string, host?: string) => {
+        return `${host || ""}/admin/group/${groupId}/edit`
+    },
+    adminGroupListPath: (host?: string) => {
+        return `${host || ""}/admin/group/list`
+    },
+
+    adminCategoryNewPath: (host?: string) => {
+        return `${host || ""}/admin/category/new`
+    },
+    adminCategoryEditPath: (categoryId: string, host?: string) => {
+        return `${host || ""}/admin/category/${categoryId}/edit`
+    },
+    adminCategoryListPath: (host?: string) => {
+        return `${host || ""}/admin/category/list`
     },
 }

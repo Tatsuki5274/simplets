@@ -26,7 +26,36 @@
         },
         "scriptGraphQL": {
           "deploymentBucketName": "amplify-sccsystem-dev-115621-deployment",
-          "s3Key": "amplify-builds/scriptGraphQL-317073355556784a6955-build.zip"
+          "s3Key": "amplify-builds/scriptGraphQL-757937484a65316c596a-build.zip"
+        },
+        "resolvers": {
+          "deploymentBucketName": "amplify-sccsystem-dev-115621-deployment",
+          "s3Key": "amplify-builds/resolvers-52424f6863396a452b71-build.zip"
+        },
+        "dbStream": {
+          "deploymentBucketName": "amplify-sccsystem-dev-115621-deployment",
+          "s3Key": "amplify-builds/dbStream-6974554f775330714969-build.zip"
+        }
+      }
+    },
+    "nonCFNdata": {
+      "function": {
+        "modules": {
+          "layerVersionMap": {
+            "1": {
+              "permissions": [
+                {
+                  "type": "awsOrg",
+                  "orgs": [
+                    "o-srfujeqg8q"
+                  ]
+                },
+                {
+                  "type": "private"
+                }
+              ]
+            }
+          }
         }
       }
     }
