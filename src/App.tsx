@@ -68,6 +68,7 @@ const getEmployee = /* GraphQL */ `
       superiorUsername
       employeeGroupLocalId
       manager
+      isCompanyAdmin
       group {
         name
       }
@@ -132,7 +133,7 @@ function App() {
         isManager = true
       }
 
-    const sidebar = createSidebarElements(isManager, false)
+    const sidebar = createSidebarElements(isManager, employee?.isCompanyAdmin || false)
     setSidebar(sidebar)
   }, [employee])
 

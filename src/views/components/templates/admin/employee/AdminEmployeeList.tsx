@@ -2,6 +2,7 @@ import React from "react";
 import { LinkType, SelectLabel } from "views/components/atoms/Types";
 import Title from "views/components/molecules/Title";
 import AdminEmployeeFilter from "views/components/organisms/admin/employee/AdminEmployeeFilter";
+import AdminEmployeeListApplyPermissions from "views/components/organisms/admin/employee/AdminEmployeeListApplyPermissions";
 import AdminListEmployee, { AdminEmployeeDataType } from "views/components/organisms/admin/employee/AdminListEmployee";
 import AdminNewEmployee from "views/components/organisms/admin/employee/AdminNewEmployee";
 import Header, { HeaderProps } from "views/components/organisms/common/Header";
@@ -61,6 +62,7 @@ export default function (props: Props) {
                                     data={props.tableData}
                                 /> : null
                             }
+                            <AdminEmployeeListApplyPermissions />
                         </>
                     </Content>
                 </RightBox>

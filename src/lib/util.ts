@@ -123,13 +123,13 @@ export function createSidebarElements(isManager: boolean, isAdmin: boolean): { l
     const adminContents = [
         {
             label: "社員管理",
-            dest: "/admin"
+            dest: routeBuilder.adminEmployeeListPath()
         }, {
             label: "部署管理",
-            dest: "/admin"
+            dest: routeBuilder.adminGroupListPath()
         }, {
             label: "カテゴリ管理",
-            dest: "/admin"
+            dest: routeBuilder.adminCategoryListPath()
         }
     ]
 
