@@ -12,6 +12,7 @@ type Props = {
     status: { label: string, value: string }[]
     initTableData: (TableEvaluationListType | null)[] | null
     setTableData: React.Dispatch<React.SetStateAction<(TableEvaluationListType | null)[] | null>>
+    setSelectedYear: React.Dispatch<React.SetStateAction<number | null>>
 }
 
 export default function (props: Props) {
@@ -51,6 +52,7 @@ export default function (props: Props) {
                         return 0
                     })
                     props.setTableData(filter)
+                    props.setSelectedYear(parseInt(values.year))
                 }
 
             }}

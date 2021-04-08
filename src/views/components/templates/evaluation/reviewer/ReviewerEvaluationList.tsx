@@ -21,6 +21,8 @@ type Props = {
         years: number[] | null
         groups: SelectLabel[] | null
     }
+    selectedYear: number | null
+    setSelectedYear: React.Dispatch<React.SetStateAction<number | null>>
 }
 
 const EvaluationListTitleStyle = styled.div({
@@ -134,12 +136,14 @@ export default function (props: Props) {
                                         years={yearList}
                                         initTableData={props.initTableData}
                                         setTableData={props.setTableData}
+                                        setSelectedYear={props.setSelectedYear}
                                     />
                                 </EvaluationFilterStyle>
                                 : null}
                             {props.tableData ?
                                 <TableEvaluationList
                                     data={props.tableData}
+                                    selectedYear={props.selectedYear}
                                 />
                                 : null}
 

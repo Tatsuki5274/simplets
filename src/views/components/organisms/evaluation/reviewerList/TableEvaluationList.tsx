@@ -28,11 +28,12 @@ export type TableEvaluationListType = {
 
 type Props = {
     data: (TableEvaluationListType | null)[] | null
+    selectedYear: number | null
 }
 
 
 export default function (props:Props) {
-    if(props.data){
+    if(props.data && props.selectedYear){
         return (
             <Table bordered>
                 <thead>
@@ -40,9 +41,9 @@ export default function (props:Props) {
                         <TableHeaderCell>部門</TableHeaderCell>
                         <TableHeaderCell>氏名</TableHeaderCell>
                         <TableHeaderCell>ステータス</TableHeaderCell>
-                        <TableHeaderCell>今期評価</TableHeaderCell>
-                        <TableHeaderCell>前期評価</TableHeaderCell>
-                        <TableHeaderCell>前々期評価</TableHeaderCell>
+                        <TableHeaderCell>{`今期評価(${props.selectedYear}年度)`}</TableHeaderCell>
+                        <TableHeaderCell>{`前期評価(${props.selectedYear - 1}年度)`}</TableHeaderCell>
+                        <TableHeaderCell>{`前々期評価(${props.selectedYear - 2}年度)`}</TableHeaderCell>
                         <TableHeaderCell>プレビュー</TableHeaderCell>
                     </tr>
                 </thead>

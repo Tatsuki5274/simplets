@@ -66,6 +66,7 @@ export default function () {
 
     // const [header, setHeader] = useState<HeaderProps | null>(null)
     const [years, setYears] = useState<number[] | null>(null)
+    const [selectedYear, setSelectedYear] = useState<number | null>(null)
     const [groups, setGroups] = useState<SelectLabel[] | null>(null)
     const currentEmployee = useContext(EmployeeContext);
     const header = useContext(HeaderContext);
@@ -73,7 +74,7 @@ export default function () {
 
 
     useEffect(()=>{
-        if(currentUser){
+        if(currentUser && currentEmployee){
             (async ()=>{
                 const listQV: APIt.ListSheetRevieweeQueryVariables = {
                     companyID: currentUser.attributes["custom:companyId"],
@@ -84,7 +85,7 @@ export default function () {
                     }
                   };
                 const sheets = await SheetDao.listReviewee(listSheetReviewee, listQV)
-                console.log("sheets", sheets)
+                // console.log("sheets", sheets)
                 if(sheets){
                     const obj: (TableEvaluationListType | null)[] = sheets.map(sheet => {
                         let ret: (TableEvaluationListType | null) = null
@@ -99,13 +100,13 @@ export default function () {
                             }
                         }
                         const lastYearsAgoOverAllEvaluation = sheets.find(comSheet => {
-                            console.log(sheet.year, comSheet.year)
+                            // console.log(sheet.year, comSheet.year)
                             if (!sheet.year) return false
-                            return sheet.year - 1 === comSheet.year
+                            return sheet.year - 1 === comSheet.year && sheet.reviewee === comSheet.reviewee
                         })?.overAllEvaluation || null
                         const twoYearsAgoOverAllEvaluation = sheets.find(comSheet => {
                             if (!sheet.year) return false
-                            return sheet.year - 2 === comSheet.year
+                            return sheet.year - 2 === comSheet.year && sheet.reviewee === comSheet.reviewee
                         })?.overAllEvaluation || null
                         if(sheet.sheetGroupLocalId && sheet.year && sheet.statusValue && sheet.revieweeEmployee){
                             ret = {
@@ -137,17 +138,25 @@ export default function () {
                       }
                       return 0
                     })
-                    
+
+                    //初期表示データをフィルター
+                    const startMonth = currentEmployee?.company?.startMonth
+                    const currentYear = getThisYear(startMonth)
+                    const filteredObj = obj.filter(sheet => {
+                      if(sheet) return sheet.data.year === currentYear
+                    })
+                    setSelectedYear(currentYear)
+
                     setInitTableData(obj)
-                    setTableData(obj)
-                    console.log("tableData", obj)
+                    setTableData(filteredObj)
+                    // console.log("tableData", obj)
                 }else{
                   // setError("シート情報の取得に失敗しました")
                   console.error("シート情報の取得に失敗しました")
                 }
             })()
         }
-    }, [currentUser])
+    }, [currentUser, currentEmployee])
 
 
     useEffect(()=>{
@@ -212,6 +221,8 @@ export default function () {
               years: years,
               groups: groups
             }}
+            selectedYear={selectedYear}
+            setSelectedYear={setSelectedYear}
         />
         // <EvaluationFilter
         //     radioButtons={radioButtonMock}
