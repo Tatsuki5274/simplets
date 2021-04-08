@@ -1,8 +1,8 @@
-import { GetReportQueryVariables, Report } from "API";
+import { GetReportQueryVariables, ListEmployeesManagerQueryVariables, Report } from "API";
 import { EmployeeContext, ErrorContext, HeaderContext, SidebarContext, UserContext } from "App";
-import { getReport } from "graphql/queries";
+import { getReport, listEmployees } from "graphql/queries";
+import { EmployeeDao } from "lib/dao/employeeDao";
 import { ReportDao } from "lib/dao/reportDao";
-import { getReviewers } from "lib/util";
 import React, { useContext, useEffect, useState } from "react";
 import { Superior } from "views/components/atoms/Types";
 import { RevieweeCreateReportType } from "views/components/organisms/report/reviewee/CreateReport";
@@ -45,25 +45,36 @@ export default function (props: Props) {
                             username: currentEmployee.superiorUsername || null,
                         }
 
-                        const managers = (await getReviewers(currentUser.username, currentUser.attributes["custom:companyId"])).referencer
+                        const listI : ListEmployeesManagerQueryVariables = {
+                            companyID: currentEmployee.companyID
+                        }
+                        const referencers = await EmployeeDao.list(listEmployees,listI)
 
-                        if (currentUser?.attributes.sub) {
-                            const reportItem: RevieweeCreateReportType = {
-                                sub: currentUser.attributes.sub,
-                                date: String(props.match.params.date),
-                                companyID: currentEmployee.companyID || "",
-                                superior: superiorItem,
-                                superiorName: `${currentEmployee.superior?.lastName || ""} ${currentEmployee.superior?.firstName || ""}`,
-                                referencer: managers,
-                                reviewer: [currentEmployee.superiorUsername || ""],
-                                reviewee: currentEmployee.username || "",
-                                revieweeName: `${currentEmployee.lastName}${currentEmployee.firstName}`,
-                                workStatus: mockData.workStatusList,
+                        if (referencers) {
+                            const referencersUsername = referencers.map(referencer => {
+                                return referencer.username || null
+                            })
+                            if (currentUser?.attributes.sub) {
+                                const reportItem: RevieweeCreateReportType = {
+                                    sub: currentUser.attributes.sub,
+                                    date: String(props.match.params.date),
+                                    companyID: currentEmployee.companyID || "",
+                                    superior: superiorItem,
+                                    superiorName: `${currentEmployee.superior?.lastName || ""} ${currentEmployee.superior?.firstName || ""}`,
+                                    referencer: referencersUsername,
+                                    reviewer: [currentEmployee.superiorUsername || ""],
+                                    reviewee: currentEmployee.username || "",
+                                    revieweeName: `${currentEmployee.lastName}${currentEmployee.firstName}`,
+                                    workStatus: mockData.workStatusList,
+                                }
+                                setReportData(reportItem)
+                            } else {
+                                console.error("認証情報が取得できません")
+                                setError("認証情報が取得できません")
                             }
-                            setReportData(reportItem)
                         } else {
-                            console.error("認証情報が取得できません")
-                            setError("認証情報が取得できません")
+                            console.error("参照者が取得できません")
+                            setError("参照者が取得できません")
                         }
 
                     }
