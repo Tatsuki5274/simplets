@@ -1,4 +1,4 @@
-import { EmployeeType, GetEmployeeQueryVariables, ListEmployeeLocalIdQueryVariables, ListEmployeesQueryVariables } from "API";
+import { BooleanType, EmployeeType, GetEmployeeQueryVariables, ListEmployeeLocalIdQueryVariables, ListEmployeesQueryVariables } from "API";
 import { ErrorContext, HeaderContext, SidebarContext, UserContext } from "App";
 import { getEmployee, listEmployeeLocalId, listEmployees, listGroups } from "graphql/queries";
 import { EmployeeDao } from "lib/dao/employeeDao";
@@ -86,13 +86,19 @@ export default function (props: Props) {
                 }
                 const superiors = await EmployeeDao.list(listEmployees, listI)
                 if (superiors) {
+                    const noSuperiorLabel: SelectLabel[] = [
+                        {
+                            label: "なし",
+                            value: ""
+                        }
+                    ]
                     const superiorsLabel: SelectLabel[] = superiors.map(superior => {
                         return {
                             label: `${superior.localID} ${superior.lastName}${superior.firstName}`,
                             value: superior.username || ""
                         }
                     })
-                    setSuperiors(superiorsLabel)
+                    setSuperiors(noSuperiorLabel.concat(superiorsLabel))
                 } else {
                     setError("上司情報の取得に失敗しました")
                     console.error("上司情報の取得に失敗しました")
@@ -102,7 +108,7 @@ export default function (props: Props) {
     }, [currentUser])
 
     useEffect(() => {
-        // 上司情報の取得
+        // 社員情報の取得
         (async () => {
             if (currentUser) {
                 const listI: ListEmployeeLocalIdQueryVariables = {
@@ -126,6 +132,7 @@ export default function (props: Props) {
                             localId: getEmployeeItem[0].localID || "",
                             managerValue: String(getEmployeeItem[0].manager),
                             superior: getEmployeeItem[0].superiorUsername || "",
+                            isDeleted: getEmployeeItem[0].isDeleted || BooleanType.FALSE,
                         }
                         setEmployee(employeeItem)
                     } else {

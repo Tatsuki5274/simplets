@@ -1,21 +1,22 @@
+import { BooleanType, CreateEmployeeInput, EmployeeType } from "API";
+import { ErrorContext } from "App";
 import { Formik } from "formik";
-import React from "react";
+import { createEmployee } from "graphql/mutations";
+import { EmployeeDao } from "lib/dao/employeeDao";
+import React, { useContext } from "react";
+import { useHistory } from "react-router";
+import { routeBuilder } from "router";
 import styled from "styled-components";
 import Button from "views/components/atoms/Button";
 import Text from "views/components/atoms/Text";
 import TextField from "views/components/atoms/TextField";
+import { SelectLabel } from "views/components/atoms/Types";
 import CommandButton from "views/components/molecules/CommandButton";
 import PullDown from "views/components/molecules/PullDown";
 
 type Props = {
-    groups: {
-        label: string
-        value: string
-    }[],
-    superiors: {
-        label: string
-        value: string
-    }[],
+    groups: SelectLabel[],
+    superiors: SelectLabel[],
     isAdmin: {
         label: string
         value: string
@@ -24,9 +25,13 @@ type Props = {
         label: string
         value: string
     }[],
+    companyId: string
 }
 
 export default function (props: Props) {
+    const history = useHistory();
+    const setError = useContext(ErrorContext);
+
     return (
         <Formik
             initialValues={{
@@ -36,12 +41,36 @@ export default function (props: Props) {
                 groupList: props.groups[0].value,
                 email: "",
                 grade: "",
-                superiorList: props.superiors[0].value,
+                superiorList: props.superiors ? props.superiors[0].value : "",
                 isAdmin: props.isAdmin[0].value,
                 manager: props.manager[0].value,
             }}
-            onSubmit={(values) => {
-                console.log("values", values)
+            onSubmit={async (values) => {
+                // console.log("values", values)
+                if (window.confirm("社員登録を行いますか？")) {
+                    const createI: CreateEmployeeInput = {
+                        companyID: props.companyId,
+                        email: values.email,
+                        employeeGroupLocalId: values.groupList,
+                        firstName: values.firstName,
+                        grade: values.grade,
+                        isDeleted: BooleanType.FALSE,
+                        lastName: values.lastName,
+                        localID: values.localID,
+                        manager: values.manager === "NORMAL" ? EmployeeType.NORMAL : values.manager === "MANAGER" ? EmployeeType.MANAGER : values.manager === "SUPER_MANAGER" ? EmployeeType.SUPER_MANAGER : EmployeeType.OTHER,
+                        superiorUsername: values.superiorList,
+                        username: values.email,
+                        isCompanyAdmin: values.isAdmin === "true" ? true : false,
+                    }
+                    const createItem = await EmployeeDao.create(createEmployee, createI);
+                    if (createItem) {
+                        window.confirm("社員情報の登録が完了しました。");
+                        history.push(routeBuilder.adminEmployeeListPath());
+                    } else {
+                        setError("社員情報の登録に失敗しました")
+                        console.error("社員情報の登録に失敗しました")
+                    }
+                }
             }}
         >
             {formik => (
@@ -157,7 +186,7 @@ export default function (props: Props) {
                             社員登録
                     </CommandButton>
                         <SpaceStyle>
-                            <Button href="/test">キャンセル</Button>
+                            <Button href={routeBuilder.adminEmployeeListPath()}>キャンセル</Button>
                         </SpaceStyle>
                     </table>
                 </form>

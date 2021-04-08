@@ -8,13 +8,7 @@ import { AdminEmployeeDataType } from "views/components/organisms/admin/employee
 import AdminEmployeeList from "views/components/templates/admin/employee/AdminEmployeeList";
 import * as APIt from 'API';
 import { EmployeeDao } from "lib/dao/employeeDao";
-
-const mockData = {
-    link: {
-        label: "社員登録",
-        dest: "/test"
-    },
-}
+import { routeBuilder } from "router";
 
 export default function () {
     const header = useContext(HeaderContext);
@@ -26,6 +20,13 @@ export default function () {
 
     const currentUser = useContext(UserContext);
     const setError = useContext(ErrorContext)
+
+    const mockData = {
+        link: {
+            label: "社員登録",
+            dest: routeBuilder.adminEmployeeNewPath(),
+        },
+    }
 
     useEffect(() => {
         // 社員情報の取得
@@ -44,7 +45,10 @@ export default function () {
                             label: "",
                             dest: "",
                         }
-                        link = { label: "変更", dest: "/test" } //仮で設定
+                        link = { 
+                            label: "変更",
+                            dest: employee.localID ? routeBuilder.adminEmployeeEditPath(employee.localID) : ""
+                         } 
 
                         if (employee.email && employee.localID && employee.group && employee.group.name && employee.employeeGroupLocalId) {
                             ret = {
@@ -59,7 +63,7 @@ export default function () {
                                     lastName: employee.superior?.lastName || "",
                                     firstName: employee.superior?.firstName || "",
                                 },
-                                isAdmin: false, //仮で設定
+                                isAdmin: employee.isCompanyAdmin ? employee.isCompanyAdmin : false,
                                 manager: employee.manager || EmployeeType.NORMAL
                             }
                         }

@@ -1,7 +1,7 @@
-import { DeleteEmployeeInput, DeleteSheetInput, ListEmployeesManagerQueryVariables, ListSheetRevieweeQueryVariables } from "API";
+import { BooleanType, DeleteEmployeeInput, DeleteSheetInput, EmployeeType, ListEmployeesManagerQueryVariables, ListSheetRevieweeQueryVariables, UpdateEmployeeInput } from "API";
 import { ErrorContext } from "App";
 import { Formik } from "formik";
-import { deleteEmployee, deleteSheet } from "graphql/mutations";
+import { deleteEmployee, deleteSheet, updateEmployee } from "graphql/mutations";
 import { listEmployees, listSheetReviewee } from "graphql/queries";
 import { EmployeeDao } from "lib/dao/employeeDao";
 import { SheetDao } from "lib/dao/sheetDao";
@@ -29,6 +29,7 @@ export type AdminEditEmployeeDataType = {
     superior: string,
     isAdminValue: string,
     managerValue: string,
+    isDeleted: BooleanType,
 }
 
 type Props = {
@@ -57,13 +58,35 @@ export default function (props: Props) {
                 firstName: props.employee.firstName,
                 groupList: props.groups[props.groups.findIndex((element) => element.value === props.employee.groupId)].value,
                 grade: props.employee.grade,
-                superiorList: props.superiors[props.superiors.findIndex((element) => element.value === props.employee.superior)].value,
+                superiorList: props.employee.superior ? props.superiors[props.superiors.findIndex((element) => element.value === props.employee.superior)].value : props.superiors[0].value,
                 isAdmin: props.isAdmin[props.isAdmin.findIndex((element) => element.value === props.employee.isAdminValue)].value,
                 manager: props.manager[props.manager.findIndex((element) => element.value === props.employee.managerValue)].value,
             }}
-            onSubmit={(values) => {
-                console.log("values", values)
-                window.alert("社員情報を変更しました");
+            onSubmit={async (values) => {
+                if (window.confirm("変更内容を保存してよろしいですか？")) {
+                    console.log("values", values)
+                    const updateI: UpdateEmployeeInput = {
+                        companyID: props.employee.companyId,
+                        username: props.employee.username,
+                        lastName: values.lastName,
+                        firstName: values.firstName,
+                        employeeGroupLocalId: values.groupList,
+                        grade: values.grade,
+                        isCompanyAdmin: values.isAdmin === "true" ? true : false,
+                        superiorUsername: values.superiorList,
+                        manager: values.manager === "MANAGER" ? EmployeeType.MANAGER : values.manager === "SUPER_MANAGER" ? EmployeeType.SUPER_MANAGER : values.manager === "NORMAL" ? EmployeeType.NORMAL : null,
+                        isDeleted:  props.employee.isDeleted,
+                        
+                    }
+                    const updateItem = await EmployeeDao.update(updateEmployee, updateI);
+                    if (updateItem) {
+                        window.alert("社員情報を変更しました");
+                        history.push(routeBuilder.adminEmployeeListPath());
+                    } else {
+                        console.log("社員情報の更新に失敗しました");
+                        setError("社員情報の更新に失敗しました");
+                    }
+                }
             }}
         >
             {formik => (
@@ -141,7 +164,7 @@ export default function (props: Props) {
                                     name="superiorList"
                                     handleChange={formik.handleChange}
                                     options={props.superiors}
-                                    defaultIndex={props.superiors.findIndex((element) => element.value === props.employee.superior)}
+                                    defaultIndex={props.employee.superior ? props.superiors.findIndex((element) => element.value === props.employee.superior) : 0}
                                 />
                             </td>
                         </tr>
@@ -179,7 +202,7 @@ export default function (props: Props) {
                         </SpaceStyle>
 
                         <SpaceStyle>
-                            <Button href="/test">キャンセル</Button>
+                            <Button href={routeBuilder.adminEmployeeListPath()}>キャンセル</Button>
                         </SpaceStyle>
 
                         <SpaceStyle>

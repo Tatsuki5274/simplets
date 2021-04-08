@@ -1,5 +1,5 @@
 import React from "react";
-import { LinkType } from "views/components/atoms/Types";
+import { LinkType, SelectLabel } from "views/components/atoms/Types";
 import Title from "views/components/molecules/Title";
 import AdminEmployeeCreateInput from "views/components/organisms/admin/employee/AdminEmployeeCreateInput";
 import Header, { HeaderProps } from "views/components/organisms/common/Header";
@@ -13,14 +13,8 @@ type Props = {
     header: HeaderProps | null
     sidebar: LinkType[][] | null
 
-    groups: {
-        label: string
-        value: string
-    }[],
-    superiors: {
-        label: string
-        value: string
-    }[],
+    groups: SelectLabel[] | null,
+    superiors: SelectLabel[] | null,
     isAdmin: {
         label: string
         value: string
@@ -29,6 +23,7 @@ type Props = {
         label: string
         value: string
     }[],
+    companyId: string
 }
 
 export default function (props: Props) {
@@ -51,9 +46,16 @@ export default function (props: Props) {
                     <Content>
                         <>
                             <Title>社員登録</Title>
-                            <AdminEmployeeCreateInput
-                                {...props}
-                            />
+
+                            {props.superiors && props.groups ?
+                                <AdminEmployeeCreateInput
+                                    groups={props.groups}
+                                    isAdmin={props.isAdmin}
+                                    manager={props.manager}
+                                    superiors={props.superiors}
+                                    companyId={props.companyId}
+                                />
+                                : null}
                         </>
                     </Content>
                 </RightBox>

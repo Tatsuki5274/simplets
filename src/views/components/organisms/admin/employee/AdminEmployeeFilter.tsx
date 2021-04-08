@@ -18,7 +18,7 @@ export default function (props: Props) {
                 groupList: props.groups[0].value
             }}
             onSubmit={(values) => {
-                console.log("values", values)
+                // console.log("values", values)
                 if (props.initTableData) {
                     let filter: (AdminEmployeeDataType | null)[] = props.initTableData
                     // 部署フィルター
