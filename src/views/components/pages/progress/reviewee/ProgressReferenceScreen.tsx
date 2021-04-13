@@ -71,7 +71,7 @@ export default function () {
                             groupId: sheet.sheetGroupLocalId || "",
                             year: sheet.year || -1, // unsafe
                             employeeId: sheet.revieweeEmployee ? sheet.revieweeEmployee.localID || "" : "",
-                            employeeName: sheet.revieweeEmployee ? sheet.revieweeEmployee.lastName || "" + sheet.revieweeEmployee.firstName || "" : "",
+                            employeeName: sheet.revieweeEmployee ? `${sheet.revieweeEmployee.lastName} ${sheet.revieweeEmployee.firstName}` : "",
                             groupName: sheet.sheetGroupName || "",
                             avg: 1,
                             gaugeId: sheet.sheetGroupLocalId ? createGaugeId(`chart-${sheet.sheetGroupLocalId}-${getSheetKeys(sheet)}`) : null,
