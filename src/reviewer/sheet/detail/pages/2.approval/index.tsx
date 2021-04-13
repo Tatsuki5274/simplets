@@ -150,6 +150,7 @@ export const ReviewerSheetPagesStatus2 = ()=>{
                                                     // const updatedSheet = runUpdateSheet(props.values);
                                                     if (updatedSheet) {
                                                         console.log("保存成功", updatedSheet)
+                                                        window.alert("保存が完了しました")
                                                     } else {
                                                         setError("保存失敗")
                                                         console.error("保存失敗", updatedSheet)
@@ -159,7 +160,7 @@ export const ReviewerSheetPagesStatus2 = ()=>{
                                                     console.error("評価シートの特定に失敗しました")
                                                 }
     
-                                            }}>保存</Button>
+                                            }}>一時保存</Button>
                                             
                                             <Button type="submit" className={buttonComponentStyle}>目標内容承認</Button>
                                             <Button onClick={handleShow} className={buttonComponentStyle}>差し戻し</Button>

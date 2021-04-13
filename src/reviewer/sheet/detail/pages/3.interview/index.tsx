@@ -46,6 +46,7 @@ export const ReviewerSheetPagesStatus3 = (props: Props) => {
             // const updatedSheet = runUpdateSheet(props.values);
             if (updatedSheet) {
                 console.log("保存成功")
+                window.alert("保存が完了しました")
             } else {
                 setError("保存失敗")
                 console.error("保存失敗", updatedSheet)
@@ -106,7 +107,7 @@ export const ReviewerSheetPagesStatus3 = (props: Props) => {
 
                                     {/* ステータスによってボタンの出し分け */}
                                     <Form.Group>
-                                        <Button type="submit" className={buttonComponentStyle}>保存</Button>
+                                        <Button type="submit" className={buttonComponentStyle}>一時保存</Button>
 
                                         <Button onClick={handleShow} className={buttonComponentStyle}>差し戻し</Button>
 

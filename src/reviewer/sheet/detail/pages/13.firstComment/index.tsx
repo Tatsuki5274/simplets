@@ -116,13 +116,14 @@ export const ReviewerSheetPagesStatus13 = () => {
                                                     // const updatedSheet = runUpdateSheet(props.values);
                                                     if (updatedSheet) {
                                                         console.log("保存成功")
+                                                        window.alert("保存が完了しました")
                                                     } else {
                                                         setError("保存失敗")
                                                         console.error("保存失敗", updatedSheet)
                                                     }
                                                 }
                                  
-                                            }}>保存</Button>
+                                            }}>一時保存</Button>
 
                                             <Button type="submit" className={buttonComponentStyle}>最終承認</Button>
 
