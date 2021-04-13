@@ -18,44 +18,15 @@
       "function": {
         "approvalStatusManager": {
           "deploymentBucketName": "amplify-sccsystem-dev-115621-deployment",
-          "s3Key": "amplify-builds/approvalStatusManager-2b5a664e783654343558-build.zip"
+          "s3Key": "amplify-builds/approvalStatusManager-79655979444772725450-build.zip"
         },
         "sendEmail": {
           "deploymentBucketName": "amplify-sccsystem-dev-115621-deployment",
-          "s3Key": "amplify-builds/sendEmail-704e69774d4952544c75-build.zip"
+          "s3Key": "amplify-builds/sendEmail-5858497a4d51436a5642-build.zip"
         },
         "scriptGraphQL": {
           "deploymentBucketName": "amplify-sccsystem-dev-115621-deployment",
-          "s3Key": "amplify-builds/scriptGraphQL-757937484a65316c596a-build.zip"
-        },
-        "resolvers": {
-          "deploymentBucketName": "amplify-sccsystem-dev-115621-deployment",
-          "s3Key": "amplify-builds/resolvers-52424f6863396a452b71-build.zip"
-        },
-        "dbStream": {
-          "deploymentBucketName": "amplify-sccsystem-dev-115621-deployment",
-          "s3Key": "amplify-builds/dbStream-6974554f775330714969-build.zip"
-        }
-      }
-    },
-    "nonCFNdata": {
-      "function": {
-        "modules": {
-          "layerVersionMap": {
-            "1": {
-              "permissions": [
-                {
-                  "type": "awsOrg",
-                  "orgs": [
-                    "o-srfujeqg8q"
-                  ]
-                },
-                {
-                  "type": "private"
-                }
-              ]
-            }
-          }
+          "s3Key": "amplify-builds/scriptGraphQL-6357426c6b43416e4946-build.zip"
         }
       }
     }

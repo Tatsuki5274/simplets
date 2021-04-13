@@ -17,11 +17,5 @@
       ]
     }
   },
-  "lambdaLayers": [
-    {
-      "type": "ProjectLayer",
-      "resourceName": "modules",
-      "version": 1
-    }
-  ]
+  "lambdaLayers": []
 }

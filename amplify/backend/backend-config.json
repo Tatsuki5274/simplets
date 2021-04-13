@@ -91,13 +91,6 @@
             "GraphQLAPIIdOutput",
             "GraphQLAPIEndpointOutput"
           ]
-        },
-        {
-          "category": "function",
-          "resourceName": "modules",
-          "attributes": [
-            "Arn"
-          ]
         }
       ]
     },
@@ -120,20 +113,8 @@
           "attributes": [
             "UserPoolId"
           ]
-        },
-        {
-          "category": "function",
-          "resourceName": "modules",
-          "attributes": [
-            "Arn"
-          ]
         }
       ]
-    },
-    "modules": {
-      "providerPlugin": "awscloudformation",
-      "service": "LambdaLayer",
-      "build": true
     }
   }
 }
