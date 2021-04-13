@@ -125,14 +125,16 @@ export default async function UpdateOwners(event: EventType) {
                         }
                     }
                 }
-
                 // 報告書を選択
                 const selectedReports = reports.filter(report => report.sub === employee.sub)
-                // console.log(selectedReports)
+                const referencerReport = employees.map(employee => {
+                    return employee.username || null
+                })
+                // console.log("referencerReport:",referencerReport)
                 for (const report of selectedReports) {
                     // 選択報告書の権限を上書き
                     report.reviewer = secondReviewers;
-                    report.referencer = referencer;
+                    report.referencer = referencerReport;
                 }
             }
         }
