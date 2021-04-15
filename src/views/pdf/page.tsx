@@ -1,11 +1,12 @@
 import { ErrorContext, UserContext } from "App";
-import { getSheet, listSheetReviewee } from "graphql/queries";
+import { getEmployee, getSheet, listSheetReviewee } from "graphql/queries";
 import { SheetDao } from "lib/dao/sheetDao";
 import React, { useContext, useEffect, useState } from "react";
 import { PDFTemplete } from "./templete";
 import * as APIt from 'API';
 import { getStatusValue } from "lib/getStatusValue";
 import { Section, Sheet } from "API";
+import { EmployeeDao } from "lib/dao/employeeDao";
 
 type Props = {
     match: {
@@ -36,6 +37,8 @@ export function PDFPage(props:Props) {
     const setError = useContext(ErrorContext)
     const [sheet, setSheet] = useState<Sheet | null>(null);
     const [lastOverAllEvaluations, setlastOverAllEvaluations] = useState<Array<number | null> | null>();
+    const [secondReviewerName, setSecondReviewerName] = useState<string | null>(null);
+    // const [topReviewerName, setTopReviewerName] = useState<string | null>(null);
     useEffect(() => {
         (async () => {
             const res = await SheetDao.get(getSheet, {
@@ -102,6 +105,29 @@ export function PDFPage(props:Props) {
         })()
     }, [sheet, setError])
 
+    useEffect(() => {
+        (async () => {
+            // 所属長の氏名を取得
+            if (sheet) {
+                if (sheet.secondUsername) {
+                    const getI: APIt.GetEmployeeQueryVariables = {
+                        companyID: sheet.companyID,
+                        username: sheet.secondUsername,
+                    }
+                    const getSecondReviewer = await EmployeeDao.get(getEmployee, getI);
+                    if (getSecondReviewer) {
+                        const secondReviewerName = `${getSecondReviewer.lastName} ${getSecondReviewer.firstName}`
+                        setSecondReviewerName(secondReviewerName);
+                    } else {
+                        console.error("上司情報の取得に失敗しました", getSecondReviewer)
+                        setError("上司情報の取得に失敗しました")
+                    }
+                }
+            }
+
+        })()
+    }, [sheet, setError])
+
     if (sheet) {
         return (
             <PDFTemplete
@@ -110,6 +136,7 @@ export function PDFPage(props:Props) {
                 gradeString={`${sheet.grade}`}
                 lastYearsAgoOverAllEvaluation={lastOverAllEvaluations && lastOverAllEvaluations[0] ? lastOverAllEvaluations[0] : null}
                 twoYearsAgoOverAllEvaluation={lastOverAllEvaluations && lastOverAllEvaluations[1] ? lastOverAllEvaluations[1] : null}
+                secondReviewerName={secondReviewerName}
             />
         )
     } else {

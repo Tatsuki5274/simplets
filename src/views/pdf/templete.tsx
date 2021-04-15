@@ -14,6 +14,7 @@ type Props = {
   lastYearsAgoOverAllEvaluation: number | null, //前期評価
   gradeString: string, //等級名称
   approvalStatusString: string, //承認ステータス文字列
+  secondReviewerName: string | null, //所属長氏名
 }
 
 const outputDate = (dateStr: string) => {
@@ -78,7 +79,7 @@ export const PDFTemplete = (props: Props) => {
                   <th>本人氏名</th>
                   <td>{props.sheet.revieweeEmployee?.lastName} {props.sheet.revieweeEmployee?.firstName}</td>
                   <th>所属長氏名</th>
-                  <td>{props.sheet.revieweeEmployee?.superior?.lastName} {props.sheet.revieweeEmployee?.superior?.firstName}</td>
+                  <td>{props.secondReviewerName}</td>
                   <th>部門長氏名</th>
                   <td>{props.sheet.revieweeEmployee?.superior?.superior?.lastName} {props.sheet.revieweeEmployee?.superior?.superior?.firstName}</td>
                 </Table>
