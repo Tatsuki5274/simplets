@@ -22,6 +22,6 @@ function default_1(target, employees) {
             referencer.push(referencerEmployee.username);
         }
     });
-    return [topReviewers, secondReviewers, referencer];
+    return { topReviewers: topReviewers, secondReviewers: secondReviewers, referencer: referencer };
 }
 exports.default = default_1;

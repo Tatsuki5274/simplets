@@ -94,9 +94,9 @@ export default async function UpdateOwners(event: EventType) {
             // 権限取得
             const reviewers = GetPermission(employee, employees)
             // console.log("reviewers:", reviewers)
-            const secondReviewers = reviewers[0]
-            const topReviewers = reviewers[1]
-            const referencer = reviewers[2]
+            const secondReviewers = reviewers.secondReviewers
+            const topReviewers = reviewers.topReviewers
+            const referencer = reviewers.referencer
             if (reviewers) {
                 // 選択シートを取得
                 const selectedSheets = sheets.filter(sheet => sheet.sub === employee.sub)

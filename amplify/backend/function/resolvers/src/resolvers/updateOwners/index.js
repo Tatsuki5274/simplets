@@ -108,9 +108,9 @@ function UpdateOwners(event) {
                     if (!(employees && sheets)) return [3, 7];
                     _loop_1 = function (employee) {
                         var reviewers = GetPermission_1.default(employee, employees);
-                        var secondReviewers = reviewers[0];
-                        var topReviewers = reviewers[1];
-                        var referencer = reviewers[2];
+                        var secondReviewers = reviewers.secondReviewers;
+                        var topReviewers = reviewers.topReviewers;
+                        var referencer = reviewers.referencer;
                         if (reviewers) {
                             var selectedSheets = sheets.filter(function (sheet) { return sheet.sub === employee.sub; });
                             var _loop_2 = function (sheet) {
@@ -140,10 +140,13 @@ function UpdateOwners(event) {
                                 _loop_2(sheet);
                             }
                             var selectedReports = reports.filter(function (report) { return report.sub === employee.sub; });
+                            var referencerReport = employees.map(function (employee) {
+                                return employee.username || null;
+                            });
                             for (var _a = 0, selectedReports_1 = selectedReports; _a < selectedReports_1.length; _a++) {
                                 var report = selectedReports_1[_a];
                                 report.reviewer = secondReviewers;
-                                report.referencer = referencer;
+                                report.referencer = referencerReport;
                             }
                         }
                     };

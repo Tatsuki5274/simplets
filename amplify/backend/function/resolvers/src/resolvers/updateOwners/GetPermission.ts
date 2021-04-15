@@ -23,5 +23,5 @@ export default function (target: Employee, employees: Employee[]) {
         }
     })
 
-    return [topReviewers, secondReviewers, referencer]
+    return {topReviewers, secondReviewers, referencer}
 }
