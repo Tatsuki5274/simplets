@@ -4,6 +4,7 @@ import { Formik } from "formik";
 import { createGroup } from "graphql/mutations";
 import { GroupDao } from "lib/dao/groupDao";
 import React, { useContext } from "react";
+import { useHistory } from "react-router";
 import { routeBuilder } from "router";
 import styled from "styled-components";
 import Button from "views/components/atoms/Button";
@@ -17,6 +18,7 @@ type Props = {
 
 export default function (props:Props) {
     const setError = useContext(ErrorContext)
+    const history = useHistory();
     return (
         <Formik
             initialValues={{
@@ -32,6 +34,7 @@ export default function (props:Props) {
                 const groupItem = await GroupDao.create(createGroup, createI);
                 if (groupItem) {
                     window.alert("部署登録が完了しました")
+                    history.push(routeBuilder.adminGroupListPath())
                 } else {
                     setError("部署登録に失敗しました")
                     console.error("部署登録に失敗しました")

@@ -127,7 +127,7 @@ export default function (props: Props) {
                             firstName: getEmployeeItem[0].firstName || "",
                             grade: getEmployeeItem[0].grade || "",
                             groupId: getEmployeeItem[0].employeeGroupLocalId || "",
-                            isAdminValue: "false", // 仮で設定
+                            isAdminValue: getEmployeeItem[0].isCompanyAdmin === true ? "true" : "false",
                             lastName: getEmployeeItem[0].lastName || "",
                             localId: getEmployeeItem[0].localID || "",
                             managerValue: String(getEmployeeItem[0].manager),

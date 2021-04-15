@@ -4,6 +4,7 @@ import { Formik } from "formik";
 import { updateGroup } from "graphql/mutations";
 import { GroupDao } from "lib/dao/groupDao";
 import React, { useContext } from "react";
+import { useHistory } from "react-router";
 import { routeBuilder } from "router";
 import styled from "styled-components";
 import Button from "views/components/atoms/Button";
@@ -19,6 +20,7 @@ type Props = {
 
 export default function (props: Props) {
     const setError = useContext(ErrorContext);
+    const history = useHistory();
 
     return (
         <Formik
@@ -33,7 +35,8 @@ export default function (props: Props) {
                 }
                 const updateItem = GroupDao.update(updateGroup, updateI)
                 if (updateItem) {
-                    window.alert("保存が完了しました")
+                    window.alert("部署情報の更新が完了しました")
+                    history.push(routeBuilder.adminGroupListPath())
                 } else {
                     console.error("部署情報の更新に失敗しました")
                     setError("部署情報の更新に失敗しました")

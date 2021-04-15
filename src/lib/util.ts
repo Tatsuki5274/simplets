@@ -132,8 +132,11 @@ export function createSidebarElements(isManager: boolean, isAdmin: boolean): { l
 
     if (isManager && isAdmin) {
         for (let i = 0; i < results.length; i++) {
-            for (let j = 0; j < managerContents.length; j++)
-                results[i].push(managerContents[i][j])
+            for (let j = 0; j < managerContents.length; j++) {
+                if (managerContents[i][j]) {
+                    results[i].push(managerContents[i][j])
+                }
+            }
         }
         results.push(adminContents)
     } else if (isAdmin) {
