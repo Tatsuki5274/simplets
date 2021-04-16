@@ -306,7 +306,7 @@ type Report
     {allow: groups, groups: ["Admin"]}
 
     # オーナーフィールド
-    {allow: owner, ownerField: "reviewee", operations: [create, update, read]}
+    {allow: owner, ownerField: "reviewee", operations: [create, update, read, delete]}
     {allow: owner, ownerField: "referencer", operations: [read]}
     {allow: owner, ownerField: "reviewer", operations: [read, update]}
 
