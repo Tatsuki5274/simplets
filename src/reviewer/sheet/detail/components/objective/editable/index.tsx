@@ -1,6 +1,5 @@
 import { tableHeaderStyle } from "common/globalStyle.module.scss";
 import dateFormat from "dateformat";
-import { getObjectiveKeys, getSectionKeys } from "lib/util";
 import React, { useContext } from "react"
 import style from '../common/style.module.scss';
 import * as APIt from 'API';
@@ -33,7 +32,7 @@ export const ReviewerSheetDetailObjectiveEditable = (props: Props) => {
         });
 
         return (
-            <div key={getSectionKeys(section)}>
+            <div key={section.id}>
                 <h4>{section.sectionCategoryName}</h4>
                 <ScrollTable>
                     <thead className={tableHeaderStyle}>
@@ -61,7 +60,7 @@ export const ReviewerSheetDetailObjectiveEditable = (props: Props) => {
                                 styleObjective = "";
                             }
                             return (
-                                <tr key={getObjectiveKeys(objective)} className={styleObjective}>
+                                <tr key={objective.id} className={styleObjective}>
 
                                     {/* 目標本文 */}
                                     <td>{objective.content}</td>
@@ -86,14 +85,14 @@ export const ReviewerSheetDetailObjectiveEditable = (props: Props) => {
 
                                     {/* 最終評価 */}
                                     <td className={style.detailSelect}>
-                                        <select name={`lastEvaluation[${getObjectiveKeys(objective).replace(/[.]/g, '-')}]`} onChange={async (event: React.ChangeEvent<HTMLSelectElement>)=>{
+                                        <select name={`lastEvaluation[${objective.id}]`} onChange={async (event: React.ChangeEvent<HTMLSelectElement>)=>{
                                             props.onChange(event)
-                                            if(objective.createdAt && objective.sectionKeys){
+                                            if(objective.createdAt && objective.id){
                                                 const objectiveLastEvaluation = parseInt(event.currentTarget.value);
                                                 const updateI: APIt.UpdateObjectiveInput = {
                                                     // id: objectiveId,
                                                     createdAt: objective.createdAt,
-                                                    sectionKeys: objective.sectionKeys,
+                                                    id: objective.id,
                                                     lastEvaluation: objectiveLastEvaluation,
                                                 };
                                                 const updatedObjective = await ObjectiveDao.update(updateObjective, updateI)

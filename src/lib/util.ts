@@ -1,9 +1,8 @@
 import { routeBuilder } from "router";
-import { EmployeeType, GetEmployeeQueryVariables, ListEmployeesQueryVariables, Objective, ReportWorkingStatus, Section, Sheet } from "API";
+import { EmployeeType, GetEmployeeQueryVariables, ListEmployeesCompanyQueryVariables, ReportWorkingStatus } from "API";
 import dateFormat from "dateformat";
 import { EmployeeDao } from "./dao/employeeDao";
-import { getEmployee, listEmployees } from "graphql/queries";
-import { string } from "yup";
+import { getEmployee, listEmployeesCompany } from "graphql/queries";
 
 /**
  * 
@@ -34,33 +33,6 @@ export function round(num: number, d: number){
     const n = d - 1 ;	// 小数点第n位まで残す
     const result = Math.round( num * Math.pow( 10, n ) ) / Math.pow( 10, n ) ;
     return result
-}
-
-/**
- * 
- * @param sheet sheetKeysを作成するための元シート
- * @returns 一つでsheetKeysを一意に表現するkey
- */
-export function getSheetKeys(sheet: Sheet): string{
-    return `${sheet.companyID}.${sheet.reviewee}.${sheet.year}`
-}
-
-/**
- * 
- * @param section sectionKeysを作成するための元データ
- * @returns 一つでsectionKeysを一意に表現するkey
- */
-export function getSectionKeys(section: Section): string{
-    return `${section.sheetKeys}.${section.sectionCategoryLocalId}`
-}
-
-/**
- * 
- * @param objective objectiveKeysを作成するための元データ
- * @returns 一つでobjectiveを一意に表現するkey
- */
-export function getObjectiveKeys(objective: Objective): string{
-    return `${objective.sectionKeys}.${objective.createdAt}`
 }
 
 /**
@@ -239,7 +211,6 @@ export async function getReviewers(reviewee: string, companyId: string) {
 
     const getI: GetEmployeeQueryVariables = {
         username: reviewee,
-        companyID: companyId,
     }
     const revieweeEmployee = await EmployeeDao.get(getEmployee, getI);
 
@@ -253,8 +224,8 @@ export async function getReviewers(reviewee: string, companyId: string) {
         }
 
         //参照者情報を取得
-        const superManagersI: ListEmployeesQueryVariables = {
-            companyID: revieweeEmployee?.companyID,
+        const superManagersI: ListEmployeesCompanyQueryVariables = {
+            companyID: revieweeEmployee.companyID,
             filter: {
                 manager: {
                     eq: EmployeeType.SUPER_MANAGER,
@@ -262,19 +233,20 @@ export async function getReviewers(reviewee: string, companyId: string) {
             }
         }
 
-        const groupManagersI: ListEmployeesQueryVariables = {
-            companyID: revieweeEmployee?.companyID,
+        const groupManagersI: ListEmployeesCompanyQueryVariables = {
+            companyID: revieweeEmployee.companyID,
+
             filter: {
-                employeeGroupLocalId: {
-                    eq: revieweeEmployee?.employeeGroupLocalId
+                groupID:{
+                    eq: revieweeEmployee.groupID
                 },
                 manager: {
                     eq: EmployeeType.MANAGER,
                 }
             }
         }
-        const superManagers = await EmployeeDao.list(listEmployees, superManagersI)
-        const groupManagers = await EmployeeDao.list(listEmployees, groupManagersI)
+        const superManagers = await EmployeeDao.listCompany(listEmployeesCompany, superManagersI)
+        const groupManagers = await EmployeeDao.listCompany(listEmployeesCompany, groupManagersI)
 
         let listSuperManagers: Array<string> = [];
         let listGroupManagers: Array<string> = [];
@@ -285,4 +257,14 @@ export async function getReviewers(reviewee: string, companyId: string) {
         result.referencer = managers
     }
     return result
+}
+
+/**
+ * 
+ * @param dateStr 日付
+ * @returns yyyy/mm/dd HH:MMの文字列を返却
+ */
+ export function formatSheetCheckDate(dateStr: string): string {
+    const formatDate = dateStr.replace(/(\d+)-(\d+)-(\d+)-(\d+):(\d+)/g,'$1/$2/$3 $4:$5')
+    return formatDate
 }

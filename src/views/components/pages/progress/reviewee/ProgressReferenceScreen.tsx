@@ -1,8 +1,9 @@
+import { ListGroupsCompanyQueryVariables, ListSheetsCompanyQueryVariables } from "API";
 import { EmployeeContext, HeaderContext, SidebarContext, UserContext } from "App";
-import { listGroups, listSheetReviewee, listSheets } from "graphql/queries";
+import { listGroupsCompany, listSheetsCompany } from "graphql/queries";
 import { GroupDao } from "lib/dao/groupDao";
 import { SheetDao } from "lib/dao/sheetDao";
-import { calcAvg, createGaugeId, getSectionKeys, getSheetKeys, getThisYear } from "lib/util";
+import { calcAvg, createGaugeId, getThisYear } from "lib/util";
 import React, { useContext, useEffect, useState } from "react";
 import { routeBuilder } from "router";
 import { SelectLabel } from "views/components/atoms/Types";
@@ -41,7 +42,10 @@ export default function () {
         // 部署情報の取得
         (async () => {
             if (currentUser) {
-                const groups = await GroupDao.list(listGroups, { companyID: currentUser.attributes["custom:companyId"] })
+                const listI: ListGroupsCompanyQueryVariables = {
+                    companyID: currentUser.attributes["custom:companyId"],
+                }
+                const groups = await GroupDao.listCompany(listGroupsCompany, listI)
                 if (groups) {
                     const groupAll: SelectLabel[] = [
                         {
@@ -52,7 +56,7 @@ export default function () {
                     const groupsLabel: SelectLabel[] = groups.map(group => {
                         return {
                             label: group.name || "",
-                            value: group.localID || ""
+                            value: group.no || ""
                         }
                     })
                     setGroups(groupAll.concat(groupsLabel))
@@ -64,31 +68,34 @@ export default function () {
     useEffect(() => {
         (async () => {
             if (currentUser && years) {
-                const sheets = await SheetDao.listReviewee(listSheetReviewee, { companyID: currentUser.attributes["custom:companyId"], })
+                const listI:ListSheetsCompanyQueryVariables = {
+                    companyID: currentUser.attributes["custom:companyId"],
+                }
+                const sheets = await SheetDao.listCompany(listSheetsCompany, listI)
                 if (sheets) {
                     const result = sheets.map(sheet => {
                         const data: ProgressReferenceType = {
-                            groupId: sheet.sheetGroupLocalId || "",
+                            groupId: sheet.revieweeEmployee?.group?.no || "", // unsafe
                             year: sheet.year || -1, // unsafe
-                            employeeId: sheet.revieweeEmployee ? sheet.revieweeEmployee.localID || "" : "",
+                            employeeId: sheet.revieweeEmployee && sheet.revieweeEmployee.no ? sheet.revieweeEmployee.no : "",
                             employeeName: sheet.revieweeEmployee ? `${sheet.revieweeEmployee.lastName} ${sheet.revieweeEmployee.firstName}` : "",
                             groupName: sheet.sheetGroupName || "",
                             avg: 1,
-                            gaugeId: sheet.sheetGroupLocalId ? createGaugeId(`chart-${sheet.sheetGroupLocalId}-${getSheetKeys(sheet)}`) : null,
+                            gaugeId: sheet.revieweeEmployee?.group?.no ? createGaugeId(`chart-${sheet.revieweeEmployee.group.no}-${sheet.id}`) : null,
                             statusValue: sheet.statusValue || 0,
-                            dest: routeBuilder.reviewerDetailPath(sheet.sub || "", sheet.year?.toString() || ""),   // unsafe
+                            dest: routeBuilder.reviewerDetailPath(sheet.id || ""),   // unsafe
                             objective: sheet.section?.items?.map(sec => {
-                                if (sec && sec.sectionCategoryLocalId) {
+                                if (sec) {
                                     
                                     const data = {
-                                        categoryId: sec.sectionCategoryLocalId,
+                                        categoryId: sec.no || "", // unsafe
                                         categoryName: sec.sectionCategoryName || "",
                                         avg: sec && sec.objective && sec.objective.items ?
                                             calcAvg(sec.objective.items.map((obj) => {
 
                                                 return obj && obj.progress ? obj.progress : obj && obj.progress === 0 ? 0 : null
                                             })) : null,
-                                        gaugeId: createGaugeId(`chart-${getSectionKeys(sec)}`),
+                                        gaugeId: createGaugeId(`chart-${sec.id}`),
                                     }
                                     return data
                                 }
@@ -107,6 +114,16 @@ export default function () {
                         if (a.employeeId > b.employeeId) return 1
                         if (a.employeeId < b.employeeId) return -1
                         return 0
+                    })
+                    result.map(data => {
+                        if (data && data.objective) {
+                            data.objective.sort(function (a, b) {
+                                if (a && b && a.categoryId > b.categoryId) return 1
+                                if (a && b && a.categoryId < b.categoryId) return -1
+                                return 0
+                            }
+                            )
+                        }
                     })
                     setInitCardData(result);
                     const filteredResult = result.filter(record => {

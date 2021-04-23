@@ -1,5 +1,5 @@
 import { ErrorContext, UserContext } from "App";
-import { getEmployee, getSheet, listSheetReviewee } from "graphql/queries";
+import { getEmployee, getSheet, listSheetsReviewee } from "graphql/queries";
 import { SheetDao } from "lib/dao/sheetDao";
 import React, { useContext, useEffect, useState } from "react";
 import { PDFTemplete } from "./templete";
@@ -11,8 +11,7 @@ import { EmployeeDao } from "lib/dao/employeeDao";
 type Props = {
     match: {
         params: {
-            sub: string
-            year: string
+            sheetId: string
         }
     }
 }
@@ -25,7 +24,7 @@ const sortObjective = function (a: any, b: any) {
     }
 }
 const sortCategory = function (a: Section | null, b: Section | null) {
-    if (a?.sectionCategoryLocalId && b?.sectionCategoryLocalId && a.sectionCategoryLocalId > b.sectionCategoryLocalId) {
+    if (a && b && a.no && b.no && a.no > b.no) {
         return 1;
     } else {
         return -1;
@@ -41,10 +40,10 @@ export function PDFPage(props:Props) {
     // const [topReviewerName, setTopReviewerName] = useState<string | null>(null);
     useEffect(() => {
         (async () => {
-            const res = await SheetDao.get(getSheet, {
-                sub: props.match.params.sub,
-                year: parseInt(props.match.params.year)
-            })
+            const getI: APIt.GetSheetQueryVariables = {
+                id: props.match.params.sheetId
+            }
+            const res = await SheetDao.get(getSheet, getI)
             
             if (res && currentUser && res.statusValue === 10 && res.revieweeUsername === currentUser.username) {
                 res.overAllEvaluation = null;
@@ -56,7 +55,7 @@ export function PDFPage(props:Props) {
             res?.section?.items?.sort(sortCategory)
             setSheet(res)
         })()
-    }, [currentUser,props.match.params.sub, props.match.params.year])
+    }, [currentUser,props.match.params.sheetId])
 
     useEffect(() => {
         (async () => {
@@ -64,19 +63,14 @@ export function PDFPage(props:Props) {
             if (sheet) {
                 if (sheet.year) {
                     const thisYear = sheet.year
-                    const input: APIt.ListSheetRevieweeQueryVariables = {
-                        companyID: sheet.companyID,
-                        reviewee: {
-                            eq: sheet.reviewee
+                    const input: APIt.ListSheetsRevieweeQueryVariables = {
+                        sub: sheet.sub,
+                        year: {
+                            between: [thisYear - 2, thisYear - 1]
                         },
-                        filter: {
-                            year: {
-                                between: [thisYear - 2, thisYear - 1]
-                            }
-                        }
                     }
                     console.log("input", input);
-                    const gotSheets = await SheetDao.listReviewee(listSheetReviewee, input)
+                    const gotSheets = await SheetDao.listReviewee(listSheetsReviewee, input)
                     console.log("gotSheets", gotSheets);
 
                     if (gotSheets) {
@@ -111,7 +105,6 @@ export function PDFPage(props:Props) {
             if (sheet) {
                 if (sheet.secondUsername) {
                     const getI: APIt.GetEmployeeQueryVariables = {
-                        companyID: sheet.companyID,
                         username: sheet.secondUsername,
                     }
                     const getSecondReviewer = await EmployeeDao.get(getEmployee, getI);

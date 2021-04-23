@@ -50,9 +50,9 @@ export const RevieweeSheetObjectiveEditableStatus1 = (props: Props) => {
         const objectiveProgress = parseInt(event.currentTarget.value);
 
         if (objective && objectiveProgress >= 0 && objectiveProgress <= 100) {
-            if(objective.sectionKeys && objective.createdAt){
+            if(objective.id && objective.createdAt){
                 const updateI: APIt.UpdateObjectiveInput = {
-                    sectionKeys: objective.sectionKeys,
+                    id: objective.id,
                     createdAt: objective.createdAt,
                     progress: objectiveProgress,
                 };
@@ -72,10 +72,9 @@ export const RevieweeSheetObjectiveEditableStatus1 = (props: Props) => {
     async function handleDeleteObjective(event: any) {
         if(objective){
             if(window.confirm("目標を削除しますか？")){
-                if(objective.createdAt && objective.sectionKeys){
+                if(objective.id){
                     const deleteI: APIt.DeleteObjectiveInput = {
-                        createdAt: objective.createdAt,
-                        sectionKeys: objective.sectionKeys
+                        id: objective.id,
                     };
                     const deletedObjective = await ObjectiveDao.delete(deleteObjective, deleteI)
                     if(deletedObjective){

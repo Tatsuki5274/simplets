@@ -19,6 +19,7 @@ import ErrorMessageView from 'views/components/templates/ErrorMessageView';
 import { Employee, EmployeeType } from 'API';
 import { LinkType } from 'views/components/atoms/Types';
 import { createSidebarElements } from 'lib/util';
+import { getEmployee } from 'graphql/queries';
 Amplify.configure(awsconfig);
 
 // export type Sheet = Omit<Exclude<APIt.GetSheetQuery['getSheet'], null>, '__typename'>;
@@ -58,33 +59,33 @@ export type approvalStatusManagerMutationResult = {
   error?: String  //エラー時のメッセージを格納
 }
 
-const getEmployee = /* GraphQL */ `
-  query GetEmployee($companyID: ID!, $username: ID!) {
-    getEmployee(companyID: $companyID, username: $username) {
-      companyID
-      username
-      firstName
-      lastName
-      superiorUsername
-      employeeGroupLocalId
-      manager
-      isCompanyAdmin
-      group {
-        name
-      }
-      company {
-        id
-        name
-        startMonth
-      }
-      superior {
-        email
-        firstName
-        lastName
-      }
-    }
-  }
-`;
+// const getEmployee = /* GraphQL */ `
+//   query GetEmployee($companyID: ID!, $username: ID!) {
+//     getEmployee(companyID: $companyID, username: $username) {
+//       companyID
+//       username
+//       firstName
+//       lastName
+//       superiorUsername
+//       employeeGroupLocalId
+//       manager
+//       isCompanyAdmin
+//       group {
+//         name
+//       }
+//       company {
+//         id
+//         name
+//         startMonth
+//       }
+//       superior {
+//         email
+//         firstName
+//         lastName
+//       }
+//     }
+//   }
+// `;
 
 function App() {
   const [user, setUser] = useState<any>(null);
@@ -104,7 +105,7 @@ function App() {
   useEffect(() => {
     ; (async () => {
       if (user) {
-        const employee = await EmployeeDao.get(getEmployee, { companyID: user.attributes["custom:companyId"], username: user.username })
+        const employee = await EmployeeDao.get(getEmployee, { username: user.username })
         setEmployee(employee);
         console.log("employee", employee)
       }

@@ -28,7 +28,7 @@ export default function (props:Props) {
             onSubmit={async (values) => {
                 const createI: CreateGroupInput = {
                     companyID: props.companyId,
-                    localID: values.localID,
+                    no: values.localID,
                     name: values.name
                 }
                 const groupItem = await GroupDao.create(createGroup, createI);

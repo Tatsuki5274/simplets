@@ -1,5 +1,11 @@
 type Company #会社
-@model
+@model(
+  queries: {
+    get: "getCompany"
+    list: null
+  }
+  subscriptions: null
+  )
 @auth(
   rules: [
     {allow: groups, groups: ["Admin"]}
@@ -9,7 +15,7 @@ type Company #会社
   ]
 )
 {
-  id: ID!
+  id: ID! # SCCなどの文字列を格納する
 
   name: String!
   startMonth: Int!
@@ -34,10 +40,9 @@ enum BooleanType {
 # ユーザーはcognitoで管理しています。
 # このEmployeeは名簿として機能します。認証とは関係がありません。
 type Employee #社員
-@key(fields: ["companyID", "username"])
-@key(fields: ["companyID", "localID"], name: "employee_local_id", queryField: "listEmployeeLocalID")
-@key(fields: ["companyID", "manager", "isDeleted"], name: "employee_manager", queryField: "listEmployeesManager")
-# @key(fields: ["companyID", "employeeGroupLocalId", "username"], name: "employee_manager_group", queryField: "listEmployeesManagerGroup")
+@key(fields: ["username"])
+@key(fields: ["companyID", "no"], name: "EmployeeByCompany", queryField: "listEmployeesCompany")
+@key(fields: ["companyID", "manager", "isDeleted"], name: "EmployeeByCompanyManager", queryField: "listEmployeesManager") # 非推奨
 @auth(
   rules:[
     {allow: groups, groups: ["Admin"]}
@@ -49,26 +54,32 @@ type Employee #社員
 
     {allow: private}
 
-    { allow: private, provider: iam, operations: [read, update] }
+    { allow: private, provider: iam, operations: [create, read, update] }
   ]
 )
-@model
+@model(
+  queries: {
+    get: "getEmployee"
+    list: null
+  }
+  subscriptions: null
+)
 {
+  username: String! #cognito username
+
   companyID: ID!
-  username: ID! #cognito username
 
-  localID: ID! #社員番号などの社内ID・UUID
-  employeeGroupLocalId: ID!
-  superiorUsername: ID!
+  no: String! #社員番号などの社内番号
+  groupID: ID!
+  superiorUsername: String!
 
-  # no: String #社員番号
   firstName: String!
   lastName: String!
   grade: String! #等級
   email: String!
   sub: String #cognito 被験者
-  superior: Employee @connection(fields: ["companyID", "superiorUsername"])  #上司(所属長や部門長)
-  group: Group @connection(fields: ["companyID", "employeeGroupLocalId"])  #所属部門
+  superior: Employee @connection(fields: ["superiorUsername"])  #上司(所属長や部門長)
+  group: Group @connection(fields: ["groupID"])  #所属部門
   company: Company @connection (fields: ["companyID"])
 
   manager: EmployeeType!  #マネージャー
@@ -77,19 +88,27 @@ type Employee #社員
 }
 
 type Group #部門
-@model
-@key(fields: ["companyID", "localID"])
+@model(
+  queries: {
+    get: "getGroup"
+    list: null
+  }
+  subscriptions: null
+)
+@key(fields: ["companyID", "no"], name: "GroupByCompany", queryField: "listGroupsCompany")
 @auth(
   rules: [
     {allow: groups, groups: ["Admin"]}
     {allow: private}
 
-    {allow: private, provider: iam ,operations:[read]}
+    {allow: private, provider: iam ,operations:[read, create]}
   ]
 )
 {
+  id: ID!
+
   companyID: ID!
-  localID: ID!  #ソート
+  no: String!  #ソート
   
   # company: Company @connection  グループフィールドに置き換え
   name: String! #部門名
@@ -98,29 +117,41 @@ type Group #部門
 }
 
 type Category
-@model
-@key(fields: ["companyID", "localID"])
+@model(
+  queries: {
+    get: "getCategory"
+    list: null
+  }
+  subscriptions: null
+)
+@key(fields: ["companyID", "no"], name: "CategoryByCompany", queryField: "listCategorysCompany")
 @auth(
   rules: [
     {allow: groups, groups: ["Admin"]}
     {allow: private}
-    {allow: private, provider: iam ,operations:[read]}
+    {allow: private, provider: iam ,operations:[read, create]}
 
   ]
 )
 {
+  id: ID!
   companyID: ID!
-  localID: ID!  #ソート
-  # company: Company @connection  # グループフィールドへ置き換え
 
+  no: String!  #ソート
   name: String! #カテゴリ名
 }
 
 
 type Sheet
-@model
-@key(fields: ["sub", "year"])
-@key(fields: ["companyID", "reviewee"], name: "sheet_reviewee", queryField: "listSheetReviewee")
+@model(
+  queries: {
+    get: "getSheet"
+    list: null
+  }
+  subscriptions: null
+)
+@key(fields: ["sub", "year"], name: "SheetBySub", queryField: "listSheetsReviewee")
+@key(fields: ["companyID"], name: "SheetByCompany", queryField: "listSheetsCompany")
 # @key(fields: ["companyID", "year"], name: "sheet_year", queryField: "listSheetYear")
 # @key(fields: ["companyID", "sheetGroupLocalId"], name: "sheet_group", queryField: "listSheetGroup")
 @auth(
@@ -138,10 +169,13 @@ type Sheet
   ]
 )
 {
+  id: ID!
+
   sub: String!
   year: Int!  #実施年度
 
   companyID: ID!
+  groupID: ID! #部署ID
   grade: String! #等級
   careerPlan: String  #キャリア計画本人希望
   careerPlanComment: String #話し合い結果コメント
@@ -165,16 +199,16 @@ type Sheet
   InterviewMid3Date: AWSDate    # 中間3
   InterviewMid3Comment: String
 
-  revieweeUsername: ID!
-  secondUsername: ID!
+  revieweeUsername: String!
+  secondUsername: String!
 
   # connection
-  sheetGroupLocalId: ID!
   sheetGroupName: String
-  # group: Group @connection(fields: ["companyID", "sheetGroupLocalId"])
-  revieweeEmployee: Employee @connection(fields: ["companyID", "revieweeUsername"])  #被評価者
-  secondEmployee: Employee @connection(fields: ["companyID", "secondUsername"])  #所属長
-  section: [Section] @connection(fields: ["companyID"]) # companyID.reviewee.year
+
+  revieweeEmployee: Employee @connection(fields: ["revieweeUsername"])  #被評価者
+  secondEmployee: Employee @connection(fields: ["secondUsername"])  #所属長
+  group: Group @connection(fields: ["groupID"]) # 部署ソート用番号を取得するために参照 (非推奨)
+  section: [Section] @connection(fields: ["id"], keyName: "SectionBySheet")
 
   #　オーナーフィールド
   referencer: [String!] #参照者
@@ -184,8 +218,14 @@ type Sheet
 }
 
 type Section
-@model
-@key(fields: ["sheetKeys", "sectionCategoryLocalId"])
+@model(
+  queries: {
+    get: "getSection"
+    list: null
+  }
+  subscriptions: null
+)
+@key(fields: ["sheetID"], name: "SectionBySheet", queryField: "listSectionsSheet")
 @auth(
   rules: [
     {allow: groups, groups: ["Admin"]}
@@ -196,19 +236,17 @@ type Section
     {allow: owner, ownerField: "reviewee", operations: [create, update, read, delete]}
     {allow: owner, ownerField: "referencer", operations: [read]}
 
-    {allow: private, provider: iam ,operations:[read]}
+    {allow: private, provider: iam ,operations:[create, read]}
   ]
 )
 {
-  sheetKeys: ID! # companyID.reviewee.year の形式として保持
-  sectionCategoryLocalId: ID!
+  id: ID!
+  sheetID: ID!
+  no: String!
+
   sectionCategoryName: String
-  # sectionCategoryId: ID!
-  companyID: ID!
 
-
-  objective: [Objective] @connection(fields: ["sheetKeys"]) # sheetKeys.sectionCategoryLocalId
-  category: Category @connection(fields: ["companyID", "sectionCategoryLocalId"])
+  objective: [Objective] @connection(fields: ["id"], keyName: "ObjectiveBySection")
 
   #　オーナーフィールド
   reviewee: String #被評価者
@@ -218,8 +256,14 @@ type Section
 }
 
 type Objective
-@model
-@key(fields: ["sectionKeys", "createdAt"])
+@model(
+  queries: {
+    get: "getObjective"
+    list: null
+  }
+  subscriptions: null
+)
+@key(fields: ["sectionID"], name: "ObjectiveBySection", queryField: "listObjectivesSection")
 # @key(fields: ["sectionKeys", "objectiveCategoryDate"], name: "objective_sheet_category")
 @auth(
   rules: [
@@ -231,15 +275,16 @@ type Objective
     {allow: owner, ownerField: "reviewee", operations: [create, update, read, delete]}
     {allow: owner, ownerField: "referencer", operations: [read]}
 
-    { allow: private, provider: iam, operations: [read] }
+    { allow: private, provider: iam, operations: [read, create] }
   ]
 )
 {
-  sectionKeys: ID!  # sheetKeys.sectionCategoryLocalId の形式で保持
+  id: ID!
+  sectionID: ID!
+
   createdAt: AWSDateTime!
   
-  # objectiveCategoryLocalId: ID!
-  companyID: ID!
+  companyID: String!
 
   content: String! #目標本文
   result: String  #実績
@@ -253,10 +298,6 @@ type Objective
   #expected date
   expStartDate: AWSDate  #開始予定日
   expDoneDate: AWSDate  #完了予定日
-
-  # sheet: Sheet @connection
-  # objectiveSectionId: ID!
-  # section: Section @connection(fields: ["objectiveSectionId"])
   
   #　オーナーフィールド
   reviewee: String #被評価者
@@ -295,10 +336,16 @@ type Superior
 }
 
 type Report
-@model
-@key(fields: ["sub", "date"])
-@key(fields: ["reviewee", "date"], name: "report_reviewee", queryField: "listReportsReviewee")
-@key(fields: ["companyID", "date"], name: "report_company_date", queryField: "listReportsCompanyDate")
+@model(
+  queries: {
+    get: "getReport",
+    list: null
+  }
+  subscriptions: null
+)
+@key(fields: ["sub", "date"], name: "ReportBySub", queryField: "listReportsSub")
+@key(fields: ["reviewee", "date"], name: "ReportByReviewee", queryField: "listReportsReviewee") # 非推奨
+@key(fields: ["companyID", "date"], name: "ReportByCompany", queryField: "listReportsCompanyDate")
 # @key(fields: ["companyID", "reviewee"], name: "report_company_reviewee", queryField: "listReportsReviewee")
 # @key(fields: ["companyID", "date"], name: "report_company_date", queryField: "listReportsDate")
 @auth(
@@ -310,18 +357,19 @@ type Report
     {allow: owner, ownerField: "referencer", operations: [read]}
     {allow: owner, ownerField: "reviewer", operations: [read, update]}
 
-    {allow: private, provider: iam, operations: [read,update] }
+    {allow: private, provider: iam, operations: [create, read,update] }
   ]
 )
 {
-  sub: ID!
+  id: ID!
+
+  sub: String!
   date: AWSDate!  #1970-01-01Z の形式で格納
 
-  reviewee: ID
+  reviewee: String
   reviewer: [String]
-  companyID: ID
+  companyID: String
   referencer: [String] #参照者
-  # superior: Superior # 報告書作成時の所属長を保存する必要がある？
   
   revieweeComments: RevieweeReportComment 
   # @auth(rules: [
@@ -346,7 +394,7 @@ type Report
   #   ])
   workStatus: ReportWorkingStatus #作業状況
   # revieweeEmail: String #報告者のメールアドレス
-  revieweeEmployee: Employee @connection(fields: ["companyID", "reviewee"])  #被評価者
+  revieweeEmployee: Employee @connection(fields: ["reviewee"])  #被評価者
 }
 
 # type Query {

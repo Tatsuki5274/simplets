@@ -1,16 +1,6 @@
-import { Formik } from "formik";
 import React from "react";
 import Text from "views/components/atoms/Text";
-import TextArea from "views/components/atoms/TextArea";
-import CommandButton from "views/components/molecules/CommandButton";
-import * as APIt from 'API';
-import { ReportDao } from "lib/dao/reportDao";
-import { updateReport } from "graphql/mutations";
-import { SendEmail } from "App";
-import { sendEmailMutation } from "lib/sendEmail";
 import styled from "styled-components";
-import { routeBuilder } from "router";
-import { CountLine } from "lib/util";
 
 type Props = {
     revieweeMailAddress: string | null

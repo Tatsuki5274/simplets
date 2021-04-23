@@ -27,15 +27,15 @@ export default function (props:Props) {
         (async () => {
             if (currentUser) {
                 const getI: GetCategoryQueryVariables = {
-                    companyID: currentUser.attributes["custom:companyId"],
-                    localID: props.match.params.categoryLocalId,
+                    id: props.match.params.categoryLocalId,
                 }
                 const category = await CategoryDao.get(getCategory, getI);
 
-                if (category && category.companyID && category.localID && category.name) {
+                if (category && category.id && category.companyID && category.no && category.name) {
                     const categoryItem: AdminCategoryEditDataType = {
+                        id: category.id,
                         companyId: category.companyID,
-                        localId: category.localID,
+                        localId: category.no,
                         name: category.name,
                     }
                     setCategory(categoryItem);
@@ -45,7 +45,7 @@ export default function (props:Props) {
                 }
             }
         })()
-    }, [currentUser])
+    }, [currentUser, props.match.params.categoryLocalId])
 
     return (
         category ?

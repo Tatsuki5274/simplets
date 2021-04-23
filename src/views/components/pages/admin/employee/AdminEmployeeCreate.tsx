@@ -1,6 +1,6 @@
-import { EmployeeType, ListEmployeesQueryVariables } from "API";
+import { ListCategorysCompanyQueryVariables, ListEmployeesCompanyQueryVariables } from "API";
 import { ErrorContext, HeaderContext, SidebarContext, UserContext } from "App";
-import { listEmployees, listGroups } from "graphql/queries";
+import { listEmployeesCompany, listGroupsCompany } from "graphql/queries";
 import { EmployeeDao } from "lib/dao/employeeDao";
 import { GroupDao } from "lib/dao/groupDao";
 import React, { useContext, useEffect, useState } from "react";
@@ -45,15 +45,10 @@ export default function () {
         // 上司情報の取得
         (async () => {
             if (currentUser) {
-                const listI: ListEmployeesQueryVariables = {
+                const listI: ListEmployeesCompanyQueryVariables = {
                     companyID: currentUser.attributes["custom:companyId"],
-                    filter: {
-                        manager: {
-                            ne: EmployeeType.NORMAL
-                        }
-                    }
                 }
-                const superiors = await EmployeeDao.list(listEmployees, listI)
+                const superiors = await EmployeeDao.listCompany(listEmployeesCompany, listI)
                 if (superiors) {
                     const noSuperiorLabel: SelectLabel[] = [
                         {
@@ -63,7 +58,7 @@ export default function () {
                     ]
                     const superiorsLabel: SelectLabel[] = superiors.map(superior => {
                         return {
-                            label: `${superior.localID} ${superior.lastName}${superior.firstName}`,
+                            label: `${superior.no} ${superior.lastName}${superior.firstName}`,
                             value: superior.username || ""
                         }
                     })
@@ -74,18 +69,31 @@ export default function () {
                 }
             }
         })()
-    }, [currentUser])
+    }, [currentUser, setError])
 
     useEffect(() => {
         // 部署情報の取得
         (async () => {
             if (currentUser) {
-                const groups = await GroupDao.list(listGroups, { companyID: currentUser.attributes["custom:companyId"] })
+                const listI: ListCategorysCompanyQueryVariables = {
+                    companyID: currentUser.attributes["custom:companyId"]
+                }
+                const groups = await GroupDao.listCompany(listGroupsCompany, listI)
                 if (groups) {
+                    
+                    // 部署情報をソート
+                    groups.sort(function (a, b) {
+                        if (a && b && a.id && b.id) {
+                            if (a.id < b.id) return 1
+                            if (a.id > b.id) return -1
+                        }
+                        return 0
+
+                    })
                     const groupsLabel: SelectLabel[] = groups.map(group => {
                         return {
                             label: group.name || "",
-                            value: group.localID || ""
+                            value: group.id || ""
                         }
                     })
                     setGroups(groupsLabel)
@@ -95,7 +103,7 @@ export default function () {
                 }
             }
         })()
-    }, [currentUser])
+    }, [currentUser, setError])
 
     return (
         currentUser ?

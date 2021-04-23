@@ -1,0 +1,10 @@
+{"Item":{"__typename":{"S":"Group"},"companyID":{"S":"SCC"},"createdAt":{"S":"2021-01-12T06:32:22.154Z"},"localID":{"S":"60"},"name":{"S":"DXSS"},"updatedAt":{"S":"2021-01-12T06:32:22.154Z"}}}
+{"Item":{"__typename":{"S":"Group"},"companyID":{"S":"SCC"},"createdAt":{"S":"2021-01-12T06:32:03.189Z"},"localID":{"S":"30"},"name":{"S":"EMS"},"updatedAt":{"S":"2021-01-12T06:32:03.189Z"}}}
+{"Item":{"__typename":{"S":"Group"},"companyID":{"S":"SCC"},"createdAt":{"S":"2021-01-12T06:32:14.360Z"},"localID":{"S":"50"},"name":{"S":"ERPSALES"},"updatedAt":{"S":"2021-01-12T06:32:14.360Z"}}}
+{"Item":{"__typename":{"S":"Group"},"companyID":{"S":"SCC"},"createdAt":{"S":"2021-01-12T06:30:36.684Z"},"localID":{"S":"10"},"name":{"S":"代表取締役"},"updatedAt":{"S":"2021-01-12T06:30:36.684Z"}}}
+{"Item":{"__typename":{"S":"Group"},"companyID":{"S":"SCC"},"createdAt":{"S":"2021-01-12T06:31:57.158Z"},"localID":{"S":"20"},"name":{"S":"ERPSS"},"updatedAt":{"S":"2021-01-12T06:31:57.158Z"}}}
+{"Item":{"__typename":{"S":"Group"},"companyID":{"S":"SCC"},"createdAt":{"S":"2021-04-14T04:33:58.102Z"},"localID":{"S":"100"},"name":{"S":"管理部"},"updatedAt":{"S":"2021-04-14T04:33:58.102Z"}}}
+{"Item":{"__typename":{"S":"Group"},"companyID":{"S":"SCC"},"createdAt":{"S":"2021-01-12T06:32:30.673Z"},"localID":{"S":"70"},"name":{"S":"BSS"},"updatedAt":{"S":"2021-01-12T06:32:30.673Z"}}}
+{"Item":{"__typename":{"S":"Group"},"companyID":{"S":"SCC"},"createdAt":{"S":"2021-01-12T06:32:40.602Z"},"localID":{"S":"80"},"name":{"S":"DXP"},"updatedAt":{"S":"2021-01-12T06:32:40.602Z"}}}
+{"Item":{"__typename":{"S":"Group"},"companyID":{"S":"SCC"},"createdAt":{"S":"2021-01-12T06:32:09.082Z"},"localID":{"S":"40"},"name":{"S":"BIS"},"updatedAt":{"S":"2021-01-12T06:32:09.082Z"}}}
+{"Item":{"__typename":{"S":"Group"},"companyID":{"S":"SCC"},"createdAt":{"S":"2021-01-12T06:33:13.069Z"},"localID":{"S":"90"},"name":{"S":"DXSALES"},"updatedAt":{"S":"2021-01-12T06:33:13.069Z"}}}

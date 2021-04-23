@@ -26,6 +26,7 @@ type Props = {
         commentReviewer: string
         reviewee: string
         revieweeName: string
+        id: string
     }
 }
 

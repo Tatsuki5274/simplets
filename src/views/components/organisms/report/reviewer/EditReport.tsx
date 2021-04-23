@@ -24,6 +24,7 @@ type Props = {
     commentReviewer: string
     reviewee: string
     revieweeName: string
+    id: string
 }
 
 export default function (props: Props) {
@@ -34,6 +35,7 @@ export default function (props: Props) {
             }}
             onSubmit={async (values) => {
                 const updateI: APIt.UpdateReportInput = {
+                    id: props.id,
                     sub: props.sub,
                     date: props.date,
                     reviewee: props.reviewee,
@@ -118,6 +120,7 @@ export default function (props: Props) {
                                         if (formik.values.commentReviewer) {
 
                                             const updateI: APIt.UpdateReportInput = {
+                                                id: props.id,
                                                 sub: props.sub,
                                                 date: props.date,
                                                 reviewee: props.reviewee,
@@ -157,7 +160,7 @@ ${props.commentOther || ""}
 ${formik.values.commentReviewer}
 
 以下のURLにアクセスし確認をおこなってください。
-${routeBuilder.revieweeReportEditPath(props.date, hostUrl)}
+${routeBuilder.revieweeReportEditPath(props.id, hostUrl)}
 
 # 本メールは${props.revieweeMailAddress}宛にお送りしています。
 # 本メールはシステムより自動送信されています。

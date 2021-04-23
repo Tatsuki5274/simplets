@@ -37,10 +37,11 @@ export const SubmitButtonStatus2 = () => {
         return (
             <Button className={buttonComponentStyle}
                 onClick={async () => {
-                    if (sheet.sub && sheet.year) {
+                    if (sheet.sub && sheet.year && sheet.id) {
                         if (window.confirm("目標提出の引き戻しを行いますか？")) {
                             const work = commandWorkFlow(Command.REVIWEE_PULLBACK_SUBMIT, sheet)
                             let updatedSheet = await SheetDao.update(updateSheet, {
+                                id: sheet.id,
                                 sub: sheet.sub,
                                 year: sheet.year,
                                 statusValue: work.sheet.statusValue

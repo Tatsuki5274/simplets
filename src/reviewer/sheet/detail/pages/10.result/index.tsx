@@ -18,7 +18,6 @@ import { RemandModal } from "../../components/remandModal";
 import { ReviewerSheetDetailYearlyEditableSecond } from "../../components/yearly/editable/second";
 import * as Yup from 'yup';
 import { buttonComponentStyle } from "common/globalStyle.module.scss";
-import { getObjectiveKeys } from "lib/util";
 import { routeBuilder } from "router";
 
 type Props = {
@@ -42,8 +41,8 @@ export const ReviewerSheetPagesStatus10 = (props: Props) => {
         const evaluation: any = {}
         sheet.section?.items?.forEach(section => {
             section?.objective?.items?.forEach(objective => {
-                if (objective) {
-                    evaluation[`${getObjectiveKeys(objective).replace(/[.]/g, '-')}`] = objective.lastEvaluation?.toString()
+                if (objective && objective.id) {
+                    evaluation[`${objective.id}`] = objective.lastEvaluation?.toString()
                 }
             })
         })
@@ -85,6 +84,7 @@ export const ReviewerSheetPagesStatus10 = (props: Props) => {
 
                                                 const work = commandWorkFlow(Command.SUP1_INPUT_SCORE, sheet)
                                                 const data: UpdateSheetInput = {
+                                                    id: sheet.id || "", // unsafe
                                                     sub: sheet.sub,
                                                     year: sheet.year,
                                                     secondComment: values.secondComment,
@@ -148,14 +148,16 @@ export const ReviewerSheetPagesStatus10 = (props: Props) => {
                                         {/* ステータスによってボタンの出し分け */}
                                         <Form.Group>
                                             <Button className={buttonComponentStyle} onClick={async () => {
-                                                if(sheet.sub && sheet.year){
+                                                if(sheet.id){
                                                     console.log("formik", formik.values)
                                                     const data: UpdateSheetInput = {
-                                                        sub: sheet.sub,
-                                                        year: sheet.year,
+                                                        id: sheet.id,
+                                                        // sub: sheet.sub,
+                                                        // year: sheet.year,
                                                         secondComment: formik.values.secondComment,
                                                         secondCheckDate: formatAWSDate(new Date()),
-                                                        overAllEvaluation: formik.values.overAllEvaluation || null
+                                                        overAllEvaluation: formik.values.overAllEvaluation,
+
                                                     }
                                                     const updatedSheet = await SheetDao.update(updateSheet, data);
     

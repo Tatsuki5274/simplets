@@ -31,12 +31,19 @@ export default function CalendarView(props: Props) {
 
     function handleDateClick(arg: DateClickArg) { // bind with an arrow function
         // console.log(JSON.stringify(arg.dateStr))
-        history.push(routeBuilder.revieweeReportEditPath(arg.date))
+        
+        if (arg.dateStr) {
+            history.push(routeBuilder.revieweeReportNewPath(arg.dateStr))
+        }
+        // console.log(arg)
     }
 
     function handleEventClick(arg: EventClickArg){
-        if(arg.event.start){
-            history.push(routeBuilder.revieweeReportEditPath(arg.event.start))
+        // console.log(arg)
+        if(arg.event.id){
+            history.push(routeBuilder.revieweeReportEditPath(arg.event.id))
+        } else {
+            history.push(routeBuilder.revieweeReportNewPath(arg.event.startStr))
         }
     }
 

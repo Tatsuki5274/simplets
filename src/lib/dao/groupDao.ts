@@ -106,23 +106,23 @@ export const GroupDao = {
     return null
   },
 
-  list: async (query: string, params: APIt.ListGroupsQueryVariables): Promise<Group[] | null> => {
+  listCompany: async (query: string, params: APIt.ListGroupsCompanyQueryVariables): Promise<Group[] | null> => {
     try {
-      const listQV: APIt.ListGroupsQueryVariables = params
+      const listQV: APIt.ListGroupsCompanyQueryVariables = params
       const listGQL = await graphqlQuery
-        <APIt.ListGroupsQueryVariables, APIt.ListGroupsQuery>
+        <APIt.ListGroupsCompanyQueryVariables, APIt.ListGroupsCompanyQuery>
         (query, listQV)
       if (listGQL.data) {
-        const listQ: APIt.ListGroupsQuery = listGQL.data;
-        if (listQ.listGroups && listQ.listGroups.items) {
-          const gotGroups = listQ.listGroups.items as Group[]
+        const listQ: APIt.ListGroupsCompanyQuery = listGQL.data;
+        if (listQ.listGroupsCompany && listQ.listGroupsCompany.items) {
+          const gotGroups = listQ.listGroupsCompany.items as Group[]
           return gotGroups
         } else console.error("情報の取得に失敗しました")
       } else console.error("情報の取得に失敗しました")
     } catch (e) {
-      if (e && e.data && e.data.listGroups) {
+      if (e && e.data && e.data.listGroupsCompany) {
         console.error("違反があります", e.errors)
-        return e.data.listGroups.items as Group[]
+        return e.data.listGroupsCompany.items as Group[]
       } else {
         console.error(e)
       }

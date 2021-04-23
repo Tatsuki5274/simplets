@@ -39,11 +39,11 @@ export const RevieweeSheetObjectiveModalStatus1 = (props: Props)=>{
                     //目標変更の目標、ステータス、自己評価、優先順位、実績を項目明細に上書き
                     const updateI: APIt.UpdateObjectiveInput = {
                         createdAt: props.objective.createdAt || "", // unsafe
-                        sectionKeys: props.objective.sectionKeys || "", // unsafe
+                        id: props.objective.id || "", // unsafe
                         content: values.content,
                         priority: values.priority,
                         expStartDate: values.expStartDate ? values.expStartDate : undefined,
-                        expDoneDate: values.expDoneDate ? values.expDoneDate : undefined
+                        expDoneDate: values.expDoneDate ? values.expDoneDate : undefined,
                     };
                     const updatedObjective = await ObjectiveDao.update(updateObjective, updateI)
                     if(updatedObjective){

@@ -25,6 +25,17 @@
             "name": "Launch Chrome against localhost",
             "url": "http://localhost:8080",
             "webRoot": "${workspaceFolder}"
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Launch Script(TypeScript)",
+            "preLaunchTask": "BuildScripts",
+            "cwd": "${workspaceFolder}/scripts",
+            "program": "${file}",
+            "outFiles": [
+                "${workspaceFolder}/scripts/build/**/*.js"
+            ]
         }
     ]
 }

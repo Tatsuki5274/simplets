@@ -38,6 +38,7 @@ type Props = {
         commentWork: string
         commentStatus: string
         commentOther: string
+        id: string
     }
 }
 
@@ -73,6 +74,7 @@ export default function (props: Props) {
             onSubmit={async (values) => {
 
                 const updateI: APIt.UpdateReportInput = {
+                    id: props.data.id,
                     sub: props.data.sub,
                     companyID: props.data.companyID,
                     date: props.data.date,
@@ -185,6 +187,7 @@ export default function (props: Props) {
                                     if (window.confirm("入力内容を保存して、所属長へメールを送信しますか？")) {
                                         if (formik.values.workStatus && (formik.values.workStatus === 'OK' || formik.values.commentStatus) && formik.values.commentWork) {
                                             const updateI: APIt.UpdateReportInput = {
+                                                id: props.data.id,
                                                 sub: props.data.sub,
                                                 companyID: props.data.companyID,
                                                 date: props.data.date,
@@ -229,7 +232,7 @@ ${formik.values.commentOther || ""}
 ${props.data.reviewerComments}
 
 以下のURLにアクセスし確認をおこなってください。
-${routeBuilder.reviewerReportCommentPath(props.data.date, props.data.sub, hostUrl)}
+${routeBuilder.reviewerReportCommentPath(props.data.id, hostUrl)}
 
 # 本メールは${props.data.superior.email}宛にお送りしています。
 # 本メールはシステムより自動送信されています。
@@ -256,8 +259,7 @@ ${routeBuilder.reviewerReportCommentPath(props.data.date, props.data.sub, hostUr
                     <ButtonNegative onClick={async () => {
                         if (window.confirm("削除してもよろしいですか？")) {
                             const deleteI: APIt.DeleteReportInput = {
-                                date: props.data.date,
-                                sub: props.data.sub,
+                                id: props.data.id,
                             }
 
                             const deleteItem = await ReportDao.delete(deleteReport, deleteI);

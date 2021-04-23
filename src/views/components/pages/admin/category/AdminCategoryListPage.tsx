@@ -1,6 +1,6 @@
-import { ListCategorysQueryVariables } from "API";
+import { ListCategorysCompanyQueryVariables } from "API";
 import { ErrorContext, HeaderContext, SidebarContext, UserContext } from "App";
-import { listCategorys } from "graphql/queries";
+import { listCategorysCompany } from "graphql/queries";
 import { CategoryDao } from "lib/dao/categoryDao";
 import React, { useContext, useEffect, useState } from "react";
 import { routeBuilder } from "router";
@@ -20,20 +20,21 @@ export default function () {
         // カテゴリ一覧情報の取得
         (async () => {
             if (currentUser) {
-                const listI: ListCategorysQueryVariables = {
+                const listI: ListCategorysCompanyQueryVariables = {
                     companyID: currentUser.attributes["custom:companyId"],
                 }
-                const categorys = await CategoryDao.list(listCategorys, listI);
+                const categorys = await CategoryDao.listCompany(listCategorysCompany, listI);
                 if (categorys) {
                     const categoryItems: AdminListCategoryRowType[] = categorys.map(category => {
                         return {
                             link: {
                                 label: "変更",
-                                dest: category.localID ? routeBuilder.adminCategoryEditPath(category.localID) : "",
+                                dest: category.id ? routeBuilder.adminCategoryEditPath(category.id) : "",
                             },
-                            categoryLocalId: category.localID || "",
+                            categoryLocalId: category.no || "",
                             categoryName: category.name || "",
                             companyId: category.companyID || "",
+                            id: category.id || "", // unsafe
                         }
                     })
                     setCategorys(categoryItems);

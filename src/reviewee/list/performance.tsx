@@ -11,8 +11,8 @@ import { CategoryDao } from 'lib/dao/categoryDao';
 import { SectionDao } from 'lib/dao/sectionDao';
 import { DisplaySheetAverage } from './components/average';
 import { tableHeaderStyle } from 'common/globalStyle.module.scss';
-import { getReviewers, getSheetKeys } from 'lib/util';
-import { BooleanType, Category, EmployeeType, Sheet } from 'API';
+import { getReviewers } from 'lib/util';
+import { Category, CreateSectionInput, ListCategorysCompanyQueryVariables, Sheet } from 'API';
 import LeftBox from 'views/components/templates/LeftBox';
 import RightBox from 'views/components/templates/RightBox';
 import Sidebar from 'views/components/templates/Sidebar';
@@ -21,6 +21,8 @@ import Container from 'views/components/templates/Container';
 import Title from 'views/components/molecules/Title';
 import Header from 'views/components/organisms/common/Header';
 import { routeBuilder } from 'router';
+import { getEmployee, listCategorysCompany, listSheetsReviewee } from 'graphql/queries';
+import { createSection, createSheet } from 'graphql/mutations';
 
 const sortSheet = (a: Sheet, b: Sheet) => {
   if (a.year && b.year && a.year < b.year) {
@@ -35,160 +37,160 @@ const today: Date = new Date();
 // const targetYear = today.getMonth() >= 0 && today.getMonth() <= 2 ? today.getFullYear() - 1 : today.getFullYear()
 
 
-const getEmployee = /* GraphQL */ `
-  query GetEmployee($companyID: ID!, $username: ID!) {
-    getEmployee(companyID: $companyID, username: $username) {
-      username
-      grade
-      employeeGroupLocalId
-      superior {
-        username
-        superior {
-          username
-        }
-      }
-      company {
-        id
-        name
-        startMonth
-      }
-      group {
-        name
-      }
-    }
-  }
-`;
-const listSheetReviewee = /* GraphQL */ `
-  query ListSheetReviewee(
-    $companyID: ID
-    $reviewee: ModelStringKeyConditionInput
-    $sortDirection: ModelSortDirection
-    $filter: ModelSheetFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listSheetReviewee(
-      companyID: $companyID
-      reviewee: $reviewee
-      sortDirection: $sortDirection
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-    ) {
-      items {
-        sub
-        companyID
-        year
-        grade
-        overAllEvaluation
-        statusValue
-        sheetGroupLocalId
-        reviewee
-        section {
-          items {
-            objective {
-              items {
-                progress
-              }
-            }
-          }
-        }
-        secondEmployee {
-          firstName
-          lastName
-        }
-      }
-    }
-  }
-`;
+// const getEmployee = /* GraphQL */ `
+//   query GetEmployee($companyID: ID!, $username: ID!) {
+//     getEmployee(companyID: $companyID, username: $username) {
+//       username
+//       grade
+//       employeeGroupLocalId
+//       superior {
+//         username
+//         superior {
+//           username
+//         }
+//       }
+//       company {
+//         id
+//         name
+//         startMonth
+//       }
+//       group {
+//         name
+//       }
+//     }
+//   }
+// `;
+// const listSheetReviewee = /* GraphQL */ `
+//   query ListSheetReviewee(
+//     $companyID: ID
+//     $reviewee: ModelStringKeyConditionInput
+//     $sortDirection: ModelSortDirection
+//     $filter: ModelSheetFilterInput
+//     $limit: Int
+//     $nextToken: String
+//   ) {
+//     listSheetReviewee(
+//       companyID: $companyID
+//       reviewee: $reviewee
+//       sortDirection: $sortDirection
+//       filter: $filter
+//       limit: $limit
+//       nextToken: $nextToken
+//     ) {
+//       items {
+//         sub
+//         companyID
+//         year
+//         grade
+//         overAllEvaluation
+//         statusValue
+//         sheetGroupLocalId
+//         reviewee
+//         section {
+//           items {
+//             objective {
+//               items {
+//                 progress
+//               }
+//             }
+//           }
+//         }
+//         secondEmployee {
+//           firstName
+//           lastName
+//         }
+//       }
+//     }
+//   }
+// `;
 
-const listCategorys = /* GraphQL */ `
-  query ListCategorys(
-    $companyID: ID
-    $localID: ModelIDKeyConditionInput
-    $filter: ModelCategoryFilterInput
-    $limit: Int
-    $nextToken: String
-    $sortDirection: ModelSortDirection
-  ) {
-    listCategorys(
-      companyID: $companyID
-      localID: $localID
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-      sortDirection: $sortDirection
-    ) {
-      items {
-        localID
-        name
-      }
-    }
-  }
-`;
+// const listCategorys = /* GraphQL */ `
+//   query ListCategorys(
+//     $companyID: ID
+//     $localID: ModelIDKeyConditionInput
+//     $filter: ModelCategoryFilterInput
+//     $limit: Int
+//     $nextToken: String
+//     $sortDirection: ModelSortDirection
+//   ) {
+//     listCategorys(
+//       companyID: $companyID
+//       localID: $localID
+//       filter: $filter
+//       limit: $limit
+//       nextToken: $nextToken
+//       sortDirection: $sortDirection
+//     ) {
+//       items {
+//         localID
+//         name
+//       }
+//     }
+//   }
+// `;
 
-const listEmployeesManager = /* GraphQL */ `
-  query ListEmployeesManager(
-    $companyID: ID
-    $managerIsDeleted: ModelEmployeeEmployee_managerCompositeKeyConditionInput
-    $sortDirection: ModelSortDirection
-    $filter: ModelEmployeeFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listEmployeesManager(
-      companyID: $companyID
-      managerIsDeleted: $managerIsDeleted
-      sortDirection: $sortDirection
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-    ) {
-      items {
-        username
-      }
-    }
-  }
-`;
-const createSheet = /* GraphQL */ `
-  mutation CreateSheet(
-    $input: CreateSheetInput!
-    $condition: ModelSheetConditionInput
-  ) {
-    createSheet(input: $input, condition: $condition) {
-      sub
-      companyID
-      year
-      grade
-      statusValue
-      revieweeUsername
-      secondUsername
-      sheetGroupLocalId
-      referencer
-      reviewee
-      topReviewers
-      secondReviewers
-    }
-  }
-`;
+// const listEmployeesManager = /* GraphQL */ `
+//   query ListEmployeesManager(
+//     $companyID: ID
+//     $managerIsDeleted: ModelEmployeeEmployee_managerCompositeKeyConditionInput
+//     $sortDirection: ModelSortDirection
+//     $filter: ModelEmployeeFilterInput
+//     $limit: Int
+//     $nextToken: String
+//   ) {
+//     listEmployeesManager(
+//       companyID: $companyID
+//       managerIsDeleted: $managerIsDeleted
+//       sortDirection: $sortDirection
+//       filter: $filter
+//       limit: $limit
+//       nextToken: $nextToken
+//     ) {
+//       items {
+//         username
+//       }
+//     }
+//   }
+// `;
+// const createSheet = /* GraphQL */ `
+//   mutation CreateSheet(
+//     $input: CreateSheetInput!
+//     $condition: ModelSheetConditionInput
+//   ) {
+//     createSheet(input: $input, condition: $condition) {
+//       sub
+//       companyID
+//       year
+//       grade
+//       statusValue
+//       revieweeUsername
+//       secondUsername
+//       sheetGroupLocalId
+//       referencer
+//       reviewee
+//       topReviewers
+//       secondReviewers
+//     }
+//   }
+// `;
 
-const createSection = /* GraphQL */ `
-  mutation CreateSection(
-    $input: CreateSectionInput!
-    $condition: ModelSectionConditionInput
-  ) {
-    createSection(input: $input, condition: $condition) {
-      sheetKeys
-      sectionCategoryLocalId
-      sectionCategoryName
-      companyID
-      reviewee
-      topReviewers
-      secondReviewers
-      referencer
-    }
-  }
-`;
+// const createSection = /* GraphQL */ `
+//   mutation CreateSection(
+//     $input: CreateSectionInput!
+//     $condition: ModelSectionConditionInput
+//   ) {
+//     createSection(input: $input, condition: $condition) {
+//       sheetKeys
+//       sectionCategoryLocalId
+//       sectionCategoryName
+//       companyID
+//       reviewee
+//       topReviewers
+//       secondReviewers
+//       referencer
+//     }
+//   }
+// `;
 
 function ListPerformanceEvalution() {
   const [sheets, setSheets] = useState<Sheet[] | null>(null);
@@ -205,14 +207,11 @@ function ListPerformanceEvalution() {
   useEffect(() => {
     ; (async () => {
       if (currentUser) {
-        const listQV: APIt.ListSheetRevieweeQueryVariables = {
-          companyID: currentUser.attributes["custom:companyId"],
-          reviewee: {
-            eq: currentUser.username
-          },
+        const listQV: APIt.ListSheetsRevieweeQueryVariables = {
+          sub: currentUser.attributes["sub"],
         };
 
-        const items = await SheetDao.listReviewee(listSheetReviewee, listQV)
+        const items = await SheetDao.listReviewee(listSheetsReviewee, listQV)
 
         //降順でソートしてlistItemsに保存
         items?.sort(sortSheet);
@@ -225,7 +224,7 @@ function ListPerformanceEvalution() {
   useEffect(()=>{
     (async ()=>{
       if(currentUser){
-        const emp = await EmployeeDao.get(getEmployee, { companyID: currentUser.attributes["custom:companyId"], username: currentUser.username })
+        const emp = await EmployeeDao.get(getEmployee, { username: currentUser.username })
         const startMonth = emp?.company?.startMonth
         if(startMonth){
           const dateMonth = startMonth - 1 //1月が0のため
@@ -240,15 +239,19 @@ function ListPerformanceEvalution() {
   }, [currentUser, setError])
 
   async function handleClickCreate() {
-
     if (currentUser) {
-      const revieweeEmployee = await EmployeeDao.get(getEmployee, { companyID: currentUser.attributes["custom:companyId"], username: currentUser.username })
-
+      const revieweeEmployee = await EmployeeDao.get(getEmployee, { username: currentUser.username })
+      if (!revieweeEmployee?.groupID) {
+        throw new Error("GroupID is maybe undefined.");
+      }
 
       if (revieweeEmployee) {
 
         //カテゴリを取得する
-        const categorys = await CategoryDao.list(listCategorys, { companyID: currentUser.attributes['custom:companyId'] });
+        const listI: ListCategorysCompanyQueryVariables = {
+          companyID: revieweeEmployee.companyID,
+        }
+        const categorys = await CategoryDao.listCompany(listCategorysCompany, listI);
         if (categorys) {
           console.log("categorys", categorys)
 
@@ -261,12 +264,12 @@ function ListPerformanceEvalution() {
             //シートを作成
             const createdSheet = await SheetDao.create(createSheet, {
               sub: currentUser.attributes.sub,
+              groupID: revieweeEmployee.groupID,
               grade: revieweeEmployee.grade || "",
               year: targetYear,
               statusValue: 1,
               revieweeUsername: revieweeEmployee.username || "", // unsafe
               secondUsername: revieweeEmployee.superior?.username || "",
-              sheetGroupLocalId: revieweeEmployee.employeeGroupLocalId || "",
               sheetGroupName: revieweeEmployee.group?.name || null,
               companyID: currentUser.attributes['custom:companyId'],
               reviewee: currentUser.username,
@@ -279,15 +282,16 @@ function ListPerformanceEvalution() {
               //取得したカテゴリを元にsectionを作成する
               let isSuccess = true
               categorys.forEach(async (category: Category) => {
-                const createdSection = await SectionDao.create(createSection, {
-                  sheetKeys: getSheetKeys(createdSheet),
-                  sectionCategoryLocalId: category.localID || "", // unsafe
-                  sectionCategoryName: category.name,
+                const createI: CreateSectionInput = {
+                  sheetID: createdSheet.id || "", // unsafe
+                  no: category.no || "", // unsafe
+                  referencer: managers,
+                  reviewee: createdSheet.reviewee,
                   secondReviewers: createdSheet.secondReviewers,
+                  sectionCategoryName: category.name,
                   topReviewers: createdSheet.topReviewers,
-                  companyID: createdSheet.companyID || "", // unsafe
-                  referencer: managers
-                })
+                }
+                const createdSection = await SectionDao.create(createSection, createI)
                 if (!createdSection) {
                   isSuccess = false
                   console.log("カテゴリセクションの登録に失敗しました")
@@ -381,15 +385,15 @@ function ListPerformanceEvalution() {
                   }
 
                   return (
-                    <tr key={sheet.sheetGroupLocalId}>
-                      <td><Link to={routeBuilder.revieweeDetailPath(sheet.sub || "", sheet.year?.toString() || "")}>{editName}</Link></td>
+                    <tr key={sheet.revieweeEmployee?.group?.no}>
+                      <td><Link to={routeBuilder.revieweeDetailPath(sheet.id || "")}>{editName}</Link></td>
                       <td>{sheet.year}</td>
                       <td>{sheet.secondEmployee ? sheet.secondEmployee.lastName : ""}{sheet.secondEmployee ? sheet.secondEmployee.firstName : ""}</td>
                       <td><DisplaySheetAverage sheet={sheet} /></td>
                       <td>{getStatusValue(sheet.statusValue || -1)}</td>
                       <td>
                         <a
-                          href={routeBuilder.previewPath(sheet.sub || "", sheet.year?.toString() || "")}
+                          href={routeBuilder.previewPath(sheet.id || "")}
                           target="_blank"
                           rel="noopener noreferrer"
                         >プレビュー</a>

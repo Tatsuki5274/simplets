@@ -6,28 +6,25 @@ import { EmployeeContext, ErrorContext, HeaderContext, SidebarContext, UserConte
 import style from './progressStyle.module.scss';
 import { Link } from 'react-router-dom';
 import { Field, Form, Formik } from 'formik';
-import { SheetDao } from 'lib/dao/sheetDao';
 import GaugeChart from 'react-gauge-chart';
-import { calcAvg, getSectionKeys, getSheetKeys, getThisYear, round } from 'lib/util';
+import { calcAvg, getThisYear, round } from 'lib/util';
 import { routeBuilder } from 'router';
 import { GroupDao } from 'lib/dao/groupDao';
 import ApprovalStatusBox from 'common/approvalStatusBox';
 import LeftBox from 'views/components/templates/LeftBox';
 import RightBox from 'views/components/templates/RightBox';
 import Content from 'views/components/templates/Content';
-import SidebarManager from 'views/components/organisms/common/SidebarManager';
 import Sidebar from 'views/components/templates/Sidebar';
 import Container from 'views/components/templates/Container';
 import Title from 'views/components/molecules/Title';
 import CommandButton from 'views/components/molecules/CommandButton';
-import { Group, Sheet } from 'API';
-import { propStyle } from 'aws-amplify-react';
+import { Group, ListGroupsCompanyQueryVariables, Sheet } from 'API';
 import Header from 'views/components/organisms/common/Header';
+import { listGroupsCompany } from 'graphql/queries';
 
 
 type ViewType = {
-
-    sheetKey: string,
+    id: string,
     companyId: string,
     year: string,
     reviewee: string,
@@ -48,83 +45,83 @@ type ViewType = {
     avg: number | null
 } | null
 
-const listGroups = /* GraphQL */ `
-  query ListGroups(
-    $companyID: ID
-    $localID: ModelIDKeyConditionInput
-    $filter: ModelGroupFilterInput
-    $limit: Int
-    $nextToken: String
-    $sortDirection: ModelSortDirection
-  ) {
-    listGroups(
-      companyID: $companyID
-      localID: $localID
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-      sortDirection: $sortDirection
-    ) {
-      items {
-        localID
-        name
-      }
-      nextToken
-    }
-  }
-`;
+// const listGroups = /* GraphQL */ `
+//   query ListGroups(
+//     $companyID: ID
+//     $localID: ModelIDKeyConditionInput
+//     $filter: ModelGroupFilterInput
+//     $limit: Int
+//     $nextToken: String
+//     $sortDirection: ModelSortDirection
+//   ) {
+//     listGroups(
+//       companyID: $companyID
+//       localID: $localID
+//       filter: $filter
+//       limit: $limit
+//       nextToken: $nextToken
+//       sortDirection: $sortDirection
+//     ) {
+//       items {
+//         localID
+//         name
+//       }
+//       nextToken
+//     }
+//   }
+// `;
 
-const listSheetYear = /* GraphQL */ `
-  query ListSheetYear(
-    $companyID: ID
-    $year: ModelIntKeyConditionInput
-    $sortDirection: ModelSortDirection
-    $filter: ModelSheetFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listSheetYear(
-      companyID: $companyID
-      year: $year
-      sortDirection: $sortDirection
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-    ) {
-      items {
-        companyID
-        year
-        sheetGroupLocalId
-        statusValue
-        group {
-          localID
-          name
-        }
-        section {
-          items {
-            sheetKeys
-            sectionCategoryLocalId
-            companyID
-            objective {
-              items {
-                progress
-              }
-            }
-            sectionCategoryLocalId
-            sectionCategoryName
-          }
-        }
-        reviewee
-        revieweeEmployee {
-          localID
-          firstName
-          lastName
-        }
-      }
-      nextToken
-    }
-  }
-`;
+// const listSheetYear = /* GraphQL */ `
+//   query ListSheetYear(
+//     $companyID: ID
+//     $year: ModelIntKeyConditionInput
+//     $sortDirection: ModelSortDirection
+//     $filter: ModelSheetFilterInput
+//     $limit: Int
+//     $nextToken: String
+//   ) {
+//     listSheetYear(
+//       companyID: $companyID
+//       year: $year
+//       sortDirection: $sortDirection
+//       filter: $filter
+//       limit: $limit
+//       nextToken: $nextToken
+//     ) {
+//       items {
+//         companyID
+//         year
+//         sheetGroupLocalId
+//         statusValue
+//         group {
+//           localID
+//           name
+//         }
+//         section {
+//           items {
+//             sheetKeys
+//             sectionCategoryLocalId
+//             companyID
+//             objective {
+//               items {
+//                 progress
+//               }
+//             }
+//             sectionCategoryLocalId
+//             sectionCategoryName
+//           }
+//         }
+//         reviewee
+//         revieweeEmployee {
+//           localID
+//           firstName
+//           lastName
+//         }
+//       }
+//       nextToken
+//     }
+//   }
+// `;
 
 function ProgressReferenceList() {
     // ログインユーザを取得する
@@ -158,11 +155,11 @@ function ProgressReferenceList() {
         ; (async () => {
             if (currentUser && currentEmployee) {
                 if (currentEmployee.manager === 'SUPER_MANAGER') {
-                    const groupList: APIt.ListGroupsQueryVariables = {
+                    const groupList: ListGroupsCompanyQueryVariables = {
                         companyID: currentUser.attributes["custom:companyId"]
                     }
                     console.log("groupList", groupList)
-                    const response = await GroupDao.list(listGroups, groupList)
+                    const response = await GroupDao.listCompany(listGroupsCompany, groupList)
 
                     //昇順でソートしてgroupItemに保存
                     const groupItem = response?.sort(function (a, b) {
@@ -174,14 +171,14 @@ function ProgressReferenceList() {
                     });
                     setGroupList(groupItem);
                 } else if (currentEmployee.manager === 'MANAGER') {
-                    const groupList: APIt.ListGroupsQueryVariables = {
-                        companyID: currentUser.attributes["custom:companyId"],
-                        localID: {
-                            eq: currentEmployee?.employeeGroupLocalId
-                        }
+                    const groupList: APIt.ListGroupsCompanyQueryVariables = {
+                        // companyID: currentUser.attributes["custom:companyId"],
+                        no: {
+                            eq: currentEmployee.group?.no,
+                        },
                     }
                     console.log("groupList", groupList)
-                    const response = await GroupDao.list(listGroups, groupList)
+                    const response = await GroupDao.listCompany(listGroupsCompany, groupList)
 
                     //昇順でソートしてgroupItemに保存
                     const groupItem = response?.sort(function (a, b) {
@@ -241,14 +238,13 @@ function ProgressReferenceList() {
         let viewTemp: ViewType[] | null = listItems.map((sheet) => {
             if (sheet.revieweeEmployee && sheet && sheet.section) {
                 return {
-
-                    sheetKey: getSheetKeys(sheet).replace(/[.@]/g, '-'),
+                    id: sheet.id || "", // unsafe
                     companyId: sheet.companyID || "",   // unsafe
                     year: String(sheet.year),
                     reviewee: sheet.reviewee || "", // unsafe
                     statusValue: sheet.statusValue || 0,    // unsafe
                     groupName: sheet.sheetGroupName || "",
-                    groupId: sheet.sheetGroupLocalId || "",
+                    groupId: sheet.revieweeEmployee.group?.no || "", // unsafe
                     revieweeName: {
                         firstName: sheet.revieweeEmployee.firstName || "",
                         lastName: sheet.revieweeEmployee.lastName || ""
@@ -260,9 +256,10 @@ function ProgressReferenceList() {
                                 calcAvg(section.objective.items.map((obj) => {
                                     return obj && obj.progress ? obj.progress : 0
                                 })) : null,
-                            no: section?.sectionCategoryLocalId ? parseInt(section.sectionCategoryLocalId) : null,
-                            id: section?.sectionCategoryLocalId,
-                            sectionId: section ? getSectionKeys(section).replace(/[.@]/g, '-') : null
+                            // no: section?.sectionCategoryLocalId ? parseInt(section.sectionCategoryLocalId) : null,
+                            no: section?.sectionCategoryName ? 1 : 0, //仮で設定
+                            id: section?.id,
+                            sectionId: section?.id || null,
                         }
                     }),
                     avg: -1
@@ -352,7 +349,7 @@ function ProgressReferenceList() {
                                             {groupList?.map((group: Group) => {
                                                 return (
                                                     <span className={`${style.selectionSize} ${style.selectionMargin}`}>
-                                                        <Field type="radio" name="groupId" value={group.localID} handleChange={formik.handleChange} />
+                                                        <Field type="radio" name="groupId" value={group.no} handleChange={formik.handleChange} />
                                                         {group.name}
                                                     </span>
                                                 )
@@ -423,7 +420,7 @@ function ProgressReferenceList() {
 
                                     return (
                                         <Card className={style.linkbox}>
-                                            <Link to={routeBuilder.reviewerDetailPath(view.companyId, view.reviewee, view.year)} />
+                                            <Link to={routeBuilder.reviewerDetailPath(view.id)} />
                                             {/* 社員の姓名と部門名を表示 */}
                                             <Card.Header>
                                                 {view.revieweeName.lastName}
@@ -434,7 +431,7 @@ function ProgressReferenceList() {
                                 {view.avg ? `${round(view.avg, 2).toFixed(1)}%` : null}
 
                                                 {view.avg ?
-                                                    <GaugeChart id={`chart-${view.groupId}-${view.sheetKey}`}
+                                                    <GaugeChart id={`chart-${view.groupId}`}
                                                         nrOfLevels={10}
                                                         colors={['#EA4228', '#F5CD19', '#5BE12C']}
                                                         percent={view.avg / 100}

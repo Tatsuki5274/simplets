@@ -50,10 +50,9 @@ export const RevieweeSheetObjectiveEditableStatus3 = (props: Props) => {
     async function handleChangeProgress(event: any) {
         const objectiveProgress = parseInt(event.currentTarget.value);
 
-        if (props.objective && objectiveProgress >= 0 && objectiveProgress <= 100) {
+        if (props.objective && props.objective.id && objectiveProgress >= 0 && objectiveProgress <= 100) {
             const updateI: APIt.UpdateObjectiveInput = {
-                sectionKeys: props.objective.sectionKeys || "", // unsafe
-                createdAt: props.objective.createdAt || "", // unsafe
+                id: props.objective.id,
                 progress: objectiveProgress,
             };
             const updatedObjective = await ObjectiveDao.update(updateObjective, updateI)

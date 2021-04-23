@@ -1,18 +1,14 @@
-import { GetReportQueryVariables, ListEmployeesManagerQueryVariables, Report } from "API";
+import { GetReportQueryVariables, Report } from "API";
 import { EmployeeContext, ErrorContext, HeaderContext, SidebarContext, UserContext } from "App";
-import { getReport, listEmployees } from "graphql/queries";
-import { EmployeeDao } from "lib/dao/employeeDao";
+import { getReport } from "graphql/queries";
 import { ReportDao } from "lib/dao/reportDao";
 import React, { useContext, useEffect, useState } from "react";
-import { Superior } from "views/components/atoms/Types";
-import { RevieweeCreateReportType } from "views/components/organisms/report/reviewee/CreateReport";
 import ChangeReport from "views/components/templates/report/reviewee/ChangeReport";
-import CreateReport from "views/components/templates/report/reviewee/CreateReport";
 
 type Props = {
     match: {
         params: {
-            date: Date
+            reportId: string
         }
     }
 }
@@ -25,63 +21,24 @@ export default function (props: Props) {
     const currentEmployee = useContext(EmployeeContext);
     const currentUser = useContext(UserContext);
     const [report, setReport] = useState<Report | null>();
-    const [reportData, setReportData] = useState<RevieweeCreateReportType>()
-    
+
     useEffect(() => {
         (async () => {
             if (currentUser) {
                 const getI: GetReportQueryVariables = {
-                    sub: currentUser?.attributes.sub,
-                    date: String(props.match.params.date),
+                    id: props.match.params.reportId
                 }
                 const reportItem = await ReportDao.get(getReport, getI)
 
                 if (reportItem) {
                     setReport(reportItem)
                 } else {
-                    if (currentEmployee) {
-                        const superiorItem: Superior = {
-                            email: currentEmployee.superior?.email || "",
-                            username: currentEmployee.superiorUsername || null,
-                        }
-
-                        const listI : ListEmployeesManagerQueryVariables = {
-                            companyID: currentEmployee.companyID
-                        }
-                        const referencers = await EmployeeDao.list(listEmployees,listI)
-
-                        if (referencers) {
-                            const referencersUsername = referencers.map(referencer => {
-                                return referencer.username || null
-                            })
-                            if (currentUser?.attributes.sub) {
-                                const reportItem: RevieweeCreateReportType = {
-                                    sub: currentUser.attributes.sub,
-                                    date: String(props.match.params.date),
-                                    companyID: currentEmployee.companyID || "",
-                                    superior: superiorItem,
-                                    superiorName: `${currentEmployee.superior?.lastName || ""} ${currentEmployee.superior?.firstName || ""}`,
-                                    referencer: referencersUsername,
-                                    reviewer: [currentEmployee.superiorUsername || ""],
-                                    reviewee: currentEmployee.username || "",
-                                    revieweeName: `${currentEmployee.lastName}${currentEmployee.firstName}`,
-                                    workStatus: mockData.workStatusList,
-                                }
-                                setReportData(reportItem)
-                            } else {
-                                console.error("認証情報が取得できません")
-                                setError("認証情報が取得できません")
-                            }
-                        } else {
-                            console.error("参照者が取得できません")
-                            setError("参照者が取得できません")
-                        }
-
-                    }
+                    console.error("報告書情報の取得に失敗しました")
+                    setError("報告書情報の取得に失敗しました")
                 }
             }
         })()
-    }, [currentEmployee, props.match.params.date, currentUser, setError])
+    }, [props.match.params.reportId, currentUser, setError])
 
     const mockData = {
         header: header,
@@ -100,7 +57,7 @@ export default function (props: Props) {
                 label: "問題が発生している"
             },
         ],
-        
+
     }
     return (
         report ?
@@ -123,15 +80,10 @@ export default function (props: Props) {
                     commentWork: report.revieweeComments?.work || "",
                     commentStatus: report.revieweeComments?.status || "",
                     commentOther: report.revieweeComments?.other || "",
+                    id: report.id || "", // unsafe
 
                 }}
             />
-            : reportData ?
-                <CreateReport
-                    header={mockData.header}
-                    sidebar={mockData.sidebar}
-                    data={reportData}
-                />
-                : null
+            : null
     )
 }

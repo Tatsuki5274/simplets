@@ -63,7 +63,7 @@ export const RevieweeSheetObjectiveModalStatus3 = (props: Props)=>{
                     //目標変更の目標、ステータス、自己評価、優先順位、実績を項目明細に上書き
                     const updateI: APIt.UpdateObjectiveInput = {
                         createdAt: props.objective.createdAt || "", // unsafe
-                        sectionKeys: props.objective.sectionKeys || "", // unsafe
+                        id: props.objective.id || "", // unsafe
                         selfEvaluation: selfEvaluationInput,
                         result: values.result,
                     };

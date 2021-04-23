@@ -16,6 +16,7 @@ type Props = {
     companyId: string
     groupLocalId: string
     groupName: string
+    id: string
 }
 
 export default function (props: Props) {
@@ -29,8 +30,9 @@ export default function (props: Props) {
             }}
             onSubmit={(values) => {
                 const updateI: UpdateGroupInput = {
+                    id: props.id,
                     companyID: props.companyId,
-                    localID: props.groupLocalId,
+                    no: props.groupLocalId,
                     name: values.groupName,
                 }
                 const updateItem = GroupDao.update(updateGroup, updateI)

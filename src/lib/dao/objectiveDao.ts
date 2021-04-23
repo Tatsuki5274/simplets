@@ -106,23 +106,23 @@ export const ObjectiveDao = {
     return null
   },
 
-  list: async (query: string, params: APIt.ListObjectivesQueryVariables): Promise<Objective[] | null> => {
+  listSection: async (query: string, params: APIt.ListObjectivesSectionQueryVariables): Promise<Objective[] | null> => {
     try {
-      const listQV: APIt.ListObjectivesQueryVariables = params
+      const listQV: APIt.ListObjectivesSectionQueryVariables = params
       const listGQL = await graphqlQuery
-        <APIt.ListObjectivesQueryVariables, APIt.ListObjectivesQuery>
+        <APIt.ListObjectivesSectionQueryVariables, APIt.ListObjectivesSectionQuery>
         (query, listQV)
       if (listGQL.data) {
-        const listQ: APIt.ListObjectivesQuery = listGQL.data;
-        if (listQ.listObjectives && listQ.listObjectives.items) {
-          const gotObjectives = listQ.listObjectives.items as Objective[]
+        const listQ: APIt.ListObjectivesSectionQuery = listGQL.data;
+        if (listQ.listObjectivesSection && listQ.listObjectivesSection.items) {
+          const gotObjectives = listQ.listObjectivesSection.items as Objective[]
           return gotObjectives
         } else console.error("情報の取得に失敗しました")
       } else console.error("情報の取得に失敗しました")
     } catch (e) {
-      if (e && e.data && e.data.listObjectives) {
+      if (e && e.data && e.data.listObjectivesSection) {
         console.error("違反があります", e.errors)
-        return e.data.listObjectives.items as Objective[]
+        return e.data.listObjectivesSection.items as Objective[]
       } else {
         console.error(e)
       }

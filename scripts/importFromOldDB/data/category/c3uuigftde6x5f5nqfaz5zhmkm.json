@@ -1,0 +1,4 @@
+{"Item":{"__typename":{"S":"Category"},"companyID":{"S":"SCC"},"createdAt":{"S":"2021-01-13T01:41:47.716Z"},"localID":{"S":"30"},"name":{"S":"③ 成長目標（自分の成長のための努力など）"},"updatedAt":{"S":"2021-01-13T01:41:47.716Z"}}}
+{"Item":{"__typename":{"S":"Category"},"companyID":{"S":"SCC"},"createdAt":{"S":"2021-01-12T06:35:53.608Z"},"localID":{"S":"10"},"name":{"S":"① ビジネス成果目標（部門目標への貢献、担当業務での目標、他社員の育成・指導など）"},"updatedAt":{"S":"2021-01-12T06:35:53.608Z"}}}
+{"Item":{"__typename":{"S":"Category"},"companyID":{"S":"SCC"},"createdAt":{"S":"2021-01-13T01:41:26.858Z"},"localID":{"S":"20"},"name":{"S":"② ビジネス姿勢目標（仕事への取組み姿勢、知的資産への貢献、社内行事への姿勢など）"},"updatedAt":{"S":"2021-01-13T01:41:26.858Z"}}}
+{"Item":{"__typename":{"S":"Category"},"companyID":{"S":"SCC"},"createdAt":{"S":"2021-01-13T01:42:19.553Z"},"localID":{"S":"40"},"name":{"S":"④ 人事管理目標（マネージャー、リーダーのみ、組織活性化や部下の指導など）"},"updatedAt":{"S":"2021-01-13T01:42:19.553Z"}}}

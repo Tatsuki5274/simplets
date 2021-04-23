@@ -1,6 +1,6 @@
-import { ListReportsQueryVariables, ReportWorkingStatus } from "API";
+import { ListReportsSubQueryVariables, ReportWorkingStatus } from "API";
 import { Formik } from "formik";
-import { listReports } from "graphql/queries";
+import { listReportsSub } from "graphql/queries";
 import { ReportDao } from "lib/dao/reportDao";
 import React, { useState } from "react";
 import styled from "styled-components";
@@ -16,11 +16,12 @@ import dateFormat from "dateformat"
 export type ReviewerReportFilterEmployeeType = {
     firlstName: string
     lastName: string
+    groupId: string
     groupName: string
-    groupLocalId: string
+    groupNo: string
     username: string
     sub: string
-    localId: string
+    empNo: string
 }
 
 type Props = {
@@ -56,7 +57,7 @@ export default function (props: Props) {
             setReviewees(generateRevieweeLabel(props.reviewee))
         } else {
             const filteredReviewees = props.reviewee.filter(reviewee => {
-                return reviewee.groupLocalId === value
+                return reviewee.groupNo === value
             })
             const reviewees = generateRevieweeLabel(filteredReviewees)
             if (reviewees && reviewees.length === 0) {
@@ -80,15 +81,14 @@ export default function (props: Props) {
                 reviewee: reviewees[0].value,
             }}
             onSubmit={async (values) => {
-                const reportItem: ListReportsQueryVariables = {
+                const reportItem: ListReportsSubQueryVariables = {
                     sub: values.reviewee,
                     date: {
-                        between: [values.reportStartDate, values.reportEndDate]
+                        between: [values.reportStartDate, values.reportEndDate],
                     },
-
                 }
                 let result: ReviewerReportListEmployeeType[] | null = null
-                const reports = await ReportDao.list(listReports, reportItem)
+                const reports = await ReportDao.listSub(listReportsSub, reportItem)
                 if (reports && reports.length !== 0) {
                     result = reports.map(report => {
                         return {

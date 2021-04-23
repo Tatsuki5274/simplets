@@ -30,7 +30,7 @@ export default function (props: Props) {
                     let filter: (TableEvaluationListType | null)[] = props.initTableData
                     // 部署フィルター
                     if (values.group !== "all") {
-                        filter = filter.filter(datum => datum?.data.groupLocalId === values.group)
+                        filter = filter.filter(datum => datum?.data.groupId === values.group)
                     }
                     // 年度フィルター
                     filter = filter.filter(datum => datum?.data.year.toString() === values.year)
@@ -44,10 +44,10 @@ export default function (props: Props) {
                     //ソート
                     filter.sort(function (a, b) {
                         if (a && b && a.data && b.data) {
-                            if (a.data.groupLocalId > b.data.groupLocalId) return 1
-                            if (a.data.groupLocalId < b.data.groupLocalId) return -1
-                            if (a.data.localId > b.data.localId) return 1
-                            if (a.data.localId < b.data.localId) return -1
+                            if (a.data.groupNo > b.data.groupNo) return 1
+                            if (a.data.groupNo < b.data.groupNo) return -1
+                            if (a.data.empNo > b.data.empNo) return 1
+                            if (a.data.empNo < b.data.empNo) return -1
                         }
                         return 0
                     })

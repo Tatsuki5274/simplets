@@ -5,15 +5,13 @@ import { ReportDao } from "lib/dao/reportDao";
 import React, { useContext, useEffect, useState } from "react";
 import EditReport from "views/components/templates/report/reviewer/EditReport";
 import { getReportStatusString } from "lib/util";
-import ReferenceReport from "views/components/organisms/report/reviewer/ReferenceReport";
 import TReferenceReport from "views/components/templates/report/reviewer/TReferenceReport";
 import Error from "views/components/templates/Error";
 
 type Props = {
     match: {
         params: {
-            date: string
-            sub: string
+            reportId: string
         }
     }
 }
@@ -31,8 +29,7 @@ export default function (props: Props) {
     useEffect(() => {
         (async () => {
             const getI: GetReportQueryVariables = {
-                date: props.match.params.date,
-                sub: props.match.params.sub,
+                id: props.match.params.reportId,
             }
             const reportItem = await ReportDao.get(getReport, getI)
             setIsLoaded(true);  // 読み込み完了
@@ -44,7 +41,7 @@ export default function (props: Props) {
                 }
             }
         })()
-    }, [props])
+    }, [props.match.params.reportId])
 
     const mockData = {
             header: header,
@@ -84,6 +81,7 @@ export default function (props: Props) {
                             commentReviewer: report.reviewerComments?.superior || "",
                             reviewee: report.reviewee || "",
                             revieweeName: revieweeName || "",
+                            id: report.id || "", // unsafe
                         }}
                     />
                 )

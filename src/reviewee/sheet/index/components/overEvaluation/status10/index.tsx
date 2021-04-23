@@ -5,32 +5,33 @@ import { SheetContext } from "../../..";
 import * as APIt from 'API';
 import { SheetDao } from "lib/dao/sheetDao";
 import { tableHeaderStyle } from "common/globalStyle.module.scss";
+import { listSheetsReviewee } from "graphql/queries";
 
-const listSheetReviewee = /* GraphQL */ `
-  query ListSheetReviewee(
-    $companyID: ID
-    $reviewee: ModelStringKeyConditionInput
-    $sortDirection: ModelSortDirection
-    $filter: ModelSheetFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listSheetReviewee(
-      companyID: $companyID
-      reviewee: $reviewee
-      sortDirection: $sortDirection
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-    ) {
-      items {
-        year
-        overAllEvaluation
-      }
-      nextToken
-    }
-  }
-`;
+// const listSheetReviewee = /* GraphQL */ `
+//   query ListSheetReviewee(
+//     $companyID: ID
+//     $reviewee: ModelStringKeyConditionInput
+//     $sortDirection: ModelSortDirection
+//     $filter: ModelSheetFilterInput
+//     $limit: Int
+//     $nextToken: String
+//   ) {
+//     listSheetReviewee(
+//       companyID: $companyID
+//       reviewee: $reviewee
+//       sortDirection: $sortDirection
+//       filter: $filter
+//       limit: $limit
+//       nextToken: $nextToken
+//     ) {
+//       items {
+//         year
+//         overAllEvaluation
+//       }
+//       nextToken
+//     }
+//   }
+// `;
 
 export const OverEvaluationTableStatus10 = () => {
     const currentUser = useContext(UserContext);
@@ -48,19 +49,14 @@ export const OverEvaluationTableStatus10 = () => {
                 const thisYear = sheet.year || 0 // unsafe
 
                 if(currentUser){
-                    const input: APIt.ListSheetRevieweeQueryVariables = {
-                        companyID: currentUser.attributes["custom:companyId"],
-                        reviewee: {
-                            eq: currentUser.username
-                        },
-                        filter: {
-                            year: {
-                                between: [thisYear - 2, thisYear - 1]
-                            }
+                    const input: APIt.ListSheetsRevieweeQueryVariables = {
+                        sub: currentUser.attributes["sub"],
+                        year: {
+                            between: [thisYear - 2, thisYear - 1]
                         }
                     }
                     console.log("input",input);
-                    const gotSheets = await SheetDao.listReviewee(listSheetReviewee, input)
+                    const gotSheets = await SheetDao.listReviewee(listSheetsReviewee, input)
                     console.log("gotSheets",gotSheets);
 
                     if(gotSheets){

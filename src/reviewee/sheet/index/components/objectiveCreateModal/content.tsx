@@ -4,7 +4,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import CategoryInput from "./categoryInput"
 import { ErrorMessage, FormikProps } from 'formik';
 import { inputFieldStyle } from 'common/globalStyle.module.scss';
-import { getSectionKeys } from 'lib/util';
 import { TypeForm } from '.';
 import { Sheet } from 'API';
 import ErrorText from 'views/components/atoms/ErrorText';
@@ -23,12 +22,12 @@ export function ObjectiveCreateModalContent(props: Props) {
             <div>
                 <Form.Label>目標カテゴリ<Badge variant="danger">必須</Badge></Form.Label>
                 {props.sheet.section?.items?.map((section, index) => {
-                    if (section && section.sectionCategoryName) {
+                    if (section && section.sectionCategoryName && section.id) {
                         return (
                             <CategoryInput
-                                key={getSectionKeys(section)}
+                                key={section.no + section.id}
                                 handleChange={props.formik.handleChange}
-                                sectionKeys={getSectionKeys(section)}
+                                sectionKeys={section.id}
                                 categoryName={section.sectionCategoryName}
                                 defaultCheck={index === 0}
                                 style={categoryInputStyle}

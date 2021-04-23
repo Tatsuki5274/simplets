@@ -27,8 +27,7 @@ export const SheetContext = createContext<
 type Props = {
     match: {
         params: {
-            sub: string
-            year: string
+            sheetId: string
         }
     }
 }
@@ -46,11 +45,9 @@ function EvalutionScreen(props: Props) {
 
     useEffect(() => {
         ; (async () => {
-            //const sheetId = props.match.params.sheetId;
 
             const input: APIt.GetSheetQueryVariables = {
-                sub: props.match.params.sub,
-                year: parseInt(props.match.params.year),
+                id: props.match.params.sheetId,
             }
             // let response;
             // try {
@@ -68,7 +65,7 @@ function EvalutionScreen(props: Props) {
                 console.error("シートの取得に失敗しました")
             }
         })()
-    }, [props.match.params.sub, props.match.params.year]);
+    }, [props.match.params.sheetId]);
 
     // lastEvalutation 更新
     // async function handleChangeObjective(event: any) {
@@ -115,7 +112,7 @@ function EvalutionScreen(props: Props) {
     //カテゴリ情報のnoを元に昇順でソート
     const sectionItems = sheet.section?.items as Section[];
     sectionItems?.sort(function (a, b) {
-        if (a.sectionCategoryLocalId && b.sectionCategoryLocalId && a.sectionCategoryLocalId > b.sectionCategoryLocalId) {
+        if (a.sectionCategoryName && b.sectionCategoryName && a.sectionCategoryName > b.sectionCategoryName) { // 仮で設定
             return 1;
         } else {
             return -1;

@@ -71,10 +71,10 @@ export const createEmployee = /* GraphQL */ `
     $condition: ModelEmployeeConditionInput
   ) {
     createEmployee(input: $input, condition: $condition) {
-      companyID
       username
-      localID
-      employeeGroupLocalId
+      companyID
+      no
+      groupID
       superiorUsername
       firstName
       lastName
@@ -96,10 +96,10 @@ export const createEmployee = /* GraphQL */ `
         updatedAt
       }
       superior {
-        companyID
         username
-        localID
-        employeeGroupLocalId
+        companyID
+        no
+        groupID
         superiorUsername
         firstName
         lastName
@@ -121,10 +121,10 @@ export const createEmployee = /* GraphQL */ `
           updatedAt
         }
         superior {
-          companyID
           username
-          localID
-          employeeGroupLocalId
+          companyID
+          no
+          groupID
           superiorUsername
           firstName
           lastName
@@ -146,10 +146,10 @@ export const createEmployee = /* GraphQL */ `
             updatedAt
           }
           superior {
-            companyID
             username
-            localID
-            employeeGroupLocalId
+            companyID
+            no
+            groupID
             superiorUsername
             firstName
             lastName
@@ -171,10 +171,10 @@ export const createEmployee = /* GraphQL */ `
               updatedAt
             }
             superior {
-              companyID
               username
-              localID
-              employeeGroupLocalId
+              companyID
+              no
+              groupID
               superiorUsername
               firstName
               lastName
@@ -196,10 +196,10 @@ export const createEmployee = /* GraphQL */ `
                 updatedAt
               }
               superior {
-                companyID
                 username
-                localID
-                employeeGroupLocalId
+                companyID
+                no
+                groupID
                 superiorUsername
                 firstName
                 lastName
@@ -221,10 +221,10 @@ export const createEmployee = /* GraphQL */ `
                   updatedAt
                 }
                 superior {
-                  companyID
                   username
-                  localID
-                  employeeGroupLocalId
+                  companyID
+                  no
+                  groupID
                   superiorUsername
                   firstName
                   lastName
@@ -238,48 +238,54 @@ export const createEmployee = /* GraphQL */ `
                   updatedAt
                 }
                 group {
+                  id
                   companyID
-                  localID
+                  no
                   name
                   createdAt
                   updatedAt
                 }
               }
               group {
+                id
                 companyID
-                localID
+                no
                 name
                 createdAt
                 updatedAt
               }
             }
             group {
+              id
               companyID
-              localID
+              no
               name
               createdAt
               updatedAt
             }
           }
           group {
+            id
             companyID
-            localID
+            no
             name
             createdAt
             updatedAt
           }
         }
         group {
+          id
           companyID
-          localID
+          no
           name
           createdAt
           updatedAt
         }
       }
       group {
+        id
         companyID
-        localID
+        no
         name
         createdAt
         updatedAt
@@ -293,10 +299,10 @@ export const deleteEmployee = /* GraphQL */ `
     $condition: ModelEmployeeConditionInput
   ) {
     deleteEmployee(input: $input, condition: $condition) {
-      companyID
       username
-      localID
-      employeeGroupLocalId
+      companyID
+      no
+      groupID
       superiorUsername
       firstName
       lastName
@@ -318,10 +324,10 @@ export const deleteEmployee = /* GraphQL */ `
         updatedAt
       }
       superior {
-        companyID
         username
-        localID
-        employeeGroupLocalId
+        companyID
+        no
+        groupID
         superiorUsername
         firstName
         lastName
@@ -343,10 +349,10 @@ export const deleteEmployee = /* GraphQL */ `
           updatedAt
         }
         superior {
-          companyID
           username
-          localID
-          employeeGroupLocalId
+          companyID
+          no
+          groupID
           superiorUsername
           firstName
           lastName
@@ -368,10 +374,10 @@ export const deleteEmployee = /* GraphQL */ `
             updatedAt
           }
           superior {
-            companyID
             username
-            localID
-            employeeGroupLocalId
+            companyID
+            no
+            groupID
             superiorUsername
             firstName
             lastName
@@ -393,10 +399,10 @@ export const deleteEmployee = /* GraphQL */ `
               updatedAt
             }
             superior {
-              companyID
               username
-              localID
-              employeeGroupLocalId
+              companyID
+              no
+              groupID
               superiorUsername
               firstName
               lastName
@@ -418,10 +424,10 @@ export const deleteEmployee = /* GraphQL */ `
                 updatedAt
               }
               superior {
-                companyID
                 username
-                localID
-                employeeGroupLocalId
+                companyID
+                no
+                groupID
                 superiorUsername
                 firstName
                 lastName
@@ -443,10 +449,10 @@ export const deleteEmployee = /* GraphQL */ `
                   updatedAt
                 }
                 superior {
-                  companyID
                   username
-                  localID
-                  employeeGroupLocalId
+                  companyID
+                  no
+                  groupID
                   superiorUsername
                   firstName
                   lastName
@@ -460,48 +466,54 @@ export const deleteEmployee = /* GraphQL */ `
                   updatedAt
                 }
                 group {
+                  id
                   companyID
-                  localID
+                  no
                   name
                   createdAt
                   updatedAt
                 }
               }
               group {
+                id
                 companyID
-                localID
+                no
                 name
                 createdAt
                 updatedAt
               }
             }
             group {
+              id
               companyID
-              localID
+              no
               name
               createdAt
               updatedAt
             }
           }
           group {
+            id
             companyID
-            localID
+            no
             name
             createdAt
             updatedAt
           }
         }
         group {
+          id
           companyID
-          localID
+          no
           name
           createdAt
           updatedAt
         }
       }
       group {
+        id
         companyID
-        localID
+        no
         name
         createdAt
         updatedAt
@@ -515,8 +527,9 @@ export const createGroup = /* GraphQL */ `
     $condition: ModelGroupConditionInput
   ) {
     createGroup(input: $input, condition: $condition) {
+      id
       companyID
-      localID
+      no
       name
       createdAt
       updatedAt
@@ -529,8 +542,9 @@ export const updateGroup = /* GraphQL */ `
     $condition: ModelGroupConditionInput
   ) {
     updateGroup(input: $input, condition: $condition) {
+      id
       companyID
-      localID
+      no
       name
       createdAt
       updatedAt
@@ -543,8 +557,9 @@ export const deleteGroup = /* GraphQL */ `
     $condition: ModelGroupConditionInput
   ) {
     deleteGroup(input: $input, condition: $condition) {
+      id
       companyID
-      localID
+      no
       name
       createdAt
       updatedAt
@@ -557,8 +572,9 @@ export const createCategory = /* GraphQL */ `
     $condition: ModelCategoryConditionInput
   ) {
     createCategory(input: $input, condition: $condition) {
+      id
       companyID
-      localID
+      no
       name
       createdAt
       updatedAt
@@ -571,8 +587,9 @@ export const updateCategory = /* GraphQL */ `
     $condition: ModelCategoryConditionInput
   ) {
     updateCategory(input: $input, condition: $condition) {
+      id
       companyID
-      localID
+      no
       name
       createdAt
       updatedAt
@@ -585,8 +602,9 @@ export const deleteCategory = /* GraphQL */ `
     $condition: ModelCategoryConditionInput
   ) {
     deleteCategory(input: $input, condition: $condition) {
+      id
       companyID
-      localID
+      no
       name
       createdAt
       updatedAt
@@ -599,6 +617,7 @@ export const deleteSheet = /* GraphQL */ `
     $condition: ModelSheetConditionInput
   ) {
     deleteSheet(input: $input, condition: $condition) {
+      id
       sub
       year
       companyID
@@ -624,7 +643,6 @@ export const deleteSheet = /* GraphQL */ `
       InterviewMid3Comment
       revieweeUsername
       secondUsername
-      sheetGroupLocalId
       sheetGroupName
       referencer
       reviewee
@@ -633,10 +651,10 @@ export const deleteSheet = /* GraphQL */ `
       createdAt
       updatedAt
       revieweeEmployee {
-        companyID
         username
-        localID
-        employeeGroupLocalId
+        companyID
+        no
+        groupID
         superiorUsername
         firstName
         lastName
@@ -658,10 +676,10 @@ export const deleteSheet = /* GraphQL */ `
           updatedAt
         }
         superior {
-          companyID
           username
-          localID
-          employeeGroupLocalId
+          companyID
+          no
+          groupID
           superiorUsername
           firstName
           lastName
@@ -683,10 +701,10 @@ export const deleteSheet = /* GraphQL */ `
             updatedAt
           }
           superior {
-            companyID
             username
-            localID
-            employeeGroupLocalId
+            companyID
+            no
+            groupID
             superiorUsername
             firstName
             lastName
@@ -708,10 +726,10 @@ export const deleteSheet = /* GraphQL */ `
               updatedAt
             }
             superior {
-              companyID
               username
-              localID
-              employeeGroupLocalId
+              companyID
+              no
+              groupID
               superiorUsername
               firstName
               lastName
@@ -733,10 +751,10 @@ export const deleteSheet = /* GraphQL */ `
                 updatedAt
               }
               superior {
-                companyID
                 username
-                localID
-                employeeGroupLocalId
+                companyID
+                no
+                groupID
                 superiorUsername
                 firstName
                 lastName
@@ -758,10 +776,10 @@ export const deleteSheet = /* GraphQL */ `
                   updatedAt
                 }
                 superior {
-                  companyID
                   username
-                  localID
-                  employeeGroupLocalId
+                  companyID
+                  no
+                  groupID
                   superiorUsername
                   firstName
                   lastName
@@ -775,50 +793,55 @@ export const deleteSheet = /* GraphQL */ `
                   updatedAt
                 }
                 group {
+                  id
                   companyID
-                  localID
+                  no
                   name
                   createdAt
                   updatedAt
                 }
               }
               group {
+                id
                 companyID
-                localID
+                no
                 name
                 createdAt
                 updatedAt
               }
             }
             group {
+              id
               companyID
-              localID
+              no
               name
               createdAt
               updatedAt
             }
           }
           group {
+            id
             companyID
-            localID
+            no
             name
             createdAt
             updatedAt
           }
         }
         group {
+          id
           companyID
-          localID
+          no
           name
           createdAt
           updatedAt
         }
       }
       secondEmployee {
-        companyID
         username
-        localID
-        employeeGroupLocalId
+        companyID
+        no
+        groupID
         superiorUsername
         firstName
         lastName
@@ -840,10 +863,10 @@ export const deleteSheet = /* GraphQL */ `
           updatedAt
         }
         superior {
-          companyID
           username
-          localID
-          employeeGroupLocalId
+          companyID
+          no
+          groupID
           superiorUsername
           firstName
           lastName
@@ -865,10 +888,10 @@ export const deleteSheet = /* GraphQL */ `
             updatedAt
           }
           superior {
-            companyID
             username
-            localID
-            employeeGroupLocalId
+            companyID
+            no
+            groupID
             superiorUsername
             firstName
             lastName
@@ -890,10 +913,10 @@ export const deleteSheet = /* GraphQL */ `
               updatedAt
             }
             superior {
-              companyID
               username
-              localID
-              employeeGroupLocalId
+              companyID
+              no
+              groupID
               superiorUsername
               firstName
               lastName
@@ -915,10 +938,10 @@ export const deleteSheet = /* GraphQL */ `
                 updatedAt
               }
               superior {
-                companyID
                 username
-                localID
-                employeeGroupLocalId
+                companyID
+                no
+                groupID
                 superiorUsername
                 firstName
                 lastName
@@ -940,10 +963,10 @@ export const deleteSheet = /* GraphQL */ `
                   updatedAt
                 }
                 superior {
-                  companyID
                   username
-                  localID
-                  employeeGroupLocalId
+                  companyID
+                  no
+                  groupID
                   superiorUsername
                   firstName
                   lastName
@@ -957,40 +980,45 @@ export const deleteSheet = /* GraphQL */ `
                   updatedAt
                 }
                 group {
+                  id
                   companyID
-                  localID
+                  no
                   name
                   createdAt
                   updatedAt
                 }
               }
               group {
+                id
                 companyID
-                localID
+                no
                 name
                 createdAt
                 updatedAt
               }
             }
             group {
+              id
               companyID
-              localID
+              no
               name
               createdAt
               updatedAt
             }
           }
           group {
+            id
             companyID
-            localID
+            no
             name
             createdAt
             updatedAt
           }
         }
         group {
+          id
           companyID
-          localID
+          no
           name
           createdAt
           updatedAt
@@ -998,26 +1026,20 @@ export const deleteSheet = /* GraphQL */ `
       }
       section {
         items {
-          sheetKeys
-          sectionCategoryLocalId
+          id
+          sheetID
+          no
           sectionCategoryName
-          companyID
           reviewee
           topReviewers
           secondReviewers
           referencer
           createdAt
           updatedAt
-          category {
-            companyID
-            localID
-            name
-            createdAt
-            updatedAt
-          }
           objective {
             items {
-              sectionKeys
+              id
+              sectionID
               createdAt
               companyID
               content
@@ -1049,26 +1071,20 @@ export const createSection = /* GraphQL */ `
     $condition: ModelSectionConditionInput
   ) {
     createSection(input: $input, condition: $condition) {
-      sheetKeys
-      sectionCategoryLocalId
+      id
+      sheetID
+      no
       sectionCategoryName
-      companyID
       reviewee
       topReviewers
       secondReviewers
       referencer
       createdAt
       updatedAt
-      category {
-        companyID
-        localID
-        name
-        createdAt
-        updatedAt
-      }
       objective {
         items {
-          sectionKeys
+          id
+          sectionID
           createdAt
           companyID
           content
@@ -1097,26 +1113,20 @@ export const updateSection = /* GraphQL */ `
     $condition: ModelSectionConditionInput
   ) {
     updateSection(input: $input, condition: $condition) {
-      sheetKeys
-      sectionCategoryLocalId
+      id
+      sheetID
+      no
       sectionCategoryName
-      companyID
       reviewee
       topReviewers
       secondReviewers
       referencer
       createdAt
       updatedAt
-      category {
-        companyID
-        localID
-        name
-        createdAt
-        updatedAt
-      }
       objective {
         items {
-          sectionKeys
+          id
+          sectionID
           createdAt
           companyID
           content
@@ -1145,26 +1155,20 @@ export const deleteSection = /* GraphQL */ `
     $condition: ModelSectionConditionInput
   ) {
     deleteSection(input: $input, condition: $condition) {
-      sheetKeys
-      sectionCategoryLocalId
+      id
+      sheetID
+      no
       sectionCategoryName
-      companyID
       reviewee
       topReviewers
       secondReviewers
       referencer
       createdAt
       updatedAt
-      category {
-        companyID
-        localID
-        name
-        createdAt
-        updatedAt
-      }
       objective {
         items {
-          sectionKeys
+          id
+          sectionID
           createdAt
           companyID
           content
@@ -1193,7 +1197,8 @@ export const createObjective = /* GraphQL */ `
     $condition: ModelObjectiveConditionInput
   ) {
     createObjective(input: $input, condition: $condition) {
-      sectionKeys
+      id
+      sectionID
       createdAt
       companyID
       content
@@ -1219,7 +1224,8 @@ export const updateObjective = /* GraphQL */ `
     $condition: ModelObjectiveConditionInput
   ) {
     updateObjective(input: $input, condition: $condition) {
-      sectionKeys
+      id
+      sectionID
       createdAt
       companyID
       content
@@ -1245,7 +1251,8 @@ export const deleteObjective = /* GraphQL */ `
     $condition: ModelObjectiveConditionInput
   ) {
     deleteObjective(input: $input, condition: $condition) {
-      sectionKeys
+      id
+      sectionID
       createdAt
       companyID
       content
@@ -1271,6 +1278,7 @@ export const createReport = /* GraphQL */ `
     $condition: ModelReportConditionInput
   ) {
     createReport(input: $input, condition: $condition) {
+      id
       sub
       date
       reviewee
@@ -1289,10 +1297,10 @@ export const createReport = /* GraphQL */ `
       createdAt
       updatedAt
       revieweeEmployee {
-        companyID
         username
-        localID
-        employeeGroupLocalId
+        companyID
+        no
+        groupID
         superiorUsername
         firstName
         lastName
@@ -1314,10 +1322,10 @@ export const createReport = /* GraphQL */ `
           updatedAt
         }
         superior {
-          companyID
           username
-          localID
-          employeeGroupLocalId
+          companyID
+          no
+          groupID
           superiorUsername
           firstName
           lastName
@@ -1339,10 +1347,10 @@ export const createReport = /* GraphQL */ `
             updatedAt
           }
           superior {
-            companyID
             username
-            localID
-            employeeGroupLocalId
+            companyID
+            no
+            groupID
             superiorUsername
             firstName
             lastName
@@ -1364,10 +1372,10 @@ export const createReport = /* GraphQL */ `
               updatedAt
             }
             superior {
-              companyID
               username
-              localID
-              employeeGroupLocalId
+              companyID
+              no
+              groupID
               superiorUsername
               firstName
               lastName
@@ -1389,10 +1397,10 @@ export const createReport = /* GraphQL */ `
                 updatedAt
               }
               superior {
-                companyID
                 username
-                localID
-                employeeGroupLocalId
+                companyID
+                no
+                groupID
                 superiorUsername
                 firstName
                 lastName
@@ -1414,10 +1422,10 @@ export const createReport = /* GraphQL */ `
                   updatedAt
                 }
                 superior {
-                  companyID
                   username
-                  localID
-                  employeeGroupLocalId
+                  companyID
+                  no
+                  groupID
                   superiorUsername
                   firstName
                   lastName
@@ -1431,40 +1439,45 @@ export const createReport = /* GraphQL */ `
                   updatedAt
                 }
                 group {
+                  id
                   companyID
-                  localID
+                  no
                   name
                   createdAt
                   updatedAt
                 }
               }
               group {
+                id
                 companyID
-                localID
+                no
                 name
                 createdAt
                 updatedAt
               }
             }
             group {
+              id
               companyID
-              localID
+              no
               name
               createdAt
               updatedAt
             }
           }
           group {
+            id
             companyID
-            localID
+            no
             name
             createdAt
             updatedAt
           }
         }
         group {
+          id
           companyID
-          localID
+          no
           name
           createdAt
           updatedAt
@@ -1479,6 +1492,7 @@ export const deleteReport = /* GraphQL */ `
     $condition: ModelReportConditionInput
   ) {
     deleteReport(input: $input, condition: $condition) {
+      id
       sub
       date
       reviewee
@@ -1497,10 +1511,10 @@ export const deleteReport = /* GraphQL */ `
       createdAt
       updatedAt
       revieweeEmployee {
-        companyID
         username
-        localID
-        employeeGroupLocalId
+        companyID
+        no
+        groupID
         superiorUsername
         firstName
         lastName
@@ -1522,10 +1536,10 @@ export const deleteReport = /* GraphQL */ `
           updatedAt
         }
         superior {
-          companyID
           username
-          localID
-          employeeGroupLocalId
+          companyID
+          no
+          groupID
           superiorUsername
           firstName
           lastName
@@ -1547,10 +1561,10 @@ export const deleteReport = /* GraphQL */ `
             updatedAt
           }
           superior {
-            companyID
             username
-            localID
-            employeeGroupLocalId
+            companyID
+            no
+            groupID
             superiorUsername
             firstName
             lastName
@@ -1572,10 +1586,10 @@ export const deleteReport = /* GraphQL */ `
               updatedAt
             }
             superior {
-              companyID
               username
-              localID
-              employeeGroupLocalId
+              companyID
+              no
+              groupID
               superiorUsername
               firstName
               lastName
@@ -1597,10 +1611,10 @@ export const deleteReport = /* GraphQL */ `
                 updatedAt
               }
               superior {
-                companyID
                 username
-                localID
-                employeeGroupLocalId
+                companyID
+                no
+                groupID
                 superiorUsername
                 firstName
                 lastName
@@ -1622,10 +1636,10 @@ export const deleteReport = /* GraphQL */ `
                   updatedAt
                 }
                 superior {
-                  companyID
                   username
-                  localID
-                  employeeGroupLocalId
+                  companyID
+                  no
+                  groupID
                   superiorUsername
                   firstName
                   lastName
@@ -1639,40 +1653,45 @@ export const deleteReport = /* GraphQL */ `
                   updatedAt
                 }
                 group {
+                  id
                   companyID
-                  localID
+                  no
                   name
                   createdAt
                   updatedAt
                 }
               }
               group {
+                id
                 companyID
-                localID
+                no
                 name
                 createdAt
                 updatedAt
               }
             }
             group {
+              id
               companyID
-              localID
+              no
               name
               createdAt
               updatedAt
             }
           }
           group {
+            id
             companyID
-            localID
+            no
             name
             createdAt
             updatedAt
           }
         }
         group {
+          id
           companyID
-          localID
+          no
           name
           createdAt
           updatedAt
@@ -1687,10 +1706,10 @@ export const updateEmployee = /* GraphQL */ `
     $condition: ModelEmployeeConditionInput
   ) {
     updateEmployee(input: $input, condition: $condition) {
-      companyID
       username
-      localID
-      employeeGroupLocalId
+      companyID
+      no
+      groupID
       superiorUsername
       firstName
       lastName
@@ -1712,10 +1731,10 @@ export const updateEmployee = /* GraphQL */ `
         updatedAt
       }
       superior {
-        companyID
         username
-        localID
-        employeeGroupLocalId
+        companyID
+        no
+        groupID
         superiorUsername
         firstName
         lastName
@@ -1737,10 +1756,10 @@ export const updateEmployee = /* GraphQL */ `
           updatedAt
         }
         superior {
-          companyID
           username
-          localID
-          employeeGroupLocalId
+          companyID
+          no
+          groupID
           superiorUsername
           firstName
           lastName
@@ -1762,10 +1781,10 @@ export const updateEmployee = /* GraphQL */ `
             updatedAt
           }
           superior {
-            companyID
             username
-            localID
-            employeeGroupLocalId
+            companyID
+            no
+            groupID
             superiorUsername
             firstName
             lastName
@@ -1787,10 +1806,10 @@ export const updateEmployee = /* GraphQL */ `
               updatedAt
             }
             superior {
-              companyID
               username
-              localID
-              employeeGroupLocalId
+              companyID
+              no
+              groupID
               superiorUsername
               firstName
               lastName
@@ -1812,10 +1831,10 @@ export const updateEmployee = /* GraphQL */ `
                 updatedAt
               }
               superior {
-                companyID
                 username
-                localID
-                employeeGroupLocalId
+                companyID
+                no
+                groupID
                 superiorUsername
                 firstName
                 lastName
@@ -1837,10 +1856,10 @@ export const updateEmployee = /* GraphQL */ `
                   updatedAt
                 }
                 superior {
-                  companyID
                   username
-                  localID
-                  employeeGroupLocalId
+                  companyID
+                  no
+                  groupID
                   superiorUsername
                   firstName
                   lastName
@@ -1854,48 +1873,54 @@ export const updateEmployee = /* GraphQL */ `
                   updatedAt
                 }
                 group {
+                  id
                   companyID
-                  localID
+                  no
                   name
                   createdAt
                   updatedAt
                 }
               }
               group {
+                id
                 companyID
-                localID
+                no
                 name
                 createdAt
                 updatedAt
               }
             }
             group {
+              id
               companyID
-              localID
+              no
               name
               createdAt
               updatedAt
             }
           }
           group {
+            id
             companyID
-            localID
+            no
             name
             createdAt
             updatedAt
           }
         }
         group {
+          id
           companyID
-          localID
+          no
           name
           createdAt
           updatedAt
         }
       }
       group {
+        id
         companyID
-        localID
+        no
         name
         createdAt
         updatedAt
@@ -1909,6 +1934,7 @@ export const createSheet = /* GraphQL */ `
     $condition: ModelSheetConditionInput
   ) {
     createSheet(input: $input, condition: $condition) {
+      id
       sub
       year
       companyID
@@ -1934,7 +1960,6 @@ export const createSheet = /* GraphQL */ `
       InterviewMid3Comment
       revieweeUsername
       secondUsername
-      sheetGroupLocalId
       sheetGroupName
       referencer
       reviewee
@@ -1943,10 +1968,10 @@ export const createSheet = /* GraphQL */ `
       createdAt
       updatedAt
       revieweeEmployee {
-        companyID
         username
-        localID
-        employeeGroupLocalId
+        companyID
+        no
+        groupID
         superiorUsername
         firstName
         lastName
@@ -1968,10 +1993,10 @@ export const createSheet = /* GraphQL */ `
           updatedAt
         }
         superior {
-          companyID
           username
-          localID
-          employeeGroupLocalId
+          companyID
+          no
+          groupID
           superiorUsername
           firstName
           lastName
@@ -1993,10 +2018,10 @@ export const createSheet = /* GraphQL */ `
             updatedAt
           }
           superior {
-            companyID
             username
-            localID
-            employeeGroupLocalId
+            companyID
+            no
+            groupID
             superiorUsername
             firstName
             lastName
@@ -2018,10 +2043,10 @@ export const createSheet = /* GraphQL */ `
               updatedAt
             }
             superior {
-              companyID
               username
-              localID
-              employeeGroupLocalId
+              companyID
+              no
+              groupID
               superiorUsername
               firstName
               lastName
@@ -2043,10 +2068,10 @@ export const createSheet = /* GraphQL */ `
                 updatedAt
               }
               superior {
-                companyID
                 username
-                localID
-                employeeGroupLocalId
+                companyID
+                no
+                groupID
                 superiorUsername
                 firstName
                 lastName
@@ -2068,10 +2093,10 @@ export const createSheet = /* GraphQL */ `
                   updatedAt
                 }
                 superior {
-                  companyID
                   username
-                  localID
-                  employeeGroupLocalId
+                  companyID
+                  no
+                  groupID
                   superiorUsername
                   firstName
                   lastName
@@ -2085,50 +2110,55 @@ export const createSheet = /* GraphQL */ `
                   updatedAt
                 }
                 group {
+                  id
                   companyID
-                  localID
+                  no
                   name
                   createdAt
                   updatedAt
                 }
               }
               group {
+                id
                 companyID
-                localID
+                no
                 name
                 createdAt
                 updatedAt
               }
             }
             group {
+              id
               companyID
-              localID
+              no
               name
               createdAt
               updatedAt
             }
           }
           group {
+            id
             companyID
-            localID
+            no
             name
             createdAt
             updatedAt
           }
         }
         group {
+          id
           companyID
-          localID
+          no
           name
           createdAt
           updatedAt
         }
       }
       secondEmployee {
-        companyID
         username
-        localID
-        employeeGroupLocalId
+        companyID
+        no
+        groupID
         superiorUsername
         firstName
         lastName
@@ -2150,10 +2180,10 @@ export const createSheet = /* GraphQL */ `
           updatedAt
         }
         superior {
-          companyID
           username
-          localID
-          employeeGroupLocalId
+          companyID
+          no
+          groupID
           superiorUsername
           firstName
           lastName
@@ -2175,10 +2205,10 @@ export const createSheet = /* GraphQL */ `
             updatedAt
           }
           superior {
-            companyID
             username
-            localID
-            employeeGroupLocalId
+            companyID
+            no
+            groupID
             superiorUsername
             firstName
             lastName
@@ -2200,10 +2230,10 @@ export const createSheet = /* GraphQL */ `
               updatedAt
             }
             superior {
-              companyID
               username
-              localID
-              employeeGroupLocalId
+              companyID
+              no
+              groupID
               superiorUsername
               firstName
               lastName
@@ -2225,10 +2255,10 @@ export const createSheet = /* GraphQL */ `
                 updatedAt
               }
               superior {
-                companyID
                 username
-                localID
-                employeeGroupLocalId
+                companyID
+                no
+                groupID
                 superiorUsername
                 firstName
                 lastName
@@ -2250,10 +2280,10 @@ export const createSheet = /* GraphQL */ `
                   updatedAt
                 }
                 superior {
-                  companyID
                   username
-                  localID
-                  employeeGroupLocalId
+                  companyID
+                  no
+                  groupID
                   superiorUsername
                   firstName
                   lastName
@@ -2267,40 +2297,45 @@ export const createSheet = /* GraphQL */ `
                   updatedAt
                 }
                 group {
+                  id
                   companyID
-                  localID
+                  no
                   name
                   createdAt
                   updatedAt
                 }
               }
               group {
+                id
                 companyID
-                localID
+                no
                 name
                 createdAt
                 updatedAt
               }
             }
             group {
+              id
               companyID
-              localID
+              no
               name
               createdAt
               updatedAt
             }
           }
           group {
+            id
             companyID
-            localID
+            no
             name
             createdAt
             updatedAt
           }
         }
         group {
+          id
           companyID
-          localID
+          no
           name
           createdAt
           updatedAt
@@ -2308,26 +2343,20 @@ export const createSheet = /* GraphQL */ `
       }
       section {
         items {
-          sheetKeys
-          sectionCategoryLocalId
+          id
+          sheetID
+          no
           sectionCategoryName
-          companyID
           reviewee
           topReviewers
           secondReviewers
           referencer
           createdAt
           updatedAt
-          category {
-            companyID
-            localID
-            name
-            createdAt
-            updatedAt
-          }
           objective {
             items {
-              sectionKeys
+              id
+              sectionID
               createdAt
               companyID
               content
@@ -2359,6 +2388,7 @@ export const updateSheet = /* GraphQL */ `
     $condition: ModelSheetConditionInput
   ) {
     updateSheet(input: $input, condition: $condition) {
+      id
       sub
       year
       companyID
@@ -2384,7 +2414,6 @@ export const updateSheet = /* GraphQL */ `
       InterviewMid3Comment
       revieweeUsername
       secondUsername
-      sheetGroupLocalId
       sheetGroupName
       referencer
       reviewee
@@ -2393,10 +2422,10 @@ export const updateSheet = /* GraphQL */ `
       createdAt
       updatedAt
       revieweeEmployee {
-        companyID
         username
-        localID
-        employeeGroupLocalId
+        companyID
+        no
+        groupID
         superiorUsername
         firstName
         lastName
@@ -2418,10 +2447,10 @@ export const updateSheet = /* GraphQL */ `
           updatedAt
         }
         superior {
-          companyID
           username
-          localID
-          employeeGroupLocalId
+          companyID
+          no
+          groupID
           superiorUsername
           firstName
           lastName
@@ -2443,10 +2472,10 @@ export const updateSheet = /* GraphQL */ `
             updatedAt
           }
           superior {
-            companyID
             username
-            localID
-            employeeGroupLocalId
+            companyID
+            no
+            groupID
             superiorUsername
             firstName
             lastName
@@ -2468,10 +2497,10 @@ export const updateSheet = /* GraphQL */ `
               updatedAt
             }
             superior {
-              companyID
               username
-              localID
-              employeeGroupLocalId
+              companyID
+              no
+              groupID
               superiorUsername
               firstName
               lastName
@@ -2493,10 +2522,10 @@ export const updateSheet = /* GraphQL */ `
                 updatedAt
               }
               superior {
-                companyID
                 username
-                localID
-                employeeGroupLocalId
+                companyID
+                no
+                groupID
                 superiorUsername
                 firstName
                 lastName
@@ -2518,10 +2547,10 @@ export const updateSheet = /* GraphQL */ `
                   updatedAt
                 }
                 superior {
-                  companyID
                   username
-                  localID
-                  employeeGroupLocalId
+                  companyID
+                  no
+                  groupID
                   superiorUsername
                   firstName
                   lastName
@@ -2535,50 +2564,55 @@ export const updateSheet = /* GraphQL */ `
                   updatedAt
                 }
                 group {
+                  id
                   companyID
-                  localID
+                  no
                   name
                   createdAt
                   updatedAt
                 }
               }
               group {
+                id
                 companyID
-                localID
+                no
                 name
                 createdAt
                 updatedAt
               }
             }
             group {
+              id
               companyID
-              localID
+              no
               name
               createdAt
               updatedAt
             }
           }
           group {
+            id
             companyID
-            localID
+            no
             name
             createdAt
             updatedAt
           }
         }
         group {
+          id
           companyID
-          localID
+          no
           name
           createdAt
           updatedAt
         }
       }
       secondEmployee {
-        companyID
         username
-        localID
-        employeeGroupLocalId
+        companyID
+        no
+        groupID
         superiorUsername
         firstName
         lastName
@@ -2600,10 +2634,10 @@ export const updateSheet = /* GraphQL */ `
           updatedAt
         }
         superior {
-          companyID
           username
-          localID
-          employeeGroupLocalId
+          companyID
+          no
+          groupID
           superiorUsername
           firstName
           lastName
@@ -2625,10 +2659,10 @@ export const updateSheet = /* GraphQL */ `
             updatedAt
           }
           superior {
-            companyID
             username
-            localID
-            employeeGroupLocalId
+            companyID
+            no
+            groupID
             superiorUsername
             firstName
             lastName
@@ -2650,10 +2684,10 @@ export const updateSheet = /* GraphQL */ `
               updatedAt
             }
             superior {
-              companyID
               username
-              localID
-              employeeGroupLocalId
+              companyID
+              no
+              groupID
               superiorUsername
               firstName
               lastName
@@ -2675,10 +2709,10 @@ export const updateSheet = /* GraphQL */ `
                 updatedAt
               }
               superior {
-                companyID
                 username
-                localID
-                employeeGroupLocalId
+                companyID
+                no
+                groupID
                 superiorUsername
                 firstName
                 lastName
@@ -2700,10 +2734,10 @@ export const updateSheet = /* GraphQL */ `
                   updatedAt
                 }
                 superior {
-                  companyID
                   username
-                  localID
-                  employeeGroupLocalId
+                  companyID
+                  no
+                  groupID
                   superiorUsername
                   firstName
                   lastName
@@ -2717,40 +2751,45 @@ export const updateSheet = /* GraphQL */ `
                   updatedAt
                 }
                 group {
+                  id
                   companyID
-                  localID
+                  no
                   name
                   createdAt
                   updatedAt
                 }
               }
               group {
+                id
                 companyID
-                localID
+                no
                 name
                 createdAt
                 updatedAt
               }
             }
             group {
+              id
               companyID
-              localID
+              no
               name
               createdAt
               updatedAt
             }
           }
           group {
+            id
             companyID
-            localID
+            no
             name
             createdAt
             updatedAt
           }
         }
         group {
+          id
           companyID
-          localID
+          no
           name
           createdAt
           updatedAt
@@ -2758,26 +2797,20 @@ export const updateSheet = /* GraphQL */ `
       }
       section {
         items {
-          sheetKeys
-          sectionCategoryLocalId
+          id
+          sheetID
+          no
           sectionCategoryName
-          companyID
           reviewee
           topReviewers
           secondReviewers
           referencer
           createdAt
           updatedAt
-          category {
-            companyID
-            localID
-            name
-            createdAt
-            updatedAt
-          }
           objective {
             items {
-              sectionKeys
+              id
+              sectionID
               createdAt
               companyID
               content
@@ -2809,6 +2842,7 @@ export const updateReport = /* GraphQL */ `
     $condition: ModelReportConditionInput
   ) {
     updateReport(input: $input, condition: $condition) {
+      id
       sub
       date
       reviewee
@@ -2827,10 +2861,10 @@ export const updateReport = /* GraphQL */ `
       createdAt
       updatedAt
       revieweeEmployee {
-        companyID
         username
-        localID
-        employeeGroupLocalId
+        companyID
+        no
+        groupID
         superiorUsername
         firstName
         lastName
@@ -2852,10 +2886,10 @@ export const updateReport = /* GraphQL */ `
           updatedAt
         }
         superior {
-          companyID
           username
-          localID
-          employeeGroupLocalId
+          companyID
+          no
+          groupID
           superiorUsername
           firstName
           lastName
@@ -2877,10 +2911,10 @@ export const updateReport = /* GraphQL */ `
             updatedAt
           }
           superior {
-            companyID
             username
-            localID
-            employeeGroupLocalId
+            companyID
+            no
+            groupID
             superiorUsername
             firstName
             lastName
@@ -2902,10 +2936,10 @@ export const updateReport = /* GraphQL */ `
               updatedAt
             }
             superior {
-              companyID
               username
-              localID
-              employeeGroupLocalId
+              companyID
+              no
+              groupID
               superiorUsername
               firstName
               lastName
@@ -2927,10 +2961,10 @@ export const updateReport = /* GraphQL */ `
                 updatedAt
               }
               superior {
-                companyID
                 username
-                localID
-                employeeGroupLocalId
+                companyID
+                no
+                groupID
                 superiorUsername
                 firstName
                 lastName
@@ -2952,10 +2986,10 @@ export const updateReport = /* GraphQL */ `
                   updatedAt
                 }
                 superior {
-                  companyID
                   username
-                  localID
-                  employeeGroupLocalId
+                  companyID
+                  no
+                  groupID
                   superiorUsername
                   firstName
                   lastName
@@ -2969,40 +3003,45 @@ export const updateReport = /* GraphQL */ `
                   updatedAt
                 }
                 group {
+                  id
                   companyID
-                  localID
+                  no
                   name
                   createdAt
                   updatedAt
                 }
               }
               group {
+                id
                 companyID
-                localID
+                no
                 name
                 createdAt
                 updatedAt
               }
             }
             group {
+              id
               companyID
-              localID
+              no
               name
               createdAt
               updatedAt
             }
           }
           group {
+            id
             companyID
-            localID
+            no
             name
             createdAt
             updatedAt
           }
         }
         group {
+          id
           companyID
-          localID
+          no
           name
           createdAt
           updatedAt

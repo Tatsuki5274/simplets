@@ -106,23 +106,23 @@ export const CategoryDao = {
     return null
   },
 
-  list: async (query: string, params: APIt.ListCategorysQueryVariables): Promise<Category[] | null> => {
+  listCompany: async (query: string, params: APIt.ListCategorysCompanyQueryVariables): Promise<Category[] | null> => {
     try {
-      const listQV: APIt.ListCategorysQueryVariables = params
+      const listQV: APIt.ListCategorysCompanyQueryVariables = params
       const listGQL = await graphqlQuery
-        <APIt.ListCategorysQueryVariables, APIt.ListCategorysQuery>
+        <APIt.ListCategorysCompanyQueryVariables, APIt.ListCategorysCompanyQuery>
         (query, listQV)
       if (listGQL.data) {
-        const listQ: APIt.ListCategorysQuery = listGQL.data;
-        if (listQ.listCategorys && listQ.listCategorys.items) {
-          const gotCategorys = listQ.listCategorys.items as Category[]
-          return gotCategorys
+        const listQ: APIt.ListCategorysCompanyQuery = listGQL.data;
+        if (listQ.listCategorysCompany && listQ.listCategorysCompany.items) {
+          const gotCategorysCompany = listQ.listCategorysCompany.items as Category[]
+          return gotCategorysCompany
         } else console.error("情報の取得に失敗しました")
       } else console.error("情報の取得に失敗しました")
     } catch (e) {
-      if (e && e.data && e.data.listCategorys) {
+      if (e && e.data && e.data.listCategorysCompany) {
         console.error("違反があります", e.errors)
-        return e.data.listCategorys.items as Category[]
+        return e.data.listCategorysCompany.items as Category[]
       } else {
         console.error(e)
       }

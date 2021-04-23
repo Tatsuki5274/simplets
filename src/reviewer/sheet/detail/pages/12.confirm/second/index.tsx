@@ -49,6 +49,7 @@ export const ReviewerSheetPagesStatus12Second = () => {
                                     if(window.confirm("部門長に確認依頼を送信しますか？")){
                                         const work = commandWorkFlow(Command.SUP1_CONFIRM, sheet)
                                         const data: UpdateSheetInput = {
+                                            id: sheet.id || "", // unsafe
                                             sub: sheet.sub,
                                             year: sheet.year,
                                             statusValue: work.sheet.statusValue

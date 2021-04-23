@@ -1,4 +1,5 @@
 import { tableHeaderStyle, textareaDisplayStyle } from "common/globalStyle.module.scss"
+import { formatSheetCheckDate } from "lib/util"
 import React from "react"
 import { Table } from "react-bootstrap"
 
@@ -23,9 +24,9 @@ export const YearlyTable = (props: Props) => {
             <tbody>
                 <tr>
                     <td className={textareaDisplayStyle}>{props.secondComment || "なし"}</td>
-                    <td>{props.secondCheckDate?.replace(/-/g,'/') || "-"}</td>
+                    <td>{props.secondCheckDate ? formatSheetCheckDate(props.secondCheckDate) : "-"}</td>
                     <td className={textareaDisplayStyle}>{props.firstComment || "なし"}</td>
-                    <td>{props.firstCheckDate?.replace(/-/g,'/') || "-"}</td>
+                    <td>{props.firstCheckDate ? formatSheetCheckDate(props.firstCheckDate) : "-"}</td>
                 </tr>
             </tbody>
         </Table>

@@ -17,6 +17,7 @@ type Props = {
     companyId: string
     groupLocalId: string
     groupName: string
+    id: string
 }
 
 export default function (props: Props) {

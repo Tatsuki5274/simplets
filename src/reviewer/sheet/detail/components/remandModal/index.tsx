@@ -45,11 +45,10 @@ export const RemandModal = (props: Props)=>{
                         let updatedSheet: Sheet | null = null;
 
                         //sheet更新処理
-                        if (work && sheet.sub && sheet.year) {
+                        if (work && sheet.id) {
                             if (work.sheet.statusValue === 3) {
                                 const updateI: APIt.UpdateSheetInput = {
-                                    sub: sheet.sub,
-                                    year: sheet.year,
+                                    id: sheet.id,
                                     statusValue: work.sheet.statusValue,
                                     overAllEvaluation: null,
                                     secondComment: null,
@@ -59,18 +58,22 @@ export const RemandModal = (props: Props)=>{
 
                                 sheet?.section?.items?.map(sec => {
                                     sec?.objective?.items?.map(async obj => {
-                                        if (obj && obj.sectionKeys && obj.createdAt) {
+                                        if (obj && obj.id && obj.createdAt) {
                                             const updateI: APIt.UpdateObjectiveInput = {
-                                                sectionKeys: obj.sectionKeys,
+                                                id: obj.id,
                                                 createdAt: obj?.createdAt,
                                                 lastEvaluation: null,
                                             }
                                             const updatedObjective = await ObjectiveDao.update(updateObjective, updateI);
+                                            if (!updatedObjective) {
+                                                console.log("目標情報の更新に失敗しました")
+                                            }
                                         }
                                     })
                                 })
                             } else {
                                 const updateI: APIt.UpdateSheetInput = {
+                                    id: sheet.id,
                                     sub: sheet.sub,
                                     year: sheet.year,
                                     statusValue: work.sheet.statusValue

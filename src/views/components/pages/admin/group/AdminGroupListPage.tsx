@@ -1,6 +1,6 @@
-import { ListGroupsQueryVariables } from "API";
+import { ListGroupsCompanyQueryVariables } from "API";
 import { HeaderContext, SidebarContext, UserContext } from "App";
-import { listGroups } from "graphql/queries";
+import { listGroupsCompany } from "graphql/queries";
 import { GroupDao } from "lib/dao/groupDao";
 import React, { useContext, useEffect, useState } from "react";
 import { routeBuilder } from "router";
@@ -18,20 +18,20 @@ export default function () {
     useEffect(() => {
         (async () => {
             if (currentUser) {
-                const listI: ListGroupsQueryVariables = {
+                const listI: ListGroupsCompanyQueryVariables = {
                     companyID: currentUser.attributes["custom:companyId"],
                 }
-                const groups = await GroupDao.list(listGroups, listI);
+                const groups = await GroupDao.listCompany(listGroupsCompany, listI);
                 let groupItems: AdminListGroupRowType[]
                 if (groups) {
                     groupItems = groups.map(group => {
                         return {
                             link: {
                                 label: "変更",
-                                dest: group.localID ? routeBuilder.adminGroupEditPath(group.localID) : "",
+                                dest: group.id ? routeBuilder.adminGroupEditPath(group.id) : "", // unsafe
                             },
-                            groupLocalId: group.localID || "",
-                            groupName: group.name || "",
+                            groupLocalId: group.no || "", // unsafe
+                            groupName: group.name || "", // unsafe
                         }
                     });
 

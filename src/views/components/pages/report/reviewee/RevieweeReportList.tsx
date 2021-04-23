@@ -39,7 +39,8 @@ export default function(props: Props){
                         return {
                             title: `${report.revieweeComments?.work}`,
                             date: report.date,
-                            workStatus: report.workStatus
+                            workStatus: report.workStatus,
+                            id: report.id,
                         }
                     })
                     setEvents(eventItems)

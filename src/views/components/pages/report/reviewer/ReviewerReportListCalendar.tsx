@@ -38,15 +38,15 @@ export default function(props: Props){
                 let eventItems: EventInput[]
                 if (reports) {
                     reports.sort((a, b) => {
-                        if (a.revieweeEmployee?.employeeGroupLocalId &&
-                            b.revieweeEmployee?.employeeGroupLocalId &&
-                            a.revieweeEmployee?.localID &&
-                            b.revieweeEmployee?.localID){
+                        if (a.revieweeEmployee?.group?.no &&
+                            b.revieweeEmployee?.group?.no &&
+                            a.revieweeEmployee?.no &&
+                            b.revieweeEmployee?.no){
 
-                            if (a.revieweeEmployee.employeeGroupLocalId > b.revieweeEmployee.employeeGroupLocalId) return 1
-                            if (a.revieweeEmployee.employeeGroupLocalId < b.revieweeEmployee.employeeGroupLocalId) return -1
-                            if (a.revieweeEmployee.localID > b.revieweeEmployee.localID) return 1
-                            if (a.revieweeEmployee.localID < b.revieweeEmployee.localID) return -1
+                            if (a.revieweeEmployee.group?.no > b.revieweeEmployee.group?.no) return 1
+                            if (a.revieweeEmployee.group?.no < b.revieweeEmployee.group?.no) return -1
+                            if (a.revieweeEmployee.no > b.revieweeEmployee.no) return 1
+                            if (a.revieweeEmployee.no < b.revieweeEmployee.no) return -1
                         }
                         return 0
                     })
@@ -55,7 +55,8 @@ export default function(props: Props){
                             title: `${report.revieweeEmployee?.lastName}${report.revieweeEmployee?.firstName}`,
                             date: report.date,
                             sub: report.sub,
-                            workStatus: report.workStatus
+                            workStatus: report.workStatus,
+                            id: report.id,
                         }
                     })
                     setEvents(eventItems)

@@ -174,8 +174,8 @@ function getMailObject(key: number, sheet: Sheet, reason?: string): SendEmail | 
             const protocol = window.location.protocol;
             const hostName = window.location.host;
             const hostUrl = protocol + '//' + hostName;
-            const revieweeUrl = routeBuilder.revieweeDetailPath(sheet.sub || "", sheet.year?.toString() || "", hostUrl);
-            const reviewerUrl = routeBuilder.reviewerDetailPath(sheet.sub || "", sheet.year?.toString() || "", hostUrl);
+            const revieweeUrl = routeBuilder.revieweeDetailPath(sheet.id || "", hostUrl);
+            const reviewerUrl = routeBuilder.reviewerDetailPath(sheet.id || "", hostUrl);
 
 
             switch (key) {

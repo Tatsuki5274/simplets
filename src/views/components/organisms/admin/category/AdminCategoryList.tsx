@@ -25,6 +25,7 @@ export default function (props: Props) {
                             categoryLocalId={row.categoryLocalId}
                             categoryName={row.categoryName}
                             companyId={row.companyId}
+                            id={row.id}
                         />
                     )
                 })

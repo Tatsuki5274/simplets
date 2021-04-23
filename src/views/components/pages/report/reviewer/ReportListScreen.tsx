@@ -1,5 +1,6 @@
+import { ListEmployeesCompanyQueryVariables, ListGroupsCompanyQueryVariables } from "API";
 import { HeaderContext, SidebarContext, UserContext } from "App";
-import { listEmployees, listGroups } from "graphql/queries";
+import { listEmployeesCompany, listGroupsCompany } from "graphql/queries";
 import { EmployeeDao } from "lib/dao/employeeDao";
 import { GroupDao } from "lib/dao/groupDao";
 import React, { useContext, useEffect, useState } from "react";
@@ -22,7 +23,10 @@ export default function () {
         // 部署情報の取得
         (async ()=>{
           if(currentUser){
-            const groups = await GroupDao.list(listGroups, {companyID: currentUser.attributes["custom:companyId"]})
+            const listI: ListGroupsCompanyQueryVariables = {
+              companyID: currentUser.attributes["custom:companyId"]
+            }
+            const groups = await GroupDao.listCompany(listGroupsCompany, listI)
             if(groups){
               const groupAll: SelectLabel[] = [
                 {
@@ -33,7 +37,7 @@ export default function () {
               const groupsLabel: SelectLabel[] = groups.map(group => {
                 return {
                   label: group.name || "",
-                  value: group.localID || ""
+                  value: group.id || ""
                 }
               })
               setGroups(groupAll.concat(groupsLabel))
@@ -46,25 +50,29 @@ export default function () {
         // 社員情報の取得
         (async ()=>{
           if(currentUser){
-            const reviewees = await EmployeeDao.list(listEmployees, {companyID: currentUser.attributes["custom:companyId"]})
+            const listI : ListEmployeesCompanyQueryVariables = {
+              companyID: currentUser.attributes["custom:companyId"]
+            }
+            const reviewees = await EmployeeDao.listCompany(listEmployeesCompany, listI)
             if(reviewees){
               const revieweesLabel: ReviewerReportFilterEmployeeType[] = reviewees.map(reviewee => {
                 return {
                   username: reviewee.username || "",
                   firlstName: reviewee.firstName || "",
                   lastName: reviewee.lastName || "",
-                  groupLocalId: reviewee.employeeGroupLocalId || "",
+                  groupNo: reviewee.groupID || "",
                   groupName: reviewee.group?.name || "",
+                  groupId: reviewee.groupID || "",  // unsafe
                   sub: reviewee.sub || "",
-                  localId: reviewee.localID || "",
+                  empNo: reviewee.no || "",
                 }
               })
               revieweesLabel.sort((a, b) => {
                 if (a && b) {
-                  if (a.groupLocalId > b.groupLocalId) return 1
-                  if (a.groupLocalId < b.groupLocalId) return -1
-                  if (a.localId > b.localId) return 1
-                  if (a.localId < b.localId) return -1
+                  if (a.groupNo > b.groupNo) return 1
+                  if (a.groupNo < b.groupNo) return -1
+                  if (a.empNo > b.empNo) return 1
+                  if (a.empNo < b.empNo) return -1
                 }
                 return 0
               })

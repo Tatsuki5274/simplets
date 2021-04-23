@@ -50,6 +50,7 @@ export const ReviewerSheetPagesStatus13 = () => {
                                     if (window.confirm("最終承認を行いますか？")) {
                                         const work = commandWorkFlow(Command.SUP2_DONE, sheet)
                                         const data: UpdateSheetInput = {
+                                            id: sheet.id || "", // unsafe 
                                             sub: sheet.sub,
                                             year: sheet.year,
                                             statusValue: work.sheet.statusValue,
@@ -106,6 +107,7 @@ export const ReviewerSheetPagesStatus13 = () => {
                                             <Button className={buttonComponentStyle} onClick={async () => {
                                                 if(sheet.year && sheet.sub){
                                                     const formikData: UpdateSheetInput = {
+                                                        id: sheet.id || "", // unsafe
                                                         sub: sheet.sub,
                                                         year: sheet.year,
                                                         firstComment: formik.values.firstComment,

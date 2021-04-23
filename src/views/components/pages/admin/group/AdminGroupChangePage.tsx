@@ -23,10 +23,8 @@ export default function (props: Props) {
 
     useEffect(() => {
         (async () => {
-            if (currentUser) {
                 const getI: GetGroupQueryVariables = {
-                    companyID: currentUser.attributes["custom:companyId"],
-                    localID: props.match.params.groupLocalId
+                    id: props.match.params.groupLocalId
                 }
                 const groupItem = await GroupDao.get(getGroup, getI)
                 if (groupItem) {
@@ -35,9 +33,8 @@ export default function (props: Props) {
                     console.error("部署情報が取得できません")
                     setError("部署情報が取得できません")
                 }
-            }
         })()
-    }, [currentUser, props.match.params.groupLocalId, setError])
+    }, [props.match.params.groupLocalId, setError])
 
     return (
         <>
@@ -46,8 +43,9 @@ export default function (props: Props) {
                     header={header}
                     sidebar={sidebar}
                     companyId={group.companyID || ""}
-                    groupLocalId={group.localID || ""}
+                    groupLocalId={group.no || ""}
                     groupName={group.name || ""}
+                    id={group.id || ""}
                 />
                 : null}
         </>

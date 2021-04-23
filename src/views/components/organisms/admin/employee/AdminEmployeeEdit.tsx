@@ -1,8 +1,8 @@
-import { BooleanType, DeleteEmployeeInput, DeleteSheetInput, EmployeeType, ListEmployeesManagerQueryVariables, ListSheetRevieweeQueryVariables, UpdateEmployeeInput } from "API";
+import { BooleanType, DeleteEmployeeInput, DeleteSheetInput, EmployeeType, ListEmployeesCompanyQueryVariables, ListSheetsRevieweeQueryVariables, UpdateEmployeeInput } from "API";
 import { ErrorContext } from "App";
 import { Formik } from "formik";
 import { deleteEmployee, deleteSheet, updateEmployee } from "graphql/mutations";
-import { listEmployees, listSheetReviewee } from "graphql/queries";
+import { listEmployeesCompany, listSheetsReviewee } from "graphql/queries";
 import { EmployeeDao } from "lib/dao/employeeDao";
 import { SheetDao } from "lib/dao/sheetDao";
 import React, { useContext } from "react";
@@ -30,6 +30,7 @@ export type AdminEditEmployeeDataType = {
     isAdminValue: string,
     managerValue: string,
     isDeleted: BooleanType,
+    sub: string,
 }
 
 type Props = {
@@ -70,7 +71,7 @@ export default function (props: Props) {
                         username: props.employee.username,
                         lastName: values.lastName,
                         firstName: values.firstName,
-                        employeeGroupLocalId: values.groupList,
+                        groupID: values.groupList,
                         grade: values.grade,
                         isCompanyAdmin: values.isAdmin === "true" ? true : false,
                         superiorUsername: values.superiorList,
@@ -209,26 +210,26 @@ export default function (props: Props) {
                             <ButtonNegative
                                 onClick={async () => {
                                     // 対象社員の部下を取得
-                                    const listI: ListEmployeesManagerQueryVariables = {
+                                    const listI: ListEmployeesCompanyQueryVariables = {
                                         companyID: props.employee.companyId,
+                                        no: {
+                                            eq: props.employee.localId,
+                                        },
                                         filter: {
                                             superiorUsername: {
                                                 eq: props.employee.username
                                             }
                                         }
                                     }
-                                    const listItem = await EmployeeDao.list(listEmployees, listI);
+                                    const listItem = await EmployeeDao.listCompany(listEmployeesCompany, listI);
                                     if (listItem) {
                                         // 対象社員の部下が存在しない場合
                                         if (listItem.length === 0) {
 
-                                            const listI: ListSheetRevieweeQueryVariables = {
-                                                companyID: props.employee.companyId,
-                                                reviewee: {
-                                                    eq: props.employee.username
-                                                }
+                                            const listI: ListSheetsRevieweeQueryVariables = {
+                                                sub: props.employee.sub
                                             }
-                                            const sheetItems = await SheetDao.listReviewee(listSheetReviewee, listI);
+                                            const sheetItems = await SheetDao.listReviewee(listSheetsReviewee, listI);
 
                                             if (sheetItems) {
                                                 // 対象社員のシート情報が存在する場合
@@ -240,8 +241,7 @@ export default function (props: Props) {
                                                         sheetItems.map(async (sheet, index) => {
                                                             if (sheet.sub && sheet.year) {
                                                                 const deleteSheetI: DeleteSheetInput = {
-                                                                    sub: sheet.sub,
-                                                                    year: sheet.year,
+                                                                    id: sheet.id,
                                                                 }
                                                                 const deleteSheetItem = await SheetDao.delete(deleteSheet, deleteSheetI);
                                                                 if (deleteSheetItem) {
@@ -258,7 +258,6 @@ export default function (props: Props) {
 
                                                         // 対象社員情報の削除
                                                         const deleteEmployeeI: DeleteEmployeeInput = {
-                                                            companyID: props.employee.companyId,
                                                             username: props.employee.username,
                                                         }
                                                         const deleteEmployeeItem = await EmployeeDao.delete(deleteEmployee, deleteEmployeeI);
@@ -275,7 +274,6 @@ export default function (props: Props) {
                                                     // 対象社員のシート情報が存在しない場合
                                                     if (window.confirm("社員情報を削除してよろしいですか？")) {
                                                         const deleteI: DeleteEmployeeInput = {
-                                                            companyID: props.employee.companyId,
                                                             username: props.employee.username,
                                                         }
                                                         const deleteItem = await EmployeeDao.delete(deleteEmployee, deleteI);

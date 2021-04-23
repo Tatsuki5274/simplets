@@ -8,56 +8,57 @@ import { getStatusValue } from "lib/getStatusValue";
 import { routeBuilder } from "router";
 import { getThisYear } from "lib/util";
 import { GroupDao } from "lib/dao/groupDao";
-import { listGroups, listSheetReviewee } from "graphql/queries";
+import { listGroupsCompany, listSheetsCompany } from "graphql/queries";
 import { SelectLabel } from "views/components/atoms/Types";
+import { ListGroupsCompanyQueryVariables } from "API";
 
-const listSheets = /* GraphQL */ `
-  query listSheets(
-    $companyID: ID
-    $revieweeYear: ModelSheetPrimaryCompositeKeyConditionInput
-    $filter: ModelSheetFilterInput
-    $limit: Int
-    $nextToken: String
-    $sortDirection: ModelSortDirection
-  ) {
-    listSheets(
-      companyID: $companyID
-      revieweeYear: $revieweeYear
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-      sortDirection: $sortDirection
-    ) {
-      items {
-        companyID
-        year
-        grade
-        overAllEvaluation
-        revieweeUsername
-        secondUsername
-        statusValue
-        sheetGroupLocalId
-        sheetGroupName
-        referencer
-        reviewee
-        topReviewers
-        secondReviewers
-        revieweeEmployee {
-          companyID
-          username
-          localID
-          employeeGroupLocalId
-          superiorUsername
-          firstName
-          lastName
-          grade
-          email
-        }
-      }
-      nextToken
-    }
-  }
-`;
+// const listSheets = /* GraphQL */ `
+//   query listSheets(
+//     $companyID: ID
+//     $revieweeYear: ModelSheetPrimaryCompositeKeyConditionInput
+//     $filter: ModelSheetFilterInput
+//     $limit: Int
+//     $nextToken: String
+//     $sortDirection: ModelSortDirection
+//   ) {
+//     listSheets(
+//       companyID: $companyID
+//       revieweeYear: $revieweeYear
+//       filter: $filter
+//       limit: $limit
+//       nextToken: $nextToken
+//       sortDirection: $sortDirection
+//     ) {
+//       items {
+//         companyID
+//         year
+//         grade
+//         overAllEvaluation
+//         revieweeUsername
+//         secondUsername
+//         statusValue
+//         sheetGroupLocalId
+//         sheetGroupName
+//         referencer
+//         reviewee
+//         topReviewers
+//         secondReviewers
+//         revieweeEmployee {
+//           companyID
+//           username
+//           localID
+//           employeeGroupLocalId
+//           superiorUsername
+//           firstName
+//           lastName
+//           grade
+//           email
+//         }
+//       }
+//       nextToken
+//     }
+//   }
+// `;
 
 export default function () {
     const currentUser = useContext(UserContext);
@@ -76,15 +77,15 @@ export default function () {
     useEffect(()=>{
         if(currentUser && currentEmployee){
             (async ()=>{
-                const listQV: APIt.ListSheetRevieweeQueryVariables = {
-                    companyID: currentUser.attributes["custom:companyId"],
+                const listQV: APIt.ListSheetsCompanyQueryVariables = {
+                  companyID: currentUser.attributes["custom:companyId"],
                     filter: {
                       revieweeUsername: {
                         ne: currentUser.username
                       }
                     }
                   };
-                const sheets = await SheetDao.listReviewee(listSheetReviewee, listQV)
+                const sheets = await SheetDao.listCompany(listSheetsCompany, listQV)
                 // console.log("sheets", sheets)
                 if(sheets){
                     const obj: (TableEvaluationListType | null)[] = sheets.map(sheet => {
@@ -96,7 +97,7 @@ export default function () {
                         if(sheet.revieweeEmployee?.username){
                             preview = {
                                 label: "プレビュー",
-                                dest: routeBuilder.previewPath(sheet.sub || "", sheet.year?.toString() || "") // unsafe
+                                dest: routeBuilder.previewPath(sheet.id || "") // unsafe
                             }
                         }
                         const lastYearsAgoOverAllEvaluation = sheets.find(comSheet => {
@@ -108,13 +109,14 @@ export default function () {
                             if (!sheet.year) return false
                             return sheet.year - 2 === comSheet.year && sheet.reviewee === comSheet.reviewee
                         })?.overAllEvaluation || null
-                        if(sheet.sheetGroupLocalId && sheet.year && sheet.statusValue && sheet.revieweeEmployee){
+                        if(sheet.year && sheet.statusValue && sheet.revieweeEmployee){
                             ret = {
                                 data: {
-                                    groupLocalId: sheet.sheetGroupLocalId,
+                                    groupId: sheet.groupID || "", // unsafe
+                                    groupNo: sheet.group?.no || "", // unsafe 参照するべきではない 埋め込んだ場合のid変更時の挙動の仕様を決める必要がある
                                     year: sheet.year,
                                     statusValue: sheet.statusValue,
-                                    localId: sheet.revieweeEmployee.localID || "" // unsafe
+                                    empNo: sheet.revieweeEmployee.no || "" // unsafe
                                 },
                                 groupName: sheet.sheetGroupName || "",
                                 name: `${sheet.revieweeEmployee?.lastName} ${sheet.revieweeEmployee?.firstName}`,
@@ -131,10 +133,10 @@ export default function () {
                     //ソート
                     obj.sort(function (a, b) {
                       if (a && b && a.data && b.data) {
-                          if (a.data.groupLocalId > b.data.groupLocalId) return 1
-                          if (a.data.groupLocalId < b.data.groupLocalId) return -1
-                          if (a.data.localId > b.data.localId) return 1
-                          if (a.data.localId < b.data.localId) return -1
+                          if (a.data.groupNo > b.data.groupNo) return 1
+                          if (a.data.groupNo < b.data.groupNo) return -1
+                          if (a.data.empNo > b.data.empNo) return 1
+                          if (a.data.empNo < b.data.empNo) return -1
                       }
                       return 0
                     })
@@ -180,7 +182,7 @@ export default function () {
           for(let i=0; i<5; i++){
             yearList.push(thisYear-i)
           }
-          console.log("years", yearList)
+          // console.log("years", yearList)
           setYears(yearList)
         }
       }
@@ -190,7 +192,10 @@ export default function () {
       // 部署情報の取得
       (async ()=>{
         if(currentUser){
-          const groups = await GroupDao.list(listGroups, {companyID: currentUser.attributes["custom:companyId"]})
+          const listI: ListGroupsCompanyQueryVariables = {
+            companyID: currentUser.attributes["custom:companyId"],
+          }
+          const groups = await GroupDao.listCompany(listGroupsCompany, listI)
           if(groups){
             const groupAll: SelectLabel[] = [
               {
@@ -201,7 +206,7 @@ export default function () {
             const groupsLabel: SelectLabel[] = groups.map(group => {
               return {
                 label: group.name || "",
-                value: group.localID || ""
+                value: group.id || ""
               }
             })
             setGroups(groupAll.concat(groupsLabel))

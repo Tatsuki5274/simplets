@@ -21,22 +21,24 @@ import AdminGroupChangePage from "views/components/pages/admin/group/AdminGroupC
 import AdminCategoryListPage from "views/components/pages/admin/category/AdminCategoryListPage";
 import AdminCategoryEditPage from "views/components/pages/admin/category/AdminCategoryEditPage";
 import AdminCategoryCreatePage from "views/components/pages/admin/category/AdminCategoryCreatePage";
+import { CreateReportScreen } from "views/components/pages/report/reviewee/CreateReportScreen";
 
 export default function Router(){
     return (
         <BrowserRouter>
         <Switch>
           <Route exact path="/" component={ListPerformanceEvalution} />
-          <Route exact path={routeBuilder.revieweeDetailPath(":sub", ":year")} component={RevieweeSheetShow} />
+          <Route exact path={routeBuilder.revieweeDetailPath(":sheetId")} component={RevieweeSheetShow} />
           <Route exact path={routeBuilder.revieweeListPath()} component={ListPerformanceEvalution} />
           <Route exact path={routeBuilder.reviewerListPath()} component={ProgressReferenceScreen} />
-          <Route exact path={routeBuilder.reviewerDetailPath(":sub", ":year")} component={EvaluationScreen} />
-          <Route exact path={routeBuilder.previewPath(":sub", ":year")} component={PDFPage} />
+          <Route exact path={routeBuilder.reviewerDetailPath(":sheetId")} component={EvaluationScreen} />
+          <Route exact path={routeBuilder.previewPath(":sheetId")} component={PDFPage} />
           <Route exact path={routeBuilder.reviewerEvaluationListPath()} component={EvaluationList} />
 
           <Route exact path={routeBuilder.revieweeReportCalendarPath(":date")} component={RevieweeReportList} />
-          <Route exact path={routeBuilder.revieweeReportEditPath(":date")} component={ChangeReportScreen} />
-          <Route exact path={routeBuilder.reviewerReportCommentPath(":date", ":sub")} component={EditReportScreeen} />
+          <Route exact path={routeBuilder.revieweeReportNewPath(":date")} component={CreateReportScreen} />
+          <Route exact path={routeBuilder.revieweeReportEditPath(":reportId")} component={ChangeReportScreen} />
+          <Route exact path={routeBuilder.reviewerReportCommentPath(":reportId")} component={EditReportScreeen} />
           <Route exact path={routeBuilder.reviewerReportEmployeePath()} component={ReportListScreen} />
           <Route exact path={routeBuilder.reviewerReportCalendarPaht(":date")} component={ReviewerReportList} />
 
@@ -62,11 +64,11 @@ export default function Router(){
 
 // パスを生成する関数
 export const routeBuilder = {
-    revieweeDetailPath: (sub: string, year: string, host?: string)=>{
-        return `${host || ""}/reviewee/evaluation/${sub}/${year}`
+    revieweeDetailPath: (id: string, host?: string)=>{
+        return `${host || ""}/reviewee/evaluation/${id}`
     },
-    reviewerDetailPath: (sub: string, year: string, host?: string)=>{
-        return `${host || ""}/reviewer/evaluation/${sub}/${year}`
+    reviewerDetailPath: (id: string, host?: string)=>{
+        return `${host || ""}/reviewer/evaluation/${id}`
     },
     revieweeListPath: (host?: string) =>{
         return `${host || ""}/reviewee/ref/evaluation/list`
@@ -84,17 +86,17 @@ export const routeBuilder = {
         else dateStr = dateFormat(date, "yyyy-mm")
         return `${host || ""}/reviewee/report/calendar/${dateStr}`
     },
-    revieweeReportEditPath: (date: Date | string, host?: string) => {
+    revieweeReportNewPath: (date: Date | string, host?: string)=> {
         let dateStr: string = ""
         if(typeof date === "string") dateStr = date
         else dateStr = dateFormat(date, "yyyy-mm-dd")
-        return `${host || ""}/reviewee/report/edit/${dateStr}`
+        return `${host || ""}/reviewee/report/new/${dateStr}`
     },
-    reviewerReportCommentPath: (date: Date | string, sub: string, host?: string) => {
-        let dateStr: string = ""
-        if(typeof date === "string") dateStr = date
-        else dateStr = dateFormat(date, "yyyy-mm-dd")
-        return `${host || ""}/reviewer/report/edit/${sub}/${dateStr}`
+    revieweeReportEditPath: (id: string, host?: string) => {
+        return `${host || ""}/reviewee/report/edit/${id}`
+    },
+    reviewerReportCommentPath: (id: string, host?: string) => {
+        return `${host || ""}/reviewer/report/edit/${id}`
     },
     reviewerReportEmployeePath: (host?: string) => {
         return `${host || ""}/reviewer/report/employee`
@@ -105,8 +107,8 @@ export const routeBuilder = {
         else dateStr = dateFormat(date, "yyyy-mm")
         return `${host || ""}/reviewer/report/calendar/${dateStr}`
     },
-    previewPath: (sub: string, year: string, host?: string)=>{
-        return `${host || ""}/preview/${sub}/${year}`
+    previewPath: (id: string, host?: string)=>{
+        return `${host || ""}/preview/${id}`
     },
 
     adminEmployeeNewPath: (host?: string) => {

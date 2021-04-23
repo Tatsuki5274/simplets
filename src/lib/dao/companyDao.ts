@@ -106,27 +106,27 @@ export const CompanyDao = {
     return null
   },
 
-  list: async (query: string, params: APIt.ListCompanysQueryVariables): Promise<Company[] | null> => {
-    try {
-      const listQV: APIt.ListCompanysQueryVariables = params
-      const listGQL = await graphqlQuery
-        <APIt.ListCompanysQueryVariables, APIt.ListCompanysQuery>
-        (query, listQV)
-      if (listGQL.data) {
-        const listQ: APIt.ListCompanysQuery = listGQL.data;
-        if (listQ.listCompanys && listQ.listCompanys.items) {
-          const gotCompanys = listQ.listCompanys.items as Company[]
-          return gotCompanys
-        } else console.error("情報の取得に失敗しました")
-      } else console.error("情報の取得に失敗しました")
-    } catch (e) {
-      if (e && e.data && e.data.listCompanys) {
-        console.error("違反があります", e.errors)
-        return e.data.listCompanys.items as Company[]
-      } else {
-        console.error(e)
-      }
-    }
-    return null
-  },
+  // list: async (query: string, params: APIt.ListCompanysQueryVariables): Promise<Company[] | null> => {
+  //   try {
+  //     const listQV: APIt.ListCompanysQueryVariables = params
+  //     const listGQL = await graphqlQuery
+  //       <APIt.ListCompanysQueryVariables, APIt.ListCompanysQuery>
+  //       (query, listQV)
+  //     if (listGQL.data) {
+  //       const listQ: APIt.ListCompanysQuery = listGQL.data;
+  //       if (listQ.listCompanys && listQ.listCompanys.items) {
+  //         const gotCompanys = listQ.listCompanys.items as Company[]
+  //         return gotCompanys
+  //       } else console.error("情報の取得に失敗しました")
+  //     } else console.error("情報の取得に失敗しました")
+  //   } catch (e) {
+  //     if (e && e.data && e.data.listCompanys) {
+  //       console.error("違反があります", e.errors)
+  //       return e.data.listCompanys.items as Company[]
+  //     } else {
+  //       console.error(e)
+  //     }
+  //   }
+  //   return null
+  // },
 }

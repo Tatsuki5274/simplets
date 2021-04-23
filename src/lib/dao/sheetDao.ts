@@ -106,23 +106,23 @@ export const SheetDao = {
     return null
   },
 
-  list: async (query: string, params: APIt.ListSheetsQueryVariables): Promise<Sheet[] | null> => {
+  listCompany: async (query: string, params: APIt.ListSheetsCompanyQueryVariables): Promise<Sheet[] | null> => {
     try {
-      const listQV: APIt.ListSheetsQueryVariables = params
+      const listQV: APIt.ListSheetsCompanyQueryVariables = params
       const listGQL = await graphqlQuery
-        <APIt.ListSheetsQueryVariables, APIt.ListSheetsQuery>
+        <APIt.ListSheetsCompanyQueryVariables, APIt.ListSheetsCompanyQuery>
         (query, listQV)
       if (listGQL.data) {
-        const listQ: APIt.ListSheetsQuery = listGQL.data;
-        if (listQ.listSheets && listQ.listSheets.items) {
-          const gotSheets = listQ.listSheets.items as Sheet[]
+        const listQ: APIt.ListSheetsCompanyQuery = listGQL.data;
+        if (listQ.listSheetsCompany && listQ.listSheetsCompany.items) {
+          const gotSheets = listQ.listSheetsCompany.items as Sheet[]
           return gotSheets
         } else console.error("情報の取得に失敗しました")
       } else console.error("情報の取得に失敗しました")
     } catch (e) {
-      if (e && e.data && e.data.listSheets) {
+      if (e && e.data && e.data.listSheetsCompany) {
         console.error("違反があります", e.errors)
-        return e.data.listSheets.items as Sheet[]
+        return e.data.listSheetsCompany.items as Sheet[]
       } else {
         console.error(e)
       }
@@ -130,16 +130,16 @@ export const SheetDao = {
     return null
   },
 
-  listReviewee: async (query: string, params: APIt.ListSheetRevieweeQueryVariables): Promise<Sheet[] | null> => {
+  listReviewee: async (query: string, params: APIt.ListSheetsRevieweeQueryVariables): Promise<Sheet[] | null> => {
     try {
-      const listRevieweeQV: APIt.ListSheetRevieweeQueryVariables = params
+      const listRevieweeQV: APIt.ListSheetsRevieweeQueryVariables = params
       const listRevieweeGQL = await graphqlQuery
-        <APIt.ListSheetRevieweeQueryVariables, APIt.ListSheetRevieweeQuery>
+        <APIt.ListSheetsRevieweeQueryVariables, APIt.ListSheetsRevieweeQuery>
         (query, listRevieweeQV)
       if (listRevieweeGQL.data) {
-        const listRevieweeQ: APIt.ListSheetRevieweeQuery = listRevieweeGQL.data;
-        if (listRevieweeQ.listSheetReviewee && listRevieweeQ.listSheetReviewee.items) {
-          const gotSheets = listRevieweeQ.listSheetReviewee.items as Sheet[]
+        const listRevieweeQ: APIt.ListSheetsRevieweeQuery = listRevieweeGQL.data;
+        if (listRevieweeQ.listSheetsReviewee && listRevieweeQ.listSheetsReviewee.items) {
+          const gotSheets = listRevieweeQ.listSheetsReviewee.items as Sheet[]
           return gotSheets
         } else console.error("情報の取得に失敗しました")
       } else console.error("情報の取得に失敗しました")

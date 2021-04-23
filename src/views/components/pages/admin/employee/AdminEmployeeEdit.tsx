@@ -1,6 +1,6 @@
-import { BooleanType, EmployeeType, GetEmployeeQueryVariables, ListEmployeeLocalIdQueryVariables, ListEmployeesQueryVariables } from "API";
+import { BooleanType, EmployeeType, ListEmployeesCompanyQueryVariables, ListGroupsCompanyQueryVariables } from "API";
 import { ErrorContext, HeaderContext, SidebarContext, UserContext } from "App";
-import { getEmployee, listEmployeeLocalId, listEmployees, listGroups } from "graphql/queries";
+import { listGroupsCompany, listEmployeesCompany } from "graphql/queries";
 import { EmployeeDao } from "lib/dao/employeeDao";
 import { GroupDao } from "lib/dao/groupDao";
 import React, { useContext, useEffect, useState } from "react";
@@ -55,12 +55,15 @@ export default function (props: Props) {
         // 部署情報の取得
         (async () => {
             if (currentUser) {
-                const groups = await GroupDao.list(listGroups, { companyID: currentUser.attributes["custom:companyId"] })
+                const listI: ListGroupsCompanyQueryVariables = {
+                    companyID: currentUser.attributes["custom:companyId"]
+                }
+                const groups = await GroupDao.listCompany(listGroupsCompany, listI)
                 if (groups) {
                     const groupsLabel: SelectLabel[] = groups.map(group => {
                         return {
                             label: group.name || "",
-                            value: group.localID || ""
+                            value: group.id || ""
                         }
                     })
                     setGroups(groupsLabel)
@@ -76,7 +79,7 @@ export default function (props: Props) {
         // 上司情報の取得
         (async () => {
             if (currentUser) {
-                const listI: ListEmployeesQueryVariables = {
+                const listI: ListEmployeesCompanyQueryVariables = {
                     companyID: currentUser.attributes["custom:companyId"],
                     filter: {
                         manager: {
@@ -84,7 +87,7 @@ export default function (props: Props) {
                         }
                     }
                 }
-                const superiors = await EmployeeDao.list(listEmployees, listI)
+                const superiors = await EmployeeDao.listCompany(listEmployeesCompany, listI)
                 if (superiors) {
                     const noSuperiorLabel: SelectLabel[] = [
                         {
@@ -94,7 +97,7 @@ export default function (props: Props) {
                     ]
                     const superiorsLabel: SelectLabel[] = superiors.map(superior => {
                         return {
-                            label: `${superior.localID} ${superior.lastName}${superior.firstName}`,
+                            label: `${superior.no} ${superior.lastName}${superior.firstName}`,
                             value: superior.username || ""
                         }
                     })
@@ -111,25 +114,26 @@ export default function (props: Props) {
         // 社員情報の取得
         (async () => {
             if (currentUser) {
-                const listI: ListEmployeeLocalIdQueryVariables = {
+                const listI: ListEmployeesCompanyQueryVariables = {
                     companyID: currentUser.attributes["custom:companyId"],
-                    localID: {
+                    no: {
                         eq: props.match.params.employeeId
                     }
                 }
-                const getEmployeeItem = await EmployeeDao.listLocalID(listEmployeeLocalId, listI)
+                const getEmployeeItem = await EmployeeDao.listCompany(listEmployeesCompany, listI)
                 if (getEmployeeItem) {
                     if (getEmployeeItem.length === 1) {
                         const employeeItem: AdminEditEmployeeDataType = {
+                            sub: getEmployeeItem[0].sub || "", // unsafe
                             username: getEmployeeItem[0].username || "",
                             companyId: getEmployeeItem[0].companyID || "",
                             email: getEmployeeItem[0].email || "",
                             firstName: getEmployeeItem[0].firstName || "",
                             grade: getEmployeeItem[0].grade || "",
-                            groupId: getEmployeeItem[0].employeeGroupLocalId || "",
+                            groupId: getEmployeeItem[0].group?.id || "",
                             isAdminValue: getEmployeeItem[0].isCompanyAdmin === true ? "true" : "false",
                             lastName: getEmployeeItem[0].lastName || "",
-                            localId: getEmployeeItem[0].localID || "",
+                            localId: getEmployeeItem[0].no || "",
                             managerValue: String(getEmployeeItem[0].manager),
                             superior: getEmployeeItem[0].superiorUsername || "",
                             isDeleted: getEmployeeItem[0].isDeleted || BooleanType.FALSE,
@@ -146,7 +150,7 @@ export default function (props: Props) {
             }
 
         })()
-    }, [currentUser])
+    }, [currentUser, props.match.params.employeeId])
 
     return (
         employee ?

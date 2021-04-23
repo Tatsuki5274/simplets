@@ -2,7 +2,6 @@ import { ErrorContext, UserContext } from "App";
 import { Formik } from "formik";
 import { getSheet } from "graphql/queries";
 import { SheetDao } from "lib/dao/sheetDao";
-import { getSectionKeys } from "lib/util";
 import React, { useContext, useEffect, useState } from "react";
 import { Button, Modal } from "react-bootstrap";
 import { ObjectiveCreateModalContent } from "./content";
@@ -14,7 +13,8 @@ import { Sheet } from "API";
 
 
 type Props = {
-    year: number
+    year: number,
+    id: string,
 }
 
 export type TypeForm = {
@@ -37,13 +37,13 @@ export function ObjectiveCreateModal(props: Props){
 
     useEffect(() => {
         ; (async () => {
-            const sheet = await SheetDao.get(getSheet, {
-                sub: currentUser?.attributes.sub,
-                year: props.year
-            })
+            const getI: APIt.GetSheetQueryVariables = {
+                id:props.id
+            }
+            const sheet = await SheetDao.get(getSheet, getI)
             if (sheet && sheet.section && sheet.section.items) {
                 sheet.section.items.sort(function (a, b) {
-                    if (a?.sectionCategoryLocalId && b?.sectionCategoryLocalId && a.sectionCategoryLocalId > b.sectionCategoryLocalId) {
+                    if (a && b && a.no && b.no && a.no > b.no) {
                         return 1;
                     } else {
                         return -1;
@@ -51,11 +51,11 @@ export function ObjectiveCreateModal(props: Props){
                 });
                 setSheet(sheet)
 
-                const defaultSectionKeys = sheet.section.items[0] ? getSectionKeys(sheet.section.items[0]) : null;
+                const defaultSectionKeys = sheet.section.items[0] && sheet.section.items[0].id ? sheet.section.items[0].id : null;
                 setDefaultSectionKeys(defaultSectionKeys)
             }
         })()
-    }, [sheet, currentUser, props.year]);
+    }, [sheet, currentUser, props.id]);
     if(sheet && defaultSectionKeys){
         return (
             <>
@@ -90,7 +90,7 @@ export function ObjectiveCreateModal(props: Props){
                                 if(sheet){
                                     const createI: APIt.CreateObjectiveInput = {
                                         companyID: sheet.companyID || "",   // unsafe
-                                        sectionKeys: values.sectionKeys,
+                                        sectionID: values.sectionKeys,
                                         content: values.content || "",
                                         priority: values.priority || "",
                                         expStartDate: values.expStartDate?.replace('T', '-') || "",
@@ -103,6 +103,7 @@ export function ObjectiveCreateModal(props: Props){
                                     const createR = await ObjectiveDao.create(createObjective, createI)
                                     if (createR) {
                                         // const createTM: APIt.CreateObjectiveMutation = createR.data;
+                                        window.alert("目標内容の保存が完了しました");
                                         window.location.reload()
                                     } else {
                                         console.log("保存に失敗しました", createR)

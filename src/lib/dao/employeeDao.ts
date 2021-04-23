@@ -106,47 +106,23 @@ export const EmployeeDao = {
     return null
   },
 
-list: async (query: string, params: APIt.ListEmployeesQueryVariables): Promise<Employee[] | null> => {
-  try {
-    const listQV: APIt.ListEmployeesQueryVariables = params
-    const listGQL = await graphqlQuery
-      <APIt.ListEmployeesQueryVariables, APIt.ListEmployeesQuery>
-      (query, listQV)
-    if (listGQL.data) {
-      const listQ: APIt.ListEmployeesQuery = listGQL.data;
-      if (listQ.listEmployees && listQ.listEmployees.items) {
-        const gotEmployees = listQ.listEmployees.items as Employee[]
-        return gotEmployees
-      } else console.error("情報の取得に失敗しました")
-    } else console.error("情報の取得に失敗しました")
-  } catch (e) {
-    if (e && e.data && e.data.listEmployees) {
-      console.error("違反があります", e.errors)
-      return e.data.listEmployees.items as Employee[]
-    } else {
-      console.error(e)
-    }
-        }
-        return null
-    },
-
-  listLocalID: async (query: string, params: APIt.ListEmployeeLocalIdQueryVariables): Promise<Employee[] | null> => {
+  listCompany: async (query: string, params: APIt.ListEmployeesCompanyQueryVariables): Promise<Employee[] | null> => {
     try {
-      const listLocalIDQV: APIt.ListEmployeeLocalIdQueryVariables = params
-      const listLocalIDGQL = await graphqlQuery
-        <APIt.ListEmployeeLocalIdQueryVariables, APIt.ListEmployeeLocalIdQuery>
-        (query, listLocalIDQV)
-      if (listLocalIDGQL.data) {
-        const listLocalIDQ: APIt.ListEmployeeLocalIdQuery = listLocalIDGQL.data;
-        if (listLocalIDQ.listEmployeeLocalID && listLocalIDQ.listEmployeeLocalID.items) {
-          const gotEmployees = listLocalIDQ.listEmployeeLocalID.items as Employee[]
-          return gotEmployees
+      const listQV: APIt.ListEmployeesCompanyQueryVariables = params
+      const listGQL = await graphqlQuery
+        <APIt.ListEmployeesCompanyQueryVariables, APIt.ListEmployeesCompanyQuery>
+        (query, listQV)
+      if (listGQL.data) {
+        const listQ: APIt.ListEmployeesCompanyQuery = listGQL.data;
+        if (listQ.listEmployeesCompany && listQ.listEmployeesCompany.items) {
+          const gotEmployeesCompany = listQ.listEmployeesCompany.items as Employee[]
+          return gotEmployeesCompany
         } else console.error("情報の取得に失敗しました")
       } else console.error("情報の取得に失敗しました")
     } catch (e) {
-      if (e && e.data && e.data.listEmployees) {
+      if (e && e.data && e.data.listEmployeesCompany) {
         console.error("違反があります", e.errors)
-        return e.data.listEmployees.items as Employee[]
+        return e.data.listEmployeesCompany.items as Employee[]
       } else {
         console.error(e)
       }
@@ -168,9 +144,9 @@ list: async (query: string, params: APIt.ListEmployeesQueryVariables): Promise<E
         } else console.error("情報の取得に失敗しました")
       } else console.error("情報の取得に失敗しました")
     } catch (e) {
-      if (e && e.data && e.data.listEmployees) {
+      if (e && e.data && e.data.listEmployeesManager) {
         console.error("違反があります", e.errors)
-        return e.data.listEmployees.items as Employee[]
+        return e.data.listEmployeesManager.items as Employee[]
       } else {
         console.error(e)
       }

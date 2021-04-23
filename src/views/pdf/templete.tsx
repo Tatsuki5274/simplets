@@ -2,8 +2,8 @@ import React from 'react';
 import { Col, Row, Table } from 'react-bootstrap';
 import dateFormat from 'dateformat';
 import style from './common/style.module.scss';
-import { getSectionKeys } from 'lib/util';
 import { Sheet } from 'API';
+import { formatSheetCheckDate } from 'lib/util';
 const ReactToPdf = require('react-to-pdf').default;
 
 // import Pdf from "react-to-pdf";
@@ -121,7 +121,7 @@ export const PDFTemplete = (props: Props) => {
 
                       return (
                         section ?
-                          <tr key={getSectionKeys(section)}>
+                          <tr key={section.id}>
                             <td>
                               <p>{section.sectionCategoryName}</p>
                               <Table borderless>
@@ -372,18 +372,18 @@ export const PDFTemplete = (props: Props) => {
                     <tr>
                       <td rowSpan={3}>所属長コメント</td>
                       <td rowSpan={3}>{props.sheet.secondComment}</td>
-                      <td>{props.sheet.selfCheckDate ? props.sheet.selfCheckDate : "-"}</td>
+                      <td>{props.sheet.selfCheckDate ? formatSheetCheckDate(props.sheet.selfCheckDate) : "-"}</td>
                     </tr>
                     <tr>
                       <td>所属長確認</td>
                     </tr>
                     <tr>
-                      <td>{props.sheet.secondCheckDate ? props.sheet.secondCheckDate : "-"}</td>
+                      <td>{props.sheet.secondCheckDate ? formatSheetCheckDate(props.sheet.secondCheckDate) : "-"}</td>
                     </tr>
                     <tr>
                       <td>部門長コメント</td>
                       <td>{props.sheet.firstComment}</td>
-                      <td>{props.sheet.firstCheckDate ? props.sheet.firstCheckDate : "-"}</td>
+                      <td>{props.sheet.firstCheckDate ? formatSheetCheckDate(props.sheet.firstCheckDate) : "-"}</td>
                     </tr>
                   </tbody>
                 </Table>

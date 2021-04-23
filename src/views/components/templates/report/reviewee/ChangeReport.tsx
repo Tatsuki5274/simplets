@@ -33,6 +33,7 @@ type Props = {
         commentWork: string
         commentStatus: string
         commentOther: string
+        id: string
     }
 }
 

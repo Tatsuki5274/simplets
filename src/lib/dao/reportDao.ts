@@ -106,23 +106,23 @@ export const ReportDao = {
         return null
     },
 
-    list: async (query: string, params: APIt.ListReportsQueryVariables): Promise<Report[] | null> => {
+    listSub: async (query: string, params: APIt.ListReportsSubQueryVariables): Promise<Report[] | null> => {
         try {
-            const listQV: APIt.ListReportsQueryVariables = params
+            const listQV: APIt.ListReportsSubQueryVariables = params
             const listGQL = await graphqlQuery
-                <APIt.ListReportsQueryVariables, APIt.ListReportsQuery>
+                <APIt.ListReportsSubQueryVariables, APIt.ListReportsSubQuery>
                 (query, listQV)
             if (listGQL.data) {
-                const listQ: APIt.ListReportsQuery = listGQL.data;
-                if (listQ.listReports && listQ.listReports.items) {
-                    const gotReports = listQ.listReports.items as Report[]
+                const listQ: APIt.ListReportsSubQuery = listGQL.data;
+                if (listQ.listReportsSub && listQ.listReportsSub.items) {
+                    const gotReports = listQ.listReportsSub.items as Report[]
                     return gotReports
                 } else console.error("情報の取得に失敗しました")
             } else console.error("情報の取得に失敗しました")
         } catch (e) {
-            if (e && e.data && e.data.listReports) {
+            if (e && e.data && e.data.listReportsSub) {
                 console.error("違反があります", e.errors)
-                return e.data.listReports.items as Report[]
+                return e.data.listReportsSub.items as Report[]
             } else {
                 console.error(e)
             }

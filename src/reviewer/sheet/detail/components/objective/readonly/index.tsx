@@ -1,7 +1,6 @@
 import { Section, Objective } from "API";
 import { tableHeaderStyle } from "common/globalStyle.module.scss";
 import dateFormat from "dateformat";
-import { getObjectiveKeys, getSectionKeys } from "lib/util";
 import React from "react"
 import ScrollTable from "views/components/molecules/ScrollTable";
 import style from '../common/style.module.scss';
@@ -26,7 +25,7 @@ export const ReviewerSheetDetailObjectiveReadonly = (props: Props) => {
             });
 
             return (
-                <div key={getSectionKeys(section)}>
+                <div key={section.id}>
                     <h4>{section.sectionCategoryName}</h4>
                     <ScrollTable>
                         <thead className={`${tableHeaderStyle}`}>
@@ -54,7 +53,7 @@ export const ReviewerSheetDetailObjectiveReadonly = (props: Props) => {
                                     styleObjective = "";
                                 }
                                 return (
-                                    <tr key={getObjectiveKeys(objective)} className={styleObjective}>
+                                    <tr key={objective.id} className={styleObjective}>
 
                                         {/* 目標本文 */}
                                         <td>{objective.content}</td>

@@ -2,7 +2,7 @@ import React, { useState, useEffect, createContext, useContext } from 'react';
 import { Button } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { getSheet } from 'graphql/queries'
-import { HeaderContext, SidebarContext } from 'App';
+import { ErrorContext, HeaderContext, SidebarContext } from 'App';
 import ApprovalStatusBox from 'common/approvalStatusBox';
 import { SheetDao } from 'lib/dao/sheetDao';
 import { RevieweeSheetObjectiveReadonly } from './components/objective/readonly';
@@ -21,7 +21,6 @@ import { RevieweeSheetObjectiveModalStatus1 } from './components/objectiveModal/
 import { RevieweeSheetObjectiveModalStatus3 } from './components/objectiveModal/status3';
 import { ObjectiveCreateModal } from './components/objectiveCreateModal';
 import { tableHeaderStyle } from 'common/globalStyle.module.scss';
-import { getSectionKeys } from 'lib/util';
 import { SubmitButtonStatus2 } from './components/submit/status2';
 import { RevieweeSheetObjectiveEditableStatus1 } from './components/objective/editable/status1';
 import { RevieweeSheetObjectiveEditableStatus3 } from './components/objective/editable/status3';
@@ -33,7 +32,7 @@ import LeftBox from 'views/components/templates/LeftBox';
 import RightBox from 'views/components/templates/RightBox';
 import Content from 'views/components/templates/Content';
 import Sidebar from 'views/components/templates/Sidebar';
-import { Objective, Section, Sheet } from 'API';
+import { GetSheetQueryVariables, Objective, Section, Sheet } from 'API';
 import ScrollTable from 'views/components/molecules/ScrollTable';
 import Container from 'views/components/templates/Container';
 import Title from 'views/components/molecules/Title';
@@ -53,8 +52,7 @@ export const SheetContext = createContext<
 type Props = {
     match: {
         params: {
-            sub: string
-            year: string
+            sheetId: string
         }
     }
 }
@@ -77,22 +75,28 @@ function RevieweeSheetShow(props: Props) {
     // const handleShowCareerPlanUpdate = () => setCareerPlanUpdateShow(true);
 
     const header = useContext(HeaderContext);
-    const sidebar = useContext(SidebarContext)
+    const sidebar = useContext(SidebarContext);
+    const setError = useContext(ErrorContext);
 
 
     //表示用データ
     useEffect(() => {
         ; (async () => {
-            if(props.match.params.sub && props.match.params.year){
-                const sheet = await SheetDao.get(getSheet, {
-                    sub: props.match.params.sub,
-                    year:parseInt(props.match.params.year)})
+            if(props.match.params.sheetId){
+                const getI : GetSheetQueryVariables = {
+                    id: props.match.params.sheetId,
+
+                }
+                const sheet = await SheetDao.get(getSheet, getI)
                 if(sheet){
                     setSheet(sheet);
+                } else {
+                    console.log("シート情報の取得に失敗しました");
+                    setError("シート情報の取得に失敗しました");
                 }
             }
         })()
-    }, [props.match.params.sub, props.match.params.year]);
+    }, [props.match.params.sheetId, setError]);
 
     if (sheet === undefined) return <p>Loading</p>
     else if (sheet === null) {
@@ -103,7 +107,7 @@ function RevieweeSheetShow(props: Props) {
     //カテゴリ情報のnoを元に昇順でソート
     const sectionItems = sheet.section?.items as Section[];
     sectionItems?.sort(function (a, b) {
-        if (a?.sectionCategoryLocalId && b?.sectionCategoryLocalId && a.sectionCategoryLocalId > b.sectionCategoryLocalId) {
+        if (a && b && a.no && b.no && a.no > b.no) {
             return 1;
         } else {
             return -1;
@@ -143,6 +147,7 @@ function RevieweeSheetShow(props: Props) {
                             {sheet.statusValue === 1 ?
                                 <ObjectiveCreateModal
                                     year={sheet.year || 0}  // unsafe
+                                    id={sheet.id || ""} // unsafe
                                 /> : null}
 
                             <AverageMediumGaugeBox sheet={sheet} />
@@ -161,7 +166,7 @@ function RevieweeSheetShow(props: Props) {
 
 
                                 return (
-                                    <div key={getSectionKeys(section)}>
+                                    <div key={section.id}>
                                         <AverageSmallGaugeBox section={section} />
                                         <ScrollTable>
                                             <thead className={tableHeaderStyle}>

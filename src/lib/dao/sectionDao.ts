@@ -106,23 +106,23 @@ export const SectionDao = {
     return null
   },
 
-  list: async (query: string, params: APIt.ListSectionsQueryVariables): Promise<Section[] | null> => {
+  listSheet: async (query: string, params: APIt.ListSectionsSheetQueryVariables): Promise<Section[] | null> => {
     try {
-      const listQV: APIt.ListSectionsQueryVariables = params
+      const listQV: APIt.ListSectionsSheetQueryVariables = params
       const listGQL = await graphqlQuery
-        <APIt.ListSectionsQueryVariables, APIt.ListSectionsQuery>
+        <APIt.ListSectionsSheetQueryVariables, APIt.ListSectionsSheetQuery>
         (query, listQV)
       if (listGQL.data) {
-        const listQ: APIt.ListSectionsQuery = listGQL.data;
-        if (listQ.listSections && listQ.listSections.items) {
-          const gotSections = listQ.listSections.items as Section[]
+        const listQ: APIt.ListSectionsSheetQuery = listGQL.data;
+        if (listQ.listSectionsSheet && listQ.listSectionsSheet.items) {
+          const gotSections = listQ.listSectionsSheet.items as Section[]
           return gotSections
         } else console.error("情報の取得に失敗しました")
       } else console.error("情報の取得に失敗しました")
     } catch (e) {
-      if (e && e.data && e.data.listSections) {
+      if (e && e.data && e.data.listSectionsSheet) {
         console.error("違反があります", e.errors)
-        return e.data.listSections.items as Section[]
+        return e.data.listSectionsSheet.items as Section[]
       } else {
         console.error(e)
       }

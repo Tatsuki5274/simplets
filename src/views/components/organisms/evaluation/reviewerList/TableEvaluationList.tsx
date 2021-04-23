@@ -8,9 +8,11 @@ export type TableEvaluationListType = {
     // フィルターデータ
     data: {
         year: number
-        groupLocalId: string,
+        groupId: string,    // 検索時の選択用
+        groupNo: string,    // 順番制御用
+        empNo: string,      // 順番制御用
         statusValue: number,
-        localId: string,
+        // localId: string,
     }
 
     // 表示データ

@@ -16,6 +16,7 @@ export type AdminCategoryEditDataType = {
     companyId: string
     localId: string
     name: string
+    id: string
 }
 
 type Props = AdminCategoryEditDataType;
@@ -30,8 +31,9 @@ export default function (props: Props) {
             }}
             onSubmit={async (values) => {
                 const updateI: UpdateCategoryInput = {
+                    id: props.id,
                     companyID: props.companyId,
-                    localID: props.localId,
+                    no: props.localId,
                     name: values.name,
                 }
                 const updateItems = await CategoryDao.update(updateCategory, updateI);

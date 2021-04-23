@@ -1,7 +1,7 @@
-import { DeleteGroupInput, ListEmployeesQueryVariables } from "API";
+import { DeleteGroupInput, ListEmployeesCompanyQueryVariables } from "API";
 import { ErrorContext } from "App";
 import { deleteGroup } from "graphql/mutations";
-import { listEmployees } from "graphql/queries";
+import { listEmployeesCompany } from "graphql/queries";
 import { EmployeeDao } from "lib/dao/employeeDao";
 import { GroupDao } from "lib/dao/groupDao";
 import React, { useContext } from "react";
@@ -11,6 +11,7 @@ import ButtonNegative from "views/components/molecules/ButtonNegative";
 type Props = {
     companyId: string
     groupLocalId: string
+    id: string
 }
 
 export default function (props: Props) {
@@ -19,20 +20,19 @@ export default function (props: Props) {
         <ButtonNegative
             onClick={async () => {
 
-                const listI: ListEmployeesQueryVariables = {
+                const listI: ListEmployeesCompanyQueryVariables = {
                     companyID: props.companyId,
                     filter: {
-                        employeeGroupLocalId: {
+                        groupID: {
                             eq: props.groupLocalId
                         }
                     }
                 }
-                const employeeItem = await EmployeeDao.list(listEmployees, listI);
+                const employeeItem = await EmployeeDao.listCompany(listEmployeesCompany, listI);
 
                 if (employeeItem && employeeItem.length === 0) {
                     const deleteI: DeleteGroupInput = {
-                        companyID: props.companyId,
-                        localID: props.groupLocalId,
+                        id: props.id,
                     }
                     const deleteItem = await GroupDao.delete(deleteGroup, deleteI);
 

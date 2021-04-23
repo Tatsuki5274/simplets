@@ -12,6 +12,7 @@ export type AdminListCategoryRowType = {
     categoryLocalId: string
     categoryName: string
     companyId: string
+    id: string
 }
 
 type Props = AdminListCategoryRowType
@@ -27,8 +28,9 @@ export default function (props: Props) {
                 <ButtonNegative onClick={async () => {
                     if (window.confirm("削除してよろしいですか？")) {
                         const deleteI: DeleteCategoryInput = {
-                            companyID: props.companyId,
-                            localID: props.categoryLocalId,
+                            id: props.id,
+                            // companyID: props.companyId,
+                            // localID: props.categoryLocalId,
                         }
                         const deleteItem = await CategoryDao.delete(deleteCategory, deleteI);
 

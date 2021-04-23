@@ -1,6 +1,6 @@
 import { EmployeeType } from "API";
 import { ErrorContext, HeaderContext, SidebarContext, UserContext } from "App";
-import { listEmployees, listGroups } from "graphql/queries";
+import { listEmployeesCompany, listGroupsCompany } from "graphql/queries";
 import { GroupDao } from "lib/dao/groupDao";
 import React, { useContext, useEffect, useState } from "react";
 import { SelectLabel } from "views/components/atoms/Types";
@@ -33,10 +33,10 @@ export default function () {
         (async () => {
             if (currentUser) {
                 const companyID = currentUser.attributes["custom:companyId"]
-                const listQV: APIt.ListEmployeesQueryVariables = {
+                const listQV: APIt.ListEmployeesCompanyQueryVariables = {
                     companyID: companyID,
                 };
-                const employees = await EmployeeDao.list(listEmployees, listQV);
+                const employees = await EmployeeDao.listCompany(listEmployeesCompany, listQV);
                 console.log("employees", employees)
                 if (employees) {
                     const obj: (AdminEmployeeDataType | null)[] = employees.map(employee => {
@@ -47,19 +47,19 @@ export default function () {
                         }
                         link = { 
                             label: "変更",
-                            dest: employee.localID ? routeBuilder.adminEmployeeEditPath(employee.localID) : ""
+                            dest: employee.no ? routeBuilder.adminEmployeeEditPath(employee.no) : ""
                          } 
 
-                        if (employee.email && employee.localID && employee.group && employee.group.name && employee.employeeGroupLocalId) {
+                        if (employee.email && employee.no && employee.group && employee.group.name && employee.group.no) {
                             ret = {
                                 link: link,
                                 mailAddress: employee.email,
                                 employeeName: `${employee.lastName} ${employee.firstName}`,
-                                employeeLocalId: employee.localID,
+                                employeeLocalId: employee.no,
                                 groupName: employee.group?.name,
-                                groupId: employee.employeeGroupLocalId,
+                                groupId: employee.group.no ,
                                 superior: {
-                                    employeeLocalId: employee.superior?.localID || "",
+                                    employeeLocalId: employee.superior?.no || "",
                                     lastName: employee.superior?.lastName || "",
                                     firstName: employee.superior?.firstName || "",
                                 },
@@ -92,7 +92,10 @@ export default function () {
         // 部署情報の取得
         (async () => {
             if (currentUser) {
-                const groups = await GroupDao.list(listGroups, { companyID: currentUser.attributes["custom:companyId"] })
+                const listI: APIt.ListGroupsCompanyQueryVariables = {
+                    companyID: currentUser.attributes["custom:companyId"]
+                }
+                const groups = await GroupDao.listCompany(listGroupsCompany, listI)
                 if (groups) {
                     const groupAll: SelectLabel[] = [
                         {
@@ -103,7 +106,7 @@ export default function () {
                     const groupsLabel: SelectLabel[] = groups.map(group => {
                         return {
                             label: group.name || "",
-                            value: group.localID || ""
+                            value: group.no || ""
                         }
                     })
                     setGroups(groupAll.concat(groupsLabel))

@@ -67,6 +67,7 @@ export const ReviewerSheetPagesStatus2 = ()=>{
                                     if(window.confirm("目標承認が社員に通知されます。よろしいでしょうか。")){
                                         const work = commandWorkFlow(Command.SUP1_APPLOVAL, sheet)
                                         const data: UpdateSheetInput = {
+                                            id: sheet.id || "", // unsafe
                                             sub: sheet.sub,
                                             year: sheet.year,
                                             statusValue: work.sheet.statusValue,
@@ -133,6 +134,7 @@ export const ReviewerSheetPagesStatus2 = ()=>{
                                                 console.log("formik.values",formik.values)
                                                 if(sheet.sub && sheet.year){
                                                     const data: UpdateSheetInput = {
+                                                        id: sheet.id || "", // unsafe
                                                         sub: sheet.sub,
                                                         year: sheet.year,
                                                         careerPlanComment: formik.values.careerPlanComment,

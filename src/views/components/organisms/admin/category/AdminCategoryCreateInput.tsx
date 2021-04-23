@@ -32,7 +32,7 @@ export default function (props: Props) {
 
                 const createI: CreateCategoryInput = {
                     companyID: props.companyId,
-                    localID: values.localID,
+                    no: values.localID,
                     name: values.name,
                 }
                 const category = await CategoryDao.create(createCategory, createI)
