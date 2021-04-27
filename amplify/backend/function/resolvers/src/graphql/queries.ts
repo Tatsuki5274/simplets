@@ -498,6 +498,7 @@ export const listSheetsReviewee = /* GraphQL */ `
         sub
         year
         companyID
+        groupID
         grade
         careerPlan
         careerPlanComment
@@ -832,6 +833,14 @@ export const listSheetsReviewee = /* GraphQL */ `
             createdAt
             updatedAt
           }
+        }
+        group {
+          id
+          companyID
+          no
+          name
+          createdAt
+          updatedAt
         }
         section {
           items {
@@ -896,6 +905,7 @@ export const listSheetsCompany = /* GraphQL */ `
         sub
         year
         companyID
+        groupID
         grade
         careerPlan
         careerPlanComment
@@ -1230,6 +1240,14 @@ export const listSheetsCompany = /* GraphQL */ `
             createdAt
             updatedAt
           }
+        }
+        group {
+          id
+          companyID
+          no
+          name
+          createdAt
+          updatedAt
         }
         section {
           items {
@@ -2218,6 +2236,7 @@ export const getSheet = /* GraphQL */ `
       sub
       year
       companyID
+      groupID
       grade
       careerPlan
       careerPlanComment
@@ -2620,6 +2639,14 @@ export const getSheet = /* GraphQL */ `
           createdAt
           updatedAt
         }
+      }
+      group {
+        id
+        companyID
+        no
+        name
+        createdAt
+        updatedAt
       }
       section {
         items {
