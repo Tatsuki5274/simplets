@@ -1,6 +1,6 @@
 import { CreateEmployeeInput } from "../libs/API";
 
-export function generateEmployee(dd: any, groupId: string): CreateEmployeeInput {
+export function generateEmployee(dd: any, groupId: string, sub: string): CreateEmployeeInput {
     const result: CreateEmployeeInput = {
         username: dd.username?.S,
 
@@ -14,7 +14,7 @@ export function generateEmployee(dd: any, groupId: string): CreateEmployeeInput 
         lastName: dd.lastName?.S,
         grade: dd.grade?.S,
         email: dd.email?.S,
-        sub: dd.sub?.S || null,
+        sub: sub,
 
         manager: dd.manager?.S,
         isCompanyAdmin: dd.isCompanyAdmin?.BOOL || null,

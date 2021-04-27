@@ -1,9 +1,9 @@
 import { CreateReportInput } from "../libs/API";
 import { generateListString } from "./util";
 
-export function generateReport(dd: any): CreateReportInput {
+export function generateReport(dd: any, sub: string): CreateReportInput {
     const result: CreateReportInput = {
-        sub: dd.sub.S,
+        sub: sub,
         date: dd.date.S,
 
         reviewee: dd.reviewee?.S,

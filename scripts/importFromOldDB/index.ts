@@ -33,181 +33,263 @@ import { ReportDao } from "./libs/dao/reportDao";
 // scripts/importFromOldDB/libs/dao/common/client.ts でプロファイルとエンドポイントの設定を行う(仮)
 //
 
+AWS.config.update({ region: 'ap-northeast-1' });
+var cognitoidentityserviceprovider = new AWS.CognitoIdentityServiceProvider();
+
+async function getUsersFromUserPool() {
+    // const userPoolId = "ap-northeast-1_Ix36JPBYl" // dev
+    const userPoolId = "ap-northeast-1_ZjlwviLzZ" // refactor
+    // console.log("ユーザープール", userPoolId)
+
+    if (userPoolId) {
+        const params = {
+            UserPoolId: userPoolId,
+            AttributesToGet: [
+                'sub',
+            ],
+        };
+
+        const response = await cognitoidentityserviceprovider.listUsers(params).promise();
+        console.log("response", JSON.stringify(response, null, 2));
+        return response.Users?.map(user => {
+            return {
+                username: user.Username || null,
+                sub: user.Attributes?.find(attr => {
+                    return attr.Name === "sub"
+                })?.Value || null
+            }
+        }) || null
+    } else {
+        console.log("ユーザープールが未設定です")
+        return null
+    }
+}
+
 async function main2() {
     const dataDir = "data";
+    const users = await getUsersFromUserPool()
+    console.log();
 
-    try {
-        // Reportテーブルの復元
-        const reportDir = "report"
-        const path = `./${dataDir}/${reportDir}`;
-        const convertResult = await convertJson(path);
-        const resultReport: CreateReportInput[] = convertResult.map((cv) => {
-            return generateReport(cv)
-        })
-        console.log()
-        for(const report of resultReport) {
-            const result = await ReportDao.create(createReport, report);
-            console.log(result);
-        }
-    } catch (e) {
-        console.error("error", e.message);
-        console.error("stack", e.stack);
-    }
+    if (users) {
+        console.log("userPoolの人数:", users.length);
+        try {
+            // Reportテーブルの復元
+            const reportDir = "report"
+            const path = `./${dataDir}/${reportDir}`;
+            const convertResult = await convertJson(path);
+            const resultReport: CreateReportInput[] = convertResult.map((cv) => {
+                const sub = users.find(user => {
+                    return user.username === cv.reviewee.S
+                })?.sub
+                return generateReport(cv, sub || "")
+            })
 
-    try {
-        // Groupテーブルの復元
-        const groupDir = "group"
-        const path = `./${dataDir}/${groupDir}`;
-        const convertResult = await convertJson(path);
-        const resultGroup: CreateGroupInput[] = convertResult.map((cv) => {
-            return generateGroup(cv)
-        })
-        for (const group of resultGroup) {
-            const result = await GroupDao.create(createGroup, group);
-            console.log(result);
-        }
-        // console.log()
-        if (resultGroup) {
-            try {
-                // Sheetテーブルの復元
-                const sheetDir = "sheet"
-                const path = `./${dataDir}/${sheetDir}`;
-                const convertResult = await convertJson(path);
-                const resultSheet: CreateSheetInput[] = convertResult.map((cv) => {
-                    const groupId = resultGroup.find(gr => {
-                        return gr.no === cv.sheetGroupLocalId.S
-                    })?.id
-                    return generateSheet(cv, groupId || "")
-                })
-                // Promise.all(resultSheet.map(async (sh) => {
-                //     const result = await SheetDao.create(createSheet, sh);
-                //     console.log(result);
-                // }))
-                for (const sheet of resultSheet) {
-                    const result = await SheetDao.create(createSheet, sheet);
-                    console.log(result);
+            let countReport = 0;
+            for (const report of resultReport) {
+                const result = await ReportDao.create(createReport, report);
+                // console.log(result);
+                if (result) {
+                    countReport++;
                 }
+            }
+            console.log("createReport:", countReport); // 作成した報告書のアイテム数を表示
+        } catch (e) {
+            console.error("error", e.message);
+            console.error("stack", e.stack);
+        }
 
-                // console.log()
-                if (resultSheet) {
-                    resultSheet.forEach(async sheet => {
-                        const sheetKey = `${sheet.companyID}.${sheet.reviewee}.${sheet.year}`
-
-                        try {
-                            // Sectionテーブルの復元
-                            const sectionDir = "section"
-                            const path = `./${dataDir}/${sectionDir}`;
-                            const convertResult = await convertJson(path);
-                            const filteredConvertResult = convertResult.filter(result => result.sheetKeys.S === sheetKey)
-                            const resultSection: CreateSectionInput[] = filteredConvertResult.map((cv) => {
-                                return generateSection(cv, sheet.id || "")
-                            })
-                            for (const section of resultSection) {
-                                const result = await SectionDao.create(createSection, section);
-                                console.log(result);
-                            }
-                            // console.log()
-                            if (resultSection) {
-                                resultSection.forEach(async section => {
-                                    const sectionKey = `${sheetKey}.${section.no}`
-                                    try {
-                                        // Objectiveテーブルの復元
-                                        const objectiveDir = "objective"
-                                        const path = `./${dataDir}/${objectiveDir}`;
-                                        const convertResult = await convertJson(path);
-                                        const filteredConvertResult = convertResult.filter(result => result.sectionKeys.S === sectionKey)
-                                        const resultObjective: CreateObjectiveInput[] = filteredConvertResult.map((cv) => {
-                                            return generateObjective(cv, section.id || "")
-                                        })
-                                        // console.log()
-                                        for (const objective of resultObjective) {
-                                            const result = await ObjectiveDao.create(createObjective, objective);
-                                            console.log(result);
-                                        }
-                                    } catch (e) {
-                                        console.error("error", e.message);
-                                        console.error("stack", e.stack);
-                                    }
-                                })
-                            }
-                        } catch (e) {
-                            console.error("error", e.message);
-                            console.error("stack", e.stack);
-                        }
+        try {
+            // Groupテーブルの復元
+            const groupDir = "group"
+            const path = `./${dataDir}/${groupDir}`;
+            const convertResult = await convertJson(path);
+            const resultGroup: CreateGroupInput[] = convertResult.map((cv) => {
+                return generateGroup(cv)
+            })
+            let countGroup = 0;
+            for (const group of resultGroup) {
+                const result = await GroupDao.create(createGroup, group);
+                // console.log(result);
+                if (result) {
+                    countGroup++;
+                }
+            }
+            console.log("createdGroup:", countGroup); // 作成した部署のアイテム数を表示
+            if (resultGroup) {
+                try {
+                    // Sheetテーブルの復元
+                    const sheetDir = "sheet"
+                    const path = `./${dataDir}/${sheetDir}`;
+                    const convertResult = await convertJson(path);
+                    const resultSheet: CreateSheetInput[] = convertResult.map((cv) => {
+                        const groupId = resultGroup.find(gr => {
+                            return gr.no === cv.sheetGroupLocalId.S
+                        })?.id
+                        const sub = users.find(user => {
+                            return user.username === cv.reviewee.S
+                        })?.sub
+                        return generateSheet(cv, groupId || "", sub || "")
                     })
-                }
-            } catch (e) {
-                console.error("error", e.message);
-                console.error("stack", e.stack);
-            }
+                    let countSheet = 0;
+                    for (const sheet of resultSheet) {
+                        const result = await SheetDao.create(createSheet, sheet);
+                        // console.log(result);
+                        if (result) {
+                            countSheet++;
+                        }
+                    }
+                    console.log("createdSheet:", countSheet); // 作成したシートのアイテム数を表示
 
-            try {
-                // Employeeテーブルの復元
-                const employeeDir = "employee"
-                const path = `./${dataDir}/${employeeDir}`;
-                const convertResult = await convertJson(path);
-                const resultEmployee: CreateEmployeeInput[] = convertResult.map((cv) => {
-                    const groupId = resultGroup.find(gr => {
-                        return gr.no === cv.employeeGroupLocalId.S
-                    })?.id
-                    return generateEmployee(cv, groupId || "")
-                })
-                console.log()
-                for (const employee of resultEmployee) {
-                    const result = await EmployeeDao.create(createEmployee, employee);
-                    console.log(result);
-                }
-            } catch (e) {
-                console.error("error", e.message);
-                console.error("stack", e.stack);
-            }
-        }
-    } catch (e) {
-        console.error("error", e.message);
-        console.error("stack", e.stack);
-    }
+                    // console.log()
+                    let countSection = 0;
+                    let countObjective = 0;
 
-    try {
-        // Categoryテーブルの復元
-        const categoryDir = "category"
-        const path = `./${dataDir}/${categoryDir}`;
-        const convertResult = await convertJson(path);
-        const resultCategory: CreateCategoryInput[] = convertResult.map((cv) => {
-            return generateCategory(cv)
-        })
-        // console.log()
-        for (const category of resultCategory) {
-            const result = await CategoryDao.create(createCategory, category);
-            console.log(result);
+                    if (resultSheet) {
+                        resultSheet.forEach(async sheet => {
+                            const sheetKey = `${sheet.companyID}.${sheet.reviewee}.${sheet.year}`
+
+                            try {
+                                // Sectionテーブルの復元
+                                const sectionDir = "section"
+                                const path = `./${dataDir}/${sectionDir}`;
+                                const convertResult = await convertJson(path);
+                                const filteredConvertResult = convertResult.filter(result => result.sheetKeys.S === sheetKey)
+                                const resultSection: CreateSectionInput[] = filteredConvertResult.map((cv) => {
+                                    return generateSection(cv, sheet.id || "")
+                                })
+
+                                // let countSection = 0;
+                                for (const section of resultSection) {
+                                    const result = await SectionDao.create(createSection, section);
+                                    // console.log(result);
+                                    if (result) {
+                                        countSection++;
+                                    }
+                                }
+                                console.log("createSection:", countSection); // 作成したセクションのアイテム数を表示
+                                if (resultSection) {
+                                    resultSection.forEach(async section => {
+                                        const sectionKey = `${sheetKey}.${section.no}`
+                                        try {
+                                            // Objectiveテーブルの復元
+                                            const objectiveDir = "objective"
+                                            const path = `./${dataDir}/${objectiveDir}`;
+                                            const convertResult = await convertJson(path);
+                                            const filteredConvertResult = convertResult.filter(result => result.sectionKeys.S === sectionKey)
+                                            const resultObjective: CreateObjectiveInput[] = filteredConvertResult.map((cv) => {
+                                                return generateObjective(cv, section.id || "")
+                                            })
+                                            // console.log()
+                                            // let countObjective = 0;
+                                            for (const objective of resultObjective) {
+                                                const result = await ObjectiveDao.create(createObjective, objective);
+                                                // console.log(result);
+                                                if (result) {
+                                                    countObjective++;
+                                                }
+                                            }
+                                            console.log("createObjective:", countObjective); // 作成した目標のアイテム数を表示
+                                        } catch (e) {
+                                            console.error("error", e.message);
+                                            console.error("stack", e.stack);
+                                        }
+                                    })
+                                }
+                            } catch (e) {
+                                console.error("error", e.message);
+                                console.error("stack", e.stack);
+                            }
+                        })
+                    }
+                    console.log()
+                } catch (e) {
+                    console.error("error", e.message);
+                    console.error("stack", e.stack);
+                }
+
+
+                try {
+                    // Employeeテーブルの復元
+                    const employeeDir = "employee"
+                    const path = `./${dataDir}/${employeeDir}`;
+                    const convertResult = await convertJson(path);
+                    const resultEmployee: CreateEmployeeInput[] = convertResult.map((cv) => {
+                        const groupId = resultGroup.find(gr => {
+                            return gr.no === cv.employeeGroupLocalId.S
+                        })?.id
+                        const sub = users.find(user => {
+                            return user.username === cv.username.S
+                        })?.sub
+                        return generateEmployee(cv, groupId || "", sub || "")
+                    })
+                    let countEmployee = 0;
+                    for (const employee of resultEmployee) {
+                        const result = await EmployeeDao.create(createEmployee, employee);
+                        // console.log(result);
+                        if (result) {
+                            countEmployee++;
+                        }
+                    }
+                    console.log("createEmployee:", countEmployee); // 作成した社員のアイテム数を表示
+                } catch (e) {
+                    console.error("error", e.message);
+                    console.error("stack", e.stack);
+                }
+            }
+        } catch (e) {
+            console.error("error", e.message);
+            console.error("stack", e.stack);
         }
-    } catch (e) {
-        console.error("error", e.message);
-        console.error("stack", e.stack);
+
+        try {
+            // Categoryテーブルの復元
+            const categoryDir = "category"
+            const path = `./${dataDir}/${categoryDir}`;
+            const convertResult = await convertJson(path);
+            const resultCategory: CreateCategoryInput[] = convertResult.map((cv) => {
+                return generateCategory(cv)
+            })
+            // console.log()
+            let countCategory = 0;
+            for (const category of resultCategory) {
+                const result = await CategoryDao.create(createCategory, category);
+                // console.log(result);
+                if (result) {
+                    countCategory++;
+                }
+            }
+            console.log("createCategory:", countCategory); // 作成したカテゴリのアイテム数を表示
+        } catch (e) {
+            console.error("error", e.message);
+            console.error("stack", e.stack);
+        }
+    } else {
+        console.error("users is undefined", users)
     }
 
     return true;
 }
 
-async function test() {
-    const id = uuidv4();
-    const params: CreateSheetInput = {
-        id: id,
-        sub: "subsub",
-        groupID: "test",
-        year: 2020,
-        companyID: "SCC",
-        grade: "L1",
-        revieweeUsername: "reviewee",
-        secondUsername: "second",
-        reviewee: "reviewee",
-    };
-    const result = await SheetDao.create(createSheet, params);
-    // const result = await client.mutate({
-    //     mutation: gql(createSheet),
-    //     variables: params,
-    //     fetchPolicy: 'no-cache',
-    //     errorPolicy: "all",
-    // }) as ApolloQueryResult<any>;
-}
+// async function test() {
+//     const id = uuidv4();
+//     const params: CreateSheetInput = {
+//         id: id,
+//         sub: "subsub",
+//         groupID: "test",
+//         year: 2020,
+//         companyID: "SCC",
+//         grade: "L1",
+//         revieweeUsername: "reviewee",
+//         secondUsername: "second",
+//         reviewee: "reviewee",
+//     };
+//     const result = await SheetDao.create(createSheet, params);
+//     // const result = await client.mutate({
+//     //     mutation: gql(createSheet),
+//     //     variables: params,
+//     //     fetchPolicy: 'no-cache',
+//     //     errorPolicy: "all",
+//     // }) as ApolloQueryResult<any>;
+// }
 
 main2();

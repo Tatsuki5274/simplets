@@ -3,11 +3,11 @@ import { generateListString } from "./util"
 import { v4 as uuidv4 } from 'uuid';
 
 //dd = dynamo data
-export default function generateSheet(dd: any, groupId: string): CreateSheetInput {
+export default function generateSheet(dd: any, groupId: string, sub: string): CreateSheetInput {
     const id = uuidv4();
     const result: CreateSheetInput = {
         id: id,
-        sub: dd.sub?.S,
+        sub: sub,
         year: dd.year?.N,
         companyID: dd.companyID?.S,
         groupID: groupId,
