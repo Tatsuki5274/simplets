@@ -34,11 +34,14 @@ import { ReportDao } from "./libs/dao/reportDao";
 //
 
 AWS.config.update({ region: 'ap-northeast-1' });
-var cognitoidentityserviceprovider = new AWS.CognitoIdentityServiceProvider();
+export const credentialProfile = "SCCProd"; //credentialのプロファイル名
+var credentials = new AWS.SharedIniFileCredentials({profile: credentialProfile});
+var cognitoidentityserviceprovider = new AWS.CognitoIdentityServiceProvider({region: 'ap-northeast-1',credentials:credentials});
 
 async function getUsersFromUserPool() {
     // const userPoolId = "ap-northeast-1_Ix36JPBYl" // dev
-    const userPoolId = "ap-northeast-1_ZjlwviLzZ" // refactor
+    // const userPoolId = "ap-northeast-1_ZjlwviLzZ" // refactor
+    const userPoolId = "ap-northeast-1_qkpxOPIy8" // prodb
     // console.log("ユーザープール", userPoolId)
 
     if (userPoolId) {
@@ -46,19 +49,24 @@ async function getUsersFromUserPool() {
             UserPoolId: userPoolId,
             AttributesToGet: [
                 'sub',
-            ],
+            ],      
         };
+        try{
+            const response = await cognitoidentityserviceprovider.listUsers(params).promise();
+            console.log("response", JSON.stringify(response, null, 2));
+            return response.Users?.map(user => {
+                return {
+                    username: user.Username || null,
+                    sub: user.Attributes?.find(attr => {
+                        return attr.Name === "sub"
+                    })?.Value || null
+                }
+            }) || null
+        } catch(e){
+            console.error(e);
+            throw new Error(e);
+        }
 
-        const response = await cognitoidentityserviceprovider.listUsers(params).promise();
-        console.log("response", JSON.stringify(response, null, 2));
-        return response.Users?.map(user => {
-            return {
-                username: user.Username || null,
-                sub: user.Attributes?.find(attr => {
-                    return attr.Name === "sub"
-                })?.Value || null
-            }
-        }) || null
     } else {
         console.log("ユーザープールが未設定です")
         return null

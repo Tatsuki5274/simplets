@@ -2,5 +2,9 @@
     "refactor": {
         "region": "ap-northeast-1",
         "graphqlEndpoint": "https://zgktqlihnjaalijumh7maizrp4.appsync-api.ap-northeast-1.amazonaws.com/graphql"
+    },
+    "prodb":{
+        "region": "ap-northeast-1",
+        "graphqlEndpoint": "https://yofqjto2ibdfvpdqwqjzfaxh6y.appsync-api.ap-northeast-1.amazonaws.com/graphql"
     }
 }
