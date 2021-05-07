@@ -22,7 +22,7 @@ export const RevieweeSheetObjectiveModalStatus1 = (props: Props)=>{
             <Formik
                 initialValues={{
                     content: props.objective.content,
-                    expStartDate: props.objective.expDoneDate,
+                    expStartDate: props.objective.expStartDate,
                     expDoneDate: props.objective.expDoneDate,
                     priority: props.objective.priority,
                 }}
