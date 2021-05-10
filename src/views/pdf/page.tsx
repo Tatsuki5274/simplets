@@ -17,7 +17,7 @@ type Props = {
 }
 
 const sortObjective = function (a: any, b: any) {
-    if (a?.updatedAt > b?.updatedAt) {
+    if (a?.createdAt > b?.createdAt) {
         return 1;
     } else {
         return -1;
