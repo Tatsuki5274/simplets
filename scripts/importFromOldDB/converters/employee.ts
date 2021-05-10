@@ -17,7 +17,7 @@ export function generateEmployee(dd: any, groupId: string, sub: string): CreateE
         sub: sub,
 
         manager: dd.manager?.S,
-        isCompanyAdmin: dd.isCompanyAdmin?.BOOL || null,
+        isCompanyAdmin: dd.isCompanyAdmin?.BOOL || false,
         isDeleted: dd.isDeleted?.S,
     }
     return result
