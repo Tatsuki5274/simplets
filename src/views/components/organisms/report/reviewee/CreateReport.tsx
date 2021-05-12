@@ -14,6 +14,7 @@ import styled from "styled-components";
 import { routeBuilder } from "router";
 import ErrorText from "views/components/atoms/ErrorText";
 import RequiredLabel from "views/components/molecules/RequiredLabel";
+import { useHistory } from "react-router";
 
 export type RevieweeCreateReportType = {
     date: string
@@ -48,6 +49,7 @@ const validate = (values: { commentWork: string | null; workStatus: string; comm
 };
 
 export default function (props: Props) {
+    const history = useHistory();
     const setError = useContext(ErrorContext)
     return (
         <Formik
@@ -81,6 +83,7 @@ export default function (props: Props) {
                 const createdReport = await ReportDao.create(createReport, createI);
                 if (createdReport) {
                     window.alert("保存が完了しました");
+                    history.goBack();
                 } else {
                     console.error("報告書の保存に失敗しました");
                     setError("報告書の保存に失敗しました")
@@ -216,6 +219,7 @@ ${routeBuilder.reviewerReportCommentPath(createdReport.id || "", hostUrl)}
                                                     }
                                                     if (sendEmailMutation(sendI)) {
                                                         window.alert("所属長へのメール送信が完了しました");
+                                                        history.goBack();
                                                     }
                                                 } else {
                                                     console.error("報告書の保存に失敗しました");
