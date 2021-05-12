@@ -1,5 +1,5 @@
 import { ErrorMessage, Formik } from "formik";
-import React from "react"
+import React, { useContext, useState } from "react"
 import { Badge, Button, Col, Form, Modal, Row } from "react-bootstrap";
 import * as APIt from 'API';
 import { ObjectiveDao } from "lib/dao/objectiveDao";
@@ -8,6 +8,7 @@ import { inputFieldStyle } from "common/globalStyle.module.scss";
 import * as Yup from 'yup';
 import { Objective } from "API";
 import ErrorText from "views/components/atoms/ErrorText";
+import { ErrorContext } from "App";
 
 type Props = {
     objective: Objective,
@@ -16,6 +17,8 @@ type Props = {
 }
 
 export const RevieweeSheetObjectiveModalStatus1 = (props: Props)=>{
+    const setError = useContext(ErrorContext);
+    const [isLoading, setLoading] = useState(false);
     
     if(props.objective){
         return (
@@ -36,6 +39,7 @@ export const RevieweeSheetObjectiveModalStatus1 = (props: Props)=>{
                 onSubmit={async (values) => {
                     console.log("values", values);
     
+                    setLoading(true);
                     //目標変更の目標、ステータス、自己評価、優先順位、実績を項目明細に上書き
                     const updateI: APIt.UpdateObjectiveInput = {
                         createdAt: props.objective.createdAt || "", // unsafe
@@ -46,14 +50,18 @@ export const RevieweeSheetObjectiveModalStatus1 = (props: Props)=>{
                         expDoneDate: values.expDoneDate ? values.expDoneDate : undefined,
                     };
                     const updatedObjective = await ObjectiveDao.update(updateObjective, updateI)
-                    if(updatedObjective){
+                    if (updatedObjective) {
                         // const newSheet = sheet
                         // newSheet?.section?.items?.find
+                        window.alert("目標情報の変更が完了しました")
+                        window.location.reload()
+                        props.handleClose();
+                    } else {
+                        console.error("保存に失敗しました", updateObjective);
+                        setError("保存に失敗しました");
+                        setLoading(false);
                     }
-    
-                    window.location.reload()
-                    props.handleClose();
-    
+                        
                 }}
             >
                 {formik => (
@@ -142,8 +150,8 @@ export const RevieweeSheetObjectiveModalStatus1 = (props: Props)=>{
                                 <p>例：2020年1月1日　→　2020-01-01</p>
                             </Modal.Body>
                             <Modal.Footer>
-                            <Button variant="primary" type="submit">
-                                    保存
+                            <Button variant="primary" type="submit" disabled={isLoading}>
+                                {isLoading ? '処理中…' : '保存'}
                         </Button>
                                 <Button variant="secondary" onClick={props.handleClose}>
                                     キャンセル

@@ -31,6 +31,7 @@ export function ObjectiveCreateModal(props: Props){
     const [sheet, setSheet] = useState<Sheet | null>(null)
     const [defaultSectionKeys, setDefaultSectionKeys] = useState<string | null>(null);
     const currentUser = useContext(UserContext);
+    const [isLoading, setLoading] = useState(false);
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
@@ -85,6 +86,7 @@ export function ObjectiveCreateModal(props: Props){
                             content: Yup.string().required('必須入力です')
                         })}
                         onSubmit={async (values)=>{
+                            setLoading(true);
                             //会社グループ権限が存在する場合,ミューテーション処理を実行
                             if (values.sectionKeys) {
                                 if(sheet){
@@ -103,17 +105,22 @@ export function ObjectiveCreateModal(props: Props){
                                     const createR = await ObjectiveDao.create(createObjective, createI)
                                     if (createR) {
                                         // const createTM: APIt.CreateObjectiveMutation = createR.data;
-                                        window.alert("目標内容の保存が完了しました");
+                                        window.alert("目標追加が完了しました");
+                                        handleClose();
                                         window.location.reload()
                                     } else {
                                         console.log("保存に失敗しました", createR)
+                                        console.error("保存に失敗しました")
                                     }
                                 }else{
                                     setError("目標追加時にシートの取得に失敗しています")
                                     console.error("目標追加時にシートの取得に失敗しています")
                                 }
-
+                            } else {
+                                setError("目標カテゴリが存在しません")
+                                console.error("目標カテゴリが存在しません", values.sectionKeys)
                             }
+                            setLoading(false);
                         }}>
                         {formik => (
                             <form onSubmit={formik.handleSubmit}>
@@ -129,7 +136,9 @@ export function ObjectiveCreateModal(props: Props){
                                     />
                                 </Modal.Body>
                                 <Modal.Footer>
-                                    <Button type="submit">目標追加</Button>
+                                    <Button type="submit" disabled={isLoading}>
+                                        {isLoading ? "処理中…" : "目標追加"}
+                                        </Button>
 
                                     {/* <Button variant="primary" onClick={handleClose}>
                                         Save Changes

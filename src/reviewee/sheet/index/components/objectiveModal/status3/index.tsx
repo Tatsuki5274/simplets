@@ -1,5 +1,5 @@
 import { ErrorMessage, Formik } from "formik";
-import React from "react"
+import React, { useContext, useState } from "react"
 import { Badge, Button, Col, Form, Modal, Row } from "react-bootstrap";
 import * as APIt from 'API';
 import { ObjectiveDao } from "lib/dao/objectiveDao";
@@ -8,6 +8,7 @@ import { inputFieldStyle } from "common/globalStyle.module.scss";
 import * as Yup from 'yup';
 import { Objective } from "API";
 import ErrorText from "views/components/atoms/ErrorText";
+import { ErrorContext } from "App";
 
 type Props = {
     objective: Objective,
@@ -32,6 +33,9 @@ export const RevieweeSheetObjectiveModalStatus3 = (props: Props)=>{
     //         }
     //     }
     // }
+
+    const setError = useContext(ErrorContext);
+    const [isLoading, setLoading] = useState(false);
     
     if(props.objective){
         return (
@@ -46,6 +50,7 @@ export const RevieweeSheetObjectiveModalStatus3 = (props: Props)=>{
                 })}
                 onSubmit={async (values, actions) => {
                     console.log("values", values);
+                    setLoading(true);
     
                     // // 承認ステータス3の場合,実績と自己評価以外の項目を変更した場合の処理
                     // if (sheet && sheet.statusValue === 3) {
@@ -70,6 +75,7 @@ export const RevieweeSheetObjectiveModalStatus3 = (props: Props)=>{
                     const updatedObjective = await ObjectiveDao.update(updateObjective, updateI)
                     if(updatedObjective){
                         
+                        window.alert("実績入力が完了しました。")
                         // 暫定的な対応
                         // ファイルを読み直すためリロードが入り、通信量が多くなる。
                         window.location.reload()    
@@ -87,6 +93,10 @@ export const RevieweeSheetObjectiveModalStatus3 = (props: Props)=>{
                         //         return true
                         //     })
                         // })
+                    } else {
+                        console.error("保存に失敗しました", updateObjective);
+                        setError("保存に失敗しました");
+                        setLoading(false);
                     }
     
                     props.handleClose();
@@ -168,8 +178,8 @@ export const RevieweeSheetObjectiveModalStatus3 = (props: Props)=>{
                                 </Row>
                             </Modal.Body>
                             <Modal.Footer>
-                            <Button variant="primary" type="submit">
-                                    保存
+                            <Button variant="primary" type="submit" disabled={isLoading}>
+                                {isLoading ? '処理中…' : '保存'}
                         </Button>
                                 <Button variant="secondary" onClick={props.handleClose}>
                                     キャンセル
