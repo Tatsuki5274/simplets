@@ -386,6 +386,7 @@ export const deleteSheet = /* GraphQL */ `
       InterviewMid3Comment
       revieweeUsername
       secondUsername
+      topUsername
       sheetGroupName
       referencer
       reviewee
@@ -581,6 +582,193 @@ export const deleteSheet = /* GraphQL */ `
         }
       }
       secondEmployee {
+        username
+        companyID
+        no
+        groupID
+        superiorUsername
+        firstName
+        lastName
+        grade
+        email
+        sub
+        manager
+        isCompanyAdmin
+        isDeleted
+        createdAt
+        updatedAt
+        company {
+          id
+          name
+          startMonth
+          shortName
+          url
+          createdAt
+          updatedAt
+        }
+        superior {
+          username
+          companyID
+          no
+          groupID
+          superiorUsername
+          firstName
+          lastName
+          grade
+          email
+          sub
+          manager
+          isCompanyAdmin
+          isDeleted
+          createdAt
+          updatedAt
+          company {
+            id
+            name
+            startMonth
+            shortName
+            url
+            createdAt
+            updatedAt
+          }
+          superior {
+            username
+            companyID
+            no
+            groupID
+            superiorUsername
+            firstName
+            lastName
+            grade
+            email
+            sub
+            manager
+            isCompanyAdmin
+            isDeleted
+            createdAt
+            updatedAt
+            company {
+              id
+              name
+              startMonth
+              shortName
+              url
+              createdAt
+              updatedAt
+            }
+            superior {
+              username
+              companyID
+              no
+              groupID
+              superiorUsername
+              firstName
+              lastName
+              grade
+              email
+              sub
+              manager
+              isCompanyAdmin
+              isDeleted
+              createdAt
+              updatedAt
+              company {
+                id
+                name
+                startMonth
+                shortName
+                url
+                createdAt
+                updatedAt
+              }
+              superior {
+                username
+                companyID
+                no
+                groupID
+                superiorUsername
+                firstName
+                lastName
+                grade
+                email
+                sub
+                manager
+                isCompanyAdmin
+                isDeleted
+                createdAt
+                updatedAt
+                company {
+                  id
+                  name
+                  startMonth
+                  shortName
+                  url
+                  createdAt
+                  updatedAt
+                }
+                superior {
+                  username
+                  companyID
+                  no
+                  groupID
+                  superiorUsername
+                  firstName
+                  lastName
+                  grade
+                  email
+                  sub
+                  manager
+                  isCompanyAdmin
+                  isDeleted
+                  createdAt
+                  updatedAt
+                }
+                group {
+                  id
+                  companyID
+                  no
+                  name
+                  createdAt
+                  updatedAt
+                }
+              }
+              group {
+                id
+                companyID
+                no
+                name
+                createdAt
+                updatedAt
+              }
+            }
+            group {
+              id
+              companyID
+              no
+              name
+              createdAt
+              updatedAt
+            }
+          }
+          group {
+            id
+            companyID
+            no
+            name
+            createdAt
+            updatedAt
+          }
+        }
+        group {
+          id
+          companyID
+          no
+          name
+          createdAt
+          updatedAt
+        }
+      }
+      topEmployee {
         username
         companyID
         no
@@ -1687,6 +1875,7 @@ export const createSheet = /* GraphQL */ `
       InterviewMid3Comment
       revieweeUsername
       secondUsername
+      topUsername
       sheetGroupName
       referencer
       reviewee
@@ -1882,6 +2071,193 @@ export const createSheet = /* GraphQL */ `
         }
       }
       secondEmployee {
+        username
+        companyID
+        no
+        groupID
+        superiorUsername
+        firstName
+        lastName
+        grade
+        email
+        sub
+        manager
+        isCompanyAdmin
+        isDeleted
+        createdAt
+        updatedAt
+        company {
+          id
+          name
+          startMonth
+          shortName
+          url
+          createdAt
+          updatedAt
+        }
+        superior {
+          username
+          companyID
+          no
+          groupID
+          superiorUsername
+          firstName
+          lastName
+          grade
+          email
+          sub
+          manager
+          isCompanyAdmin
+          isDeleted
+          createdAt
+          updatedAt
+          company {
+            id
+            name
+            startMonth
+            shortName
+            url
+            createdAt
+            updatedAt
+          }
+          superior {
+            username
+            companyID
+            no
+            groupID
+            superiorUsername
+            firstName
+            lastName
+            grade
+            email
+            sub
+            manager
+            isCompanyAdmin
+            isDeleted
+            createdAt
+            updatedAt
+            company {
+              id
+              name
+              startMonth
+              shortName
+              url
+              createdAt
+              updatedAt
+            }
+            superior {
+              username
+              companyID
+              no
+              groupID
+              superiorUsername
+              firstName
+              lastName
+              grade
+              email
+              sub
+              manager
+              isCompanyAdmin
+              isDeleted
+              createdAt
+              updatedAt
+              company {
+                id
+                name
+                startMonth
+                shortName
+                url
+                createdAt
+                updatedAt
+              }
+              superior {
+                username
+                companyID
+                no
+                groupID
+                superiorUsername
+                firstName
+                lastName
+                grade
+                email
+                sub
+                manager
+                isCompanyAdmin
+                isDeleted
+                createdAt
+                updatedAt
+                company {
+                  id
+                  name
+                  startMonth
+                  shortName
+                  url
+                  createdAt
+                  updatedAt
+                }
+                superior {
+                  username
+                  companyID
+                  no
+                  groupID
+                  superiorUsername
+                  firstName
+                  lastName
+                  grade
+                  email
+                  sub
+                  manager
+                  isCompanyAdmin
+                  isDeleted
+                  createdAt
+                  updatedAt
+                }
+                group {
+                  id
+                  companyID
+                  no
+                  name
+                  createdAt
+                  updatedAt
+                }
+              }
+              group {
+                id
+                companyID
+                no
+                name
+                createdAt
+                updatedAt
+              }
+            }
+            group {
+              id
+              companyID
+              no
+              name
+              createdAt
+              updatedAt
+            }
+          }
+          group {
+            id
+            companyID
+            no
+            name
+            createdAt
+            updatedAt
+          }
+        }
+        group {
+          id
+          companyID
+          no
+          name
+          createdAt
+          updatedAt
+        }
+      }
+      topEmployee {
         username
         companyID
         no
@@ -2150,6 +2526,7 @@ export const updateSheet = /* GraphQL */ `
       InterviewMid3Comment
       revieweeUsername
       secondUsername
+      topUsername
       sheetGroupName
       referencer
       reviewee
@@ -2345,6 +2722,193 @@ export const updateSheet = /* GraphQL */ `
         }
       }
       secondEmployee {
+        username
+        companyID
+        no
+        groupID
+        superiorUsername
+        firstName
+        lastName
+        grade
+        email
+        sub
+        manager
+        isCompanyAdmin
+        isDeleted
+        createdAt
+        updatedAt
+        company {
+          id
+          name
+          startMonth
+          shortName
+          url
+          createdAt
+          updatedAt
+        }
+        superior {
+          username
+          companyID
+          no
+          groupID
+          superiorUsername
+          firstName
+          lastName
+          grade
+          email
+          sub
+          manager
+          isCompanyAdmin
+          isDeleted
+          createdAt
+          updatedAt
+          company {
+            id
+            name
+            startMonth
+            shortName
+            url
+            createdAt
+            updatedAt
+          }
+          superior {
+            username
+            companyID
+            no
+            groupID
+            superiorUsername
+            firstName
+            lastName
+            grade
+            email
+            sub
+            manager
+            isCompanyAdmin
+            isDeleted
+            createdAt
+            updatedAt
+            company {
+              id
+              name
+              startMonth
+              shortName
+              url
+              createdAt
+              updatedAt
+            }
+            superior {
+              username
+              companyID
+              no
+              groupID
+              superiorUsername
+              firstName
+              lastName
+              grade
+              email
+              sub
+              manager
+              isCompanyAdmin
+              isDeleted
+              createdAt
+              updatedAt
+              company {
+                id
+                name
+                startMonth
+                shortName
+                url
+                createdAt
+                updatedAt
+              }
+              superior {
+                username
+                companyID
+                no
+                groupID
+                superiorUsername
+                firstName
+                lastName
+                grade
+                email
+                sub
+                manager
+                isCompanyAdmin
+                isDeleted
+                createdAt
+                updatedAt
+                company {
+                  id
+                  name
+                  startMonth
+                  shortName
+                  url
+                  createdAt
+                  updatedAt
+                }
+                superior {
+                  username
+                  companyID
+                  no
+                  groupID
+                  superiorUsername
+                  firstName
+                  lastName
+                  grade
+                  email
+                  sub
+                  manager
+                  isCompanyAdmin
+                  isDeleted
+                  createdAt
+                  updatedAt
+                }
+                group {
+                  id
+                  companyID
+                  no
+                  name
+                  createdAt
+                  updatedAt
+                }
+              }
+              group {
+                id
+                companyID
+                no
+                name
+                createdAt
+                updatedAt
+              }
+            }
+            group {
+              id
+              companyID
+              no
+              name
+              createdAt
+              updatedAt
+            }
+          }
+          group {
+            id
+            companyID
+            no
+            name
+            createdAt
+            updatedAt
+          }
+        }
+        group {
+          id
+          companyID
+          no
+          name
+          createdAt
+          updatedAt
+        }
+      }
+      topEmployee {
         username
         companyID
         no

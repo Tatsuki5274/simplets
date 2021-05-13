@@ -37,6 +37,7 @@ export function PDFPage(props:Props) {
     const [sheet, setSheet] = useState<Sheet | null>(null);
     const [lastOverAllEvaluations, setlastOverAllEvaluations] = useState<Array<number | null> | null>();
     const [secondReviewerName, setSecondReviewerName] = useState<string | null>(null);
+    const [topReviewerName, setTopReviewerName] = useState<string | null>(null);
     // const [topReviewerName, setTopReviewerName] = useState<string | null>(null);
     useEffect(() => {
         (async () => {
@@ -103,16 +104,19 @@ export function PDFPage(props:Props) {
         (async () => {
             // 所属長の氏名を取得
             if (sheet) {
-                if (sheet.secondUsername) {
+                if (sheet.revieweeUsername) {
                     const getI: APIt.GetEmployeeQueryVariables = {
-                        username: sheet.secondUsername,
+                        username: sheet.revieweeUsername,
                     }
-                    const getSecondReviewer = await EmployeeDao.get(getEmployee, getI);
-                    if (getSecondReviewer) {
-                        const secondReviewerName = `${getSecondReviewer.lastName} ${getSecondReviewer.firstName}`
+                    const secondReviewer = await EmployeeDao.get(getEmployee, getI);
+                    const topReviewer = secondReviewer?.superior;
+                    if (secondReviewer) {
+                        const secondReviewerName = `${secondReviewer.lastName} ${secondReviewer.firstName}`
+                        const topReviewerName = topReviewer ? `${topReviewer.lastName} ${topReviewer.firstName}` : null
                         setSecondReviewerName(secondReviewerName);
+                        setTopReviewerName(topReviewerName);
                     } else {
-                        console.error("上司情報の取得に失敗しました", getSecondReviewer)
+                        console.error("上司情報の取得に失敗しました", secondReviewer)
                         setError("上司情報の取得に失敗しました")
                     }
                 }
@@ -130,6 +134,7 @@ export function PDFPage(props:Props) {
                 lastYearsAgoOverAllEvaluation={lastOverAllEvaluations && lastOverAllEvaluations[0] ? lastOverAllEvaluations[0] : null}
                 twoYearsAgoOverAllEvaluation={lastOverAllEvaluations && lastOverAllEvaluations[1] ? lastOverAllEvaluations[1] : null}
                 secondReviewerName={secondReviewerName}
+                topReviewerName={topReviewerName}
             />
         )
     } else {

@@ -260,6 +260,16 @@ function ListPerformanceEvalution() {
           const topReviewers = reviewers.topReviewers;
           const secondReviewers = reviewers.secondReviewers;
 
+          const secondUsername = revieweeEmployee.superior?.username;
+          const topUsername = revieweeEmployee.superior?.superior?.username || null;
+          const companyId: string | null = currentUser.attributes['custom:companyId'] || null;
+
+          if (!secondUsername) {
+            throw new Error("所属長が見つかりませんでした");
+          } else if (!companyId) {
+            throw new Error("会社情報が登録されていません");
+          }
+
           if (targetYear && revieweeEmployee.username && revieweeEmployee.superior?.username) {
             //シートを作成
             const createdSheet = await SheetDao.create(createSheet, {
@@ -268,15 +278,15 @@ function ListPerformanceEvalution() {
               grade: revieweeEmployee.grade || "",
               year: targetYear,
               statusValue: 1,
-              revieweeUsername: revieweeEmployee.username || "", // unsafe
-              secondUsername: revieweeEmployee.superior?.username || "",
+              revieweeUsername: secondUsername,
+              secondUsername: topUsername,
+              topUsername: revieweeEmployee.superior.username || "",
               sheetGroupName: revieweeEmployee.group?.name || null,
               companyID: currentUser.attributes['custom:companyId'],
               reviewee: currentUser.username,
               secondReviewers: secondReviewers ,
               topReviewers: topReviewers,
               referencer: managers
-
             })
             if (createdSheet) {
               //取得したカテゴリを元にsectionを作成する
