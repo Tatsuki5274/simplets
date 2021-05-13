@@ -11,7 +11,6 @@ import awsconfig from './aws-exports';
 import * as APIt from 'API';
 
 //カスタムコンポーネント
-import MySignIn from 'views/auth/signIn';
 import { EmployeeDao } from 'lib/dao/employeeDao';
 import Router from 'router';
 import { HeaderProps } from 'views/components/organisms/common/Header';
@@ -20,6 +19,7 @@ import { Employee, EmployeeType } from 'API';
 import { LinkType } from 'views/components/atoms/Types';
 import { createSidebarElements } from 'lib/util';
 import { getEmployee } from 'graphql/queries';
+import CustomSignIn from 'views/auth/signIn';
 Amplify.configure(awsconfig);
 
 // export type Sheet = Omit<Exclude<APIt.GetSheetQuery['getSheet'], null>, '__typename'>;
@@ -158,7 +158,7 @@ function App() {
 }
 
 export default withAuthenticator(App, false, [
-  <MySignIn />,
+  <CustomSignIn />,
   <ConfirmSignIn />,
   <VerifyContact />,
   <SignUp />,
