@@ -104,9 +104,9 @@ export function PDFPage(props:Props) {
         (async () => {
             // 所属長の氏名を取得
             if (sheet) {
-                if (sheet.revieweeUsername) {
+                if (sheet.secondUsername) {
                     const getI: APIt.GetEmployeeQueryVariables = {
-                        username: sheet.revieweeUsername,
+                        username: sheet.secondUsername,
                     }
                     const secondReviewer = await EmployeeDao.get(getEmployee, getI);
                     const topReviewer = secondReviewer?.superior;
