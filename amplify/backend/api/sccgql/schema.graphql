@@ -199,14 +199,16 @@ type Sheet
   InterviewMid3Date: AWSDate    # 中間3
   InterviewMid3Comment: String
 
-  revieweeUsername: String!
-  secondUsername: String!
+  revieweeUsername: String
+  secondUsername: String
+  topUsername: String
 
   # connection
   sheetGroupName: String
 
   revieweeEmployee: Employee @connection(fields: ["revieweeUsername"])  #被評価者
   secondEmployee: Employee @connection(fields: ["secondUsername"])  #所属長
+  topEmployee: Employee @connection(fields: ["topUsername"])  #所属長の所属長（部門長）
   group: Group @connection(fields: ["groupID"]) # 部署ソート用番号を取得するために参照 (非推奨)
   section: [Section] @connection(fields: ["id"], keyName: "SectionBySheet")
 
