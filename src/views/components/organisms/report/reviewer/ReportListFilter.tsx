@@ -150,6 +150,8 @@ export default function (props: Props) {
                     <p>※使用しているブラウザがSafariの場合、作業報告表示期間は yyyy-mm-dd 形式で入力してください</p>
                     <p>例：2020年1月1日　→　2020-01-01</p>
 
+                    <p>報告日：青→順調に作業できている、黄色→課題はあるが作業できている、赤→問題が発生している</p>
+
                     <CommandButton type="submit">確認</CommandButton>
                 </form>
             )}

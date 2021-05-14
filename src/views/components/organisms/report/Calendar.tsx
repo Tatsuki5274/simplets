@@ -115,6 +115,7 @@ export default function (props: Props) {
                 dateClick={props.handleDateClick}
                 eventClick={props.handleEventClick}
                 events={props.events}
+                eventOrder={["groupNo","employeeNo"]}
                 eventContent={(CalendarEvent)}
                 initialDate={dateStr}
                 headerToolbar={{

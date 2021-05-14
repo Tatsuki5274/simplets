@@ -37,26 +37,15 @@ export default function(props: Props){
 
                 let eventItems: EventInput[]
                 if (reports) {
-                    reports.sort((a, b) => {
-                        if (a.revieweeEmployee?.group?.no &&
-                            b.revieweeEmployee?.group?.no &&
-                            a.revieweeEmployee?.no &&
-                            b.revieweeEmployee?.no){
-
-                            if (a.revieweeEmployee.group?.no > b.revieweeEmployee.group?.no) return 1
-                            if (a.revieweeEmployee.group?.no < b.revieweeEmployee.group?.no) return -1
-                            if (a.revieweeEmployee.no > b.revieweeEmployee.no) return 1
-                            if (a.revieweeEmployee.no < b.revieweeEmployee.no) return -1
-                        }
-                        return 0
-                    })
                     eventItems = reports.map(report => {
                         return {
-                            title: `${report.revieweeEmployee?.lastName}${report.revieweeEmployee?.firstName}`,
+                            title: `${report.revieweeEmployee?.lastName}${report.revieweeEmployee?.firstName} ${report.revieweeEmployee?.group?.name}`,
                             date: report.date,
                             sub: report.sub,
                             workStatus: report.workStatus,
                             id: report.id,
+                            groupNo: report.revieweeEmployee?.group?.no, // ソートで使用
+                            employeeNo: report.revieweeEmployee?.no, // ソートで使用
                         }
                     })
                     setEvents(eventItems)

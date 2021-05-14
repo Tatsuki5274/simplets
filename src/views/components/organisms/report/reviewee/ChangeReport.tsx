@@ -106,7 +106,7 @@ export default function (props: Props) {
                     </ReportStyle>
 
                     <div>
-                        <Text className="commentWork">【作業報告】</Text>
+                        <Text className="commentWork">【作業内容】</Text>
                         <RequiredLabel />
                     </div>
                     <ReportStyle>
@@ -138,7 +138,7 @@ export default function (props: Props) {
                     </ReportStyle>
 
                     <div>
-                        <Text className="commentStatus">【作業状況】</Text>
+                        <Text className="commentStatus">【作業状況詳細】</Text>
                         {formik.values.workStatus !== 'OK' ?
                             <RequiredLabel />
                             : null
