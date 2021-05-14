@@ -3,6 +3,7 @@ import { Table } from "react-bootstrap"
 import { Link } from "react-router-dom"
 import TableBodyCell from "views/components/atoms/TableBodyCell"
 import TableHeaderCell from "views/components/atoms/TableHeaderCell"
+import Text from "views/components/atoms/Text"
 
 export type TableEvaluationListType = {
     // フィルターデータ
@@ -60,12 +61,15 @@ export default function (props:Props) {
                                     <TableBodyCell>{evaluationList?.lastYearsAgoOverAllEvaluation ? String(evaluationList.lastYearsAgoOverAllEvaluation) : "未評価"}</TableBodyCell>
                                     <TableBodyCell>{evaluationList?.twoYearsAgoOverAllEvaluation ? String(evaluationList.twoYearsAgoOverAllEvaluation) : "未評価"}</TableBodyCell>
                                     <TableBodyCell>
-                                        <Link
-                                            to={evaluationList?.preview.dest || ""}
-                                            target="_blank"
-                                        >
-                                            {evaluationList?.preview.label || ""}
-                                        </Link>
+                                        {evaluationList?.preview.label === "プレビュー" ?
+                                            <Link
+                                                to={evaluationList?.preview.dest || ""}
+                                                target="_blank"
+                                            >
+                                                {evaluationList?.preview.label || ""}
+                                            </Link>
+                                            : <Text>シートなし</Text>
+                                        }
                                     </TableBodyCell>
                                 </tr>
                             )

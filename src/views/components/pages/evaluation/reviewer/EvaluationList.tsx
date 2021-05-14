@@ -79,12 +79,7 @@ export default function () {
             (async ()=>{
                 const listQV: APIt.ListSheetsCompanyQueryVariables = {
                   companyID: currentUser.attributes["custom:companyId"],
-                    filter: {
-                      revieweeUsername: {
-                        ne: currentUser.username
-                      }
-                    }
-                  };
+                };
                 const sheets = await SheetDao.listCompany(listSheetsCompany, listQV)
                 // console.log("sheets", sheets)
                 if(sheets){
@@ -94,7 +89,7 @@ export default function () {
                             label: "",
                             dest: "",
                         }
-                        if(sheet.revieweeEmployee?.username){
+                      if (sheet.revieweeEmployee?.username && sheet.section && sheet.section.items && sheet.section.items.length > 0) {
                             preview = {
                                 label: "プレビュー",
                                 dest: routeBuilder.previewPath(sheet.id || "") // unsafe
