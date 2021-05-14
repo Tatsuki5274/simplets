@@ -81,6 +81,9 @@ export default function (props: Props) {
                             <Button href={routeBuilder.adminCategoryListPath()}>キャンセル</Button>
                         </SpaceStyle>
                     </table>
+
+                    <p>※新規作成したカテゴリは作成済みの業績評価シートには適用されず、カテゴリ新規作成後に作成したシートにのみ適用されます。</p>
+
                 </form>
             )}
         </Formik>

@@ -1,4 +1,5 @@
 import React from "react";
+import Text from "views/components/atoms/Text";
 import { LinkType } from "views/components/atoms/Types";
 import { AdminListCategoryRowType } from "views/components/molecules/admin/RowListCategory";
 import Title from "views/components/molecules/Title";
@@ -43,6 +44,7 @@ export default function (props: Props) {
                             <AdminCategoryList
                                 data={props.data}
                             />
+                            <Text><p>※削除したカテゴリは作成済みの業績評価シートには適用されず、カテゴリ削除実施後に作成したシートにのみ適用されます。</p></Text>
                         </>
                     </Content>
                 </RightBox>

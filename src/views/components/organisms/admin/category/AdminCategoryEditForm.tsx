@@ -81,6 +81,8 @@ export default function (props: Props) {
                         </SpaceStyle>
 
                     </table>
+
+                    <p>※変更したカテゴリ内容は作成済みの業績評価シートには適用されず、カテゴリ内容変更後に作成したシートにのみ適用されます。</p>
                 </form>
             )}
         </Formik>
