@@ -6,5 +6,9 @@
     "prodb":{
         "region": "ap-northeast-1",
         "graphqlEndpoint": "https://yofqjto2ibdfvpdqwqjzfaxh6y.appsync-api.ap-northeast-1.amazonaws.com/graphql"
+    },
+    "dev":{
+        "region": "ap-northeast-1",
+        "graphqlEndpoint": "https://h6atavgafvgbnmjjlidjn3jv2a.appsync-api.ap-northeast-1.amazonaws.com/graphql"
     }
 }

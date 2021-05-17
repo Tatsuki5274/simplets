@@ -34,14 +34,14 @@ import { ReportDao } from "./libs/dao/reportDao";
 //
 
 AWS.config.update({ region: 'ap-northeast-1' });
-export const credentialProfile = "SCCProd"; //credentialのプロファイル名
+export const credentialProfile = "SCCDev"; //credentialのプロファイル名
 var credentials = new AWS.SharedIniFileCredentials({profile: credentialProfile});
 var cognitoidentityserviceprovider = new AWS.CognitoIdentityServiceProvider({region: 'ap-northeast-1',credentials:credentials});
 
 async function getUsersFromUserPool() {
-    // const userPoolId = "ap-northeast-1_Ix36JPBYl" // dev
-    // const userPoolId = "ap-northeast-1_ZjlwviLzZ" // refactor
-    const userPoolId = "ap-northeast-1_qkpxOPIy8" // prodb
+    // const userPoolId = "ap-northeast-1_udR5E7uL6" // dev
+    const userPoolId = "ap-northeast-1_ZjlwviLzZ" // refactor
+    // const userPoolId = "ap-northeast-1_qkpxOPIy8" // prodb
     // console.log("ユーザープール", userPoolId)
 
     if (userPoolId) {

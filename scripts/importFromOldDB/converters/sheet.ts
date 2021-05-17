@@ -35,6 +35,7 @@ export default function generateSheet(dd: any, groupId: string, sub: string): Cr
 
         revieweeUsername: dd.revieweeUsername?.S,
         secondUsername: dd.secondUsername?.S,
+        topUsername: generateListString(dd.topReviewers)[0] || null,
 
         sheetGroupName: dd.sheetGroupName?.S || null,
 
