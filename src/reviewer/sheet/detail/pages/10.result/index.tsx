@@ -105,7 +105,6 @@ export const ReviewerSheetPagesStatus10 = (props: Props) => {
                           updateSheet,
                           data
                         );
-                        console.log("10updated", updatedSheet);
 
                         if (updatedSheet) {
                           if (work.mailObject) {
@@ -113,26 +112,22 @@ export const ReviewerSheetPagesStatus10 = (props: Props) => {
                             alert("承認が完了しました");
                           } else {
                             setError("メールの作成に失敗しました");
-                            console.error("メールの作成に失敗しました");
                           }
                           if (setSheet) {
                             setSheet({ ...updatedSheet });
                           }
                         } else {
                           setError("フォームデータの登録に失敗しました");
-                          console.error("フォームデータの登録に失敗しました");
                         }
                       }
                     } else {
                       alert("評価をすべて入力してください");
                     }
                   } else {
-                    console.error("評価シートの特定に失敗しました");
                     setError("評価シートの特定に失敗しました");
                   }
                 } else {
                   setError("sheetの読み込みに失敗しています");
-                  console.error("sheetの読み込みに失敗しています");
                 }
               }}
             >
@@ -165,7 +160,6 @@ export const ReviewerSheetPagesStatus10 = (props: Props) => {
                         className={buttonComponentStyle}
                         onClick={async () => {
                           if (sheet.id) {
-                            console.log("formik", formik.values);
                             const data: UpdateSheetInput = {
                               id: sheet.id,
                               // sub: sheet.sub,
@@ -182,13 +176,12 @@ export const ReviewerSheetPagesStatus10 = (props: Props) => {
 
                             // const updatedSheet = runUpdateSheet(props.values);
                             if (updatedSheet) {
-                              console.log("保存成功", updatedSheet);
                               window.alert("保存が完了しました");
                             } else {
-                              console.error("保存失敗", updatedSheet);
+                              // Todo エラー出力の追加
+                              // console.error("保存失敗", updatedSheet);
                             }
                           } else {
-                            console.error("評価シートの特定に失敗しました");
                             setError("評価シートの特定に失敗しました");
                           }
                         }}
@@ -216,7 +209,6 @@ export const ReviewerSheetPagesStatus10 = (props: Props) => {
       </div>
     );
   } else {
-    console.error("シートが存在しません");
     return null;
   }
 };

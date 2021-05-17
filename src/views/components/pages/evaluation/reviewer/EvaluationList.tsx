@@ -87,7 +87,6 @@ export default function () {
           companyID: currentUser.attributes["custom:companyId"],
         };
         const sheets = await SheetDao.listCompany(listSheetsCompany, listQV);
-        // console.log("sheets", sheets)
         if (sheets) {
           const obj: (TableEvaluationListType | null)[] = sheets.map(
             (sheet) => {
@@ -109,7 +108,6 @@ export default function () {
               }
               const lastYearsAgoOverAllEvaluation =
                 sheets.find((comSheet) => {
-                  // console.log(sheet.year, comSheet.year)
                   if (!sheet.year) return false;
                   return (
                     sheet.year - 1 === comSheet.year &&
@@ -169,10 +167,6 @@ export default function () {
 
           setInitTableData(obj);
           setTableData(filteredObj);
-          // console.log("tableData", obj)
-        } else {
-          // setError("シート情報の取得に失敗しました")
-          console.error("シート情報の取得に失敗しました");
         }
       })();
     }
@@ -199,7 +193,6 @@ export default function () {
         for (let i = 0; i < 5; i++) {
           yearList.push(thisYear - i);
         }
-        // console.log("years", yearList)
         setYears(yearList);
       }
     }

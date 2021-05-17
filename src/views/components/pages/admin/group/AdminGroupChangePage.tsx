@@ -16,7 +16,6 @@ type Props = {
 export default function (props: Props) {
   const header = useContext(HeaderContext);
   const sidebar = useContext(SidebarContext);
-  const currentUser = useContext(UserContext);
   const setError = useContext(ErrorContext);
 
   const [group, setGroup] = useState<Group | null>(null);
@@ -30,7 +29,6 @@ export default function (props: Props) {
       if (groupItem) {
         setGroup(groupItem);
       } else {
-        console.error("部署情報が取得できません");
         setError("部署情報が取得できません");
       }
     })();

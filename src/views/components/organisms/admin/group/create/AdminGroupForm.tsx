@@ -37,7 +37,6 @@ export default function (props: Props) {
           history.push(routeBuilder.adminGroupListPath());
         } else {
           setError("部署登録に失敗しました");
-          console.error("部署登録に失敗しました");
         }
       }}
     >

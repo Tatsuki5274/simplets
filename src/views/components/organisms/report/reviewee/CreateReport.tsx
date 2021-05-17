@@ -89,7 +89,6 @@ export default function (props: Props) {
           window.alert("保存が完了しました");
           history.goBack();
         } else {
-          console.error("報告書の保存に失敗しました");
           setError("報告書の保存に失敗しました");
         }
       }}
@@ -239,7 +238,6 @@ ${routeBuilder.reviewerReportCommentPath(createdReport.id || "", hostUrl)}
                             history.goBack();
                           }
                         } else {
-                          console.error("報告書の保存に失敗しました");
                           setError("報告書の保存に失敗しました");
                         }
                       } else {

@@ -78,7 +78,6 @@ export default function (props: Props) {
           setGroups(groupsLabel);
         } else {
           setError("部署情報の取得に失敗しました");
-          console.error("部署情報の取得に失敗しました");
         }
       }
     })();
@@ -116,7 +115,6 @@ export default function (props: Props) {
           setSuperiors(noSuperiorLabel.concat(superiorsLabel));
         } else {
           setError("上司情報の取得に失敗しました");
-          console.error("上司情報の取得に失敗しました");
         }
       }
     })();
@@ -157,11 +155,9 @@ export default function (props: Props) {
             setEmployee(employeeItem);
           } else {
             setError("社員番号が重複しています");
-            console.error("社員番号が重複しています");
           }
         } else {
           setError("社員情報の取得に失敗しました");
-          console.error("社員情報の取得に失敗しました");
         }
       }
     })();

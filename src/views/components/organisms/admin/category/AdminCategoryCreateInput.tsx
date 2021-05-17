@@ -27,8 +27,6 @@ export default function (props: Props) {
         name: "",
       }}
       onSubmit={async (values) => {
-        console.log("values", values);
-
         const createI: CreateCategoryInput = {
           companyID: props.companyId,
           no: values.localID,
@@ -41,7 +39,6 @@ export default function (props: Props) {
           history.push(routeBuilder.adminCategoryListPath());
         } else {
           setError("カテゴリ内容の作成に失敗しました");
-          console.error("カテゴリ内容の作成に失敗しました");
         }
       }}
     >

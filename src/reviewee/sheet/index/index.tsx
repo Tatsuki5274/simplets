@@ -86,7 +86,6 @@ function RevieweeSheetShow(props: Props) {
         if (sheet) {
           setSheet(sheet);
         } else {
-          console.log("シート情報の取得に失敗しました");
           setError("シート情報の取得に失敗しました");
         }
       }
@@ -95,7 +94,6 @@ function RevieweeSheetShow(props: Props) {
 
   if (sheet === undefined) return <p>Loading</p>;
   else if (sheet === null) {
-    console.log("sheet not found.");
     return <p>該当のシートは存在しません</p>;
   }
 

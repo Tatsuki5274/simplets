@@ -36,7 +36,7 @@ export const RevieweeSheetObjectiveEditableStatus3 = (props: Props) => {
     expDoneDateStyle = "";
   }
 
-  function HandleChange(event: any) {
+  function HandleChange() {
     if (props.objective) {
       props.setModalObjective(props.objective);
     }
@@ -63,7 +63,6 @@ export const RevieweeSheetObjectiveEditableStatus3 = (props: Props) => {
         updateI
       );
       if (!updatedObjective) {
-        console.error("更新に失敗しました");
         setError("更新に失敗しました");
       }
     }

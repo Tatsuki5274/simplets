@@ -28,7 +28,6 @@ type Props = {
 };
 
 function CalendarEvent(eventInfo: EventContentArg) {
-  // console.log("event", eventInfo)
   const status: ReportWorkingStatus | undefined =
     eventInfo.event.extendedProps.workStatus;
   // 色を変える分岐を作成する

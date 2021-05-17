@@ -90,13 +90,10 @@ export default function (props: Props) {
             status: values.commentStatus,
           },
         };
-        // console.log("updateI", updateI)
         const updatedReport = await ReportDao.update(updateReport, updateI);
-        // console.log("updatedReport", updatedReport)
         if (updatedReport) {
           window.alert("保存が完了しました");
         } else {
-          console.error("報告書の保存に失敗しました");
           setError("報告書の保存に失敗しました");
         }
       }}
@@ -206,12 +203,10 @@ export default function (props: Props) {
                           status: formik.values.commentStatus,
                         },
                       };
-                      // console.log("updateI", updateI)
                       const updatedReport = await ReportDao.update(
                         updateReport,
                         updateI
                       );
-                      // console.log("updatedReport", updatedReport)
                       if (updatedReport) {
                         const protocol = window.location.protocol;
                         const hostName = window.location.host;
@@ -261,7 +256,6 @@ ${routeBuilder.reviewerReportCommentPath(props.data.id, hostUrl)}
                           window.alert("所属長へのメール送信が完了しました");
                         }
                       } else {
-                        console.error("報告書の保存に失敗しました");
                         setError("報告書の保存に失敗しました");
                       }
                     } else {
@@ -291,7 +285,6 @@ ${routeBuilder.reviewerReportCommentPath(props.data.id, hostUrl)}
                   window.alert("削除が完了しました。");
                   history.goBack();
                 } else {
-                  console.error("報告書の削除に失敗しました");
                   setError("報告書の削除に失敗しました");
                 }
               }

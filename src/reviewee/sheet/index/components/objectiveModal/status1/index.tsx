@@ -44,8 +44,6 @@ export const RevieweeSheetObjectiveModalStatus1 = (props: Props) => {
           content: Yup.string().required("必須入力です"),
         })}
         onSubmit={async (values) => {
-          console.log("values", values);
-
           setLoading(true);
           //目標変更の目標、ステータス、自己評価、優先順位、実績を項目明細に上書き
           const updateI: APIt.UpdateObjectiveInput = {
@@ -67,7 +65,6 @@ export const RevieweeSheetObjectiveModalStatus1 = (props: Props) => {
             window.location.reload();
             props.handleClose();
           } else {
-            console.error("保存に失敗しました", updateObjective);
             setError("保存に失敗しました");
             setLoading(false);
           }

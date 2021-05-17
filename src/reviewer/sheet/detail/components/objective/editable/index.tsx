@@ -104,17 +104,12 @@ export const ReviewerSheetDetailObjectiveEditable = (props: Props) => {
                                 id: objective.id,
                                 lastEvaluation: objectiveLastEvaluation,
                               };
-                              const updatedObjective =
-                                await ObjectiveDao.update(
-                                  updateObjective,
-                                  updateI
-                                );
-                              console.log("updatedObjective", updatedObjective);
-                            } else {
-                              console.error(
-                                "変更対象の特定に失敗しました",
-                                objective
+                              // const updatedObjective =
+                              await ObjectiveDao.update(
+                                updateObjective,
+                                updateI
                               );
+                            } else {
                               setError("変更対象の特定に失敗しました");
                             }
                           }}

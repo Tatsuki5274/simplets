@@ -65,8 +65,6 @@ export default function (props: Props) {
         manager: Yup.string().required("参照権限を選択してください"),
       })}
       onSubmit={async (values) => {
-        // console.log("values", values)
-
         // 社員番号の重複確認
         const listI: ListEmployeesCompanyQueryVariables = {
           companyID: props.companyId,
@@ -117,7 +115,6 @@ export default function (props: Props) {
                   history.push(routeBuilder.adminEmployeeListPath());
                 } else {
                   setError("社員情報の登録に失敗しました");
-                  console.error("社員情報の登録に失敗しました");
                 }
               }
             } else {
@@ -128,7 +125,6 @@ export default function (props: Props) {
           }
         } else {
           setError("社員情報の取得に失敗しました");
-          console.error("社員情報の取得に失敗しました");
         }
       }}
     >

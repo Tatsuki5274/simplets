@@ -1,4 +1,3 @@
-import { DateClickArg } from "@fullcalendar/interaction";
 import { EventClickArg, EventInput } from "@fullcalendar/react";
 import React from "react";
 import { useHistory } from "react-router-dom";
@@ -28,14 +27,12 @@ export default function CalendarView(props: Props) {
   const history = useHistory();
   // const calendarRef = useRef<FullCalendar | null>(null)
 
-  function handleDateClick(arg: DateClickArg) {
-    // bind with an arrow function
-    // console.log("arg", JSON.stringify(arg))
-    // history.push(routeBuilder.reviewerReportCommentPath(arg.date, ""))
-  }
+  // function handleDateClick(arg: DateClickArg) {
+  //   // bind with an arrow function
+  //   // history.push(routeBuilder.reviewerReportCommentPath(arg.date, ""))
+  // }
 
   function handleEventClick(arg: EventClickArg) {
-    // console.log(arg)
     if (arg.event.id) {
       history.push(routeBuilder.reviewerReportCommentPath(arg.event.id));
     }
@@ -82,7 +79,7 @@ export default function CalendarView(props: Props) {
 
               <Calendar
                 events={props.events}
-                handleDateClick={handleDateClick}
+                // handleDateClick={handleDateClick}
                 handleEventClick={handleEventClick}
                 initialDate={props.data.initialDate}
                 // calendarRef={calendarRef}

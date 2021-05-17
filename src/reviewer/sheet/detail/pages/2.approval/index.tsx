@@ -108,7 +108,6 @@ export const ReviewerSheetPagesStatus2 = () => {
                         sendEmailMutation(work.mailObject);
                       } else {
                         setError("メールの作成に失敗しました");
-                        console.error("メールの作成に失敗しました");
                       }
                       if (setSheet) {
                         setSheet({ ...updatedSheet });
@@ -117,12 +116,10 @@ export const ReviewerSheetPagesStatus2 = () => {
                       // setSheet({...updatedSheet});
                     } else {
                       setError("フォームデータの登録に失敗しました");
-                      console.error("フォームデータの登録に失敗しました");
                     }
                   }
                 } else {
                   setError("評価シートの特定に失敗しました");
-                  console.error("評価シートの特定に失敗しました");
                 }
               }}
             >
@@ -158,7 +155,6 @@ export const ReviewerSheetPagesStatus2 = () => {
                       <Button
                         className={buttonComponentStyle}
                         onClick={async () => {
-                          console.log("formik.values", formik.values);
                           if (sheet.sub && sheet.year) {
                             const data: UpdateSheetInput = {
                               id: sheet.id || "", // unsafe
@@ -198,15 +194,12 @@ export const ReviewerSheetPagesStatus2 = () => {
 
                             // const updatedSheet = runUpdateSheet(props.values);
                             if (updatedSheet) {
-                              console.log("保存成功", updatedSheet);
                               window.alert("保存が完了しました");
                             } else {
                               setError("保存失敗");
-                              console.error("保存失敗", updatedSheet);
                             }
                           } else {
                             setError("評価シートの特定に失敗しました");
-                            console.error("評価シートの特定に失敗しました");
                           }
                         }}
                       >
@@ -234,7 +227,6 @@ export const ReviewerSheetPagesStatus2 = () => {
     );
   } else {
     setError("シートが存在しません");
-    console.error("シートが存在しません");
     return null;
   }
 };

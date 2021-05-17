@@ -42,7 +42,6 @@ export default function (props: Props) {
             window.alert("部署の削除が完了しました");
             window.location.href = routeBuilder.adminGroupListPath();
           } else {
-            console.error("部署情報の削除に失敗しました");
             setError("部署情報の削除に失敗しました");
           }
         } else {

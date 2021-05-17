@@ -50,22 +50,18 @@ export const SubmitButtonStatus2 = () => {
                 year: sheet.year,
                 statusValue: work.sheet.statusValue,
               });
-              console.log("workflow", work);
               if (updatedSheet) {
                 setSheet({ ...updatedSheet });
                 if (work.mailObject) {
                   sendEmailMutation(work.mailObject);
                 } else {
                   setError("メールの作成に失敗しました");
-                  console.error("メールの作成に失敗しました");
                 }
               } else {
                 setError("フォームデータの登録に失敗しました");
-                console.error("フォームデータの登録に失敗しました");
               }
             }
           } else {
-            console.error("評価シートの特定に失敗しました");
             setError("評価シートの特定に失敗しました");
           }
         }}

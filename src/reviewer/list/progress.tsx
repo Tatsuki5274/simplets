@@ -13,7 +13,7 @@ import style from "./progressStyle.module.scss";
 import { Link } from "react-router-dom";
 import { Field, Form, Formik } from "formik";
 import GaugeChart from "react-gauge-chart";
-import { calcAvg, getThisYear, round } from "lib/util";
+import { getThisYear, round } from "lib/util";
 import { routeBuilder } from "router";
 import { GroupDao } from "lib/dao/groupDao";
 import ApprovalStatusBox from "common/approvalStatusBox";
@@ -141,7 +141,6 @@ function ProgressReferenceList() {
   const setError = useContext(ErrorContext);
 
   //今日の日付を取得
-  const today: Date = new Date();
   const thisYear: number = getThisYear(currentEmployee?.company?.startMonth);
   const yearList: Array<number> = [];
   for (let step = 0; step < 10; step++) {
@@ -161,7 +160,6 @@ function ProgressReferenceList() {
           const groupList: ListGroupsCompanyQueryVariables = {
             companyID: currentUser.attributes["custom:companyId"],
           };
-          console.log("groupList", groupList);
           const response = await GroupDao.listCompany(
             listGroupsCompany,
             groupList
@@ -183,7 +181,6 @@ function ProgressReferenceList() {
               eq: currentEmployee.group?.no,
             },
           };
-          console.log("groupList", groupList);
           const response = await GroupDao.listCompany(
             listGroupsCompany,
             groupList
@@ -200,14 +197,12 @@ function ProgressReferenceList() {
           setGroupList(groupItem);
         } else {
           setError("マネージャーではありません");
-          console.error("マネージャーではありません");
         }
       }
     })();
   }, [currentUser, currentEmployee]);
 
   useEffect(() => {
-    const today: Date = new Date();
     (async () => {
       if (currentUser) {
         // const listYearQV: APIt.ListSheetYearQueryVariables = {
@@ -239,70 +234,69 @@ function ProgressReferenceList() {
     })();
   }, [currentUser]);
 
-  const setView = (listItems: Sheet[]) => {
-    // 画面表示に必要な情報を加工する処理
-    const viewTemp: ViewType[] | null = listItems.map((sheet) => {
-      if (sheet.revieweeEmployee && sheet && sheet.section) {
-        return {
-          id: sheet.id || "", // unsafe
-          companyId: sheet.companyID || "", // unsafe
-          year: String(sheet.year),
-          reviewee: sheet.reviewee || "", // unsafe
-          statusValue: sheet.statusValue || 0, // unsafe
-          groupName: sheet.sheetGroupName || "",
-          groupId: sheet.revieweeEmployee.group?.no || "", // unsafe
-          revieweeName: {
-            firstName: sheet.revieweeEmployee.firstName || "",
-            lastName: sheet.revieweeEmployee.lastName || "",
-          },
-          categorys: sheet.section.items?.map((section) => {
-            return {
-              name: section?.sectionCategoryName || undefined,
-              avg:
-                section && section.objective && section.objective.items
-                  ? calcAvg(
-                      section.objective.items.map((obj) => {
-                        return obj && obj.progress ? obj.progress : 0;
-                      })
-                    )
-                  : null,
-              // no: section?.sectionCategoryLocalId ? parseInt(section.sectionCategoryLocalId) : null,
-              no: section?.sectionCategoryName ? 1 : 0, //仮で設定
-              id: section?.id,
-              sectionId: section?.id || null,
-            };
-          }),
-          avg: -1,
-        };
-      } else {
-        setError("シート情報に不備があります");
-        console.error("シート情報に不備があります");
-        return null;
-      }
-    });
-    if (viewTemp) {
-      const view = viewTemp.map((item) => {
-        if (item) {
-          return {
-            ...item,
-            avg: item.categorys
-              ? calcAvg(
-                  item.categorys.map((cat) => {
-                    return cat.avg;
-                  })
-                )
-              : -1,
-          };
-        } else {
-          return null;
-        }
-      });
+  // const setView = (listItems: Sheet[]) => {
+  //   // 画面表示に必要な情報を加工する処理
+  //   const viewTemp: ViewType[] | null = listItems.map((sheet) => {
+  //     if (sheet.revieweeEmployee && sheet && sheet.section) {
+  //       return {
+  //         id: sheet.id || "", // unsafe
+  //         companyId: sheet.companyID || "", // unsafe
+  //         year: String(sheet.year),
+  //         reviewee: sheet.reviewee || "", // unsafe
+  //         statusValue: sheet.statusValue || 0, // unsafe
+  //         groupName: sheet.sheetGroupName || "",
+  //         groupId: sheet.revieweeEmployee.group?.no || "", // unsafe
+  //         revieweeName: {
+  //           firstName: sheet.revieweeEmployee.firstName || "",
+  //           lastName: sheet.revieweeEmployee.lastName || "",
+  //         },
+  //         categorys: sheet.section.items?.map((section) => {
+  //           return {
+  //             name: section?.sectionCategoryName || undefined,
+  //             avg:
+  //               section && section.objective && section.objective.items
+  //                 ? calcAvg(
+  //                     section.objective.items.map((obj) => {
+  //                       return obj && obj.progress ? obj.progress : 0;
+  //                     })
+  //                   )
+  //                 : null,
+  //             // no: section?.sectionCategoryLocalId ? parseInt(section.sectionCategoryLocalId) : null,
+  //             no: section?.sectionCategoryName ? 1 : 0, //仮で設定
+  //             id: section?.id,
+  //             sectionId: section?.id || null,
+  //           };
+  //         }),
+  //         avg: -1,
+  //       };
+  //     } else {
+  //       setError("シート情報に不備があります");
+  //       return null;
+  //     }
+  //   });
+  //   if (viewTemp) {
+  //     const view = viewTemp.map((item) => {
+  //       if (item) {
+  //         return {
+  //           ...item,
+  //           avg: item.categorys
+  //             ? calcAvg(
+  //                 item.categorys.map((cat) => {
+  //                   return cat.avg;
+  //                 })
+  //               )
+  //             : -1,
+  //         };
+  //       } else {
+  //         return null;
+  //       }
+  //     });
 
-      if (view) {
-        setSheetsView(view);
-      }
-    }
-  };
+  //     if (view) {
+  //       setSheetsView(view);
+  //     }
+  //   }
+  // };
 
   return (
     <div>
@@ -339,7 +333,6 @@ function ProgressReferenceList() {
                   //     }
                   // }
                   // const listItems = await SheetDao.listYear(listSheetYear, filter)
-                  // console.log(listItems)
                   // if (listItems) {
                   //     setView(listItems)
                   // }

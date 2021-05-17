@@ -40,7 +40,6 @@ export default function (props: Props) {
           window.alert("部署情報の更新が完了しました");
           history.push(routeBuilder.adminGroupListPath());
         } else {
-          console.error("部署情報の更新に失敗しました");
           setError("部署情報の更新に失敗しました");
         }
       }}

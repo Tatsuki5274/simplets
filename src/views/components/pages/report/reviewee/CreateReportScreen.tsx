@@ -87,11 +87,9 @@ export function CreateReportScreen(props: Props) {
             };
             setReportData(reportItem);
           } else {
-            console.error("認証情報が取得できません");
             setError("認証情報が取得できません");
           }
         } else {
-          console.error("参照者が取得できません");
           setError("参照者が取得できません");
         }
       }

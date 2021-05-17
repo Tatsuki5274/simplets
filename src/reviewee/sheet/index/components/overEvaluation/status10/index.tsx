@@ -57,19 +57,12 @@ export const OverEvaluationTableStatus10 = () => {
               between: [thisYear - 2, thisYear - 1],
             },
           };
-          console.log("input", input);
           const gotSheets = await SheetDao.listReviewee(
             listSheetsReviewee,
             input
           );
-          console.log("gotSheets", gotSheets);
-
           if (gotSheets) {
             if (gotSheets.length > 2) {
-              console.error(
-                "業績評価年度に重複があります。前期前々期の記録に想定されない値が格納される場合があります。",
-                gotSheets
-              );
               setError(
                 "業績評価年度に重複があります。前期前々期の記録に想定されない値が格納される場合があります。"
               );

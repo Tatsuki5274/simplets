@@ -77,21 +77,15 @@ export function PDFPage(props: Props) {
               between: [thisYear - 2, thisYear - 1],
             },
           };
-          console.log("input", input);
           const gotSheets = await SheetDao.listReviewee(
             listSheetsReviewee,
             input
           );
-          console.log("gotSheets", gotSheets);
 
           if (gotSheets) {
             if (gotSheets.length > 2) {
               setError(
                 "業績評価年度に重複があります。前期前々期の記録に想定されない値が格納される場合があります。"
-              );
-              console.error(
-                "業績評価年度に重複があります。前期前々期の記録に想定されない値が格納される場合があります。",
-                gotSheets
               );
             }
             const results: (number | null)[] = [null, null];
@@ -110,7 +104,6 @@ export function PDFPage(props: Props) {
             setlastOverAllEvaluations(results);
           }
         } else {
-          console.error("評価シートの年度情報を取得できませんでした", sheet);
           setError("評価シートの年度情報を取得できませんでした");
         }
       }
@@ -135,7 +128,6 @@ export function PDFPage(props: Props) {
             setSecondReviewerName(secondReviewerName);
             setTopReviewerName(topReviewerName);
           } else {
-            console.error("上司情報の取得に失敗しました", secondReviewer);
             setError("上司情報の取得に失敗しました");
           }
         }

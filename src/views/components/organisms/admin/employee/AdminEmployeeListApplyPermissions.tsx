@@ -7,10 +7,8 @@ export default function () {
   const onClick = async () => {
     setIsLoading(true);
     const result = await updateOwnersMutation();
-    console.log("res", result);
     if (result.errors) {
       alert("更新に失敗しました");
-      console.error(result.errors);
     } else {
       alert("更新が完了しました");
     }

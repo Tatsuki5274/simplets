@@ -42,11 +42,9 @@ export const RevieweeSheetCareerModal = (props: Props) => {
             }
             props.handleClose();
           } else {
-            console.error("必要なデータの取得に失敗しました", sheet);
             setError("必要なデータの取得に失敗しました");
           }
         } else {
-          console.error("sheetの取得に失敗しています");
           setError("sheetの取得に失敗しています");
         }
       }}

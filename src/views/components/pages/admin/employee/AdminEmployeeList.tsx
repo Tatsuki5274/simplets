@@ -42,7 +42,6 @@ export default function () {
           listEmployeesCompany,
           listQV
         );
-        console.log("employees", employees);
         if (employees) {
           const obj: (AdminEmployeeDataType | null)[] = employees.map(
             (employee) => {
@@ -99,7 +98,6 @@ export default function () {
           setTableData(obj);
         } else {
           setError("社員情報の取得に失敗しました");
-          console.error("社員情報の取得に失敗しました");
         }
       }
     })();
@@ -129,7 +127,6 @@ export default function () {
           setGroups(groupAll.concat(groupsLabel));
         } else {
           setError("部署情報の取得に失敗しました");
-          console.error("部署情報の取得に失敗しました");
         }
       }
     })();

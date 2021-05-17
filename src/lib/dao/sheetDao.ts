@@ -1,3 +1,4 @@
+/* eslint-disable no-console */ //暫定措置
 import * as APIt from "API";
 import { Sheet } from "API";
 import { graphqlMutation, graphqlQuery } from "./common/sdk";

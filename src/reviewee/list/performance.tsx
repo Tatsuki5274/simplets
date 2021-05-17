@@ -243,7 +243,6 @@ function ListPerformanceEvalution() {
               : today.getFullYear();
           setTargetYear(targetYear);
         } else {
-          console.error("会社の年度開始月を取得できませんでした");
           setError("会社の年度開始月を取得できませんでした");
         }
       }
@@ -269,8 +268,6 @@ function ListPerformanceEvalution() {
           listI
         );
         if (categorys) {
-          console.log("categorys", categorys);
-
           const reviewers = await getReviewers(
             currentUser.username,
             currentUser.attributes["custom:companyId"]
@@ -332,7 +329,6 @@ function ListPerformanceEvalution() {
                 );
                 if (!createdSection) {
                   isSuccess = false;
-                  console.log("カテゴリセクションの登録に失敗しました");
                 }
               });
               const addSheets = (newSheet: Sheet) => {
@@ -347,23 +343,17 @@ function ListPerformanceEvalution() {
               //レンダリング要素の追加
               addSheets(createdSheet);
               if (isSuccess) {
-                console.log("シートの作成に成功しました", sheets);
+                // console.log("シートの作成に成功しました", sheets);
               }
             } else {
-              console.error("シートの作成に失敗しました");
               setError("シートの作成に失敗しました");
             }
           } else {
             if (!targetYear) {
-              console.error("年度情報の取得に失敗しました");
               setError("年度情報の取得に失敗しました");
             } else if (!revieweeEmployee.username) {
-              console.error("ユーザー名が取得できませんでした");
               setError("ユーザー名が取得できませんでした");
             } else if (!revieweeEmployee.superior?.username) {
-              console.error(
-                "所属長が設定されていないため目標シートを作成することができません"
-              );
               setError(
                 "所属長が設定されていないため目標シートを作成することができません"
               );

@@ -1,6 +1,5 @@
 import { DateClickArg } from "@fullcalendar/interaction";
 import { EventClickArg, EventInput } from "@fullcalendar/react";
-import { Agent } from "http";
 import React from "react";
 import { useHistory } from "react-router-dom";
 import { routeBuilder } from "router";
@@ -30,9 +29,6 @@ export default function CalendarView(props: Props) {
   // const calendarRef = useRef<FullCalendar | null>(null)
 
   function handleDateClick(arg: DateClickArg) {
-    // bind with an arrow function
-    // console.log(JSON.stringify(arg.dateStr))
-
     const id = props.events.find((event) => {
       return event.date === arg.dateStr;
     })?.id;
@@ -44,7 +40,6 @@ export default function CalendarView(props: Props) {
   }
 
   function handleEventClick(arg: EventClickArg) {
-    // console.log(arg)
     if (arg.event.id) {
       history.push(routeBuilder.revieweeReportEditPath(arg.event.id));
     } else {
@@ -54,7 +49,6 @@ export default function CalendarView(props: Props) {
 
   function handleNextMonthClick(target: Date) {
     history.push(routeBuilder.revieweeReportCalendarPath(target));
-    // props.setEvents([])
   }
 
   function handlePrevMonthClick(target: Date) {

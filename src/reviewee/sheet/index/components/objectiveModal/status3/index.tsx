@@ -17,23 +17,6 @@ type Props = {
 };
 
 export const RevieweeSheetObjectiveModalStatus3 = (props: Props) => {
-  // const context = useContext(SheetContext);
-  // const sheet = context.sheet
-  // const setSheet = context.setSheet
-
-  // //目標変更検知
-  // function handleCheckObjectiveItems(inputItems: (string | null | undefined)[], objectiveItems: (string | null | undefined)[]) {
-  //     for (let i = 0; i < inputItems.length; i++) {
-  //         if (inputItems[i] !== undefined) {
-  //             if (inputItems[i] !== objectiveItems[i]) {
-  //                 // 承認ステータス更新処理を実行
-  //                 console.log("項目変更を検知しました");
-  //                 break;
-  //             }
-  //         }
-  //     }
-  // }
-
   const setError = useContext(ErrorContext);
   const [isLoading, setLoading] = useState(false);
 
@@ -50,8 +33,7 @@ export const RevieweeSheetObjectiveModalStatus3 = (props: Props) => {
             .typeError("正しく入力してください"),
           result: Yup.string().required("必須入力です").nullable(),
         })}
-        onSubmit={async (values, actions) => {
-          console.log("values", values);
+        onSubmit={async (values) => {
           setLoading(true);
 
           // // 承認ステータス3の場合,実績と自己評価以外の項目を変更した場合の処理
@@ -100,7 +82,6 @@ export const RevieweeSheetObjectiveModalStatus3 = (props: Props) => {
             //     })
             // })
           } else {
-            console.error("保存に失敗しました", updateObjective);
             setError("保存に失敗しました");
             setLoading(false);
           }

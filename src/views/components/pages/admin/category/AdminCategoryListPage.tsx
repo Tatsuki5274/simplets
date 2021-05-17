@@ -48,7 +48,6 @@ export default function () {
           setCategorys(categoryItems);
         } else {
           setError("カテゴリ情報の取得に失敗しました");
-          console.error("カテゴリ情報の取得に失敗しました");
         }
       }
     })();

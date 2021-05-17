@@ -59,7 +59,8 @@ function EvalutionScreen(props: Props) {
       if (sheetItem) {
         setSheet(sheetItem);
       } else {
-        console.error("シートの取得に失敗しました");
+        // Todo エラー出力の追加
+        // console.error("シートの取得に失敗しました");
       }
     })();
   }, [props.match.params.sheetId]);
@@ -98,7 +99,6 @@ function EvalutionScreen(props: Props) {
 
   if (sheet === undefined) return <div>Loading...</div>;
   else if (sheet === null) {
-    console.log("sheet not found.");
     return <p>該当のシートは存在しません</p>;
   }
 

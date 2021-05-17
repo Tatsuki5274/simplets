@@ -39,7 +39,6 @@ export default function (props: Props) {
         if (reportItem) {
           setReport(reportItem);
         } else {
-          console.error("報告書情報の取得に失敗しました");
           setError("報告書情報の取得に失敗しました");
         }
       }

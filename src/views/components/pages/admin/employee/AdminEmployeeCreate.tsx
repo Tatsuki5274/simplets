@@ -73,7 +73,6 @@ export default function () {
           setSuperiors(noSuperiorLabel.concat(superiorsLabel));
         } else {
           setError("上司情報の取得に失敗しました");
-          console.error("上司情報の取得に失敗しました");
         }
       }
     })();
@@ -105,7 +104,6 @@ export default function () {
           setGroups(groupsLabel);
         } else {
           setError("部署情報の取得に失敗しました");
-          console.error("部署情報の取得に失敗しました");
         }
       }
     })();

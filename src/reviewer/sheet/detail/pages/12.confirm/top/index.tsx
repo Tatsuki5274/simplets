@@ -65,23 +65,19 @@ export const ReviewerSheetPagesStatus12Top = () => {
                           alert("承認が完了しました");
                         } else {
                           setError("メールの作成に失敗しました");
-                          console.error("メールの作成に失敗しました");
                         }
                         if (setSheet) {
                           setSheet({ ...updatedSheet });
                         }
                       } else {
                         setError("フォームデータの登録に失敗しました");
-                        console.error("フォームデータの登録に失敗しました");
                       }
                     }
                   } else {
-                    console.error("評価シートの特定に失敗しました");
                     setError("評価シートの特定に失敗しました");
                   }
                 } else {
                   setError("sheetの読み込みに失敗しています");
-                  console.error("sheetの読み込みに失敗しています");
                 }
               }}
             >
@@ -123,7 +119,6 @@ export const ReviewerSheetPagesStatus12Top = () => {
     );
   } else {
     setError("シートが存在しません");
-    console.error("シートが存在しません");
     return null;
   }
 };

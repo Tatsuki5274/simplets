@@ -32,7 +32,7 @@ export const RemandModal = (props: Props) => {
       <Modal show={props.isShow} onHide={props.handleClose}>
         <Formik
           initialValues={{ reason: "" }}
-          onSubmit={async (values, actions) => {
+          onSubmit={async (values) => {
             if (sheet) {
               //ワークフローの実行
               let work;
@@ -82,7 +82,8 @@ export const RemandModal = (props: Props) => {
                           updateI
                         );
                         if (!updatedObjective) {
-                          console.log("目標情報の更新に失敗しました");
+                          // Todo エラー出力の追加
+                          // console.log("目標情報の更新に失敗しました");
                         }
                       }
                     });
@@ -103,20 +104,17 @@ export const RemandModal = (props: Props) => {
                 if (work.mailObject) {
                   sendEmailMutation(work.mailObject);
                 } else {
-                  console.error("メールの作成に失敗しました");
                   setError("メールの作成に失敗しました");
                 }
                 // updatedSheet = await statusManager.exec(updatedSheet, "proceed");
                 // setSheet({...updatedSheet});
               } else {
                 setError("更新に失敗しました");
-                console.error("更新に失敗しました");
               }
 
               props.handleClose();
             } else {
               setError("SheetContexの参照がありませんでした");
-              console.error("SheetContexの参照がありませんでした");
             }
           }}
         >

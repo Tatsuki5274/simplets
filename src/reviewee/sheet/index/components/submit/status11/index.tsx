@@ -37,16 +37,13 @@ export const SubmitButtonStatus11 = () => {
                 if (work.mailObject) {
                   sendEmailMutation(work.mailObject);
                 } else {
-                  console.error("メールの作成に失敗しました");
                   setError("メールの作成に失敗しました");
                 }
               } else {
                 setError("フォームデータの登録に失敗しました");
-                console.error("フォームデータの登録に失敗しました");
               }
             }
           } else {
-            console.error("評価シートの特定に失敗しました");
             setError("評価シートの特定に失敗しました");
           }
         }}

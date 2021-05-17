@@ -41,7 +41,6 @@ export default function (props: Props) {
           window.alert("カテゴリ内容の変更が完了しました");
           history.push(routeBuilder.adminCategoryListPath());
         } else {
-          console.log("カテゴリ内容の変更に失敗しました");
           setError("カテゴリ内容の変更に失敗しました");
         }
       }}

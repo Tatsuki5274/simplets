@@ -84,7 +84,7 @@ export function ObjectiveCreateModal(props: Props) {
               expDoneDate: Yup.date()
                 .min(
                   Yup.ref("expStartDate"),
-                  ({ min }) => `開始予定日より後の日付を入力してください`
+                  () => `開始予定日より後の日付を入力してください`
                 )
                 .typeError("正しく入力してください")
                 .required("必須入力です"),
@@ -121,16 +121,15 @@ export function ObjectiveCreateModal(props: Props) {
                     handleClose();
                     window.location.reload();
                   } else {
-                    console.log("保存に失敗しました", createR);
-                    console.error("保存に失敗しました");
+                    // Todo エラー出力の追加
+                    // console.log("保存に失敗しました", createR);
+                    // console.error("保存に失敗しました");
                   }
                 } else {
                   setError("目標追加時にシートの取得に失敗しています");
-                  console.error("目標追加時にシートの取得に失敗しています");
                 }
               } else {
                 setError("目標カテゴリが存在しません");
-                console.error("目標カテゴリが存在しません", values.sectionKeys);
               }
               setLoading(false);
             }}

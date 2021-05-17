@@ -61,11 +61,9 @@ export const RevieweeSheetObjectiveEditableStatus1 = (props: Props) => {
           updateI
         );
         if (!updatedObjective) {
-          console.error("更新に失敗しました");
           setError("更新に失敗しました");
         }
       } else {
-        console.error("必要なデータの取得に失敗しました", objective);
         setError("必要なデータの取得に失敗しました");
       }
     }
@@ -86,9 +84,7 @@ export const RevieweeSheetObjectiveEditableStatus1 = (props: Props) => {
           if (deletedObjective) {
             setObjective(null);
           }
-          console.log("delete", deletedObjective);
         } else {
-          console.error("必要なデータの取得に失敗しました", objective);
           setError("必要なデータの取得に失敗しました");
         }
       }

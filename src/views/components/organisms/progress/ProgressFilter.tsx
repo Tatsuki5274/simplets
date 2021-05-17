@@ -25,8 +25,6 @@ export default function (props: Props) {
         statusValue: props.status[0].value,
       }}
       onSubmit={(values) => {
-        // console.log("input", props.initCardData)
-        // console.log("values", values);
         if (props.initCardData) {
           let filter: (ProgressReferenceType | null)[] = props.initCardData;
           // 部署フィルター
@@ -44,7 +42,6 @@ export default function (props: Props) {
               (datum) => datum?.statusValue.toString() === values.statusValue
             );
           }
-          // console.log("filter", filter)
 
           //ソート
           filter.sort(function (a, b) {

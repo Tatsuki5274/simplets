@@ -132,7 +132,6 @@ function getMailObject(
   let isInitSuccess = true;
   if (sheet.revieweeEmployee) {
     const employees = getEmployees(sheet.revieweeEmployee as Employee);
-    console.log("getEmployee", employees);
 
     const reviewee = {
       name: "",

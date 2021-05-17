@@ -50,14 +50,11 @@ export const ReviewerSheetPagesStatus3 = (props: Props) => {
 
       // const updatedSheet = runUpdateSheet(props.values);
       if (updatedSheet) {
-        console.log("保存成功");
         window.alert("保存が完了しました");
       } else {
         setError("保存失敗");
-        console.error("保存失敗", updatedSheet);
       }
     } else {
-      console.error("シートの特定に失敗しました。", props.sheet);
       setError("シートの特定に失敗しました。");
     }
   };
@@ -89,7 +86,7 @@ export const ReviewerSheetPagesStatus3 = (props: Props) => {
                 InterviewMid3Date: props.sheet.InterviewMid3Date,
               } as Sheet
             }
-            onSubmit={async (values, actions) => {
+            onSubmit={async (values) => {
               onSubmit(values);
             }}
           >

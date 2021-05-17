@@ -60,18 +60,15 @@ export const SubmitButtonStatus3 = () => {
                       sendEmailMutation(work.mailObject);
                     } else {
                       setError("メールの作成に失敗しました");
-                      console.error("メールの作成に失敗しました");
                     }
                   } else {
                     setError("フォームデータの登録に失敗しました");
-                    console.error("フォームデータの登録に失敗しました");
                   }
                 }
               } else {
                 alert("自己評価と実績を全て入力してください");
               }
             } else {
-              console.error("評価シートの特定に失敗しました");
               setError("評価シートの特定に失敗しました");
             }
           }}
@@ -103,11 +100,9 @@ export const SubmitButtonStatus3 = () => {
                     sendEmailMutation(work.mailObject);
                   } else {
                     setError("メールの作成に失敗しました");
-                    console.error("メールの作成に失敗しました");
                   }
                 } else {
                   setError("フォームデータの登録に失敗しました");
-                  console.error("フォームデータの登録に失敗しました");
                 }
               }
             }

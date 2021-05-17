@@ -35,7 +35,8 @@ export function ObjectiveCreateModalContent(props: Props) {
               ></CategoryInput>
             );
           } else {
-            console.log("エラー: カテゴリが設定されていない可能性があります。");
+            // Todo エラー出力の追加
+            //console.log("エラー: カテゴリが設定されていない可能性があります。");
           }
         })}
         <p>

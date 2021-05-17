@@ -94,7 +94,6 @@ export default function (props: Props) {
       }}
       onSubmit={async (values) => {
         if (window.confirm("変更内容を保存してよろしいですか？")) {
-          console.log("values", values);
           const updateI: UpdateEmployeeInput = {
             companyID: props.employee.companyId,
             username: props.employee.username,
@@ -119,7 +118,6 @@ export default function (props: Props) {
             window.alert("社員情報を変更しました");
             history.push(routeBuilder.adminEmployeeListPath());
           } else {
-            console.log("社員情報の更新に失敗しました");
             setError("社員情報の更新に失敗しました");
           }
         }
@@ -307,7 +305,6 @@ export default function (props: Props) {
                                 if (deleteSheetItem) {
                                   deletedNum++;
                                 } else {
-                                  console.log("シート情報の削除に失敗しました");
                                   setError("シート情報の削除に失敗しました");
                                 }
                               }
@@ -332,7 +329,6 @@ export default function (props: Props) {
                                 routeBuilder.adminEmployeeListPath()
                               );
                             } else {
-                              console.log("社員情報の削除に失敗しました");
                               setError("社員情報の削除に失敗しました");
                             }
                           }
@@ -354,13 +350,11 @@ export default function (props: Props) {
                                 routeBuilder.adminEmployeeListPath()
                               );
                             } else {
-                              console.log("社員情報の削除に失敗しました");
                               setError("社員情報の削除に失敗しました");
                             }
                           }
                         }
                       } else {
-                        console.log("シート情報の取得に失敗しました");
                         setError("シート情報の取得に失敗しました");
                       }
                     } else {
@@ -381,7 +375,6 @@ export default function (props: Props) {
                       window.alert(`削除できません。部下：${displayReviewee}`);
                     }
                   } else {
-                    console.log("社員情報の取得に失敗しました");
                     setError("社員情報の取得に失敗しました");
                   }
                 }}

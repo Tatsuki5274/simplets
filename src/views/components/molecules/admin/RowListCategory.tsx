@@ -44,7 +44,6 @@ export default function (props: Props) {
                 window.alert("カテゴリ内容の削除が完了しました");
               } else {
                 setError("カテゴリ情報の取得に失敗しました");
-                console.error("カテゴリ情報の取得に失敗しました");
               }
             }
           }}

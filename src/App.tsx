@@ -1,3 +1,5 @@
+/* eslint-disable no-console */
+
 //React
 import React, { createContext, useEffect, useState } from "react";
 import {
@@ -107,7 +109,6 @@ function App() {
     (async () => {
       const user = await Auth.currentAuthenticatedUser();
       setUser(user);
-      console.log("user", user);
     })();
   }, []);
 
@@ -118,7 +119,6 @@ function App() {
           username: user.username,
         });
         setEmployee(employee);
-        console.log("employee", employee);
       }
     })();
   }, [user]);
@@ -173,11 +173,11 @@ function App() {
 }
 
 export default withAuthenticator(App, false, [
-  <CustomSignIn />,
-  <ConfirmSignIn />,
-  <VerifyContact />,
-  <SignUp />,
-  <ConfirmSignUp />,
-  <ForgotPassword />,
-  <RequireNewPassword />,
+  <CustomSignIn key="1" />,
+  <ConfirmSignIn key="2" />,
+  <VerifyContact key="3" />,
+  <SignUp key="4" />,
+  <ConfirmSignUp key="5" />,
+  <ForgotPassword key="6" />,
+  <RequireNewPassword key="7" />,
 ]);
