@@ -20,9 +20,10 @@
     "jsx": "react",
     "baseUrl": "src",
     "typeRoots": [
-      "./@types", // 自作の型定義ファイルを配置するディレクトリのパス
+      "./@types",
       "./node_modules/@types"
-    ]
+    ],
+    "noFallthroughCasesInSwitch": true
   },
   "include": [
     "src"

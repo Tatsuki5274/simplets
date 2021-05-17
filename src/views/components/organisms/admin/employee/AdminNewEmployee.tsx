@@ -2,18 +2,14 @@ import React from "react";
 import CommandButton from "views/components/molecules/CommandButton";
 
 type Props = {
-    link: {
-        label: string,
-        dest: string
-    },
-}
+  link: {
+    label: string;
+    dest: string;
+  };
+};
 
 export default function (props: Props) {
-    return (
-        <CommandButton
-            href={props.link.dest}
-        >
-            {props.link.label}
-        </CommandButton>
-    )
+  return (
+    <CommandButton href={props.link.dest}>{props.link.label}</CommandButton>
+  );
 }

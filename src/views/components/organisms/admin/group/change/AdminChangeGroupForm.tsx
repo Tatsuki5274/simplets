@@ -13,79 +13,78 @@ import TextField from "views/components/atoms/TextField";
 import CommandButton from "views/components/molecules/CommandButton";
 
 type Props = {
-    companyId: string
-    groupLocalId: string
-    groupName: string
-    id: string
-}
+  companyId: string;
+  groupLocalId: string;
+  groupName: string;
+  id: string;
+};
 
 export default function (props: Props) {
-    const setError = useContext(ErrorContext);
-    const history = useHistory();
+  const setError = useContext(ErrorContext);
+  const history = useHistory();
 
-    return (
-        <Formik
-            initialValues={{
-                groupName: props.groupName,
-            }}
-            onSubmit={(values) => {
-                const updateI: UpdateGroupInput = {
-                    id: props.id,
-                    companyID: props.companyId,
-                    no: props.groupLocalId,
-                    name: values.groupName,
-                }
-                const updateItem = GroupDao.update(updateGroup, updateI)
-                if (updateItem) {
-                    window.alert("部署情報の更新が完了しました")
-                    history.push(routeBuilder.adminGroupListPath())
-                } else {
-                    console.error("部署情報の更新に失敗しました")
-                    setError("部署情報の更新に失敗しました")
-                }
-            }}
-        >
-            {formik => (
-                <form onSubmit={formik.handleSubmit}>
-                    <table>
-                        <tr>
-                            <td>
-                                <Text>部署ID</Text>
-                            </td>
-                            <td>
-                                <Text>{props.groupLocalId}</Text>
-                            </td>
-                        </tr>
+  return (
+    <Formik
+      initialValues={{
+        groupName: props.groupName,
+      }}
+      onSubmit={(values) => {
+        const updateI: UpdateGroupInput = {
+          id: props.id,
+          companyID: props.companyId,
+          no: props.groupLocalId,
+          name: values.groupName,
+        };
+        const updateItem = GroupDao.update(updateGroup, updateI);
+        if (updateItem) {
+          window.alert("部署情報の更新が完了しました");
+          history.push(routeBuilder.adminGroupListPath());
+        } else {
+          console.error("部署情報の更新に失敗しました");
+          setError("部署情報の更新に失敗しました");
+        }
+      }}
+    >
+      {(formik) => (
+        <form onSubmit={formik.handleSubmit}>
+          <table>
+            <tr>
+              <td>
+                <Text>部署ID</Text>
+              </td>
+              <td>
+                <Text>{props.groupLocalId}</Text>
+              </td>
+            </tr>
 
-                        <tr>
-                            <td>
-                                <Text>部署名</Text>
-                            </td>
-                            <td>
-                                <TextField
-                                    name="groupName"
-                                    onChange={formik.handleChange}
-                                    defaultValue={formik.initialValues.groupName}
-                                />
-                            </td>
-                        </tr>
+            <tr>
+              <td>
+                <Text>部署名</Text>
+              </td>
+              <td>
+                <TextField
+                  name="groupName"
+                  onChange={formik.handleChange}
+                  defaultValue={formik.initialValues.groupName}
+                />
+              </td>
+            </tr>
 
-                        <CommandButton type="submit">部署変更</CommandButton>
+            <CommandButton type="submit">部署変更</CommandButton>
 
-                        <SpaceStyle>
-                            <Button href={routeBuilder.adminGroupListPath()}>
-                                キャンセル
-                                </Button>
-                        </SpaceStyle>
-
-                    </table>
-                </form>
-            )}
-        </Formik>
-    )
+            <SpaceStyle>
+              <Button href={routeBuilder.adminGroupListPath()}>
+                キャンセル
+              </Button>
+            </SpaceStyle>
+          </table>
+        </form>
+      )}
+    </Formik>
+  );
 }
 
 const SpaceStyle = styled.div({
-    display: "inline-block",
-    margin: "0 10px",
-})
+  display: "inline-block",
+  margin: "0 10px",
+});

@@ -1,6 +1,6 @@
-import styled from 'styled-components'
+import styled from "styled-components";
 
 export default styled.img({
-    objectFit: "contain",
-    width: "100%"
-})
+  objectFit: "contain",
+  width: "100%",
+});

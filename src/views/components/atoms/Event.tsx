@@ -1,13 +1,13 @@
 import React from "react";
 
 type Props = {
-    title: string
-}
+  title: string;
+};
 
-export default function(props: Props){
-    return (
-        <>
-            <i>{props.title}</i>
-        </>
-    )
+export default function (props: Props) {
+  return (
+    <>
+      <i>{props.title}</i>
+    </>
+  );
 }

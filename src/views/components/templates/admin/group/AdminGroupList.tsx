@@ -12,43 +12,32 @@ import RightBox from "../../RightBox";
 import Sidebar from "../../Sidebar";
 
 type Props = {
-    header: HeaderProps | null
-    sidebar: LinkType[][] | null
-    data: AdminListGroupRowType[] | null
-}
+  header: HeaderProps | null;
+  sidebar: LinkType[][] | null;
+  data: AdminListGroupRowType[] | null;
+};
 
 export default function (props: Props) {
-    return (
-        <>
-            <Header
-                {...props.header}
-            />
-            <Container>
-                <LeftBox>
-                    <>
-                        {props.sidebar ?
-                            <Sidebar
-                                data={props.sidebar}
-                            />
-                            : null}
-                    </>
-
-                </LeftBox>
-                <RightBox>
-                    <Content>
-                        <>
-                            <Title>部署管理</Title>
-                            <AdminGroupNewLinkButton/>
-                            {/* <AdminNewEmployee
+  return (
+    <>
+      <Header {...props.header} />
+      <Container>
+        <LeftBox>
+          <>{props.sidebar ? <Sidebar data={props.sidebar} /> : null}</>
+        </LeftBox>
+        <RightBox>
+          <Content>
+            <>
+              <Title>部署管理</Title>
+              <AdminGroupNewLinkButton />
+              {/* <AdminNewEmployee
                                 link={props.link}
                             /> */}
-                            <AdminListGroupTable
-                                data={props.data}
-                            />
-                        </>
-                    </Content>
-                </RightBox>
-            </Container>
-        </>
-    )
+              <AdminListGroupTable data={props.data} />
+            </>
+          </Content>
+        </RightBox>
+      </Container>
+    </>
+  );
 }

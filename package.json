@@ -31,6 +31,7 @@
     "jquery": "^3.5.1",
     "node-sass": "^4.14.1",
     "popper.js": "^1.16.1",
+    "prettier": "^2.3.0",
     "react": "^16.13.1",
     "react-bootstrap": "^1.3.0",
     "react-dom": "^16.13.1",
@@ -48,6 +49,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
+    "lint": "eslint  'src/**/*.{js,jsx,ts,tsx}'",
+    "lint:fix": "eslint --fix 'src/**/*.{js,jsx,ts,tsx}'",
     "amplify:scriptgraphql": "cp src/API.ts amplify/backend/function/scriptGraphQL/src && cp -R src/graphql amplify/backend/function/scriptGraphQL/src/ && cd amplify/backend/function/scriptGraphQL/src",
     "amplify:resolvers": "cp src/API.ts amplify/backend/function/resolvers/src && cp -R src/graphql amplify/backend/function/resolvers/src/ && cd amplify/backend/function/resolvers",
     "amplify:dbstream": "cp src/API.ts amplify/backend/function/dbStream/src && cp -R src/graphql amplify/backend/function/dbStream/src/ && cd amplify/backend/function/dbStream",
@@ -70,6 +73,12 @@
     ]
   },
   "devDependencies": {
-    "@types/styled-components": "^5.1.7"
+    "@types/styled-components": "^5.1.7",
+    "@typescript-eslint/eslint-plugin": "^4.23.0",
+    "@typescript-eslint/parser": "^4.23.0",
+    "eslint": "^7.11.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-prettier": "^3.1.4",
+    "eslint-plugin-react": "^7.23.2"
   }
 }

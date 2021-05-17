@@ -1,22 +1,20 @@
-import React from "react"
-import styled from "styled-components"
-import CalendarEvent from "views/components/atoms/Event"
+import React from "react";
+import styled from "styled-components";
+import CalendarEvent from "views/components/atoms/Event";
 
 type Props = {
-    title: string
-}
+  title: string;
+};
 
-export default function(props: Props){
-    return (
-        <Styled>
-            <CalendarEvent
-                title={props.title}
-            />
-        </Styled>
-    )
+export default function (props: Props) {
+  return (
+    <Styled>
+      <CalendarEvent title={props.title} />
+    </Styled>
+  );
 }
 
 const Styled = styled.div({
-    backgroundColor: "yellow",
-    color: "black"
-})
+  backgroundColor: "yellow",
+  color: "black",
+});

@@ -2,15 +2,13 @@ import React from "react";
 import styled from "styled-components";
 
 type Props = {
-    children: string
-}
+  children: string;
+};
 
-export default function(props: Props){
-    return <Styled>
-        {props.children}
-    </Styled>
+export default function (props: Props) {
+  return <Styled>{props.children}</Styled>;
 }
 
 const Styled = styled.td({
-    backgroundColor: "#8080804d"
-})
+  backgroundColor: "#8080804d",
+});

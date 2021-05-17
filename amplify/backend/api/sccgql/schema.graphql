@@ -212,7 +212,7 @@ type Sheet
   group: Group @connection(fields: ["groupID"]) # 部署ソート用番号を取得するために参照 (非推奨)
   section: [Section] @connection(fields: ["id"], keyName: "SectionBySheet")
 
-  #　オーナーフィールド
+  # オーナーフィールド
   referencer: [String!] #参照者
   reviewee: String! #被評価者
   topReviewers: [String!] #部門長権限
@@ -250,7 +250,7 @@ type Section
 
   objective: [Objective] @connection(fields: ["id"], keyName: "ObjectiveBySection")
 
-  #　オーナーフィールド
+  # オーナーフィールド
   reviewee: String #被評価者
   topReviewers: [String!] #部門長権限
   secondReviewers: [String!] #所属長権限
@@ -301,7 +301,7 @@ type Objective
   expStartDate: AWSDate  #開始予定日
   expDoneDate: AWSDate  #完了予定日
   
-  #　オーナーフィールド
+  # オーナーフィールド
   reviewee: String #被評価者
   topReviewers: [String!] #部門長権限
   secondReviewers: [String!] #所属長権限

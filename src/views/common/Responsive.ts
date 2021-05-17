@@ -1,5 +1,5 @@
-export const onMobile = "@media(max-width: 500px)"
-export const onDesktop = "@media(min-width: 1024px)"
+export const onMobile = "@media(max-width: 500px)";
+export const onDesktop = "@media(min-width: 1024px)";
 
 // 使い方
 

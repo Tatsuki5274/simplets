@@ -1,14 +1,14 @@
 export type SelectLabel = {
-    value: string
-    label: string
-}
+  value: string;
+  label: string;
+};
 
 export type Superior = {
-    email: string | null
-    username: string | null
-}
+  email: string | null;
+  username: string | null;
+};
 
 export type LinkType = {
-    label: string
-    dest: string
-}
+  label: string;
+  dest: string;
+};

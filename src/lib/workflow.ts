@@ -3,186 +3,201 @@ import { SendEmail } from "App";
 import { routeBuilder } from "router";
 
 export enum Command {
-    REVIEWEE_SUBMIT,
-    SUP1_APPLOVAL,
-    REVIEWEE_INPUT_RESULT,
-    SUP1_INPUT_SCORE,
-    REVIEWEE_CONFIRM_SCORE,
-    SUP1_CONFIRM,
-    SUP2_DONE,
-    SUP1_DONE,
-    REMAND_FROM_SUBMIT,
-    REVIEWEE_CHANGE_OBJECTIVE,
-    REMAND_FROM_INPUT_RESULT,
-    REMAND_FROM_SUR1_CONFIRM,
-    REVIWEE_PULLBACK_SUBMIT,
-    REVIWEE_PULLBACK_APPROVAL
+  REVIEWEE_SUBMIT,
+  SUP1_APPLOVAL,
+  REVIEWEE_INPUT_RESULT,
+  SUP1_INPUT_SCORE,
+  REVIEWEE_CONFIRM_SCORE,
+  SUP1_CONFIRM,
+  SUP2_DONE,
+  SUP1_DONE,
+  REMAND_FROM_SUBMIT,
+  REVIEWEE_CHANGE_OBJECTIVE,
+  REMAND_FROM_INPUT_RESULT,
+  REMAND_FROM_SUR1_CONFIRM,
+  REVIWEE_PULLBACK_SUBMIT,
+  REVIWEE_PULLBACK_APPROVAL,
 }
 
-const systemName = "Simplet's"
+const systemName = "Simplet's";
 
 type ReturnType = {
-    sheet: Sheet,
-    mailObject: SendEmail | null
-}
+  sheet: Sheet;
+  mailObject: SendEmail | null;
+};
 
 /**
- * 
+ *
  * @param command 承認フローのコマンドを選択
  * @param sheet 処理対象のシートを指定
  * @param reason 差し戻しの場合は差し戻し理由を指定
  */
-export function commandWorkFlow(command: Command, sheet: Sheet, reason?: string): ReturnType {
-    let ret: ReturnType = {
-        sheet: sheet,
-        mailObject: null,
-    }
-    let key = -1;
-    let status = sheet.statusValue;
-    switch (command) {
-        case Command.REVIEWEE_SUBMIT:
-            status = 2
-            key = 1
-            break
-        case Command.SUP1_APPLOVAL:
-            status = 3
-            key = 2
-            break
-        case Command.REVIEWEE_INPUT_RESULT:
-            status = 10
-            key = 3
-            break
-        case Command.SUP1_INPUT_SCORE:
-            status = 11
-            key = 4
-            break;
-        case Command.REVIEWEE_CONFIRM_SCORE:
-            status = 12
-            key = 5
-            break
-        case Command.SUP1_CONFIRM:
-            status = 13
-            key = 7
-            break
-        case Command.SUP2_DONE:
-            status = 14
-            key = 8
-            break
-        case Command.SUP1_DONE:
-            status = 14
-            key = 8
-            break;
-        case Command.REMAND_FROM_SUBMIT:
-            key = 10
-            status = 1
-            break;
-        case Command.REVIEWEE_CHANGE_OBJECTIVE:
-            status = 1
-            break;
-        case Command.REMAND_FROM_INPUT_RESULT:
-            key = 15
-            status = 3
-            break;
-        case Command.REMAND_FROM_SUR1_CONFIRM:
-            key = 11
-            status = 1
-            break
-        case Command.REVIWEE_PULLBACK_SUBMIT:
-            key = 14
-            status = 1
-            break;
-        case Command.REVIWEE_PULLBACK_APPROVAL:
-            key = 13
-            status = 1
-            break;
-    }
-    if(key !== -1){
-        ret.mailObject = getMailObject(key, sheet, reason)
-    }
-    ret.sheet.statusValue = status
-    return ret;
+export function commandWorkFlow(
+  command: Command,
+  sheet: Sheet,
+  reason?: string
+): ReturnType {
+  const ret: ReturnType = {
+    sheet: sheet,
+    mailObject: null,
+  };
+  let key = -1;
+  let status = sheet.statusValue;
+  switch (command) {
+    case Command.REVIEWEE_SUBMIT:
+      status = 2;
+      key = 1;
+      break;
+    case Command.SUP1_APPLOVAL:
+      status = 3;
+      key = 2;
+      break;
+    case Command.REVIEWEE_INPUT_RESULT:
+      status = 10;
+      key = 3;
+      break;
+    case Command.SUP1_INPUT_SCORE:
+      status = 11;
+      key = 4;
+      break;
+    case Command.REVIEWEE_CONFIRM_SCORE:
+      status = 12;
+      key = 5;
+      break;
+    case Command.SUP1_CONFIRM:
+      status = 13;
+      key = 7;
+      break;
+    case Command.SUP2_DONE:
+      status = 14;
+      key = 8;
+      break;
+    case Command.SUP1_DONE:
+      status = 14;
+      key = 8;
+      break;
+    case Command.REMAND_FROM_SUBMIT:
+      key = 10;
+      status = 1;
+      break;
+    case Command.REVIEWEE_CHANGE_OBJECTIVE:
+      status = 1;
+      break;
+    case Command.REMAND_FROM_INPUT_RESULT:
+      key = 15;
+      status = 3;
+      break;
+    case Command.REMAND_FROM_SUR1_CONFIRM:
+      key = 11;
+      status = 1;
+      break;
+    case Command.REVIWEE_PULLBACK_SUBMIT:
+      key = 14;
+      status = 1;
+      break;
+    case Command.REVIWEE_PULLBACK_APPROVAL:
+      key = 13;
+      status = 1;
+      break;
+  }
+  if (key !== -1) {
+    ret.mailObject = getMailObject(key, sheet, reason);
+  }
+  ret.sheet.statusValue = status;
+  return ret;
 }
 
-function getEmployees(employee: Employee): Employee[]{
-    const ret: Employee[] = []
-    let work: any = employee
-    do{
-        ret.push(work)
-        work = work.superior;
-    }while(work)
-    return ret
+function getEmployees(employee: Employee): Employee[] {
+  const ret: Employee[] = [];
+  let work: any = employee;
+  do {
+    ret.push(work);
+    work = work.superior;
+  } while (work);
+  return ret;
 }
 
-function getMailObject(key: number, sheet: Sheet, reason?: string): SendEmail | null{
-    let ret: SendEmail = {
-        to: [null],
-        cc: null,
-        bcc: null,
-        body: "",
-        subject: "",
-    } 
-    let isInitSuccess = true;
-    if(sheet.revieweeEmployee){
-        const employees = getEmployees(sheet.revieweeEmployee as Employee)
-        console.log("getEmployee", employees)
+function getMailObject(
+  key: number,
+  sheet: Sheet,
+  reason?: string
+): SendEmail | null {
+  const ret: SendEmail = {
+    to: [null],
+    cc: null,
+    bcc: null,
+    body: "",
+    subject: "",
+  };
+  let isInitSuccess = true;
+  if (sheet.revieweeEmployee) {
+    const employees = getEmployees(sheet.revieweeEmployee as Employee);
+    console.log("getEmployee", employees);
 
-        let reviewee = {
-            name: "",
-            email: ""
-        }
-        let sup1 = {
-            name: "",
-            email: ""
-        }
-        let sup2 = {
-            name: "",
-            email: ""
-        }
-        let ceo = {
-            name: "",
-            email: ""
-        }
-        if(employees.length === 2){
-            reviewee.name = `${employees[0].lastName} ${employees[0].firstName}`
-            reviewee.email = employees[0].email || "" // unsafe
-            sup1.name = `${employees[1].lastName} ${employees[1].firstName}`
-            sup1.email = employees[1].email || "" // unsafe
-            ceo.name = `${employees[1].lastName} ${employees[1].firstName}`
-            ceo.email = employees[1].email || "" // unsafe
-        }else if(employees.length === 3){
-            reviewee.name = `${employees[0].lastName} ${employees[0].firstName}`
-            reviewee.email = employees[0].email || "" // unsafe
-            sup1.name = `${employees[1].lastName} ${employees[1].firstName}`
-            sup1.email = employees[1].email || "" // unsafe
-            ceo.name = `${employees[2].lastName} ${employees[2].firstName}`
-            ceo.email = employees[2].email || "" // unsafe
-        }else if(employees.length >= 4){
-            reviewee.name = `${employees[0].lastName} ${employees[0].firstName}`
-            reviewee.email = employees[0].email || "" // unsafe
-            sup1.name = `${employees[1].lastName} ${employees[1].firstName}`
-            sup1.email = employees[1].email || "" // unsafe
-            sup2.name = `${employees[2].lastName} ${employees[2].firstName}`
-            sup2.email = employees[2].email || "" // unsafe
-            ceo.name = `${employees[employees.length-1].lastName} ${employees[employees.length-1].firstName}`
-            ceo.email = employees[employees.length-1].email || "" // unsafe
-        }else{
-            console.error("社員情報に誤りがあります", employees)
-            isInitSuccess = false
-        }
+    const reviewee = {
+      name: "",
+      email: "",
+    };
+    const sup1 = {
+      name: "",
+      email: "",
+    };
+    const sup2 = {
+      name: "",
+      email: "",
+    };
+    const ceo = {
+      name: "",
+      email: "",
+    };
+    if (employees.length === 2) {
+      reviewee.name = `${employees[0].lastName} ${employees[0].firstName}`;
+      reviewee.email = employees[0].email || ""; // unsafe
+      sup1.name = `${employees[1].lastName} ${employees[1].firstName}`;
+      sup1.email = employees[1].email || ""; // unsafe
+      ceo.name = `${employees[1].lastName} ${employees[1].firstName}`;
+      ceo.email = employees[1].email || ""; // unsafe
+    } else if (employees.length === 3) {
+      reviewee.name = `${employees[0].lastName} ${employees[0].firstName}`;
+      reviewee.email = employees[0].email || ""; // unsafe
+      sup1.name = `${employees[1].lastName} ${employees[1].firstName}`;
+      sup1.email = employees[1].email || ""; // unsafe
+      ceo.name = `${employees[2].lastName} ${employees[2].firstName}`;
+      ceo.email = employees[2].email || ""; // unsafe
+    } else if (employees.length >= 4) {
+      reviewee.name = `${employees[0].lastName} ${employees[0].firstName}`;
+      reviewee.email = employees[0].email || ""; // unsafe
+      sup1.name = `${employees[1].lastName} ${employees[1].firstName}`;
+      sup1.email = employees[1].email || ""; // unsafe
+      sup2.name = `${employees[2].lastName} ${employees[2].firstName}`;
+      sup2.email = employees[2].email || ""; // unsafe
+      ceo.name = `${employees[employees.length - 1].lastName} ${
+        employees[employees.length - 1].firstName
+      }`;
+      ceo.email = employees[employees.length - 1].email || ""; // unsafe
+    } else {
+      console.error("社員情報に誤りがあります", employees);
+      isInitSuccess = false;
+    }
 
-        if(isInitSuccess){
-            const protocol = window.location.protocol;
-            const hostName = window.location.host;
-            const hostUrl = protocol + '//' + hostName;
-            const revieweeUrl = routeBuilder.revieweeDetailPath(sheet.id || "", hostUrl);
-            const reviewerUrl = routeBuilder.reviewerDetailPath(sheet.id || "", hostUrl);
+    if (isInitSuccess) {
+      const protocol = window.location.protocol;
+      const hostName = window.location.host;
+      const hostUrl = protocol + "//" + hostName;
+      const revieweeUrl = routeBuilder.revieweeDetailPath(
+        sheet.id || "",
+        hostUrl
+      );
+      const reviewerUrl = routeBuilder.reviewerDetailPath(
+        sheet.id || "",
+        hostUrl
+      );
 
-
-            switch (key) {
-                case 1:
-                    ret.to = [sup1.email]
-                    ret.subject = `[${systemName}]  目標設定が提出されました`
-                    ret.body = `
+      switch (key) {
+        case 1:
+          ret.to = [sup1.email];
+          ret.subject = `[${systemName}]  目標設定が提出されました`;
+          ret.body = `
 ${sup1.name}様:
 
 目標設定が完了しました。
@@ -198,12 +213,12 @@ ${reviewerUrl}
 
 # 本メールは${sup1.email}宛にお送りしています。
 # 本メールはシステムより自動送信されています。
-# 本メールに返信されましても、返答できませんのでご了承ください。`
-                    break;
-                case 2:
-                    ret.to = [reviewee.email]
-                    ret.subject = `[${systemName}]  目標設定が承認されました`
-                    ret.body = `
+# 本メールに返信されましても、返答できませんのでご了承ください。`;
+          break;
+        case 2:
+          ret.to = [reviewee.email];
+          ret.subject = `[${systemName}]  目標設定が承認されました`;
+          ret.body = `
 ${reviewee.name}様:
 
 目標設定が承認されました。
@@ -219,12 +234,12 @@ ${revieweeUrl}
 # 本メールは${reviewee.email}宛にお送りしています。
 # 本メールはシステムより自動送信されています。
 # 本メールに返信されましても、返答できませんのでご了承ください。
-`
-                    break;
-                case 3:
-                    ret.to = [sup1.email]
-                    ret.subject = `[${systemName}]  目標設定の実績が入力されましたので評価をお願いいたします`
-                    ret.body = `
+`;
+          break;
+        case 3:
+          ret.to = [sup1.email];
+          ret.subject = `[${systemName}]  目標設定の実績が入力されましたので評価をお願いいたします`;
+          ret.body = `
 ${sup1.name}様:
 
 目標の実績入力と社員の自己評価が完了しました。
@@ -241,12 +256,12 @@ ${reviewerUrl}
 # 本メールは${sup1.email}宛にお送りしています。
 # 本メールはシステムより自動送信されています。
 # 本メールに返信されましても、返答できませんのでご了承ください。
-                    `
-                    break;
-                case 4:
-                    ret.to = [reviewee.email]
-                    ret.subject = `[${systemName}]  今年度の総合評価が決定しました`
-                    ret.body = `
+                    `;
+          break;
+        case 4:
+          ret.to = [reviewee.email];
+          ret.subject = `[${systemName}]  今年度の総合評価が決定しました`;
+          ret.body = `
 ${reviewee.name}様:
 
 所属長より年度評価が入力されました。
@@ -262,12 +277,12 @@ ${revieweeUrl}
 # 本メールは${reviewee.email}宛にお送りしています。
 # 本メールはシステムより自動送信されています。
 # 本メールに返信されましても、返答できませんのでご了承ください。
-                    `
-                    break;
-                case 5:
-                    ret.to = [sup1.email]
-                    ret.subject = `[${systemName}]  総合評価の社員確認が完了しました`
-                    ret.body = `
+                    `;
+          break;
+        case 5:
+          ret.to = [sup1.email];
+          ret.subject = `[${systemName}]  総合評価の社員確認が完了しました`;
+          ret.body = `
 ${sup1.name}様:
 
 評価の確認が完了しました。
@@ -283,12 +298,12 @@ ${reviewerUrl}
 # 本メールは${sup1.email}宛にお送りしています。
 # 本メールはシステムより自動送信されています。
 # 本メールに返信されましても、返答できませんのでご了承ください。
-                    `
-                    break;
-                case 7:
-                    ret.to = [sup2.email]
-                    ret.subject = `[${systemName}]  今年度評価へのコメントをお願いいたします`
-                    ret.body = `
+                    `;
+          break;
+        case 7:
+          ret.to = [sup2.email];
+          ret.subject = `[${systemName}]  今年度評価へのコメントをお願いいたします`;
+          ret.body = `
 ${sup2.name}様:
 
 所属長の評価が完了しました。
@@ -305,12 +320,12 @@ ${reviewerUrl}
 # 本メールは${sup2.email}宛にお送りしています。
 # 本メールはシステムより自動送信されています。
 # 本メールに返信されましても、返答できませんのでご了承ください。
-                    `
-                    break;
-                case 8:
-                    ret.to = Array.from(new Set([ceo.email, sup1.email, reviewee.email]))
-                    ret.subject = `[${systemName}]  評価が完了しました`
-                    ret.body = `
+                    `;
+          break;
+        case 8:
+          ret.to = Array.from(new Set([ceo.email, sup1.email, reviewee.email]));
+          ret.subject = `[${systemName}]  評価が完了しました`;
+          ret.body = `
 最終承認者のコメントが記入されました。
 
 ----------------------------------------------------------------------
@@ -324,12 +339,12 @@ ${reviewerUrl}
 # 本メールは${ceo.email}/${sup1.email}/${reviewee.email}宛にお送りしています。
 # 本メールはシステムより自動送信されています。
 # 本メールに返信されましても、返答できませんのでご了承ください。
-                    `
-                    break;
-                case 10:
-                    ret.to = [reviewee.email]
-                    ret.subject = `[${systemName}]  目標が差し戻されました`
-                    ret.body = `
+                    `;
+          break;
+        case 10:
+          ret.to = [reviewee.email];
+          ret.subject = `[${systemName}]  目標が差し戻されました`;
+          ret.body = `
 ${reviewee.name}様:
 
 目標設定が差し戻されました、
@@ -347,12 +362,12 @@ ${revieweeUrl}
 # 本メールは${reviewee.email}宛にお送りしています。
 # 本メールはシステムより自動送信されています。
 # 本メールに返信されましても、返答できませんのでご了承ください。
-                    `
-                    break;
-                case 11:
-                    ret.to = [reviewee.email]
-                    ret.subject = `[${systemName}]  評価依頼が差し戻されました`
-                    ret.body = `
+                    `;
+          break;
+        case 11:
+          ret.to = [reviewee.email];
+          ret.subject = `[${systemName}]  評価依頼が差し戻されました`;
+          ret.body = `
 ${reviewee.name}様:
 
 評価依頼が差し戻されました。修正し再度、評価依頼を行なってください。
@@ -366,18 +381,18 @@ ${reviewee.name}様:
 以下のURLにアクセスし
 実績、自己評価を修正し再度申請してください。
 ※）社員目標設定待ちに戻りますので、目標設定の承認依頼を行ってください。
-　　所属長承認後、評価依頼を行ってください。
+  所属長承認後、評価依頼を行ってください。
 ${revieweeUrl}
 
 # 本メールは${reviewee.email}宛にお送りしています。
 # 本メールはシステムより自動送信されています。
 # 本メールに返信されましても、返答できませんのでご了承ください。
-                    `
-                    break;
-                case 13:
-                    ret.to = [sup1.email]
-                    ret.subject = `[${systemName}]  承認依頼が引き戻されました`
-                    ret.body = `
+                    `;
+          break;
+        case 13:
+          ret.to = [sup1.email];
+          ret.subject = `[${systemName}]  承認依頼が引き戻されました`;
+          ret.body = `
 ${sup1.name}様:
 
 承認依頼が引き戻されました
@@ -391,12 +406,12 @@ ${reviewerUrl}
 # 本メールは${sup1.email}宛にお送りしています。 
 # 本メールはシステムより自動送信されています。 
 # 本メールに返信されましても、返答できませんのでご了承ください。
-                    `
-                    break;
-                case 14:
-                    ret.to = [sup1.email]
-                    ret.subject = `[${systemName}]  提出済み目標が引き戻されました`
-                    ret.body = `
+                    `;
+          break;
+        case 14:
+          ret.to = [sup1.email];
+          ret.subject = `[${systemName}]  提出済み目標が引き戻されました`;
+          ret.body = `
 ${sup1.name}様:
 
 提出済み目標が引き戻されました
@@ -410,12 +425,12 @@ ${reviewerUrl}
 # 本メールは${sup1.email}宛にお送りしています。 
 # 本メールはシステムより自動送信されています。 
 # 本メールに返信されましても、返答できませんのでご了承ください。
-                    `
-                    break;
-                case 15:
-                    ret.to = [reviewee.email]
-                    ret.subject = `[${systemName}]  自己評価と実績が差し戻されました`
-                    ret.body = `
+                    `;
+          break;
+        case 15:
+          ret.to = [reviewee.email];
+          ret.subject = `[${systemName}]  自己評価と実績が差し戻されました`;
+          ret.body = `
 ${reviewee.name}様:
 
 自己評価と実績が差し戻されました、
@@ -434,17 +449,17 @@ ${revieweeUrl}
 # 本メールは${reviewee.email}宛にお送りしています。
 # 本メールはシステムより自動送信されています。
 # 本メールに返信されましても、返答できませんのでご了承ください。
-                    `
-                    break;
-            }
-        }else{
-            console.error("社員データの初期化に失敗しました", employees)
-            return null
-        }
-    }else{
-        console.error("被評価者者が登録されていません")
-        return null
+                    `;
+          break;
+      }
+    } else {
+      console.error("社員データの初期化に失敗しました", employees);
+      return null;
     }
-    // ret.body = ret.body.replace(/\s+/g, "");
-    return ret;
+  } else {
+    console.error("被評価者者が登録されていません");
+    return null;
+  }
+  // ret.body = ret.body.replace(/\s+/g, "");
+  return ret;
 }

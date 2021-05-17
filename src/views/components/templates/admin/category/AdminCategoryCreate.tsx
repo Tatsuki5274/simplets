@@ -10,40 +10,29 @@ import RightBox from "../../RightBox";
 import Sidebar from "../../Sidebar";
 
 type Props = {
-    header: HeaderProps | null
-    sidebar: LinkType[][] | null
+  header: HeaderProps | null;
+  sidebar: LinkType[][] | null;
 
-    companyId: string
-}
+  companyId: string;
+};
 
 export default function (props: Props) {
-    return (
-        <>
-            <Header
-                {...props.header}
-            />
-            <Container>
-                <LeftBox>
-                    <>
-                        {props.sidebar ?
-                            <Sidebar
-                                data={props.sidebar}
-                            />
-                            : null}
-                    </>
-
-                </LeftBox>
-                <RightBox>
-                    <Content>
-                        <>
-                            <Title>カテゴリ内容作成</Title>
-                            <AdminCategoryCreateInput
-                                companyId={props.companyId}
-                            />
-                        </>
-                    </Content>
-                </RightBox>
-            </Container>
-        </>
-    )
+  return (
+    <>
+      <Header {...props.header} />
+      <Container>
+        <LeftBox>
+          <>{props.sidebar ? <Sidebar data={props.sidebar} /> : null}</>
+        </LeftBox>
+        <RightBox>
+          <Content>
+            <>
+              <Title>カテゴリ内容作成</Title>
+              <AdminCategoryCreateInput companyId={props.companyId} />
+            </>
+          </Content>
+        </RightBox>
+      </Container>
+    </>
+  );
 }

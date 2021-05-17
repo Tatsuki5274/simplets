@@ -11,45 +11,33 @@ import RightBox from "../../RightBox";
 import Sidebar from "../../Sidebar";
 
 type Props = {
-    header: HeaderProps | null
-    sidebar: LinkType[][] | null
+  header: HeaderProps | null;
+  sidebar: LinkType[][] | null;
 
-    companyId: string
-    groupLocalId: string
-    groupName: string
-    id: string
-}
+  companyId: string;
+  groupLocalId: string;
+  groupName: string;
+  id: string;
+};
 
 export default function (props: Props) {
-    return (
-        <>
-            <Header
-                {...props.header}
-            />
-            <Container>
-                <LeftBox>
-                    <>
-                        {props.sidebar ?
-                            <Sidebar
-                                data={props.sidebar}
-                            />
-                            : null}
-                    </>
-                </LeftBox>
-                <RightBox>
-                    <Content>
-                        <>
-                            <Title>部署変更・削除</Title>
-                            <AdminChangeGroupForm
-                                {...props}
-                            />
-                            <AdminDeleteGroup
-                                {...props}
-                            />
-                        </>
-                    </Content>
-                </RightBox>
-            </Container>
-        </>
-    )
+  return (
+    <>
+      <Header {...props.header} />
+      <Container>
+        <LeftBox>
+          <>{props.sidebar ? <Sidebar data={props.sidebar} /> : null}</>
+        </LeftBox>
+        <RightBox>
+          <Content>
+            <>
+              <Title>部署変更・削除</Title>
+              <AdminChangeGroupForm {...props} />
+              <AdminDeleteGroup {...props} />
+            </>
+          </Content>
+        </RightBox>
+      </Container>
+    </>
+  );
 }
