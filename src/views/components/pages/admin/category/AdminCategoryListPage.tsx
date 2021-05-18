@@ -51,7 +51,7 @@ export default function () {
         }
       }
     })();
-  }, [currentUser, setError, categorys]);
+  }, [currentUser, setError]);
 
   return (
     <>
