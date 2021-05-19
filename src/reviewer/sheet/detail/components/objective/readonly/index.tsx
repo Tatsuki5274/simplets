@@ -47,8 +47,9 @@ export const ReviewerSheetDetailObjectiveReadonly = (props: Props) => {
                   if (objective.progress === 100) {
                     styleObjective = style.detailObjectiveProgressHigh;
                   } else if (
-                    objective.progress! >= 10 &&
-                    objective.progress! < 100
+                    typeof objective.progress === "number" &&
+                    objective.progress >= 10 &&
+                    objective.progress < 100
                   ) {
                     styleObjective = style.detailObjectiveProgressMiddle;
                   } else {

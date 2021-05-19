@@ -25,12 +25,14 @@ export const RevieweeSheetObjectiveEditableStatus3 = (props: Props) => {
   const date = new Date(props.objective.updatedAt || ""); // unsafe
   let expDoneDateStyle: string; //完了予定日のクラス名
   const currentDate = new Date().getTime();
-  const doneDate = new Date(props.objective.expDoneDate!).getTime();
+  const doneDate = props.objective.expDoneDate
+    ? new Date(props.objective.expDoneDate).getTime()
+    : null;
 
   // const [objective, setObjective] = useState<Objective | null>(props.objective)
 
   //完了予定日のスタイルの分岐
-  if (doneDate < currentDate && doneDate !== 0) {
+  if (doneDate && doneDate < currentDate && doneDate !== 0) {
     expDoneDateStyle = Style.indexExpDoneDateExpired;
   } else {
     expDoneDateStyle = "";
