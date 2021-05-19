@@ -25,5 +25,6 @@ module.exports = {
     "@typescript-eslint/explicit-module-boundary-types": "off",
     "no-console": "warn",
     "react/jsx-key": "warn", // 一時的な措置。errorに戻す
+    "@typescript-eslint/no-non-null-assertion": "warn", // 一時的な措置。修正後、errorに変更
   },
 };
