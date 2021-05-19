@@ -22,9 +22,9 @@ const Link = styled.div({
 export default function (props: Props) {
   return (
     <Styled>
-      {props.links.map((link) => {
+      {props.links.map((link, index) => {
         return (
-          <Link>
+          <Link key={index}>
             <LinkMenu data={link} />
           </Link>
         );

@@ -32,6 +32,7 @@ export default function () {
               },
               groupLocalId: group.no || "", // unsafe
               groupName: group.name || "", // unsafe
+              id: group.id,
             };
           });
 

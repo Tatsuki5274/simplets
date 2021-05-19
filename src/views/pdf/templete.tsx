@@ -91,14 +91,17 @@ export const PDFTemplete = (props: Props) => {
                   </thead>
                   <tbody>
                     {props.sheet.section?.items?.map((section) => {
-                      return section ? (
+                      return section && section.id ? (
                         <tr key={section.id}>
                           <td>
                             <p>{section.sectionCategoryName}</p>
                             <Table borderless>
                               {section.objective?.items?.map((objective) => {
+                                if (!objective?.id) {
+                                  return null; // 最適な内容に変更することも検討
+                                }
                                 return (
-                                  <tr>
+                                  <tr key={objective.id}>
                                     <td>{objective?.content}</td>
                                   </tr>
                                 );
@@ -109,8 +112,11 @@ export const PDFTemplete = (props: Props) => {
                             <p> </p>
                             <Table borderless>
                               {section.objective?.items?.map((objective) => {
+                                if (!objective?.id) {
+                                  return null;
+                                }
                                 return (
-                                  <tr>
+                                  <tr key={objective?.id}>
                                     <td>{objective?.priority}</td>
                                   </tr>
                                 );
@@ -122,8 +128,11 @@ export const PDFTemplete = (props: Props) => {
                             <p> </p>
                             <Table borderless>
                               {section?.objective?.items?.map((objective) => {
+                                if (!objective?.id) {
+                                  return null;
+                                }
                                 return (
-                                  <tr>
+                                  <tr key={objective?.id}>
                                     <td>{objective?.result}</td>
                                   </tr>
                                 );
@@ -134,8 +143,11 @@ export const PDFTemplete = (props: Props) => {
                             <p></p>
                             <Table borderless>
                               {section?.objective?.items?.map((objective) => {
+                                if (!objective?.id) {
+                                  return null;
+                                }
                                 return (
-                                  <tr>
+                                  <tr key={objective?.id}>
                                     <td>{objective?.selfEvaluation}</td>
                                   </tr>
                                 );
@@ -146,8 +158,11 @@ export const PDFTemplete = (props: Props) => {
                             <p></p>
                             <Table borderless>
                               {section?.objective?.items?.map((objective) => {
+                                if (!objective?.id) {
+                                  return null;
+                                }
                                 return (
-                                  <tr>
+                                  <tr key={objective?.id}>
                                     <td>{objective?.lastEvaluation}</td>
                                   </tr>
                                 );

@@ -20,11 +20,15 @@ export default function (props: Props) {
       </thead>
       <tbody>
         {props.data?.map((row) => {
+          if (!row.id) {
+            return null;
+          }
           return (
             <RowListGroup
               link={row.link}
               groupLocalId={row.groupLocalId}
               groupName={row.groupName}
+              key={row.id}
             />
           );
         })}

@@ -6,6 +6,7 @@ export type AdminListGroupRowType = {
   link: LinkType;
   groupLocalId: string;
   groupName: string;
+  id?: string;
 };
 
 export default function (props: AdminListGroupRowType) {

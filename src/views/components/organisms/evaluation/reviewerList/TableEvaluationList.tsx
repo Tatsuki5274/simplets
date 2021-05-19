@@ -27,6 +27,7 @@ export type TableEvaluationListType = {
     label: string;
     dest: string;
   };
+  username: string; // ユニークキー
 };
 
 type Props = {
@@ -55,8 +56,11 @@ export default function (props: Props) {
         </thead>
         <tbody>
           {props.data.map((evaluationList) => {
+            if (!evaluationList?.username) {
+              return null;
+            }
             return (
-              <tr>
+              <tr key={evaluationList?.username}>
                 <TableBodyCell>{evaluationList?.groupName || ""}</TableBodyCell>
                 <TableBodyCell>{evaluationList?.name || ""}</TableBodyCell>
                 <TableBodyCell>{evaluationList?.status || ""}</TableBodyCell>

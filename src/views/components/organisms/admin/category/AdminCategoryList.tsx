@@ -28,6 +28,7 @@ export default function (props: Props) {
               categoryName={row.categoryName}
               companyId={row.companyId}
               id={row.id}
+              key={row.id}
             />
           );
         })}

@@ -14,9 +14,9 @@ type Props = {
 export default function (props: Props) {
   return props.data ? (
     <Styled>
-      {props.data.map((links) => {
+      {props.data.map((links, index) => {
         return (
-          <SidebarContent>
+          <SidebarContent key={index}>
             <SidebarManager links={links} />
           </SidebarContent>
         );

@@ -122,7 +122,12 @@ export default function () {
                     sheet.reviewee === comSheet.reviewee
                   );
                 })?.overAllEvaluation || null;
-              if (sheet.year && sheet.statusValue && sheet.revieweeEmployee) {
+              if (
+                sheet.year &&
+                sheet.statusValue &&
+                sheet.revieweeEmployee &&
+                sheet.reviewee
+              ) {
                 ret = {
                   data: {
                     groupId: sheet.groupID || "", // unsafe
@@ -140,6 +145,7 @@ export default function () {
                   overAllEvaluation: sheet.overAllEvaluation || null,
                   lastYearsAgoOverAllEvaluation: lastYearsAgoOverAllEvaluation,
                   twoYearsAgoOverAllEvaluation: twoYearsAgoOverAllEvaluation,
+                  username: sheet.reviewee,
                 };
               }
               return ret;
