@@ -160,7 +160,7 @@ export function parseToJsDateFromAWSDate(dateStr: string): Date | null {
     const date: Date = new Date(dateStr);
     return date;
   } catch (e) {
-    console.error("parse exception", e);
+    // console.error("parse exception", e);
     return null;
   }
 }
@@ -211,7 +211,7 @@ export function CountLine(str: string): number {
  * @param companyId 会社ID
  * @returns 所属長,部門長,参照者を返却
  */
-export async function getReviewers(reviewee: string, companyId: string) {
+export async function getReviewers(reviewee: string) {
   type ResultType = {
     topReviewers: string[] | null;
     secondReviewers: string[] | null;

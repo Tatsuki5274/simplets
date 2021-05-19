@@ -36,7 +36,7 @@ export const RevieweeSheetObjectiveModalStatus1 = (props: Props) => {
           expDoneDate: Yup.date()
             .min(
               Yup.ref("expStartDate"),
-              ({ min }) => `開始予定日より後の日付を入力してください`
+              () => `開始予定日より後の日付を入力してください`
             )
             .typeError("yyyy-mm-dd形式で入力してください")
             .required("必須入力です"),

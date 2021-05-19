@@ -37,7 +37,7 @@ export const RevieweeSheetObjectiveEditableStatus1 = (props: Props) => {
     expDoneDateStyle = "";
   }
 
-  function HandleChange(event: any) {
+  function HandleChange() {
     if (objective) {
       props.setModalObjective(objective);
     }
@@ -70,7 +70,7 @@ export const RevieweeSheetObjectiveEditableStatus1 = (props: Props) => {
   }
 
   //objectiveの削除
-  async function handleDeleteObjective(event: any) {
+  async function handleDeleteObjective() {
     if (objective) {
       if (window.confirm("目標を削除しますか？")) {
         if (objective.id) {

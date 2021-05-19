@@ -30,7 +30,6 @@ import { LinkType } from "views/components/atoms/Types";
 import { createSidebarElements } from "lib/util";
 import { getEmployee } from "graphql/queries";
 import CustomSignIn from "views/auth/signIn";
-import { string } from "yup";
 Amplify.configure(awsconfig);
 
 // export type Sheet = Omit<Exclude<APIt.GetSheetQuery['getSheet'], null>, '__typename'>;

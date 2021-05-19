@@ -39,7 +39,8 @@ export const PDFTemplete = (props: Props) => {
         unit: "px",
       }}
     >
-      {({ toPdf, targetRef }: { toPdf: any; targetRef: any }) => (
+      {/* {({ toPdf, targetRef }: { toPdf: any; targetRef: any }) => ( */}
+      {() => (
         <div>
           {/* <Button
             onClick={() => history.goBack()}
@@ -47,7 +48,8 @@ export const PDFTemplete = (props: Props) => {
           >戻る</Button> */}
           {/* <Button onClick={toPdf} className={buttonComponentStyle}>PDFをダウンロード</Button> */}
 
-          <div ref={targetRef} className={style.PDFScreenStyle}>
+          {/* <div ref={targetRef} className={style.PDFScreenStyle}> */}
+          <div className={style.PDFScreenStyle}>
             <Row>
               <Col xs={6} sm={6} md={6} lg={6} xl={6}>
                 <h4>{props.sheet.year}年度 業績評価シート</h4>

@@ -268,10 +268,7 @@ function ListPerformanceEvalution() {
           listI
         );
         if (categorys) {
-          const reviewers = await getReviewers(
-            currentUser.username,
-            currentUser.attributes["custom:companyId"]
-          );
+          const reviewers = await getReviewers(currentUser.username);
           const managers = reviewers.referencer;
           const topReviewers = reviewers.topReviewers;
           const secondReviewers = reviewers.secondReviewers;

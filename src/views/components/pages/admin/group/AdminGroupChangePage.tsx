@@ -1,5 +1,5 @@
 import { GetGroupQueryVariables, Group } from "API";
-import { ErrorContext, HeaderContext, SidebarContext, UserContext } from "App";
+import { ErrorContext, HeaderContext, SidebarContext } from "App";
 import { getGroup } from "graphql/queries";
 import { GroupDao } from "lib/dao/groupDao";
 import React, { useContext, useEffect, useState } from "react";
