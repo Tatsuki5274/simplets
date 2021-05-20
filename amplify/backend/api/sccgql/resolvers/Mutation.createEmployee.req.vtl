@@ -9,12 +9,12 @@ $util.qr($context.args.input.put("updatedAt", $util.defaultIfNull($ctx.args.inpu
 #set( $hasSeenSomeKeyArg = false )
 #set( $keyFieldNames = ["manager", "isDeleted"] )
 ## [開始] 管理者権限の確認. **
-#set( $isCompanyAdmin = $ctx.identity.claims.get("custom:isCompanyAdmin"))
-#if($util.isNull($isCompanyAdmin))
-  $util.error("isCompanyAdmin is null.")
-#elseif($isCompanyAdmin == "false")
-  $util.error("isCompanyAdmin is false.")
-#end
+## #set( $isCompanyAdmin = $ctx.identity.claims.get("custom:isCompanyAdmin"))
+## #if($util.isNull($isCompanyAdmin))
+##  $util.error("isCompanyAdmin is null.")
+## #elseif($isCompanyAdmin == "false")
+##  $util.error("isCompanyAdmin is false.")
+## #end
 ## [終了] 管理者権限の確認. **
 #foreach( $keyFieldName in $keyFieldNames )
 #if( $ctx.args.input.containsKey("$keyFieldName") ) #set( $hasSeenSomeKeyArg = true ) #end

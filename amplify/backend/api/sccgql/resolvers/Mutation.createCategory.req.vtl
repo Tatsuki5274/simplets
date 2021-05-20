@@ -8,12 +8,12 @@ $util.qr($context.args.input.put("updatedAt", $util.defaultIfNull($ctx.args.inpu
 ## [End] Set default values. **
 
 ## [開始] 管理者権限の確認. **
-#set( $isCompanyAdmin = $ctx.identity.claims.get("custom:isCompanyAdmin"))
-#if($util.isNull($isCompanyAdmin))
-  $util.error("isCompanyAdmin is null.")
-#elseif($isCompanyAdmin == "false")
-  $util.error("isCompanyAdmin is false.")
-#end
+## #set( $isCompanyAdmin = $ctx.identity.claims.get("custom:isCompanyAdmin"))
+## #if($util.isNull($isCompanyAdmin))
+##  $util.error("isCompanyAdmin is null.")
+## #elseif($isCompanyAdmin == "false")
+##  $util.error("isCompanyAdmin is false.")
+## #end
 ## [終了] 管理者権限の確認. **
 
 ## [Start] Prepare DynamoDB PutItem Request. **
