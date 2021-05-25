@@ -58,6 +58,8 @@ export const PDFTemplete = (props: Props) => {
             <Row>
               <Col xs={6} sm={6} md={6} lg={6} xl={6}>
                 <Table bordered className={style.PDFTableStyle}>
+                  <th>部署名</th>
+                  <td>{props.sheet.sheetGroupName}</td>
                   <th>本人氏名</th>
                   <td>
                     {props.sheet.revieweeEmployee?.lastName}{" "}
