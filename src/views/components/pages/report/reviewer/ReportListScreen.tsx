@@ -69,7 +69,7 @@ export default function () {
                 username: reviewee.username || "",
                 firlstName: reviewee.firstName || "",
                 lastName: reviewee.lastName || "",
-                groupNo: reviewee.groupID || "",
+                groupNo: reviewee.group?.no || "",
                 groupName: reviewee.group?.name || "",
                 groupId: reviewee.groupID || "", // unsafe
                 sub: reviewee.sub || "",
