@@ -10,6 +10,9 @@ export type AdminListGroupRowType = {
 };
 
 export default function (props: AdminListGroupRowType) {
+  if (props.link.dest === null) {
+    return null;
+  }
   return (
     <tr>
       <td>

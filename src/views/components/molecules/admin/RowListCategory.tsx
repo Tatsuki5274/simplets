@@ -19,6 +19,9 @@ type Props = AdminListCategoryRowType;
 
 export default function (props: Props) {
   const setError = useContext(ErrorContext);
+  if (!props.link.dest) {
+    return null;
+  }
   return (
     <tr>
       <td>

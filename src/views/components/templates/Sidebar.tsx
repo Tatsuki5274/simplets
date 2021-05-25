@@ -6,7 +6,7 @@ type Props = {
   data:
     | {
         label: string;
-        dest: string;
+        dest: string | null;
       }[][]
     | null;
 };

@@ -64,16 +64,24 @@ export function getThisYear(startMonth = 1): number {
 export function createSidebarElements(
   isManager: boolean,
   isAdmin: boolean
-): { label: string; dest: string }[][] {
+): { label: string; dest: string | null }[][] {
   const today = new Date();
   const results = [
     [
+      {
+        label: "- 目標設定 -",
+        dest: null,
+      },
       {
         label: "業績評価一覧",
         dest: routeBuilder.revieweeListPath(),
       },
     ],
     [
+      {
+        label: "- 作業報告 -",
+        dest: null,
+      },
       {
         label: "作業報告入力",
         dest: routeBuilder.revieweeReportCalendarPath(today),
@@ -103,6 +111,10 @@ export function createSidebarElements(
   ];
 
   const adminContents = [
+    {
+      label: "- マスター管理 -",
+      dest: null,
+    },
     {
       label: "社員管理",
       dest: routeBuilder.adminEmployeeListPath(),

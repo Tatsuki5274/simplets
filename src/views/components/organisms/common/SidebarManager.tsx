@@ -1,11 +1,12 @@
 import React from "react";
 import styled from "styled-components";
+import Text from "views/components/atoms/Text";
 import LinkMenu from "views/components/molecules/LinkMenu";
 
 type Props = {
   links: {
     label: string;
-    dest: string;
+    dest: string | null;
   }[];
 };
 
@@ -23,7 +24,11 @@ export default function (props: Props) {
   return (
     <Styled>
       {props.links.map((link, index) => {
-        return (
+        return link.dest === null ? (
+          <StyledText>
+            <Text>{link.label}</Text>
+          </StyledText>
+        ) : (
           <Link key={index}>
             <LinkMenu data={link} />
           </Link>
@@ -32,3 +37,7 @@ export default function (props: Props) {
     </Styled>
   );
 }
+
+const StyledText = styled.div({
+  fontSize: "10px",
+});

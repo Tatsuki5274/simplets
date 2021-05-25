@@ -10,5 +10,5 @@ export type Superior = {
 
 export type LinkType = {
   label: string;
-  dest: string;
+  dest: string | null;
 };
