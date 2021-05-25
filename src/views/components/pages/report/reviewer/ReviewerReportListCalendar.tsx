@@ -31,6 +31,7 @@ export default function (props: Props) {
           date: {
             beginsWith: props.match.params.date,
           },
+          limit: 1000,
         };
         const reports = await ReportDao.listCompanyDate(
           listReportsCompanyDate,
