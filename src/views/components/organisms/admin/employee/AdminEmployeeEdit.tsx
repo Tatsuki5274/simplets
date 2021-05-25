@@ -6,10 +6,16 @@ import {
   ListEmployeesCompanyQueryVariables,
   ListSheetsRevieweeQueryVariables,
   UpdateEmployeeInput,
+  UpdateSheetInput,
 } from "API";
-import { ErrorContext } from "App";
+import { EmployeeContext, ErrorContext } from "App";
 import { Formik } from "formik";
-import { deleteEmployee, deleteSheet, updateEmployee } from "graphql/mutations";
+import {
+  deleteEmployee,
+  deleteSheet,
+  updateEmployee,
+  updateSheet,
+} from "graphql/mutations";
 import { listEmployeesCompany, listSheetsReviewee } from "graphql/queries";
 import { EmployeeDao } from "lib/dao/employeeDao";
 import { SheetDao } from "lib/dao/sheetDao";
@@ -59,6 +65,7 @@ type Props = {
 export default function (props: Props) {
   const setError = useContext(ErrorContext);
   const history = useHistory();
+  const currentEmployee = useContext(EmployeeContext);
 
   return (
     <Formik
@@ -93,33 +100,96 @@ export default function (props: Props) {
           ].value,
       }}
       onSubmit={async (values) => {
-        if (window.confirm("変更内容を保存してよろしいですか？")) {
-          const updateI: UpdateEmployeeInput = {
-            companyID: props.employee.companyId,
-            username: props.employee.username,
-            lastName: values.lastName,
-            firstName: values.firstName,
-            groupID: values.groupList,
-            grade: values.grade,
-            isCompanyAdmin: values.isAdmin === "true" ? true : false,
-            superiorUsername: values.superiorList,
-            manager:
-              values.manager === "MANAGER"
-                ? EmployeeType.MANAGER
-                : values.manager === "SUPER_MANAGER"
-                ? EmployeeType.SUPER_MANAGER
-                : values.manager === "NORMAL"
-                ? EmployeeType.NORMAL
-                : null,
-            isDeleted: props.employee.isDeleted,
-          };
-          const updateItem = await EmployeeDao.update(updateEmployee, updateI);
-          if (updateItem) {
-            window.alert("社員情報を変更しました");
-            history.push(routeBuilder.adminEmployeeListPath());
-          } else {
-            setError("社員情報の更新に失敗しました");
+        try {
+          if (window.confirm("変更内容を保存してよろしいですか？")) {
+            const updateI: UpdateEmployeeInput = {
+              companyID: props.employee.companyId,
+              username: props.employee.username,
+              lastName: values.lastName,
+              firstName: values.firstName,
+              groupID: values.groupList,
+              grade: values.grade,
+              isCompanyAdmin: values.isAdmin === "true" ? true : false,
+              superiorUsername: values.superiorList,
+              manager:
+                values.manager === "MANAGER"
+                  ? EmployeeType.MANAGER
+                  : values.manager === "SUPER_MANAGER"
+                  ? EmployeeType.SUPER_MANAGER
+                  : values.manager === "NORMAL"
+                  ? EmployeeType.NORMAL
+                  : null,
+              isDeleted: props.employee.isDeleted,
+            };
+            const updateItem = await EmployeeDao.update(
+              updateEmployee,
+              updateI
+            );
+            if (updateItem) {
+              // シートの等級情報を更新
+              if (
+                props.employee.grade !== values.grade ||
+                props.employee.groupId !== values.groupList
+              ) {
+                const today: Date = new Date();
+                const startMonth = currentEmployee?.company?.startMonth;
+                if (startMonth) {
+                  const dateMonth = startMonth - 1;
+                  const targetYear =
+                    today.getMonth() < dateMonth
+                      ? today.getFullYear() - 1
+                      : today.getFullYear();
+                  const listI: ListSheetsRevieweeQueryVariables = {
+                    sub: props.employee.sub,
+                    year: {
+                      eq: targetYear,
+                    },
+                  };
+                  const listItem = await SheetDao.listReviewee(
+                    listSheetsReviewee,
+                    listI
+                  );
+                  if (listItem && listItem.length > 0) {
+                    if (listItem.length > 1) {
+                      // 今年度のシートが複数作成されている場合
+                      throw new RangeError(
+                        "今年度のシート情報が複数存在しています"
+                      );
+                    }
+                    if (!listItem[0].id) {
+                      // IDが入力されていない場合は不整合
+                      throw new TypeError("idに想定されていない値が含まれます");
+                    }
+                    const statusValue = listItem[0].statusValue || null;
+                    if (statusValue !== 14) {
+                      // 更新対象外であれば、更新処理を実施しない
+                      const updateI: UpdateSheetInput = {
+                        id: listItem[0].id,
+                        grade: values.grade,
+                        groupID: values.groupList,
+                        sheetGroupName: props.groups.find(
+                          (element) => element.value === values.groupList
+                        )?.label,
+                      };
+                      const updateItem = await SheetDao.update(
+                        updateSheet,
+                        updateI
+                      );
+                      if (!updateItem) {
+                        throw new TypeError("シート情報の更新に失敗しました");
+                      }
+                    }
+                  }
+                }
+              }
+              window.alert("社員情報を変更しました");
+              history.push(routeBuilder.adminEmployeeListPath());
+            } else {
+              setError("社員情報の更新に失敗しました");
+            }
           }
+        } catch (e) {
+          setError(e.message);
         }
       }}
     >
@@ -383,6 +453,10 @@ export default function (props: Props) {
               </ButtonNegative>
             </SpaceStyle>
           </table>
+
+          <p>
+            ※等級情報を変更すると、評価中の今期のシートの等級情報も変更されます。
+          </p>
         </form>
       )}
     </Formik>
