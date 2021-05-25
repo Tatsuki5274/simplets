@@ -17,6 +17,8 @@ import { ReviewerSheetDetailCareerEditable } from "../../components/career/edita
 import { ReviewerSheetDetailInterviewEditable } from "../../components/interview/editable";
 import { buttonComponentStyle } from "common/globalStyle.module.scss";
 import { routeBuilder } from "router";
+import { IOError, UserError } from "lib/exception";
+import { validateInterviewDate } from "lib/util";
 
 // type Props = {
 //     sheet: Sheet,
@@ -64,62 +66,107 @@ export const ReviewerSheetPagesStatus2 = () => {
                 InterviewMid3Date: sheet.InterviewMid3Date,
               }}
               onSubmit={async (values) => {
-                if (sheet && sheet.sub && sheet.year) {
-                  if (
-                    window.confirm(
-                      "目標承認が社員に通知されます。よろしいでしょうか。"
-                    )
-                  ) {
-                    const work = commandWorkFlow(Command.SUP1_APPLOVAL, sheet);
-                    const data: UpdateSheetInput = {
-                      id: sheet.id || "", // unsafe
-                      sub: sheet.sub,
-                      year: sheet.year,
-                      statusValue: work.sheet.statusValue,
-                      careerPlanComment: values.careerPlanComment,
-                      interviewPlanComment: values.interviewPlanComment,
-                      interviewPlanDate:
-                        values.interviewPlanDate !== ""
-                          ? values.interviewPlanDate
-                          : null,
-                      InterviewMid1Comment: values.InterviewMid1Comment,
-                      InterviewMid1Date:
-                        values.InterviewMid1Date !== ""
-                          ? values.InterviewMid1Date
-                          : null,
-                      InterviewMid2Comment: values.InterviewMid2Comment,
-                      InterviewMid2Date:
-                        values.InterviewMid2Date !== ""
-                          ? values.InterviewMid2Date
-                          : null,
-                      InterviewMid3Comment: values.InterviewMid3Comment,
-                      InterviewMid3Date:
-                        values.InterviewMid3Date !== ""
-                          ? values.InterviewMid3Date
-                          : null,
-                    };
-                    const updatedSheet = await SheetDao.update(
-                      updateSheet,
-                      data
-                    );
+                try {
+                  if (sheet && sheet.sub && sheet.year) {
+                    if (
+                      window.confirm(
+                        "目標承認が社員に通知されます。よろしいでしょうか。"
+                      )
+                    ) {
+                      // インタビュー実施記録の目標設定の実施日時の形式を確認
+                      if (
+                        values.interviewPlanDate &&
+                        validateInterviewDate(values.interviewPlanDate)
+                      ) {
+                        throw new UserError(
+                          "インタビュー実施記録の目標設定の実施日時がyyyy-mm-dd形式で入力されていません。"
+                        );
+                      }
+                      // インタビュー実施記録の中間#1の実施日時の形式を確認
+                      if (
+                        values.InterviewMid1Date &&
+                        validateInterviewDate(values.InterviewMid1Date)
+                      ) {
+                        throw new UserError(
+                          "インタビュー実施記録の中間#1の実施日時がyyyy-mm-dd形式で入力されていません。"
+                        );
+                      }
+                      // インタビュー実施記録の中間#2の実施日時の形式を確認
+                      if (
+                        values.InterviewMid2Date &&
+                        validateInterviewDate(values.InterviewMid2Date)
+                      ) {
+                        throw new UserError(
+                          "インタビュー実施記録の中間#2の実施日時がyyyy-mm-dd形式で入力されていません。"
+                        );
+                      }
+                      // インタビュー実施記録の中間#3の実施日時の形式を確認
+                      if (
+                        values.InterviewMid3Date &&
+                        validateInterviewDate(values.InterviewMid3Date)
+                      ) {
+                        throw new UserError(
+                          "インタビュー実施記録の中間#3の実施日時がyyyy-mm-dd形式で入力されていません。"
+                        );
+                      }
 
-                    if (updatedSheet) {
-                      if (work.mailObject) {
-                        sendEmailMutation(work.mailObject);
+                      const work = commandWorkFlow(
+                        Command.SUP1_APPLOVAL,
+                        sheet
+                      );
+                      const data: UpdateSheetInput = {
+                        id: sheet.id || "", // unsafe
+                        sub: sheet.sub,
+                        year: sheet.year,
+                        statusValue: work.sheet.statusValue,
+                        careerPlanComment: values.careerPlanComment,
+                        interviewPlanComment: values.interviewPlanComment,
+                        interviewPlanDate:
+                          values.interviewPlanDate !== ""
+                            ? values.interviewPlanDate
+                            : null,
+                        InterviewMid1Comment: values.InterviewMid1Comment,
+                        InterviewMid1Date:
+                          values.InterviewMid1Date !== ""
+                            ? values.InterviewMid1Date
+                            : null,
+                        InterviewMid2Comment: values.InterviewMid2Comment,
+                        InterviewMid2Date:
+                          values.InterviewMid2Date !== ""
+                            ? values.InterviewMid2Date
+                            : null,
+                        InterviewMid3Comment: values.InterviewMid3Comment,
+                        InterviewMid3Date:
+                          values.InterviewMid3Date !== ""
+                            ? values.InterviewMid3Date
+                            : null,
+                      };
+                      const updatedSheet = await SheetDao.update(
+                        updateSheet,
+                        data
+                      );
+
+                      if (updatedSheet) {
+                        if (work.mailObject) {
+                          sendEmailMutation(work.mailObject);
+                        } else {
+                          setError("メールの作成に失敗しました");
+                        }
+                        if (setSheet) {
+                          setSheet({ ...updatedSheet });
+                        }
+                        // updatedSheet = await statusManager.exec(updatedSheet, "proceed");
+                        // setSheet({...updatedSheet});
                       } else {
-                        setError("メールの作成に失敗しました");
+                        setError("フォームデータの登録に失敗しました");
+                        throw new IOError("フォームデータの登録に失敗しました");
                       }
-                      if (setSheet) {
-                        setSheet({ ...updatedSheet });
-                      }
-                      // updatedSheet = await statusManager.exec(updatedSheet, "proceed");
-                      // setSheet({...updatedSheet});
-                    } else {
-                      setError("フォームデータの登録に失敗しました");
                     }
+                  } else {
+                    setError("評価シートの特定に失敗しました");
                   }
-                } else {
-                  setError("評価シートの特定に失敗しました");
+                } catch (e) {
+                  setError(e.message);
                 }
               }}
             >

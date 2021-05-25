@@ -307,3 +307,16 @@ export function formatSheetCheckDate(dateStr: string): string {
   );
   return formatDate;
 }
+
+/**
+ *
+ * @param dateStr 日付
+ * @returns ブール値を返却
+ */
+export function validateInterviewDate(dateStr: string): boolean {
+  if (dateStr !== "" && !dateStr.match(/^\d{4}-\d{2}-\d{2}$/)) {
+    return true;
+  } else {
+    return false;
+  }
+}
