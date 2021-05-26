@@ -94,13 +94,7 @@ export function CreateReportScreen(props: Props) {
         }
       }
     })();
-  }, [
-    currentEmployee,
-    props.match.params.date,
-    currentUser,
-    setError,
-    mockData.workStatusList,
-  ]);
+  }, [currentEmployee, props.match.params.date, currentUser, setError]);
 
   if (!reportData) {
     return <div>Loading...</div>;

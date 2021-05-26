@@ -1,7 +1,7 @@
 import { ErrorMessage, Formik } from "formik";
 import { createReport } from "graphql/mutations";
 import { ReportDao } from "lib/dao/reportDao";
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import Text from "views/components/atoms/Text";
 import TextArea from "views/components/atoms/TextArea";
 import CommandButton from "views/components/molecules/CommandButton";
@@ -15,6 +15,7 @@ import { routeBuilder } from "router";
 import ErrorText from "views/components/atoms/ErrorText";
 import RequiredLabel from "views/components/molecules/RequiredLabel";
 import { useHistory } from "react-router";
+import AsyncButton from "views/components/atoms/AsyncButton";
 
 export type RevieweeCreateReportType = {
   date: string;
@@ -56,6 +57,7 @@ const validate = (values: {
 export default function (props: Props) {
   const history = useHistory();
   const setError = useContext(ErrorContext);
+  const [isLoading, setIsLoading] = useState(false);
   return (
     <Formik
       initialValues={{
@@ -70,6 +72,7 @@ export default function (props: Props) {
       // })}
       validate={validate}
       onSubmit={async (values) => {
+        setIsLoading(true);
         const createI: APIt.CreateReportInput = {
           sub: props.data.sub,
           companyID: props.data.companyID,
@@ -91,6 +94,7 @@ export default function (props: Props) {
         } else {
           setError("報告書の保存に失敗しました");
         }
+        setIsLoading(false);
       }}
     >
       {(formik) => (
@@ -155,10 +159,12 @@ export default function (props: Props) {
             />
           </ReportStyle>
 
-          <CommandButton type="submit">保存</CommandButton>
+          <CommandButton type="submit" disabled={isLoading}>
+            保存
+          </CommandButton>
           {props.data.superior && props.data.superior.email ? (
             <SpaceStyle>
-              <CommandButton
+              <AsyncButton
                 onClick={async () => {
                   if (
                     window.confirm(
@@ -248,7 +254,7 @@ ${routeBuilder.reviewerReportCommentPath(createdReport.id || "", hostUrl)}
                 }}
               >
                 所属長へ送信
-              </CommandButton>
+              </AsyncButton>
             </SpaceStyle>
           ) : null}
         </form>
