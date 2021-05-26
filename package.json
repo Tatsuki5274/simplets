@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "@apollo/client": "^3.3.6",
-    "@aws-amplify/ui-react": "^0.2.16",
+    "@aws-amplify/ui-react": "^1.0.7",
     "@fullcalendar/core": "^5.5.1",
     "@fullcalendar/daygrid": "^5.5.0",
     "@fullcalendar/interaction": "^5.5.0",

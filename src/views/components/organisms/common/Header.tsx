@@ -39,7 +39,7 @@ export default function (props: Props) {
               {(props.lastName || "") + (props.firstName || "")}
             </TextHeader>
           </TextStyle>
-          <AmplifySignOut button-text="ログアウト"></AmplifySignOut>
+          <AmplifySignOut buttonText="ログアウト"></AmplifySignOut>
         </Navbar.Collapse>
       </Navbar>
     </Styled>
