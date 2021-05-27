@@ -60,7 +60,7 @@ export default function (props: Props) {
       setReviewees(generateRevieweeLabel(props.reviewee));
     } else {
       const filteredReviewees = props.reviewee.filter((reviewee) => {
-        return reviewee.groupNo === value;
+        return reviewee.groupId === value;
       });
       const reviewees = generateRevieweeLabel(filteredReviewees);
       if (reviewees && reviewees.length === 0) {
