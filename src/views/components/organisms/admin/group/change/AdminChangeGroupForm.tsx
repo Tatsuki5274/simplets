@@ -28,14 +28,14 @@ export default function (props: Props) {
       initialValues={{
         groupName: props.groupName,
       }}
-      onSubmit={(values) => {
+      onSubmit={async (values) => {
         const updateI: UpdateGroupInput = {
           id: props.id,
           companyID: props.companyId,
           no: props.groupLocalId,
           name: values.groupName,
         };
-        const updateItem = GroupDao.update(updateGroup, updateI);
+        const updateItem = await GroupDao.update(updateGroup, updateI);
         if (updateItem) {
           window.alert("部署情報の更新が完了しました");
           history.push(routeBuilder.adminGroupListPath());
