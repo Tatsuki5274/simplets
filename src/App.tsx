@@ -100,7 +100,7 @@ export type approvalStatusManagerMutationResult = {
 // `;
 
 function App() {
-  const [user, setUser] = useState<any>(null);
+  const [user, setUser] = useState<User | null>(null);
   const [employee, setEmployee] = useState<Employee | null>(null);
   const [header, setHeader] = useState<HeaderProps | null>(null);
   const [sidebar, setSidebar] = useState<LinkType[][] | null>(null);
@@ -109,7 +109,15 @@ function App() {
   useEffect(() => {
     (async () => {
       const user = await Auth.currentAuthenticatedUser();
-      setUser(user);
+      const result: User = {
+        attributes: {
+          "custom:companyId": user.attributes["custom:companyId"],
+          "custom:isCompanyAdmin": user.attributes["custom:isCompanyAdmin"],
+          sub: user.attributes["sub"],
+        },
+        username: user.username,
+      };
+      setUser(result);
     })();
   }, []);
 

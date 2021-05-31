@@ -364,7 +364,7 @@ export default function (props: Props) {
                             //対象社員のシート情報の削除
                             let deletedNum = 0;
                             sheetItems.map(async (sheet, index) => {
-                              if (sheet.sub && sheet.year) {
+                              if (sheet.sub && sheet.year && sheet.id) {
                                 const deleteSheetI: DeleteSheetInput = {
                                   id: sheet.id,
                                 };
