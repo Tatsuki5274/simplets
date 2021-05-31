@@ -100,7 +100,7 @@ export type UpdateCompanyInput = {
 };
 
 export type DeleteCompanyInput = {
-  id?: string | null,
+  id: string,
 };
 
 export type DeleteEmployeeInput = {
@@ -223,7 +223,7 @@ export type ModelGroupConditionInput = {
 };
 
 export type DeleteGroupInput = {
-  id?: string | null,
+  id: string,
 };
 
 export type UpdateCategoryInput = {
@@ -253,11 +253,11 @@ export type Category = {
 };
 
 export type DeleteCategoryInput = {
-  id?: string | null,
+  id: string,
 };
 
 export type DeleteSheetInput = {
-  id?: string | null,
+  id: string,
 };
 
 export type ModelSheetConditionInput = {
@@ -408,7 +408,7 @@ export type ModelSectionConditionInput = {
 };
 
 export type DeleteSectionInput = {
-  id?: string | null,
+  id: string,
 };
 
 export type UpdateObjectiveInput = {
@@ -450,11 +450,11 @@ export type ModelObjectiveConditionInput = {
 };
 
 export type DeleteObjectiveInput = {
-  id?: string | null,
+  id: string,
 };
 
 export type DeleteReportInput = {
-  id?: string | null,
+  id: string,
 };
 
 export type ModelReportConditionInput = {

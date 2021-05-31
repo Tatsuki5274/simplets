@@ -2,31 +2,28 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const getReport = /* GraphQL */ `
-  query GetReport($sub: ID!, $date: AWSDate!) {
-    getReport(sub: $sub, date: $date) {
-      sub
-      date
-      reviewee
-      reviewer
-      companyID
-      referencer
-      revieweeComments {
-        work
-        other
-        status
-      }
-      reviewerComments {
-        superior
-      }
-      workStatus
-      createdAt
-      updatedAt
-      revieweeEmployee {
-        companyID
+export const listEmployeesCompany = /* GraphQL */ `
+  query ListEmployeesCompany(
+    $companyID: ID
+    $no: ModelStringKeyConditionInput
+    $sortDirection: ModelSortDirection
+    $filter: ModelEmployeeFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listEmployeesCompany(
+      companyID: $companyID
+      no: $no
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
         username
-        localID
-        employeeGroupLocalId
+        companyID
+        no
+        groupID
         superiorUsername
         firstName
         lastName
@@ -48,10 +45,10 @@ export const getReport = /* GraphQL */ `
           updatedAt
         }
         superior {
-          companyID
           username
-          localID
-          employeeGroupLocalId
+          companyID
+          no
+          groupID
           superiorUsername
           firstName
           lastName
@@ -73,10 +70,10 @@ export const getReport = /* GraphQL */ `
             updatedAt
           }
           superior {
-            companyID
             username
-            localID
-            employeeGroupLocalId
+            companyID
+            no
+            groupID
             superiorUsername
             firstName
             lastName
@@ -98,10 +95,10 @@ export const getReport = /* GraphQL */ `
               updatedAt
             }
             superior {
-              companyID
               username
-              localID
-              employeeGroupLocalId
+              companyID
+              no
+              groupID
               superiorUsername
               firstName
               lastName
@@ -123,10 +120,10 @@ export const getReport = /* GraphQL */ `
                 updatedAt
               }
               superior {
-                companyID
                 username
-                localID
-                employeeGroupLocalId
+                companyID
+                no
+                groupID
                 superiorUsername
                 firstName
                 lastName
@@ -148,10 +145,10 @@ export const getReport = /* GraphQL */ `
                   updatedAt
                 }
                 superior {
-                  companyID
                   username
-                  localID
-                  employeeGroupLocalId
+                  companyID
+                  no
+                  groupID
                   superiorUsername
                   firstName
                   lastName
@@ -165,66 +162,1556 @@ export const getReport = /* GraphQL */ `
                   updatedAt
                 }
                 group {
+                  id
                   companyID
-                  localID
+                  no
                   name
                   createdAt
                   updatedAt
                 }
               }
               group {
+                id
                 companyID
-                localID
+                no
                 name
                 createdAt
                 updatedAt
               }
             }
             group {
+              id
               companyID
-              localID
+              no
               name
               createdAt
               updatedAt
             }
           }
           group {
+            id
             companyID
-            localID
+            no
             name
             createdAt
             updatedAt
           }
         }
         group {
+          id
           companyID
-          localID
+          no
           name
           createdAt
           updatedAt
         }
       }
+      nextToken
     }
   }
 `;
-export const listReports = /* GraphQL */ `
-  query ListReports(
-    $sub: ID
-    $date: ModelStringKeyConditionInput
-    $filter: ModelReportFilterInput
+export const listEmployeesManager = /* GraphQL */ `
+  query ListEmployeesManager(
+    $companyID: ID
+    $managerIsDeleted: ModelEmployeeEmployeeByCompanyManagerCompositeKeyConditionInput
+    $sortDirection: ModelSortDirection
+    $filter: ModelEmployeeFilterInput
     $limit: Int
     $nextToken: String
-    $sortDirection: ModelSortDirection
   ) {
-    listReports(
-      sub: $sub
-      date: $date
+    listEmployeesManager(
+      companyID: $companyID
+      managerIsDeleted: $managerIsDeleted
+      sortDirection: $sortDirection
       filter: $filter
       limit: $limit
       nextToken: $nextToken
-      sortDirection: $sortDirection
     ) {
       items {
+        username
+        companyID
+        no
+        groupID
+        superiorUsername
+        firstName
+        lastName
+        grade
+        email
+        sub
+        manager
+        isCompanyAdmin
+        isDeleted
+        createdAt
+        updatedAt
+        company {
+          id
+          name
+          startMonth
+          shortName
+          url
+          createdAt
+          updatedAt
+        }
+        superior {
+          username
+          companyID
+          no
+          groupID
+          superiorUsername
+          firstName
+          lastName
+          grade
+          email
+          sub
+          manager
+          isCompanyAdmin
+          isDeleted
+          createdAt
+          updatedAt
+          company {
+            id
+            name
+            startMonth
+            shortName
+            url
+            createdAt
+            updatedAt
+          }
+          superior {
+            username
+            companyID
+            no
+            groupID
+            superiorUsername
+            firstName
+            lastName
+            grade
+            email
+            sub
+            manager
+            isCompanyAdmin
+            isDeleted
+            createdAt
+            updatedAt
+            company {
+              id
+              name
+              startMonth
+              shortName
+              url
+              createdAt
+              updatedAt
+            }
+            superior {
+              username
+              companyID
+              no
+              groupID
+              superiorUsername
+              firstName
+              lastName
+              grade
+              email
+              sub
+              manager
+              isCompanyAdmin
+              isDeleted
+              createdAt
+              updatedAt
+              company {
+                id
+                name
+                startMonth
+                shortName
+                url
+                createdAt
+                updatedAt
+              }
+              superior {
+                username
+                companyID
+                no
+                groupID
+                superiorUsername
+                firstName
+                lastName
+                grade
+                email
+                sub
+                manager
+                isCompanyAdmin
+                isDeleted
+                createdAt
+                updatedAt
+                company {
+                  id
+                  name
+                  startMonth
+                  shortName
+                  url
+                  createdAt
+                  updatedAt
+                }
+                superior {
+                  username
+                  companyID
+                  no
+                  groupID
+                  superiorUsername
+                  firstName
+                  lastName
+                  grade
+                  email
+                  sub
+                  manager
+                  isCompanyAdmin
+                  isDeleted
+                  createdAt
+                  updatedAt
+                }
+                group {
+                  id
+                  companyID
+                  no
+                  name
+                  createdAt
+                  updatedAt
+                }
+              }
+              group {
+                id
+                companyID
+                no
+                name
+                createdAt
+                updatedAt
+              }
+            }
+            group {
+              id
+              companyID
+              no
+              name
+              createdAt
+              updatedAt
+            }
+          }
+          group {
+            id
+            companyID
+            no
+            name
+            createdAt
+            updatedAt
+          }
+        }
+        group {
+          id
+          companyID
+          no
+          name
+          createdAt
+          updatedAt
+        }
+      }
+      nextToken
+    }
+  }
+`;
+export const listGroupsCompany = /* GraphQL */ `
+  query ListGroupsCompany(
+    $companyID: ID
+    $no: ModelStringKeyConditionInput
+    $sortDirection: ModelSortDirection
+    $filter: ModelGroupFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listGroupsCompany(
+      companyID: $companyID
+      no: $no
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        companyID
+        no
+        name
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const listCategorysCompany = /* GraphQL */ `
+  query ListCategorysCompany(
+    $companyID: ID
+    $no: ModelStringKeyConditionInput
+    $sortDirection: ModelSortDirection
+    $filter: ModelCategoryFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listCategorysCompany(
+      companyID: $companyID
+      no: $no
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        companyID
+        no
+        name
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const listSheetsReviewee = /* GraphQL */ `
+  query ListSheetsReviewee(
+    $sub: String
+    $year: ModelIntKeyConditionInput
+    $sortDirection: ModelSortDirection
+    $filter: ModelSheetFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listSheetsReviewee(
+      sub: $sub
+      year: $year
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        sub
+        year
+        companyID
+        groupID
+        grade
+        careerPlan
+        careerPlanComment
+        reviewComment
+        reviewDate
+        selfCheckDate
+        firstComment
+        firstCheckDate
+        secondComment
+        secondCheckDate
+        overAllEvaluation
+        statusValue
+        interviewPlanDate
+        interviewPlanComment
+        InterviewMid1Date
+        InterviewMid1Comment
+        InterviewMid2Date
+        InterviewMid2Comment
+        InterviewMid3Date
+        InterviewMid3Comment
+        revieweeUsername
+        secondUsername
+        topUsername
+        sheetGroupName
+        referencer
+        reviewee
+        topReviewers
+        secondReviewers
+        createdAt
+        updatedAt
+        revieweeEmployee {
+          username
+          companyID
+          no
+          groupID
+          superiorUsername
+          firstName
+          lastName
+          grade
+          email
+          sub
+          manager
+          isCompanyAdmin
+          isDeleted
+          createdAt
+          updatedAt
+          company {
+            id
+            name
+            startMonth
+            shortName
+            url
+            createdAt
+            updatedAt
+          }
+          superior {
+            username
+            companyID
+            no
+            groupID
+            superiorUsername
+            firstName
+            lastName
+            grade
+            email
+            sub
+            manager
+            isCompanyAdmin
+            isDeleted
+            createdAt
+            updatedAt
+            company {
+              id
+              name
+              startMonth
+              shortName
+              url
+              createdAt
+              updatedAt
+            }
+            superior {
+              username
+              companyID
+              no
+              groupID
+              superiorUsername
+              firstName
+              lastName
+              grade
+              email
+              sub
+              manager
+              isCompanyAdmin
+              isDeleted
+              createdAt
+              updatedAt
+              company {
+                id
+                name
+                startMonth
+                shortName
+                url
+                createdAt
+                updatedAt
+              }
+              superior {
+                username
+                companyID
+                no
+                groupID
+                superiorUsername
+                firstName
+                lastName
+                grade
+                email
+                sub
+                manager
+                isCompanyAdmin
+                isDeleted
+                createdAt
+                updatedAt
+                company {
+                  id
+                  name
+                  startMonth
+                  shortName
+                  url
+                  createdAt
+                  updatedAt
+                }
+                superior {
+                  username
+                  companyID
+                  no
+                  groupID
+                  superiorUsername
+                  firstName
+                  lastName
+                  grade
+                  email
+                  sub
+                  manager
+                  isCompanyAdmin
+                  isDeleted
+                  createdAt
+                  updatedAt
+                }
+                group {
+                  id
+                  companyID
+                  no
+                  name
+                  createdAt
+                  updatedAt
+                }
+              }
+              group {
+                id
+                companyID
+                no
+                name
+                createdAt
+                updatedAt
+              }
+            }
+            group {
+              id
+              companyID
+              no
+              name
+              createdAt
+              updatedAt
+            }
+          }
+          group {
+            id
+            companyID
+            no
+            name
+            createdAt
+            updatedAt
+          }
+        }
+        secondEmployee {
+          username
+          companyID
+          no
+          groupID
+          superiorUsername
+          firstName
+          lastName
+          grade
+          email
+          sub
+          manager
+          isCompanyAdmin
+          isDeleted
+          createdAt
+          updatedAt
+          company {
+            id
+            name
+            startMonth
+            shortName
+            url
+            createdAt
+            updatedAt
+          }
+          superior {
+            username
+            companyID
+            no
+            groupID
+            superiorUsername
+            firstName
+            lastName
+            grade
+            email
+            sub
+            manager
+            isCompanyAdmin
+            isDeleted
+            createdAt
+            updatedAt
+            company {
+              id
+              name
+              startMonth
+              shortName
+              url
+              createdAt
+              updatedAt
+            }
+            superior {
+              username
+              companyID
+              no
+              groupID
+              superiorUsername
+              firstName
+              lastName
+              grade
+              email
+              sub
+              manager
+              isCompanyAdmin
+              isDeleted
+              createdAt
+              updatedAt
+              company {
+                id
+                name
+                startMonth
+                shortName
+                url
+                createdAt
+                updatedAt
+              }
+              superior {
+                username
+                companyID
+                no
+                groupID
+                superiorUsername
+                firstName
+                lastName
+                grade
+                email
+                sub
+                manager
+                isCompanyAdmin
+                isDeleted
+                createdAt
+                updatedAt
+                company {
+                  id
+                  name
+                  startMonth
+                  shortName
+                  url
+                  createdAt
+                  updatedAt
+                }
+                superior {
+                  username
+                  companyID
+                  no
+                  groupID
+                  superiorUsername
+                  firstName
+                  lastName
+                  grade
+                  email
+                  sub
+                  manager
+                  isCompanyAdmin
+                  isDeleted
+                  createdAt
+                  updatedAt
+                }
+                group {
+                  id
+                  companyID
+                  no
+                  name
+                  createdAt
+                  updatedAt
+                }
+              }
+              group {
+                id
+                companyID
+                no
+                name
+                createdAt
+                updatedAt
+              }
+            }
+            group {
+              id
+              companyID
+              no
+              name
+              createdAt
+              updatedAt
+            }
+          }
+          group {
+            id
+            companyID
+            no
+            name
+            createdAt
+            updatedAt
+          }
+        }
+        topEmployee {
+          username
+          companyID
+          no
+          groupID
+          superiorUsername
+          firstName
+          lastName
+          grade
+          email
+          sub
+          manager
+          isCompanyAdmin
+          isDeleted
+          createdAt
+          updatedAt
+          company {
+            id
+            name
+            startMonth
+            shortName
+            url
+            createdAt
+            updatedAt
+          }
+          superior {
+            username
+            companyID
+            no
+            groupID
+            superiorUsername
+            firstName
+            lastName
+            grade
+            email
+            sub
+            manager
+            isCompanyAdmin
+            isDeleted
+            createdAt
+            updatedAt
+            company {
+              id
+              name
+              startMonth
+              shortName
+              url
+              createdAt
+              updatedAt
+            }
+            superior {
+              username
+              companyID
+              no
+              groupID
+              superiorUsername
+              firstName
+              lastName
+              grade
+              email
+              sub
+              manager
+              isCompanyAdmin
+              isDeleted
+              createdAt
+              updatedAt
+              company {
+                id
+                name
+                startMonth
+                shortName
+                url
+                createdAt
+                updatedAt
+              }
+              superior {
+                username
+                companyID
+                no
+                groupID
+                superiorUsername
+                firstName
+                lastName
+                grade
+                email
+                sub
+                manager
+                isCompanyAdmin
+                isDeleted
+                createdAt
+                updatedAt
+                company {
+                  id
+                  name
+                  startMonth
+                  shortName
+                  url
+                  createdAt
+                  updatedAt
+                }
+                superior {
+                  username
+                  companyID
+                  no
+                  groupID
+                  superiorUsername
+                  firstName
+                  lastName
+                  grade
+                  email
+                  sub
+                  manager
+                  isCompanyAdmin
+                  isDeleted
+                  createdAt
+                  updatedAt
+                }
+                group {
+                  id
+                  companyID
+                  no
+                  name
+                  createdAt
+                  updatedAt
+                }
+              }
+              group {
+                id
+                companyID
+                no
+                name
+                createdAt
+                updatedAt
+              }
+            }
+            group {
+              id
+              companyID
+              no
+              name
+              createdAt
+              updatedAt
+            }
+          }
+          group {
+            id
+            companyID
+            no
+            name
+            createdAt
+            updatedAt
+          }
+        }
+        group {
+          id
+          companyID
+          no
+          name
+          createdAt
+          updatedAt
+        }
+        section {
+          items {
+            id
+            sheetID
+            no
+            sectionCategoryName
+            reviewee
+            topReviewers
+            secondReviewers
+            referencer
+            createdAt
+            updatedAt
+            objective {
+              items {
+                id
+                sectionID
+                createdAt
+                companyID
+                content
+                result
+                priority
+                selfEvaluation
+                firstEvaluation
+                lastEvaluation
+                progress
+                expStartDate
+                expDoneDate
+                reviewee
+                topReviewers
+                secondReviewers
+                referencer
+                updatedAt
+              }
+              nextToken
+            }
+          }
+          nextToken
+        }
+      }
+      nextToken
+    }
+  }
+`;
+export const listSheetsCompany = /* GraphQL */ `
+  query ListSheetsCompany(
+    $companyID: ID
+    $sortDirection: ModelSortDirection
+    $filter: ModelSheetFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listSheetsCompany(
+      companyID: $companyID
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        sub
+        year
+        companyID
+        groupID
+        grade
+        careerPlan
+        careerPlanComment
+        reviewComment
+        reviewDate
+        selfCheckDate
+        firstComment
+        firstCheckDate
+        secondComment
+        secondCheckDate
+        overAllEvaluation
+        statusValue
+        interviewPlanDate
+        interviewPlanComment
+        InterviewMid1Date
+        InterviewMid1Comment
+        InterviewMid2Date
+        InterviewMid2Comment
+        InterviewMid3Date
+        InterviewMid3Comment
+        revieweeUsername
+        secondUsername
+        topUsername
+        sheetGroupName
+        referencer
+        reviewee
+        topReviewers
+        secondReviewers
+        createdAt
+        updatedAt
+        revieweeEmployee {
+          username
+          companyID
+          no
+          groupID
+          superiorUsername
+          firstName
+          lastName
+          grade
+          email
+          sub
+          manager
+          isCompanyAdmin
+          isDeleted
+          createdAt
+          updatedAt
+          company {
+            id
+            name
+            startMonth
+            shortName
+            url
+            createdAt
+            updatedAt
+          }
+          superior {
+            username
+            companyID
+            no
+            groupID
+            superiorUsername
+            firstName
+            lastName
+            grade
+            email
+            sub
+            manager
+            isCompanyAdmin
+            isDeleted
+            createdAt
+            updatedAt
+            company {
+              id
+              name
+              startMonth
+              shortName
+              url
+              createdAt
+              updatedAt
+            }
+            superior {
+              username
+              companyID
+              no
+              groupID
+              superiorUsername
+              firstName
+              lastName
+              grade
+              email
+              sub
+              manager
+              isCompanyAdmin
+              isDeleted
+              createdAt
+              updatedAt
+              company {
+                id
+                name
+                startMonth
+                shortName
+                url
+                createdAt
+                updatedAt
+              }
+              superior {
+                username
+                companyID
+                no
+                groupID
+                superiorUsername
+                firstName
+                lastName
+                grade
+                email
+                sub
+                manager
+                isCompanyAdmin
+                isDeleted
+                createdAt
+                updatedAt
+                company {
+                  id
+                  name
+                  startMonth
+                  shortName
+                  url
+                  createdAt
+                  updatedAt
+                }
+                superior {
+                  username
+                  companyID
+                  no
+                  groupID
+                  superiorUsername
+                  firstName
+                  lastName
+                  grade
+                  email
+                  sub
+                  manager
+                  isCompanyAdmin
+                  isDeleted
+                  createdAt
+                  updatedAt
+                }
+                group {
+                  id
+                  companyID
+                  no
+                  name
+                  createdAt
+                  updatedAt
+                }
+              }
+              group {
+                id
+                companyID
+                no
+                name
+                createdAt
+                updatedAt
+              }
+            }
+            group {
+              id
+              companyID
+              no
+              name
+              createdAt
+              updatedAt
+            }
+          }
+          group {
+            id
+            companyID
+            no
+            name
+            createdAt
+            updatedAt
+          }
+        }
+        secondEmployee {
+          username
+          companyID
+          no
+          groupID
+          superiorUsername
+          firstName
+          lastName
+          grade
+          email
+          sub
+          manager
+          isCompanyAdmin
+          isDeleted
+          createdAt
+          updatedAt
+          company {
+            id
+            name
+            startMonth
+            shortName
+            url
+            createdAt
+            updatedAt
+          }
+          superior {
+            username
+            companyID
+            no
+            groupID
+            superiorUsername
+            firstName
+            lastName
+            grade
+            email
+            sub
+            manager
+            isCompanyAdmin
+            isDeleted
+            createdAt
+            updatedAt
+            company {
+              id
+              name
+              startMonth
+              shortName
+              url
+              createdAt
+              updatedAt
+            }
+            superior {
+              username
+              companyID
+              no
+              groupID
+              superiorUsername
+              firstName
+              lastName
+              grade
+              email
+              sub
+              manager
+              isCompanyAdmin
+              isDeleted
+              createdAt
+              updatedAt
+              company {
+                id
+                name
+                startMonth
+                shortName
+                url
+                createdAt
+                updatedAt
+              }
+              superior {
+                username
+                companyID
+                no
+                groupID
+                superiorUsername
+                firstName
+                lastName
+                grade
+                email
+                sub
+                manager
+                isCompanyAdmin
+                isDeleted
+                createdAt
+                updatedAt
+                company {
+                  id
+                  name
+                  startMonth
+                  shortName
+                  url
+                  createdAt
+                  updatedAt
+                }
+                superior {
+                  username
+                  companyID
+                  no
+                  groupID
+                  superiorUsername
+                  firstName
+                  lastName
+                  grade
+                  email
+                  sub
+                  manager
+                  isCompanyAdmin
+                  isDeleted
+                  createdAt
+                  updatedAt
+                }
+                group {
+                  id
+                  companyID
+                  no
+                  name
+                  createdAt
+                  updatedAt
+                }
+              }
+              group {
+                id
+                companyID
+                no
+                name
+                createdAt
+                updatedAt
+              }
+            }
+            group {
+              id
+              companyID
+              no
+              name
+              createdAt
+              updatedAt
+            }
+          }
+          group {
+            id
+            companyID
+            no
+            name
+            createdAt
+            updatedAt
+          }
+        }
+        topEmployee {
+          username
+          companyID
+          no
+          groupID
+          superiorUsername
+          firstName
+          lastName
+          grade
+          email
+          sub
+          manager
+          isCompanyAdmin
+          isDeleted
+          createdAt
+          updatedAt
+          company {
+            id
+            name
+            startMonth
+            shortName
+            url
+            createdAt
+            updatedAt
+          }
+          superior {
+            username
+            companyID
+            no
+            groupID
+            superiorUsername
+            firstName
+            lastName
+            grade
+            email
+            sub
+            manager
+            isCompanyAdmin
+            isDeleted
+            createdAt
+            updatedAt
+            company {
+              id
+              name
+              startMonth
+              shortName
+              url
+              createdAt
+              updatedAt
+            }
+            superior {
+              username
+              companyID
+              no
+              groupID
+              superiorUsername
+              firstName
+              lastName
+              grade
+              email
+              sub
+              manager
+              isCompanyAdmin
+              isDeleted
+              createdAt
+              updatedAt
+              company {
+                id
+                name
+                startMonth
+                shortName
+                url
+                createdAt
+                updatedAt
+              }
+              superior {
+                username
+                companyID
+                no
+                groupID
+                superiorUsername
+                firstName
+                lastName
+                grade
+                email
+                sub
+                manager
+                isCompanyAdmin
+                isDeleted
+                createdAt
+                updatedAt
+                company {
+                  id
+                  name
+                  startMonth
+                  shortName
+                  url
+                  createdAt
+                  updatedAt
+                }
+                superior {
+                  username
+                  companyID
+                  no
+                  groupID
+                  superiorUsername
+                  firstName
+                  lastName
+                  grade
+                  email
+                  sub
+                  manager
+                  isCompanyAdmin
+                  isDeleted
+                  createdAt
+                  updatedAt
+                }
+                group {
+                  id
+                  companyID
+                  no
+                  name
+                  createdAt
+                  updatedAt
+                }
+              }
+              group {
+                id
+                companyID
+                no
+                name
+                createdAt
+                updatedAt
+              }
+            }
+            group {
+              id
+              companyID
+              no
+              name
+              createdAt
+              updatedAt
+            }
+          }
+          group {
+            id
+            companyID
+            no
+            name
+            createdAt
+            updatedAt
+          }
+        }
+        group {
+          id
+          companyID
+          no
+          name
+          createdAt
+          updatedAt
+        }
+        section {
+          items {
+            id
+            sheetID
+            no
+            sectionCategoryName
+            reviewee
+            topReviewers
+            secondReviewers
+            referencer
+            createdAt
+            updatedAt
+            objective {
+              items {
+                id
+                sectionID
+                createdAt
+                companyID
+                content
+                result
+                priority
+                selfEvaluation
+                firstEvaluation
+                lastEvaluation
+                progress
+                expStartDate
+                expDoneDate
+                reviewee
+                topReviewers
+                secondReviewers
+                referencer
+                updatedAt
+              }
+              nextToken
+            }
+          }
+          nextToken
+        }
+      }
+      nextToken
+    }
+  }
+`;
+export const listSectionsSheet = /* GraphQL */ `
+  query ListSectionsSheet(
+    $sheetID: ID
+    $sortDirection: ModelSortDirection
+    $filter: ModelSectionFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listSectionsSheet(
+      sheetID: $sheetID
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        sheetID
+        no
+        sectionCategoryName
+        reviewee
+        topReviewers
+        secondReviewers
+        referencer
+        createdAt
+        updatedAt
+        objective {
+          items {
+            id
+            sectionID
+            createdAt
+            companyID
+            content
+            result
+            priority
+            selfEvaluation
+            firstEvaluation
+            lastEvaluation
+            progress
+            expStartDate
+            expDoneDate
+            reviewee
+            topReviewers
+            secondReviewers
+            referencer
+            updatedAt
+          }
+          nextToken
+        }
+      }
+      nextToken
+    }
+  }
+`;
+export const listObjectivesSection = /* GraphQL */ `
+  query ListObjectivesSection(
+    $sectionID: ID
+    $sortDirection: ModelSortDirection
+    $filter: ModelObjectiveFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listObjectivesSection(
+      sectionID: $sectionID
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        sectionID
+        createdAt
+        companyID
+        content
+        result
+        priority
+        selfEvaluation
+        firstEvaluation
+        lastEvaluation
+        progress
+        expStartDate
+        expDoneDate
+        reviewee
+        topReviewers
+        secondReviewers
+        referencer
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const listReportsSub = /* GraphQL */ `
+  query ListReportsSub(
+    $sub: String
+    $date: ModelStringKeyConditionInput
+    $sortDirection: ModelSortDirection
+    $filter: ModelReportFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listReportsSub(
+      sub: $sub
+      date: $date
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
         sub
         date
         reviewee
@@ -243,10 +1730,10 @@ export const listReports = /* GraphQL */ `
         createdAt
         updatedAt
         revieweeEmployee {
-          companyID
           username
-          localID
-          employeeGroupLocalId
+          companyID
+          no
+          groupID
           superiorUsername
           firstName
           lastName
@@ -268,10 +1755,10 @@ export const listReports = /* GraphQL */ `
             updatedAt
           }
           superior {
-            companyID
             username
-            localID
-            employeeGroupLocalId
+            companyID
+            no
+            groupID
             superiorUsername
             firstName
             lastName
@@ -293,10 +1780,10 @@ export const listReports = /* GraphQL */ `
               updatedAt
             }
             superior {
-              companyID
               username
-              localID
-              employeeGroupLocalId
+              companyID
+              no
+              groupID
               superiorUsername
               firstName
               lastName
@@ -318,10 +1805,10 @@ export const listReports = /* GraphQL */ `
                 updatedAt
               }
               superior {
-                companyID
                 username
-                localID
-                employeeGroupLocalId
+                companyID
+                no
+                groupID
                 superiorUsername
                 firstName
                 lastName
@@ -343,10 +1830,10 @@ export const listReports = /* GraphQL */ `
                   updatedAt
                 }
                 superior {
-                  companyID
                   username
-                  localID
-                  employeeGroupLocalId
+                  companyID
+                  no
+                  groupID
                   superiorUsername
                   firstName
                   lastName
@@ -360,32 +1847,36 @@ export const listReports = /* GraphQL */ `
                   updatedAt
                 }
                 group {
+                  id
                   companyID
-                  localID
+                  no
                   name
                   createdAt
                   updatedAt
                 }
               }
               group {
+                id
                 companyID
-                localID
+                no
                 name
                 createdAt
                 updatedAt
               }
             }
             group {
+              id
               companyID
-              localID
+              no
               name
               createdAt
               updatedAt
             }
           }
           group {
+            id
             companyID
-            localID
+            no
             name
             createdAt
             updatedAt
@@ -398,7 +1889,7 @@ export const listReports = /* GraphQL */ `
 `;
 export const listReportsReviewee = /* GraphQL */ `
   query ListReportsReviewee(
-    $reviewee: ID
+    $reviewee: String
     $date: ModelStringKeyConditionInput
     $sortDirection: ModelSortDirection
     $filter: ModelReportFilterInput
@@ -414,6 +1905,7 @@ export const listReportsReviewee = /* GraphQL */ `
       nextToken: $nextToken
     ) {
       items {
+        id
         sub
         date
         reviewee
@@ -432,10 +1924,10 @@ export const listReportsReviewee = /* GraphQL */ `
         createdAt
         updatedAt
         revieweeEmployee {
-          companyID
           username
-          localID
-          employeeGroupLocalId
+          companyID
+          no
+          groupID
           superiorUsername
           firstName
           lastName
@@ -457,10 +1949,10 @@ export const listReportsReviewee = /* GraphQL */ `
             updatedAt
           }
           superior {
-            companyID
             username
-            localID
-            employeeGroupLocalId
+            companyID
+            no
+            groupID
             superiorUsername
             firstName
             lastName
@@ -482,10 +1974,10 @@ export const listReportsReviewee = /* GraphQL */ `
               updatedAt
             }
             superior {
-              companyID
               username
-              localID
-              employeeGroupLocalId
+              companyID
+              no
+              groupID
               superiorUsername
               firstName
               lastName
@@ -507,10 +1999,10 @@ export const listReportsReviewee = /* GraphQL */ `
                 updatedAt
               }
               superior {
-                companyID
                 username
-                localID
-                employeeGroupLocalId
+                companyID
+                no
+                groupID
                 superiorUsername
                 firstName
                 lastName
@@ -532,10 +2024,10 @@ export const listReportsReviewee = /* GraphQL */ `
                   updatedAt
                 }
                 superior {
-                  companyID
                   username
-                  localID
-                  employeeGroupLocalId
+                  companyID
+                  no
+                  groupID
                   superiorUsername
                   firstName
                   lastName
@@ -549,32 +2041,36 @@ export const listReportsReviewee = /* GraphQL */ `
                   updatedAt
                 }
                 group {
+                  id
                   companyID
-                  localID
+                  no
                   name
                   createdAt
                   updatedAt
                 }
               }
               group {
+                id
                 companyID
-                localID
+                no
                 name
                 createdAt
                 updatedAt
               }
             }
             group {
+              id
               companyID
-              localID
+              no
               name
               createdAt
               updatedAt
             }
           }
           group {
+            id
             companyID
-            localID
+            no
             name
             createdAt
             updatedAt
@@ -587,7 +2083,7 @@ export const listReportsReviewee = /* GraphQL */ `
 `;
 export const listReportsCompanyDate = /* GraphQL */ `
   query ListReportsCompanyDate(
-    $companyID: ID
+    $companyID: String
     $date: ModelStringKeyConditionInput
     $sortDirection: ModelSortDirection
     $filter: ModelReportFilterInput
@@ -603,6 +2099,7 @@ export const listReportsCompanyDate = /* GraphQL */ `
       nextToken: $nextToken
     ) {
       items {
+        id
         sub
         date
         reviewee
@@ -621,10 +2118,10 @@ export const listReportsCompanyDate = /* GraphQL */ `
         createdAt
         updatedAt
         revieweeEmployee {
-          companyID
           username
-          localID
-          employeeGroupLocalId
+          companyID
+          no
+          groupID
           superiorUsername
           firstName
           lastName
@@ -646,10 +2143,10 @@ export const listReportsCompanyDate = /* GraphQL */ `
             updatedAt
           }
           superior {
-            companyID
             username
-            localID
-            employeeGroupLocalId
+            companyID
+            no
+            groupID
             superiorUsername
             firstName
             lastName
@@ -671,10 +2168,10 @@ export const listReportsCompanyDate = /* GraphQL */ `
               updatedAt
             }
             superior {
-              companyID
               username
-              localID
-              employeeGroupLocalId
+              companyID
+              no
+              groupID
               superiorUsername
               firstName
               lastName
@@ -696,10 +2193,10 @@ export const listReportsCompanyDate = /* GraphQL */ `
                 updatedAt
               }
               superior {
-                companyID
                 username
-                localID
-                employeeGroupLocalId
+                companyID
+                no
+                groupID
                 superiorUsername
                 firstName
                 lastName
@@ -721,10 +2218,10 @@ export const listReportsCompanyDate = /* GraphQL */ `
                   updatedAt
                 }
                 superior {
-                  companyID
                   username
-                  localID
-                  employeeGroupLocalId
+                  companyID
+                  no
+                  groupID
                   superiorUsername
                   firstName
                   lastName
@@ -738,57 +2235,41 @@ export const listReportsCompanyDate = /* GraphQL */ `
                   updatedAt
                 }
                 group {
+                  id
                   companyID
-                  localID
+                  no
                   name
                   createdAt
                   updatedAt
                 }
               }
               group {
+                id
                 companyID
-                localID
+                no
                 name
                 createdAt
                 updatedAt
               }
             }
             group {
+              id
               companyID
-              localID
+              no
               name
               createdAt
               updatedAt
             }
           }
           group {
+            id
             companyID
-            localID
+            no
             name
             createdAt
             updatedAt
           }
         }
-      }
-      nextToken
-    }
-  }
-`;
-export const listCompanys = /* GraphQL */ `
-  query ListCompanys(
-    $filter: ModelCompanyFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listCompanys(filter: $filter, limit: $limit, nextToken: $nextToken) {
-      items {
-        id
-        name
-        startMonth
-        shortName
-        url
-        createdAt
-        updatedAt
       }
       nextToken
     }
@@ -807,216 +2288,13 @@ export const getCompany = /* GraphQL */ `
     }
   }
 `;
-export const listEmployees = /* GraphQL */ `
-  query ListEmployees(
-    $companyID: ID
-    $username: ModelIDKeyConditionInput
-    $filter: ModelEmployeeFilterInput
-    $limit: Int
-    $nextToken: String
-    $sortDirection: ModelSortDirection
-  ) {
-    listEmployees(
-      companyID: $companyID
-      username: $username
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-      sortDirection: $sortDirection
-    ) {
-      items {
-        companyID
-        username
-        localID
-        employeeGroupLocalId
-        superiorUsername
-        firstName
-        lastName
-        grade
-        email
-        sub
-        manager
-        isCompanyAdmin
-        isDeleted
-        createdAt
-        updatedAt
-        company {
-          id
-          name
-          startMonth
-          shortName
-          url
-          createdAt
-          updatedAt
-        }
-        superior {
-          companyID
-          username
-          localID
-          employeeGroupLocalId
-          superiorUsername
-          firstName
-          lastName
-          grade
-          email
-          sub
-          manager
-          isCompanyAdmin
-          isDeleted
-          createdAt
-          updatedAt
-          company {
-            id
-            name
-            startMonth
-            shortName
-            url
-            createdAt
-            updatedAt
-          }
-          superior {
-            companyID
-            username
-            localID
-            employeeGroupLocalId
-            superiorUsername
-            firstName
-            lastName
-            grade
-            email
-            sub
-            manager
-            isCompanyAdmin
-            isDeleted
-            createdAt
-            updatedAt
-            company {
-              id
-              name
-              startMonth
-              shortName
-              url
-              createdAt
-              updatedAt
-            }
-            superior {
-              companyID
-              username
-              localID
-              employeeGroupLocalId
-              superiorUsername
-              firstName
-              lastName
-              grade
-              email
-              sub
-              manager
-              isCompanyAdmin
-              isDeleted
-              createdAt
-              updatedAt
-              company {
-                id
-                name
-                startMonth
-                shortName
-                url
-                createdAt
-                updatedAt
-              }
-              superior {
-                companyID
-                username
-                localID
-                employeeGroupLocalId
-                superiorUsername
-                firstName
-                lastName
-                grade
-                email
-                sub
-                manager
-                isCompanyAdmin
-                isDeleted
-                createdAt
-                updatedAt
-                company {
-                  id
-                  name
-                  startMonth
-                  shortName
-                  url
-                  createdAt
-                  updatedAt
-                }
-                superior {
-                  companyID
-                  username
-                  localID
-                  employeeGroupLocalId
-                  superiorUsername
-                  firstName
-                  lastName
-                  grade
-                  email
-                  sub
-                  manager
-                  isCompanyAdmin
-                  isDeleted
-                  createdAt
-                  updatedAt
-                }
-                group {
-                  companyID
-                  localID
-                  name
-                  createdAt
-                  updatedAt
-                }
-              }
-              group {
-                companyID
-                localID
-                name
-                createdAt
-                updatedAt
-              }
-            }
-            group {
-              companyID
-              localID
-              name
-              createdAt
-              updatedAt
-            }
-          }
-          group {
-            companyID
-            localID
-            name
-            createdAt
-            updatedAt
-          }
-        }
-        group {
-          companyID
-          localID
-          name
-          createdAt
-          updatedAt
-        }
-      }
-      nextToken
-    }
-  }
-`;
 export const getEmployee = /* GraphQL */ `
-  query GetEmployee($companyID: ID!, $username: ID!) {
-    getEmployee(companyID: $companyID, username: $username) {
-      companyID
+  query GetEmployee($username: String!) {
+    getEmployee(username: $username) {
       username
-      localID
-      employeeGroupLocalId
+      companyID
+      no
+      groupID
       superiorUsername
       firstName
       lastName
@@ -1038,10 +2316,10 @@ export const getEmployee = /* GraphQL */ `
         updatedAt
       }
       superior {
-        companyID
         username
-        localID
-        employeeGroupLocalId
+        companyID
+        no
+        groupID
         superiorUsername
         firstName
         lastName
@@ -1063,10 +2341,10 @@ export const getEmployee = /* GraphQL */ `
           updatedAt
         }
         superior {
-          companyID
           username
-          localID
-          employeeGroupLocalId
+          companyID
+          no
+          groupID
           superiorUsername
           firstName
           lastName
@@ -1088,10 +2366,10 @@ export const getEmployee = /* GraphQL */ `
             updatedAt
           }
           superior {
-            companyID
             username
-            localID
-            employeeGroupLocalId
+            companyID
+            no
+            groupID
             superiorUsername
             firstName
             lastName
@@ -1113,10 +2391,10 @@ export const getEmployee = /* GraphQL */ `
               updatedAt
             }
             superior {
-              companyID
               username
-              localID
-              employeeGroupLocalId
+              companyID
+              no
+              groupID
               superiorUsername
               firstName
               lastName
@@ -1138,10 +2416,10 @@ export const getEmployee = /* GraphQL */ `
                 updatedAt
               }
               superior {
-                companyID
                 username
-                localID
-                employeeGroupLocalId
+                companyID
+                no
+                groupID
                 superiorUsername
                 firstName
                 lastName
@@ -1163,10 +2441,10 @@ export const getEmployee = /* GraphQL */ `
                   updatedAt
                 }
                 superior {
-                  companyID
                   username
-                  localID
-                  employeeGroupLocalId
+                  companyID
+                  no
+                  groupID
                   superiorUsername
                   firstName
                   lastName
@@ -1180,533 +2458,79 @@ export const getEmployee = /* GraphQL */ `
                   updatedAt
                 }
                 group {
+                  id
                   companyID
-                  localID
+                  no
                   name
                   createdAt
                   updatedAt
                 }
               }
               group {
+                id
                 companyID
-                localID
+                no
                 name
                 createdAt
                 updatedAt
               }
             }
             group {
+              id
               companyID
-              localID
+              no
               name
               createdAt
               updatedAt
             }
           }
           group {
+            id
             companyID
-            localID
+            no
             name
             createdAt
             updatedAt
           }
         }
         group {
+          id
           companyID
-          localID
+          no
           name
           createdAt
           updatedAt
         }
       }
       group {
+        id
         companyID
-        localID
+        no
         name
         createdAt
         updatedAt
       }
-    }
-  }
-`;
-export const listEmployeeLocalId = /* GraphQL */ `
-  query ListEmployeeLocalId(
-    $companyID: ID
-    $localID: ModelIDKeyConditionInput
-    $sortDirection: ModelSortDirection
-    $filter: ModelEmployeeFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listEmployeeLocalID(
-      companyID: $companyID
-      localID: $localID
-      sortDirection: $sortDirection
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-    ) {
-      items {
-        companyID
-        username
-        localID
-        employeeGroupLocalId
-        superiorUsername
-        firstName
-        lastName
-        grade
-        email
-        sub
-        manager
-        isCompanyAdmin
-        isDeleted
-        createdAt
-        updatedAt
-        company {
-          id
-          name
-          startMonth
-          shortName
-          url
-          createdAt
-          updatedAt
-        }
-        superior {
-          companyID
-          username
-          localID
-          employeeGroupLocalId
-          superiorUsername
-          firstName
-          lastName
-          grade
-          email
-          sub
-          manager
-          isCompanyAdmin
-          isDeleted
-          createdAt
-          updatedAt
-          company {
-            id
-            name
-            startMonth
-            shortName
-            url
-            createdAt
-            updatedAt
-          }
-          superior {
-            companyID
-            username
-            localID
-            employeeGroupLocalId
-            superiorUsername
-            firstName
-            lastName
-            grade
-            email
-            sub
-            manager
-            isCompanyAdmin
-            isDeleted
-            createdAt
-            updatedAt
-            company {
-              id
-              name
-              startMonth
-              shortName
-              url
-              createdAt
-              updatedAt
-            }
-            superior {
-              companyID
-              username
-              localID
-              employeeGroupLocalId
-              superiorUsername
-              firstName
-              lastName
-              grade
-              email
-              sub
-              manager
-              isCompanyAdmin
-              isDeleted
-              createdAt
-              updatedAt
-              company {
-                id
-                name
-                startMonth
-                shortName
-                url
-                createdAt
-                updatedAt
-              }
-              superior {
-                companyID
-                username
-                localID
-                employeeGroupLocalId
-                superiorUsername
-                firstName
-                lastName
-                grade
-                email
-                sub
-                manager
-                isCompanyAdmin
-                isDeleted
-                createdAt
-                updatedAt
-                company {
-                  id
-                  name
-                  startMonth
-                  shortName
-                  url
-                  createdAt
-                  updatedAt
-                }
-                superior {
-                  companyID
-                  username
-                  localID
-                  employeeGroupLocalId
-                  superiorUsername
-                  firstName
-                  lastName
-                  grade
-                  email
-                  sub
-                  manager
-                  isCompanyAdmin
-                  isDeleted
-                  createdAt
-                  updatedAt
-                }
-                group {
-                  companyID
-                  localID
-                  name
-                  createdAt
-                  updatedAt
-                }
-              }
-              group {
-                companyID
-                localID
-                name
-                createdAt
-                updatedAt
-              }
-            }
-            group {
-              companyID
-              localID
-              name
-              createdAt
-              updatedAt
-            }
-          }
-          group {
-            companyID
-            localID
-            name
-            createdAt
-            updatedAt
-          }
-        }
-        group {
-          companyID
-          localID
-          name
-          createdAt
-          updatedAt
-        }
-      }
-      nextToken
-    }
-  }
-`;
-export const listEmployeesManager = /* GraphQL */ `
-  query ListEmployeesManager(
-    $companyID: ID
-    $managerIsDeleted: ModelEmployeeEmployee_managerCompositeKeyConditionInput
-    $sortDirection: ModelSortDirection
-    $filter: ModelEmployeeFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listEmployeesManager(
-      companyID: $companyID
-      managerIsDeleted: $managerIsDeleted
-      sortDirection: $sortDirection
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-    ) {
-      items {
-        companyID
-        username
-        localID
-        employeeGroupLocalId
-        superiorUsername
-        firstName
-        lastName
-        grade
-        email
-        sub
-        manager
-        isCompanyAdmin
-        isDeleted
-        createdAt
-        updatedAt
-        company {
-          id
-          name
-          startMonth
-          shortName
-          url
-          createdAt
-          updatedAt
-        }
-        superior {
-          companyID
-          username
-          localID
-          employeeGroupLocalId
-          superiorUsername
-          firstName
-          lastName
-          grade
-          email
-          sub
-          manager
-          isCompanyAdmin
-          isDeleted
-          createdAt
-          updatedAt
-          company {
-            id
-            name
-            startMonth
-            shortName
-            url
-            createdAt
-            updatedAt
-          }
-          superior {
-            companyID
-            username
-            localID
-            employeeGroupLocalId
-            superiorUsername
-            firstName
-            lastName
-            grade
-            email
-            sub
-            manager
-            isCompanyAdmin
-            isDeleted
-            createdAt
-            updatedAt
-            company {
-              id
-              name
-              startMonth
-              shortName
-              url
-              createdAt
-              updatedAt
-            }
-            superior {
-              companyID
-              username
-              localID
-              employeeGroupLocalId
-              superiorUsername
-              firstName
-              lastName
-              grade
-              email
-              sub
-              manager
-              isCompanyAdmin
-              isDeleted
-              createdAt
-              updatedAt
-              company {
-                id
-                name
-                startMonth
-                shortName
-                url
-                createdAt
-                updatedAt
-              }
-              superior {
-                companyID
-                username
-                localID
-                employeeGroupLocalId
-                superiorUsername
-                firstName
-                lastName
-                grade
-                email
-                sub
-                manager
-                isCompanyAdmin
-                isDeleted
-                createdAt
-                updatedAt
-                company {
-                  id
-                  name
-                  startMonth
-                  shortName
-                  url
-                  createdAt
-                  updatedAt
-                }
-                superior {
-                  companyID
-                  username
-                  localID
-                  employeeGroupLocalId
-                  superiorUsername
-                  firstName
-                  lastName
-                  grade
-                  email
-                  sub
-                  manager
-                  isCompanyAdmin
-                  isDeleted
-                  createdAt
-                  updatedAt
-                }
-                group {
-                  companyID
-                  localID
-                  name
-                  createdAt
-                  updatedAt
-                }
-              }
-              group {
-                companyID
-                localID
-                name
-                createdAt
-                updatedAt
-              }
-            }
-            group {
-              companyID
-              localID
-              name
-              createdAt
-              updatedAt
-            }
-          }
-          group {
-            companyID
-            localID
-            name
-            createdAt
-            updatedAt
-          }
-        }
-        group {
-          companyID
-          localID
-          name
-          createdAt
-          updatedAt
-        }
-      }
-      nextToken
-    }
-  }
-`;
-export const listGroups = /* GraphQL */ `
-  query ListGroups(
-    $companyID: ID
-    $localID: ModelIDKeyConditionInput
-    $filter: ModelGroupFilterInput
-    $limit: Int
-    $nextToken: String
-    $sortDirection: ModelSortDirection
-  ) {
-    listGroups(
-      companyID: $companyID
-      localID: $localID
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-      sortDirection: $sortDirection
-    ) {
-      items {
-        companyID
-        localID
-        name
-        createdAt
-        updatedAt
-      }
-      nextToken
     }
   }
 `;
 export const getGroup = /* GraphQL */ `
-  query GetGroup($companyID: ID!, $localID: ID!) {
-    getGroup(companyID: $companyID, localID: $localID) {
+  query GetGroup($id: ID!) {
+    getGroup(id: $id) {
+      id
       companyID
-      localID
+      no
       name
       createdAt
       updatedAt
     }
   }
 `;
-export const listCategorys = /* GraphQL */ `
-  query ListCategorys(
-    $companyID: ID
-    $localID: ModelIDKeyConditionInput
-    $filter: ModelCategoryFilterInput
-    $limit: Int
-    $nextToken: String
-    $sortDirection: ModelSortDirection
-  ) {
-    listCategorys(
-      companyID: $companyID
-      localID: $localID
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-      sortDirection: $sortDirection
-    ) {
-      items {
-        companyID
-        localID
-        name
-        createdAt
-        updatedAt
-      }
-      nextToken
-    }
-  }
-`;
 export const getCategory = /* GraphQL */ `
-  query GetCategory($companyID: ID!, $localID: ID!) {
-    getCategory(companyID: $companyID, localID: $localID) {
+  query GetCategory($id: ID!) {
+    getCategory(id: $id) {
+      id
       companyID
-      localID
+      no
       name
       createdAt
       updatedAt
@@ -1714,11 +2538,13 @@ export const getCategory = /* GraphQL */ `
   }
 `;
 export const getSheet = /* GraphQL */ `
-  query GetSheet($sub: String!, $year: Int!) {
-    getSheet(sub: $sub, year: $year) {
+  query GetSheet($id: ID!) {
+    getSheet(id: $id) {
+      id
       sub
       year
       companyID
+      groupID
       grade
       careerPlan
       careerPlanComment
@@ -1741,7 +2567,7 @@ export const getSheet = /* GraphQL */ `
       InterviewMid3Comment
       revieweeUsername
       secondUsername
-      sheetGroupLocalId
+      topUsername
       sheetGroupName
       referencer
       reviewee
@@ -1750,10 +2576,10 @@ export const getSheet = /* GraphQL */ `
       createdAt
       updatedAt
       revieweeEmployee {
-        companyID
         username
-        localID
-        employeeGroupLocalId
+        companyID
+        no
+        groupID
         superiorUsername
         firstName
         lastName
@@ -1775,10 +2601,10 @@ export const getSheet = /* GraphQL */ `
           updatedAt
         }
         superior {
-          companyID
           username
-          localID
-          employeeGroupLocalId
+          companyID
+          no
+          groupID
           superiorUsername
           firstName
           lastName
@@ -1800,10 +2626,10 @@ export const getSheet = /* GraphQL */ `
             updatedAt
           }
           superior {
-            companyID
             username
-            localID
-            employeeGroupLocalId
+            companyID
+            no
+            groupID
             superiorUsername
             firstName
             lastName
@@ -1825,10 +2651,10 @@ export const getSheet = /* GraphQL */ `
               updatedAt
             }
             superior {
-              companyID
               username
-              localID
-              employeeGroupLocalId
+              companyID
+              no
+              groupID
               superiorUsername
               firstName
               lastName
@@ -1850,10 +2676,10 @@ export const getSheet = /* GraphQL */ `
                 updatedAt
               }
               superior {
-                companyID
                 username
-                localID
-                employeeGroupLocalId
+                companyID
+                no
+                groupID
                 superiorUsername
                 firstName
                 lastName
@@ -1875,10 +2701,10 @@ export const getSheet = /* GraphQL */ `
                   updatedAt
                 }
                 superior {
-                  companyID
                   username
-                  localID
-                  employeeGroupLocalId
+                  companyID
+                  no
+                  groupID
                   superiorUsername
                   firstName
                   lastName
@@ -1892,50 +2718,55 @@ export const getSheet = /* GraphQL */ `
                   updatedAt
                 }
                 group {
+                  id
                   companyID
-                  localID
+                  no
                   name
                   createdAt
                   updatedAt
                 }
               }
               group {
+                id
                 companyID
-                localID
+                no
                 name
                 createdAt
                 updatedAt
               }
             }
             group {
+              id
               companyID
-              localID
+              no
               name
               createdAt
               updatedAt
             }
           }
           group {
+            id
             companyID
-            localID
+            no
             name
             createdAt
             updatedAt
           }
         }
         group {
+          id
           companyID
-          localID
+          no
           name
           createdAt
           updatedAt
         }
       }
       secondEmployee {
-        companyID
         username
-        localID
-        employeeGroupLocalId
+        companyID
+        no
+        groupID
         superiorUsername
         firstName
         lastName
@@ -1957,10 +2788,10 @@ export const getSheet = /* GraphQL */ `
           updatedAt
         }
         superior {
-          companyID
           username
-          localID
-          employeeGroupLocalId
+          companyID
+          no
+          groupID
           superiorUsername
           firstName
           lastName
@@ -1982,10 +2813,10 @@ export const getSheet = /* GraphQL */ `
             updatedAt
           }
           superior {
-            companyID
             username
-            localID
-            employeeGroupLocalId
+            companyID
+            no
+            groupID
             superiorUsername
             firstName
             lastName
@@ -2007,10 +2838,10 @@ export const getSheet = /* GraphQL */ `
               updatedAt
             }
             superior {
-              companyID
               username
-              localID
-              employeeGroupLocalId
+              companyID
+              no
+              groupID
               superiorUsername
               firstName
               lastName
@@ -2032,10 +2863,10 @@ export const getSheet = /* GraphQL */ `
                 updatedAt
               }
               superior {
-                companyID
                 username
-                localID
-                employeeGroupLocalId
+                companyID
+                no
+                groupID
                 superiorUsername
                 firstName
                 lastName
@@ -2057,10 +2888,10 @@ export const getSheet = /* GraphQL */ `
                   updatedAt
                 }
                 superior {
-                  companyID
                   username
-                  localID
-                  employeeGroupLocalId
+                  companyID
+                  no
+                  groupID
                   superiorUsername
                   firstName
                   lastName
@@ -2074,67 +2905,261 @@ export const getSheet = /* GraphQL */ `
                   updatedAt
                 }
                 group {
+                  id
                   companyID
-                  localID
+                  no
                   name
                   createdAt
                   updatedAt
                 }
               }
               group {
+                id
                 companyID
-                localID
+                no
                 name
                 createdAt
                 updatedAt
               }
             }
             group {
+              id
               companyID
-              localID
+              no
               name
               createdAt
               updatedAt
             }
           }
           group {
+            id
             companyID
-            localID
+            no
             name
             createdAt
             updatedAt
           }
         }
         group {
+          id
           companyID
-          localID
+          no
           name
           createdAt
           updatedAt
         }
       }
+      topEmployee {
+        username
+        companyID
+        no
+        groupID
+        superiorUsername
+        firstName
+        lastName
+        grade
+        email
+        sub
+        manager
+        isCompanyAdmin
+        isDeleted
+        createdAt
+        updatedAt
+        company {
+          id
+          name
+          startMonth
+          shortName
+          url
+          createdAt
+          updatedAt
+        }
+        superior {
+          username
+          companyID
+          no
+          groupID
+          superiorUsername
+          firstName
+          lastName
+          grade
+          email
+          sub
+          manager
+          isCompanyAdmin
+          isDeleted
+          createdAt
+          updatedAt
+          company {
+            id
+            name
+            startMonth
+            shortName
+            url
+            createdAt
+            updatedAt
+          }
+          superior {
+            username
+            companyID
+            no
+            groupID
+            superiorUsername
+            firstName
+            lastName
+            grade
+            email
+            sub
+            manager
+            isCompanyAdmin
+            isDeleted
+            createdAt
+            updatedAt
+            company {
+              id
+              name
+              startMonth
+              shortName
+              url
+              createdAt
+              updatedAt
+            }
+            superior {
+              username
+              companyID
+              no
+              groupID
+              superiorUsername
+              firstName
+              lastName
+              grade
+              email
+              sub
+              manager
+              isCompanyAdmin
+              isDeleted
+              createdAt
+              updatedAt
+              company {
+                id
+                name
+                startMonth
+                shortName
+                url
+                createdAt
+                updatedAt
+              }
+              superior {
+                username
+                companyID
+                no
+                groupID
+                superiorUsername
+                firstName
+                lastName
+                grade
+                email
+                sub
+                manager
+                isCompanyAdmin
+                isDeleted
+                createdAt
+                updatedAt
+                company {
+                  id
+                  name
+                  startMonth
+                  shortName
+                  url
+                  createdAt
+                  updatedAt
+                }
+                superior {
+                  username
+                  companyID
+                  no
+                  groupID
+                  superiorUsername
+                  firstName
+                  lastName
+                  grade
+                  email
+                  sub
+                  manager
+                  isCompanyAdmin
+                  isDeleted
+                  createdAt
+                  updatedAt
+                }
+                group {
+                  id
+                  companyID
+                  no
+                  name
+                  createdAt
+                  updatedAt
+                }
+              }
+              group {
+                id
+                companyID
+                no
+                name
+                createdAt
+                updatedAt
+              }
+            }
+            group {
+              id
+              companyID
+              no
+              name
+              createdAt
+              updatedAt
+            }
+          }
+          group {
+            id
+            companyID
+            no
+            name
+            createdAt
+            updatedAt
+          }
+        }
+        group {
+          id
+          companyID
+          no
+          name
+          createdAt
+          updatedAt
+        }
+      }
+      group {
+        id
+        companyID
+        no
+        name
+        createdAt
+        updatedAt
+      }
       section {
         items {
-          sheetKeys
-          sectionCategoryLocalId
+          id
+          sheetID
+          no
           sectionCategoryName
-          companyID
           reviewee
           topReviewers
           secondReviewers
           referencer
           createdAt
           updatedAt
-          category {
-            companyID
-            localID
-            name
-            createdAt
-            updatedAt
-          }
           objective {
             items {
-              sectionKeys
+              id
+              sectionID
               createdAt
               companyID
               content
@@ -2160,828 +3185,23 @@ export const getSheet = /* GraphQL */ `
     }
   }
 `;
-export const listSheets = /* GraphQL */ `
-  query ListSheets(
-    $sub: String
-    $year: ModelIntKeyConditionInput
-    $filter: ModelSheetFilterInput
-    $limit: Int
-    $nextToken: String
-    $sortDirection: ModelSortDirection
-  ) {
-    listSheets(
-      sub: $sub
-      year: $year
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-      sortDirection: $sortDirection
-    ) {
-      items {
-        sub
-        year
-        companyID
-        grade
-        careerPlan
-        careerPlanComment
-        reviewComment
-        reviewDate
-        selfCheckDate
-        firstComment
-        firstCheckDate
-        secondComment
-        secondCheckDate
-        overAllEvaluation
-        statusValue
-        interviewPlanDate
-        interviewPlanComment
-        InterviewMid1Date
-        InterviewMid1Comment
-        InterviewMid2Date
-        InterviewMid2Comment
-        InterviewMid3Date
-        InterviewMid3Comment
-        revieweeUsername
-        secondUsername
-        sheetGroupLocalId
-        sheetGroupName
-        referencer
-        reviewee
-        topReviewers
-        secondReviewers
-        createdAt
-        updatedAt
-        revieweeEmployee {
-          companyID
-          username
-          localID
-          employeeGroupLocalId
-          superiorUsername
-          firstName
-          lastName
-          grade
-          email
-          sub
-          manager
-          isCompanyAdmin
-          isDeleted
-          createdAt
-          updatedAt
-          company {
-            id
-            name
-            startMonth
-            shortName
-            url
-            createdAt
-            updatedAt
-          }
-          superior {
-            companyID
-            username
-            localID
-            employeeGroupLocalId
-            superiorUsername
-            firstName
-            lastName
-            grade
-            email
-            sub
-            manager
-            isCompanyAdmin
-            isDeleted
-            createdAt
-            updatedAt
-            company {
-              id
-              name
-              startMonth
-              shortName
-              url
-              createdAt
-              updatedAt
-            }
-            superior {
-              companyID
-              username
-              localID
-              employeeGroupLocalId
-              superiorUsername
-              firstName
-              lastName
-              grade
-              email
-              sub
-              manager
-              isCompanyAdmin
-              isDeleted
-              createdAt
-              updatedAt
-              company {
-                id
-                name
-                startMonth
-                shortName
-                url
-                createdAt
-                updatedAt
-              }
-              superior {
-                companyID
-                username
-                localID
-                employeeGroupLocalId
-                superiorUsername
-                firstName
-                lastName
-                grade
-                email
-                sub
-                manager
-                isCompanyAdmin
-                isDeleted
-                createdAt
-                updatedAt
-                company {
-                  id
-                  name
-                  startMonth
-                  shortName
-                  url
-                  createdAt
-                  updatedAt
-                }
-                superior {
-                  companyID
-                  username
-                  localID
-                  employeeGroupLocalId
-                  superiorUsername
-                  firstName
-                  lastName
-                  grade
-                  email
-                  sub
-                  manager
-                  isCompanyAdmin
-                  isDeleted
-                  createdAt
-                  updatedAt
-                }
-                group {
-                  companyID
-                  localID
-                  name
-                  createdAt
-                  updatedAt
-                }
-              }
-              group {
-                companyID
-                localID
-                name
-                createdAt
-                updatedAt
-              }
-            }
-            group {
-              companyID
-              localID
-              name
-              createdAt
-              updatedAt
-            }
-          }
-          group {
-            companyID
-            localID
-            name
-            createdAt
-            updatedAt
-          }
-        }
-        secondEmployee {
-          companyID
-          username
-          localID
-          employeeGroupLocalId
-          superiorUsername
-          firstName
-          lastName
-          grade
-          email
-          sub
-          manager
-          isCompanyAdmin
-          isDeleted
-          createdAt
-          updatedAt
-          company {
-            id
-            name
-            startMonth
-            shortName
-            url
-            createdAt
-            updatedAt
-          }
-          superior {
-            companyID
-            username
-            localID
-            employeeGroupLocalId
-            superiorUsername
-            firstName
-            lastName
-            grade
-            email
-            sub
-            manager
-            isCompanyAdmin
-            isDeleted
-            createdAt
-            updatedAt
-            company {
-              id
-              name
-              startMonth
-              shortName
-              url
-              createdAt
-              updatedAt
-            }
-            superior {
-              companyID
-              username
-              localID
-              employeeGroupLocalId
-              superiorUsername
-              firstName
-              lastName
-              grade
-              email
-              sub
-              manager
-              isCompanyAdmin
-              isDeleted
-              createdAt
-              updatedAt
-              company {
-                id
-                name
-                startMonth
-                shortName
-                url
-                createdAt
-                updatedAt
-              }
-              superior {
-                companyID
-                username
-                localID
-                employeeGroupLocalId
-                superiorUsername
-                firstName
-                lastName
-                grade
-                email
-                sub
-                manager
-                isCompanyAdmin
-                isDeleted
-                createdAt
-                updatedAt
-                company {
-                  id
-                  name
-                  startMonth
-                  shortName
-                  url
-                  createdAt
-                  updatedAt
-                }
-                superior {
-                  companyID
-                  username
-                  localID
-                  employeeGroupLocalId
-                  superiorUsername
-                  firstName
-                  lastName
-                  grade
-                  email
-                  sub
-                  manager
-                  isCompanyAdmin
-                  isDeleted
-                  createdAt
-                  updatedAt
-                }
-                group {
-                  companyID
-                  localID
-                  name
-                  createdAt
-                  updatedAt
-                }
-              }
-              group {
-                companyID
-                localID
-                name
-                createdAt
-                updatedAt
-              }
-            }
-            group {
-              companyID
-              localID
-              name
-              createdAt
-              updatedAt
-            }
-          }
-          group {
-            companyID
-            localID
-            name
-            createdAt
-            updatedAt
-          }
-        }
-        section {
-          items {
-            sheetKeys
-            sectionCategoryLocalId
-            sectionCategoryName
-            companyID
-            reviewee
-            topReviewers
-            secondReviewers
-            referencer
-            createdAt
-            updatedAt
-            category {
-              companyID
-              localID
-              name
-              createdAt
-              updatedAt
-            }
-            objective {
-              items {
-                sectionKeys
-                createdAt
-                companyID
-                content
-                result
-                priority
-                selfEvaluation
-                firstEvaluation
-                lastEvaluation
-                progress
-                expStartDate
-                expDoneDate
-                reviewee
-                topReviewers
-                secondReviewers
-                referencer
-                updatedAt
-              }
-              nextToken
-            }
-          }
-          nextToken
-        }
-      }
-      nextToken
-    }
-  }
-`;
-export const listSheetReviewee = /* GraphQL */ `
-  query ListSheetReviewee(
-    $companyID: ID
-    $reviewee: ModelStringKeyConditionInput
-    $sortDirection: ModelSortDirection
-    $filter: ModelSheetFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listSheetReviewee(
-      companyID: $companyID
-      reviewee: $reviewee
-      sortDirection: $sortDirection
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-    ) {
-      items {
-        sub
-        year
-        companyID
-        grade
-        careerPlan
-        careerPlanComment
-        reviewComment
-        reviewDate
-        selfCheckDate
-        firstComment
-        firstCheckDate
-        secondComment
-        secondCheckDate
-        overAllEvaluation
-        statusValue
-        interviewPlanDate
-        interviewPlanComment
-        InterviewMid1Date
-        InterviewMid1Comment
-        InterviewMid2Date
-        InterviewMid2Comment
-        InterviewMid3Date
-        InterviewMid3Comment
-        revieweeUsername
-        secondUsername
-        sheetGroupLocalId
-        sheetGroupName
-        referencer
-        reviewee
-        topReviewers
-        secondReviewers
-        createdAt
-        updatedAt
-        revieweeEmployee {
-          companyID
-          username
-          localID
-          employeeGroupLocalId
-          superiorUsername
-          firstName
-          lastName
-          grade
-          email
-          sub
-          manager
-          isCompanyAdmin
-          isDeleted
-          createdAt
-          updatedAt
-          company {
-            id
-            name
-            startMonth
-            shortName
-            url
-            createdAt
-            updatedAt
-          }
-          superior {
-            companyID
-            username
-            localID
-            employeeGroupLocalId
-            superiorUsername
-            firstName
-            lastName
-            grade
-            email
-            sub
-            manager
-            isCompanyAdmin
-            isDeleted
-            createdAt
-            updatedAt
-            company {
-              id
-              name
-              startMonth
-              shortName
-              url
-              createdAt
-              updatedAt
-            }
-            superior {
-              companyID
-              username
-              localID
-              employeeGroupLocalId
-              superiorUsername
-              firstName
-              lastName
-              grade
-              email
-              sub
-              manager
-              isCompanyAdmin
-              isDeleted
-              createdAt
-              updatedAt
-              company {
-                id
-                name
-                startMonth
-                shortName
-                url
-                createdAt
-                updatedAt
-              }
-              superior {
-                companyID
-                username
-                localID
-                employeeGroupLocalId
-                superiorUsername
-                firstName
-                lastName
-                grade
-                email
-                sub
-                manager
-                isCompanyAdmin
-                isDeleted
-                createdAt
-                updatedAt
-                company {
-                  id
-                  name
-                  startMonth
-                  shortName
-                  url
-                  createdAt
-                  updatedAt
-                }
-                superior {
-                  companyID
-                  username
-                  localID
-                  employeeGroupLocalId
-                  superiorUsername
-                  firstName
-                  lastName
-                  grade
-                  email
-                  sub
-                  manager
-                  isCompanyAdmin
-                  isDeleted
-                  createdAt
-                  updatedAt
-                }
-                group {
-                  companyID
-                  localID
-                  name
-                  createdAt
-                  updatedAt
-                }
-              }
-              group {
-                companyID
-                localID
-                name
-                createdAt
-                updatedAt
-              }
-            }
-            group {
-              companyID
-              localID
-              name
-              createdAt
-              updatedAt
-            }
-          }
-          group {
-            companyID
-            localID
-            name
-            createdAt
-            updatedAt
-          }
-        }
-        secondEmployee {
-          companyID
-          username
-          localID
-          employeeGroupLocalId
-          superiorUsername
-          firstName
-          lastName
-          grade
-          email
-          sub
-          manager
-          isCompanyAdmin
-          isDeleted
-          createdAt
-          updatedAt
-          company {
-            id
-            name
-            startMonth
-            shortName
-            url
-            createdAt
-            updatedAt
-          }
-          superior {
-            companyID
-            username
-            localID
-            employeeGroupLocalId
-            superiorUsername
-            firstName
-            lastName
-            grade
-            email
-            sub
-            manager
-            isCompanyAdmin
-            isDeleted
-            createdAt
-            updatedAt
-            company {
-              id
-              name
-              startMonth
-              shortName
-              url
-              createdAt
-              updatedAt
-            }
-            superior {
-              companyID
-              username
-              localID
-              employeeGroupLocalId
-              superiorUsername
-              firstName
-              lastName
-              grade
-              email
-              sub
-              manager
-              isCompanyAdmin
-              isDeleted
-              createdAt
-              updatedAt
-              company {
-                id
-                name
-                startMonth
-                shortName
-                url
-                createdAt
-                updatedAt
-              }
-              superior {
-                companyID
-                username
-                localID
-                employeeGroupLocalId
-                superiorUsername
-                firstName
-                lastName
-                grade
-                email
-                sub
-                manager
-                isCompanyAdmin
-                isDeleted
-                createdAt
-                updatedAt
-                company {
-                  id
-                  name
-                  startMonth
-                  shortName
-                  url
-                  createdAt
-                  updatedAt
-                }
-                superior {
-                  companyID
-                  username
-                  localID
-                  employeeGroupLocalId
-                  superiorUsername
-                  firstName
-                  lastName
-                  grade
-                  email
-                  sub
-                  manager
-                  isCompanyAdmin
-                  isDeleted
-                  createdAt
-                  updatedAt
-                }
-                group {
-                  companyID
-                  localID
-                  name
-                  createdAt
-                  updatedAt
-                }
-              }
-              group {
-                companyID
-                localID
-                name
-                createdAt
-                updatedAt
-              }
-            }
-            group {
-              companyID
-              localID
-              name
-              createdAt
-              updatedAt
-            }
-          }
-          group {
-            companyID
-            localID
-            name
-            createdAt
-            updatedAt
-          }
-        }
-        section {
-          items {
-            sheetKeys
-            sectionCategoryLocalId
-            sectionCategoryName
-            companyID
-            reviewee
-            topReviewers
-            secondReviewers
-            referencer
-            createdAt
-            updatedAt
-            category {
-              companyID
-              localID
-              name
-              createdAt
-              updatedAt
-            }
-            objective {
-              items {
-                sectionKeys
-                createdAt
-                companyID
-                content
-                result
-                priority
-                selfEvaluation
-                firstEvaluation
-                lastEvaluation
-                progress
-                expStartDate
-                expDoneDate
-                reviewee
-                topReviewers
-                secondReviewers
-                referencer
-                updatedAt
-              }
-              nextToken
-            }
-          }
-          nextToken
-        }
-      }
-      nextToken
-    }
-  }
-`;
 export const getSection = /* GraphQL */ `
-  query GetSection($sheetKeys: ID!, $sectionCategoryLocalId: ID!) {
-    getSection(
-      sheetKeys: $sheetKeys
-      sectionCategoryLocalId: $sectionCategoryLocalId
-    ) {
-      sheetKeys
-      sectionCategoryLocalId
+  query GetSection($id: ID!) {
+    getSection(id: $id) {
+      id
+      sheetID
+      no
       sectionCategoryName
-      companyID
       reviewee
       topReviewers
       secondReviewers
       referencer
       createdAt
       updatedAt
-      category {
-        companyID
-        localID
-        name
-        createdAt
-        updatedAt
-      }
       objective {
         items {
-          sectionKeys
+          id
+          sectionID
           createdAt
           companyID
           content
@@ -3004,72 +3224,11 @@ export const getSection = /* GraphQL */ `
     }
   }
 `;
-export const listSections = /* GraphQL */ `
-  query ListSections(
-    $sheetKeys: ID
-    $sectionCategoryLocalId: ModelIDKeyConditionInput
-    $filter: ModelSectionFilterInput
-    $limit: Int
-    $nextToken: String
-    $sortDirection: ModelSortDirection
-  ) {
-    listSections(
-      sheetKeys: $sheetKeys
-      sectionCategoryLocalId: $sectionCategoryLocalId
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-      sortDirection: $sortDirection
-    ) {
-      items {
-        sheetKeys
-        sectionCategoryLocalId
-        sectionCategoryName
-        companyID
-        reviewee
-        topReviewers
-        secondReviewers
-        referencer
-        createdAt
-        updatedAt
-        category {
-          companyID
-          localID
-          name
-          createdAt
-          updatedAt
-        }
-        objective {
-          items {
-            sectionKeys
-            createdAt
-            companyID
-            content
-            result
-            priority
-            selfEvaluation
-            firstEvaluation
-            lastEvaluation
-            progress
-            expStartDate
-            expDoneDate
-            reviewee
-            topReviewers
-            secondReviewers
-            referencer
-            updatedAt
-          }
-          nextToken
-        }
-      }
-      nextToken
-    }
-  }
-`;
 export const getObjective = /* GraphQL */ `
-  query GetObjective($sectionKeys: ID!, $createdAt: AWSDateTime!) {
-    getObjective(sectionKeys: $sectionKeys, createdAt: $createdAt) {
-      sectionKeys
+  query GetObjective($id: ID!) {
+    getObjective(id: $id) {
+      id
+      sectionID
       createdAt
       companyID
       content
@@ -3089,43 +3248,214 @@ export const getObjective = /* GraphQL */ `
     }
   }
 `;
-export const listObjectives = /* GraphQL */ `
-  query ListObjectives(
-    $sectionKeys: ID
-    $createdAt: ModelStringKeyConditionInput
-    $filter: ModelObjectiveFilterInput
-    $limit: Int
-    $nextToken: String
-    $sortDirection: ModelSortDirection
-  ) {
-    listObjectives(
-      sectionKeys: $sectionKeys
-      createdAt: $createdAt
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-      sortDirection: $sortDirection
-    ) {
-      items {
-        sectionKeys
-        createdAt
-        companyID
-        content
-        result
-        priority
-        selfEvaluation
-        firstEvaluation
-        lastEvaluation
-        progress
-        expStartDate
-        expDoneDate
-        reviewee
-        topReviewers
-        secondReviewers
-        referencer
-        updatedAt
+export const getReport = /* GraphQL */ `
+  query GetReport($id: ID!) {
+    getReport(id: $id) {
+      id
+      sub
+      date
+      reviewee
+      reviewer
+      companyID
+      referencer
+      revieweeComments {
+        work
+        other
+        status
       }
-      nextToken
+      reviewerComments {
+        superior
+      }
+      workStatus
+      createdAt
+      updatedAt
+      revieweeEmployee {
+        username
+        companyID
+        no
+        groupID
+        superiorUsername
+        firstName
+        lastName
+        grade
+        email
+        sub
+        manager
+        isCompanyAdmin
+        isDeleted
+        createdAt
+        updatedAt
+        company {
+          id
+          name
+          startMonth
+          shortName
+          url
+          createdAt
+          updatedAt
+        }
+        superior {
+          username
+          companyID
+          no
+          groupID
+          superiorUsername
+          firstName
+          lastName
+          grade
+          email
+          sub
+          manager
+          isCompanyAdmin
+          isDeleted
+          createdAt
+          updatedAt
+          company {
+            id
+            name
+            startMonth
+            shortName
+            url
+            createdAt
+            updatedAt
+          }
+          superior {
+            username
+            companyID
+            no
+            groupID
+            superiorUsername
+            firstName
+            lastName
+            grade
+            email
+            sub
+            manager
+            isCompanyAdmin
+            isDeleted
+            createdAt
+            updatedAt
+            company {
+              id
+              name
+              startMonth
+              shortName
+              url
+              createdAt
+              updatedAt
+            }
+            superior {
+              username
+              companyID
+              no
+              groupID
+              superiorUsername
+              firstName
+              lastName
+              grade
+              email
+              sub
+              manager
+              isCompanyAdmin
+              isDeleted
+              createdAt
+              updatedAt
+              company {
+                id
+                name
+                startMonth
+                shortName
+                url
+                createdAt
+                updatedAt
+              }
+              superior {
+                username
+                companyID
+                no
+                groupID
+                superiorUsername
+                firstName
+                lastName
+                grade
+                email
+                sub
+                manager
+                isCompanyAdmin
+                isDeleted
+                createdAt
+                updatedAt
+                company {
+                  id
+                  name
+                  startMonth
+                  shortName
+                  url
+                  createdAt
+                  updatedAt
+                }
+                superior {
+                  username
+                  companyID
+                  no
+                  groupID
+                  superiorUsername
+                  firstName
+                  lastName
+                  grade
+                  email
+                  sub
+                  manager
+                  isCompanyAdmin
+                  isDeleted
+                  createdAt
+                  updatedAt
+                }
+                group {
+                  id
+                  companyID
+                  no
+                  name
+                  createdAt
+                  updatedAt
+                }
+              }
+              group {
+                id
+                companyID
+                no
+                name
+                createdAt
+                updatedAt
+              }
+            }
+            group {
+              id
+              companyID
+              no
+              name
+              createdAt
+              updatedAt
+            }
+          }
+          group {
+            id
+            companyID
+            no
+            name
+            createdAt
+            updatedAt
+          }
+        }
+        group {
+          id
+          companyID
+          no
+          name
+          createdAt
+          updatedAt
+        }
+      }
     }
   }
 `;

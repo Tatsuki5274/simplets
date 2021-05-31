@@ -35,35 +35,54 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-var client_1 = require("../client");
-var mutations_1 = require("../graphql/mutations");
-function default_1(username, sub, companyId) {
+var aws_sdk_1 = __importDefault(require("aws-sdk"));
+var process_1 = require("process");
+aws_sdk_1.default.config.update({ region: "ap-northeast-1" });
+function default_1(record) {
     return __awaiter(this, void 0, void 0, function () {
-        var param, updated, e_1;
+        var cognitoidentityserviceprovider, dynamoDb, keys, newImage, oldImage, newCompanyId, oldCompanyId, oldIsCompanyAdmin, newIsCompanyAdmin, username, params, result;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
-                    param = {
-                        input: {
-                            companyID: companyId,
-                            username: username,
-                            sub: sub,
-                        },
+                    cognitoidentityserviceprovider = new aws_sdk_1.default.CognitoIdentityServiceProvider();
+                    dynamoDb = record["dynamodb"];
+                    keys = dynamoDb["Keys"];
+                    newImage = dynamoDb["NewImage"];
+                    oldImage = dynamoDb["OldImage"];
+                    newCompanyId = newImage["companyID"].S;
+                    oldCompanyId = oldImage["companyID"].S;
+                    oldIsCompanyAdmin = oldImage["isCompanyAdmin"].BOOL;
+                    newIsCompanyAdmin = newImage["isCompanyAdmin"].BOOL;
+                    username = keys["username"].S;
+                    if (!process_1.env.AUTH_SCCSYSTEME53C89F0_USERPOOLID) return [3, 2];
+                    if (!(oldCompanyId !== newCompanyId ||
+                        oldIsCompanyAdmin !== newIsCompanyAdmin)) return [3, 2];
+                    params = {
+                        UserAttributes: [
+                            {
+                                Name: "custom:companyId",
+                                Value: String(newCompanyId),
+                            },
+                            {
+                                Name: "custom:isCompanyAdmin",
+                                Value: String(newIsCompanyAdmin),
+                            },
+                        ],
+                        UserPoolId: process_1.env.AUTH_SCCSYSTEME53C89F0_USERPOOLID,
+                        Username: username,
                     };
-                    _a.label = 1;
+                    return [4, cognitoidentityserviceprovider
+                            .adminUpdateUserAttributes(params)
+                            .promise()];
                 case 1:
-                    _a.trys.push([1, 3, , 4]);
-                    return [4, client_1.graphqlMutation(mutations_1.updateEmployee, param)];
-                case 2:
-                    updated = _a.sent();
-                    console.log("result", updated);
-                    return [3, 4];
-                case 3:
-                    e_1 = _a.sent();
-                    console.log(JSON.stringify(e_1, null, 2));
-                    return [3, 4];
-                case 4: return [2, 1];
+                    result = _a.sent();
+                    console.log(JSON.stringify(result));
+                    _a.label = 2;
+                case 2: return [2];
             }
         });
     });

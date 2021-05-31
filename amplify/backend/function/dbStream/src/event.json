@@ -1,90 +1,81 @@
 {
   "Records":[
-     {
-        "eventID":"1",
-        "eventName":"INSERT",
-        "eventVersion":"1.0",
-        "eventSource":"aws:dynamodb",
-        "awsRegion":"ap-northeast-1",
-        "dynamodb":{
-           "Keys":{
-              "Id":{
-                 "N":"101"
-              }
-           },
-           "NewImage":{
-              "Message":{
-                 "S":"New item!"
+   {
+      "eventID": "ed1118af5569344191aa820e6a039c9d",
+      "eventName": "INSERT",
+      "eventVersion": "1.1",
+      "eventSource": "aws:dynamodb",
+      "awsRegion": "ap-northeast-1",
+      "dynamodb": {
+          "ApproximateCreationDateTime": 1616566778,
+          "Keys": {
+              "companyID": {
+                  "S": "SCC"
               },
-              "Id":{
-                 "N":"101"
+              "username": {
+                  "S": "yhamazaki+4@sisco-consulting.co.jp"
               }
-           },
-           "SequenceNumber":"111",
-           "SizeBytes":26,
-           "StreamViewType":"NEW_AND_OLD_IMAGES"
-        },
-        "eventSourceARN": "arn:aws:dynamodb:ap-northeast-1:894246227847:table/Sheet-32u27eia4fbxxnlsctqalnh6ey-dev/stream/2020-12-22T05:07:21.407"
+          },
+          "NewImage": {
+              "lastName": {
+                  "S": "濱嵜"
+              },
+              "sub": {
+                  "S": "a"
+              },
+              "superiorUsername": {
+                  "S": ""
+              },
+              "manager": {
+                  "S": "NORMAL"
+              },
+              "__typename": {
+                  "S": "Employee"
+              },
+              "manager#isDeleted": {
+                  "S": "${ctx.args.input.manager}#${ctx.args.input.isDeleted}"
+              },
+              "no": {
+                  "S": "000000001"
+              },
+              "createdAt": {
+                  "S": "2021-01-07T02:37:15.233Z"
+              },
+              "firstName": {
+                  "S": "社長"
+              },
+              "companyID": {
+                  "S": "SCC"
+              },
+              "isCompanyAdmin": {
+                  "BOOL": false
+              },
+              "isDeleted": {
+                  "S": "FALSE"
+              },
+              "grade": {
+                  "N": "10"
+              },
+              "email": {
+                  "S": "yhamazaki+4@sisco-consulting.co.jp"
+              },
+              "groupID": {
+                  "S": "20"
+              },
+              "updatedAt": {
+                  "S": "2021-03-01T03:19:53.804Z"
+              },
+              "username": {
+                  "S": "yhamazaki+4@sisco-consulting.co.jp"
+              }
+          },
+          "SequenceNumber": "365755700000000003597038689",
+          "SizeBytes": 437,
+          "StreamViewType": "NEW_AND_OLD_IMAGES"
       },
-     {
-        "eventID":"2",
-        "eventName":"MODIFY",
-        "eventVersion":"1.0",
-        "eventSource":"aws:dynamodb",
-        "awsRegion":"us-east-1",
-        "dynamodb":{
-           "Keys":{
-              "Id":{
-                 "N":"101"
-              }
-           },
-           "NewImage":{
-              "Message":{
-                 "S":"This item has changed"
-              },
-              "Id":{
-                 "N":"101"
-              }
-           },
-           "OldImage":{
-              "Message":{
-                 "S":"New item!"
-              },
-              "Id":{
-                 "N":"101"
-              }
-           },
-           "SequenceNumber":"222",
-           "SizeBytes":59,
-           "StreamViewType":"NEW_AND_OLD_IMAGES"
-        },
-        "eventSourceARN": "arn:aws:dynamodb:ap-northeast-1:894246227847:table/Sheet-32u27eia4fbxxnlsctqalnh6ey-dev/stream/2020-12-22T05:07:21.407"
-     },
-     {
-        "eventID":"3",
-        "eventName":"REMOVE",
-        "eventVersion":"1.0",
-        "eventSource":"aws:dynamodb",
-        "awsRegion":"us-east-1",
-        "dynamodb":{
-           "Keys":{
-              "Id":{
-                 "N":"101"
-              }
-           },
-           "OldImage":{
-              "Message":{
-                 "S":"This item has changed"
-              },
-              "Id":{
-                 "N":"101"
-              }
-           },
-           "SequenceNumber":"333",
-           "SizeBytes":38,
-           "StreamViewType":"NEW_AND_OLD_IMAGES"
-        },
-        "eventSourceARN": "arn:aws:dynamodb:ap-northeast-1:894246227847:table/Sheet-32u27eia4fbxxnlsctqalnh6ey-dev/stream/2020-12-22T05:07:21.407"
-     }
+      "eventSourceARN": "arn:aws:dynamodb:ap-northeast-1:251893532135:table/Employee-tax5rtw73nasnojjpddpxxkjo4-dev/stream/2021-01-06T07:55:38.023"
+  }
+  
+  
   ]
 }

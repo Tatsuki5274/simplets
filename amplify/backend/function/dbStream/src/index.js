@@ -40,75 +40,69 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.handler = void 0;
-var aws_sdk_1 = __importDefault(require("aws-sdk"));
-var process_1 = require("process");
-var updateEmployeeSub_1 = __importDefault(require("./scripts/updateEmployeeSub"));
-aws_sdk_1.default.config.update({ region: 'ap-northeast-1' });
+var onUpdateEmployee_1 = __importDefault(require("./onUpdateEmployee"));
+var onCreateEmployee_1 = __importDefault(require("./onCreateEmployee"));
+var onDeleteEmployee_1 = __importDefault(require("./onDeleteEmployee"));
 var handler = function (event) { return __awaiter(void 0, void 0, void 0, function () {
-    var cognitoidentityserviceprovider, _a, params, result, userName, sub, companyId, updated, _i, _b, record, ddbARN, ddbTable, typeName, response;
-    var _c, _d, _e, _f, _g, _h, _j;
-    return __generator(this, function (_k) {
-        switch (_k.label) {
+    var _i, _a, record, ddbARN, ddbTable, typeName, eventName, _b, _c, e_1, response;
+    return __generator(this, function (_d) {
+        switch (_d.label) {
             case 0:
-                cognitoidentityserviceprovider = new aws_sdk_1.default.CognitoIdentityServiceProvider();
-                _a = event.Records[0].eventName;
-                switch (_a) {
-                    case "INSERT": return [3, 1];
-                }
-                return [3, 6];
+                _d.trys.push([0, 14, , 15]);
+                _i = 0, _a = event.Records;
+                _d.label = 1;
             case 1:
-                if (!process_1.env.AUTH_SCCSYSTEME53C89F0_USERPOOLID) return [3, 5];
-                params = {
-                    UserPoolId: process_1.env.AUTH_SCCSYSTEME53C89F0_USERPOOLID,
-                    Username: 'admintest1',
-                    DesiredDeliveryMediums: [
-                        "EMAIL",
-                    ],
-                    TemporaryPassword: 'pass1234',
-                    UserAttributes: [
-                        {
-                            Name: 'email',
-                            Value: 'yhamazaki@sisco-consulting.co.jp'
-                        },
-                        {
-                            Name: 'email_verified',
-                            Value: 'false'
-                        },
-                        {
-                            Name: 'custom:companyId',
-                            Value: 'SCC'
-                        },
-                    ],
-                };
-                return [4, cognitoidentityserviceprovider.adminCreateUser(params).promise()];
-            case 2:
-                result = _k.sent();
-                console.log(JSON.stringify(result));
-                userName = (_c = result.User) === null || _c === void 0 ? void 0 : _c.Username;
-                sub = (_f = (_e = (_d = result.User) === null || _d === void 0 ? void 0 : _d.Attributes) === null || _e === void 0 ? void 0 : _e.find(function (element) {
-                    return element.Name === "sub";
-                })) === null || _f === void 0 ? void 0 : _f.Value;
-                companyId = (_j = (_h = (_g = result.User) === null || _g === void 0 ? void 0 : _g.Attributes) === null || _h === void 0 ? void 0 : _h.find(function (element) {
-                    return element.Name === "custom:companyId";
-                })) === null || _j === void 0 ? void 0 : _j.Value;
-                if (!(userName && sub && companyId)) return [3, 4];
-                return [4, updateEmployeeSub_1.default(userName, sub, companyId)];
-            case 3:
-                updated = _k.sent();
-                return [3, 5];
-            case 4: throw new Error("required field is undefined");
-            case 5: return [3, 7];
-            case 6: throw new Error("不明なイベントが指定されました");
-            case 7:
-                for (_i = 0, _b = event.Records; _i < _b.length; _i++) {
-                    record = _b[_i];
-                    ddbARN = record['eventSourceARN'];
-                    ddbTable = ddbARN.split(':')[5].split('/')[1];
-                    typeName = ddbTable.split('-')[0];
+                if (!(_i < _a.length)) return [3, 13];
+                record = _a[_i];
+                ddbARN = record["eventSourceARN"];
+                ddbTable = ddbARN.split(":")[5].split("/")[1];
+                typeName = ddbTable.split("-")[0];
+                eventName = record["eventName"];
+                console.log("typeName:", typeName);
+                console.log(JSON.stringify(record));
+                _b = typeName;
+                switch (_b) {
+                    case "Employee": return [3, 2];
                 }
+                return [3, 11];
+            case 2:
+                _c = eventName;
+                switch (_c) {
+                    case "INSERT": return [3, 3];
+                    case "MODIFY": return [3, 5];
+                    case "REMOVE": return [3, 7];
+                }
+                return [3, 9];
+            case 3: return [4, onCreateEmployee_1.default(record)];
+            case 4:
+                _d.sent();
+                return [3, 10];
+            case 5: return [4, onUpdateEmployee_1.default(record)];
+            case 6:
+                _d.sent();
+                return [3, 10];
+            case 7: return [4, onDeleteEmployee_1.default(record)];
+            case 8:
+                _d.sent();
+                return [3, 10];
+            case 9: throw new Error("不明なイベントが指定されました");
+            case 10: return [3, 12];
+            case 11: throw new Error("不明なイベントが指定されました");
+            case 12:
+                _i++;
+                return [3, 1];
+            case 13: return [3, 15];
+            case 14:
+                e_1 = _d.sent();
+                console.error("Error", e_1);
+                return [2, {
+                        statusCode: 500,
+                        message: e_1.name + ": " + e_1.message,
+                    }];
+            case 15:
                 response = {
                     statusCode: 200,
-                    body: "result",
+                    message: "Operation successfully completed",
                 };
                 return [2, response];
         }

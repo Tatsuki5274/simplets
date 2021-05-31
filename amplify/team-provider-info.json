@@ -174,11 +174,11 @@
         },
         "resolvers": {
           "deploymentBucketName": "amplify-sccsystem-dev-110829-deployment",
-          "s3Key": "amplify-builds/resolvers-4d516e746b3530745035-build.zip"
+          "s3Key": "amplify-builds/resolvers-306c4e6c596c4e584145-build.zip"
         },
         "dbStream": {
           "deploymentBucketName": "amplify-sccsystem-dev-110829-deployment",
-          "s3Key": "amplify-builds/dbStream-64384c7a565745567076-build.zip"
+          "s3Key": "amplify-builds/dbStream-58666935475144376878-build.zip"
         }
       }
     }

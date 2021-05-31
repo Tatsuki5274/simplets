@@ -44,7 +44,7 @@ var aws_appsync_1 = __importDefault(require("aws-appsync"));
 var process_1 = require("process");
 var aws_sdk_1 = __importDefault(require("aws-sdk"));
 var graphql_tag_1 = __importDefault(require("graphql-tag"));
-require('isomorphic-fetch');
+require("isomorphic-fetch");
 var client = getClient();
 function getClient() {
     var endpoint = process_1.env.API_SCCGQL_GRAPHQLAPIENDPOINTOUTPUT;
@@ -60,7 +60,7 @@ function getClient() {
             region: region,
             auth: {
                 type: "AWS_IAM",
-                credentials: function () { return credentials; }
+                credentials: function () { return credentials; },
             },
             disableOffline: true,
         });
@@ -70,7 +70,7 @@ function getClient() {
         console.log("Error GraphQL Client", {
             endpoint: endpoint,
             region: region,
-            credentials: credentials
+            credentials: credentials,
         });
         return null;
     }
@@ -84,7 +84,7 @@ function graphqlQuery(query, params) {
                     if (!client) return [3, 2];
                     return [4, client.query({
                             query: graphql_tag_1.default(query),
-                            variables: params
+                            variables: params,
                         })];
                 case 1:
                     result = _a.sent();

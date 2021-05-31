@@ -1,92 +1,68 @@
 // AUTH_SCCSYSTEME53C89F0_USERPOOLID
 
-import AWS from "aws-sdk";
-import { env } from "process";
-import updateEmployeeSub from "./scripts/updateEmployeeSub";
+// import AWS from "aws-sdk";
+import onUpdateEmployee from "./onUpdateEmployee";
+import onCreateEmployee from "./onCreateEmployee";
+import onDeleteEmployee from "./onDeleteEmployee";
+// import { env } from "process";
+// import updateEmployeeSub from "./scripts/updateEmployeeSub";
 
-AWS.config.update({ region: 'ap-northeast-1' });
+// AWS.config.update({ region: 'ap-northeast-1' });
 export const handler = async (event: any) => {
-    // Todo eventの型定義
+  // Todo eventの型定義
 
-    const cognitoidentityserviceprovider = new AWS.CognitoIdentityServiceProvider();
-
+  // const cognitoidentityserviceprovider = new AWS.CognitoIdentityServiceProvider();
+  try {
     for (const record of event.Records) {
-        const ddbARN = record['eventSourceARN']
-        const ddbTable = ddbARN.split(':')[5].split('/')[1]     // dynamoDBテーブル名 例. Sheet-xxxxxxx-dev, Group-xxxxxxxx-prodなど
-        const typeName = ddbTable.split('-')[0]                 // GraphQLスキーマ Type名 例. Sheet, Groupなど
-        const eventName = record['eventName']                   // イベント名 例、INSERTなど
+      const ddbARN = record["eventSourceARN"];
+      const ddbTable = ddbARN.split(":")[5].split("/")[1]; // dynamoDBテーブル名 例. Sheet-xxxxxxx-dev, Group-xxxxxxxx-prodなど
+      const typeName = ddbTable.split("-")[0]; // GraphQLスキーマ Type名 例. Sheet, Groupなど
+      const eventName = record["eventName"]; // イベント名 例、INSERTなど
 
-        switch (typeName) {
-            case "Employee":
-                switch (eventName) {
-                    case "INSERT":
-                        if (env.AUTH_SCCSYSTEME53C89F0_USERPOOLID) {
-                            var params = {
-                                UserPoolId: env.AUTH_SCCSYSTEME53C89F0_USERPOOLID, /* required */
-                                Username: 'admintest1', /* required */
-                                // ClientMetadata: {
-                                //   '<StringType>': 'STRING_VALUE',
-                                //   /* '<StringType>': ... */
-                                // },
-                                DesiredDeliveryMediums: [
-                                    "EMAIL",
-                                    /* more items */
-                                ],
-                                // ForceAliasCreation: true || false,
-                                // MessageAction: "SUPPRESS",
-                                TemporaryPassword: 'pass1234',
-                                UserAttributes: [
-                                    {
-                                        Name: 'email', /* required */
-                                        Value: 'yhamazaki@sisco-consulting.co.jp'
-                                    },
-                                    {
-                                        Name: 'email_verified', /* required */
-                                        Value: 'false'
-                                    },
-                                    {
-                                        Name: 'custom:companyId', /* required */
-                                        Value: 'SCC'
-                                    },
-                                    /* more items */
-                                ],
-                                // ValidationData: [
-                                //   {
-                                //     Name: 'STRING_VALUE', /* required */
-                                //     Value: 'STRING_VALUE'
-                                //   },
-                                //   /* more items */
-                                // ]
-                            };
-                            const result = await cognitoidentityserviceprovider.adminCreateUser(params).promise();
-                            console.log(JSON.stringify(result))
+      console.log("typeName:", typeName);
+      console.log(JSON.stringify(record));
 
-                            const userName = result.User?.Username;
-                            const sub = result.User?.Attributes?.find(element => {
-                                return element.Name === "sub"
-                            })?.Value
-                            const companyId = result.User?.Attributes?.find(element => {
-                                return element.Name === "custom:companyId"
-                            })?.Value
-                            if (userName && sub && companyId) {
-                                const updated = await updateEmployeeSub(userName, sub, companyId);
-                            } else {
-                                throw new Error("required field is undefined")
-                            }
-                        }
-                        break
-                    default:
-                        throw new Error("不明なイベントが指定されました");
-                }
-                break
-        }
+      switch (typeName) {
+        case "Employee":
+          switch (eventName) {
+            case "INSERT":
+              // console.log("record:", JSON.stringify(record))
+              // const dynamoDb = record["dynamodb"];
+              // const newImage = dynamoDb['NewImage'];
+              // const email = newImage['email'].S;
+              // const companyId = newImage['companyID'].S;
+              // const isCompanyAdmin = newImage['isCompanyAdmin'].BOOL;
+              // const username = newImage['username'].S;
+
+              await onCreateEmployee(record);
+
+              break;
+            case "MODIFY":
+              await onUpdateEmployee(record);
+              break;
+            case "REMOVE":
+              await onDeleteEmployee(record);
+              break;
+            default:
+              throw new Error("不明なイベントが指定されました");
+          }
+          break;
+        default:
+          throw new Error("不明なイベントが指定されました");
+      }
     }
-
-    // Todo レスポンスの検討（設計
-    const response = {
-        statusCode: 200,
-        body: "event",
+  } catch (e) {
+    console.error("Error", e);
+    return {
+      statusCode: 500,
+      message: `${e.name}: ${e.message}`,
     };
+  }
 
-    return response;
+  const response = {
+    statusCode: 200,
+    message: "Operation successfully completed",
+    //result: result
+  };
+  return response;
 };
