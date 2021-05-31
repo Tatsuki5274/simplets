@@ -3,25 +3,25 @@ import RevieweeSheetShow from "reviewee/sheet/index/index";
 import ListPerformanceEvalution from "reviewee/list/performance";
 import EvaluationScreen from "reviewer/sheet";
 import { PDFPage } from "views/pdf/page";
-import EvaluationList from "views/components/pages/evaluation/reviewer/EvaluationList"; //総合評価参照画面 テスト用
-import RevieweeReportList from "views/components/pages/report/reviewee/RevieweeReportList";
-import EditReportScreeen from "views/components/pages/report/reviewer/EditReportScreeen";
-import ReportListScreen from "views/components/pages/report/reviewer/ReportListScreen";
-import ChangeReportScreen from "views/components/pages/report/reviewee/ChangeReportScreen";
-import ReviewerReportList from "views/components/pages/report/reviewer/ReviewerReportListCalendar";
-import ProgressReferenceScreen from "views/components/pages/progress/reviewee/ProgressReferenceScreen";
+import EditReportScreeen from "views/components/report/reviewer/pages/EditReportScreeen";
+import ChangeReportScreen from "views/components/report/reviewee/pages/ChangeReportScreen";
+import ProgressReferenceScreen from "views/components/evaluation/reviewee/pages/ProgressReferenceScreen";
 import React from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-import AdminEmployeeList from "views/components/pages/admin/employee/AdminEmployeeList";
-import AdminEmployeeCreate from "views/components/pages/admin/employee/AdminEmployeeCreate";
-import AdminEmployeeEdit from "views/components/pages/admin/employee/AdminEmployeeEdit";
-import AdminGroupCreatePage from "views/components/pages/admin/group/AdminGroupCreatePage";
-import AdminGroupListPage from "views/components/pages/admin/group/AdminGroupListPage";
-import AdminGroupChangePage from "views/components/pages/admin/group/AdminGroupChangePage";
-import AdminCategoryListPage from "views/components/pages/admin/category/AdminCategoryListPage";
-import AdminCategoryEditPage from "views/components/pages/admin/category/AdminCategoryEditPage";
-import AdminCategoryCreatePage from "views/components/pages/admin/category/AdminCategoryCreatePage";
-import { CreateReportScreen } from "views/components/pages/report/reviewee/CreateReportScreen";
+import AdminEmployeeCreate from "views/components/admin/employee/pages/AdminEmployeeCreate";
+import EvaluationList from "views/components/evaluation/reviewer/pages/EvaluationList";
+import RevieweeReportList from "views/components/report/reviewee/pages/RevieweeReportList";
+import AdminCategoryCreatePage from "views/components/admin/category/pages/AdminCategoryCreatePage";
+import AdminCategoryEditPage from "views/components/admin/category/pages/AdminCategoryEditPage";
+import AdminCategoryListPage from "views/components/admin/category/pages/AdminCategoryListPage";
+import AdminEmployeeEdit from "views/components/admin/employee/pages/AdminEmployeeEdit";
+import AdminEmployeeList from "views/components/admin/employee/pages/AdminEmployeeList";
+import AdminGroupChangePage from "views/components/admin/group/pages/AdminGroupChangePage";
+import AdminGroupCreatePage from "views/components/admin/group/pages/AdminGroupCreatePage";
+import AdminGroupListPage from "views/components/admin/group/pages/AdminGroupListPage";
+import { CreateReportScreen } from "views/components/report/reviewee/pages/CreateReportScreen";
+import ReportListScreen from "views/components/report/reviewer/pages/ReportListScreen";
+import ReviewerReportListCalendar from "views/components/report/reviewer/pages/ReviewerReportListCalendar";
 
 export default function Router() {
   return (
@@ -87,7 +87,7 @@ export default function Router() {
         <Route
           exact
           path={routeBuilder.reviewerReportCalendarPaht(":date")}
-          component={ReviewerReportList}
+          component={ReviewerReportListCalendar}
         />
 
         {/* 管理画面 */}

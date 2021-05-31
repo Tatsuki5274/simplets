@@ -3,8 +3,8 @@ import React, { useContext, useEffect, useState } from "react";
 import style from "./headerStyle.module.scss";
 import { Navbar } from "react-bootstrap";
 import { AmplifySignOut } from "@aws-amplify/ui-react";
-import HeaderLogo from "views/components/organisms/common/HeaderLogo";
 import { Employee } from "API";
+import HeaderLogo from "views/components/common/organisms/HeaderLogo";
 
 function HeaderComponents() {
   //所属する部署と社員名のデータを取得

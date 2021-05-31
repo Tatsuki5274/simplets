@@ -2,7 +2,7 @@ import { SignIn } from "aws-amplify-react";
 import { inputFieldStyle } from "common/globalStyle.module.scss";
 import React from "react";
 import { Button, Container, Form } from "react-bootstrap";
-import LoginLogo from "views/components/organisms/auth/LoginLogo";
+import LoginLogo from "views/auth/signIn/LoginLogo";
 
 export default class CustomSignIn extends SignIn {
   constructor(props: any) {

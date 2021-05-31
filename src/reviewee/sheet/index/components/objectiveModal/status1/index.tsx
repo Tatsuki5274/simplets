@@ -7,8 +7,8 @@ import { updateObjective } from "graphql/mutations";
 import { inputFieldStyle } from "common/globalStyle.module.scss";
 import * as Yup from "yup";
 import { Objective } from "API";
-import ErrorText from "views/components/atoms/ErrorText";
 import { ErrorContext } from "App";
+import ErrorText from "views/components/common/atoms/ErrorText";
 
 type Props = {
   objective: Objective;

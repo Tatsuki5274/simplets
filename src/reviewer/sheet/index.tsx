@@ -11,7 +11,7 @@ import { ReviewerSheetPagesStatus10 } from "./detail/pages/10.result";
 import { ReviewerSheetPagesStatus12Second } from "./detail/pages/12.confirm/second";
 import { ReviewerSheetPagesStatus12Top } from "./detail/pages/12.confirm/top";
 import { ReviewerSheetPagesStatus13 } from "./detail/pages/13.firstComment";
-import Header from "views/components/organisms/common/Header";
+import Header from "views/components/common/organisms/Header";
 import { SheetDao } from "lib/dao/sheetDao";
 
 export const SheetContext = createContext<{

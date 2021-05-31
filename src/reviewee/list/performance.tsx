@@ -18,13 +18,8 @@ import {
   ListCategorysCompanyQueryVariables,
   Sheet,
 } from "API";
-import LeftBox from "views/components/templates/LeftBox";
-import RightBox from "views/components/templates/RightBox";
-import Sidebar from "views/components/templates/Sidebar";
-import Content from "views/components/templates/Content";
-import Container from "views/components/templates/Container";
-import Title from "views/components/molecules/Title";
-import Header from "views/components/organisms/common/Header";
+import Container from "views/components/common/templates/Container";
+import Header from "views/components/common/organisms/Header";
 import { routeBuilder } from "router";
 import {
   getEmployee,
@@ -32,6 +27,11 @@ import {
   listSheetsReviewee,
 } from "graphql/queries";
 import { createSection, createSheet } from "graphql/mutations";
+import Title from "views/components/common/molecules/Title";
+import Content from "views/components/common/templates/Content";
+import LeftBox from "views/components/common/templates/LeftBox";
+import RightBox from "views/components/common/templates/RightBox";
+import Sidebar from "views/components/common/templates/Sidebar";
 
 const sortSheet = (a: Sheet, b: Sheet) => {
   if (a.year && b.year && a.year < b.year) {

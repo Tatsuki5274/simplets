@@ -27,17 +27,17 @@ import { RevieweeSheetObjectiveEditableStatus3 } from "./components/objective/ed
 import { YearlyTableStatus10 } from "./components/yearly/status10";
 import { OverEvaluationTableStatus10 } from "./components/overEvaluation/status10";
 import { RevieweeSheetObjectiveReadonlyStatus10 } from "./components/objective/readonly/status10";
-import InterviewTable from "views/components/organisms/evaluation/InterviewTable/InterviewTable";
-import LeftBox from "views/components/templates/LeftBox";
-import RightBox from "views/components/templates/RightBox";
-import Content from "views/components/templates/Content";
-import Sidebar from "views/components/templates/Sidebar";
 import { GetSheetQueryVariables, Objective, Section, Sheet } from "API";
-import ScrollTable from "views/components/molecules/ScrollTable";
-import Container from "views/components/templates/Container";
-import Title from "views/components/molecules/Title";
-import Header from "views/components/organisms/common/Header";
+import Container from "views/components/common/templates/Container";
+import Header from "views/components/common/organisms/Header";
 import { routeBuilder } from "router";
+import ScrollTable from "views/components/common/molecules/ScrollTable";
+import Title from "views/components/common/molecules/Title";
+import Content from "views/components/common/templates/Content";
+import LeftBox from "views/components/common/templates/LeftBox";
+import RightBox from "views/components/common/templates/RightBox";
+import Sidebar from "views/components/common/templates/Sidebar";
+import InterviewTable from "views/components/evaluation/reviewee/organisms/InterviewTable";
 
 export const SheetContext = createContext<{
   sheet: Sheet | null;

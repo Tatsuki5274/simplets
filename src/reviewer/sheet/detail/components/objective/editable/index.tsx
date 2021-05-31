@@ -5,9 +5,9 @@ import style from "../common/style.module.scss";
 import * as APIt from "API";
 import { ObjectiveDao } from "lib/dao/objectiveDao";
 import { updateObjective } from "graphql/mutations";
-import ScrollTable from "views/components/molecules/ScrollTable";
 import { Objective, Section } from "API";
 import { ErrorContext } from "App";
+import ScrollTable from "views/components/common/molecules/ScrollTable";
 
 type Props = {
   sections: Section[];

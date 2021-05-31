@@ -2,7 +2,7 @@ import { Section, Objective } from "API";
 import { tableHeaderStyle } from "common/globalStyle.module.scss";
 import dateFormat from "dateformat";
 import React from "react";
-import ScrollTable from "views/components/molecules/ScrollTable";
+import ScrollTable from "views/components/common/molecules/ScrollTable";
 import style from "../common/style.module.scss";
 
 type Props = {

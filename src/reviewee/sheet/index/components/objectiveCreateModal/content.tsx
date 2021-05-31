@@ -6,7 +6,7 @@ import { ErrorMessage, FormikProps } from "formik";
 import { inputFieldStyle } from "common/globalStyle.module.scss";
 import { TypeForm } from ".";
 import { Sheet } from "API";
-import ErrorText from "views/components/atoms/ErrorText";
+import ErrorText from "views/components/common/atoms/ErrorText";
 
 type Props = {
   year: number;

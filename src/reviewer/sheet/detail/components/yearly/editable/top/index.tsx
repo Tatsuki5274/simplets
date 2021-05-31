@@ -2,7 +2,7 @@ import { Sheet } from "API";
 import { ErrorMessage } from "formik";
 import React from "react";
 import { Badge, Form, Table } from "react-bootstrap";
-import ErrorText from "views/components/atoms/ErrorText";
+import ErrorText from "views/components/common/atoms/ErrorText";
 import style from "../../common/style.module.scss";
 
 type Props = {

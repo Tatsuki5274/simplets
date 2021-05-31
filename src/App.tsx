@@ -23,13 +23,13 @@ import * as APIt from "API";
 //カスタムコンポーネント
 import { EmployeeDao } from "lib/dao/employeeDao";
 import Router from "router";
-import { HeaderProps } from "views/components/organisms/common/Header";
-import ErrorMessageView from "views/components/templates/ErrorMessageView";
+import { HeaderProps } from "views/components/common/organisms/Header";
 import { Employee, EmployeeType } from "API";
-import { LinkType } from "views/components/atoms/Types";
 import { createSidebarElements } from "lib/util";
 import { getEmployee } from "graphql/queries";
 import CustomSignIn from "views/auth/signIn";
+import { LinkType } from "views/components/common/atoms/Types";
+import ErrorMessageView from "views/components/common/templates/ErrorMessageView";
 Amplify.configure(awsconfig);
 
 // export type Sheet = Omit<Exclude<APIt.GetSheetQuery['getSheet'], null>, '__typename'>;
