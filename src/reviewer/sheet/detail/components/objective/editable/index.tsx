@@ -11,7 +11,7 @@ import ScrollTable from "views/components/common/molecules/ScrollTable";
 
 type Props = {
   sections: Section[];
-  onChange: (e: React.ChangeEvent<any>) => void;
+  onChange: (e: React.ChangeEvent<HTMLElement>) => void;
 };
 
 export const ReviewerSheetDetailObjectiveEditable = (props: Props) => {
