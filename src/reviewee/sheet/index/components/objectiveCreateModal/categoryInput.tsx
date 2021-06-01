@@ -4,7 +4,7 @@ import { Form } from "react-bootstrap";
 type Props = {
   sectionKeys: string;
   categoryName: string;
-  handleChange: any;
+  handleChange: React.ChangeEventHandler<HTMLInputElement>;
   defaultCheck: boolean;
   style: CSSProperties;
 };
