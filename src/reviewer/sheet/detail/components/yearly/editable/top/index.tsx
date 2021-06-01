@@ -6,7 +6,7 @@ import ErrorText from "views/components/common/atoms/ErrorText";
 import style from "../../common/style.module.scss";
 
 type Props = {
-  handleChange: (e: React.ChangeEvent<any>) => void;
+  handleChange: (e: React.ChangeEvent<HTMLElement>) => void;
   sheet: Sheet;
 };
 export const ReviewerSheetDetailYearlyEditableTop = (props: Props) => {
