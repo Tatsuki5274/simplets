@@ -5,7 +5,7 @@ import { Form } from "react-bootstrap";
 import style from "../common/style.module.scss";
 
 type Props = {
-  handleChange: (e: React.ChangeEvent<any>) => void;
+  handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   sheet: Sheet;
 };
 export const ReviewerSheetDetailCareerEditable = (props: Props) => {
