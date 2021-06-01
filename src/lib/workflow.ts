@@ -109,7 +109,7 @@ export function commandWorkFlow(
 
 function getEmployees(employee: Employee): Employee[] {
   const ret: Employee[] = [];
-  let work: any = employee;
+  let work: Employee | undefined = employee;
   do {
     ret.push(work);
     work = work.superior;
