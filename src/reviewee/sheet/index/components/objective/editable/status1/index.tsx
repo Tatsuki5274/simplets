@@ -48,7 +48,9 @@ export const RevieweeSheetObjectiveEditableStatus1 = (props: Props) => {
   }
 
   // Progress 更新
-  async function handleChangeProgress(event: any) {
+  async function handleChangeProgress(
+    event: React.ChangeEvent<HTMLInputElement>
+  ) {
     const objectiveProgress = parseInt(event.currentTarget.value);
 
     if (objective && objectiveProgress >= 0 && objectiveProgress <= 100) {
