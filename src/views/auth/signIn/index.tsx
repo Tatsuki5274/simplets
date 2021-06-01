@@ -1,11 +1,12 @@
 import { SignIn } from "aws-amplify-react";
+import { ISignInProps } from "aws-amplify-react/lib-esm/Auth/SignIn";
 import { inputFieldStyle } from "common/globalStyle.module.scss";
 import React from "react";
 import { Button, Container, Form } from "react-bootstrap";
 import LoginLogo from "views/auth/signIn/LoginLogo";
 
 export default class CustomSignIn extends SignIn {
-  constructor(props: any) {
+  constructor(props: ISignInProps) {
     super(props);
     this._validAuthStates = ["signIn", "signedOut", "signedUp"];
   }
@@ -34,7 +35,13 @@ export default class CustomSignIn extends SignIn {
           placeholder="******************"
           className={inputFieldStyle}
         />
-        <Button onClick={(event: any) => super.signIn(event)}>ログイン</Button>
+        <Button
+          onClick={(event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+            super.signIn(event);
+          }}
+        >
+          ログイン
+        </Button>
         <div>
           <p
             className="text-indigo cursor-pointer hover:text-indigo-darker"
