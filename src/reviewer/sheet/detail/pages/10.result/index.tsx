@@ -36,11 +36,16 @@ export const ReviewerSheetPagesStatus10 = (props: Props) => {
   const handleShow = () => setIsRemandModal(true);
 
   if (sheet) {
-    const evaluation: any = {};
+    const evaluation: { [index: string]: { lastEvaluation: string | null } } =
+      {};
     sheet.section?.items?.forEach((section) => {
       section?.objective?.items?.forEach((objective) => {
-        if (objective && objective.id) {
-          evaluation[`${objective.id}`] = objective.lastEvaluation?.toString();
+        if (objective && objective.id && objective.lastEvaluation) {
+          evaluation[`${objective.id}`] = {
+            lastEvaluation: objective.lastEvaluation
+              ? objective.lastEvaluation.toString()
+              : null,
+          };
         }
       });
     });
