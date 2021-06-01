@@ -5,7 +5,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { PDFTemplete } from "./templete";
 import * as APIt from "API";
 import { getStatusValue } from "lib/getStatusValue";
-import { Section, Sheet } from "API";
+import { Objective, Section, Sheet } from "API";
 import { EmployeeDao } from "lib/dao/employeeDao";
 
 type Props = {
@@ -16,12 +16,16 @@ type Props = {
   };
 };
 
-const sortObjective = function (a: any, b: any) {
-  if (a?.createdAt > b?.createdAt) {
-    return 1;
-  } else {
-    return -1;
+const sortObjective = function (a: Objective | null, b: Objective | null) {
+  // unsafe
+  if (a && b) {
+    if (a.createdAt && b.createdAt && a.createdAt > b.createdAt) {
+      return 1;
+    } else {
+      return -1;
+    }
   }
+  return 0;
 };
 const sortCategory = function (a: Section | null, b: Section | null) {
   if (a && b && a.no && b.no && a.no > b.no) {
