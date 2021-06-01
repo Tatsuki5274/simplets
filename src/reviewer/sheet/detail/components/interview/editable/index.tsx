@@ -5,7 +5,7 @@ import { Form, Table } from "react-bootstrap";
 import style from "../common/style.module.scss";
 
 type Props = {
-  handleChange: (e: React.ChangeEvent<any>) => void;
+  handleChange: (e: React.ChangeEvent<HTMLElement>) => void;
   sheet: Sheet;
 };
 
