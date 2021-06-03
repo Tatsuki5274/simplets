@@ -348,6 +348,7 @@ type Report
 @key(fields: ["sub", "date"], name: "ReportBySub", queryField: "listReportsSub")
 @key(fields: ["reviewee", "date"], name: "ReportByReviewee", queryField: "listReportsReviewee") # 非推奨
 @key(fields: ["companyID", "date"], name: "ReportByCompany", queryField: "listReportsCompanyDate")
+@key(fields: ["groupID"], name: "ReportByGroup", queryField: "listReportsGroup")
 # @key(fields: ["companyID", "reviewee"], name: "report_company_reviewee", queryField: "listReportsReviewee")
 # @key(fields: ["companyID", "date"], name: "report_company_date", queryField: "listReportsDate")
 @auth(
@@ -366,7 +367,9 @@ type Report
   id: ID!
 
   sub: String!
-  date: AWSDate!  #1970-01-01Z の形式で格納
+  date: AWSDate!
+
+  groupID: ID! #部署ID
 
   reviewee: String
   reviewer: [String]

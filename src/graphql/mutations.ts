@@ -1151,6 +1151,7 @@ export const deleteReport = /* GraphQL */ `
       id
       sub
       date
+      groupID
       reviewee
       reviewer
       companyID
@@ -3222,6 +3223,7 @@ export const createReport = /* GraphQL */ `
       id
       sub
       date
+      groupID
       reviewee
       reviewer
       companyID
@@ -3436,6 +3438,7 @@ export const updateReport = /* GraphQL */ `
       id
       sub
       date
+      groupID
       reviewee
       reviewer
       companyID
