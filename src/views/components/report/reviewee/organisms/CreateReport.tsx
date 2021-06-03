@@ -31,6 +31,7 @@ export type RevieweeCreateReportType = {
     value: string;
     label: string;
   }[];
+  groupID: string;
 };
 
 type Props = {
@@ -86,6 +87,7 @@ export default function (props: Props) {
             other: values.commentOther,
             status: values.commentStatus,
           },
+          groupID: props.data.groupID,
         };
         const createdReport = await ReportDao.create(createReport, createI);
         if (createdReport) {
@@ -192,6 +194,7 @@ export default function (props: Props) {
                             other: formik.values.commentOther,
                             status: formik.values.commentStatus,
                           },
+                          groupID: props.data.groupID,
                         };
                         const createdReport = await ReportDao.create(
                           createReport,

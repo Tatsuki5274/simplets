@@ -6,16 +6,20 @@ import styled from "styled-components";
 import Header, { HeaderProps } from "views/components/common/organisms/Header";
 import Calendar from "views/components/common/organisms/Calendar";
 import Container from "../../../common/templates/Container";
-import { LinkType } from "views/components/common/atoms/Types";
+import { LinkType, SelectLabel } from "views/components/common/atoms/Types";
 import Title from "views/components/common/molecules/Title";
 import Content from "views/components/common/templates/Content";
 import LeftBox from "views/components/common/templates/LeftBox";
 import RightBox from "views/components/common/templates/RightBox";
 import Sidebar from "views/components/common/templates/Sidebar";
+import { ReviewerReportFilter } from "../organisms/ReviewerReportFilter";
 
 type Props = {
   events: EventInput[];
   setEvents: React.Dispatch<React.SetStateAction<EventInput[]>>;
+  initEvents: EventInput[];
+  groups: SelectLabel[];
+  employeeGroupId: string;
   data: {
     initialDate: Date;
     header: HeaderProps | null;
@@ -77,6 +81,15 @@ export default function CalendarView(props: Props) {
                 <Title>{`報告参照 カレンダー`}</Title>
               </TitleStyle>
 
+              <FilterStyle>
+                <ReviewerReportFilter
+                  groupId={props.employeeGroupId}
+                  groups={props.groups}
+                  initEvents={props.initEvents}
+                  setEvents={props.setEvents}
+                />
+              </FilterStyle>
+
               <Calendar
                 events={props.events}
                 // handleDateClick={handleDateClick}
@@ -97,4 +110,9 @@ export default function CalendarView(props: Props) {
 
 const TitleStyle = styled.div({
   paddingBottom: "10px",
+});
+
+const FilterStyle = styled.div({
+  paddingBottom: "30px",
+  paddingLeft: "10px",
 });

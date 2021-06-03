@@ -70,7 +70,7 @@ export function CreateReportScreen(props: Props) {
           const referencersUsername = referencers.map((referencer) => {
             return referencer.username || null;
           });
-          if (currentUser?.attributes.sub) {
+          if (currentUser?.attributes.sub && currentEmployee.groupID) {
             const reportItem: RevieweeCreateReportType = {
               sub: currentUser.attributes.sub,
               date: String(props.match.params.date),
@@ -84,6 +84,7 @@ export function CreateReportScreen(props: Props) {
               reviewee: currentEmployee.username || "",
               revieweeName: `${currentEmployee.lastName}${currentEmployee.firstName}`,
               workStatus: mockData.workStatusList,
+              groupID: currentEmployee.groupID,
             };
             setReportData(reportItem);
           } else {
