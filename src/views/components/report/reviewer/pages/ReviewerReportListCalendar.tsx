@@ -63,7 +63,7 @@ export default function (props: Props) {
               id: report.id,
               groupNo: report.revieweeEmployee?.group?.no, // ソートで使用
               employeeNo: report.revieweeEmployee?.no, // ソートで使用
-              groupId: report.groupID,
+              groupId: report.groupID || undefined,
             };
           });
           setInitEvents(eventItems);

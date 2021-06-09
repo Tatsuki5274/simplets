@@ -369,7 +369,7 @@ type Report
   sub: String!
   date: AWSDate!
 
-  groupID: ID! #部署ID
+  groupID: ID #部署ID
 
   reviewee: String
   reviewer: [String]
