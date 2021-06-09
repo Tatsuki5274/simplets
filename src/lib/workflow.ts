@@ -1,3 +1,5 @@
+/* eslint-disable no-console */
+// Todo コンソール出力の変更
 import { Employee, Sheet } from "API";
 import { SendEmail } from "App";
 import { routeBuilder } from "router";

@@ -91,6 +91,7 @@ export default function (props: Props) {
           date: {
             between: [values.reportStartDate, values.reportEndDate],
           },
+          limit: 1000,
         };
         let result: ReviewerReportListEmployeeType[] | null = null;
         const reports = await ReportDao.listSub(listReportsSub, reportItem);

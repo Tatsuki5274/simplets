@@ -30,6 +30,7 @@ export default function () {
       if (currentUser) {
         const listI: ListGroupsCompanyQueryVariables = {
           companyID: currentUser.attributes["custom:companyId"],
+          limit: 1000,
         };
         const groups = await GroupDao.listCompany(listGroupsCompany, listI);
         if (groups) {

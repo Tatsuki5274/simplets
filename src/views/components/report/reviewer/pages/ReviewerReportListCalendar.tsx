@@ -67,10 +67,12 @@ export default function (props: Props) {
             };
           });
           setInitEvents(eventItems);
-          const filterdEvents = eventItems.filter(
-            (eventItem) => eventItem.groupId === employeeGroupId
-          );
-          setEvents(filterdEvents);
+          setEvents(eventItems);
+          // Todo 部署絞り込みの実装
+          // const filterdEvents = eventItems.filter(
+          //   (eventItem) => eventItem.groupId === employeeGroupId
+          // );
+          // setEvents(filterdEvents);
         }
       }
     })();

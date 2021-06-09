@@ -81,14 +81,15 @@ export default function CalendarView(props: Props) {
                 <Title>{`報告参照 カレンダー`}</Title>
               </TitleStyle>
 
-              <FilterStyle>
+              {/* Todo 部署絞り込みの実装 一旦無効化 */}
+              {/* <FilterStyle>
                 <ReviewerReportFilter
                   groupId={props.employeeGroupId}
                   groups={props.groups}
                   initEvents={props.initEvents}
                   setEvents={props.setEvents}
                 />
-              </FilterStyle>
+              </FilterStyle> */}
 
               <Calendar
                 events={props.events}
