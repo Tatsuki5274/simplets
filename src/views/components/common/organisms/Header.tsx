@@ -22,7 +22,7 @@ const TextStyle = styled.div({
 export default function (props: Props) {
   return (
     <Styled>
-      <Navbar bg="dark" variant="dark" sticky="top">
+      <Navbar bg="dark" variant="dark" sticky="top" style={{ zIndex: "auto" }}>
         <Navbar.Brand>
           <HeaderLogo />
         </Navbar.Brand>

@@ -12,7 +12,7 @@ import Content from "views/components/common/templates/Content";
 import LeftBox from "views/components/common/templates/LeftBox";
 import RightBox from "views/components/common/templates/RightBox";
 import Sidebar from "views/components/common/templates/Sidebar";
-import { ReviewerReportFilter } from "../organisms/ReviewerReportFilter";
+// import { ReviewerReportFilter } from "../organisms/ReviewerReportFilter";
 
 type Props = {
   events: EventInput[];
@@ -113,7 +113,7 @@ const TitleStyle = styled.div({
   paddingBottom: "10px",
 });
 
-const FilterStyle = styled.div({
-  paddingBottom: "30px",
-  paddingLeft: "10px",
-});
+// const FilterStyle = styled.div({
+//   paddingBottom: "30px",
+//   paddingLeft: "10px",
+// });

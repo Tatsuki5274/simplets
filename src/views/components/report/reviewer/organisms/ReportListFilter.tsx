@@ -11,6 +11,8 @@ import TextField from "views/components/common/atoms/TextField";
 import { SelectLabel } from "views/components/common/atoms/Types";
 import CommandButton from "views/components/common/molecules/CommandButton";
 import PullDown from "views/components/common/molecules/PullDown";
+import { SettingError } from "lib/exception";
+import { catcher } from "views/components/common/templates/ErrorBoundary";
 
 export type ReviewerReportFilterEmployeeType = {
   firlstName: string;
@@ -86,16 +88,24 @@ export default function (props: Props) {
         reviewee: reviewees[0].value,
       }}
       onSubmit={async (values) => {
-        const reportItem: ListReportsSubQueryVariables = {
-          sub: values.reviewee,
-          date: {
-            between: [values.reportStartDate, values.reportEndDate],
-          },
-          limit: 1000,
-        };
-        let result: ReviewerReportListEmployeeType[] | null = null;
-        const reports = await ReportDao.listSub(listReportsSub, reportItem);
-        if (reports && reports.length !== 0) {
+        try {
+          if (!values.reviewee)
+            throw new SettingError(
+              "選択したユーザーの識別子が存在しませんでした。"
+            );
+          const reportItem: ListReportsSubQueryVariables = {
+            sub: values.reviewee,
+            date: {
+              between: [values.reportStartDate, values.reportEndDate],
+            },
+            limit: 1000,
+          };
+          let result: ReviewerReportListEmployeeType[] | null = null;
+          const reports = await ReportDao.listSub(listReportsSub, reportItem);
+          if (!reports || reports.length === 0) {
+            window.alert("条件に一致する報告書はありません。");
+            return;
+          }
           result = reports.map((report) => {
             return {
               commentOther: report.revieweeComments?.other || "",
@@ -106,10 +116,11 @@ export default function (props: Props) {
               date: report.date || "",
             };
           });
-        } else {
-          window.alert("条件に一致する報告書はありません。");
+
+          props.setTable(result);
+        } catch (e) {
+          await catcher(e);
         }
-        props.setTable(result);
       }}
     >
       {(formik) => (
