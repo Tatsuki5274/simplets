@@ -71,8 +71,8 @@ export default function (props: Props) {
         if (groups) {
           const groupsLabel: SelectLabel[] = groups.map((group) => {
             return {
-              label: group.name || "",
-              value: group.id || "",
+              label: group?.name || "",
+              value: group?.id || "",
             };
           });
           setGroups(groupsLabel);
@@ -108,8 +108,8 @@ export default function (props: Props) {
           ];
           const superiorsLabel: SelectLabel[] = superiors.map((superior) => {
             return {
-              label: `${superior.no} ${superior.lastName}${superior.firstName}`,
-              value: superior.username || "",
+              label: `${superior?.no} ${superior?.lastName}${superior?.firstName}`,
+              value: superior?.username || "",
             };
           });
           setSuperiors(noSuperiorLabel.concat(superiorsLabel));
@@ -136,21 +136,21 @@ export default function (props: Props) {
         );
         if (getEmployeeItem) {
           if (getEmployeeItem.length === 1) {
+            const emp = getEmployeeItem[0];
             const employeeItem: AdminEditEmployeeDataType = {
-              sub: getEmployeeItem[0].sub || "", // unsafe
-              username: getEmployeeItem[0].username || "",
-              companyId: getEmployeeItem[0].companyID || "",
-              email: getEmployeeItem[0].email || "",
-              firstName: getEmployeeItem[0].firstName || "",
-              grade: getEmployeeItem[0].grade || "",
-              groupId: getEmployeeItem[0].group?.id || "",
-              isAdminValue:
-                getEmployeeItem[0].isCompanyAdmin === true ? "true" : "false",
-              lastName: getEmployeeItem[0].lastName || "",
-              localId: getEmployeeItem[0].no || "",
-              managerValue: String(getEmployeeItem[0].manager),
-              superior: getEmployeeItem[0].superiorUsername || "",
-              isDeleted: getEmployeeItem[0].isDeleted || BooleanType.FALSE,
+              sub: emp?.sub || "", // unsafe
+              username: emp?.username || "",
+              companyId: emp?.companyID || "",
+              email: emp?.email || "",
+              firstName: emp?.firstName || "",
+              grade: emp?.grade || "",
+              groupId: emp?.group?.id || "",
+              isAdminValue: emp?.isCompanyAdmin === true ? "true" : "false",
+              lastName: emp?.lastName || "",
+              localId: emp?.no || "",
+              managerValue: String(emp?.manager),
+              superior: emp?.superiorUsername || "",
+              isDeleted: emp?.isDeleted || BooleanType.FALSE,
             };
             setEmployee(employeeItem);
           } else {

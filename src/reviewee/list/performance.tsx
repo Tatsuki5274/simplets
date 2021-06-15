@@ -13,7 +13,6 @@ import { DisplaySheetAverage } from "./components/average";
 import { tableHeaderStyle } from "common/globalStyle.module.scss";
 import { getReviewers } from "lib/util";
 import {
-  Category,
   CreateSectionInput,
   ListCategorysCompanyQueryVariables,
   Sheet,
@@ -33,8 +32,8 @@ import LeftBox from "views/components/common/templates/LeftBox";
 import RightBox from "views/components/common/templates/RightBox";
 import Sidebar from "views/components/common/templates/Sidebar";
 
-const sortSheet = (a: Sheet, b: Sheet) => {
-  if (a.year && b.year && a.year < b.year) {
+const sortSheet = (a: Sheet | null, b: Sheet | null) => {
+  if (a?.year && b?.year && a.year < b.year) {
     return 1;
   } else {
     return -1;
@@ -201,7 +200,7 @@ const today: Date = new Date();
 // `;
 
 function ListPerformanceEvalution() {
-  const [sheets, setSheets] = useState<Sheet[] | null>(null);
+  const [sheets, setSheets] = useState<(Sheet | null)[] | null>(null);
   const [targetYear, setTargetYear] = useState<number | null>(null);
 
   // ログインユーザを取得する
@@ -310,14 +309,14 @@ function ListPerformanceEvalution() {
             if (createdSheet) {
               //取得したカテゴリを元にsectionを作成する
               let isSuccess = true;
-              categorys.forEach(async (category: Category) => {
+              categorys.forEach(async (category) => {
                 const createI: CreateSectionInput = {
                   sheetID: createdSheet.id || "", // unsafe
-                  no: category.no || "", // unsafe
+                  no: category?.no || "", // unsafe
                   referencer: managers,
                   reviewee: createdSheet.reviewee,
                   secondReviewers: createdSheet.secondReviewers,
-                  sectionCategoryName: category.name,
+                  sectionCategoryName: category?.name || "",
                   topReviewers: createdSheet.topReviewers,
                 };
                 const createdSection = await SectionDao.create(
@@ -376,7 +375,7 @@ function ListPerformanceEvalution() {
               <Title>業績評価一覧</Title>
               {sheets &&
               sheets.find((sheet) => {
-                return sheet.year === targetYear;
+                return sheet?.year === targetYear;
               }) ? null : (
                 <Button variant="primary" onClick={handleClickCreate}>
                   新規作成
@@ -395,37 +394,42 @@ function ListPerformanceEvalution() {
                 </thead>
 
                 <tbody>
-                  {sheets?.map((sheet: Sheet) => {
+                  {sheets?.map((sheet) => {
+                    if (!sheet) {
+                      return null;
+                    }
                     let editName = "編集";
-                    if (sheet.statusValue === ApprovalStatus.DONE) {
+                    if (sheet?.statusValue === ApprovalStatus.DONE) {
                       editName = "確認";
                     }
 
                     return (
-                      <tr key={sheet.revieweeEmployee?.group?.no}>
+                      <tr key={sheet?.revieweeEmployee?.group?.no}>
                         <td>
                           <Link
-                            to={routeBuilder.revieweeDetailPath(sheet.id || "")}
+                            to={routeBuilder.revieweeDetailPath(
+                              sheet?.id || ""
+                            )}
                           >
                             {editName}
                           </Link>
                         </td>
-                        <td>{sheet.year}</td>
+                        <td>{sheet?.year}</td>
                         <td>
-                          {sheet.secondEmployee
+                          {sheet?.secondEmployee
                             ? sheet.secondEmployee.lastName
                             : ""}
-                          {sheet.secondEmployee
+                          {sheet?.secondEmployee
                             ? sheet.secondEmployee.firstName
                             : ""}
                         </td>
                         <td>
                           <DisplaySheetAverage sheet={sheet} />
                         </td>
-                        <td>{getStatusValue(sheet.statusValue || -1)}</td>
+                        <td>{getStatusValue(sheet?.statusValue || -1)}</td>
                         <td>
                           <a
-                            href={routeBuilder.previewPath(sheet.id || "")}
+                            href={routeBuilder.previewPath(sheet?.id || "")}
                             target="_blank"
                             rel="noopener noreferrer"
                           >

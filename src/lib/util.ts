@@ -283,10 +283,10 @@ export async function getReviewers(reviewee: string) {
     const listSuperManagers: Array<string> = [];
     const listGroupManagers: Array<string> = [];
     superManagers?.forEach((element) =>
-      listSuperManagers.push(element.username || "")
+      listSuperManagers.push(element?.username || "")
     );
     groupManagers?.forEach((element) =>
-      listGroupManagers.push(element.username || "")
+      listGroupManagers.push(element?.username || "")
     );
 
     const managers = listSuperManagers.concat(listGroupManagers);

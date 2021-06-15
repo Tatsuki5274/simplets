@@ -156,15 +156,16 @@ export default function (props: Props) {
                         "今年度のシート情報が複数存在しています"
                       );
                     }
-                    if (!listItem[0].id) {
+                    const sheet = listItem[0];
+                    if (!sheet?.id) {
                       // IDが入力されていない場合は不整合
                       throw new TypeError("idに想定されていない値が含まれます");
                     }
-                    const statusValue = listItem[0].statusValue || null;
+                    const statusValue = sheet?.statusValue || null;
                     if (statusValue !== 14) {
                       // 更新対象外であれば、更新処理を実施しない
                       const updateI: UpdateSheetInput = {
-                        id: listItem[0].id,
+                        id: sheet?.id,
                         grade: values.grade,
                         groupID: values.groupList,
                         sheetGroupName: props.groups.find(
@@ -364,7 +365,7 @@ export default function (props: Props) {
                             //対象社員のシート情報の削除
                             let deletedNum = 0;
                             sheetItems.map(async (sheet, index) => {
-                              if (sheet.sub && sheet.year && sheet.id) {
+                              if (sheet?.sub && sheet.year && sheet.id) {
                                 const deleteSheetI: DeleteSheetInput = {
                                   id: sheet.id,
                                 };
@@ -432,7 +433,7 @@ export default function (props: Props) {
                       const revieweeNames: string[] = [];
                       listItem.forEach((element) => {
                         return revieweeNames.push(
-                          `${element.lastName} ${element.firstName}`
+                          `${element?.lastName} ${element?.firstName}`
                         );
                       });
                       let displayReviewee = "";

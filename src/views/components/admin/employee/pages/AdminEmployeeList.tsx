@@ -52,13 +52,13 @@ export default function () {
               };
               link = {
                 label: "変更",
-                dest: employee.no
+                dest: employee?.no
                   ? routeBuilder.adminEmployeeEditPath(employee.no)
                   : "",
               };
 
               if (
-                employee.email &&
+                employee?.email &&
                 employee.no &&
                 employee.group &&
                 employee.group.name &&
@@ -120,8 +120,8 @@ export default function () {
           ];
           const groupsLabel: SelectLabel[] = groups.map((group) => {
             return {
-              label: group.name || "",
-              value: group.no || "",
+              label: group?.name || "",
+              value: group?.no || "",
             };
           });
           setGroups(groupAll.concat(groupsLabel));

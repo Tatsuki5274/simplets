@@ -64,8 +64,8 @@ export default function () {
           ];
           const groupsLabel: SelectLabel[] = groups.map((group) => {
             return {
-              label: group.name || "",
-              value: group.no || "",
+              label: group?.name || "",
+              value: group?.no || "",
             };
           });
           setGroups(groupAll.concat(groupsLabel));
@@ -84,26 +84,26 @@ export default function () {
         if (sheets) {
           const result = sheets.map((sheet) => {
             const data: ProgressReferenceType = {
-              groupId: sheet.revieweeEmployee?.group?.no || "", // unsafe
-              year: sheet.year || -1, // unsafe
+              groupId: sheet?.revieweeEmployee?.group?.no || "", // unsafe
+              year: sheet?.year || -1, // unsafe
               employeeId:
-                sheet.revieweeEmployee && sheet.revieweeEmployee.no
+                sheet?.revieweeEmployee && sheet.revieweeEmployee.no
                   ? sheet.revieweeEmployee.no
                   : "",
-              employeeName: sheet.revieweeEmployee
+              employeeName: sheet?.revieweeEmployee
                 ? `${sheet.revieweeEmployee.lastName} ${sheet.revieweeEmployee.firstName}`
                 : "",
-              groupName: sheet.sheetGroupName || "",
+              groupName: sheet?.sheetGroupName || "",
               avg: 1,
-              gaugeId: sheet.revieweeEmployee?.group?.no
+              gaugeId: sheet?.revieweeEmployee?.group?.no
                 ? createGaugeId(
                     `chart-${sheet.revieweeEmployee.group.no}-${sheet.id}`
                   )
                 : null,
-              statusValue: sheet.statusValue || 0,
-              dest: routeBuilder.reviewerDetailPath(sheet.id || ""), // unsafe
+              statusValue: sheet?.statusValue || 0,
+              dest: routeBuilder.reviewerDetailPath(sheet?.id || ""), // unsafe
               objective:
-                sheet.section?.items?.map((sec) => {
+                sheet?.section?.items?.map((sec) => {
                   if (sec) {
                     const data = {
                       categoryId: sec.no || "", // unsafe

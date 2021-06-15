@@ -34,14 +34,14 @@ export default function () {
               return {
                 link: {
                   label: "変更",
-                  dest: category.id
+                  dest: category?.id
                     ? routeBuilder.adminCategoryEditPath(category.id)
                     : "",
                 },
-                categoryLocalId: category.no || "",
-                categoryName: category.name || "",
-                companyId: category.companyID || "",
-                id: category.id || "", // unsafe
+                categoryLocalId: category?.no || "",
+                categoryName: category?.name || "",
+                companyId: category?.companyID || "",
+                id: category?.id || "", // unsafe
               };
             }
           );

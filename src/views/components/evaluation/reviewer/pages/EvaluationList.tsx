@@ -96,7 +96,7 @@ export default function () {
                 dest: "",
               };
               if (
-                sheet.revieweeEmployee?.username &&
+                sheet?.revieweeEmployee?.username &&
                 sheet.section &&
                 sheet.section.items &&
                 sheet.section.items.length > 0
@@ -108,22 +108,22 @@ export default function () {
               }
               const lastYearsAgoOverAllEvaluation =
                 sheets.find((comSheet) => {
-                  if (!sheet.year) return false;
+                  if (!sheet?.year) return false;
                   return (
-                    sheet.year - 1 === comSheet.year &&
-                    sheet.reviewee === comSheet.reviewee
+                    sheet.year - 1 === comSheet?.year &&
+                    sheet.reviewee === comSheet?.reviewee
                   );
                 })?.overAllEvaluation || null;
               const twoYearsAgoOverAllEvaluation =
                 sheets.find((comSheet) => {
-                  if (!sheet.year) return false;
+                  if (!sheet?.year) return false;
                   return (
-                    sheet.year - 2 === comSheet.year &&
-                    sheet.reviewee === comSheet.reviewee
+                    sheet.year - 2 === comSheet?.year &&
+                    sheet.reviewee === comSheet?.reviewee
                   );
                 })?.overAllEvaluation || null;
               if (
-                sheet.year &&
+                sheet?.year &&
                 sheet.statusValue &&
                 sheet.revieweeEmployee &&
                 sheet.reviewee
@@ -221,8 +221,8 @@ export default function () {
           ];
           const groupsLabel: SelectLabel[] = groups.map((group) => {
             return {
-              label: group.name || "",
-              value: group.id || "",
+              label: group?.name || "",
+              value: group?.id || "",
             };
           });
           setGroups(groupAll.concat(groupsLabel));

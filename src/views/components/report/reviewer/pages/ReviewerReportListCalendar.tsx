@@ -56,14 +56,14 @@ export default function (props: Props) {
         if (reports) {
           eventItems = reports.map((report) => {
             return {
-              title: `${report.revieweeEmployee?.lastName}${report.revieweeEmployee?.firstName} ${report.revieweeEmployee?.group?.name}`,
-              date: report.date,
-              sub: report.sub,
-              workStatus: report.workStatus,
-              id: report.id,
-              groupNo: report.revieweeEmployee?.group?.no, // ソートで使用
-              employeeNo: report.revieweeEmployee?.no, // ソートで使用
-              groupId: report.groupID || undefined,
+              title: `${report?.revieweeEmployee?.lastName}${report?.revieweeEmployee?.firstName} ${report?.revieweeEmployee?.group?.name}`,
+              date: report?.date,
+              sub: report?.sub,
+              workStatus: report?.workStatus,
+              id: report?.id,
+              groupNo: report?.revieweeEmployee?.group?.no, // ソートで使用
+              employeeNo: report?.revieweeEmployee?.no, // ソートで使用
+              groupId: report?.groupID || undefined,
             };
           });
           setInitEvents(eventItems);
@@ -95,8 +95,8 @@ export default function (props: Props) {
           ];
           const groupsLabel: SelectLabel[] = groups.map((group) => {
             return {
-              label: group.name || "",
-              value: group.id || "",
+              label: group?.name || "",
+              value: group?.id || "",
             };
           });
           setGroups(groupAll.concat(groupsLabel));

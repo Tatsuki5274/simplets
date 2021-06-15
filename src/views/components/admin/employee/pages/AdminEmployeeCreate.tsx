@@ -66,8 +66,8 @@ export default function () {
           ];
           const superiorsLabel: SelectLabel[] = superiors.map((superior) => {
             return {
-              label: `${superior.no} ${superior.lastName}${superior.firstName}`,
-              value: superior.username || "",
+              label: `${superior?.no} ${superior?.lastName}${superior?.firstName}`,
+              value: superior?.username || "",
             };
           });
           setSuperiors(noSuperiorLabel.concat(superiorsLabel));
@@ -97,8 +97,8 @@ export default function () {
           });
           const groupsLabel: SelectLabel[] = groups.map((group) => {
             return {
-              label: group.name || "",
-              value: group.id || "",
+              label: group?.name || "",
+              value: group?.id || "",
             };
           });
           setGroups(groupsLabel);

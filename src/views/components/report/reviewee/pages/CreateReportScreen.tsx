@@ -68,7 +68,7 @@ export function CreateReportScreen(props: Props) {
         );
         if (referencers) {
           const referencersUsername = referencers.map((referencer) => {
-            return referencer.username || null;
+            return referencer?.username || null;
           });
           if (currentUser?.attributes.sub && currentEmployee.groupID) {
             const reportItem: RevieweeCreateReportType = {

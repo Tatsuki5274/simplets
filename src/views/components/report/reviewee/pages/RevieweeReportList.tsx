@@ -40,10 +40,10 @@ export default function (props: Props) {
         if (reports) {
           eventItems = reports.map((report) => {
             return {
-              title: `${report.revieweeComments?.work}`,
-              date: report.date,
-              workStatus: report.workStatus,
-              id: report.id,
+              title: `${report?.revieweeComments?.work}`,
+              date: report?.date,
+              workStatus: report?.workStatus,
+              id: report?.id,
             };
           });
           setEvents(eventItems);

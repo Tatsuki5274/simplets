@@ -28,11 +28,13 @@ export default function () {
             return {
               link: {
                 label: "変更",
-                dest: group.id ? routeBuilder.adminGroupEditPath(group.id) : "", // unsafe
+                dest: group?.id
+                  ? routeBuilder.adminGroupEditPath(group.id)
+                  : "", // unsafe
               },
-              groupLocalId: group.no || "", // unsafe
-              groupName: group.name || "", // unsafe
-              id: group.id,
+              groupLocalId: group?.no || "", // unsafe
+              groupName: group?.name || "", // unsafe
+              id: group?.id,
             };
           });
 

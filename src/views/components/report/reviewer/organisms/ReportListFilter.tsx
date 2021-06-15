@@ -108,12 +108,12 @@ export default function (props: Props) {
           }
           result = reports.map((report) => {
             return {
-              commentOther: report.revieweeComments?.other || "",
-              commentStatus: report.revieweeComments?.status || "",
-              commentSuperior: report.reviewerComments?.superior || "",
-              commentWork: report.revieweeComments?.work || "",
-              workStatus: report.workStatus || ReportWorkingStatus.OK,
-              date: report.date || "",
+              commentOther: report?.revieweeComments?.other || "",
+              commentStatus: report?.revieweeComments?.status || "",
+              commentSuperior: report?.reviewerComments?.superior || "",
+              commentWork: report?.revieweeComments?.work || "",
+              workStatus: report?.workStatus || ReportWorkingStatus.OK,
+              date: report?.date || "",
             };
           });
 

@@ -2,7 +2,7 @@ type Company #会社
 @model(
   queries: {
     get: "getCompany"
-    list: null
+    list: "listCompanys"
   }
   subscriptions: null
   )
@@ -60,7 +60,7 @@ type Employee #社員
 @model(
   queries: {
     get: "getEmployee"
-    list: null
+    list: "listEmployees"
   }
   subscriptions: null
 )
@@ -91,7 +91,7 @@ type Group #部門
 @model(
   queries: {
     get: "getGroup"
-    list: null
+    list: "listGroups"
   }
   subscriptions: null
 )
@@ -120,7 +120,7 @@ type Category
 @model(
   queries: {
     get: "getCategory"
-    list: null
+    list: "listCategorys"
   }
   subscriptions: null
 )
@@ -146,7 +146,7 @@ type Sheet
 @model(
   queries: {
     get: "getSheet"
-    list: null
+    list: "listSheets"
   }
   subscriptions: null
 )
@@ -223,11 +223,11 @@ type Section
 @model(
   queries: {
     get: "getSection"
-    list: null
+    list: "listSections"
   }
   subscriptions: null
 )
-@key(fields: ["sheetID"], name: "SectionBySheet", queryField: "listSectionsSheet")
+@key(fields: ["sheetID"], name: "SectionBySheet")
 @auth(
   rules: [
     {allow: groups, groups: ["Admin"]}
@@ -261,12 +261,11 @@ type Objective
 @model(
   queries: {
     get: "getObjective"
-    list: null
+    list: "listObjectives"
   }
   subscriptions: null
 )
-@key(fields: ["sectionID"], name: "ObjectiveBySection", queryField: "listObjectivesSection")
-# @key(fields: ["sectionKeys", "objectiveCategoryDate"], name: "objective_sheet_category")
+@key(fields: ["sectionID"], name: "ObjectiveBySection")
 @auth(
   rules: [
     {allow: groups, groups: ["Admin"]}
@@ -341,7 +340,7 @@ type Report
 @model(
   queries: {
     get: "getReport",
-    list: null
+    list: "listReports"
   }
   subscriptions: null
 )

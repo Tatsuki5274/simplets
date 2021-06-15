@@ -42,8 +42,8 @@ export default function () {
           ];
           const groupsLabel: SelectLabel[] = groups.map((group) => {
             return {
-              label: group.name || "",
-              value: group.id || "",
+              label: group?.name || "",
+              value: group?.id || "",
             };
           });
           setGroups(groupAll.concat(groupsLabel));
@@ -67,14 +67,14 @@ export default function () {
           const revieweesLabel: ReviewerReportFilterEmployeeType[] =
             reviewees.map((reviewee) => {
               return {
-                username: reviewee.username || "",
-                firlstName: reviewee.firstName || "",
-                lastName: reviewee.lastName || "",
-                groupNo: reviewee.group?.no || "",
-                groupName: reviewee.group?.name || "",
-                groupId: reviewee.groupID || "", // unsafe
-                sub: reviewee.sub || "",
-                empNo: reviewee.no || "",
+                username: reviewee?.username || "",
+                firlstName: reviewee?.firstName || "",
+                lastName: reviewee?.lastName || "",
+                groupNo: reviewee?.group?.no || "",
+                groupName: reviewee?.group?.name || "",
+                groupId: reviewee?.groupID || "", // unsafe
+                sub: reviewee?.sub || "",
+                empNo: reviewee?.no || "",
               };
             });
           revieweesLabel.sort((a, b) => {
