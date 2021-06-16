@@ -1,4 +1,5 @@
 import React from "react";
+import styled from "styled-components";
 import { LinkType, SelectLabel } from "views/components/common/atoms/Types";
 import Title from "views/components/common/molecules/Title";
 import Header, { HeaderProps } from "views/components/common/organisms/Header";
@@ -43,18 +44,25 @@ export default function (props: Props) {
           <Content>
             <>
               <Title>社員管理</Title>
-              <AdminNewEmployee link={props.link} />
-              {props.groups ? (
-                <AdminEmployeeFilter
-                  setTableData={props.setTableData}
-                  initTableData={props.initTableData}
-                  groups={props.groups}
-                />
-              ) : null}
+              <MenuStyle>
+                <div>
+                  <AdminNewEmployee link={props.link} />
+                </div>
+                {props.groups ? (
+                  <FilterBoxStyle>
+                    <AdminEmployeeFilter
+                      setTableData={props.setTableData}
+                      initTableData={props.initTableData}
+                      groups={props.groups}
+                    />
+                  </FilterBoxStyle>
+                ) : null}
+                <AdminEmployeeListApplyPermissions />
+              </MenuStyle>
+
               {props.tableData ? (
                 <AdminListEmployee data={props.tableData} />
               ) : null}
-              <AdminEmployeeListApplyPermissions />
             </>
           </Content>
         </RightBox>
@@ -62,3 +70,12 @@ export default function (props: Props) {
     </>
   );
 }
+
+const MenuStyle = styled.div({
+  margin: "15px 0",
+});
+
+const FilterBoxStyle = styled.div({
+  display: "inline-block",
+  margin: "0 15px",
+});

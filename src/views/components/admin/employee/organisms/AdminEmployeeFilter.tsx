@@ -1,5 +1,6 @@
 import { Formik } from "formik";
 import React from "react";
+import styled from "styled-components";
 import { SelectLabel } from "views/components/common/atoms/Types";
 import CommandButton from "views/components/common/molecules/CommandButton";
 import PullDown from "views/components/common/molecules/PullDown";
@@ -52,7 +53,9 @@ export default function (props: Props) {
                 options={props.groups}
                 handleChange={formik.handleChange}
               />
-              <CommandButton type="submit">確認</CommandButton>
+              <ButtonStyle>
+                <CommandButton type="submit">確認</CommandButton>
+              </ButtonStyle>
             </>
           ) : null}
         </form>
@@ -60,3 +63,8 @@ export default function (props: Props) {
     </Formik>
   );
 }
+
+const ButtonStyle = styled.div({
+  display: "inline-block",
+  marginLeft: "15px",
+});
