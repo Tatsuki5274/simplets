@@ -31,6 +31,7 @@ import Content from "views/components/common/templates/Content";
 import LeftBox from "views/components/common/templates/LeftBox";
 import RightBox from "views/components/common/templates/RightBox";
 import Sidebar from "views/components/common/templates/Sidebar";
+import LoadingScreen from "views/components/common/templates/LoadingScreen";
 
 const sortSheet = (a: Sheet | null, b: Sheet | null) => {
   if (a?.year && b?.year && a.year < b.year) {
@@ -360,7 +361,7 @@ function ListPerformanceEvalution() {
     }
   }
 
-  if (sheets === undefined) return <div>Loading</div>;
+  if (!sheets) return <LoadingScreen />;
   return (
     <>
       {/* ヘッダーの表示 */}

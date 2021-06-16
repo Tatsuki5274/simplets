@@ -1,6 +1,7 @@
 import { updateOwnersMutation } from "lib/admin";
 import React, { useState } from "react";
 import CommandButton from "views/components/common/molecules/CommandButton";
+import LoadingScreen from "views/components/common/templates/LoadingScreen";
 
 export default function () {
   const [isLoading, setIsLoading] = useState(false);
@@ -15,7 +16,9 @@ export default function () {
     setIsLoading(false);
   };
 
-  return !isLoading ? (
-    <CommandButton onClick={onClick}>反映</CommandButton>
-  ) : null;
+  if (isLoading) {
+    return <LoadingScreen />;
+  }
+
+  return <CommandButton onClick={onClick}>反映</CommandButton>;
 }

@@ -173,6 +173,7 @@ export default function () {
 
           setInitTableData(obj);
           setTableData(filteredObj);
+          // setIsLoading(false);
         }
       })();
     }
@@ -230,6 +231,10 @@ export default function () {
       }
     })();
   }, [currentUser]);
+
+  // if (isLoading) {
+  //   return <LoadingScreen />;
+  // }
 
   return (
     <ReviewerEvaluationList

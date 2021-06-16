@@ -38,6 +38,7 @@ import LeftBox from "views/components/common/templates/LeftBox";
 import RightBox from "views/components/common/templates/RightBox";
 import Sidebar from "views/components/common/templates/Sidebar";
 import InterviewTable from "views/components/evaluation/reviewee/organisms/InterviewTable";
+import LoadingScreen from "views/components/common/templates/LoadingScreen";
 
 export const SheetContext = createContext<{
   sheet: Sheet | null;
@@ -92,7 +93,7 @@ function RevieweeSheetShow(props: Props) {
     })();
   }, [props.match.params.sheetId, setError]);
 
-  if (sheet === undefined) return <p>Loading</p>;
+  if (sheet === undefined) return <LoadingScreen />;
   else if (sheet === null) {
     return <p>該当のシートは存在しません</p>;
   }
