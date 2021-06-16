@@ -345,11 +345,9 @@ type Report
   subscriptions: null
 )
 @key(fields: ["sub", "date"], name: "ReportBySub", queryField: "listReportsSub")
-@key(fields: ["reviewee", "date"], name: "ReportByReviewee", queryField: "listReportsReviewee") # 非推奨
+@key(fields: ["reviewee", "date"], name: "ReportByReviewee", queryField: "listReportsReviewee") # 非推奨マーク
 @key(fields: ["companyID", "date"], name: "ReportByCompany", queryField: "listReportsCompanyDate")
-@key(fields: ["groupID"], name: "ReportByGroup", queryField: "listReportsGroup")
-# @key(fields: ["companyID", "reviewee"], name: "report_company_reviewee", queryField: "listReportsReviewee")
-# @key(fields: ["companyID", "date"], name: "report_company_date", queryField: "listReportsDate")
+# @key(fields: ["groupID"], name: "ReportByGroup", queryField: "listReportsGroup") #仕様追加見送り
 @auth(
   rules: [
     {allow: groups, groups: ["Admin"]}

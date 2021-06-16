@@ -71,6 +71,9 @@ export const ReportDao = {
     )) as APIt.ListReportsCompanyDateQuery;
     return result.listReportsCompanyDate?.items as (Report | null)[] | null;
   },
+  /**
+   * @deprecated listSubへの切り替えを推奨
+   */
   listReviewee: async (
     query: string,
     params: APIt.ListReportsRevieweeQueryVariables
