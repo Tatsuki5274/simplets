@@ -16,7 +16,6 @@ export default function (props: Props) {
           <td></td>
           <td>カテゴリ番号</td>
           <td>カテゴリ内容</td>
-          <td></td>
         </tr>
       </thead>
       <tbody>

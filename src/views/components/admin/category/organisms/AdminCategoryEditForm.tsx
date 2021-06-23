@@ -1,7 +1,7 @@
-import { UpdateCategoryInput } from "API";
+import { DeleteCategoryInput, UpdateCategoryInput } from "API";
 import { ErrorContext } from "App";
 import { Formik } from "formik";
-import { updateCategory } from "graphql/mutations";
+import { deleteCategory, updateCategory } from "graphql/mutations";
 import { CategoryDao } from "lib/dao/categoryDao";
 import React, { useContext } from "react";
 import { useHistory } from "react-router-dom";
@@ -10,6 +10,7 @@ import styled from "styled-components";
 import Button from "views/components/common/atoms/Button";
 import Text from "views/components/common/atoms/Text";
 import TextField from "views/components/common/atoms/TextField";
+import ButtonNegative from "views/components/common/molecules/ButtonNegative";
 import CommandButton from "views/components/common/molecules/CommandButton";
 
 export type AdminCategoryEditDataType = {
@@ -24,6 +25,23 @@ type Props = AdminCategoryEditDataType;
 export default function (props: Props) {
   const setError = useContext(ErrorContext);
   const history = useHistory();
+  const onClickDelete = async () => {
+    if (window.confirm("削除してよろしいですか？")) {
+      const deleteI: DeleteCategoryInput = {
+        id: props.id,
+        // companyID: props.companyId,
+        // localID: props.categoryLocalId,
+      };
+      const deleteItem = await CategoryDao.delete(deleteCategory, deleteI);
+      if (!deleteItem) {
+        setError("カテゴリ情報の取得に失敗しました");
+        return;
+      }
+      window.alert("カテゴリ内容の削除が完了しました");
+      history.push(routeBuilder.adminCategoryListPath());
+    }
+  };
+
   return (
     <Formik
       initialValues={{
@@ -78,7 +96,7 @@ export default function (props: Props) {
               </Button>
             </SpaceStyle>
           </table>
-
+          <ButtonNegative onClick={onClickDelete}>削除</ButtonNegative>
           <p>
             ※変更したカテゴリ内容は作成済みの業績評価シートには適用されず、カテゴリ内容変更後に作成したシートにのみ適用されます。
           </p>
