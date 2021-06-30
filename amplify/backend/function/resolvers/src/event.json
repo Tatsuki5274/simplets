@@ -26,7 +26,8 @@
           "phone_number": "+10352134561",
           "exp": 1615960257,
           "iat": 1615956658,
-          "email": "twatanabe@sisco-consulting.co.jp"
+          "email": "twatanabe@sisco-consulting.co.jp",
+          "dev": true
       },
       "defaultAuthStrategy": "ALLOW"
   },

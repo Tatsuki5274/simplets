@@ -1,148 +1,150 @@
 import { EventType } from "index";
-import { GraphQLClient } from "../../libs/client";
-import { listEmployees, listObjectives, listReports, listSections, listSheetReviewee } from "../../graphql/queries";
+import {
+  listEmployeesCompany,
+  listReportsCompanyDate,
+  listSheets,
+} from "../../graphql/queries";
 import Apply from "./Apply";
 import GetPermission from "./GetPermission";
-import { Employee, Objective, Report, Section, Sheet } from "../../API";
-import { isEmployee, isObjective, isReport, isSection, isSheet } from "../../libs/typeChecker";
-
-// sheetKeysを取得
-function getSheetKeys(sheet: Sheet): string {
-    return `${sheet.companyID}.${sheet.reviewee}.${sheet.year}`
-}
-
-// sectionKeysを取得
-function getSectionKeys(section: Section): string {
-    return `${section.sheetKeys}.${section.sectionCategoryLocalId}`
-}
+import { Objective, Report, Section, Sheet } from "../../API";
+import { EmployeeDao } from "../../libs/dao/employeeDao";
+import { SheetDao } from "../../libs/dao/sheetDao";
+import { ReportDao } from "../../libs/dao/reportDao";
 
 export default async function UpdateOwners(event: EventType) {
-    let companyId: string | null = null
-    let isCompanyAdmin: boolean = false
+  // idnetityの形式チェック
+  if (typeof event.identity !== "object") {
+    throw new Error("identity is not object");
+  }
+  if (typeof event.identity.claims !== "object") {
+    throw new Error("claims is not object");
+  }
 
-    // 管理者権限のチェック
-    const claims = event.identity?.claims
-    if (typeof claims === "object") {
-        companyId = typeof claims["custom:companyId"] === "string" ? claims["custom:companyId"] : null
-        isCompanyAdmin = typeof claims["custom:isCompanyAdmin"] === "boolean" ? claims["custom:isCompanyAdmin"] : false
-    }
+  const claims = event.identity.claims;
+
+  const companyId =
+    typeof claims["custom:companyId"] === "string"
+      ? claims["custom:companyId"]
+      : null;
+  if (!companyId) {
+    // 会社番号が登録されていない場合
+    throw new Error("CompanyID is not set");
+  }
+
+  if (!claims["dev"]) {
+    // 開発環境ではない場合は管理者権限をチェックする
+    const isCompanyAdmin =
+      claims["custom:isCompanyAdmin"] === "true" ? true : false;
     if (!isCompanyAdmin) {
-        // 社内管理者ではない場合
-        // throw new Error("You don't have permission")
+      // 社内管理者ではない場合
+      throw new Error("You don't have permission");
     }
-    if (!companyId) {
-        throw new Error("CompanyID is not set")
-    }
+  }
 
-    // Todo 変更前の入力
-    const client = new GraphQLClient();
-    // 社員情報の取得
-    const employeesItems = await client.query(listEmployees, { companyID: companyId })
-    // 社員情報の型を確認
-    if (!isEmployee((employeesItems?.data as any).listEmployees.items)) {
-        throw new TypeError('TypeError : employeesItems')
-    }
-    const employees: Employee[] = (employeesItems?.data as any).listEmployees.items
+  // 社員情報の取得
+  const employees = await EmployeeDao.listCompany(listEmployeesCompany, {
+    companyID: "SCC",
+  });
+  if (!employees) {
+    // 社員が取得できなかった場合
+    throw new Error("Employees couldn't get");
+  }
 
-    // シート情報の取得
-    const sheetsItems = await client.query(listSheetReviewee, { companyID: companyId })
-    // console.log(JSON.stringify((sheetsItems.data as any).listSheetReviewee.items)) // 実行するとsheetテーブルの内容が出力される
+  // シート情報の取得
+  // const sheets = await SheetDao.listCompany(listSheetsReviewee, {
+  //   companyID: companyId,
+  // });
+  // クエリの関係で仮実装
+  const sheets = await SheetDao.list(listSheets, {
+    filter: {
+      companyID: {
+        eq: companyId,
+      },
+    },
+  });
 
-    // シート情報の型を確認
-    if (!isSheet((sheetsItems.data as any).listSheetReviewee.items)) {
-        throw new TypeError('TypeError : sheetsItems')
-    }
-    const sheets: Sheet[] = (sheetsItems.data as any).listSheetReviewee.items
+  if (!sheets) {
+    throw new Error("sheet couldn't get.");
+  }
 
+  const data: {
+    sheets: (Sheet | null)[];
+    sections: (Section | null)[];
+    objectives: (Objective | null)[];
+    reports: (Report | null)[];
+  } = {
+    sheets: sheets || [],
+    sections: [],
+    objectives: [],
+    reports: [],
+  };
 
-    // セクションの取得
-    const sectionsItems = await client.query(listSections, { filter: { companyID: { eq: companyId } } })
-    // console.log(JSON.stringify((sectionsItems.data as any).listSections.items)) // 実行するとsheetテーブルの内容が出力される
+  // 報告書の取得
+  const reports = await ReportDao.listCompanyDate(listReportsCompanyDate, {
+    companyID: companyId,
+  });
 
-    // セクション情報の型を確認
-    if (!isSection(((sectionsItems.data as any).listSections.items))) {
-        throw new TypeError('TypeError : sectionsItems')
-    }
-    const sections: Section[] = (sectionsItems.data as any).listSections.items
-    // console.log(sections);
+  employees.forEach((employee) => {
+    if (!employee) return;
+    // 権限取得
+    const reviewers = GetPermission(employee, employees);
+    const secondReviewers = reviewers.secondReviewers;
+    const topReviewers = reviewers.topReviewers;
+    const referencer = reviewers.referencer;
 
-    // 目標の取得
-    const objectivesItems = await client.query(listObjectives, { filter: { companyID: { eq: companyId } } })
-    // console.log(JSON.stringify((objectivesItems.data as any).listObjectives.items))
-    // 目標情報の型を確認
-    if (!isObjective((objectivesItems.data as any).listObjectives.items)) {
-        throw new TypeError('TypeError : objectivesItems')
-    }
-    const objectives: Objective[] = (objectivesItems.data as any).listObjectives.items
-    // console.log(JSON.stringify(objectives))
+    // 選択シートを取得
+    const selectedSheets = sheets.filter(
+      (sheet) => sheet?.sub === employee.sub
+    );
+    selectedSheets.forEach((sheet) => {
+      if (!sheet) return;
+      // 選択シートの権限を上書き
+      sheet.secondReviewers = secondReviewers;
+      sheet.topReviewers = topReviewers;
+      sheet.referencer = referencer;
 
+      data.sheets.push(sheet);
 
-    // 報告書の取得
-    const reportsItems = await client.query(listReports, {})
-    // console.log(JSON.stringify((reportsItems.data as any).listReports.items)) 
+      sheet?.section?.items?.forEach((section) => {
+        if (!section) return;
 
-    if (!isReport((reportsItems.data as any).listReports.items)) {
-        throw new TypeError('TypeError : reportsItems')
-    }
-    const reports: Report[] = (reportsItems.data as any).listReports.items
-    // console.log(JSON.stringify(reports))
+        // 選択セクションの権限を上書き
+        section.secondReviewers = secondReviewers;
+        section.topReviewers = topReviewers;
+        section.referencer = referencer;
 
-    if (employees && sheets) {
-        // Todo 権限の置き換え処理
-        for (const employee of employees) {
-            // console.log("employee:", employee)
-            // 権限取得
-            const reviewers = GetPermission(employee, employees)
-            // console.log("reviewers:", reviewers)
-            const secondReviewers = reviewers.secondReviewers
-            const topReviewers = reviewers.topReviewers
-            const referencer = reviewers.referencer
-            if (reviewers) {
-                // 選択シートを取得
-                const selectedSheets = sheets.filter(sheet => sheet.sub === employee.sub)
-                // console.log("employeeSheets",employeeSheets)
-                for (const sheet of selectedSheets) {
-                    // 選択シートの権限を上書き
-                    sheet.secondReviewers = secondReviewers;
-                    sheet.topReviewers = topReviewers;
-                    sheet.referencer = referencer;
+        data.sections.push(section);
 
-                    // セクションを選択
-                    const selectedSections = sections.filter(section => section.sheetKeys === getSheetKeys(sheet))
-                    for (const section of selectedSections) {
-                        // 選択セクションの権限を上書き
-                        section.secondReviewers = secondReviewers;
-                        section.topReviewers = topReviewers;
-                        section.referencer = referencer;
+        section?.objective?.items?.forEach((objective) => {
+          if (!objective) return;
+          // 選択目標の権限を上書き
+          objective.secondReviewers = secondReviewers;
+          objective.topReviewers = topReviewers;
+          objective.referencer = referencer;
 
-                        // 目標を選択
-                        const selectedObjectives = objectives.filter(objective => objective.sectionKeys === getSectionKeys(section));
-                        for (const objective of selectedObjectives) {
-                            // 選択目標の権限を上書き
-                            objective.secondReviewers = secondReviewers;
-                            objective.topReviewers = topReviewers;
-                            objective.referencer = referencer;
-                        }
-                    }
-                }
-                // 報告書を選択
-                const selectedReports = reports.filter(report => report.sub === employee.sub)
-                const referencerReport = employees.map(employee => {
-                    return employee.username || null
-                })
-                // console.log("referencerReport:",referencerReport)
-                for (const report of selectedReports) {
-                    // 選択報告書の権限を上書き
-                    report.reviewer = secondReviewers;
-                    report.referencer = referencerReport;
-                }
-            }
-        }
-        // Todo DBへの反映処理
-        await Apply(sheets, sections, objectives, reports)
+          data.objectives.push(objective);
+        });
+      });
+    });
+    // 報告書を選択
+    const selectedReports = reports?.filter(
+      (report) => report?.sub === employee.sub
+    );
+    const referencerReport = employees.map((employee) => {
+      return employee?.username || null;
+    });
 
-        return {
-            message: "hello"
-        }
-    }
+    selectedReports?.forEach((report) => {
+      if (!report) return;
+      // 選択報告書の権限を上書き
+      report.reviewer = secondReviewers;
+      report.referencer = referencerReport;
+      data.reports.push(report);
+    });
+  });
+  await Apply(data.sheets, data.sections, data.objectives, data.reports);
+
+  return {
+    message: "Update success!",
+  };
 }

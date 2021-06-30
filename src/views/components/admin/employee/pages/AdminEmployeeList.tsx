@@ -52,8 +52,8 @@ export default function () {
               };
               link = {
                 label: "変更",
-                dest: employee?.no
-                  ? routeBuilder.adminEmployeeEditPath(employee.no)
+                dest: employee?.username
+                  ? routeBuilder.adminEmployeeEditPath(employee.username)
                   : "",
               };
 

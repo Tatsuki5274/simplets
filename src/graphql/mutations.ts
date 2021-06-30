@@ -14,7 +14,11 @@ export const sendEmail = /* GraphQL */ `
 `;
 export const updateOwners = /* GraphQL */ `
   mutation UpdateOwners {
-    updateOwners
+    updateOwners {
+      statusCode
+      message
+      result
+    }
   }
 `;
 export const createCompany = /* GraphQL */ `
@@ -1004,48 +1008,6 @@ export const deleteSheet = /* GraphQL */ `
     }
   }
 `;
-export const updateSection = /* GraphQL */ `
-  mutation UpdateSection(
-    $input: UpdateSectionInput!
-    $condition: ModelSectionConditionInput
-  ) {
-    updateSection(input: $input, condition: $condition) {
-      id
-      sheetID
-      no
-      sectionCategoryName
-      reviewee
-      topReviewers
-      secondReviewers
-      referencer
-      createdAt
-      updatedAt
-      objective {
-        items {
-          id
-          sectionID
-          createdAt
-          companyID
-          content
-          result
-          priority
-          selfEvaluation
-          firstEvaluation
-          lastEvaluation
-          progress
-          expStartDate
-          expDoneDate
-          reviewee
-          topReviewers
-          secondReviewers
-          referencer
-          updatedAt
-        }
-        nextToken
-      }
-    }
-  }
-`;
 export const deleteSection = /* GraphQL */ `
   mutation DeleteSection(
     $input: DeleteSectionInput!
@@ -1085,33 +1047,6 @@ export const deleteSection = /* GraphQL */ `
         }
         nextToken
       }
-    }
-  }
-`;
-export const updateObjective = /* GraphQL */ `
-  mutation UpdateObjective(
-    $input: UpdateObjectiveInput!
-    $condition: ModelObjectiveConditionInput
-  ) {
-    updateObjective(input: $input, condition: $condition) {
-      id
-      sectionID
-      createdAt
-      companyID
-      content
-      result
-      priority
-      selfEvaluation
-      firstEvaluation
-      lastEvaluation
-      progress
-      expStartDate
-      expDoneDate
-      reviewee
-      topReviewers
-      secondReviewers
-      referencer
-      updatedAt
     }
   }
 `;
@@ -3187,12 +3122,81 @@ export const createSection = /* GraphQL */ `
     }
   }
 `;
+export const updateSection = /* GraphQL */ `
+  mutation UpdateSection(
+    $input: UpdateSectionInput!
+    $condition: ModelSectionConditionInput
+  ) {
+    updateSection(input: $input, condition: $condition) {
+      id
+      sheetID
+      no
+      sectionCategoryName
+      reviewee
+      topReviewers
+      secondReviewers
+      referencer
+      createdAt
+      updatedAt
+      objective {
+        items {
+          id
+          sectionID
+          createdAt
+          companyID
+          content
+          result
+          priority
+          selfEvaluation
+          firstEvaluation
+          lastEvaluation
+          progress
+          expStartDate
+          expDoneDate
+          reviewee
+          topReviewers
+          secondReviewers
+          referencer
+          updatedAt
+        }
+        nextToken
+      }
+    }
+  }
+`;
 export const createObjective = /* GraphQL */ `
   mutation CreateObjective(
     $input: CreateObjectiveInput!
     $condition: ModelObjectiveConditionInput
   ) {
     createObjective(input: $input, condition: $condition) {
+      id
+      sectionID
+      createdAt
+      companyID
+      content
+      result
+      priority
+      selfEvaluation
+      firstEvaluation
+      lastEvaluation
+      progress
+      expStartDate
+      expDoneDate
+      reviewee
+      topReviewers
+      secondReviewers
+      referencer
+      updatedAt
+    }
+  }
+`;
+export const updateObjective = /* GraphQL */ `
+  mutation UpdateObjective(
+    $input: UpdateObjectiveInput!
+    $condition: ModelObjectiveConditionInput
+  ) {
+    updateObjective(input: $input, condition: $condition) {
       id
       sectionID
       createdAt

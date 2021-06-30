@@ -5,7 +5,11 @@ import {
   ListGroupsCompanyQueryVariables,
 } from "API";
 import { ErrorContext, HeaderContext, SidebarContext, UserContext } from "App";
-import { listGroupsCompany, listEmployeesCompany } from "graphql/queries";
+import {
+  listGroupsCompany,
+  listEmployeesCompany,
+  getEmployee,
+} from "graphql/queries";
 import { EmployeeDao } from "lib/dao/employeeDao";
 import { GroupDao } from "lib/dao/groupDao";
 import React, { useContext, useEffect, useState } from "react";
@@ -124,41 +128,26 @@ export default function (props: Props) {
     // 社員情報の取得
     (async () => {
       if (currentUser) {
-        const listI: ListEmployeesCompanyQueryVariables = {
-          companyID: currentUser.attributes["custom:companyId"],
-          no: {
-            eq: props.match.params.employeeId,
-          },
+        const emp = await EmployeeDao.get(getEmployee, {
+          username: props.match.params.employeeId,
+        });
+        if (!emp) return;
+        const employeeItem: AdminEditEmployeeDataType = {
+          sub: emp?.sub || "", // unsafe
+          username: emp?.username || "",
+          companyId: emp?.companyID || "",
+          email: emp?.email || "",
+          firstName: emp?.firstName || "",
+          grade: emp?.grade || "",
+          groupId: emp?.group?.id || "",
+          isAdminValue: emp?.isCompanyAdmin === true ? "true" : "false",
+          lastName: emp?.lastName || "",
+          localId: emp?.no || "",
+          managerValue: String(emp?.manager),
+          superior: emp?.superiorUsername || "",
+          isDeleted: emp?.isDeleted || BooleanType.FALSE,
         };
-        const getEmployeeItem = await EmployeeDao.listCompany(
-          listEmployeesCompany,
-          listI
-        );
-        if (getEmployeeItem) {
-          if (getEmployeeItem.length === 1) {
-            const emp = getEmployeeItem[0];
-            const employeeItem: AdminEditEmployeeDataType = {
-              sub: emp?.sub || "", // unsafe
-              username: emp?.username || "",
-              companyId: emp?.companyID || "",
-              email: emp?.email || "",
-              firstName: emp?.firstName || "",
-              grade: emp?.grade || "",
-              groupId: emp?.group?.id || "",
-              isAdminValue: emp?.isCompanyAdmin === true ? "true" : "false",
-              lastName: emp?.lastName || "",
-              localId: emp?.no || "",
-              managerValue: String(emp?.manager),
-              superior: emp?.superiorUsername || "",
-              isDeleted: emp?.isDeleted || BooleanType.FALSE,
-            };
-            setEmployee(employeeItem);
-          } else {
-            setError("社員番号が重複しています");
-          }
-        } else {
-          setError("社員情報の取得に失敗しました");
-        }
+        setEmployee(employeeItem);
       }
     })();
   }, [currentUser, props.match.params.employeeId]);

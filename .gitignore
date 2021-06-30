@@ -38,3 +38,6 @@ amplify-build-config.json
 amplify-gradle-config.json
 amplifytools.xcconfig
 amplify/backend/api/sccgql/pipelineFunctions/
+
+*.js
+!.eslintrc.js

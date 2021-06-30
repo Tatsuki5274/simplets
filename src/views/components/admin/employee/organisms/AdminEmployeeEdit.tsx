@@ -72,32 +72,19 @@ export default function (props: Props) {
       initialValues={{
         lastName: props.employee.lastName,
         firstName: props.employee.firstName,
-        groupList:
-          props.groups[
-            props.groups.findIndex(
-              (element) => element.value === props.employee.groupId
-            )
-          ].value,
+        groupList: props.groups.find(
+          (group) => group.value === props.employee.groupId
+        )?.value,
         grade: props.employee.grade,
-        superiorList: props.employee.superior
-          ? props.superiors[
-              props.superiors.findIndex(
-                (element) => element.value === props.employee.superior
-              )
-            ].value
-          : props.superiors[0].value,
-        isAdmin:
-          props.isAdmin[
-            props.isAdmin.findIndex(
-              (element) => element.value === props.employee.isAdminValue
-            )
-          ].value,
-        manager:
-          props.manager[
-            props.manager.findIndex(
-              (element) => element.value === props.employee.managerValue
-            )
-          ].value,
+        superiorList: props.superiors.find(
+          (employee) => employee.value === props.employee.superior
+        )?.value,
+        isAdmin: props.isAdmin.find(
+          (flag) => flag.value === props.employee.isAdminValue
+        )?.value,
+        manager: props.manager.find(
+          (mgr) => mgr.value === props.employee.managerValue
+        )?.value,
       }}
       onSubmit={async (values) => {
         try {

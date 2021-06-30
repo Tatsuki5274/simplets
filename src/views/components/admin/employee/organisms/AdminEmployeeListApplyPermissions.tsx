@@ -1,4 +1,4 @@
-import { updateOwnersMutation } from "lib/admin";
+import { CustomDao } from "lib/dao/customDao";
 import React, { useState } from "react";
 import CommandButton from "views/components/common/molecules/CommandButton";
 import LoadingScreen from "views/components/common/templates/LoadingScreen";
@@ -7,9 +7,11 @@ export default function () {
   const [isLoading, setIsLoading] = useState(false);
   const onClick = async () => {
     setIsLoading(true);
-    const result = await updateOwnersMutation();
-    if (result.errors) {
-      alert("更新に失敗しました");
+    const result = await CustomDao.updateOwners();
+    if (result.statusCode === 500) {
+      alert(`更新に失敗しました(${result.message})`);
+      // eslint-disable-next-line no-console
+      console.error(result);
     } else {
       alert("更新が完了しました");
     }

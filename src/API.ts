@@ -10,6 +10,13 @@ export type sendEmailInput = {
   body: string,
 };
 
+export type UpdateOwnerResponseType = {
+  __typename: "UpdateOwnerResponseType",
+  statusCode?: number,
+  message?: string,
+  result?: string | null,
+};
+
 export type CreateCompanyInput = {
   id?: string | null,
   name: string,
@@ -387,15 +394,8 @@ export type Objective = {
   updatedAt?: string,
 };
 
-export type UpdateSectionInput = {
+export type DeleteSectionInput = {
   id: string,
-  sheetID?: string | null,
-  no?: string | null,
-  sectionCategoryName?: string | null,
-  reviewee?: string | null,
-  topReviewers?: Array< string > | null,
-  secondReviewers?: Array< string > | null,
-  referencer?: Array< string > | null,
 };
 
 export type ModelSectionConditionInput = {
@@ -407,28 +407,8 @@ export type ModelSectionConditionInput = {
   not?: ModelSectionConditionInput | null,
 };
 
-export type DeleteSectionInput = {
+export type DeleteObjectiveInput = {
   id: string,
-};
-
-export type UpdateObjectiveInput = {
-  id: string,
-  sectionID?: string | null,
-  createdAt?: string | null,
-  companyID?: string | null,
-  content?: string | null,
-  result?: string | null,
-  priority?: string | null,
-  selfEvaluation?: number | null,
-  firstEvaluation?: number | null,
-  lastEvaluation?: number | null,
-  progress?: number | null,
-  expStartDate?: string | null,
-  expDoneDate?: string | null,
-  reviewee?: string | null,
-  topReviewers?: Array< string > | null,
-  secondReviewers?: Array< string > | null,
-  referencer?: Array< string > | null,
 };
 
 export type ModelObjectiveConditionInput = {
@@ -447,10 +427,6 @@ export type ModelObjectiveConditionInput = {
   and?: Array< ModelObjectiveConditionInput | null > | null,
   or?: Array< ModelObjectiveConditionInput | null > | null,
   not?: ModelObjectiveConditionInput | null,
-};
-
-export type DeleteObjectiveInput = {
-  id: string,
 };
 
 export type DeleteReportInput = {
@@ -640,12 +616,43 @@ export type CreateSectionInput = {
   referencer?: Array< string > | null,
 };
 
+export type UpdateSectionInput = {
+  id: string,
+  sheetID?: string | null,
+  no?: string | null,
+  sectionCategoryName?: string | null,
+  reviewee?: string | null,
+  topReviewers?: Array< string > | null,
+  secondReviewers?: Array< string > | null,
+  referencer?: Array< string > | null,
+};
+
 export type CreateObjectiveInput = {
   id?: string | null,
   sectionID: string,
   createdAt?: string | null,
   companyID: string,
   content: string,
+  result?: string | null,
+  priority?: string | null,
+  selfEvaluation?: number | null,
+  firstEvaluation?: number | null,
+  lastEvaluation?: number | null,
+  progress?: number | null,
+  expStartDate?: string | null,
+  expDoneDate?: string | null,
+  reviewee?: string | null,
+  topReviewers?: Array< string > | null,
+  secondReviewers?: Array< string > | null,
+  referencer?: Array< string > | null,
+};
+
+export type UpdateObjectiveInput = {
+  id: string,
+  sectionID?: string | null,
+  createdAt?: string | null,
+  companyID?: string | null,
+  content?: string | null,
   result?: string | null,
   priority?: string | null,
   selfEvaluation?: number | null,
@@ -934,7 +941,12 @@ export type SendEmailMutation = {
 };
 
 export type UpdateOwnersMutation = {
-  updateOwners?: string | null,
+  updateOwners?:  {
+    __typename: "UpdateOwnerResponseType",
+    statusCode: number,
+    message: string,
+    result?: string | null,
+  } | null,
 };
 
 export type CreateCompanyMutationVariables = {
@@ -2013,52 +2025,6 @@ export type DeleteSheetMutation = {
   } | null,
 };
 
-export type UpdateSectionMutationVariables = {
-  input?: UpdateSectionInput,
-  condition?: ModelSectionConditionInput | null,
-};
-
-export type UpdateSectionMutation = {
-  updateSection?:  {
-    __typename: "Section",
-    id: string,
-    sheetID: string,
-    no: string,
-    sectionCategoryName?: string | null,
-    reviewee?: string | null,
-    topReviewers?: Array< string > | null,
-    secondReviewers?: Array< string > | null,
-    referencer?: Array< string > | null,
-    createdAt: string,
-    updatedAt: string,
-    objective?:  {
-      __typename: "ModelObjectiveConnection",
-      items?:  Array< {
-        __typename: "Objective",
-        id: string,
-        sectionID: string,
-        createdAt: string,
-        companyID: string,
-        content: string,
-        result?: string | null,
-        priority?: string | null,
-        selfEvaluation?: number | null,
-        firstEvaluation?: number | null,
-        lastEvaluation?: number | null,
-        progress?: number | null,
-        expStartDate?: string | null,
-        expDoneDate?: string | null,
-        reviewee?: string | null,
-        topReviewers?: Array< string > | null,
-        secondReviewers?: Array< string > | null,
-        referencer?: Array< string > | null,
-        updatedAt: string,
-      } | null > | null,
-      nextToken?: string | null,
-    } | null,
-  } | null,
-};
-
 export type DeleteSectionMutationVariables = {
   input?: DeleteSectionInput,
   condition?: ModelSectionConditionInput | null,
@@ -2102,35 +2068,6 @@ export type DeleteSectionMutation = {
       } | null > | null,
       nextToken?: string | null,
     } | null,
-  } | null,
-};
-
-export type UpdateObjectiveMutationVariables = {
-  input?: UpdateObjectiveInput,
-  condition?: ModelObjectiveConditionInput | null,
-};
-
-export type UpdateObjectiveMutation = {
-  updateObjective?:  {
-    __typename: "Objective",
-    id: string,
-    sectionID: string,
-    createdAt: string,
-    companyID: string,
-    content: string,
-    result?: string | null,
-    priority?: string | null,
-    selfEvaluation?: number | null,
-    firstEvaluation?: number | null,
-    lastEvaluation?: number | null,
-    progress?: number | null,
-    expStartDate?: string | null,
-    expDoneDate?: string | null,
-    reviewee?: string | null,
-    topReviewers?: Array< string > | null,
-    secondReviewers?: Array< string > | null,
-    referencer?: Array< string > | null,
-    updatedAt: string,
   } | null,
 };
 
@@ -4386,6 +4323,52 @@ export type CreateSectionMutation = {
   } | null,
 };
 
+export type UpdateSectionMutationVariables = {
+  input?: UpdateSectionInput,
+  condition?: ModelSectionConditionInput | null,
+};
+
+export type UpdateSectionMutation = {
+  updateSection?:  {
+    __typename: "Section",
+    id: string,
+    sheetID: string,
+    no: string,
+    sectionCategoryName?: string | null,
+    reviewee?: string | null,
+    topReviewers?: Array< string > | null,
+    secondReviewers?: Array< string > | null,
+    referencer?: Array< string > | null,
+    createdAt: string,
+    updatedAt: string,
+    objective?:  {
+      __typename: "ModelObjectiveConnection",
+      items?:  Array< {
+        __typename: "Objective",
+        id: string,
+        sectionID: string,
+        createdAt: string,
+        companyID: string,
+        content: string,
+        result?: string | null,
+        priority?: string | null,
+        selfEvaluation?: number | null,
+        firstEvaluation?: number | null,
+        lastEvaluation?: number | null,
+        progress?: number | null,
+        expStartDate?: string | null,
+        expDoneDate?: string | null,
+        reviewee?: string | null,
+        topReviewers?: Array< string > | null,
+        secondReviewers?: Array< string > | null,
+        referencer?: Array< string > | null,
+        updatedAt: string,
+      } | null > | null,
+      nextToken?: string | null,
+    } | null,
+  } | null,
+};
+
 export type CreateObjectiveMutationVariables = {
   input?: CreateObjectiveInput,
   condition?: ModelObjectiveConditionInput | null,
@@ -4393,6 +4376,35 @@ export type CreateObjectiveMutationVariables = {
 
 export type CreateObjectiveMutation = {
   createObjective?:  {
+    __typename: "Objective",
+    id: string,
+    sectionID: string,
+    createdAt: string,
+    companyID: string,
+    content: string,
+    result?: string | null,
+    priority?: string | null,
+    selfEvaluation?: number | null,
+    firstEvaluation?: number | null,
+    lastEvaluation?: number | null,
+    progress?: number | null,
+    expStartDate?: string | null,
+    expDoneDate?: string | null,
+    reviewee?: string | null,
+    topReviewers?: Array< string > | null,
+    secondReviewers?: Array< string > | null,
+    referencer?: Array< string > | null,
+    updatedAt: string,
+  } | null,
+};
+
+export type UpdateObjectiveMutationVariables = {
+  input?: UpdateObjectiveInput,
+  condition?: ModelObjectiveConditionInput | null,
+};
+
+export type UpdateObjectiveMutation = {
+  updateObjective?:  {
     __typename: "Objective",
     id: string,
     sectionID: string,

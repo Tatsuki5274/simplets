@@ -238,7 +238,7 @@ type Section
     {allow: owner, ownerField: "reviewee", operations: [create, update, read, delete]}
     {allow: owner, ownerField: "referencer", operations: [read]}
 
-    {allow: private, provider: iam ,operations:[create, read]}
+    {allow: private, provider: iam ,operations:[create, update, read]}
   ]
 )
 {
@@ -276,7 +276,7 @@ type Objective
     {allow: owner, ownerField: "reviewee", operations: [create, update, read, delete]}
     {allow: owner, ownerField: "referencer", operations: [read]}
 
-    { allow: private, provider: iam, operations: [read, create] }
+    { allow: private, provider: iam, operations: [read, update, create] }
   ]
 )
 {
@@ -357,7 +357,7 @@ type Report
     {allow: owner, ownerField: "referencer", operations: [read]}
     {allow: owner, ownerField: "reviewer", operations: [read, update]}
 
-    {allow: private, provider: iam, operations: [create, read,update] }
+    {allow: private, provider: iam, operations: [create, read, update] }
   ]
 )
 {
@@ -420,6 +420,11 @@ input sendEmailInput{
   body: String!
 }
 
+type UpdateOwnerResponseType {
+  statusCode: Int!
+  message: String!
+  result: String # JSON String
+}
 
 type Mutation{
   # 廃止
@@ -436,7 +441,7 @@ type Mutation{
     ])
 
   # 管理者による既存データの所有権更新処理
-  updateOwners: String
+  updateOwners: UpdateOwnerResponseType
     @function(name: "resolvers-${env}")
     @auth(rules: [
       {allow: private}

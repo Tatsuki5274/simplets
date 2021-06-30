@@ -7,18 +7,24 @@ export default async function (record: any) {
   const cognitoidentityserviceprovider =
     new AWS.CognitoIdentityServiceProvider();
 
-  const dynamoDb = record["dynamodb"];
-  const keys = dynamoDb["Keys"];
-  const username = keys["username"].S;
+  const dynamoDb = record?.dynamodb;
+  const keys = dynamoDb?.Keys;
+  const username: unknown = keys?.username?.S;
 
-  if (env.AUTH_SCCSYSTEME53C89F0_USERPOOLID) {
-    const params = {
-      UserPoolId: env.AUTH_SCCSYSTEME53C89F0_USERPOOLID /* required */,
-      Username: username /* required */,
-    };
-    const result = await cognitoidentityserviceprovider
-      .adminDeleteUser(params)
-      .promise();
-    console.log(JSON.stringify(result));
+  const userPoolId = env.AUTH_SCCSYSTEME53C89F0_USERPOOLID;
+  if (!userPoolId) {
+    throw new Error("userPoolId is not defined");
   }
+  if (typeof username !== "string") {
+    throw new TypeError("username is not string");
+  }
+
+  const params = {
+    UserPoolId: userPoolId,
+    Username: username,
+  };
+  const result = await cognitoidentityserviceprovider
+    .adminDeleteUser(params)
+    .promise();
+  console.log(JSON.stringify(result));
 }

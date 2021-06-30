@@ -1,10 +1,10 @@
 import AWSAppSyncClient from "aws-appsync";
 import { env } from "process";
-import aws from 'aws-sdk';
+import aws from "aws-sdk";
 import gql from "graphql-tag";
 import { NormalizedCacheObject } from "apollo-cache-inmemory";
 
-require('isomorphic-fetch')
+require("isomorphic-fetch");
 
 /* 使い方
 const client = new GraphQLClient(); //クライアントを初期化する
@@ -29,28 +29,28 @@ export class GraphQLClient {
       // エンドポイントのリージョンが未設定
       throw new Error("region is undefined");
     }
-    if (!aws.config.credentials){
+    if (!aws.config.credentials) {
       // 認証が存在しない
       throw new Error("credentials is undefined");
     }
 
-    const endpoint = env.API_SCCGQL_GRAPHQLAPIENDPOINTOUTPUT
-    const region = env.REGION
-    const credentials = aws.config.credentials
+    const endpoint = env.API_SCCGQL_GRAPHQLAPIENDPOINTOUTPUT;
+    const region = env.REGION;
+    const credentials = aws.config.credentials;
 
     // エンドポイントの形式を確認
-    const regexp = /http(s)?:\/\/([\w-]+\.)+[\w-]+(\/[\w- ./?%&=]*)?/
-    if(!endpoint?.match(regexp)){
+    const regexp = /http(s)?:\/\/([\w-]+\.)+[\w-]+(\/[\w- ./?%&=]*)?/;
+    if (!endpoint?.match(regexp)) {
       // エンドポイントの形式が不適切な場合
-      throw new Error(`GraphQL endpoint is not correct(${endpoint})`)
+      throw new Error(`GraphQL endpoint is not correct(${endpoint})`);
     }
-    
+
     const appSyncClient = new AWSAppSyncClient({
       url: endpoint,
       region: region,
       auth: {
         type: "AWS_IAM",
-        credentials: ()=> credentials
+        credentials: () => credentials,
       },
       disableOffline: true,
     });
@@ -58,7 +58,7 @@ export class GraphQLClient {
   }
 
   /**
-   * 
+   *
    * @param query クエリ文字列
    * @param params クエリパラメータ
    * @returns GraphQLクエリの実行結果
@@ -73,7 +73,7 @@ export class GraphQLClient {
   }
 
   /**
-   * 
+   *
    * @param mutation ミューテーション文字列
    * @param params ミューテーションパラメータ
    * @returns GraphQLミューテーションの実行結果
@@ -88,70 +88,69 @@ export class GraphQLClient {
   }
 }
 
-const client = getClient()
+const client = getClient();
 
 /**
  * @deprecated
  */
-function getClient(){
-    const endpoint = env.API_SCCGQL_GRAPHQLAPIENDPOINTOUTPUT
-    const region = env.REGION
-    const credentials = aws.config.credentials
-    const regexp = /http(s)?:\/\/([\w-]+\.)+[\w-]+(\/[\w- ./?%&=]*)?/
+function getClient() {
+  const endpoint = env.API_SCCGQL_GRAPHQLAPIENDPOINTOUTPUT;
+  const region = env.REGION;
+  const credentials = aws.config.credentials;
+  const regexp = /http(s)?:\/\/([\w-]+\.)+[\w-]+(\/[\w- ./?%&=]*)?/;
 
-    if(!endpoint?.match(regexp)){
-      throw new Error(`GraphQL endpoint is not correct(${endpoint})`)
-    }
-    
-    if(credentials && endpoint && region){
-      const appSyncClient = new AWSAppSyncClient({
-        url: endpoint,
-        region: region,
-        auth: {
-          type: "AWS_IAM",
-          credentials: ()=> credentials
-        },
-        disableOffline: true,
-      });
-      return appSyncClient
-    }else{
-      console.log("Error GraphQL Client", {
-        endpoint: endpoint,
-        region: region,
-        credentials: credentials
-      })
-      return null
-    }
+  if (!endpoint?.match(regexp)) {
+    throw new Error(`GraphQL endpoint is not correct(${endpoint})`);
+  }
+
+  if (credentials && endpoint && region) {
+    const appSyncClient = new AWSAppSyncClient({
+      url: endpoint,
+      region: region,
+      auth: {
+        type: "AWS_IAM",
+        credentials: () => credentials,
+      },
+      disableOffline: true,
+    });
+    return appSyncClient;
+  } else {
+    console.log("Error GraphQL Client", {
+      endpoint: endpoint,
+      region: region,
+      credentials: credentials,
+    });
+    return null;
+  }
 }
 
 /**
  * @deprecated
  */
-export async function graphqlQuery(query: string, params: unknown){
-  if(client){
+export async function graphqlQuery(query: string, params: unknown) {
+  if (client) {
     const result = await client.query({
       query: gql(query),
       variables: params,
       errorPolicy: "all",
-    })
-    return result
+    });
+    return result;
   }
-  return null
+  return null;
 }
 
 /**
  * @deprecated
  */
-export async function graphqlMutation(mutation: string, params: unknown){
-  if(client){
+export async function graphqlMutation(mutation: string, params: unknown) {
+  if (client) {
     const res = await client.mutate({
       mutation: gql(mutation),
       variables: params,
       errorPolicy: "all",
-    })
-    return res
-  }else{
-    return null
+    });
+    return res;
+  } else {
+    return null;
   }
- 
 }
