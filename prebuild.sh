@@ -7,20 +7,23 @@ echo "スクリプト開始"
 
 # resolversの型定義の複製とトランスパイル
 cd $PROJECT_ROOT_DIR
-cd amplify/backend/function/resolvers/
-cp "${PROJECT_ROOT_DIR}/src/API.ts" src/
-cp -R "${PROJECT_ROOT_DIR}/src/graphql" src/
-cp -R "${PROJECT_ROOT_DIR}/src/lib/dao" src/libs
-npx tsc
+cd amplify/backend/function/resolvers/src/
+npm i > /dev/null
+cp "${PROJECT_ROOT_DIR}/src/API.ts" ./
+cp -R "${PROJECT_ROOT_DIR}/src/graphql" ./
+cp -R "${PROJECT_ROOT_DIR}/src/lib/dao" ./libs
+./node_modules/.bin/tsc && echo "トランスパイル完了"
 echo "resolvers更新完了"
 
+echo
 # dbStreamの型定義の複製とトランスパイル
 cd $PROJECT_ROOT_DIR
-cd amplify/backend/function/dbStream/
-cp "${PROJECT_ROOT_DIR}/src/API.ts" src/
-cp -R "${PROJECT_ROOT_DIR}/src/graphql" src/
-cp -R "${PROJECT_ROOT_DIR}/src/lib/dao" src/libs
-npx tsc
+cd amplify/backend/function/dbStream/src/
+npm i > /dev/null
+cp "${PROJECT_ROOT_DIR}/src/API.ts" ./
+cp -R "${PROJECT_ROOT_DIR}/src/graphql" ./
+cp -R "${PROJECT_ROOT_DIR}/src/lib/dao" ./libs
+./node_modules/.bin/tsc && echo "トランスパイル完了"
 echo "dbStream更新完了"
 
 # cp src/API.ts amplify/backend/function/resolvers/src

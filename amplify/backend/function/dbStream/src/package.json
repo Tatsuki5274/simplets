@@ -11,5 +11,8 @@
     "aws-sdk": "^2.866.0",
     "graphql-tag": "^2.12.1",
     "isomorphic-fetch": "^3.0.0"
+  },
+  "devDependencies": {
+    "typescript": "^4.3.5"
   }
 }
