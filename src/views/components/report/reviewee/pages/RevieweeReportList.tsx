@@ -1,7 +1,7 @@
 import { EventInput } from "@fullcalendar/react";
-import { ListReportsRevieweeQueryVariables } from "API";
+import { ListReportsSubQueryVariables } from "API";
 import { HeaderContext, SidebarContext, UserContext } from "App";
-import { listReportsReviewee } from "graphql/queries";
+import { listReportsSub } from "graphql/queries";
 import { ReportDao } from "lib/dao/reportDao";
 import React, { useContext, useEffect, useState } from "react";
 import CalendarView from "views/components/report/reviewee/templates/CalendarView";
@@ -26,16 +26,13 @@ export default function (props: Props) {
     // 報告書情報の取得
     (async () => {
       if (currentUser) {
-        const listI: ListReportsRevieweeQueryVariables = {
-          reviewee: currentUser.username,
+        const listI: ListReportsSubQueryVariables = {
+          sub: currentUser.attributes.sub,
           date: {
             beginsWith: props.match.params.date,
           },
         };
-        const reports = await ReportDao.listReviewee(
-          listReportsReviewee,
-          listI
-        );
+        const reports = await ReportDao.listSub(listReportsSub, listI);
         let eventItems: EventInput[];
         if (reports) {
           eventItems = reports.map((report) => {

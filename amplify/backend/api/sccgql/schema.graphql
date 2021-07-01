@@ -345,7 +345,6 @@ type Report
   subscriptions: null
 )
 @key(fields: ["sub", "date"], name: "ReportBySub", queryField: "listReportsSub")
-@key(fields: ["reviewee", "date"], name: "ReportByReviewee", queryField: "listReportsReviewee") # 非推奨マーク
 @key(fields: ["companyID", "date"], name: "ReportByCompany", queryField: "listReportsCompanyDate")
 # @key(fields: ["groupID"], name: "ReportByGroup", queryField: "listReportsGroup") #仕様追加見送り
 @auth(

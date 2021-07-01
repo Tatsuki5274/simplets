@@ -70,17 +70,4 @@ export const ReportDao = {
     )) as APIt.ListReportsCompanyDateQuery;
     return result.listReportsCompanyDate?.items as (Report | null)[] | null;
   },
-  /**
-   * @deprecated listSubへの切り替えを推奨
-   */
-  listReviewee: async (
-    query: string,
-    params: APIt.ListReportsRevieweeQueryVariables
-  ): Promise<(Report | null)[] | null> => {
-    const result = (await BaseDao.list(
-      query,
-      params
-    )) as APIt.ListReportsRevieweeQuery;
-    return result.listReportsReviewee?.items as (Report | null)[] | null;
-  },
 };
