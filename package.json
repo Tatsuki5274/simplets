@@ -54,7 +54,9 @@
     "lint": "eslint  'src/**/*.{js,jsx,ts,tsx}'",
     "lint:fix": "eslint --fix 'src/**/*.{js,jsx,ts,tsx}'",
     "invoke:resolvers": "bash prebuild.sh && amplify mock function resolvers --event src/event.json --timeout 60",
-    "invoke:dbstream": "bash prebuild.sh && amplify mock function dbStream --event src/event.json --timeout 60"
+    "invoke:dbstream:insert": "bash prebuild.sh && amplify mock function dbStream --event src/events/event-insert.json --timeout 60",
+    "invoke:dbstream:modify": "bash prebuild.sh && amplify mock function dbStream --event src/events/event-modify.json --timeout 60",
+    "invoke:dbstream:remove": "bash prebuild.sh && amplify mock function dbStream --event src/events/event-remove.json --timeout 60"
   },
   "eslintConfig": {
     "extends": "react-app"

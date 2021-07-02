@@ -1,9 +1,14 @@
 import AWS from "aws-sdk";
 import { env } from "process";
+import { StreamEventRecordType } from "./types";
 
 AWS.config.update({ region: "ap-northeast-1" });
 
-export default async function (record: any) {
+/**
+ * @throws Error
+ * @throws TypeError
+ */
+export default async function (record: StreamEventRecordType) {
   const cognitoidentityserviceprovider =
     new AWS.CognitoIdentityServiceProvider();
 
@@ -26,5 +31,6 @@ export default async function (record: any) {
   const result = await cognitoidentityserviceprovider
     .adminDeleteUser(params)
     .promise();
+  // eslint-disable-next-line no-console
   console.log(JSON.stringify(result));
 }

@@ -1,9 +1,14 @@
 import AWS from "aws-sdk";
 import { env } from "process";
+import { getTypeErrorMessage, StreamEventRecordType } from "./types";
 
 AWS.config.update({ region: "ap-northeast-1" });
 
-export default async function (record: any) {
+/**
+ * @throws Error
+ * @throws TypeError
+ */
+export default async function (record: StreamEventRecordType) {
   const cognitoidentityserviceprovider =
     new AWS.CognitoIdentityServiceProvider();
 
@@ -23,13 +28,21 @@ export default async function (record: any) {
   }
   if (newCompanyId !== oldCompanyId) {
     // 社員の所属会社を変更することは許容しない
-    throw new Error("company can't update");
+    throw new Error("To chenage company is not allowed");
   }
   if (typeof username !== "string") {
-    throw new TypeError("username is not string");
+    throw new TypeError(
+      getTypeErrorMessage("username", "string", typeof username)
+    );
   }
   if (typeof newIsCompanyAdmin !== "boolean") {
-    throw new TypeError("newIsCompanyAdmin is not boolean");
+    throw new TypeError(
+      getTypeErrorMessage(
+        "newIsCompanyAdmin",
+        "boolean",
+        typeof newIsCompanyAdmin
+      )
+    );
   }
 
   // 意図の不明な条件分岐
@@ -54,5 +67,7 @@ export default async function (record: any) {
   const result = await cognitoidentityserviceprovider
     .adminUpdateUserAttributes(params)
     .promise();
+
+  // eslint-disable-next-line no-console
   console.log(JSON.stringify(result));
 }

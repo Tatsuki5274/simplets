@@ -1,0 +1,73 @@
+{
+  "Records": [
+      {
+          "eventID": "92176ed17f6bdcc6214b59a26387ee22",
+          "eventName": "REMOVE",
+          "eventVersion": "1.1",
+          "eventSource": "aws:dynamodb",
+          "awsRegion": "ap-northeast-1",
+          "dynamodb": {
+              "ApproximateCreationDateTime": 1625109245,
+              "Keys": {
+                  "username": {
+                      "S": "a"
+                  }
+              },
+              "OldImage": {
+                  "lastName": {
+                      "S": "ab"
+                  },
+                  "no": {
+                      "S": "a"
+                  },
+                  "superiorUsername": {
+                      "S": ""
+                  },
+                  "manager": {
+                      "S": "NORMAL"
+                  },
+                  "__typename": {
+                      "S": "Employee"
+                  },
+                  "groupID": {
+                      "S": "f408a35d-7d23-4659-b226-08f8349d67b9"
+                  },
+                  "manager#isDeleted": {
+                      "S": "NORMAL#FALSE"
+                  },
+                  "createdAt": {
+                      "S": "2021-05-26T09:25:04.252Z"
+                  },
+                  "firstName": {
+                      "S": "a"
+                  },
+                  "companyID": {
+                      "S": "SCC"
+                  },
+                  "isCompanyAdmin": {
+                      "BOOL": true
+                  },
+                  "isDeleted": {
+                      "S": "FALSE"
+                  },
+                  "grade": {
+                      "S": "a"
+                  },
+                  "email": {
+                      "S": "a"
+                  },
+                  "updatedAt": {
+                      "S": "2021-05-27T01:32:04.150Z"
+                  },
+                  "username": {
+                      "S": "a"
+                  }
+              },
+              "SequenceNumber": "233363500000000006331535834",
+              "SizeBytes": 279,
+              "StreamViewType": "NEW_AND_OLD_IMAGES"
+          },
+          "eventSourceARN": "arn:aws:dynamodb:ap-northeast-1:251893532135:table/Employee-pi7otg4cvzfnvb62tpp7apqkuy-dev/stream/2021-05-13T02:15:15.310"
+      }
+  ]
+}

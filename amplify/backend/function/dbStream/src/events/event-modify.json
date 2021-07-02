@@ -1,0 +1,123 @@
+{
+  "Records": [
+      {
+          "eventID": "e1c868fb7efe60cd813e1c6d0e9071b9",
+          "eventName": "MODIFY",
+          "eventVersion": "1.1",
+          "eventSource": "aws:dynamodb",
+          "awsRegion": "ap-northeast-1",
+          "dynamodb": {
+              "ApproximateCreationDateTime": 1625109143,
+              "Keys": {
+                  "username": {
+                      "S": "twatanabe@sisco-consulting.co.jp"
+                  }
+              },
+              "NewImage": {
+                  "lastName": {
+                      "S": "渡辺"
+                  },
+                  "no": {
+                      "S": "0"
+                  },
+                  "superiorUsername": {
+                      "S": "twatanabe+sup1@sisco-consulting.co.jp"
+                  },
+                  "manager": {
+                      "S": "SUPER_MANAGER"
+                  },
+                  "__typename": {
+                      "S": "Employee"
+                  },
+                  "groupID": {
+                      "S": "f408a35d-7d23-4659-b226-08f8349d67b9"
+                  },
+                  "manager#isDeleted": {
+                      "S": "SUPER_MANAGER#FALSE"
+                  },
+                  "createdAt": {
+                      "S": "2021-05-13T02:32:25.596Z"
+                  },
+                  "firstName": {
+                      "S": "社員"
+                  },
+                  "companyID": {
+                      "S": "SCC"
+                  },
+                  "isCompanyAdmin": {
+                      "BOOL": false
+                  },
+                  "isDeleted": {
+                      "S": "FALSE"
+                  },
+                  "grade": {
+                      "S": "L0"
+                  },
+                  "email": {
+                      "S": "twatanabe@sisco-consulting.co.jp"
+                  },
+                  "updatedAt": {
+                      "S": "2021-07-01T03:12:23.535Z"
+                  },
+                  "username": {
+                      "S": "twatanabe@sisco-consulting.co.jp"
+                  }
+              },
+              "OldImage": {
+                  "lastName": {
+                      "S": "渡辺"
+                  },
+                  "no": {
+                      "S": "0"
+                  },
+                  "superiorUsername": {
+                      "S": "twatanabe+sup1@sisco-consulting.co.jp"
+                  },
+                  "manager": {
+                      "S": "SUPER_MANAGER"
+                  },
+                  "__typename": {
+                      "S": "Employee"
+                  },
+                  "groupID": {
+                      "S": "f408a35d-7d23-4659-b226-08f8349d67b9"
+                  },
+                  "manager#isDeleted": {
+                      "S": "SUPER_MANAGER#FALSE"
+                  },
+                  "createdAt": {
+                      "S": "2021-05-13T02:32:25.596Z"
+                  },
+                  "firstName": {
+                      "S": "社員"
+                  },
+                  "companyID": {
+                      "S": "SCC"
+                  },
+                  "isCompanyAdmin": {
+                      "BOOL": true
+                  },
+                  "isDeleted": {
+                      "S": "FALSE"
+                  },
+                  "grade": {
+                      "S": "L0"
+                  },
+                  "email": {
+                      "S": "twatanabe@sisco-consulting.co.jp"
+                  },
+                  "updatedAt": {
+                      "S": "2021-07-01T02:05:34.604Z"
+                  },
+                  "username": {
+                      "S": "twatanabe@sisco-consulting.co.jp"
+                  }
+              },
+              "SequenceNumber": "233379300000000030029664864",
+              "SizeBytes": 826,
+              "StreamViewType": "NEW_AND_OLD_IMAGES"
+          },
+          "eventSourceARN": "arn:aws:dynamodb:ap-northeast-1:251893532135:table/Employee-pi7otg4cvzfnvb62tpp7apqkuy-dev/stream/2021-05-13T02:15:15.310"
+      }
+  ]
+}
