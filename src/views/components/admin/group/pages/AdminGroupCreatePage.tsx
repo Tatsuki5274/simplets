@@ -7,12 +7,13 @@ export default function () {
   const sidebar = useContext(SidebarContext);
 
   const currentUser = useContext(UserContext);
+  const companyId = currentUser?.attributes["custom:companyId"] || null;
+
+  if (!companyId) {
+    throw new Error("会社情報を取得することができませんでした");
+  }
 
   return currentUser ? (
-    <AdminGroupCreate
-      header={header}
-      sidebar={sidebar}
-      companyId={currentUser.attributes["custom:companyId"]}
-    />
+    <AdminGroupCreate header={header} sidebar={sidebar} companyId={companyId} />
   ) : null;
 }
