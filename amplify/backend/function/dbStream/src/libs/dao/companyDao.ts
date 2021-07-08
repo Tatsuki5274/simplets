@@ -33,6 +33,9 @@ export const CompanyDao = {
     )) as APIt.DeleteCompanyMutation;
     return result.deleteCompany || null;
   },
+  /**
+   * @param params 指定の会社IDのデータを取得する
+   */
   get: async (
     query: string,
     params: APIt.GetCompanyQueryVariables
@@ -40,8 +43,17 @@ export const CompanyDao = {
     const result = (await BaseDao.get(query, params)) as APIt.GetCompanyQuery;
     return result.getCompany || null;
   },
+  // 仕様検討中
+  // /**
+  //  * @description 自分の所属する会社情報を取得する
+  //  */
+  // getOwn: async (query: string): Promise<Company | null> => {
+  //   const result = (await BaseDao.get(query, {})) as APIt.GetOwnCompanyQuery;
+  //   return result.getOwnCompany || null;
+  // },
   /**
    * @deprecated 検証用のみ
+   * @authority IAM
    */
   list: async (
     query: string,

@@ -5606,6 +5606,19 @@ export type UpdateReportMutation = {
   } | null,
 };
 
+export type GetOwnCompanyQuery = {
+  getOwnCompany?:  {
+    __typename: "Company",
+    id: string,
+    name: string,
+    startMonth: number,
+    shortName?: string | null,
+    url?: string | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
 export type GetCompanyQueryVariables = {
   id?: string,
 };

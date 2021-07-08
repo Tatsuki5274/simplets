@@ -13,17 +13,10 @@ const createCategoryByCompanyAdmin = async (
     throw TypeError("claims is not found.");
   }
   const companyId: string | null = claims["custom:companyId"] || null;
-  const isCompanyAdmin: boolean = claims["custom:isCompanyAdmin"] === "true";
 
   if (!companyId) {
     // 会社番号が登録されていない場合
     throw new Error("CompanyID is not found.");
-  }
-
-  // 開発環境ではない場合は管理者権限をチェックする
-  if (!isCompanyAdmin) {
-    // 社内管理者ではない場合
-    throw new Error("You don't have permission");
   }
 
   params.companyID = companyId;
