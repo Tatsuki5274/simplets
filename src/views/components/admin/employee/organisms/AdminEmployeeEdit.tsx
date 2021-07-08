@@ -10,12 +10,7 @@ import {
 } from "API";
 import { EmployeeContext, ErrorContext } from "App";
 import { Formik } from "formik";
-import {
-  deleteEmployee,
-  deleteSheet,
-  updateEmployee,
-  updateSheet,
-} from "graphql/mutations";
+import { deleteEmployee, updateEmployee, updateSheet } from "graphql/mutations";
 import { listEmployeesCompany, listSheetsReviewee } from "graphql/queries";
 import { EmployeeDao } from "lib/dao/employeeDao";
 import { SheetDao } from "lib/dao/sheetDao";
@@ -103,15 +98,8 @@ export default function (props: Props) {
       };
       const sheetItems = await SheetDao.listReviewee(listSheetsReviewee, listI);
 
-      if (!sheetItems) {
-        // 評価シートの取得に失敗した場合はエラー
-        // 一件も登録できていない場合は空配列を想定
-        setError("シート情報の取得に失敗しました");
-        return;
-      }
-
       // 対象社員のシート情報が存在する場合
-      if (sheetItems.length > 0) {
+      if (sheetItems && sheetItems.length > 0) {
         if (
           window.confirm(
             "過去の評価データも削除されますが、社員情報を削除してよろしいですか？"
@@ -128,8 +116,7 @@ export default function (props: Props) {
               const deleteSheetI: DeleteSheetInput = {
                 id: sheet.id,
               };
-              const deleteSheetItem = await SheetDao.delete(
-                deleteSheet,
+              const deleteSheetItem = await SheetDao.deleteWithChildren(
                 deleteSheetI
               );
               if (!deleteSheetItem) {

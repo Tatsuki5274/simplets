@@ -164,7 +164,7 @@ type Sheet
     {allow: owner, ownerField: "reviewee", operations: [create, update, read]}
     {allow: owner, ownerField: "referencer", operations: [read]}
 
-    { allow: private, provider: iam, operations: [create, read, update] }
+    { allow: private, provider: iam, operations: [create, read, update, delete] }
     
   ]
 )
@@ -238,7 +238,7 @@ type Section
     {allow: owner, ownerField: "reviewee", operations: [create, update, read, delete]}
     {allow: owner, ownerField: "referencer", operations: [read]}
 
-    {allow: private, provider: iam ,operations:[create, update, read]}
+    { allow: private, provider: iam, operations: [create, read, update, delete] }
   ]
 )
 {
@@ -276,7 +276,7 @@ type Objective
     {allow: owner, ownerField: "reviewee", operations: [create, update, read, delete]}
     {allow: owner, ownerField: "referencer", operations: [read]}
 
-    { allow: private, provider: iam, operations: [read, update, create] }
+    { allow: private, provider: iam, operations: [create, read, update, delete] }
   ]
 )
 {
@@ -420,9 +420,14 @@ input sendEmailInput{
 }
 
 type UpdateOwnerResponseType {
-  statusCode: Int!
+  isSuccess: Boolean!
   message: String!
   result: String # JSON String
+}
+
+# 削除に必要なフィールド
+input DeleteFieldType {
+  id: String!
 }
 
 type Mutation{
@@ -441,6 +446,13 @@ type Mutation{
 
   # 管理者による既存データの所有権更新処理
   updateOwners: UpdateOwnerResponseType
+    @function(name: "resolvers-${env}")
+    @auth(rules: [
+      {allow: private}
+    ])
+  
+  # 社内管理者による削除処理  
+  deleteSheetWithChildrenByCompanyAdmin(input: DeleteFieldType): Sheet
     @function(name: "resolvers-${env}")
     @auth(rules: [
       {allow: private}

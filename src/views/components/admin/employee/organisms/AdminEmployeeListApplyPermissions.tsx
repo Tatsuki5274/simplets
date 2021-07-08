@@ -8,7 +8,7 @@ export default function () {
   const onClick = async () => {
     setIsLoading(true);
     const result = await CustomDao.updateOwners();
-    if (result.statusCode === 500) {
+    if (!result.isSuccess) {
       alert(`更新に失敗しました(${result.message})`);
       // eslint-disable-next-line no-console
       console.error(result);

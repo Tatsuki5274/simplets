@@ -1,18 +1,17 @@
-// import * as lambda from 'aws-lambda';
+import deleteSheetWithChildrenByCompanyAdmin from "./resolvers/deleteSheetWithChildrenByCompanyAdmin";
+import { deleteSheet } from "./graphql/mutations";
 import UpdateOwners from "./resolvers/updateOwners";
 
 export type EventType = {
   typeName?: string;
   fieldName?: string;
-  arguments?: ObjectType;
+  arguments?: any;
   identity?: ObjectType;
 };
 
 export type ObjectType = {
   [key: string]: ObjectType | string | boolean;
 };
-
-type ResponseType = ObjectType;
 
 /*
 context: {
@@ -27,34 +26,36 @@ context: {
 }
 */
 
-export const handler = async (event: EventType, context: any) => {
+export const handler = async (
+  event: EventType,
+  context: unknown
+): Promise<unknown> => {
   const typeName: string | null = event.typeName || null;
   const fieldName: string | null = event.fieldName || null;
-  let result: ResponseType | undefined = undefined;
-  console.log("It's only on TypeScript");
+  let result: unknown = null;
 
-  try {
-    if (typeName === "Mutation") {
-      if (fieldName === "updateOwners") {
-        result = await UpdateOwners(event);
-      } else {
-        throw new Error("fieldName is undefined");
+  if (typeName === "Mutation") {
+    if (fieldName === "updateOwners") {
+      result = await UpdateOwners(event);
+    } else if (fieldName === "deleteSheetWithChildrenByCompanyAdmin") {
+      const id = event?.arguments?.input?.id || null;
+      if (typeof id !== "string") {
+        throw new TypeError("id is not string");
       }
+      result = await deleteSheetWithChildrenByCompanyAdmin(
+        deleteSheet,
+        {
+          id: id,
+        },
+        event.identity?.claims
+      );
     } else {
-      throw new Error("typeName is undefined");
+      throw new Error("unknown fieldName");
     }
-  } catch (e) {
-    console.error("Error", e);
-    return {
-      statusCode: 500,
-      message: `${e.name}: ${e.message}`,
-    };
+  } else {
+    throw new Error("unknown typeName");
   }
 
-  const response = {
-    statusCode: 200,
-    message: "Operation successfully completed",
-    result: result,
-  };
-  return response;
+  console.log("Success", JSON.stringify(result));
+  return result;
 };

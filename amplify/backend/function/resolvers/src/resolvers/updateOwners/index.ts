@@ -6,12 +6,20 @@ import {
 } from "../../graphql/queries";
 import Apply from "./Apply";
 import GetPermission from "./GetPermission";
-import { Objective, Report, Section, Sheet } from "../../API";
+import {
+  Objective,
+  Report,
+  Section,
+  Sheet,
+  UpdateOwnerResponseType,
+} from "../../API";
 import { EmployeeDao } from "../../libs/dao/employeeDao";
 import { SheetDao } from "../../libs/dao/sheetDao";
 import { ReportDao } from "../../libs/dao/reportDao";
 
-export default async function UpdateOwners(event: EventType) {
+export default async function UpdateOwners(
+  event: EventType
+): Promise<UpdateOwnerResponseType> {
   // idnetityの形式チェック
   if (typeof event.identity !== "object") {
     throw new Error("identity is not object");
@@ -145,6 +153,8 @@ export default async function UpdateOwners(event: EventType) {
   await Apply(data.sheets, data.sections, data.objectives, data.reports);
 
   return {
+    __typename: "UpdateOwnerResponseType",
     message: "Update success!",
+    isSuccess: true,
   };
 }

@@ -1,3 +1,4 @@
+import { deleteSheetWithChildrenByCompanyAdmin } from "../../graphql/mutations";
 import * as APIt from "../../API";
 import { Sheet } from "../../API";
 import { BaseDao } from "./common/baseDao";
@@ -32,6 +33,25 @@ export const SheetDao = {
       params
     )) as APIt.DeleteSheetMutation;
     return (result.deleteSheet as Sheet) || null;
+  },
+  /**
+   * @description 評価シートと関連する全ての目標カテゴリと目標を削除する
+   * @param params 削除したいシートID
+   * @returns 削除したシートID
+   * @authority 社内管理者及び同一会社
+   */
+  deleteWithChildren: async (
+    params: APIt.DeleteSheetInput
+  ): Promise<Sheet | null> => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const result: any = await BaseDao.create(
+      deleteSheetWithChildrenByCompanyAdmin,
+      params
+    );
+    if (typeof result !== "object" || !result) {
+      throw TypeError("Response is not object");
+    }
+    return result.deleteSheetWithChildrenByCompanyAdmin || null;
   },
   get: async (
     query: string,
