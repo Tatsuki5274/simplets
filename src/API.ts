@@ -258,7 +258,6 @@ export type DeleteEmployeeInput = {
 };
 
 export type ModelEmployeeConditionInput = {
-  companyID?: ModelIDInput | null,
   no?: ModelStringInput | null,
   groupID?: ModelIDInput | null,
   superiorUsername?: ModelStringInput | null,
@@ -317,7 +316,6 @@ export type UpdateGroupInput = {
 };
 
 export type ModelGroupConditionInput = {
-  companyID?: ModelIDInput | null,
   no?: ModelStringInput | null,
   name?: ModelStringInput | null,
   createdAt?: ModelStringInput | null,
@@ -338,7 +336,6 @@ export type UpdateCategoryInput = {
 };
 
 export type ModelCategoryConditionInput = {
-  companyID?: ModelIDInput | null,
   no?: ModelStringInput | null,
   name?: ModelStringInput | null,
   and?: Array< ModelCategoryConditionInput | null > | null,
@@ -5603,19 +5600,6 @@ export type UpdateReportMutation = {
         updatedAt: string,
       } | null,
     } | null,
-  } | null,
-};
-
-export type GetOwnCompanyQuery = {
-  getOwnCompany?:  {
-    __typename: "Company",
-    id: string,
-    name: string,
-    startMonth: number,
-    shortName?: string | null,
-    url?: string | null,
-    createdAt: string,
-    updatedAt: string,
   } | null,
 };
 

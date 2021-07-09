@@ -48,7 +48,7 @@ export default function (props: Props) {
         localID: "",
         lastName: "",
         firstName: "",
-        groupList: props.groups[0].value,
+        groupList: props.groups?.[0]?.value || "",
         email: "",
         grade: "",
         superiorList: props.superiors ? props.superiors[0].value : "",

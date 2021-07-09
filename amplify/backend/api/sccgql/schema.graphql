@@ -9,7 +9,9 @@ type Company #会社
 @auth(
   rules: [
     {allow: groups, groups: ["Admin"]}
-    {allow: private}
+
+    # 社員の閲覧権限
+    {allow: groups, groupsField: "id", operations:[read]}
 
     {allow: private, provider: iam ,operations:[read]}
   ]
@@ -50,9 +52,8 @@ type Employee #社員
     # 社員本人の持つ権限
     {allow: owner, ownerField: "username", operations: [read]}
 
-    { allow: private, provider: iam, operations: [read] }
-
-    {allow: private}
+    # 社員の閲覧権限
+    {allow: groups, groupsField: "companyID", operations:[read]}
 
     { allow: private, provider: iam, operations: [create, read, update] }
   ]
@@ -99,7 +100,9 @@ type Group #部門
 @auth(
   rules: [
     {allow: groups, groups: ["Admin"]}
-    {allow: private}
+
+    # 社員の閲覧権限
+    {allow: groups, groupsField: "companyID", operations:[read]}
 
     {allow: private, provider: iam ,operations:[read, create]}
   ]
@@ -128,7 +131,10 @@ type Category
 @auth(
   rules: [
     {allow: groups, groups: ["Admin"]}
-    {allow: private}
+
+    # 社員の閲覧権限
+    {allow: groups, groupsField: "companyID", operations:[read]}
+
     {allow: private, provider: iam ,operations:[read, create]}
 
   ]

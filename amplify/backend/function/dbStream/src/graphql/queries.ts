@@ -2,19 +2,6 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const getOwnCompany = /* GraphQL */ `
-  query GetOwnCompany {
-    getOwnCompany {
-      id
-      name
-      startMonth
-      shortName
-      url
-      createdAt
-      updatedAt
-    }
-  }
-`;
 export const getCompany = /* GraphQL */ `
   query GetCompany($id: ID!) {
     getCompany(id: $id) {

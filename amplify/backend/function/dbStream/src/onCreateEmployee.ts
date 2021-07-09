@@ -93,6 +93,15 @@ export default async function (record: StreamEventRecordType) {
     .adminCreateUser(params)
     .promise();
 
+  const groupParams = {
+    GroupName: companyID,
+    UserPoolId: userPoolId,
+    Username: username,
+  };
+  await cognitoidentityserviceprovider
+    .adminAddUserToGroup(groupParams)
+    .promise();
+
   const sub =
     result.User?.Attributes?.find((element) => {
       return element.Name === "sub";
