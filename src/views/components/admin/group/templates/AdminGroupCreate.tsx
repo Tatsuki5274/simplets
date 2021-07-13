@@ -8,6 +8,7 @@ import LeftBox from "views/components/common/templates/LeftBox";
 import RightBox from "views/components/common/templates/RightBox";
 import Sidebar from "views/components/common/templates/Sidebar";
 import AdminGroupForm from "../organisms/AdminGroupForm";
+import Text from "views/components/common/atoms/Text";
 
 type Props = {
   header: HeaderProps | null;
@@ -28,6 +29,14 @@ export default function (props: Props) {
             <>
               <Title>部署登録</Title>
               <AdminGroupForm companyId={props.companyId} />
+              <Text>
+                <p>
+                  部署マスタに部署情報を登録できます。
+                  <br />
+                  <br />
+                  ※部署IDは登録後変更する事ができません。
+                </p>
+              </Text>
             </>
           </Content>
         </RightBox>
