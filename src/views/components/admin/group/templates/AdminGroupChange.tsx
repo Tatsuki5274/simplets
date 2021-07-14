@@ -10,6 +10,13 @@ import RightBox from "views/components/common/templates/RightBox";
 import Sidebar from "views/components/common/templates/Sidebar";
 import Container from "../../../common/templates/Container";
 import AdminDeleteGroup from "../organisms/AdminDeleteGroup";
+import Text from "views/components/common/atoms/Text";
+import styled from "styled-components";
+
+const SpaceStyle = styled.p({
+  textIndent: "-1em",
+  marginLeft: "1em",
+});
 
 type Props = {
   header: HeaderProps | null;
@@ -35,6 +42,16 @@ export default function (props: Props) {
               <Title>部署変更・削除</Title>
               <AdminChangeGroupForm {...props} />
               <AdminDeleteGroup {...props} />
+              <Text>
+                <p>
+                  <p>部署名の変更、部署情報の削除が可能です。</p>
+                  <SpaceStyle>
+                    ※変更した部署名は今期の評価中のシートにのみ適用されます。
+                    <br />
+                    今期の評価完了済みのシートや過去年度のシートには変更内容は適用されません。
+                  </SpaceStyle>
+                </p>
+              </Text>
             </>
           </Content>
         </RightBox>
