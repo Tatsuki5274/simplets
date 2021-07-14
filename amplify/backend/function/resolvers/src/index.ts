@@ -2,6 +2,14 @@ import deleteSheetWithChildrenByCompanyAdmin from "./resolvers/deleteSheetWithCh
 import { deleteSheet } from "./graphql/mutations";
 import UpdateOwners from "./resolvers/updateOwners";
 import getOwnCompany from "./resolvers/getOwnCompany";
+import updateReportByCompanyAdmin from "./resolvers/updateReportByCompanyAdmin";
+import deleteReportByCompanyAdmin from "./resolvers/deleteReportByCompanyAdmin";
+import createCategoryByCompanyAdmin from "./resolvers/createCategoryByCompanyAdmin";
+import updateCategoryByCompanyAdmin from "./resolvers/updateCategoryByCompanyAdmin";
+import deleteCategoryByCompanyAdmin from "./resolvers/deleteCategoryByCompanyAdmin";
+import createEmployeeByCompanyAdmin from "./resolvers/createEmployeeByCompanyAdmin";
+import updateEmployeeByCompanyAdmin from "./resolvers/updateEmployeeByCompanyAdmin";
+import deleteEmployeeByCompanyAdmin from "./resolvers/deleteEmployeeByCompanyAdmin";
 
 export type EventType = {
   typeName?: string;
@@ -51,6 +59,19 @@ export const handler = async (
       }
 
       result = await UpdateOwners(event);
+    } else if (fieldName === "createCategoryByCompanyAdmin") {
+      if (!isCompanyAdmin) {
+        // 社内管理者であることを検証
+        throw new Error("You don't have permission");
+      }
+      if (!companyId) {
+        throw new Error("companyId is required.");
+      }
+      const params = event?.arguments?.input;
+      if (typeof params !== "object") {
+        throw new TypeError("params not provided.");
+      }
+      result = await createCategoryByCompanyAdmin(params, companyId);
     } else if (fieldName === "deleteSheetWithChildrenByCompanyAdmin") {
       if (!isCompanyAdmin) {
         // 社内管理者であることを検証
@@ -71,6 +92,98 @@ export const handler = async (
         },
         event.identity?.claims
       );
+    } else if (fieldName === "updateCategoryByCompanyAdmin") {
+      if (!isCompanyAdmin) {
+        // 社内管理者であることを検証
+        throw new Error("You don't have permission");
+      }
+      if (!companyId) {
+        throw new Error("companyId is required.");
+      }
+      const params = event?.arguments?.input;
+      if (typeof params !== "object") {
+        throw new TypeError("params not provided.");
+      }
+      result = await updateCategoryByCompanyAdmin(params, companyId);
+      // todo テスト
+    } else if (fieldName === "deleteCategoryByCompanyAdmin") {
+      if (!isCompanyAdmin) {
+        // 社内管理者であることを検証
+        throw new Error("You don't have permission");
+      }
+      if (!companyId) {
+        throw new Error("companyId is required.");
+      }
+      const params = event?.arguments?.input;
+      if (typeof params !== "object") {
+        throw new TypeError("params not provided.");
+      }
+      result = await deleteCategoryByCompanyAdmin(params, companyId);
+    } else if (fieldName === "createEmployeeByCompanyAdmin") {
+      if (!isCompanyAdmin) {
+        // 社内管理者であることを検証
+        throw new Error("You don't have permission");
+      }
+      if (!companyId) {
+        throw new Error("companyId is required.");
+      }
+      const params = event?.arguments?.input;
+      if (typeof params !== "object") {
+        throw new TypeError("params not provided.");
+      }
+      result = await createEmployeeByCompanyAdmin(params, companyId);
+    } else if (fieldName === "updateEmployeeByCompanyAdmin") {
+      if (!isCompanyAdmin) {
+        // 社内管理者であることを検証
+        throw new Error("You don't have permission");
+      }
+      if (!companyId) {
+        throw new Error("companyId is required.");
+      }
+      const params = event?.arguments?.input;
+      if (typeof params !== "object") {
+        throw new TypeError("params not provided.");
+      }
+      result = await updateEmployeeByCompanyAdmin(params, companyId);
+    } else if (fieldName === "deleteEmployeeByCompanyAdmin") {
+      if (!isCompanyAdmin) {
+        // 社内管理者であることを検証
+        throw new Error("You don't have permission");
+      }
+      if (!companyId) {
+        throw new Error("companyId is required.");
+      }
+      const params = event?.arguments?.input;
+      if (typeof params !== "object") {
+        throw new TypeError("params not provided.");
+      }
+      result = await deleteEmployeeByCompanyAdmin(params, companyId);
+    } else if (fieldName === "updateReportByCompanyAdmin") {
+      if (!isCompanyAdmin) {
+        // 社内管理者であることを検証
+        throw new Error("You don't have permission");
+      }
+      if (!companyId) {
+        throw new Error("companyId is required.");
+      }
+      const params = event?.arguments?.input;
+      if (typeof params !== "object") {
+        throw new TypeError("params not provided.");
+      }
+      result = await updateReportByCompanyAdmin(params, companyId);
+    } else if (fieldName === "deleteReportByCompanyAdmin") {
+      if (!isCompanyAdmin) {
+        // 社内管理者であることを検証
+        throw new Error("You don't have permission");
+      }
+      if (!companyId) {
+        throw new Error("companyId is required.");
+      }
+      const params = event?.arguments?.input;
+      if (typeof params !== "object") {
+        throw new TypeError("params not provided.");
+      }
+      result = await deleteReportByCompanyAdmin(params, companyId);
     } else {
       throw new Error("unknown fieldName");
     }

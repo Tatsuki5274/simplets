@@ -70,4 +70,24 @@ export const ReportDao = {
     )) as APIt.ListReportsCompanyDateQuery;
     return result.listReportsCompanyDate?.items as (Report | null)[] | null;
   },
+  updateByAdmin: async (
+    mutation: string,
+    params: APIt.UpdateReportInput
+  ): Promise<Report | null> => {
+    const result = (await BaseDao.update(
+      mutation,
+      params
+    )) as APIt.UpdateReportByCompanyAdminMutation;
+    return (result.updateReportByCompanyAdmin as Report) || null;
+  },
+  deleteByAdmin: async (
+    mutation: string,
+    params: APIt.DeleteReportInput
+  ): Promise<Report | null> => {
+    const result = (await BaseDao.delete(
+      mutation,
+      params
+    )) as APIt.DeleteReportByCompanyAdminMutation;
+    return (result.deleteReportByCompanyAdmin as Report) || null;
+  },
 };

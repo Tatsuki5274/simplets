@@ -17,7 +17,128 @@ export type UpdateOwnerResponseType = {
   result?: string | null,
 };
 
-export type DeleteFieldType = {
+export type CreateCategoryInput = {
+  id?: string | null,
+  companyID: string,
+  no: string,
+  name: string,
+};
+
+export type Category = {
+  __typename: "Category",
+  id?: string,
+  companyID?: string,
+  no?: string,
+  name?: string,
+  createdAt?: string,
+  updatedAt?: string,
+};
+
+export type UpdateCategoryInput = {
+  id: string,
+  companyID?: string | null,
+  no?: string | null,
+  name?: string | null,
+};
+
+export type DeleteCategoryInput = {
+  id: string,
+};
+
+export type CreateEmployeeInput = {
+  username: string,
+  companyID: string,
+  no: string,
+  groupID: string,
+  superiorUsername: string,
+  firstName: string,
+  lastName: string,
+  grade: string,
+  email: string,
+  sub?: string | null,
+  manager: EmployeeType,
+  isCompanyAdmin?: boolean | null,
+  isDeleted: BooleanType,
+};
+
+export enum EmployeeType {
+  OTHER = "OTHER",
+  NORMAL = "NORMAL",
+  MANAGER = "MANAGER",
+  SUPER_MANAGER = "SUPER_MANAGER",
+}
+
+
+export enum BooleanType {
+  TRUE = "TRUE",
+  FALSE = "FALSE",
+}
+
+
+export type Employee = {
+  __typename: "Employee",
+  username?: string,
+  companyID?: string,
+  no?: string,
+  groupID?: string,
+  superiorUsername?: string,
+  firstName?: string,
+  lastName?: string,
+  grade?: string,
+  email?: string,
+  sub?: string | null,
+  manager?: EmployeeType,
+  isCompanyAdmin?: boolean | null,
+  isDeleted?: BooleanType,
+  createdAt?: string,
+  updatedAt?: string,
+  company?: Company,
+  superior?: Employee,
+  group?: Group,
+};
+
+export type Company = {
+  __typename: "Company",
+  id?: string,
+  name?: string,
+  startMonth?: number,
+  shortName?: string | null,
+  url?: string | null,
+  createdAt?: string,
+  updatedAt?: string,
+};
+
+export type Group = {
+  __typename: "Group",
+  id?: string,
+  companyID?: string,
+  no?: string,
+  name?: string,
+  createdAt?: string,
+  updatedAt?: string,
+};
+
+export type UpdateEmployeeInput = {
+  username: string,
+  companyID?: string | null,
+  no?: string | null,
+  groupID?: string | null,
+  superiorUsername?: string | null,
+  firstName?: string | null,
+  lastName?: string | null,
+  grade?: string | null,
+  email?: string | null,
+  sub?: string | null,
+  manager?: EmployeeType | null,
+  isCompanyAdmin?: boolean | null,
+  isDeleted?: BooleanType | null,
+};
+
+export type DeleteEmployeeInput = {
+  username: string,
+};
+
+export type DeleteSheetInput = {
   id: string,
 };
 
@@ -63,63 +184,6 @@ export type Sheet = {
   topEmployee?: Employee,
   group?: Group,
   section?: ModelSectionConnection,
-};
-
-export type Employee = {
-  __typename: "Employee",
-  username?: string,
-  companyID?: string,
-  no?: string,
-  groupID?: string,
-  superiorUsername?: string,
-  firstName?: string,
-  lastName?: string,
-  grade?: string,
-  email?: string,
-  sub?: string | null,
-  manager?: EmployeeType,
-  isCompanyAdmin?: boolean | null,
-  isDeleted?: BooleanType,
-  createdAt?: string,
-  updatedAt?: string,
-  company?: Company,
-  superior?: Employee,
-  group?: Group,
-};
-
-export enum EmployeeType {
-  OTHER = "OTHER",
-  NORMAL = "NORMAL",
-  MANAGER = "MANAGER",
-  SUPER_MANAGER = "SUPER_MANAGER",
-}
-
-
-export enum BooleanType {
-  TRUE = "TRUE",
-  FALSE = "FALSE",
-}
-
-
-export type Company = {
-  __typename: "Company",
-  id?: string,
-  name?: string,
-  startMonth?: number,
-  shortName?: string | null,
-  url?: string | null,
-  createdAt?: string,
-  updatedAt?: string,
-};
-
-export type Group = {
-  __typename: "Group",
-  id?: string,
-  companyID?: string,
-  no?: string,
-  name?: string,
-  createdAt?: string,
-  updatedAt?: string,
 };
 
 export type ModelSectionConnection = {
@@ -169,6 +233,71 @@ export type Objective = {
   secondReviewers?: Array< string > | null,
   referencer?: Array< string > | null,
   updatedAt?: string,
+};
+
+export type UpdateReportInput = {
+  id: string,
+  sub?: string | null,
+  date?: string | null,
+  groupID?: string | null,
+  reviewee?: string | null,
+  reviewer?: Array< string | null > | null,
+  companyID?: string | null,
+  referencer?: Array< string | null > | null,
+  revieweeComments?: RevieweeReportCommentInput | null,
+  reviewerComments?: ReviewerReportCommentInput | null,
+  workStatus?: ReportWorkingStatus | null,
+};
+
+export type RevieweeReportCommentInput = {
+  work?: string | null,
+  other?: string | null,
+  status?: string | null,
+};
+
+export type ReviewerReportCommentInput = {
+  superior?: string | null,
+};
+
+export enum ReportWorkingStatus {
+  OK = "OK",
+  InTask = "InTask",
+  InProblem = "InProblem",
+}
+
+
+export type Report = {
+  __typename: "Report",
+  id?: string,
+  sub?: string,
+  date?: string,
+  groupID?: string | null,
+  reviewee?: string | null,
+  reviewer?: Array< string | null > | null,
+  companyID?: string | null,
+  referencer?: Array< string | null > | null,
+  revieweeComments?: RevieweeReportComment,
+  reviewerComments?: ReviewerReportComment,
+  workStatus?: ReportWorkingStatus | null,
+  createdAt?: string,
+  updatedAt?: string,
+  revieweeEmployee?: Employee,
+};
+
+export type RevieweeReportComment = {
+  __typename: "RevieweeReportComment",
+  work?: string | null,
+  other?: string | null,
+  status?: string | null,
+};
+
+export type ReviewerReportComment = {
+  __typename: "ReviewerReportComment",
+  superior?: string | null,
+};
+
+export type DeleteReportInput = {
+  id: string,
 };
 
 export type CreateCompanyInput = {
@@ -253,8 +382,25 @@ export type DeleteCompanyInput = {
   id: string,
 };
 
-export type DeleteEmployeeInput = {
-  username: string,
+export type UpdateGroupInput = {
+  id: string,
+  companyID?: string | null,
+  no?: string | null,
+  name?: string | null,
+  createdAt?: string | null,
+};
+
+export type ModelGroupConditionInput = {
+  no?: ModelStringInput | null,
+  name?: ModelStringInput | null,
+  createdAt?: ModelStringInput | null,
+  and?: Array< ModelGroupConditionInput | null > | null,
+  or?: Array< ModelGroupConditionInput | null > | null,
+  not?: ModelGroupConditionInput | null,
+};
+
+export type DeleteGroupInput = {
+  id: string,
 };
 
 export type ModelEmployeeConditionInput = {
@@ -307,145 +453,6 @@ export type ModelBooleanTypeInput = {
   ne?: BooleanType | null,
 };
 
-export type UpdateGroupInput = {
-  id: string,
-  companyID?: string | null,
-  no?: string | null,
-  name?: string | null,
-  createdAt?: string | null,
-};
-
-export type ModelGroupConditionInput = {
-  no?: ModelStringInput | null,
-  name?: ModelStringInput | null,
-  createdAt?: ModelStringInput | null,
-  and?: Array< ModelGroupConditionInput | null > | null,
-  or?: Array< ModelGroupConditionInput | null > | null,
-  not?: ModelGroupConditionInput | null,
-};
-
-export type DeleteGroupInput = {
-  id: string,
-};
-
-export type UpdateCategoryInput = {
-  id: string,
-  companyID?: string | null,
-  no?: string | null,
-  name?: string | null,
-};
-
-export type ModelCategoryConditionInput = {
-  no?: ModelStringInput | null,
-  name?: ModelStringInput | null,
-  and?: Array< ModelCategoryConditionInput | null > | null,
-  or?: Array< ModelCategoryConditionInput | null > | null,
-  not?: ModelCategoryConditionInput | null,
-};
-
-export type Category = {
-  __typename: "Category",
-  id?: string,
-  companyID?: string,
-  no?: string,
-  name?: string,
-  createdAt?: string,
-  updatedAt?: string,
-};
-
-export type DeleteCategoryInput = {
-  id: string,
-};
-
-export type DeleteReportInput = {
-  id: string,
-};
-
-export type ModelReportConditionInput = {
-  sub?: ModelStringInput | null,
-  date?: ModelStringInput | null,
-  groupID?: ModelIDInput | null,
-  companyID?: ModelStringInput | null,
-  workStatus?: ModelReportWorkingStatusInput | null,
-  and?: Array< ModelReportConditionInput | null > | null,
-  or?: Array< ModelReportConditionInput | null > | null,
-  not?: ModelReportConditionInput | null,
-};
-
-export type ModelReportWorkingStatusInput = {
-  eq?: ReportWorkingStatus | null,
-  ne?: ReportWorkingStatus | null,
-};
-
-export enum ReportWorkingStatus {
-  OK = "OK",
-  InTask = "InTask",
-  InProblem = "InProblem",
-}
-
-
-export type Report = {
-  __typename: "Report",
-  id?: string,
-  sub?: string,
-  date?: string,
-  groupID?: string | null,
-  reviewee?: string | null,
-  reviewer?: Array< string | null > | null,
-  companyID?: string | null,
-  referencer?: Array< string | null > | null,
-  revieweeComments?: RevieweeReportComment,
-  reviewerComments?: ReviewerReportComment,
-  workStatus?: ReportWorkingStatus | null,
-  createdAt?: string,
-  updatedAt?: string,
-  revieweeEmployee?: Employee,
-};
-
-export type RevieweeReportComment = {
-  __typename: "RevieweeReportComment",
-  work?: string | null,
-  other?: string | null,
-  status?: string | null,
-};
-
-export type ReviewerReportComment = {
-  __typename: "ReviewerReportComment",
-  superior?: string | null,
-};
-
-export type CreateEmployeeInput = {
-  username: string,
-  companyID: string,
-  no: string,
-  groupID: string,
-  superiorUsername: string,
-  firstName: string,
-  lastName: string,
-  grade: string,
-  email: string,
-  sub?: string | null,
-  manager: EmployeeType,
-  isCompanyAdmin?: boolean | null,
-  isDeleted: BooleanType,
-};
-
-export type UpdateEmployeeInput = {
-  username: string,
-  companyID?: string | null,
-  no?: string | null,
-  groupID?: string | null,
-  superiorUsername?: string | null,
-  firstName?: string | null,
-  lastName?: string | null,
-  grade?: string | null,
-  email?: string | null,
-  sub?: string | null,
-  manager?: EmployeeType | null,
-  isCompanyAdmin?: boolean | null,
-  isDeleted?: BooleanType | null,
-};
-
 export type CreateGroupInput = {
   id?: string | null,
   companyID: string,
@@ -454,11 +461,12 @@ export type CreateGroupInput = {
   createdAt?: string | null,
 };
 
-export type CreateCategoryInput = {
-  id?: string | null,
-  companyID: string,
-  no: string,
-  name: string,
+export type ModelCategoryConditionInput = {
+  no?: ModelStringInput | null,
+  name?: ModelStringInput | null,
+  and?: Array< ModelCategoryConditionInput | null > | null,
+  or?: Array< ModelCategoryConditionInput | null > | null,
+  not?: ModelCategoryConditionInput | null,
 };
 
 export type CreateSheetInput = {
@@ -565,10 +573,6 @@ export type UpdateSheetInput = {
   reviewee?: string | null,
   topReviewers?: Array< string > | null,
   secondReviewers?: Array< string > | null,
-};
-
-export type DeleteSheetInput = {
-  id: string,
 };
 
 export type CreateSectionInput = {
@@ -682,28 +686,20 @@ export type CreateReportInput = {
   workStatus?: ReportWorkingStatus | null,
 };
 
-export type RevieweeReportCommentInput = {
-  work?: string | null,
-  other?: string | null,
-  status?: string | null,
+export type ModelReportConditionInput = {
+  sub?: ModelStringInput | null,
+  date?: ModelStringInput | null,
+  groupID?: ModelIDInput | null,
+  companyID?: ModelStringInput | null,
+  workStatus?: ModelReportWorkingStatusInput | null,
+  and?: Array< ModelReportConditionInput | null > | null,
+  or?: Array< ModelReportConditionInput | null > | null,
+  not?: ModelReportConditionInput | null,
 };
 
-export type ReviewerReportCommentInput = {
-  superior?: string | null,
-};
-
-export type UpdateReportInput = {
-  id: string,
-  sub?: string | null,
-  date?: string | null,
-  groupID?: string | null,
-  reviewee?: string | null,
-  reviewer?: Array< string | null > | null,
-  companyID?: string | null,
-  referencer?: Array< string | null > | null,
-  revieweeComments?: RevieweeReportCommentInput | null,
-  reviewerComments?: ReviewerReportCommentInput | null,
-  workStatus?: ReportWorkingStatus | null,
+export type ModelReportWorkingStatusInput = {
+  eq?: ReportWorkingStatus | null,
+  ne?: ReportWorkingStatus | null,
 };
 
 export type ModelCompanyFilterInput = {
@@ -950,8 +946,797 @@ export type UpdateOwnersMutation = {
   } | null,
 };
 
+export type CreateCategoryByCompanyAdminMutationVariables = {
+  input?: CreateCategoryInput | null,
+};
+
+export type CreateCategoryByCompanyAdminMutation = {
+  createCategoryByCompanyAdmin?:  {
+    __typename: "Category",
+    id: string,
+    companyID: string,
+    no: string,
+    name: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type UpdateCategoryByCompanyAdminMutationVariables = {
+  input?: UpdateCategoryInput | null,
+};
+
+export type UpdateCategoryByCompanyAdminMutation = {
+  updateCategoryByCompanyAdmin?:  {
+    __typename: "Category",
+    id: string,
+    companyID: string,
+    no: string,
+    name: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type DeleteCategoryByCompanyAdminMutationVariables = {
+  input?: DeleteCategoryInput | null,
+};
+
+export type DeleteCategoryByCompanyAdminMutation = {
+  deleteCategoryByCompanyAdmin?:  {
+    __typename: "Category",
+    id: string,
+    companyID: string,
+    no: string,
+    name: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type CreateEmployeeByCompanyAdminMutationVariables = {
+  input?: CreateEmployeeInput | null,
+};
+
+export type CreateEmployeeByCompanyAdminMutation = {
+  createEmployeeByCompanyAdmin?:  {
+    __typename: "Employee",
+    username: string,
+    companyID: string,
+    no: string,
+    groupID: string,
+    superiorUsername: string,
+    firstName: string,
+    lastName: string,
+    grade: string,
+    email: string,
+    sub?: string | null,
+    manager: EmployeeType,
+    isCompanyAdmin?: boolean | null,
+    isDeleted: BooleanType,
+    createdAt: string,
+    updatedAt: string,
+    company?:  {
+      __typename: "Company",
+      id: string,
+      name: string,
+      startMonth: number,
+      shortName?: string | null,
+      url?: string | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    superior?:  {
+      __typename: "Employee",
+      username: string,
+      companyID: string,
+      no: string,
+      groupID: string,
+      superiorUsername: string,
+      firstName: string,
+      lastName: string,
+      grade: string,
+      email: string,
+      sub?: string | null,
+      manager: EmployeeType,
+      isCompanyAdmin?: boolean | null,
+      isDeleted: BooleanType,
+      createdAt: string,
+      updatedAt: string,
+      company?:  {
+        __typename: "Company",
+        id: string,
+        name: string,
+        startMonth: number,
+        shortName?: string | null,
+        url?: string | null,
+        createdAt: string,
+        updatedAt: string,
+      } | null,
+      superior?:  {
+        __typename: "Employee",
+        username: string,
+        companyID: string,
+        no: string,
+        groupID: string,
+        superiorUsername: string,
+        firstName: string,
+        lastName: string,
+        grade: string,
+        email: string,
+        sub?: string | null,
+        manager: EmployeeType,
+        isCompanyAdmin?: boolean | null,
+        isDeleted: BooleanType,
+        createdAt: string,
+        updatedAt: string,
+        company?:  {
+          __typename: "Company",
+          id: string,
+          name: string,
+          startMonth: number,
+          shortName?: string | null,
+          url?: string | null,
+          createdAt: string,
+          updatedAt: string,
+        } | null,
+        superior?:  {
+          __typename: "Employee",
+          username: string,
+          companyID: string,
+          no: string,
+          groupID: string,
+          superiorUsername: string,
+          firstName: string,
+          lastName: string,
+          grade: string,
+          email: string,
+          sub?: string | null,
+          manager: EmployeeType,
+          isCompanyAdmin?: boolean | null,
+          isDeleted: BooleanType,
+          createdAt: string,
+          updatedAt: string,
+          company?:  {
+            __typename: "Company",
+            id: string,
+            name: string,
+            startMonth: number,
+            shortName?: string | null,
+            url?: string | null,
+            createdAt: string,
+            updatedAt: string,
+          } | null,
+          superior?:  {
+            __typename: "Employee",
+            username: string,
+            companyID: string,
+            no: string,
+            groupID: string,
+            superiorUsername: string,
+            firstName: string,
+            lastName: string,
+            grade: string,
+            email: string,
+            sub?: string | null,
+            manager: EmployeeType,
+            isCompanyAdmin?: boolean | null,
+            isDeleted: BooleanType,
+            createdAt: string,
+            updatedAt: string,
+            company?:  {
+              __typename: "Company",
+              id: string,
+              name: string,
+              startMonth: number,
+              shortName?: string | null,
+              url?: string | null,
+              createdAt: string,
+              updatedAt: string,
+            } | null,
+            superior?:  {
+              __typename: "Employee",
+              username: string,
+              companyID: string,
+              no: string,
+              groupID: string,
+              superiorUsername: string,
+              firstName: string,
+              lastName: string,
+              grade: string,
+              email: string,
+              sub?: string | null,
+              manager: EmployeeType,
+              isCompanyAdmin?: boolean | null,
+              isDeleted: BooleanType,
+              createdAt: string,
+              updatedAt: string,
+              company?:  {
+                __typename: "Company",
+                id: string,
+                name: string,
+                startMonth: number,
+                shortName?: string | null,
+                url?: string | null,
+                createdAt: string,
+                updatedAt: string,
+              } | null,
+              superior?:  {
+                __typename: "Employee",
+                username: string,
+                companyID: string,
+                no: string,
+                groupID: string,
+                superiorUsername: string,
+                firstName: string,
+                lastName: string,
+                grade: string,
+                email: string,
+                sub?: string | null,
+                manager: EmployeeType,
+                isCompanyAdmin?: boolean | null,
+                isDeleted: BooleanType,
+                createdAt: string,
+                updatedAt: string,
+              } | null,
+              group?:  {
+                __typename: "Group",
+                id: string,
+                companyID: string,
+                no: string,
+                name: string,
+                createdAt: string,
+                updatedAt: string,
+              } | null,
+            } | null,
+            group?:  {
+              __typename: "Group",
+              id: string,
+              companyID: string,
+              no: string,
+              name: string,
+              createdAt: string,
+              updatedAt: string,
+            } | null,
+          } | null,
+          group?:  {
+            __typename: "Group",
+            id: string,
+            companyID: string,
+            no: string,
+            name: string,
+            createdAt: string,
+            updatedAt: string,
+          } | null,
+        } | null,
+        group?:  {
+          __typename: "Group",
+          id: string,
+          companyID: string,
+          no: string,
+          name: string,
+          createdAt: string,
+          updatedAt: string,
+        } | null,
+      } | null,
+      group?:  {
+        __typename: "Group",
+        id: string,
+        companyID: string,
+        no: string,
+        name: string,
+        createdAt: string,
+        updatedAt: string,
+      } | null,
+    } | null,
+    group?:  {
+      __typename: "Group",
+      id: string,
+      companyID: string,
+      no: string,
+      name: string,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+  } | null,
+};
+
+export type UpdateEmployeeByCompanyAdminMutationVariables = {
+  input?: UpdateEmployeeInput | null,
+};
+
+export type UpdateEmployeeByCompanyAdminMutation = {
+  updateEmployeeByCompanyAdmin?:  {
+    __typename: "Employee",
+    username: string,
+    companyID: string,
+    no: string,
+    groupID: string,
+    superiorUsername: string,
+    firstName: string,
+    lastName: string,
+    grade: string,
+    email: string,
+    sub?: string | null,
+    manager: EmployeeType,
+    isCompanyAdmin?: boolean | null,
+    isDeleted: BooleanType,
+    createdAt: string,
+    updatedAt: string,
+    company?:  {
+      __typename: "Company",
+      id: string,
+      name: string,
+      startMonth: number,
+      shortName?: string | null,
+      url?: string | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    superior?:  {
+      __typename: "Employee",
+      username: string,
+      companyID: string,
+      no: string,
+      groupID: string,
+      superiorUsername: string,
+      firstName: string,
+      lastName: string,
+      grade: string,
+      email: string,
+      sub?: string | null,
+      manager: EmployeeType,
+      isCompanyAdmin?: boolean | null,
+      isDeleted: BooleanType,
+      createdAt: string,
+      updatedAt: string,
+      company?:  {
+        __typename: "Company",
+        id: string,
+        name: string,
+        startMonth: number,
+        shortName?: string | null,
+        url?: string | null,
+        createdAt: string,
+        updatedAt: string,
+      } | null,
+      superior?:  {
+        __typename: "Employee",
+        username: string,
+        companyID: string,
+        no: string,
+        groupID: string,
+        superiorUsername: string,
+        firstName: string,
+        lastName: string,
+        grade: string,
+        email: string,
+        sub?: string | null,
+        manager: EmployeeType,
+        isCompanyAdmin?: boolean | null,
+        isDeleted: BooleanType,
+        createdAt: string,
+        updatedAt: string,
+        company?:  {
+          __typename: "Company",
+          id: string,
+          name: string,
+          startMonth: number,
+          shortName?: string | null,
+          url?: string | null,
+          createdAt: string,
+          updatedAt: string,
+        } | null,
+        superior?:  {
+          __typename: "Employee",
+          username: string,
+          companyID: string,
+          no: string,
+          groupID: string,
+          superiorUsername: string,
+          firstName: string,
+          lastName: string,
+          grade: string,
+          email: string,
+          sub?: string | null,
+          manager: EmployeeType,
+          isCompanyAdmin?: boolean | null,
+          isDeleted: BooleanType,
+          createdAt: string,
+          updatedAt: string,
+          company?:  {
+            __typename: "Company",
+            id: string,
+            name: string,
+            startMonth: number,
+            shortName?: string | null,
+            url?: string | null,
+            createdAt: string,
+            updatedAt: string,
+          } | null,
+          superior?:  {
+            __typename: "Employee",
+            username: string,
+            companyID: string,
+            no: string,
+            groupID: string,
+            superiorUsername: string,
+            firstName: string,
+            lastName: string,
+            grade: string,
+            email: string,
+            sub?: string | null,
+            manager: EmployeeType,
+            isCompanyAdmin?: boolean | null,
+            isDeleted: BooleanType,
+            createdAt: string,
+            updatedAt: string,
+            company?:  {
+              __typename: "Company",
+              id: string,
+              name: string,
+              startMonth: number,
+              shortName?: string | null,
+              url?: string | null,
+              createdAt: string,
+              updatedAt: string,
+            } | null,
+            superior?:  {
+              __typename: "Employee",
+              username: string,
+              companyID: string,
+              no: string,
+              groupID: string,
+              superiorUsername: string,
+              firstName: string,
+              lastName: string,
+              grade: string,
+              email: string,
+              sub?: string | null,
+              manager: EmployeeType,
+              isCompanyAdmin?: boolean | null,
+              isDeleted: BooleanType,
+              createdAt: string,
+              updatedAt: string,
+              company?:  {
+                __typename: "Company",
+                id: string,
+                name: string,
+                startMonth: number,
+                shortName?: string | null,
+                url?: string | null,
+                createdAt: string,
+                updatedAt: string,
+              } | null,
+              superior?:  {
+                __typename: "Employee",
+                username: string,
+                companyID: string,
+                no: string,
+                groupID: string,
+                superiorUsername: string,
+                firstName: string,
+                lastName: string,
+                grade: string,
+                email: string,
+                sub?: string | null,
+                manager: EmployeeType,
+                isCompanyAdmin?: boolean | null,
+                isDeleted: BooleanType,
+                createdAt: string,
+                updatedAt: string,
+              } | null,
+              group?:  {
+                __typename: "Group",
+                id: string,
+                companyID: string,
+                no: string,
+                name: string,
+                createdAt: string,
+                updatedAt: string,
+              } | null,
+            } | null,
+            group?:  {
+              __typename: "Group",
+              id: string,
+              companyID: string,
+              no: string,
+              name: string,
+              createdAt: string,
+              updatedAt: string,
+            } | null,
+          } | null,
+          group?:  {
+            __typename: "Group",
+            id: string,
+            companyID: string,
+            no: string,
+            name: string,
+            createdAt: string,
+            updatedAt: string,
+          } | null,
+        } | null,
+        group?:  {
+          __typename: "Group",
+          id: string,
+          companyID: string,
+          no: string,
+          name: string,
+          createdAt: string,
+          updatedAt: string,
+        } | null,
+      } | null,
+      group?:  {
+        __typename: "Group",
+        id: string,
+        companyID: string,
+        no: string,
+        name: string,
+        createdAt: string,
+        updatedAt: string,
+      } | null,
+    } | null,
+    group?:  {
+      __typename: "Group",
+      id: string,
+      companyID: string,
+      no: string,
+      name: string,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+  } | null,
+};
+
+export type DeleteEmployeeByCompanyAdminMutationVariables = {
+  input?: DeleteEmployeeInput | null,
+};
+
+export type DeleteEmployeeByCompanyAdminMutation = {
+  deleteEmployeeByCompanyAdmin?:  {
+    __typename: "Employee",
+    username: string,
+    companyID: string,
+    no: string,
+    groupID: string,
+    superiorUsername: string,
+    firstName: string,
+    lastName: string,
+    grade: string,
+    email: string,
+    sub?: string | null,
+    manager: EmployeeType,
+    isCompanyAdmin?: boolean | null,
+    isDeleted: BooleanType,
+    createdAt: string,
+    updatedAt: string,
+    company?:  {
+      __typename: "Company",
+      id: string,
+      name: string,
+      startMonth: number,
+      shortName?: string | null,
+      url?: string | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    superior?:  {
+      __typename: "Employee",
+      username: string,
+      companyID: string,
+      no: string,
+      groupID: string,
+      superiorUsername: string,
+      firstName: string,
+      lastName: string,
+      grade: string,
+      email: string,
+      sub?: string | null,
+      manager: EmployeeType,
+      isCompanyAdmin?: boolean | null,
+      isDeleted: BooleanType,
+      createdAt: string,
+      updatedAt: string,
+      company?:  {
+        __typename: "Company",
+        id: string,
+        name: string,
+        startMonth: number,
+        shortName?: string | null,
+        url?: string | null,
+        createdAt: string,
+        updatedAt: string,
+      } | null,
+      superior?:  {
+        __typename: "Employee",
+        username: string,
+        companyID: string,
+        no: string,
+        groupID: string,
+        superiorUsername: string,
+        firstName: string,
+        lastName: string,
+        grade: string,
+        email: string,
+        sub?: string | null,
+        manager: EmployeeType,
+        isCompanyAdmin?: boolean | null,
+        isDeleted: BooleanType,
+        createdAt: string,
+        updatedAt: string,
+        company?:  {
+          __typename: "Company",
+          id: string,
+          name: string,
+          startMonth: number,
+          shortName?: string | null,
+          url?: string | null,
+          createdAt: string,
+          updatedAt: string,
+        } | null,
+        superior?:  {
+          __typename: "Employee",
+          username: string,
+          companyID: string,
+          no: string,
+          groupID: string,
+          superiorUsername: string,
+          firstName: string,
+          lastName: string,
+          grade: string,
+          email: string,
+          sub?: string | null,
+          manager: EmployeeType,
+          isCompanyAdmin?: boolean | null,
+          isDeleted: BooleanType,
+          createdAt: string,
+          updatedAt: string,
+          company?:  {
+            __typename: "Company",
+            id: string,
+            name: string,
+            startMonth: number,
+            shortName?: string | null,
+            url?: string | null,
+            createdAt: string,
+            updatedAt: string,
+          } | null,
+          superior?:  {
+            __typename: "Employee",
+            username: string,
+            companyID: string,
+            no: string,
+            groupID: string,
+            superiorUsername: string,
+            firstName: string,
+            lastName: string,
+            grade: string,
+            email: string,
+            sub?: string | null,
+            manager: EmployeeType,
+            isCompanyAdmin?: boolean | null,
+            isDeleted: BooleanType,
+            createdAt: string,
+            updatedAt: string,
+            company?:  {
+              __typename: "Company",
+              id: string,
+              name: string,
+              startMonth: number,
+              shortName?: string | null,
+              url?: string | null,
+              createdAt: string,
+              updatedAt: string,
+            } | null,
+            superior?:  {
+              __typename: "Employee",
+              username: string,
+              companyID: string,
+              no: string,
+              groupID: string,
+              superiorUsername: string,
+              firstName: string,
+              lastName: string,
+              grade: string,
+              email: string,
+              sub?: string | null,
+              manager: EmployeeType,
+              isCompanyAdmin?: boolean | null,
+              isDeleted: BooleanType,
+              createdAt: string,
+              updatedAt: string,
+              company?:  {
+                __typename: "Company",
+                id: string,
+                name: string,
+                startMonth: number,
+                shortName?: string | null,
+                url?: string | null,
+                createdAt: string,
+                updatedAt: string,
+              } | null,
+              superior?:  {
+                __typename: "Employee",
+                username: string,
+                companyID: string,
+                no: string,
+                groupID: string,
+                superiorUsername: string,
+                firstName: string,
+                lastName: string,
+                grade: string,
+                email: string,
+                sub?: string | null,
+                manager: EmployeeType,
+                isCompanyAdmin?: boolean | null,
+                isDeleted: BooleanType,
+                createdAt: string,
+                updatedAt: string,
+              } | null,
+              group?:  {
+                __typename: "Group",
+                id: string,
+                companyID: string,
+                no: string,
+                name: string,
+                createdAt: string,
+                updatedAt: string,
+              } | null,
+            } | null,
+            group?:  {
+              __typename: "Group",
+              id: string,
+              companyID: string,
+              no: string,
+              name: string,
+              createdAt: string,
+              updatedAt: string,
+            } | null,
+          } | null,
+          group?:  {
+            __typename: "Group",
+            id: string,
+            companyID: string,
+            no: string,
+            name: string,
+            createdAt: string,
+            updatedAt: string,
+          } | null,
+        } | null,
+        group?:  {
+          __typename: "Group",
+          id: string,
+          companyID: string,
+          no: string,
+          name: string,
+          createdAt: string,
+          updatedAt: string,
+        } | null,
+      } | null,
+      group?:  {
+        __typename: "Group",
+        id: string,
+        companyID: string,
+        no: string,
+        name: string,
+        createdAt: string,
+        updatedAt: string,
+      } | null,
+    } | null,
+    group?:  {
+      __typename: "Group",
+      id: string,
+      companyID: string,
+      no: string,
+      name: string,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+  } | null,
+};
+
 export type DeleteSheetWithChildrenByCompanyAdminMutationVariables = {
-  input?: DeleteFieldType | null,
+  input?: DeleteSheetInput | null,
 };
 
 export type DeleteSheetWithChildrenByCompanyAdminMutation = {
@@ -1655,383 +2440,12 @@ export type DeleteSheetWithChildrenByCompanyAdminMutation = {
   } | null,
 };
 
-export type CreateCompanyMutationVariables = {
-  input?: CreateCompanyInput,
-  condition?: ModelCompanyConditionInput | null,
+export type UpdateReportByCompanyAdminMutationVariables = {
+  input?: UpdateReportInput | null,
 };
 
-export type CreateCompanyMutation = {
-  createCompany?:  {
-    __typename: "Company",
-    id: string,
-    name: string,
-    startMonth: number,
-    shortName?: string | null,
-    url?: string | null,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
-};
-
-export type UpdateCompanyMutationVariables = {
-  input?: UpdateCompanyInput,
-  condition?: ModelCompanyConditionInput | null,
-};
-
-export type UpdateCompanyMutation = {
-  updateCompany?:  {
-    __typename: "Company",
-    id: string,
-    name: string,
-    startMonth: number,
-    shortName?: string | null,
-    url?: string | null,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
-};
-
-export type DeleteCompanyMutationVariables = {
-  input?: DeleteCompanyInput,
-  condition?: ModelCompanyConditionInput | null,
-};
-
-export type DeleteCompanyMutation = {
-  deleteCompany?:  {
-    __typename: "Company",
-    id: string,
-    name: string,
-    startMonth: number,
-    shortName?: string | null,
-    url?: string | null,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
-};
-
-export type DeleteEmployeeMutationVariables = {
-  input?: DeleteEmployeeInput,
-  condition?: ModelEmployeeConditionInput | null,
-};
-
-export type DeleteEmployeeMutation = {
-  deleteEmployee?:  {
-    __typename: "Employee",
-    username: string,
-    companyID: string,
-    no: string,
-    groupID: string,
-    superiorUsername: string,
-    firstName: string,
-    lastName: string,
-    grade: string,
-    email: string,
-    sub?: string | null,
-    manager: EmployeeType,
-    isCompanyAdmin?: boolean | null,
-    isDeleted: BooleanType,
-    createdAt: string,
-    updatedAt: string,
-    company?:  {
-      __typename: "Company",
-      id: string,
-      name: string,
-      startMonth: number,
-      shortName?: string | null,
-      url?: string | null,
-      createdAt: string,
-      updatedAt: string,
-    } | null,
-    superior?:  {
-      __typename: "Employee",
-      username: string,
-      companyID: string,
-      no: string,
-      groupID: string,
-      superiorUsername: string,
-      firstName: string,
-      lastName: string,
-      grade: string,
-      email: string,
-      sub?: string | null,
-      manager: EmployeeType,
-      isCompanyAdmin?: boolean | null,
-      isDeleted: BooleanType,
-      createdAt: string,
-      updatedAt: string,
-      company?:  {
-        __typename: "Company",
-        id: string,
-        name: string,
-        startMonth: number,
-        shortName?: string | null,
-        url?: string | null,
-        createdAt: string,
-        updatedAt: string,
-      } | null,
-      superior?:  {
-        __typename: "Employee",
-        username: string,
-        companyID: string,
-        no: string,
-        groupID: string,
-        superiorUsername: string,
-        firstName: string,
-        lastName: string,
-        grade: string,
-        email: string,
-        sub?: string | null,
-        manager: EmployeeType,
-        isCompanyAdmin?: boolean | null,
-        isDeleted: BooleanType,
-        createdAt: string,
-        updatedAt: string,
-        company?:  {
-          __typename: "Company",
-          id: string,
-          name: string,
-          startMonth: number,
-          shortName?: string | null,
-          url?: string | null,
-          createdAt: string,
-          updatedAt: string,
-        } | null,
-        superior?:  {
-          __typename: "Employee",
-          username: string,
-          companyID: string,
-          no: string,
-          groupID: string,
-          superiorUsername: string,
-          firstName: string,
-          lastName: string,
-          grade: string,
-          email: string,
-          sub?: string | null,
-          manager: EmployeeType,
-          isCompanyAdmin?: boolean | null,
-          isDeleted: BooleanType,
-          createdAt: string,
-          updatedAt: string,
-          company?:  {
-            __typename: "Company",
-            id: string,
-            name: string,
-            startMonth: number,
-            shortName?: string | null,
-            url?: string | null,
-            createdAt: string,
-            updatedAt: string,
-          } | null,
-          superior?:  {
-            __typename: "Employee",
-            username: string,
-            companyID: string,
-            no: string,
-            groupID: string,
-            superiorUsername: string,
-            firstName: string,
-            lastName: string,
-            grade: string,
-            email: string,
-            sub?: string | null,
-            manager: EmployeeType,
-            isCompanyAdmin?: boolean | null,
-            isDeleted: BooleanType,
-            createdAt: string,
-            updatedAt: string,
-            company?:  {
-              __typename: "Company",
-              id: string,
-              name: string,
-              startMonth: number,
-              shortName?: string | null,
-              url?: string | null,
-              createdAt: string,
-              updatedAt: string,
-            } | null,
-            superior?:  {
-              __typename: "Employee",
-              username: string,
-              companyID: string,
-              no: string,
-              groupID: string,
-              superiorUsername: string,
-              firstName: string,
-              lastName: string,
-              grade: string,
-              email: string,
-              sub?: string | null,
-              manager: EmployeeType,
-              isCompanyAdmin?: boolean | null,
-              isDeleted: BooleanType,
-              createdAt: string,
-              updatedAt: string,
-              company?:  {
-                __typename: "Company",
-                id: string,
-                name: string,
-                startMonth: number,
-                shortName?: string | null,
-                url?: string | null,
-                createdAt: string,
-                updatedAt: string,
-              } | null,
-              superior?:  {
-                __typename: "Employee",
-                username: string,
-                companyID: string,
-                no: string,
-                groupID: string,
-                superiorUsername: string,
-                firstName: string,
-                lastName: string,
-                grade: string,
-                email: string,
-                sub?: string | null,
-                manager: EmployeeType,
-                isCompanyAdmin?: boolean | null,
-                isDeleted: BooleanType,
-                createdAt: string,
-                updatedAt: string,
-              } | null,
-              group?:  {
-                __typename: "Group",
-                id: string,
-                companyID: string,
-                no: string,
-                name: string,
-                createdAt: string,
-                updatedAt: string,
-              } | null,
-            } | null,
-            group?:  {
-              __typename: "Group",
-              id: string,
-              companyID: string,
-              no: string,
-              name: string,
-              createdAt: string,
-              updatedAt: string,
-            } | null,
-          } | null,
-          group?:  {
-            __typename: "Group",
-            id: string,
-            companyID: string,
-            no: string,
-            name: string,
-            createdAt: string,
-            updatedAt: string,
-          } | null,
-        } | null,
-        group?:  {
-          __typename: "Group",
-          id: string,
-          companyID: string,
-          no: string,
-          name: string,
-          createdAt: string,
-          updatedAt: string,
-        } | null,
-      } | null,
-      group?:  {
-        __typename: "Group",
-        id: string,
-        companyID: string,
-        no: string,
-        name: string,
-        createdAt: string,
-        updatedAt: string,
-      } | null,
-    } | null,
-    group?:  {
-      __typename: "Group",
-      id: string,
-      companyID: string,
-      no: string,
-      name: string,
-      createdAt: string,
-      updatedAt: string,
-    } | null,
-  } | null,
-};
-
-export type UpdateGroupMutationVariables = {
-  input?: UpdateGroupInput,
-  condition?: ModelGroupConditionInput | null,
-};
-
-export type UpdateGroupMutation = {
-  updateGroup?:  {
-    __typename: "Group",
-    id: string,
-    companyID: string,
-    no: string,
-    name: string,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
-};
-
-export type DeleteGroupMutationVariables = {
-  input?: DeleteGroupInput,
-  condition?: ModelGroupConditionInput | null,
-};
-
-export type DeleteGroupMutation = {
-  deleteGroup?:  {
-    __typename: "Group",
-    id: string,
-    companyID: string,
-    no: string,
-    name: string,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
-};
-
-export type UpdateCategoryMutationVariables = {
-  input?: UpdateCategoryInput,
-  condition?: ModelCategoryConditionInput | null,
-};
-
-export type UpdateCategoryMutation = {
-  updateCategory?:  {
-    __typename: "Category",
-    id: string,
-    companyID: string,
-    no: string,
-    name: string,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
-};
-
-export type DeleteCategoryMutationVariables = {
-  input?: DeleteCategoryInput,
-  condition?: ModelCategoryConditionInput | null,
-};
-
-export type DeleteCategoryMutation = {
-  deleteCategory?:  {
-    __typename: "Category",
-    id: string,
-    companyID: string,
-    no: string,
-    name: string,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
-};
-
-export type DeleteReportMutationVariables = {
-  input?: DeleteReportInput,
-  condition?: ModelReportConditionInput | null,
-};
-
-export type DeleteReportMutation = {
-  deleteReport?:  {
+export type UpdateReportByCompanyAdminMutation = {
+  updateReportByCompanyAdmin?:  {
     __typename: "Report",
     id: string,
     sub: string,
@@ -2257,6 +2671,328 @@ export type DeleteReportMutation = {
         updatedAt: string,
       } | null,
     } | null,
+  } | null,
+};
+
+export type DeleteReportByCompanyAdminMutationVariables = {
+  input?: DeleteReportInput | null,
+};
+
+export type DeleteReportByCompanyAdminMutation = {
+  deleteReportByCompanyAdmin?:  {
+    __typename: "Report",
+    id: string,
+    sub: string,
+    date: string,
+    groupID?: string | null,
+    reviewee?: string | null,
+    reviewer?: Array< string | null > | null,
+    companyID?: string | null,
+    referencer?: Array< string | null > | null,
+    revieweeComments?:  {
+      __typename: "RevieweeReportComment",
+      work?: string | null,
+      other?: string | null,
+      status?: string | null,
+    } | null,
+    reviewerComments?:  {
+      __typename: "ReviewerReportComment",
+      superior?: string | null,
+    } | null,
+    workStatus?: ReportWorkingStatus | null,
+    createdAt: string,
+    updatedAt: string,
+    revieweeEmployee?:  {
+      __typename: "Employee",
+      username: string,
+      companyID: string,
+      no: string,
+      groupID: string,
+      superiorUsername: string,
+      firstName: string,
+      lastName: string,
+      grade: string,
+      email: string,
+      sub?: string | null,
+      manager: EmployeeType,
+      isCompanyAdmin?: boolean | null,
+      isDeleted: BooleanType,
+      createdAt: string,
+      updatedAt: string,
+      company?:  {
+        __typename: "Company",
+        id: string,
+        name: string,
+        startMonth: number,
+        shortName?: string | null,
+        url?: string | null,
+        createdAt: string,
+        updatedAt: string,
+      } | null,
+      superior?:  {
+        __typename: "Employee",
+        username: string,
+        companyID: string,
+        no: string,
+        groupID: string,
+        superiorUsername: string,
+        firstName: string,
+        lastName: string,
+        grade: string,
+        email: string,
+        sub?: string | null,
+        manager: EmployeeType,
+        isCompanyAdmin?: boolean | null,
+        isDeleted: BooleanType,
+        createdAt: string,
+        updatedAt: string,
+        company?:  {
+          __typename: "Company",
+          id: string,
+          name: string,
+          startMonth: number,
+          shortName?: string | null,
+          url?: string | null,
+          createdAt: string,
+          updatedAt: string,
+        } | null,
+        superior?:  {
+          __typename: "Employee",
+          username: string,
+          companyID: string,
+          no: string,
+          groupID: string,
+          superiorUsername: string,
+          firstName: string,
+          lastName: string,
+          grade: string,
+          email: string,
+          sub?: string | null,
+          manager: EmployeeType,
+          isCompanyAdmin?: boolean | null,
+          isDeleted: BooleanType,
+          createdAt: string,
+          updatedAt: string,
+          company?:  {
+            __typename: "Company",
+            id: string,
+            name: string,
+            startMonth: number,
+            shortName?: string | null,
+            url?: string | null,
+            createdAt: string,
+            updatedAt: string,
+          } | null,
+          superior?:  {
+            __typename: "Employee",
+            username: string,
+            companyID: string,
+            no: string,
+            groupID: string,
+            superiorUsername: string,
+            firstName: string,
+            lastName: string,
+            grade: string,
+            email: string,
+            sub?: string | null,
+            manager: EmployeeType,
+            isCompanyAdmin?: boolean | null,
+            isDeleted: BooleanType,
+            createdAt: string,
+            updatedAt: string,
+            company?:  {
+              __typename: "Company",
+              id: string,
+              name: string,
+              startMonth: number,
+              shortName?: string | null,
+              url?: string | null,
+              createdAt: string,
+              updatedAt: string,
+            } | null,
+            superior?:  {
+              __typename: "Employee",
+              username: string,
+              companyID: string,
+              no: string,
+              groupID: string,
+              superiorUsername: string,
+              firstName: string,
+              lastName: string,
+              grade: string,
+              email: string,
+              sub?: string | null,
+              manager: EmployeeType,
+              isCompanyAdmin?: boolean | null,
+              isDeleted: BooleanType,
+              createdAt: string,
+              updatedAt: string,
+              company?:  {
+                __typename: "Company",
+                id: string,
+                name: string,
+                startMonth: number,
+                shortName?: string | null,
+                url?: string | null,
+                createdAt: string,
+                updatedAt: string,
+              } | null,
+              superior?:  {
+                __typename: "Employee",
+                username: string,
+                companyID: string,
+                no: string,
+                groupID: string,
+                superiorUsername: string,
+                firstName: string,
+                lastName: string,
+                grade: string,
+                email: string,
+                sub?: string | null,
+                manager: EmployeeType,
+                isCompanyAdmin?: boolean | null,
+                isDeleted: BooleanType,
+                createdAt: string,
+                updatedAt: string,
+              } | null,
+              group?:  {
+                __typename: "Group",
+                id: string,
+                companyID: string,
+                no: string,
+                name: string,
+                createdAt: string,
+                updatedAt: string,
+              } | null,
+            } | null,
+            group?:  {
+              __typename: "Group",
+              id: string,
+              companyID: string,
+              no: string,
+              name: string,
+              createdAt: string,
+              updatedAt: string,
+            } | null,
+          } | null,
+          group?:  {
+            __typename: "Group",
+            id: string,
+            companyID: string,
+            no: string,
+            name: string,
+            createdAt: string,
+            updatedAt: string,
+          } | null,
+        } | null,
+        group?:  {
+          __typename: "Group",
+          id: string,
+          companyID: string,
+          no: string,
+          name: string,
+          createdAt: string,
+          updatedAt: string,
+        } | null,
+      } | null,
+      group?:  {
+        __typename: "Group",
+        id: string,
+        companyID: string,
+        no: string,
+        name: string,
+        createdAt: string,
+        updatedAt: string,
+      } | null,
+    } | null,
+  } | null,
+};
+
+export type CreateCompanyMutationVariables = {
+  input?: CreateCompanyInput,
+  condition?: ModelCompanyConditionInput | null,
+};
+
+export type CreateCompanyMutation = {
+  createCompany?:  {
+    __typename: "Company",
+    id: string,
+    name: string,
+    startMonth: number,
+    shortName?: string | null,
+    url?: string | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type UpdateCompanyMutationVariables = {
+  input?: UpdateCompanyInput,
+  condition?: ModelCompanyConditionInput | null,
+};
+
+export type UpdateCompanyMutation = {
+  updateCompany?:  {
+    __typename: "Company",
+    id: string,
+    name: string,
+    startMonth: number,
+    shortName?: string | null,
+    url?: string | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type DeleteCompanyMutationVariables = {
+  input?: DeleteCompanyInput,
+  condition?: ModelCompanyConditionInput | null,
+};
+
+export type DeleteCompanyMutation = {
+  deleteCompany?:  {
+    __typename: "Company",
+    id: string,
+    name: string,
+    startMonth: number,
+    shortName?: string | null,
+    url?: string | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type UpdateGroupMutationVariables = {
+  input?: UpdateGroupInput,
+  condition?: ModelGroupConditionInput | null,
+};
+
+export type UpdateGroupMutation = {
+  updateGroup?:  {
+    __typename: "Group",
+    id: string,
+    companyID: string,
+    no: string,
+    name: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type DeleteGroupMutationVariables = {
+  input?: DeleteGroupInput,
+  condition?: ModelGroupConditionInput | null,
+};
+
+export type DeleteGroupMutation = {
+  deleteGroup?:  {
+    __typename: "Group",
+    id: string,
+    companyID: string,
+    no: string,
+    name: string,
+    createdAt: string,
+    updatedAt: string,
   } | null,
 };
 
@@ -2756,6 +3492,254 @@ export type UpdateEmployeeMutation = {
   } | null,
 };
 
+export type DeleteEmployeeMutationVariables = {
+  input?: DeleteEmployeeInput,
+  condition?: ModelEmployeeConditionInput | null,
+};
+
+export type DeleteEmployeeMutation = {
+  deleteEmployee?:  {
+    __typename: "Employee",
+    username: string,
+    companyID: string,
+    no: string,
+    groupID: string,
+    superiorUsername: string,
+    firstName: string,
+    lastName: string,
+    grade: string,
+    email: string,
+    sub?: string | null,
+    manager: EmployeeType,
+    isCompanyAdmin?: boolean | null,
+    isDeleted: BooleanType,
+    createdAt: string,
+    updatedAt: string,
+    company?:  {
+      __typename: "Company",
+      id: string,
+      name: string,
+      startMonth: number,
+      shortName?: string | null,
+      url?: string | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    superior?:  {
+      __typename: "Employee",
+      username: string,
+      companyID: string,
+      no: string,
+      groupID: string,
+      superiorUsername: string,
+      firstName: string,
+      lastName: string,
+      grade: string,
+      email: string,
+      sub?: string | null,
+      manager: EmployeeType,
+      isCompanyAdmin?: boolean | null,
+      isDeleted: BooleanType,
+      createdAt: string,
+      updatedAt: string,
+      company?:  {
+        __typename: "Company",
+        id: string,
+        name: string,
+        startMonth: number,
+        shortName?: string | null,
+        url?: string | null,
+        createdAt: string,
+        updatedAt: string,
+      } | null,
+      superior?:  {
+        __typename: "Employee",
+        username: string,
+        companyID: string,
+        no: string,
+        groupID: string,
+        superiorUsername: string,
+        firstName: string,
+        lastName: string,
+        grade: string,
+        email: string,
+        sub?: string | null,
+        manager: EmployeeType,
+        isCompanyAdmin?: boolean | null,
+        isDeleted: BooleanType,
+        createdAt: string,
+        updatedAt: string,
+        company?:  {
+          __typename: "Company",
+          id: string,
+          name: string,
+          startMonth: number,
+          shortName?: string | null,
+          url?: string | null,
+          createdAt: string,
+          updatedAt: string,
+        } | null,
+        superior?:  {
+          __typename: "Employee",
+          username: string,
+          companyID: string,
+          no: string,
+          groupID: string,
+          superiorUsername: string,
+          firstName: string,
+          lastName: string,
+          grade: string,
+          email: string,
+          sub?: string | null,
+          manager: EmployeeType,
+          isCompanyAdmin?: boolean | null,
+          isDeleted: BooleanType,
+          createdAt: string,
+          updatedAt: string,
+          company?:  {
+            __typename: "Company",
+            id: string,
+            name: string,
+            startMonth: number,
+            shortName?: string | null,
+            url?: string | null,
+            createdAt: string,
+            updatedAt: string,
+          } | null,
+          superior?:  {
+            __typename: "Employee",
+            username: string,
+            companyID: string,
+            no: string,
+            groupID: string,
+            superiorUsername: string,
+            firstName: string,
+            lastName: string,
+            grade: string,
+            email: string,
+            sub?: string | null,
+            manager: EmployeeType,
+            isCompanyAdmin?: boolean | null,
+            isDeleted: BooleanType,
+            createdAt: string,
+            updatedAt: string,
+            company?:  {
+              __typename: "Company",
+              id: string,
+              name: string,
+              startMonth: number,
+              shortName?: string | null,
+              url?: string | null,
+              createdAt: string,
+              updatedAt: string,
+            } | null,
+            superior?:  {
+              __typename: "Employee",
+              username: string,
+              companyID: string,
+              no: string,
+              groupID: string,
+              superiorUsername: string,
+              firstName: string,
+              lastName: string,
+              grade: string,
+              email: string,
+              sub?: string | null,
+              manager: EmployeeType,
+              isCompanyAdmin?: boolean | null,
+              isDeleted: BooleanType,
+              createdAt: string,
+              updatedAt: string,
+              company?:  {
+                __typename: "Company",
+                id: string,
+                name: string,
+                startMonth: number,
+                shortName?: string | null,
+                url?: string | null,
+                createdAt: string,
+                updatedAt: string,
+              } | null,
+              superior?:  {
+                __typename: "Employee",
+                username: string,
+                companyID: string,
+                no: string,
+                groupID: string,
+                superiorUsername: string,
+                firstName: string,
+                lastName: string,
+                grade: string,
+                email: string,
+                sub?: string | null,
+                manager: EmployeeType,
+                isCompanyAdmin?: boolean | null,
+                isDeleted: BooleanType,
+                createdAt: string,
+                updatedAt: string,
+              } | null,
+              group?:  {
+                __typename: "Group",
+                id: string,
+                companyID: string,
+                no: string,
+                name: string,
+                createdAt: string,
+                updatedAt: string,
+              } | null,
+            } | null,
+            group?:  {
+              __typename: "Group",
+              id: string,
+              companyID: string,
+              no: string,
+              name: string,
+              createdAt: string,
+              updatedAt: string,
+            } | null,
+          } | null,
+          group?:  {
+            __typename: "Group",
+            id: string,
+            companyID: string,
+            no: string,
+            name: string,
+            createdAt: string,
+            updatedAt: string,
+          } | null,
+        } | null,
+        group?:  {
+          __typename: "Group",
+          id: string,
+          companyID: string,
+          no: string,
+          name: string,
+          createdAt: string,
+          updatedAt: string,
+        } | null,
+      } | null,
+      group?:  {
+        __typename: "Group",
+        id: string,
+        companyID: string,
+        no: string,
+        name: string,
+        createdAt: string,
+        updatedAt: string,
+      } | null,
+    } | null,
+    group?:  {
+      __typename: "Group",
+      id: string,
+      companyID: string,
+      no: string,
+      name: string,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+  } | null,
+};
+
 export type CreateGroupMutationVariables = {
   input?: CreateGroupInput,
   condition?: ModelGroupConditionInput | null,
@@ -2780,6 +3764,40 @@ export type CreateCategoryMutationVariables = {
 
 export type CreateCategoryMutation = {
   createCategory?:  {
+    __typename: "Category",
+    id: string,
+    companyID: string,
+    no: string,
+    name: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type UpdateCategoryMutationVariables = {
+  input?: UpdateCategoryInput,
+  condition?: ModelCategoryConditionInput | null,
+};
+
+export type UpdateCategoryMutation = {
+  updateCategory?:  {
+    __typename: "Category",
+    id: string,
+    companyID: string,
+    no: string,
+    name: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type DeleteCategoryMutationVariables = {
+  input?: DeleteCategoryInput,
+  condition?: ModelCategoryConditionInput | null,
+};
+
+export type DeleteCategoryMutation = {
+  deleteCategory?:  {
     __typename: "Category",
     id: string,
     companyID: string,
@@ -5375,6 +6393,241 @@ export type UpdateReportMutationVariables = {
 
 export type UpdateReportMutation = {
   updateReport?:  {
+    __typename: "Report",
+    id: string,
+    sub: string,
+    date: string,
+    groupID?: string | null,
+    reviewee?: string | null,
+    reviewer?: Array< string | null > | null,
+    companyID?: string | null,
+    referencer?: Array< string | null > | null,
+    revieweeComments?:  {
+      __typename: "RevieweeReportComment",
+      work?: string | null,
+      other?: string | null,
+      status?: string | null,
+    } | null,
+    reviewerComments?:  {
+      __typename: "ReviewerReportComment",
+      superior?: string | null,
+    } | null,
+    workStatus?: ReportWorkingStatus | null,
+    createdAt: string,
+    updatedAt: string,
+    revieweeEmployee?:  {
+      __typename: "Employee",
+      username: string,
+      companyID: string,
+      no: string,
+      groupID: string,
+      superiorUsername: string,
+      firstName: string,
+      lastName: string,
+      grade: string,
+      email: string,
+      sub?: string | null,
+      manager: EmployeeType,
+      isCompanyAdmin?: boolean | null,
+      isDeleted: BooleanType,
+      createdAt: string,
+      updatedAt: string,
+      company?:  {
+        __typename: "Company",
+        id: string,
+        name: string,
+        startMonth: number,
+        shortName?: string | null,
+        url?: string | null,
+        createdAt: string,
+        updatedAt: string,
+      } | null,
+      superior?:  {
+        __typename: "Employee",
+        username: string,
+        companyID: string,
+        no: string,
+        groupID: string,
+        superiorUsername: string,
+        firstName: string,
+        lastName: string,
+        grade: string,
+        email: string,
+        sub?: string | null,
+        manager: EmployeeType,
+        isCompanyAdmin?: boolean | null,
+        isDeleted: BooleanType,
+        createdAt: string,
+        updatedAt: string,
+        company?:  {
+          __typename: "Company",
+          id: string,
+          name: string,
+          startMonth: number,
+          shortName?: string | null,
+          url?: string | null,
+          createdAt: string,
+          updatedAt: string,
+        } | null,
+        superior?:  {
+          __typename: "Employee",
+          username: string,
+          companyID: string,
+          no: string,
+          groupID: string,
+          superiorUsername: string,
+          firstName: string,
+          lastName: string,
+          grade: string,
+          email: string,
+          sub?: string | null,
+          manager: EmployeeType,
+          isCompanyAdmin?: boolean | null,
+          isDeleted: BooleanType,
+          createdAt: string,
+          updatedAt: string,
+          company?:  {
+            __typename: "Company",
+            id: string,
+            name: string,
+            startMonth: number,
+            shortName?: string | null,
+            url?: string | null,
+            createdAt: string,
+            updatedAt: string,
+          } | null,
+          superior?:  {
+            __typename: "Employee",
+            username: string,
+            companyID: string,
+            no: string,
+            groupID: string,
+            superiorUsername: string,
+            firstName: string,
+            lastName: string,
+            grade: string,
+            email: string,
+            sub?: string | null,
+            manager: EmployeeType,
+            isCompanyAdmin?: boolean | null,
+            isDeleted: BooleanType,
+            createdAt: string,
+            updatedAt: string,
+            company?:  {
+              __typename: "Company",
+              id: string,
+              name: string,
+              startMonth: number,
+              shortName?: string | null,
+              url?: string | null,
+              createdAt: string,
+              updatedAt: string,
+            } | null,
+            superior?:  {
+              __typename: "Employee",
+              username: string,
+              companyID: string,
+              no: string,
+              groupID: string,
+              superiorUsername: string,
+              firstName: string,
+              lastName: string,
+              grade: string,
+              email: string,
+              sub?: string | null,
+              manager: EmployeeType,
+              isCompanyAdmin?: boolean | null,
+              isDeleted: BooleanType,
+              createdAt: string,
+              updatedAt: string,
+              company?:  {
+                __typename: "Company",
+                id: string,
+                name: string,
+                startMonth: number,
+                shortName?: string | null,
+                url?: string | null,
+                createdAt: string,
+                updatedAt: string,
+              } | null,
+              superior?:  {
+                __typename: "Employee",
+                username: string,
+                companyID: string,
+                no: string,
+                groupID: string,
+                superiorUsername: string,
+                firstName: string,
+                lastName: string,
+                grade: string,
+                email: string,
+                sub?: string | null,
+                manager: EmployeeType,
+                isCompanyAdmin?: boolean | null,
+                isDeleted: BooleanType,
+                createdAt: string,
+                updatedAt: string,
+              } | null,
+              group?:  {
+                __typename: "Group",
+                id: string,
+                companyID: string,
+                no: string,
+                name: string,
+                createdAt: string,
+                updatedAt: string,
+              } | null,
+            } | null,
+            group?:  {
+              __typename: "Group",
+              id: string,
+              companyID: string,
+              no: string,
+              name: string,
+              createdAt: string,
+              updatedAt: string,
+            } | null,
+          } | null,
+          group?:  {
+            __typename: "Group",
+            id: string,
+            companyID: string,
+            no: string,
+            name: string,
+            createdAt: string,
+            updatedAt: string,
+          } | null,
+        } | null,
+        group?:  {
+          __typename: "Group",
+          id: string,
+          companyID: string,
+          no: string,
+          name: string,
+          createdAt: string,
+          updatedAt: string,
+        } | null,
+      } | null,
+      group?:  {
+        __typename: "Group",
+        id: string,
+        companyID: string,
+        no: string,
+        name: string,
+        createdAt: string,
+        updatedAt: string,
+      } | null,
+    } | null,
+  } | null,
+};
+
+export type DeleteReportMutationVariables = {
+  input?: DeleteReportInput,
+  condition?: ModelReportConditionInput | null,
+};
+
+export type DeleteReportMutation = {
+  deleteReport?:  {
     __typename: "Report",
     id: string,
     sub: string,

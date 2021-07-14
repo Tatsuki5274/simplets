@@ -76,4 +76,34 @@ export const EmployeeDao = {
     )) as APIt.ListEmployeesManagerQuery;
     return (result.listEmployeesManager?.items as (Employee | null)[]) || null;
   },
+  createByAdmin: async (
+    mutation: string,
+    params: APIt.CreateEmployeeInput
+  ): Promise<Employee | null> => {
+    const result = (await BaseDao.create(
+      mutation,
+      params
+    )) as APIt.CreateEmployeeByCompanyAdminMutation;
+    return (result.createEmployeeByCompanyAdmin as Employee) || null;
+  },
+  updateByAdmin: async (
+    mutation: string,
+    params: APIt.UpdateEmployeeInput
+  ): Promise<Employee | null> => {
+    const result = (await BaseDao.update(
+      mutation,
+      params
+    )) as APIt.UpdateEmployeeByCompanyAdminMutation;
+    return (result.updateEmployeeByCompanyAdmin as Employee) || null;
+  },
+  deleteByAdmin: async (
+    mutation: string,
+    params: APIt.DeleteEmployeeInput
+  ): Promise<Employee | null> => {
+    const result = (await BaseDao.delete(
+      mutation,
+      params
+    )) as APIt.DeleteEmployeeByCompanyAdminMutation;
+    return (result.deleteEmployeeByCompanyAdmin as Employee) || null;
+  },
 };

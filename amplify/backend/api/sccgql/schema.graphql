@@ -50,12 +50,12 @@ type Employee #社員
     {allow: groups, groups: ["Admin"]}
 
     # 社員本人の持つ権限
-    {allow: owner, ownerField: "username", operations: [read]}
+    #{allow: owner, ownerField: "username", operations: [read]}
 
     # 社員の閲覧権限
     {allow: groups, groupsField: "companyID", operations:[read]}
 
-    { allow: private, provider: iam, operations: [create, read, update] }
+    { allow: private, provider: iam, operations: [create, read, update, delete] }
   ]
 )
 @model(
@@ -135,7 +135,7 @@ type Category
     # 社員の閲覧権限
     {allow: groups, groupsField: "companyID", operations:[read]}
 
-    {allow: private, provider: iam ,operations:[read, create]}
+    {allow: private, provider: iam ,operations:[create, read, update, delete]}
 
   ]
 )
@@ -362,7 +362,7 @@ type Report
     {allow: owner, ownerField: "referencer", operations: [read]}
     {allow: owner, ownerField: "reviewer", operations: [read, update]}
 
-    {allow: private, provider: iam, operations: [create, read, update] }
+    {allow: private, provider: iam, operations: [create, read, update, delete] }
   ]
 )
 {
@@ -431,11 +431,6 @@ type UpdateOwnerResponseType {
   result: String # JSON String
 }
 
-# 削除に必要なフィールド
-input DeleteFieldType {
-  id: String!
-}
-
 type Mutation{
   # 廃止
   approvalStatusManager(action: String, sheetId: String): String @function(name: "approvalStatusManager_${env}")
@@ -456,11 +451,149 @@ type Mutation{
     @auth(rules: [
       {allow: private}
     ])
-  
-  # 社内管理者による削除処理  
-  deleteSheetWithChildrenByCompanyAdmin(input: DeleteFieldType): Sheet
+
+  # 社内管理者によるカテゴリ作成
+  createCategoryByCompanyAdmin(input: CreateCategoryInput): Category
     @function(name: "resolvers-${env}")
     @auth(rules: [
       {allow: private}
     ])
+
+  # 社内管理者によるカテゴリ変更
+  updateCategoryByCompanyAdmin(input: UpdateCategoryInput): Category
+    @function(name: "resolvers-${env}")
+    @auth(rules: [
+      {allow: private}
+    ])
+
+  # 社内管理者によるカテゴリ削除
+  deleteCategoryByCompanyAdmin(input: DeleteCategoryInput): Category
+    @function(name: "resolvers-${env}")
+    @auth(rules: [
+      {allow: private}
+    ])
+
+  # 社内管理者による社員追加
+  createEmployeeByCompanyAdmin(input: CreateEmployeeInput): Employee
+    @function(name: "resolvers-${env}")
+    @auth(rules: [
+      {allow: private}
+    ])
+
+  # 社内管理者による社員更新
+  updateEmployeeByCompanyAdmin(input: UpdateEmployeeInput): Employee
+    @function(name: "resolvers-${env}")
+    @auth(rules: [
+      {allow: private}
+    ])
+
+  # 社内管理者による社員削除
+  deleteEmployeeByCompanyAdmin(input: DeleteEmployeeInput): Employee
+    @function(name: "resolvers-${env}")
+    @auth(rules: [
+      {allow: private}
+    ])
+
+  # 社内管理者による削除処理  
+  deleteSheetWithChildrenByCompanyAdmin(input: DeleteSheetInput): Sheet
+    @function(name: "resolvers-${env}")
+    @auth(rules: [
+      {allow: private}
+    ])
+
+  # 社内管理者による作業報告の更新処理
+  updateReportByCompanyAdmin(input: UpdateReportInput): Report
+    @function(name: "resolvers-${env}")
+    @auth(rules: [
+      {allow: private}
+    ])
+  deleteReportByCompanyAdmin(input: DeleteReportInput): Report
+    @function(name: "resolvers-${env}")
+    @auth(rules: [
+      {allow: private}
+    ])
+}
+
+# 以下、ビルドスキーマから複製
+## カテゴリ
+input CreateCategoryInput {
+  id: ID
+  companyID: ID!
+  no: String!
+  name: String!
+}
+input UpdateCategoryInput {
+  id: ID!
+  companyID: ID
+  no: String
+  name: String
+}
+input DeleteCategoryInput {
+  id: ID!
+}
+
+## 社員
+input CreateEmployeeInput {
+  username: String!
+  companyID: ID!
+  no: String!
+  groupID: ID!
+  superiorUsername: String!
+  firstName: String!
+  lastName: String!
+  grade: String!
+  email: String!
+  sub: String
+  manager: EmployeeType!
+  isCompanyAdmin: Boolean
+  isDeleted: BooleanType!
+}
+input UpdateEmployeeInput {
+  username: String!
+  companyID: ID
+  no: String
+  groupID: ID
+  superiorUsername: String
+  firstName: String
+  lastName: String
+  grade: String
+  email: String
+  sub: String
+  manager: EmployeeType
+  isCompanyAdmin: Boolean
+  isDeleted: BooleanType
+}
+input DeleteEmployeeInput {
+  username: String!
+}
+
+## 作業報告
+input UpdateReportInput {
+  id: ID!
+  sub: String
+  date: AWSDate
+  groupID: ID
+  reviewee: String
+  reviewer: [String]
+  companyID: String
+  referencer: [String]
+  revieweeComments: RevieweeReportCommentInput
+  reviewerComments: ReviewerReportCommentInput
+  workStatus: ReportWorkingStatus
+}
+input DeleteReportInput {
+  id: ID!
+}
+input RevieweeReportCommentInput {
+  work: String
+  other: String
+  status: String
+}
+input ReviewerReportCommentInput {
+  superior: String
+}
+
+## 評価シート
+input DeleteSheetInput {
+  id: ID!
 }

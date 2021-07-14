@@ -64,4 +64,34 @@ export const CategoryDao = {
     )) as APIt.ListCategorysCompanyQuery;
     return result.listCategorysCompany?.items || null;
   },
+  createByAdmin: async (
+    mutation: string,
+    params: APIt.CreateCategoryInput
+  ): Promise<Category | null> => {
+    const result = (await BaseDao.create(
+      mutation,
+      params
+    )) as APIt.CreateCategoryByCompanyAdminMutation;
+    return result.createCategoryByCompanyAdmin || null;
+  },
+  updateByAdmin: async (
+    mutation: string,
+    params: APIt.UpdateCategoryInput
+  ): Promise<Category | null> => {
+    const result = (await BaseDao.update(
+      mutation,
+      params
+    )) as APIt.UpdateCategoryByCompanyAdminMutation;
+    return result.updateCategoryByCompanyAdmin || null;
+  },
+  deleteByAdmin: async (
+    mutation: string,
+    params: APIt.DeleteCategoryInput
+  ): Promise<Category | null> => {
+    const result = (await BaseDao.delete(
+      mutation,
+      params
+    )) as APIt.DeleteCategoryByCompanyAdminMutation;
+    return result.deleteCategoryByCompanyAdmin || null;
+  },
 };
