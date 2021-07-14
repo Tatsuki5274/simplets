@@ -10,6 +10,7 @@ import Sidebar from "views/components/common/templates/Sidebar";
 import AdminEmployeeEdit, {
   AdminEditEmployeeDataType,
 } from "../organisms/AdminEmployeeEdit";
+import AdminEmployeeEditMessage from "views/components/admin/employee/organisms/AdminEmployeeEditMessage";
 
 type Props = {
   header: HeaderProps | null;
@@ -50,6 +51,7 @@ export default function (props: Props) {
                   superiors={props.superiors}
                 />
               ) : null}
+              <AdminEmployeeEditMessage></AdminEmployeeEditMessage>
             </>
           </Content>
         </RightBox>

@@ -430,10 +430,6 @@ export default function (props: Props) {
               </ButtonNegative>
             </SpaceStyle>
           </table>
-
-          <p>
-            ※等級情報を変更すると、評価中の今期のシートの等級情報も変更されます。
-          </p>
         </form>
       )}
     </Formik>
