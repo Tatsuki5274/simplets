@@ -89,9 +89,9 @@ export default function () {
         if (groups) {
           // 部署情報をソート
           groups.sort(function (a, b) {
-            if (a && b && a.id && b.id) {
-              if (a.id < b.id) return 1;
-              if (a.id > b.id) return -1;
+            if (a && b && a.no && b.no) {
+              if (a.no > b.no) return 1;
+              if (a.no < b.no) return -1;
             }
             return 0;
           });
