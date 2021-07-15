@@ -8,6 +8,7 @@ import LeftBox from "views/components/common/templates/LeftBox";
 import RightBox from "views/components/common/templates/RightBox";
 import Sidebar from "views/components/common/templates/Sidebar";
 import Container from "../../../common/templates/Container";
+import AdminEmployeeCreateMessage from "views/components/admin/employee/organisms/AdminEmployeeCreateMessage";
 
 type Props = {
   header: HeaderProps | null;
@@ -48,6 +49,7 @@ export default function (props: Props) {
                   companyId={props.companyId}
                 />
               ) : null}
+              <AdminEmployeeCreateMessage></AdminEmployeeCreateMessage>
             </>
           </Content>
         </RightBox>

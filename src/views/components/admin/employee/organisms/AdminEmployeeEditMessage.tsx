@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */ // Todo delete lint ignore 
 import {
   BooleanType,
   CreateEmployeeInput,
