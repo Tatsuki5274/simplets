@@ -1,7 +1,7 @@
 import { CreateCategoryInput } from "API";
 import { ErrorContext } from "App";
 import { Formik } from "formik";
-import { createCategory } from "graphql/mutations";
+import { createCategoryByCompanyAdmin } from "graphql/mutations";
 import { CategoryDao } from "lib/dao/categoryDao";
 import React, { useContext } from "react";
 import { useHistory } from "react-router";
@@ -32,7 +32,10 @@ export default function (props: Props) {
           no: values.localID,
           name: values.name,
         };
-        const category = await CategoryDao.create(createCategory, createI);
+        const category = await CategoryDao.createByAdmin(
+          createCategoryByCompanyAdmin,
+          createI
+        );
 
         if (category) {
           window.alert("カテゴリ内容が作成されました");

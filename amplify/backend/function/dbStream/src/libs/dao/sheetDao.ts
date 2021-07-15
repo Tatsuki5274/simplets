@@ -90,4 +90,14 @@ export const SheetDao = {
     )) as APIt.ListSheetsRevieweeQuery;
     return (result.listSheetsReviewee?.items as (Sheet | null)[]) || null;
   },
+  updateByAdmin: async (
+    mutation: string,
+    params: APIt.UpdateSheetInput
+  ): Promise<Sheet | null> => {
+    const result = (await BaseDao.update(
+      mutation,
+      params
+    )) as APIt.UpdateSheetByCompanyAdminMutation;
+    return (result.updateSheetByCompanyAdmin as Sheet) || null;
+  },
 };

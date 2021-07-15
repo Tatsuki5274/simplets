@@ -9,7 +9,7 @@ const updateCategoryByCompanyAdmin = async (
   params: UpdateCategoryInput,
   companyId: string
 ): Promise<Category | null> => {
-  params.companyID = companyId; // 会社番号を上書きする
+  delete params.companyID; // 会社番号の変更は無効化する
   const category = await CategoryDao.get(getCategory, { id: params.id });
   if (category?.companyID !== companyId) {
     // 登録しているカテゴリが別の会社のデータの場合は拒否

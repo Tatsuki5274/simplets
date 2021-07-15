@@ -1,7 +1,7 @@
 import { CreateGroupInput } from "API";
 import { ErrorContext } from "App";
 import { Formik } from "formik";
-import { createGroup } from "graphql/mutations";
+import { createGroupByCompanyAdmin } from "graphql/mutations";
 import { GroupDao } from "lib/dao/groupDao";
 import React, { useContext } from "react";
 import { useHistory } from "react-router";
@@ -31,7 +31,10 @@ export default function (props: Props) {
           no: values.localID,
           name: values.name,
         };
-        const groupItem = await GroupDao.create(createGroup, createI);
+        const groupItem = await GroupDao.createByAdmin(
+          createGroupByCompanyAdmin,
+          createI
+        );
         if (groupItem) {
           window.alert("部署登録が完了しました");
           history.push(routeBuilder.adminGroupListPath());

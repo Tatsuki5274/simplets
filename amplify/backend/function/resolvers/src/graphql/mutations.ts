@@ -732,6 +732,690 @@ export const deleteEmployeeByCompanyAdmin = /* GraphQL */ `
     }
   }
 `;
+export const createGroupByCompanyAdmin = /* GraphQL */ `
+  mutation CreateGroupByCompanyAdmin($input: CreateGroupInput) {
+    createGroupByCompanyAdmin(input: $input) {
+      id
+      companyID
+      no
+      name
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateGroupByCompanyAdmin = /* GraphQL */ `
+  mutation UpdateGroupByCompanyAdmin($input: UpdateGroupInput) {
+    updateGroupByCompanyAdmin(input: $input) {
+      id
+      companyID
+      no
+      name
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteGroupByCompanyAdmin = /* GraphQL */ `
+  mutation DeleteGroupByCompanyAdmin($input: DeleteGroupInput) {
+    deleteGroupByCompanyAdmin(input: $input) {
+      id
+      companyID
+      no
+      name
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateSheetByCompanyAdmin = /* GraphQL */ `
+  mutation UpdateSheetByCompanyAdmin($input: UpdateSheetInput) {
+    updateSheetByCompanyAdmin(input: $input) {
+      id
+      sub
+      year
+      companyID
+      groupID
+      grade
+      careerPlan
+      careerPlanComment
+      reviewComment
+      reviewDate
+      selfCheckDate
+      firstComment
+      firstCheckDate
+      secondComment
+      secondCheckDate
+      overAllEvaluation
+      statusValue
+      interviewPlanDate
+      interviewPlanComment
+      InterviewMid1Date
+      InterviewMid1Comment
+      InterviewMid2Date
+      InterviewMid2Comment
+      InterviewMid3Date
+      InterviewMid3Comment
+      revieweeUsername
+      secondUsername
+      topUsername
+      sheetGroupName
+      referencer
+      reviewee
+      topReviewers
+      secondReviewers
+      createdAt
+      updatedAt
+      revieweeEmployee {
+        username
+        companyID
+        no
+        groupID
+        superiorUsername
+        firstName
+        lastName
+        grade
+        email
+        sub
+        manager
+        isCompanyAdmin
+        isDeleted
+        createdAt
+        updatedAt
+        company {
+          id
+          name
+          startMonth
+          shortName
+          url
+          createdAt
+          updatedAt
+        }
+        superior {
+          username
+          companyID
+          no
+          groupID
+          superiorUsername
+          firstName
+          lastName
+          grade
+          email
+          sub
+          manager
+          isCompanyAdmin
+          isDeleted
+          createdAt
+          updatedAt
+          company {
+            id
+            name
+            startMonth
+            shortName
+            url
+            createdAt
+            updatedAt
+          }
+          superior {
+            username
+            companyID
+            no
+            groupID
+            superiorUsername
+            firstName
+            lastName
+            grade
+            email
+            sub
+            manager
+            isCompanyAdmin
+            isDeleted
+            createdAt
+            updatedAt
+            company {
+              id
+              name
+              startMonth
+              shortName
+              url
+              createdAt
+              updatedAt
+            }
+            superior {
+              username
+              companyID
+              no
+              groupID
+              superiorUsername
+              firstName
+              lastName
+              grade
+              email
+              sub
+              manager
+              isCompanyAdmin
+              isDeleted
+              createdAt
+              updatedAt
+              company {
+                id
+                name
+                startMonth
+                shortName
+                url
+                createdAt
+                updatedAt
+              }
+              superior {
+                username
+                companyID
+                no
+                groupID
+                superiorUsername
+                firstName
+                lastName
+                grade
+                email
+                sub
+                manager
+                isCompanyAdmin
+                isDeleted
+                createdAt
+                updatedAt
+                company {
+                  id
+                  name
+                  startMonth
+                  shortName
+                  url
+                  createdAt
+                  updatedAt
+                }
+                superior {
+                  username
+                  companyID
+                  no
+                  groupID
+                  superiorUsername
+                  firstName
+                  lastName
+                  grade
+                  email
+                  sub
+                  manager
+                  isCompanyAdmin
+                  isDeleted
+                  createdAt
+                  updatedAt
+                }
+                group {
+                  id
+                  companyID
+                  no
+                  name
+                  createdAt
+                  updatedAt
+                }
+              }
+              group {
+                id
+                companyID
+                no
+                name
+                createdAt
+                updatedAt
+              }
+            }
+            group {
+              id
+              companyID
+              no
+              name
+              createdAt
+              updatedAt
+            }
+          }
+          group {
+            id
+            companyID
+            no
+            name
+            createdAt
+            updatedAt
+          }
+        }
+        group {
+          id
+          companyID
+          no
+          name
+          createdAt
+          updatedAt
+        }
+      }
+      secondEmployee {
+        username
+        companyID
+        no
+        groupID
+        superiorUsername
+        firstName
+        lastName
+        grade
+        email
+        sub
+        manager
+        isCompanyAdmin
+        isDeleted
+        createdAt
+        updatedAt
+        company {
+          id
+          name
+          startMonth
+          shortName
+          url
+          createdAt
+          updatedAt
+        }
+        superior {
+          username
+          companyID
+          no
+          groupID
+          superiorUsername
+          firstName
+          lastName
+          grade
+          email
+          sub
+          manager
+          isCompanyAdmin
+          isDeleted
+          createdAt
+          updatedAt
+          company {
+            id
+            name
+            startMonth
+            shortName
+            url
+            createdAt
+            updatedAt
+          }
+          superior {
+            username
+            companyID
+            no
+            groupID
+            superiorUsername
+            firstName
+            lastName
+            grade
+            email
+            sub
+            manager
+            isCompanyAdmin
+            isDeleted
+            createdAt
+            updatedAt
+            company {
+              id
+              name
+              startMonth
+              shortName
+              url
+              createdAt
+              updatedAt
+            }
+            superior {
+              username
+              companyID
+              no
+              groupID
+              superiorUsername
+              firstName
+              lastName
+              grade
+              email
+              sub
+              manager
+              isCompanyAdmin
+              isDeleted
+              createdAt
+              updatedAt
+              company {
+                id
+                name
+                startMonth
+                shortName
+                url
+                createdAt
+                updatedAt
+              }
+              superior {
+                username
+                companyID
+                no
+                groupID
+                superiorUsername
+                firstName
+                lastName
+                grade
+                email
+                sub
+                manager
+                isCompanyAdmin
+                isDeleted
+                createdAt
+                updatedAt
+                company {
+                  id
+                  name
+                  startMonth
+                  shortName
+                  url
+                  createdAt
+                  updatedAt
+                }
+                superior {
+                  username
+                  companyID
+                  no
+                  groupID
+                  superiorUsername
+                  firstName
+                  lastName
+                  grade
+                  email
+                  sub
+                  manager
+                  isCompanyAdmin
+                  isDeleted
+                  createdAt
+                  updatedAt
+                }
+                group {
+                  id
+                  companyID
+                  no
+                  name
+                  createdAt
+                  updatedAt
+                }
+              }
+              group {
+                id
+                companyID
+                no
+                name
+                createdAt
+                updatedAt
+              }
+            }
+            group {
+              id
+              companyID
+              no
+              name
+              createdAt
+              updatedAt
+            }
+          }
+          group {
+            id
+            companyID
+            no
+            name
+            createdAt
+            updatedAt
+          }
+        }
+        group {
+          id
+          companyID
+          no
+          name
+          createdAt
+          updatedAt
+        }
+      }
+      topEmployee {
+        username
+        companyID
+        no
+        groupID
+        superiorUsername
+        firstName
+        lastName
+        grade
+        email
+        sub
+        manager
+        isCompanyAdmin
+        isDeleted
+        createdAt
+        updatedAt
+        company {
+          id
+          name
+          startMonth
+          shortName
+          url
+          createdAt
+          updatedAt
+        }
+        superior {
+          username
+          companyID
+          no
+          groupID
+          superiorUsername
+          firstName
+          lastName
+          grade
+          email
+          sub
+          manager
+          isCompanyAdmin
+          isDeleted
+          createdAt
+          updatedAt
+          company {
+            id
+            name
+            startMonth
+            shortName
+            url
+            createdAt
+            updatedAt
+          }
+          superior {
+            username
+            companyID
+            no
+            groupID
+            superiorUsername
+            firstName
+            lastName
+            grade
+            email
+            sub
+            manager
+            isCompanyAdmin
+            isDeleted
+            createdAt
+            updatedAt
+            company {
+              id
+              name
+              startMonth
+              shortName
+              url
+              createdAt
+              updatedAt
+            }
+            superior {
+              username
+              companyID
+              no
+              groupID
+              superiorUsername
+              firstName
+              lastName
+              grade
+              email
+              sub
+              manager
+              isCompanyAdmin
+              isDeleted
+              createdAt
+              updatedAt
+              company {
+                id
+                name
+                startMonth
+                shortName
+                url
+                createdAt
+                updatedAt
+              }
+              superior {
+                username
+                companyID
+                no
+                groupID
+                superiorUsername
+                firstName
+                lastName
+                grade
+                email
+                sub
+                manager
+                isCompanyAdmin
+                isDeleted
+                createdAt
+                updatedAt
+                company {
+                  id
+                  name
+                  startMonth
+                  shortName
+                  url
+                  createdAt
+                  updatedAt
+                }
+                superior {
+                  username
+                  companyID
+                  no
+                  groupID
+                  superiorUsername
+                  firstName
+                  lastName
+                  grade
+                  email
+                  sub
+                  manager
+                  isCompanyAdmin
+                  isDeleted
+                  createdAt
+                  updatedAt
+                }
+                group {
+                  id
+                  companyID
+                  no
+                  name
+                  createdAt
+                  updatedAt
+                }
+              }
+              group {
+                id
+                companyID
+                no
+                name
+                createdAt
+                updatedAt
+              }
+            }
+            group {
+              id
+              companyID
+              no
+              name
+              createdAt
+              updatedAt
+            }
+          }
+          group {
+            id
+            companyID
+            no
+            name
+            createdAt
+            updatedAt
+          }
+        }
+        group {
+          id
+          companyID
+          no
+          name
+          createdAt
+          updatedAt
+        }
+      }
+      group {
+        id
+        companyID
+        no
+        name
+        createdAt
+        updatedAt
+      }
+      section {
+        items {
+          id
+          sheetID
+          no
+          sectionCategoryName
+          reviewee
+          topReviewers
+          secondReviewers
+          referencer
+          createdAt
+          updatedAt
+          objective {
+            items {
+              id
+              sectionID
+              createdAt
+              companyID
+              content
+              result
+              priority
+              selfEvaluation
+              firstEvaluation
+              lastEvaluation
+              progress
+              expStartDate
+              expDoneDate
+              reviewee
+              topReviewers
+              secondReviewers
+              referencer
+              updatedAt
+            }
+            nextToken
+          }
+        }
+        nextToken
+      }
+    }
+  }
+`;
 export const deleteSheetWithChildrenByCompanyAdmin = /* GraphQL */ `
   mutation DeleteSheetWithChildrenByCompanyAdmin($input: DeleteSheetInput) {
     deleteSheetWithChildrenByCompanyAdmin(input: $input) {
@@ -1852,36 +2536,6 @@ export const deleteCompany = /* GraphQL */ `
     }
   }
 `;
-export const updateGroup = /* GraphQL */ `
-  mutation UpdateGroup(
-    $input: UpdateGroupInput!
-    $condition: ModelGroupConditionInput
-  ) {
-    updateGroup(input: $input, condition: $condition) {
-      id
-      companyID
-      no
-      name
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const deleteGroup = /* GraphQL */ `
-  mutation DeleteGroup(
-    $input: DeleteGroupInput!
-    $condition: ModelGroupConditionInput
-  ) {
-    deleteGroup(input: $input, condition: $condition) {
-      id
-      companyID
-      no
-      name
-      createdAt
-      updatedAt
-    }
-  }
-`;
 export const createEmployee = /* GraphQL */ `
   mutation CreateEmployee(
     $input: CreateEmployeeInput!
@@ -2572,6 +3226,36 @@ export const createGroup = /* GraphQL */ `
     $condition: ModelGroupConditionInput
   ) {
     createGroup(input: $input, condition: $condition) {
+      id
+      companyID
+      no
+      name
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateGroup = /* GraphQL */ `
+  mutation UpdateGroup(
+    $input: UpdateGroupInput!
+    $condition: ModelGroupConditionInput
+  ) {
+    updateGroup(input: $input, condition: $condition) {
+      id
+      companyID
+      no
+      name
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteGroup = /* GraphQL */ `
+  mutation DeleteGroup(
+    $input: DeleteGroupInput!
+    $condition: ModelGroupConditionInput
+  ) {
+    deleteGroup(input: $input, condition: $condition) {
       id
       companyID
       no

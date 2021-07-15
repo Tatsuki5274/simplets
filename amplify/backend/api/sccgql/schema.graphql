@@ -104,7 +104,7 @@ type Group #部門
     # 社員の閲覧権限
     {allow: groups, groupsField: "companyID", operations:[read]}
 
-    {allow: private, provider: iam ,operations:[read, create]}
+    { allow: private, provider: iam, operations: [create, read, update, delete] }
   ]
 )
 {
@@ -494,6 +494,34 @@ type Mutation{
       {allow: private}
     ])
 
+  # 社内管理者による部署追加
+  createGroupByCompanyAdmin(input: CreateGroupInput): Group
+    @function(name: "resolvers-${env}")
+    @auth(rules: [
+      {allow: private}
+    ])
+
+  # 社内管理者による部署更新
+  updateGroupByCompanyAdmin(input: UpdateGroupInput): Group
+    @function(name: "resolvers-${env}")
+    @auth(rules: [
+      {allow: private}
+    ])
+
+  # 社内管理者による部署削除
+  deleteGroupByCompanyAdmin(input: DeleteGroupInput): Group
+    @function(name: "resolvers-${env}")
+    @auth(rules: [
+      {allow: private}
+    ])
+
+  # 社内管理者によるシート更新
+  updateSheetByCompanyAdmin(input: UpdateSheetInput): Sheet
+    @function(name: "resolvers-${env}")
+    @auth(rules: [
+      {allow: private}
+    ])
+
   # 社内管理者による削除処理  
   deleteSheetWithChildrenByCompanyAdmin(input: DeleteSheetInput): Sheet
     @function(name: "resolvers-${env}")
@@ -529,6 +557,27 @@ input UpdateCategoryInput {
   name: String
 }
 input DeleteCategoryInput {
+  id: ID!
+}
+
+## 部署
+input CreateGroupInput {
+  id: ID
+  companyID: ID!
+  no: String!
+  name: String!
+  createdAt: AWSDateTime
+}
+
+input UpdateGroupInput {
+  id: ID!
+  companyID: ID
+  no: String
+  name: String
+  createdAt: AWSDateTime
+}
+
+input DeleteGroupInput {
   id: ID!
 }
 
@@ -594,6 +643,42 @@ input ReviewerReportCommentInput {
 }
 
 ## 評価シート
+input UpdateSheetInput {
+  id: ID!
+  sub: String
+  year: Int
+  companyID: ID
+  groupID: ID
+  grade: String
+  careerPlan: String
+  careerPlanComment: String
+  reviewComment: String
+  reviewDate: AWSDate
+  selfCheckDate: AWSDate
+  firstComment: String
+  firstCheckDate: AWSDate
+  secondComment: String
+  secondCheckDate: AWSDate
+  overAllEvaluation: Int
+  statusValue: Int
+  interviewPlanDate: AWSDate
+  interviewPlanComment: String
+  InterviewMid1Date: AWSDate
+  InterviewMid1Comment: String
+  InterviewMid2Date: AWSDate
+  InterviewMid2Comment: String
+  InterviewMid3Date: AWSDate
+  InterviewMid3Comment: String
+  revieweeUsername: String
+  secondUsername: String
+  topUsername: String
+  sheetGroupName: String
+  referencer: [String!]
+  reviewee: String
+  topReviewers: [String!]
+  secondReviewers: [String!]
+}
+
 input DeleteSheetInput {
   id: ID!
 }

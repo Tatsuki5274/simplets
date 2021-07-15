@@ -7,7 +7,7 @@ import {
 } from "API";
 import { ErrorContext } from "App";
 import { ErrorMessage, Formik } from "formik";
-import { createEmployee } from "graphql/mutations";
+import { createEmployeeByCompanyAdmin } from "graphql/mutations";
 import { getEmployee, listEmployeesCompany } from "graphql/queries";
 import { EmployeeDao } from "lib/dao/employeeDao";
 import React, { useContext } from "react";
@@ -107,8 +107,8 @@ export default function (props: Props) {
                   username: values.email,
                   isCompanyAdmin: values.isAdmin === "true" ? true : false,
                 };
-                const createItem = await EmployeeDao.create(
-                  createEmployee,
+                const createItem = await EmployeeDao.createByAdmin(
+                  createEmployeeByCompanyAdmin,
                   createI
                 );
                 if (createItem) {

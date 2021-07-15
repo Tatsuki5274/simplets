@@ -1,7 +1,7 @@
 import { UpdateGroupInput } from "API";
 import { ErrorContext } from "App";
 import { Formik } from "formik";
-import { updateGroup } from "graphql/mutations";
+import { updateGroupByCompanyAdmin } from "graphql/mutations";
 import { GroupDao } from "lib/dao/groupDao";
 import React, { useContext } from "react";
 import { useHistory } from "react-router";
@@ -35,7 +35,10 @@ export default function (props: Props) {
           no: props.groupLocalId,
           name: values.groupName,
         };
-        const updateItem = await GroupDao.update(updateGroup, updateI);
+        const updateItem = await GroupDao.updateByAdmin(
+          updateGroupByCompanyAdmin,
+          updateI
+        );
         if (updateItem) {
           window.alert("部署情報の更新が完了しました");
           history.push(routeBuilder.adminGroupListPath());

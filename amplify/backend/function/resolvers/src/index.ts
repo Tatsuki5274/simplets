@@ -10,6 +10,10 @@ import deleteCategoryByCompanyAdmin from "./resolvers/deleteCategoryByCompanyAdm
 import createEmployeeByCompanyAdmin from "./resolvers/createEmployeeByCompanyAdmin";
 import updateEmployeeByCompanyAdmin from "./resolvers/updateEmployeeByCompanyAdmin";
 import deleteEmployeeByCompanyAdmin from "./resolvers/deleteEmployeeByCompanyAdmin";
+import createGroupByCompanyAdmin from "./resolvers/createGroupByCompanyAdmin";
+import updateGroupByCompanyAdmin from "./resolvers/updateGroupByCompanyAdmin";
+import deleteGroupByCompanyAdmin from "./resolvers/deleteGroupByCompanyAdmin";
+import updateSheetByCompanyAdmin from "./resolvers/updateSheetByCompanyAdmin";
 
 export type EventType = {
   typeName?: string;
@@ -36,8 +40,8 @@ context: {
 */
 
 export const handler = async (
-  event: EventType,
-  context: unknown
+  event: EventType
+  // context: unknown
 ): Promise<unknown> => {
   const typeName: string | null = event.typeName || null;
   const fieldName: string | null = event.fieldName || null;
@@ -158,6 +162,58 @@ export const handler = async (
         throw new TypeError("params not provided.");
       }
       result = await deleteEmployeeByCompanyAdmin(params, companyId);
+    } else if (fieldName === "createGroupByCompanyAdmin") {
+      if (!isCompanyAdmin) {
+        // 社内管理者であることを検証
+        throw new Error("You don't have permission");
+      }
+      if (!companyId) {
+        throw new Error("companyId is required.");
+      }
+      const params = event?.arguments?.input;
+      if (typeof params !== "object") {
+        throw new TypeError("params not provided.");
+      }
+      result = await createGroupByCompanyAdmin(params, companyId);
+    } else if (fieldName === "updateGroupByCompanyAdmin") {
+      if (!isCompanyAdmin) {
+        // 社内管理者であることを検証
+        throw new Error("You don't have permission");
+      }
+      if (!companyId) {
+        throw new Error("companyId is required.");
+      }
+      const params = event?.arguments?.input;
+      if (typeof params !== "object") {
+        throw new TypeError("params not provided.");
+      }
+      result = await updateGroupByCompanyAdmin(params, companyId);
+    } else if (fieldName === "deleteGroupByCompanyAdmin") {
+      if (!isCompanyAdmin) {
+        // 社内管理者であることを検証
+        throw new Error("You don't have permission");
+      }
+      if (!companyId) {
+        throw new Error("companyId is required.");
+      }
+      const params = event?.arguments?.input;
+      if (typeof params !== "object") {
+        throw new TypeError("params not provided.");
+      }
+      result = await deleteGroupByCompanyAdmin(params, companyId);
+    } else if (fieldName === "updateSheetByCompanyAdmin") {
+      if (!isCompanyAdmin) {
+        // 社内管理者であることを検証
+        throw new Error("You don't have permission");
+      }
+      if (!companyId) {
+        throw new Error("companyId is required.");
+      }
+      const params = event?.arguments?.input;
+      if (typeof params !== "object") {
+        throw new TypeError("params not provided.");
+      }
+      result = await updateSheetByCompanyAdmin(params, companyId);
     } else if (fieldName === "updateReportByCompanyAdmin") {
       if (!isCompanyAdmin) {
         // 社内管理者であることを検証

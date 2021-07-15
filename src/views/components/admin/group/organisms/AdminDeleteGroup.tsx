@@ -1,6 +1,6 @@
 import { DeleteGroupInput, ListEmployeesCompanyQueryVariables } from "API";
 import { ErrorContext } from "App";
-import { deleteGroup } from "graphql/mutations";
+import { deleteGroupByCompanyAdmin } from "graphql/mutations";
 import { listEmployeesCompany } from "graphql/queries";
 import { EmployeeDao } from "lib/dao/employeeDao";
 import { GroupDao } from "lib/dao/groupDao";
@@ -36,7 +36,10 @@ export default function (props: Props) {
           const deleteI: DeleteGroupInput = {
             id: props.id,
           };
-          const deleteItem = await GroupDao.delete(deleteGroup, deleteI);
+          const deleteItem = await GroupDao.deleteByAdmin(
+            deleteGroupByCompanyAdmin,
+            deleteI
+          );
 
           if (deleteItem) {
             window.alert("部署の削除が完了しました");

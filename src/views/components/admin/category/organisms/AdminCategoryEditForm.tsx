@@ -1,7 +1,10 @@
 import { DeleteCategoryInput, UpdateCategoryInput } from "API";
 import { ErrorContext } from "App";
 import { Formik } from "formik";
-import { deleteCategory, updateCategory } from "graphql/mutations";
+import {
+  deleteCategoryByCompanyAdmin,
+  updateCategoryByCompanyAdmin,
+} from "graphql/mutations";
 import { CategoryDao } from "lib/dao/categoryDao";
 import React, { useContext } from "react";
 import { useHistory } from "react-router-dom";
@@ -32,7 +35,10 @@ export default function (props: Props) {
         // companyID: props.companyId,
         // localID: props.categoryLocalId,
       };
-      const deleteItem = await CategoryDao.delete(deleteCategory, deleteI);
+      const deleteItem = await CategoryDao.deleteByAdmin(
+        deleteCategoryByCompanyAdmin,
+        deleteI
+      );
       if (!deleteItem) {
         setError("カテゴリ情報の取得に失敗しました");
         return;
@@ -54,7 +60,10 @@ export default function (props: Props) {
           no: props.localId,
           name: values.name,
         };
-        const updateItems = await CategoryDao.update(updateCategory, updateI);
+        const updateItems = await CategoryDao.updateByAdmin(
+          updateCategoryByCompanyAdmin,
+          updateI
+        );
         if (updateItems) {
           window.alert("カテゴリ内容の変更が完了しました");
           history.push(routeBuilder.adminCategoryListPath());

@@ -9,6 +9,7 @@ const updateEmployeeByCompanyAdmin = async (
   params: UpdateEmployeeInput,
   companyId: string
 ): Promise<Employee | null> => {
+  delete params.companyID; // 会社番号の変更は無効化する
   const employee = await EmployeeDao.get(getEmployee, {
     username: params.username,
   });

@@ -10,7 +10,11 @@ import {
 } from "API";
 import { EmployeeContext, ErrorContext } from "App";
 import { Formik } from "formik";
-import { deleteEmployee, updateEmployee, updateSheet } from "graphql/mutations";
+import {
+  deleteEmployeeByCompanyAdmin,
+  updateEmployeeByCompanyAdmin,
+  updateSheet,
+} from "graphql/mutations";
 import { listEmployeesCompany, listSheetsReviewee } from "graphql/queries";
 import { EmployeeDao } from "lib/dao/employeeDao";
 import { SheetDao } from "lib/dao/sheetDao";
@@ -134,8 +138,8 @@ export default function (props: Props) {
           const deleteEmployeeI: DeleteEmployeeInput = {
             username: props.employee.username,
           };
-          const deleteEmployeeItem = await EmployeeDao.delete(
-            deleteEmployee,
+          const deleteEmployeeItem = await EmployeeDao.deleteByAdmin(
+            deleteEmployeeByCompanyAdmin,
             deleteEmployeeI
           );
           if (deleteEmployeeItem) {
@@ -151,7 +155,10 @@ export default function (props: Props) {
           const deleteI: DeleteEmployeeInput = {
             username: props.employee.username,
           };
-          const deleteItem = await EmployeeDao.delete(deleteEmployee, deleteI);
+          const deleteItem = await EmployeeDao.deleteByAdmin(
+            deleteEmployeeByCompanyAdmin,
+            deleteI
+          );
           if (!deleteItem) {
             setError("社員情報の削除に失敗しました");
             return;
@@ -201,7 +208,10 @@ export default function (props: Props) {
               : null,
           isDeleted: props.employee.isDeleted,
         };
-        const updateItem = await EmployeeDao.update(updateEmployee, updateI);
+        const updateItem = await EmployeeDao.updateByAdmin(
+          updateEmployeeByCompanyAdmin,
+          updateI
+        );
         if (updateItem) {
           // シートの等級情報を更新
           if (

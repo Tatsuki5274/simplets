@@ -60,4 +60,34 @@ export const GroupDao = {
     )) as APIt.ListGroupsCompanyQuery;
     return result.listGroupsCompany?.items || null;
   },
+  createByAdmin: async (
+    mutation: string,
+    params: APIt.CreateGroupInput
+  ): Promise<Group | null> => {
+    const result = (await BaseDao.create(
+      mutation,
+      params
+    )) as APIt.CreateGroupByCompanyAdminMutation;
+    return result.createGroupByCompanyAdmin || null;
+  },
+  updateByAdmin: async (
+    mutation: string,
+    params: APIt.UpdateGroupInput
+  ): Promise<Group | null> => {
+    const result = (await BaseDao.update(
+      mutation,
+      params
+    )) as APIt.UpdateGroupByCompanyAdminMutation;
+    return result.updateGroupByCompanyAdmin || null;
+  },
+  deleteByAdmin: async (
+    mutation: string,
+    params: APIt.DeleteGroupInput
+  ): Promise<Group | null> => {
+    const result = (await BaseDao.delete(
+      mutation,
+      params
+    )) as APIt.DeleteGroupByCompanyAdminMutation;
+    return result.deleteGroupByCompanyAdmin || null;
+  },
 };

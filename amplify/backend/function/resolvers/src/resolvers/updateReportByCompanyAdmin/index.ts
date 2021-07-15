@@ -9,6 +9,7 @@ const updateReportByCompanyAdmin = async (
   params: UpdateReportInput,
   companyId: string
 ): Promise<Report | null> => {
+  delete params.companyID; // 会社番号の変更は無効化する
   const report = await ReportDao.get(getReport, { id: params.id });
   if (report?.companyID !== companyId) {
     // データの所有者が別の会社のデータなら削除は許可しない
