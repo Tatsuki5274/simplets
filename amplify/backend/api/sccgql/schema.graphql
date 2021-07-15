@@ -19,10 +19,10 @@ type Company #会社
 {
   id: ID! # SCCなどの文字列を格納する
 
-  name: String!
-  startMonth: Int!
-  shortName: String
-  url: AWSURL
+  name: String! # 会社名
+  startMonth: Int!  # 会社年度開始月
+  shortName: String # 会社の省略表記
+  url: AWSURL # ホームページリンク
 
   
 }
@@ -66,26 +66,27 @@ type Employee #社員
   subscriptions: null
 )
 {
-  username: String! #cognito username
+  username: String! #cognitoのusername
 
-  companyID: ID!
+  companyID: ID!  # 所属会社ID
 
-  no: String! #社員番号などの社内番号
-  groupID: ID!
-  superiorUsername: String!
+  no: String! # 社員番号
+  groupID: ID!  # 所属部署ID
+  superiorUsername: String! # 上司ユーザー名
 
-  firstName: String!
-  lastName: String!
+  firstName: String!  # 名
+  lastName: String! # 姓
   grade: String! #等級
-  email: String!
-  sub: String #cognito 被験者
+  email: String!  # メールアドレス
+  sub: String #cognitoのsubフィールド
+
   superior: Employee @connection(fields: ["superiorUsername"])  #上司(所属長や部門長)
   group: Group @connection(fields: ["groupID"])  #所属部門
   company: Company @connection (fields: ["companyID"])
 
   manager: EmployeeType!  #マネージャー
-  isCompanyAdmin: Boolean
-  isDeleted: BooleanType!
+  isCompanyAdmin: Boolean # 社内管理者フラグ
+  isDeleted: BooleanType! # 退職フラグ（未使用）
 }
 
 type Group #部門
@@ -108,10 +109,10 @@ type Group #部門
   ]
 )
 {
-  id: ID!
+  id: ID! # 部署ID
 
-  companyID: ID!
-  no: String!  #ソート
+  companyID: ID!  # 所属会社ID
+  no: String!  #部署番号
   
   # company: Company @connection  グループフィールドに置き換え
   name: String! #部門名
@@ -140,10 +141,10 @@ type Category
   ]
 )
 {
-  id: ID!
-  companyID: ID!
+  id: ID! # カテゴリID
+  companyID: ID!  # 所属会社ID
 
-  no: String!  #ソート
+  no: String!  #カテゴリ番号
   name: String! #カテゴリ名
 }
 
@@ -165,22 +166,22 @@ type Sheet
     {allow: groups, groups: ["Admin"]}
 
     # オーナーフィールド
-    {allow: owner, ownerField: "topReviewers", operations: [update, read]}
-    {allow: owner, ownerField: "secondReviewers", operations: [update, read]}
-    {allow: owner, ownerField: "reviewee", operations: [create, update, read]}
-    {allow: owner, ownerField: "referencer", operations: [read]}
+    {allow: owner, ownerField: "topReviewers", operations: [update, read]}  # 部門長による権限
+    {allow: owner, ownerField: "secondReviewers", operations: [update, read]} # 所属長による権限
+    {allow: owner, ownerField: "reviewee", operations: [create, update, read]}  # 被評価者による権限
+    {allow: owner, ownerField: "referencer", operations: [read]}  # 参照者(マネージャー)による権限
 
     { allow: private, provider: iam, operations: [create, read, update, delete] }
     
   ]
 )
 {
-  id: ID!
+  id: ID! # シートID
 
-  sub: String!
+  sub: String!  # 所有社員のsub
+
   year: Int!  #実施年度
-
-  companyID: ID!
+  companyID: ID!  # 所属会社ID
   groupID: ID! #部署ID
   grade: String! #等級
   careerPlan: String  #キャリア計画本人希望
@@ -205,12 +206,12 @@ type Sheet
   InterviewMid3Date: AWSDate    # 中間3
   InterviewMid3Comment: String
 
-  revieweeUsername: String
-  secondUsername: String
-  topUsername: String
+  revieweeUsername: String  # 被評価者ユーザー名
+  secondUsername: String  # 所属長ユーザー名
+  topUsername: String # 部門長ユーザー名
 
   # connection
-  sheetGroupName: String
+  sheetGroupName: String  # 部署名
 
   revieweeEmployee: Employee @connection(fields: ["revieweeUsername"])  #被評価者
   secondEmployee: Employee @connection(fields: ["secondUsername"])  #所属長
@@ -248,13 +249,13 @@ type Section
   ]
 )
 {
-  id: ID!
-  sheetID: ID!
-  no: String!
+  id: ID! # カテゴリセクションID
+  sheetID: ID!  # 評価シートID
+  no: String! # カテゴリID
 
-  sectionCategoryName: String
+  sectionCategoryName: String # カテゴリ名
 
-  objective: [Objective] @connection(fields: ["id"], keyName: "ObjectiveBySection")
+  objective: [Objective] @connection(fields: ["id"], keyName: "ObjectiveBySection") # カテゴリ所属目標の参照
 
   # オーナーフィールド
   reviewee: String #被評価者
@@ -286,12 +287,12 @@ type Objective
   ]
 )
 {
-  id: ID!
-  sectionID: ID!
+  id: ID! # 目標ID
+  sectionID: ID!  # 所属カテゴリセクションID
 
   createdAt: AWSDateTime!
   
-  companyID: String!
+  companyID: String!  # 所属会社ID
 
   content: String! #目標本文
   result: String  #実績
@@ -314,20 +315,22 @@ type Objective
 
 }
 
-
+# 作業報告状態定義
 enum ReportWorkingStatus {
-  OK
-  InTask
-  InProblem
+  OK        # 問題なし
+  InTask    # 問題はあるが、作業はできている
+  InProblem # 問題がある
 }
 
+# 報告者のフィールド定義
 type RevieweeReportComment
 {
-  work: String #作業内容
-  other: String #その他コメント
+  work: String    #作業内容
+  other: String   #その他コメント
   status: String  #作業状況コメント
 }
 
+# 所属長のフィールド定義
 type ReviewerReportComment
 {
   superior: String #所属長コメント
@@ -366,19 +369,19 @@ type Report
   ]
 )
 {
-  id: ID!
+  id: ID! # 作業報告ID
 
-  sub: String!
-  date: AWSDate!
+  sub: String!  # 報告者のsub
+  date: AWSDate!  # 報告対象日
 
   groupID: ID #部署ID
 
-  reviewee: String
-  reviewer: [String]
-  companyID: String
-  referencer: [String] #参照者
+  reviewee: String  # 報告者
+  reviewer: [String]  # 所属長
+  companyID: String # 報告者所属会社ID
+  referencer: [String] #参照者(マネージャーなど)
   
-  revieweeComments: RevieweeReportComment 
+  revieweeComments: RevieweeReportComment # 報告者用フィールド
   # @auth(rules: [
   #     { allow: owner, ownerField: "reviewee"}
   #     # { allow: owner, ownerField: "reviewee", operations: [create, update, read] }
@@ -392,7 +395,7 @@ type Report
     #   # { allow: owner, ownerField: "reviewer", operations: [read] }      
     #   # { allow: owner, ownerField: "referencer", operations: [read] }      
     # ])
-  reviewerComments: ReviewerReportComment 
+  reviewerComments: ReviewerReportComment # 所属長用フィールド
   # @auth(rules: [
   #     # { allow: owner, ownerField: "reviewer" }
   #     # { allow: owner, ownerField: "reviewer", operations: [update, read] }
@@ -401,7 +404,7 @@ type Report
   #   ])
   workStatus: ReportWorkingStatus #作業状況
   # revieweeEmail: String #報告者のメールアドレス
-  revieweeEmployee: Employee @connection(fields: ["reviewee"])  #被評価者
+  revieweeEmployee: Employee @connection(fields: ["reviewee"])  #被評価者参照
 }
 
 # type Query {
@@ -417,6 +420,7 @@ type Report
 #   #   ])
 # }
 
+# メール送信関数の入力定義
 input sendEmailInput{
   to: [String]!
   cc: [String]
@@ -425,6 +429,7 @@ input sendEmailInput{
   body: String!
 }
 
+# 管理者用　組織変更時の権限反映処理のレスポンス形式の定義
 type UpdateOwnerResponseType {
   isSuccess: Boolean!
   message: String!
