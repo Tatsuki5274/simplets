@@ -4,8 +4,11 @@ import {
   DeleteSheetInput,
   EmployeeType,
   ListEmployeesCompanyQueryVariables,
+  ListReportsQuery,
+  ListReportsSubQueryVariables,
   ListSheetsRevieweeQueryVariables,
   UpdateEmployeeInput,
+  UpdateReportInput,
   UpdateSheetInput,
 } from "API";
 import { EmployeeContext, ErrorContext } from "App";
@@ -29,6 +32,10 @@ import { SelectLabel } from "views/components/common/atoms/Types";
 import ButtonNegative from "views/components/common/molecules/ButtonNegative";
 import CommandButton from "views/components/common/molecules/CommandButton";
 import PullDown from "views/components/common/molecules/PullDown";
+import { ReportDao } from "lib/dao/reportDao";
+import { updateReportByCompanyAdmin, updateReport } from "graphql/mutations";
+import { listReportsSub } from "graphql/queries";
+import { IOError } from "lib/exception";
 
 export type AdminEditEmployeeDataType = {
   username: string;
@@ -267,6 +274,36 @@ export default function (props: Props) {
                     throw new TypeError("シート情報の更新に失敗しました");
                   }
                 }
+              }
+              //変更対象社員のすべての作業報告(report)の部署(groupIdフィールド)を変更後の社員の部署idに付け替える。
+              //処理はフロントエンドで非同期で実行する。
+              const reportItem: ListReportsSubQueryVariables = {
+                sub: props.employee.sub,
+              };
+              const reports = await ReportDao.listSub(
+                listReportsSub,
+                reportItem
+              );
+              if (reports && reports.length > 0) {
+                await Promise.all(
+                  reports.map(async (report) => {
+                    if (!report?.id) {
+                      // idが取得できない場合はスキップ
+                      return;
+                    }
+                    const updateI: UpdateReportInput = {
+                      id: report.id,
+                      groupID: props.employee.groupId,
+                    };
+                    const updateItem = await ReportDao.updateByAdmin(
+                      updateReportByCompanyAdmin,
+                      updateI
+                    );
+                    if (!updateItem) {
+                      throw new IOError("作業報告の更新に失敗しました");
+                    }
+                  })
+                );
               }
             }
           }
