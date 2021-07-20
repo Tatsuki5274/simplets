@@ -1,10 +1,10 @@
 import {
   BooleanType,
   DeleteEmployeeInput,
+  DeleteReportInput,
   DeleteSheetInput,
   EmployeeType,
   ListEmployeesCompanyQueryVariables,
-  ListReportsQuery,
   ListReportsSubQueryVariables,
   ListSheetsRevieweeQueryVariables,
   UpdateEmployeeInput,
@@ -15,6 +15,7 @@ import { EmployeeContext, ErrorContext } from "App";
 import { Formik } from "formik";
 import {
   deleteEmployeeByCompanyAdmin,
+  deleteReportByCompanyAdmin,
   updateEmployeeByCompanyAdmin,
   updateSheet,
 } from "graphql/mutations";
@@ -33,7 +34,7 @@ import ButtonNegative from "views/components/common/molecules/ButtonNegative";
 import CommandButton from "views/components/common/molecules/CommandButton";
 import PullDown from "views/components/common/molecules/PullDown";
 import { ReportDao } from "lib/dao/reportDao";
-import { updateReportByCompanyAdmin, updateReport } from "graphql/mutations";
+import { updateReportByCompanyAdmin } from "graphql/mutations";
 import { listReportsSub } from "graphql/queries";
 import { IOError } from "lib/exception";
 
@@ -109,70 +110,87 @@ export default function (props: Props) {
       };
       const sheetItems = await SheetDao.listReviewee(listSheetsReviewee, listI);
 
-      // 対象社員のシート情報が存在する場合
-      if (sheetItems && sheetItems.length > 0) {
-        if (
-          window.confirm(
-            "過去の評価データも削除されますが、社員情報を削除してよろしいですか？"
-          )
-        ) {
-          //対象社員のシート情報の削除
-          let deletedNum = 0;
-          await Promise.all(
-            sheetItems.map(async (sheet) => {
-              if (!sheet?.id) {
-                // idが取得できない場合はスキップ
-                return;
-              }
-              const deleteSheetI: DeleteSheetInput = {
-                id: sheet.id,
-              };
-              const deleteSheetItem = await SheetDao.deleteWithChildren(
-                deleteSheetI
-              );
-              if (!deleteSheetItem) {
-                setError("シート情報の削除に失敗しました");
-                return;
-              }
-              deletedNum++;
-            })
-          );
-
-          // 評価シートの削除件数を表示する
-          window.alert(`${deletedNum}件のシート情報の削除が完了しました`);
-
-          // 対象社員情報の削除
-          const deleteEmployeeI: DeleteEmployeeInput = {
-            username: props.employee.username,
-          };
-          const deleteEmployeeItem = await EmployeeDao.deleteByAdmin(
-            deleteEmployeeByCompanyAdmin,
-            deleteEmployeeI
-          );
-          if (deleteEmployeeItem) {
-            window.alert("社員情報の削除が完了しました");
-            history.push(routeBuilder.adminEmployeeListPath());
-          } else {
-            setError("社員情報の削除に失敗しました");
-          }
+      if (
+        window.confirm(
+          "過去の評価データと作業報告がある場合は全て削除されます。社員情報を削除してもよろしいでしょうか？"
+        )
+      ) {
+        //対象社員の作業報告情報の削除
+        let deleteReportNum = 0;
+        const reportItem: ListReportsSubQueryVariables = {
+          sub: props.employee.sub,
+        };
+        const reports = await ReportDao.listSub(listReportsSub, reportItem);
+        if (!reports) {
+          setError("作業報告情報の取得に失敗しました");
+          return;
         }
-      } else {
-        // 対象社員の評価シート情報が存在しない場合
-        if (window.confirm("社員情報を削除してよろしいですか？")) {
-          const deleteI: DeleteEmployeeInput = {
-            username: props.employee.username,
-          };
-          const deleteItem = await EmployeeDao.deleteByAdmin(
-            deleteEmployeeByCompanyAdmin,
-            deleteI
-          );
-          if (!deleteItem) {
-            setError("社員情報の削除に失敗しました");
-            return;
-          }
+        await Promise.all(
+          reports.map(async (report) => {
+            if (!report?.id) {
+              // idが取得できない場合はスキップ
+              return;
+            }
+            const deleteReportI: DeleteReportInput = {
+              id: report.id,
+            };
+            const deleteReportItem = await ReportDao.deleteByAdmin(
+              deleteReportByCompanyAdmin,
+              deleteReportI
+            );
+            if (!deleteReportItem) {
+              setError("作業報告情報の削除に失敗しました");
+              return;
+            }
+            deleteReportNum++;
+          })
+        );
 
+        // 報告書の削除件数を表示する
+        window.alert(`${deleteReportNum}件の報告書の削除が完了しました`);
+
+        //対象社員のシート情報の削除
+        let deletedNum = 0;
+        if (!sheetItems) {
+          setError("シート情報の取得に失敗しました");
+          return;
+        }
+        await Promise.all(
+          sheetItems.map(async (sheet) => {
+            if (!sheet?.id) {
+              // idが取得できない場合はスキップ
+              return;
+            }
+            const deleteSheetI: DeleteSheetInput = {
+              id: sheet.id,
+            };
+            const deleteSheetItem = await SheetDao.deleteWithChildren(
+              deleteSheetI
+            );
+            if (!deleteSheetItem) {
+              setError("シート情報の削除に失敗しました");
+              return;
+            }
+            deletedNum++;
+          })
+        );
+
+        // 評価シートの削除件数を表示する
+        window.alert(`${deletedNum}件のシート情報の削除が完了しました`);
+
+        // 対象社員情報の削除
+        const deleteEmployeeI: DeleteEmployeeInput = {
+          username: props.employee.username,
+        };
+        const deleteEmployeeItem = await EmployeeDao.deleteByAdmin(
+          deleteEmployeeByCompanyAdmin,
+          deleteEmployeeI
+        );
+        if (deleteEmployeeItem) {
           window.alert("社員情報の削除が完了しました");
           history.push(routeBuilder.adminEmployeeListPath());
+        } else {
+          setError("社員情報の削除に失敗しました");
         }
       }
     } else {

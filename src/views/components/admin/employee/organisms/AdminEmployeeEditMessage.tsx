@@ -1,27 +1,6 @@
-import {
-  BooleanType,
-  CreateEmployeeInput,
-  EmployeeType,
-  GetEmployeeQueryVariables,
-  ListEmployeesCompanyQueryVariables,
-} from "API";
-import { ErrorContext } from "App";
-import { ErrorMessage, Formik } from "formik";
-import { createEmployee } from "graphql/mutations";
-import { getEmployee, listEmployeesCompany } from "graphql/queries";
-import { EmployeeDao } from "lib/dao/employeeDao";
-import React, { useContext } from "react";
-import { useHistory } from "react-router";
-import { routeBuilder } from "router";
+import React from "react";
 import styled from "styled-components";
-import Button from "views/components/common/atoms/Button";
-import ErrorText from "views/components/common/atoms/ErrorText";
 import Text from "views/components/common/atoms/Text";
-import TextField from "views/components/common/atoms/TextField";
-import { SelectLabel } from "views/components/common/atoms/Types";
-import CommandButton from "views/components/common/molecules/CommandButton";
-import PullDown from "views/components/common/molecules/PullDown";
-import * as Yup from "yup";
 
 const SpaceStyle = styled.p({
   textIndent: "-1em",
