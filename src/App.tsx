@@ -156,9 +156,14 @@ function App() {
       isManager = true;
     }
 
+    const isMobile = document.body.clientWidth < 500;
+
     const sidebar = createSidebarElements(
       isManager,
-      employee?.isCompanyAdmin || false
+      employee?.isCompanyAdmin || false,
+      employee?.company?.isContractEvaluation || false,
+      employee?.company?.isContractReport || false,
+      isMobile
     );
     setSidebar(sidebar);
   }, [employee]);

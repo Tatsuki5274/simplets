@@ -55,6 +55,11 @@ export function getThisYear(startMonth = 1): number {
   return thisYear;
 }
 
+type ContentsType = {
+  label: string;
+  dest: string | null;
+};
+
 /**
  *
  * @param isManager マネージャ権限の有無
@@ -63,58 +68,57 @@ export function getThisYear(startMonth = 1): number {
  */
 export function createSidebarElements(
   isManager: boolean,
-  isAdmin: boolean
-): { label: string; dest: string | null }[][] {
-  const today = new Date();
-  const results = [
-    [
-      {
-        label: "- 目標設定 -",
-        dest: null,
-      },
-      {
-        label: "業績評価一覧",
-        dest: routeBuilder.revieweeListPath(),
-      },
-    ],
-    [
-      {
-        label: "- 作業報告 -",
-        dest: null,
-      },
-      {
-        label: "作業報告入力",
-        dest: routeBuilder.revieweeReportCalendarPath(today),
-      },
-      {
-        label: "報告参照カレンダー",
-        dest: routeBuilder.reviewerReportCalendarPaht(today),
-      },
-      {
-        label: "報告参照社員",
-        dest: routeBuilder.reviewerReportEmployeePath(),
-      },
-    ],
-  ];
-  const managerContents = [
-    [
-      {
-        label: "進捗参照",
-        dest: routeBuilder.reviewerListPath(),
-      },
-      {
-        label: "総合評価参照",
-        dest: routeBuilder.reviewerEvaluationListPath(),
-      },
-    ],
-    [],
-  ];
+  isAdmin: boolean,
+  isContractEvaluation: boolean,
+  isContractReport: boolean,
+  isMobile: boolean
+): ContentsType[][] {
+  const resultEvaluation: ContentsType[] = [];
+  const resultReport: ContentsType[] = [];
+  let resultAdmin: ContentsType[] = [];
 
+  const today = new Date();
+
+  // 以下リンク定義
+  const evaluationTitle = {
+    label: "- 目標設定 -",
+    dest: null,
+  };
+  const evaluationContentList = {
+    label: "業績評価一覧",
+    dest: routeBuilder.revieweeListPath(),
+  };
+  const evaluationContentRefProgress = {
+    label: "進捗参照",
+    dest: routeBuilder.reviewerListPath(),
+  };
+  const evaluationContentRefOver = {
+    label: "総合評価参照",
+    dest: routeBuilder.reviewerEvaluationListPath(),
+  };
+
+  const reportTitle = {
+    label: "- 作業報告 -",
+    dest: null,
+  };
+  const reportContentInputCalendar = {
+    label: "作業報告入力",
+    dest: routeBuilder.revieweeReportCalendarPath(today),
+  };
+  const reportContentRefCalendar = {
+    label: "報告参照カレンダー",
+    dest: routeBuilder.reviewerReportCalendarPaht(today),
+  };
+  const reportContentRefEmp = {
+    label: "報告参照社員",
+    dest: routeBuilder.reviewerReportEmployeePath(),
+  };
+
+  const adminTitle = {
+    label: "- マスター管理 -",
+    dest: null,
+  };
   const adminContents = [
-    {
-      label: "- マスター管理 -",
-      dest: null,
-    },
     {
       label: "社員管理",
       dest: routeBuilder.adminEmployeeListPath(),
@@ -129,24 +133,36 @@ export function createSidebarElements(
     },
   ];
 
-  if (isManager && isAdmin) {
-    for (let i = 0; i < results.length; i++) {
-      for (let j = 0; j < managerContents.length; j++) {
-        if (managerContents[i][j]) {
-          results[i].push(managerContents[i][j]);
-        }
-      }
-    }
-    results.push(adminContents);
-  } else if (isAdmin) {
-    results.push(adminContents);
-  } else if (isManager) {
-    for (let i = 0; i < results.length; i++) {
-      for (let j = 0; j < managerContents[i].length; j++)
-        results[i].push(managerContents[i][j]);
+  // 以下リンク作成処理
+  if (isContractEvaluation) {
+    resultEvaluation.push(evaluationTitle);
+    resultEvaluation.push(evaluationContentList);
+    if (isManager) {
+      resultEvaluation.push(evaluationContentRefProgress);
+      resultEvaluation.push(evaluationContentRefOver);
     }
   }
-  return results;
+
+  if (isContractReport) {
+    resultReport.push(reportTitle);
+    resultReport.push(reportContentInputCalendar);
+    if (!isMobile) {
+      resultReport.push(reportContentRefCalendar);
+    }
+    resultReport.push(reportContentRefEmp);
+  }
+
+  if (isAdmin) {
+    resultAdmin.push(adminTitle);
+    resultAdmin = resultAdmin.concat(adminContents);
+  }
+
+  const result: ContentsType[][] = [
+    resultEvaluation,
+    resultReport,
+    resultAdmin,
+  ];
+  return result;
 }
 
 export function createGaugeId(id: string): string {

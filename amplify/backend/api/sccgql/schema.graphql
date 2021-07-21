@@ -23,7 +23,8 @@ type Company #会社
   startMonth: Int!  # 会社年度開始月
   shortName: String # 会社の省略表記
   url: AWSURL # ホームページリンク
-
+  isContractEvaluation: Boolean # 業績評価機能の契約状況
+  isContractReport: Boolean # 作業報告機能の契約状況
   
 }
 

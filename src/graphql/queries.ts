@@ -10,6 +10,8 @@ export const getCompany = /* GraphQL */ `
       startMonth
       shortName
       url
+      isContractEvaluation
+      isContractReport
       createdAt
       updatedAt
     }
@@ -28,6 +30,8 @@ export const listCompanys = /* GraphQL */ `
         startMonth
         shortName
         url
+        isContractEvaluation
+        isContractReport
         createdAt
         updatedAt
       }
@@ -59,6 +63,8 @@ export const getEmployee = /* GraphQL */ `
         startMonth
         shortName
         url
+        isContractEvaluation
+        isContractReport
         createdAt
         updatedAt
       }
@@ -84,6 +90,8 @@ export const getEmployee = /* GraphQL */ `
           startMonth
           shortName
           url
+          isContractEvaluation
+          isContractReport
           createdAt
           updatedAt
         }
@@ -109,6 +117,8 @@ export const getEmployee = /* GraphQL */ `
             startMonth
             shortName
             url
+            isContractEvaluation
+            isContractReport
             createdAt
             updatedAt
           }
@@ -134,6 +144,8 @@ export const getEmployee = /* GraphQL */ `
               startMonth
               shortName
               url
+              isContractEvaluation
+              isContractReport
               createdAt
               updatedAt
             }
@@ -159,6 +171,8 @@ export const getEmployee = /* GraphQL */ `
                 startMonth
                 shortName
                 url
+                isContractEvaluation
+                isContractReport
                 createdAt
                 updatedAt
               }
@@ -184,6 +198,8 @@ export const getEmployee = /* GraphQL */ `
                   startMonth
                   shortName
                   url
+                  isContractEvaluation
+                  isContractReport
                   createdAt
                   updatedAt
                 }
@@ -297,6 +313,8 @@ export const listEmployees = /* GraphQL */ `
           startMonth
           shortName
           url
+          isContractEvaluation
+          isContractReport
           createdAt
           updatedAt
         }
@@ -322,6 +340,8 @@ export const listEmployees = /* GraphQL */ `
             startMonth
             shortName
             url
+            isContractEvaluation
+            isContractReport
             createdAt
             updatedAt
           }
@@ -347,6 +367,8 @@ export const listEmployees = /* GraphQL */ `
               startMonth
               shortName
               url
+              isContractEvaluation
+              isContractReport
               createdAt
               updatedAt
             }
@@ -372,6 +394,8 @@ export const listEmployees = /* GraphQL */ `
                 startMonth
                 shortName
                 url
+                isContractEvaluation
+                isContractReport
                 createdAt
                 updatedAt
               }
@@ -397,6 +421,8 @@ export const listEmployees = /* GraphQL */ `
                   startMonth
                   shortName
                   url
+                  isContractEvaluation
+                  isContractReport
                   createdAt
                   updatedAt
                 }
@@ -505,6 +531,8 @@ export const listEmployeesCompany = /* GraphQL */ `
           startMonth
           shortName
           url
+          isContractEvaluation
+          isContractReport
           createdAt
           updatedAt
         }
@@ -530,6 +558,8 @@ export const listEmployeesCompany = /* GraphQL */ `
             startMonth
             shortName
             url
+            isContractEvaluation
+            isContractReport
             createdAt
             updatedAt
           }
@@ -555,6 +585,8 @@ export const listEmployeesCompany = /* GraphQL */ `
               startMonth
               shortName
               url
+              isContractEvaluation
+              isContractReport
               createdAt
               updatedAt
             }
@@ -580,6 +612,8 @@ export const listEmployeesCompany = /* GraphQL */ `
                 startMonth
                 shortName
                 url
+                isContractEvaluation
+                isContractReport
                 createdAt
                 updatedAt
               }
@@ -605,6 +639,8 @@ export const listEmployeesCompany = /* GraphQL */ `
                   startMonth
                   shortName
                   url
+                  isContractEvaluation
+                  isContractReport
                   createdAt
                   updatedAt
                 }
@@ -713,6 +749,8 @@ export const listEmployeesManager = /* GraphQL */ `
           startMonth
           shortName
           url
+          isContractEvaluation
+          isContractReport
           createdAt
           updatedAt
         }
@@ -738,6 +776,8 @@ export const listEmployeesManager = /* GraphQL */ `
             startMonth
             shortName
             url
+            isContractEvaluation
+            isContractReport
             createdAt
             updatedAt
           }
@@ -763,6 +803,8 @@ export const listEmployeesManager = /* GraphQL */ `
               startMonth
               shortName
               url
+              isContractEvaluation
+              isContractReport
               createdAt
               updatedAt
             }
@@ -788,6 +830,8 @@ export const listEmployeesManager = /* GraphQL */ `
                 startMonth
                 shortName
                 url
+                isContractEvaluation
+                isContractReport
                 createdAt
                 updatedAt
               }
@@ -813,6 +857,8 @@ export const listEmployeesManager = /* GraphQL */ `
                   startMonth
                   shortName
                   url
+                  isContractEvaluation
+                  isContractReport
                   createdAt
                   updatedAt
                 }
@@ -1062,6 +1108,8 @@ export const getSheet = /* GraphQL */ `
           startMonth
           shortName
           url
+          isContractEvaluation
+          isContractReport
           createdAt
           updatedAt
         }
@@ -1087,6 +1135,8 @@ export const getSheet = /* GraphQL */ `
             startMonth
             shortName
             url
+            isContractEvaluation
+            isContractReport
             createdAt
             updatedAt
           }
@@ -1112,6 +1162,8 @@ export const getSheet = /* GraphQL */ `
               startMonth
               shortName
               url
+              isContractEvaluation
+              isContractReport
               createdAt
               updatedAt
             }
@@ -1137,6 +1189,8 @@ export const getSheet = /* GraphQL */ `
                 startMonth
                 shortName
                 url
+                isContractEvaluation
+                isContractReport
                 createdAt
                 updatedAt
               }
@@ -1162,6 +1216,8 @@ export const getSheet = /* GraphQL */ `
                   startMonth
                   shortName
                   url
+                  isContractEvaluation
+                  isContractReport
                   createdAt
                   updatedAt
                 }
@@ -1249,6 +1305,8 @@ export const getSheet = /* GraphQL */ `
           startMonth
           shortName
           url
+          isContractEvaluation
+          isContractReport
           createdAt
           updatedAt
         }
@@ -1274,6 +1332,8 @@ export const getSheet = /* GraphQL */ `
             startMonth
             shortName
             url
+            isContractEvaluation
+            isContractReport
             createdAt
             updatedAt
           }
@@ -1299,6 +1359,8 @@ export const getSheet = /* GraphQL */ `
               startMonth
               shortName
               url
+              isContractEvaluation
+              isContractReport
               createdAt
               updatedAt
             }
@@ -1324,6 +1386,8 @@ export const getSheet = /* GraphQL */ `
                 startMonth
                 shortName
                 url
+                isContractEvaluation
+                isContractReport
                 createdAt
                 updatedAt
               }
@@ -1349,6 +1413,8 @@ export const getSheet = /* GraphQL */ `
                   startMonth
                   shortName
                   url
+                  isContractEvaluation
+                  isContractReport
                   createdAt
                   updatedAt
                 }
@@ -1436,6 +1502,8 @@ export const getSheet = /* GraphQL */ `
           startMonth
           shortName
           url
+          isContractEvaluation
+          isContractReport
           createdAt
           updatedAt
         }
@@ -1461,6 +1529,8 @@ export const getSheet = /* GraphQL */ `
             startMonth
             shortName
             url
+            isContractEvaluation
+            isContractReport
             createdAt
             updatedAt
           }
@@ -1486,6 +1556,8 @@ export const getSheet = /* GraphQL */ `
               startMonth
               shortName
               url
+              isContractEvaluation
+              isContractReport
               createdAt
               updatedAt
             }
@@ -1511,6 +1583,8 @@ export const getSheet = /* GraphQL */ `
                 startMonth
                 shortName
                 url
+                isContractEvaluation
+                isContractReport
                 createdAt
                 updatedAt
               }
@@ -1536,6 +1610,8 @@ export const getSheet = /* GraphQL */ `
                   startMonth
                   shortName
                   url
+                  isContractEvaluation
+                  isContractReport
                   createdAt
                   updatedAt
                 }
@@ -1715,6 +1791,8 @@ export const listSheets = /* GraphQL */ `
             startMonth
             shortName
             url
+            isContractEvaluation
+            isContractReport
             createdAt
             updatedAt
           }
@@ -1740,6 +1818,8 @@ export const listSheets = /* GraphQL */ `
               startMonth
               shortName
               url
+              isContractEvaluation
+              isContractReport
               createdAt
               updatedAt
             }
@@ -1765,6 +1845,8 @@ export const listSheets = /* GraphQL */ `
                 startMonth
                 shortName
                 url
+                isContractEvaluation
+                isContractReport
                 createdAt
                 updatedAt
               }
@@ -1790,6 +1872,8 @@ export const listSheets = /* GraphQL */ `
                   startMonth
                   shortName
                   url
+                  isContractEvaluation
+                  isContractReport
                   createdAt
                   updatedAt
                 }
@@ -1868,6 +1952,8 @@ export const listSheets = /* GraphQL */ `
             startMonth
             shortName
             url
+            isContractEvaluation
+            isContractReport
             createdAt
             updatedAt
           }
@@ -1893,6 +1979,8 @@ export const listSheets = /* GraphQL */ `
               startMonth
               shortName
               url
+              isContractEvaluation
+              isContractReport
               createdAt
               updatedAt
             }
@@ -1918,6 +2006,8 @@ export const listSheets = /* GraphQL */ `
                 startMonth
                 shortName
                 url
+                isContractEvaluation
+                isContractReport
                 createdAt
                 updatedAt
               }
@@ -1943,6 +2033,8 @@ export const listSheets = /* GraphQL */ `
                   startMonth
                   shortName
                   url
+                  isContractEvaluation
+                  isContractReport
                   createdAt
                   updatedAt
                 }
@@ -2021,6 +2113,8 @@ export const listSheets = /* GraphQL */ `
             startMonth
             shortName
             url
+            isContractEvaluation
+            isContractReport
             createdAt
             updatedAt
           }
@@ -2046,6 +2140,8 @@ export const listSheets = /* GraphQL */ `
               startMonth
               shortName
               url
+              isContractEvaluation
+              isContractReport
               createdAt
               updatedAt
             }
@@ -2071,6 +2167,8 @@ export const listSheets = /* GraphQL */ `
                 startMonth
                 shortName
                 url
+                isContractEvaluation
+                isContractReport
                 createdAt
                 updatedAt
               }
@@ -2096,6 +2194,8 @@ export const listSheets = /* GraphQL */ `
                   startMonth
                   shortName
                   url
+                  isContractEvaluation
+                  isContractReport
                   createdAt
                   updatedAt
                 }
@@ -2278,6 +2378,8 @@ export const listSheetsReviewee = /* GraphQL */ `
             startMonth
             shortName
             url
+            isContractEvaluation
+            isContractReport
             createdAt
             updatedAt
           }
@@ -2303,6 +2405,8 @@ export const listSheetsReviewee = /* GraphQL */ `
               startMonth
               shortName
               url
+              isContractEvaluation
+              isContractReport
               createdAt
               updatedAt
             }
@@ -2328,6 +2432,8 @@ export const listSheetsReviewee = /* GraphQL */ `
                 startMonth
                 shortName
                 url
+                isContractEvaluation
+                isContractReport
                 createdAt
                 updatedAt
               }
@@ -2353,6 +2459,8 @@ export const listSheetsReviewee = /* GraphQL */ `
                   startMonth
                   shortName
                   url
+                  isContractEvaluation
+                  isContractReport
                   createdAt
                   updatedAt
                 }
@@ -2431,6 +2539,8 @@ export const listSheetsReviewee = /* GraphQL */ `
             startMonth
             shortName
             url
+            isContractEvaluation
+            isContractReport
             createdAt
             updatedAt
           }
@@ -2456,6 +2566,8 @@ export const listSheetsReviewee = /* GraphQL */ `
               startMonth
               shortName
               url
+              isContractEvaluation
+              isContractReport
               createdAt
               updatedAt
             }
@@ -2481,6 +2593,8 @@ export const listSheetsReviewee = /* GraphQL */ `
                 startMonth
                 shortName
                 url
+                isContractEvaluation
+                isContractReport
                 createdAt
                 updatedAt
               }
@@ -2506,6 +2620,8 @@ export const listSheetsReviewee = /* GraphQL */ `
                   startMonth
                   shortName
                   url
+                  isContractEvaluation
+                  isContractReport
                   createdAt
                   updatedAt
                 }
@@ -2584,6 +2700,8 @@ export const listSheetsReviewee = /* GraphQL */ `
             startMonth
             shortName
             url
+            isContractEvaluation
+            isContractReport
             createdAt
             updatedAt
           }
@@ -2609,6 +2727,8 @@ export const listSheetsReviewee = /* GraphQL */ `
               startMonth
               shortName
               url
+              isContractEvaluation
+              isContractReport
               createdAt
               updatedAt
             }
@@ -2634,6 +2754,8 @@ export const listSheetsReviewee = /* GraphQL */ `
                 startMonth
                 shortName
                 url
+                isContractEvaluation
+                isContractReport
                 createdAt
                 updatedAt
               }
@@ -2659,6 +2781,8 @@ export const listSheetsReviewee = /* GraphQL */ `
                   startMonth
                   shortName
                   url
+                  isContractEvaluation
+                  isContractReport
                   createdAt
                   updatedAt
                 }
@@ -2839,6 +2963,8 @@ export const listSheetsCompany = /* GraphQL */ `
             startMonth
             shortName
             url
+            isContractEvaluation
+            isContractReport
             createdAt
             updatedAt
           }
@@ -2864,6 +2990,8 @@ export const listSheetsCompany = /* GraphQL */ `
               startMonth
               shortName
               url
+              isContractEvaluation
+              isContractReport
               createdAt
               updatedAt
             }
@@ -2889,6 +3017,8 @@ export const listSheetsCompany = /* GraphQL */ `
                 startMonth
                 shortName
                 url
+                isContractEvaluation
+                isContractReport
                 createdAt
                 updatedAt
               }
@@ -2914,6 +3044,8 @@ export const listSheetsCompany = /* GraphQL */ `
                   startMonth
                   shortName
                   url
+                  isContractEvaluation
+                  isContractReport
                   createdAt
                   updatedAt
                 }
@@ -2992,6 +3124,8 @@ export const listSheetsCompany = /* GraphQL */ `
             startMonth
             shortName
             url
+            isContractEvaluation
+            isContractReport
             createdAt
             updatedAt
           }
@@ -3017,6 +3151,8 @@ export const listSheetsCompany = /* GraphQL */ `
               startMonth
               shortName
               url
+              isContractEvaluation
+              isContractReport
               createdAt
               updatedAt
             }
@@ -3042,6 +3178,8 @@ export const listSheetsCompany = /* GraphQL */ `
                 startMonth
                 shortName
                 url
+                isContractEvaluation
+                isContractReport
                 createdAt
                 updatedAt
               }
@@ -3067,6 +3205,8 @@ export const listSheetsCompany = /* GraphQL */ `
                   startMonth
                   shortName
                   url
+                  isContractEvaluation
+                  isContractReport
                   createdAt
                   updatedAt
                 }
@@ -3145,6 +3285,8 @@ export const listSheetsCompany = /* GraphQL */ `
             startMonth
             shortName
             url
+            isContractEvaluation
+            isContractReport
             createdAt
             updatedAt
           }
@@ -3170,6 +3312,8 @@ export const listSheetsCompany = /* GraphQL */ `
               startMonth
               shortName
               url
+              isContractEvaluation
+              isContractReport
               createdAt
               updatedAt
             }
@@ -3195,6 +3339,8 @@ export const listSheetsCompany = /* GraphQL */ `
                 startMonth
                 shortName
                 url
+                isContractEvaluation
+                isContractReport
                 createdAt
                 updatedAt
               }
@@ -3220,6 +3366,8 @@ export const listSheetsCompany = /* GraphQL */ `
                   startMonth
                   shortName
                   url
+                  isContractEvaluation
+                  isContractReport
                   createdAt
                   updatedAt
                 }
@@ -3511,6 +3659,8 @@ export const getReport = /* GraphQL */ `
           startMonth
           shortName
           url
+          isContractEvaluation
+          isContractReport
           createdAt
           updatedAt
         }
@@ -3536,6 +3686,8 @@ export const getReport = /* GraphQL */ `
             startMonth
             shortName
             url
+            isContractEvaluation
+            isContractReport
             createdAt
             updatedAt
           }
@@ -3561,6 +3713,8 @@ export const getReport = /* GraphQL */ `
               startMonth
               shortName
               url
+              isContractEvaluation
+              isContractReport
               createdAt
               updatedAt
             }
@@ -3586,6 +3740,8 @@ export const getReport = /* GraphQL */ `
                 startMonth
                 shortName
                 url
+                isContractEvaluation
+                isContractReport
                 createdAt
                 updatedAt
               }
@@ -3611,6 +3767,8 @@ export const getReport = /* GraphQL */ `
                   startMonth
                   shortName
                   url
+                  isContractEvaluation
+                  isContractReport
                   createdAt
                   updatedAt
                 }
@@ -3728,6 +3886,8 @@ export const listReports = /* GraphQL */ `
             startMonth
             shortName
             url
+            isContractEvaluation
+            isContractReport
             createdAt
             updatedAt
           }
@@ -3753,6 +3913,8 @@ export const listReports = /* GraphQL */ `
               startMonth
               shortName
               url
+              isContractEvaluation
+              isContractReport
               createdAt
               updatedAt
             }
@@ -3778,6 +3940,8 @@ export const listReports = /* GraphQL */ `
                 startMonth
                 shortName
                 url
+                isContractEvaluation
+                isContractReport
                 createdAt
                 updatedAt
               }
@@ -3803,6 +3967,8 @@ export const listReports = /* GraphQL */ `
                   startMonth
                   shortName
                   url
+                  isContractEvaluation
+                  isContractReport
                   createdAt
                   updatedAt
                 }
@@ -3923,6 +4089,8 @@ export const listReportsSub = /* GraphQL */ `
             startMonth
             shortName
             url
+            isContractEvaluation
+            isContractReport
             createdAt
             updatedAt
           }
@@ -3948,6 +4116,8 @@ export const listReportsSub = /* GraphQL */ `
               startMonth
               shortName
               url
+              isContractEvaluation
+              isContractReport
               createdAt
               updatedAt
             }
@@ -3973,6 +4143,8 @@ export const listReportsSub = /* GraphQL */ `
                 startMonth
                 shortName
                 url
+                isContractEvaluation
+                isContractReport
                 createdAt
                 updatedAt
               }
@@ -3998,6 +4170,8 @@ export const listReportsSub = /* GraphQL */ `
                   startMonth
                   shortName
                   url
+                  isContractEvaluation
+                  isContractReport
                   createdAt
                   updatedAt
                 }
@@ -4118,6 +4292,8 @@ export const listReportsCompanyDate = /* GraphQL */ `
             startMonth
             shortName
             url
+            isContractEvaluation
+            isContractReport
             createdAt
             updatedAt
           }
@@ -4143,6 +4319,8 @@ export const listReportsCompanyDate = /* GraphQL */ `
               startMonth
               shortName
               url
+              isContractEvaluation
+              isContractReport
               createdAt
               updatedAt
             }
@@ -4168,6 +4346,8 @@ export const listReportsCompanyDate = /* GraphQL */ `
                 startMonth
                 shortName
                 url
+                isContractEvaluation
+                isContractReport
                 createdAt
                 updatedAt
               }
@@ -4193,6 +4373,8 @@ export const listReportsCompanyDate = /* GraphQL */ `
                   startMonth
                   shortName
                   url
+                  isContractEvaluation
+                  isContractReport
                   createdAt
                   updatedAt
                 }
