@@ -14,7 +14,7 @@ import CommandButton from "views/components/common/molecules/CommandButton";
 
 type Props = {
   companyId: string;
-  groupLocalId: string;
+  groupNo: string;
   groupName: string;
   id: string;
 };
@@ -32,7 +32,7 @@ export default function (props: Props) {
         const updateI: UpdateGroupInput = {
           id: props.id,
           companyID: props.companyId,
-          no: props.groupLocalId,
+          no: props.groupNo,
           name: values.groupName,
         };
         const updateItem = await GroupDao.updateByAdmin(
@@ -52,10 +52,10 @@ export default function (props: Props) {
           <table>
             <tr>
               <td>
-                <Text>部署ID</Text>
+                <Text>部署番号</Text>
               </td>
               <td>
-                <Text>{props.groupLocalId}</Text>
+                <Text>{props.groupNo}</Text>
               </td>
             </tr>
 

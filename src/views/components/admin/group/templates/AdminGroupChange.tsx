@@ -23,7 +23,8 @@ type Props = {
   sidebar: LinkType[][] | null;
 
   companyId: string;
-  groupLocalId: string;
+  groupNo: string;
+  groupId: string;
   groupName: string;
   id: string;
 };

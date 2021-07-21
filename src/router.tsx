@@ -116,7 +116,7 @@ export default function Router() {
         />
         <Route
           exact
-          path={routeBuilder.adminGroupEditPath(":groupLocalId")}
+          path={routeBuilder.adminGroupEditPath(":groupId")}
           component={AdminGroupChangePage}
         />
         <Route

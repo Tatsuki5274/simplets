@@ -4,11 +4,12 @@ import { getGroup } from "graphql/queries";
 import { GroupDao } from "lib/dao/groupDao";
 import React, { useContext, useEffect, useState } from "react";
 import AdminGroupChange from "views/components/admin/group/templates/AdminGroupChange";
+import LoadingScreen from "views/components/common/templates/LoadingScreen";
 
 type Props = {
   match: {
     params: {
-      groupLocalId: string;
+      groupId: string;
     };
   };
 };
@@ -23,7 +24,7 @@ export default function (props: Props) {
   useEffect(() => {
     (async () => {
       const getI: GetGroupQueryVariables = {
-        id: props.match.params.groupLocalId,
+        id: props.match.params.groupId,
       };
       const groupItem = await GroupDao.get(getGroup, getI);
       if (groupItem) {
@@ -32,8 +33,10 @@ export default function (props: Props) {
         setError("部署情報が取得できません");
       }
     })();
-  }, [props.match.params.groupLocalId, setError]);
-
+  }, [props.match.params.groupId, setError]);
+  if (!group?.id) {
+    return <LoadingScreen></LoadingScreen>;
+  }
   return (
     <>
       {group ? (
@@ -41,9 +44,10 @@ export default function (props: Props) {
           header={header}
           sidebar={sidebar}
           companyId={group.companyID || ""}
-          groupLocalId={group.no || ""}
+          groupId={group.id}
+          groupNo={group.no || ""}
           groupName={group.name || ""}
-          id={group.id || ""}
+          id={group.id}
         />
       ) : null}
     </>
