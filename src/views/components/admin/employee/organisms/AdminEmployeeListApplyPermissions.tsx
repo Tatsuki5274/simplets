@@ -22,5 +22,5 @@ export default function () {
     return <LoadingScreen />;
   }
 
-  return <CommandButton onClick={onClick}>反映</CommandButton>;
+  return <CommandButton onClick={onClick}>変更反映</CommandButton>;
 }

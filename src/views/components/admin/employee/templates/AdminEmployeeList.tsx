@@ -14,6 +14,7 @@ import AdminListEmployee, {
   AdminEmployeeDataType,
 } from "../organisms/AdminListEmployee";
 import AdminNewEmployee from "../organisms/AdminNewEmployee";
+import AdminEmployeeListMessage from "../organisms/AdminEmployeeListMessage";
 
 type Props = {
   header: HeaderProps | null;
@@ -59,6 +60,8 @@ export default function (props: Props) {
                 ) : null}
                 <AdminEmployeeListApplyPermissions />
               </MenuStyle>
+
+              <AdminEmployeeListMessage />
 
               {props.tableData ? (
                 <AdminListEmployee data={props.tableData} />
