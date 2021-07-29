@@ -325,7 +325,9 @@ export default function (props: Props) {
               }
             }
           }
-          window.alert("社員情報を変更しました");
+          window.alert(
+            "社員情報を変更しました。全ての変更が完了したら反映ボタンを押して変更を確定させてください。"
+          );
           history.push(routeBuilder.adminEmployeeListPath());
         } else {
           setError("社員情報の更新に失敗しました");
