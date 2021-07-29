@@ -49,7 +49,7 @@ export default function (props: Props) {
                   companyId={props.companyId}
                 />
               ) : null}
-              <AdminEmployeeCreateMessage></AdminEmployeeCreateMessage>
+              <AdminEmployeeCreateMessage />
             </>
           </Content>
         </RightBox>

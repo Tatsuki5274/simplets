@@ -112,7 +112,7 @@ export default function (props: Props) {
                   createI
                 );
                 if (createItem) {
-                  window.confirm("社員情報の登録が完了しました。");
+                  window.alert("社員情報の登録が完了しました。");
                   history.push(routeBuilder.adminEmployeeListPath());
                 } else {
                   setError("社員情報の登録に失敗しました");
