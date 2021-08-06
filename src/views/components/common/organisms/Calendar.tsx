@@ -134,6 +134,15 @@ export default function (props: Props) {
           },
         }}
       />
+      {/* カレンダーライブラリのmoreスクロール用カスタマイズ */}
+      <style>
+        {`
+        .fc .fc-popover {
+          max-height: 100vh !important;
+          overflow-y: auto !important;
+        }
+        `}
+      </style>
     </>
   );
 }
