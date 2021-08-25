@@ -6,8 +6,8 @@ import { PDFPage } from "views/pdf/page";
 import EditReportScreeen from "views/components/report/reviewer/pages/EditReportScreeen";
 import ChangeReportScreen from "views/components/report/reviewee/pages/ChangeReportScreen";
 import ProgressReferenceScreen from "views/components/evaluation/reviewee/pages/ProgressReferenceScreen";
-import React from "react";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import React, { useContext } from "react";
+import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
 import AdminEmployeeCreate from "views/components/admin/employee/pages/AdminEmployeeCreate";
 import EvaluationList from "views/components/evaluation/reviewer/pages/EvaluationList";
 import RevieweeReportList from "views/components/report/reviewee/pages/RevieweeReportList";
@@ -22,12 +22,14 @@ import AdminGroupListPage from "views/components/admin/group/pages/AdminGroupLis
 import { CreateReportScreen } from "views/components/report/reviewee/pages/CreateReportScreen";
 import ReportListScreen from "views/components/report/reviewer/pages/ReportListScreen";
 import ReviewerReportListCalendar from "views/components/report/reviewer/pages/ReviewerReportListCalendar";
+import { EmployeeContext } from "App";
+import LoadingScreen from "views/components/common/templates/LoadingScreen";
 
 export default function Router() {
   return (
     <BrowserRouter>
       <Switch>
-        <Route exact path="/" component={ListPerformanceEvalution} />
+        <Route exact path="/" component={RootPath} />
         <Route
           exact
           path={routeBuilder.revieweeDetailPath(":sheetId")}
@@ -145,6 +147,25 @@ export default function Router() {
     </BrowserRouter>
   );
 }
+
+const RootPath = () => {
+  const currentEmployee = useContext(EmployeeContext);
+  if (!currentEmployee) {
+    return <LoadingScreen />;
+  }
+  if (currentEmployee?.company?.isContractEvaluation) {
+    // 業績評価機能を契約している場合は、評価一覧画面にリダイレクトする
+    return <Redirect to={routeBuilder.revieweeListPath()} />;
+  } else if (currentEmployee?.company?.isContractReport) {
+    // 作業報告機能を契約している場合は、報告書カレンダーにリダイレクトする
+    return (
+      <Redirect to={routeBuilder.reviewerReportCalendarPaht(new Date())} />
+    );
+  } else {
+    // どちらも契約していない場合は、例外を送出する
+    throw new Error("契約状況を確認することが出来ませんでした");
+  }
+};
 
 // パスを生成する関数
 export const routeBuilder = {
