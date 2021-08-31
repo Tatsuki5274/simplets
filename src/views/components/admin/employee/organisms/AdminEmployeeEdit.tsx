@@ -222,7 +222,7 @@ export default function (props: Props) {
           groupID: values.groupList,
           grade: values.grade,
           isCompanyAdmin: values.isAdmin === "true" ? true : false,
-          superiorUsername: values.superiorList,
+          superiorUsername: values.superiorList || "",
           manager:
             values.manager === "MANAGER"
               ? EmployeeType.MANAGER
