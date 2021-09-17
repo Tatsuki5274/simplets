@@ -4,6 +4,7 @@ import dateFormat from "dateformat";
 import style from "./common/style.module.scss";
 import { Sheet } from "API";
 import { formatSheetCheckDate } from "lib/util";
+import "./style.css";
 const ReactToPdf = require("react-to-pdf").default;
 
 // import Pdf from "react-to-pdf";
@@ -49,7 +50,7 @@ export const PDFTemplete = (props: Props) => {
           {/* <Button onClick={toPdf} className={buttonComponentStyle}>PDFをダウンロード</Button> */}
 
           {/* <div ref={targetRef} className={style.PDFScreenStyle}> */}
-          <div className={style.PDFScreenStyle}>
+          <div className={`pdf-preview ${style.PDFScreenStyle}`}>
             <Row>
               <Col xs={6} sm={6} md={6} lg={6} xl={6}>
                 <h4>{props.sheet.year}年度 業績評価シート</h4>
