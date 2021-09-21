@@ -1,5 +1,13 @@
 {
-  "key1": "value1",
-  "key2": "value2",
-  "key3": "value3"
+  "typeName": "Mutation",
+    "fieldName": "sendEmail",
+    "arguments": {
+        "input": {
+            "to": [
+                "ananbu@sisco-consulting.co.jp"
+            ],
+            "subject": "AWSmailtest",
+            "body": "メール送信テストです。"
+        }
+    }
 }
