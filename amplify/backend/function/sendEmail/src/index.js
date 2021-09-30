@@ -39,7 +39,7 @@ exports.handler = async (event) => {
         Data: subject,
       },
     },
-    Source: "approval_request@simplets.jp" /* required */,
+    Source: "simplets_desk_test@simplets.jp" /* required */,
     // ReplyToAddresses: [
     //    'EMAIL_ADDRESS',
     //   /* more items */
