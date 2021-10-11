@@ -52,7 +52,7 @@ export default function (props: Props) {
           <table>
             <tr>
               <td>
-                <Text>部署番号</Text>
+                <Text>部署ID</Text>
               </td>
               <td>
                 <Text>{props.groupNo}</Text>

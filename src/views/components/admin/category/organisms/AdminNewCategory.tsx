@@ -5,7 +5,7 @@ import CommandButton from "views/components/common/molecules/CommandButton";
 export default function () {
   return (
     <CommandButton href={routeBuilder.adminCategoryNewPath()}>
-      新規作成
+      登録
     </CommandButton>
   );
 }

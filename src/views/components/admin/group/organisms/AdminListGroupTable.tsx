@@ -14,7 +14,7 @@ export default function (props: Props) {
       <thead>
         <tr>
           <td></td>
-          <td>部署番号</td>
+          <td>部署ID</td>
           <td>部署名</td>
         </tr>
       </thead>

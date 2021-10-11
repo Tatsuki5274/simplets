@@ -27,7 +27,7 @@ export default function (props: Props) {
         <RightBox>
           <Content>
             <>
-              <Title>カテゴリ内容作成</Title>
+              <Title>カテゴリ登録</Title>
               <AdminCategoryCreateInput companyId={props.companyId} />
             </>
           </Content>

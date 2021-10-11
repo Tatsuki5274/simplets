@@ -30,17 +30,17 @@ export default function (props: Props) {
         <RightBox>
           <Content>
             <>
-              <Title>カテゴリ一覧</Title>
+              <Title>カテゴリ管理</Title>
               <AdminNewCategory />
               <AdminCategoryList data={props.data} />
               <Text>
                 <p>
                   カテゴリマスタに登録されているカテゴリ情報が表示されます。
                   <br />
-                  カテゴリ番号順にシートが作成されます。
+                  カテゴリID順にシートが作成されます。
                   <br />
                   <br />
-                  新規作成：カテゴリ情報を新規作成することができます。
+                  登録：カテゴリ情報を新規作成することができます。
                   <br />
                   変更：登録されているカテゴリの情報を変更することができます。
                   <br />
