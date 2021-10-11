@@ -29,7 +29,7 @@ export default function (props: Props) {
         <RightBox>
           <Content>
             <>
-              <Title>カテゴリ変更</Title>
+              <Title>カテゴリ変更・削除</Title>
               <AdminCategoryEditForm {...props.category} />
             </>
           </Content>
