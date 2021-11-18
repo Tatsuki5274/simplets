@@ -1,13 +1,13 @@
 import React from "react";
-import { Col, Row, Table } from "react-bootstrap";
+import { Button, Col, Row, Table } from "react-bootstrap";
 import dateFormat from "dateformat";
 import style from "./common/style.module.scss";
 import { Sheet } from "API";
 import { formatSheetCheckDate } from "lib/util";
 import "./style.css";
-const ReactToPdf = require("react-to-pdf").default;
-
-// import Pdf from "react-to-pdf";
+import { buttonComponentStyle } from "common/globalStyle.module.scss";
+import ReactToPdf from "./ReactToPDF";
+//const ReactToPdf = require("react-to-pdf").default;
 
 type Props = {
   sheet: Sheet;
@@ -26,31 +26,50 @@ const outputDate = (dateStr: string) => {
     return null;
   }
 };
-
+const today = new Date();
+const year = today.getFullYear();
+const month = today.getMonth() + 1;
+const date = today.getDate();
 // Create Document Component
 export const PDFTemplete = (props: Props) => {
   // const history = useHistory();
 
   return (
     <ReactToPdf
-      filename="output.pdf"
-      scale={0.7}
+      filename={
+        props.sheet.sheetGroupName +
+        "_" +
+        props.sheet.revieweeEmployee?.lastName +
+        props.sheet.revieweeEmployee?.firstName +
+        "_" +
+        year +
+        "_" +
+        month +
+        "_" +
+        date
+      }
+      scale={1.5}
       options={{
-        orientation: "l",
+        orientation: "landscape",
         unit: "px",
       }}
     >
-      {/* {({ toPdf, targetRef }: { toPdf: any; targetRef: any }) => ( */}
-      {() => (
+      {({
+        toPdf,
+        targetRef,
+      }: {
+        toPdf: React.MouseEventHandler<HTMLElement>;
+        targetRef: React.LegacyRef<HTMLDivElement>;
+      }) => (
         <div>
-          {/* <Button
-            onClick={() => history.goBack()}
-            className={buttonComponentStyle}
-          >戻る</Button> */}
-          {/* <Button onClick={toPdf} className={buttonComponentStyle}>PDFをダウンロード</Button> */}
+          <Button onClick={toPdf} className={buttonComponentStyle}>
+            PDFをダウンロード
+          </Button>
 
-          {/* <div ref={targetRef} className={style.PDFScreenStyle}> */}
-          <div className={`pdf-preview ${style.PDFScreenStyle}`}>
+          <div
+            ref={targetRef}
+            className={`pdf-preview ${style.PDFScreenStyle}`}
+          >
             <Row>
               <Col xs={6} sm={6} md={6} lg={6} xl={6}>
                 <h4>{props.sheet.year}年度 業績評価シート</h4>
@@ -80,105 +99,101 @@ export const PDFTemplete = (props: Props) => {
               </Col>
             </Row>
 
-            <Row>
-              <Col xs={12} sm={12} md={12} lg={12} xl={12}>
-                <Table bordered className={style.PDFTableStyle}>
-                  <thead>
-                    <tr>
-                      <td>目標設定 （評価の優先順位も記入）</td>
-                      <td>優先順位</td>
-                      <td>実績</td>
-                      <td>自己評価</td>
-                      <td>最終評価</td>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {props.sheet.section?.items?.map((section) => {
-                      return section && section.id ? (
-                        <tr key={section.id}>
-                          <td>
-                            <p>{section.sectionCategoryName}</p>
-                            <Table borderless>
-                              {section.objective?.items?.map((objective) => {
-                                if (!objective?.id) {
-                                  return null; // 最適な内容に変更することも検討
-                                }
-                                return (
-                                  <tr key={objective.id}>
-                                    <td>{objective?.content}</td>
-                                  </tr>
-                                );
-                              })}
-                            </Table>
-                          </td>
-                          <td>
-                            <p> </p>
-                            <Table borderless>
-                              {section.objective?.items?.map((objective) => {
-                                if (!objective?.id) {
-                                  return null;
-                                }
-                                return (
-                                  <tr key={objective?.id}>
-                                    <td>{objective?.priority}</td>
-                                  </tr>
-                                );
-                              })}
-                            </Table>
-                          </td>
+            <Table bordered className={style.PDFGoalStyle}>
+              <thead>
+                <tr>
+                  <td>目標設定 （評価の優先順位も記入）</td>
+                  <td>優先順位</td>
+                  <td>実績</td>
+                  <td>自己評価</td>
+                  <td>最終評価</td>
+                </tr>
+              </thead>
+              <tbody>
+                {props.sheet.section?.items?.map((section) => {
+                  return section && section.id ? (
+                    <tr key={section.id}>
+                      <td width="700">
+                        <p>{section.sectionCategoryName}</p>
+                        <Table borderless>
+                          {section.objective?.items?.map((objective) => {
+                            if (!objective?.id) {
+                              return null; // 最適な内容に変更することも検討
+                            }
+                            return (
+                              <tr key={objective.id}>
+                                <td>{objective?.content}</td>
+                              </tr>
+                            );
+                          })}
+                        </Table>
+                      </td>
+                      <td width="80">
+                        <p> </p>
+                        <Table borderless>
+                          {section.objective?.items?.map((objective) => {
+                            if (!objective?.id) {
+                              return null;
+                            }
+                            return (
+                              <tr key={objective?.id}>
+                                <td>{objective?.priority}</td>
+                              </tr>
+                            );
+                          })}
+                        </Table>
+                      </td>
 
-                          <td>
-                            <p> </p>
-                            <Table borderless>
-                              {section?.objective?.items?.map((objective) => {
-                                if (!objective?.id) {
-                                  return null;
-                                }
-                                return (
-                                  <tr key={objective?.id}>
-                                    <td>{objective?.result}</td>
-                                  </tr>
-                                );
-                              })}
-                            </Table>
-                          </td>
-                          <td>
-                            <p></p>
-                            <Table borderless>
-                              {section?.objective?.items?.map((objective) => {
-                                if (!objective?.id) {
-                                  return null;
-                                }
-                                return (
-                                  <tr key={objective?.id}>
-                                    <td>{objective?.selfEvaluation}</td>
-                                  </tr>
-                                );
-                              })}
-                            </Table>
-                          </td>
-                          <td>
-                            <p></p>
-                            <Table borderless>
-                              {section?.objective?.items?.map((objective) => {
-                                if (!objective?.id) {
-                                  return null;
-                                }
-                                return (
-                                  <tr key={objective?.id}>
-                                    <td>{objective?.lastEvaluation}</td>
-                                  </tr>
-                                );
-                              })}
-                            </Table>
-                          </td>
-                        </tr>
-                      ) : null;
-                    })}
-                  </tbody>
-                </Table>
-              </Col>
-            </Row>
+                      <td width="520">
+                        <p> </p>
+                        <Table borderless>
+                          {section?.objective?.items?.map((objective) => {
+                            if (!objective?.id) {
+                              return null;
+                            }
+                            return (
+                              <tr key={objective?.id}>
+                                <td>{objective?.result}</td>
+                              </tr>
+                            );
+                          })}
+                        </Table>
+                      </td>
+                      <td width="80">
+                        <p></p>
+                        <Table borderless>
+                          {section?.objective?.items?.map((objective) => {
+                            if (!objective?.id) {
+                              return null;
+                            }
+                            return (
+                              <tr key={objective?.id}>
+                                <td>{objective?.selfEvaluation}</td>
+                              </tr>
+                            );
+                          })}
+                        </Table>
+                      </td>
+                      <td width="80">
+                        <p></p>
+                        <Table borderless>
+                          {section?.objective?.items?.map((objective) => {
+                            if (!objective?.id) {
+                              return null;
+                            }
+                            return (
+                              <tr key={objective?.id}>
+                                <td>{objective?.lastEvaluation}</td>
+                              </tr>
+                            );
+                          })}
+                        </Table>
+                      </td>
+                    </tr>
+                  ) : null;
+                })}
+              </tbody>
+            </Table>
 
             <Row>
               <Col xs={6} sm={6} md={6} lg={6} xl={6}>
@@ -254,63 +269,53 @@ export const PDFTemplete = (props: Props) => {
               <Col xs={12} sm={12} md={12} lg={12} xl={12}>
                 <h5>インタビュー実施記録</h5>
               </Col>
-              <Col>
-                <Table bordered className={style.PDFTableStyle}>
-                  <thead>
-                    <tr>
-                      <td>目的</td>
-                      <td>実施日時</td>
-                      <td>内容（所属長記入）</td>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <th>目標設定（必須）</th>
-                      <td>
-                        {props.sheet.interviewPlanDate ? (
-                          <span>
-                            {outputDate(props.sheet.interviewPlanDate)}
-                          </span>
-                        ) : null}
-                      </td>
-                      <td>{props.sheet.interviewPlanComment}</td>
-                    </tr>
-                    <tr>
-                      <th>中間 #1</th>
-                      <td>
-                        {props.sheet.InterviewMid1Date ? (
-                          <span>
-                            {outputDate(props.sheet.InterviewMid1Date)}
-                          </span>
-                        ) : null}
-                      </td>
-                      <td>{props.sheet.InterviewMid1Comment}</td>
-                    </tr>
-                    <tr>
-                      <th>中間 #2</th>
-                      <td>
-                        {props.sheet.InterviewMid2Date ? (
-                          <span>
-                            {outputDate(props.sheet.InterviewMid2Date)}
-                          </span>
-                        ) : null}
-                      </td>
-                      <td>{props.sheet.InterviewMid2Comment}</td>
-                    </tr>
-                    <tr>
-                      <th>中間 #3</th>
-                      <td>
-                        {props.sheet.InterviewMid3Date ? (
-                          <span>
-                            {outputDate(props.sheet.InterviewMid3Date)}
-                          </span>
-                        ) : null}
-                      </td>
-                      <td>{props.sheet.InterviewMid3Comment}</td>
-                    </tr>
-                  </tbody>
-                </Table>
-              </Col>
+              <Table bordered className={style.PDFInterviewStyle}>
+                <thead>
+                  <tr>
+                    <td width="123">目的</td>
+                    <td width="100">実施日時</td>
+                    <td>内容（所属長記入）</td>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th>目標設定（必須）</th>
+                    <td width="100">
+                      {props.sheet.interviewPlanDate ? (
+                        <span>{outputDate(props.sheet.interviewPlanDate)}</span>
+                      ) : null}
+                    </td>
+                    <td>{props.sheet.interviewPlanComment}</td>
+                  </tr>
+                  <tr>
+                    <th>中間 #1</th>
+                    <td width="100">
+                      {props.sheet.InterviewMid1Date ? (
+                        <span>{outputDate(props.sheet.InterviewMid1Date)}</span>
+                      ) : null}
+                    </td>
+                    <td>{props.sheet.InterviewMid1Comment}</td>
+                  </tr>
+                  <tr>
+                    <th>中間 #2</th>
+                    <td width="100">
+                      {props.sheet.InterviewMid2Date ? (
+                        <span>{outputDate(props.sheet.InterviewMid2Date)}</span>
+                      ) : null}
+                    </td>
+                    <td>{props.sheet.InterviewMid2Comment}</td>
+                  </tr>
+                  <tr>
+                    <th>中間 #3</th>
+                    <td width="100">
+                      {props.sheet.InterviewMid3Date ? (
+                        <span>{outputDate(props.sheet.InterviewMid3Date)}</span>
+                      ) : null}
+                    </td>
+                    <td>{props.sheet.InterviewMid3Comment}</td>
+                  </tr>
+                </tbody>
+              </Table>
 
               <Col>
                 <Table bordered className={style.PDFTableStyle}>

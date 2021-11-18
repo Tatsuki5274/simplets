@@ -1,4 +1,10 @@
 .pdf-preview .table-bordered, .pdf-preview .table-bordered td, .pdf-preview .table-bordered th{
-    border-width:5px;
+    border-width:3px;
+    color:black;
 }
 
+@media print{
+    @page{
+        size: landscape;
+    }
+}

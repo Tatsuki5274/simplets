@@ -3,3 +3,7 @@ export const PDFTableStyle: string;
 export const PDFOverAllEvaluationStyle: string;
 export const PDFScreenStyle: string;
 export const PDFTextStyle: string;
+export const PDFMeetStyle: string;
+export const PDFNameStyle: string;
+export const PDFInterviewStyle: string;
+export const PDFGoalStyle: string;
