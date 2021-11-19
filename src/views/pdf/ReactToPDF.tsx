@@ -58,7 +58,7 @@ class ReactToPdf extends React.Component {
       scale: this.props.scale,
     }).then((canvas) => {
       const imgData = canvas.toDataURL();
-      const pdf = new JsPdf(options);
+      const pdf = new JsPdf(options, "a4");
       const pageHeight = 500;
       const pdfWidth = pdf.internal.pageSize.getWidth();
       const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
@@ -66,7 +66,7 @@ class ReactToPdf extends React.Component {
       let heightleft = pdfHeight - pageHeight;
       pdf.addImage(imgData, "JPEG", x, y, pdfWidth, 0, "alias", "FAST");
       while (heightleft > 0) {
-        position = heightleft - pdfHeight + 52;
+        position = heightleft - pdfHeight + 54;
         pdf.addPage();
         pdf.addImage(
           imgData,

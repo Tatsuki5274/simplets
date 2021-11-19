@@ -30,6 +30,9 @@ const today = new Date();
 const year = today.getFullYear();
 const month = today.getMonth() + 1;
 const date = today.getDate();
+const hours = today.getHours();
+const minutes = today.getMinutes();
+const seconds = today.getSeconds();
 // Create Document Component
 export const PDFTemplete = (props: Props) => {
   // const history = useHistory();
@@ -43,10 +46,11 @@ export const PDFTemplete = (props: Props) => {
         props.sheet.revieweeEmployee?.firstName +
         "_" +
         year +
-        "_" +
         month +
-        "_" +
-        date
+        date +
+        hours +
+        minutes +
+        seconds
       }
       scale={1.5}
       options={{
@@ -72,7 +76,9 @@ export const PDFTemplete = (props: Props) => {
           >
             <Row>
               <Col xs={6} sm={6} md={6} lg={6} xl={6}>
-                <h4>{props.sheet.year}年度 業績評価シート</h4>
+                <h4 className="evaluationSheet">
+                  {props.sheet.year}年度 業績評価シート
+                </h4>
               </Col>
             </Row>
             <Row>
