@@ -279,10 +279,11 @@ function ListPerformanceEvalution() {
           const companyId: string | null =
             currentUser.attributes["custom:companyId"] || null;
 
-          if (!secondUsername) {
-            throw new Error("所属長が見つかりませんでした");
-          } else if (!companyId) {
+          if (!companyId) {
             throw new Error("会社情報が登録されていません");
+          }
+          if (!secondUsername) {
+            setError("所属長が登録されていません。管理者に確認してください。");
           }
 
           if (
