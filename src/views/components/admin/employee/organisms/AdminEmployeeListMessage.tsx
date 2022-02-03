@@ -6,7 +6,7 @@ const CommentStyle = styled.p({
   color: "red",
 });
 
-export default function () {
+export default function (): JSX.Element {
   return (
     <Text>
       <p>

@@ -8,7 +8,7 @@
     marginLeft: "1em",
   });
   
-  export default function () {
+  export default function (): JSX.Element {
     return (
       <Text>
         <p>

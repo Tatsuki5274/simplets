@@ -7,15 +7,16 @@ import { routeBuilder } from "router";
 import { AdminListCategoryRowType } from "views/components/admin/category/molecules/RowListCategory";
 import AdminCategoryList from "../templates/AdminCategoryList";
 
-export default function () {
+export default function (): JSX.Element {
   const header = useContext(HeaderContext);
   const sidebar = useContext(SidebarContext);
 
   const currentUser = useContext(UserContext);
   const setError = useContext(ErrorContext);
 
-  const [categorys, setCategorys] =
-    useState<AdminListCategoryRowType[] | null>(null);
+  const [categorys, setCategorys] = useState<AdminListCategoryRowType[] | null>(
+    null
+  );
 
   useEffect(() => {
     // カテゴリ一覧情報の取得

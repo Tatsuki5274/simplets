@@ -65,12 +65,14 @@ import { TableEvaluationListType } from "../organisms/TableEvaluationList";
 //   }
 // `;
 
-export default function () {
+export default function (): JSX.Element {
   const currentUser = useContext(UserContext);
-  const [tableData, setTableData] =
-    useState<(TableEvaluationListType | null)[] | null>(null);
-  const [initTableData, setInitTableData] =
-    useState<(TableEvaluationListType | null)[] | null>(null);
+  const [tableData, setTableData] = useState<
+    (TableEvaluationListType | null)[] | null
+  >(null);
+  const [initTableData, setInitTableData] = useState<
+    (TableEvaluationListType | null)[] | null
+  >(null);
 
   // const [header, setHeader] = useState<HeaderProps | null>(null)
   const [years, setYears] = useState<number[] | null>(null);

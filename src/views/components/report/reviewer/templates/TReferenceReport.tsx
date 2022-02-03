@@ -29,7 +29,7 @@ type Props = {
   };
 };
 
-export default function (props: Props) {
+export default function (props: Props): JSX.Element {
   return (
     <>
       <Header {...props.header} />

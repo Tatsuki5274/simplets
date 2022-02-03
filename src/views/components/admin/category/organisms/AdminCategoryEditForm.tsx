@@ -25,7 +25,7 @@ export type AdminCategoryEditDataType = {
 
 type Props = AdminCategoryEditDataType;
 
-export default function (props: Props) {
+export default function (props: Props): JSX.Element {
   const setError = useContext(ErrorContext);
   const history = useHistory();
   const onClickDelete = async () => {

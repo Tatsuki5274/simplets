@@ -11,7 +11,7 @@ type Props = {
 
 const Styled = styled.div({});
 
-export default function (props: Props) {
+export default function (props: Props): JSX.Element | null {
   if (!props.data.dest) {
     return null;
   }

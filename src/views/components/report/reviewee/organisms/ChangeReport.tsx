@@ -59,7 +59,7 @@ const validate = (values: {
   return errors;
 };
 
-export default function (props: Props) {
+export default function (props: Props): JSX.Element {
   const setError = useContext(ErrorContext);
   const history = useHistory();
 
@@ -252,7 +252,7 @@ ${routeBuilder.reviewerReportCommentPath(props.data.id, hostUrl)}
 # 本メールに返信されましても、返答できませんのでご了承ください。
 `,
                         };
-                        if (sendEmailMutation(sendI)) {
+                        if (await sendEmailMutation(sendI)) {
                           window.alert("所属長へのメール送信が完了しました");
                         }
                       } else {

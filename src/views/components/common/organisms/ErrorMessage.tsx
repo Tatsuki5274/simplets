@@ -6,7 +6,7 @@ type Props = {
   children?: string;
 };
 
-export default function (props: Props) {
+export default function (props: Props): JSX.Element | null {
   // const [timerId, setTimerId] = useState<NodeJS.Timeout>()
 
   // useEffect(()=>{

@@ -16,7 +16,9 @@ type Props = {
   handleClose: () => void;
 };
 
-export const RevieweeSheetObjectiveModalStatus1 = (props: Props) => {
+export const RevieweeSheetObjectiveModalStatus1 = (
+  props: Props
+): JSX.Element | null => {
   const setError = useContext(ErrorContext);
   const [isLoading, setLoading] = useState(false);
 

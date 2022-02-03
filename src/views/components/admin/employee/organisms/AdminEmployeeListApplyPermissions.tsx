@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import CommandButton from "views/components/common/molecules/CommandButton";
 import LoadingScreen from "views/components/common/templates/LoadingScreen";
 
-export default function () {
+export default function (): JSX.Element {
   const [isLoading, setIsLoading] = useState(false);
   const onClick = async () => {
     setIsLoading(true);

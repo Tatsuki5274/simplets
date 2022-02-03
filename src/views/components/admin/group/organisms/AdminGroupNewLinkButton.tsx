@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { routeBuilder } from "router";
 import CommandButton from "views/components/common/molecules/CommandButton";
 
-export default function () {
+export default function (): JSX.Element {
   // TODO リンクの実装
   return (
     <Link to={routeBuilder.adminGroupNewPath()}>

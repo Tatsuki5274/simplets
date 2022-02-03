@@ -13,7 +13,7 @@ type Props = {
   firstCheckDate: string | null;
 };
 
-export const YearlyTable = (props: Props) => {
+export const YearlyTable = (props: Props): JSX.Element => {
   return (
     <Table bordered hover>
       <thead className={tableHeaderStyle}>

@@ -37,7 +37,7 @@ const EvaluationFilterStyle = styled.div({
   paddingTop: "20px",
 });
 
-export default function (props: Props) {
+export default function (props: Props): JSX.Element {
   const yearList = props.data.years?.map((year) => {
     return {
       label: `${year}年`,

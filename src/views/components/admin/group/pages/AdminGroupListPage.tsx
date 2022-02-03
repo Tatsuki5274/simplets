@@ -7,7 +7,7 @@ import { routeBuilder } from "router";
 import { AdminListGroupRowType } from "views/components/admin/group/molecules/RowListGroup";
 import AdminGroupList from "../templates/AdminGroupList";
 
-export default function () {
+export default function (): JSX.Element {
   const header = useContext(HeaderContext);
   const sidebar = useContext(SidebarContext);
 

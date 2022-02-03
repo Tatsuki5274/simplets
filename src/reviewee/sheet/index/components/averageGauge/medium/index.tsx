@@ -7,7 +7,7 @@ type Props = {
   sheet: Sheet;
 };
 
-export const AverageMediumGaugeBox = (props: Props) => {
+export const AverageMediumGaugeBox = (props: Props): JSX.Element | null => {
   // カテゴリ別の平均算出処理
   let avg: number | null = null;
   const sections = props.sheet.section?.items;

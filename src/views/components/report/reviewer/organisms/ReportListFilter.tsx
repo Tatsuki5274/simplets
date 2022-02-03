@@ -42,7 +42,7 @@ function generateRevieweeLabel(input: ReviewerReportFilterEmployeeType[]) {
   });
 }
 
-export default function (props: Props) {
+export default function (props: Props): JSX.Element {
   const today = new Date();
   const startOfMonth = new Date();
   startOfMonth.setDate(1);
@@ -119,7 +119,11 @@ export default function (props: Props) {
 
           props.setTable(result);
         } catch (e) {
-          await catcher(e);
+          if (e instanceof Error) {
+            await catcher(e);
+          } else {
+            throw new Error("処理されていないエラー");
+          }
         }
       }}
     >

@@ -1,7 +1,7 @@
 import React from "react";
 import { Card } from "react-bootstrap";
 
-export const BorderTable = () => {
+export const BorderTable = (): JSX.Element => {
   return (
     <Card>
       <Card.Header>

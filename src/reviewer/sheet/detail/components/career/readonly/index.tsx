@@ -5,7 +5,9 @@ import React from "react";
 type Props = {
   sheet: Sheet;
 };
-export const ReviewerSheetDetailCareerReadonly = (props: Props) => {
+export const ReviewerSheetDetailCareerReadonly = (
+  props: Props
+): JSX.Element => {
   return (
     <div>
       <h4>本人希望</h4>

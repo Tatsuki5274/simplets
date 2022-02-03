@@ -2,7 +2,7 @@ import { HeaderContext, SidebarContext, UserContext } from "App";
 import React, { useContext } from "react";
 import AdminGroupCreate from "../templates/AdminGroupCreate";
 
-export default function () {
+export default function (): JSX.Element | null {
   const header = useContext(HeaderContext);
   const sidebar = useContext(SidebarContext);
 

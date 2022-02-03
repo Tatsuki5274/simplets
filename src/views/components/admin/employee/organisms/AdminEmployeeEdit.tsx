@@ -79,7 +79,7 @@ type FormType = {
   manager: string | null;
 };
 
-export default function (props: Props) {
+export default function (props: Props): JSX.Element {
   const setError = useContext(ErrorContext);
   const history = useHistory();
   const currentEmployee = useContext(EmployeeContext);
@@ -334,7 +334,11 @@ export default function (props: Props) {
         }
       }
     } catch (e) {
-      setError(e.message);
+      if (e instanceof Error) {
+        setError(e.message);
+      } else {
+        throw new Error("処理されていないエラー");
+      }
     }
   };
 

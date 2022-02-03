@@ -52,7 +52,7 @@ type Props = {
   };
 };
 
-export default function (props: Props) {
+export default function (props: Props): JSX.Element | null {
   const header = useContext(HeaderContext);
   const sidebar = useContext(SidebarContext);
 
@@ -61,8 +61,9 @@ export default function (props: Props) {
 
   const [groups, setGroups] = useState<SelectLabel[] | null>(null);
   const [superiors, setSuperiors] = useState<SelectLabel[] | null>(null);
-  const [employee, setEmployee] =
-    useState<AdminEditEmployeeDataType | null>(null);
+  const [employee, setEmployee] = useState<AdminEditEmployeeDataType | null>(
+    null
+  );
 
   useEffect(() => {
     // 部署情報の取得

@@ -17,7 +17,7 @@ const Styled = styled.div({});
 const Label = styled.label({
   marginRight: "10px",
 });
-export default function (props: Props) {
+export default function (props: Props): JSX.Element {
   const defaultIndex = props.defaultIndex || 0;
   return (
     <Styled>

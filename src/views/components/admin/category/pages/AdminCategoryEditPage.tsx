@@ -14,14 +14,15 @@ type Props = {
   };
 };
 
-export default function (props: Props) {
+export default function (props: Props): JSX.Element | null {
   const header = useContext(HeaderContext);
   const sidebar = useContext(SidebarContext);
   const currentUser = useContext(UserContext);
   const setError = useContext(ErrorContext);
 
-  const [category, setCategory] =
-    useState<AdminCategoryEditDataType | null>(null);
+  const [category, setCategory] = useState<AdminCategoryEditDataType | null>(
+    null
+  );
 
   useEffect(() => {
     // カテゴリ情報の取得

@@ -27,7 +27,7 @@ import { validateInterviewDate } from "lib/util";
 //     handleUpdateObjective: (e: React.ChangeEvent<any>)=> void
 // }
 
-export const ReviewerSheetPagesStatus2 = () => {
+export const ReviewerSheetPagesStatus2 = (): JSX.Element | null => {
   const setError = useContext(ErrorContext);
   const context = useContext(SheetContext);
   const sheet = context.sheet;
@@ -166,7 +166,11 @@ export const ReviewerSheetPagesStatus2 = () => {
                     setError("評価シートの特定に失敗しました");
                   }
                 } catch (e) {
-                  setError(e.message);
+                  if (e instanceof Error) {
+                    setError(e.message);
+                  } else {
+                    throw new Error("処理されていないエラー");
+                  }
                 }
               }}
             >

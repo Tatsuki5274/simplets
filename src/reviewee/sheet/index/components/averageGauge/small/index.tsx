@@ -7,7 +7,7 @@ type Props = {
   section: Section;
 };
 
-export const AverageSmallGaugeBox = (props: Props) => {
+export const AverageSmallGaugeBox = (props: Props): JSX.Element | null => {
   // カテゴリ別の平均算出処理
   let avg: number | null = null;
   if (props.section.objective && props.section.objective.items) {

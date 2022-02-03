@@ -56,7 +56,7 @@ type Props = {
   };
 };
 
-function RevieweeSheetShow(props: Props) {
+function RevieweeSheetShow(props: Props): JSX.Element {
   // const sheetId = props.match.params.sheetId;
 
   const [sheet, setSheet] = useState<Sheet>();

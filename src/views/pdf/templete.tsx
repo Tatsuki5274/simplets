@@ -34,7 +34,7 @@ const hours = today.getHours();
 const minutes = today.getMinutes();
 const seconds = today.getSeconds();
 // Create Document Component
-export const PDFTemplete = (props: Props) => {
+export const PDFTemplete = (props: Props): JSX.Element => {
   // const history = useHistory();
 
   return (

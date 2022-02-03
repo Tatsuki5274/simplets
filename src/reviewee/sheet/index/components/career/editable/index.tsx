@@ -7,7 +7,7 @@ import { Button, Table } from "react-bootstrap";
 import { SheetContext } from "reviewee/sheet/index";
 import { RevieweeSheetCareerModal } from "../../careerModal";
 
-export const RevieweeSheetCareerEditable = () => {
+export const RevieweeSheetCareerEditable = (): JSX.Element | null => {
   const context = useContext(SheetContext);
   const sheet = context.sheet;
   // const setSheet = context.setSheet

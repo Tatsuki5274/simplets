@@ -8,7 +8,7 @@ type Props = {
   defaultCheck: boolean;
   style: CSSProperties;
 };
-function CategoryInput(props: Props) {
+function CategoryInput(props: Props): JSX.Element {
   return (
     <div>
       <Form.Check

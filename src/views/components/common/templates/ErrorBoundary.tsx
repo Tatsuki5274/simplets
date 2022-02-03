@@ -22,19 +22,21 @@ class ErrorBoundary extends React.Component<PropsType, StateType> {
     this.state = { hasError: false };
   }
 
-  static getDerivedStateFromError(error: Error) {
+  static getDerivedStateFromError(error: Error): {
+    hasError: boolean;
+  } {
     // Update state so the next render will show the fallback UI.
     return { hasError: true };
   }
 
-  componentDidCatch(error: Error, errorInfo: unknown) {
+  componentDidCatch(error: Error, errorInfo: unknown): void {
     // You can also log the error to an error reporting service
     logError(error, errorInfo);
 
     console.error(error);
   }
 
-  render() {
+  render(): JSX.Element & React.ReactNode {
     if (this.state.hasError) {
       // You can render any custom fallback UI
       return <h1>予期せぬエラーが発生しました。</h1>;
@@ -63,7 +65,7 @@ function logError(error: Error, errorInfo: unknown) {
  *  catcher(e);
  * }
  */
-export const catcher = async (error: Error) => {
+export const catcher = async (error: Error): Promise<void> => {
   if (error instanceof Error) {
     message.error(error.message);
     logError(error, null);

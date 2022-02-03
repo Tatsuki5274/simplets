@@ -2,7 +2,7 @@ import { HeaderContext, SidebarContext, UserContext } from "App";
 import React, { useContext } from "react";
 import AdminCategoryCreate from "views/components/admin/category/templates/AdminCategoryCreate";
 
-export default function () {
+export default function (): JSX.Element | null {
   const header = useContext(HeaderContext);
   const sidebar = useContext(SidebarContext);
   const currentUser = useContext(UserContext);

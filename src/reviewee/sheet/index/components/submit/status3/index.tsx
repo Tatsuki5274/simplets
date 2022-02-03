@@ -28,7 +28,7 @@ function validSheet(sheet: Sheet): boolean {
   return result;
 }
 
-export const SubmitButtonStatus3 = () => {
+export const SubmitButtonStatus3 = (): JSX.Element | null => {
   const context = useContext(SheetContext);
   const setError = useContext(ErrorContext);
   const sheet = context.sheet;

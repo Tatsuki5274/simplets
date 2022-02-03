@@ -8,7 +8,7 @@ type Props = {
 
 const Styled = styled.h2({});
 
-export default function (props: Props) {
+export default function (props: Props): JSX.Element {
   return (
     <Styled>
       <Text>{props.children}</Text>

@@ -8,7 +8,7 @@ type Props = {
   };
 };
 
-export default function (props: Props) {
+export default function (props: Props): JSX.Element {
   return (
     <CommandButton href={props.link.dest}>{props.link.label}</CommandButton>
   );

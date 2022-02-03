@@ -9,7 +9,7 @@ export type AdminListGroupRowType = {
   id?: string;
 };
 
-export default function (props: AdminListGroupRowType) {
+export default function (props: AdminListGroupRowType): JSX.Element | null {
   if (props.link.dest === null) {
     return null;
   }

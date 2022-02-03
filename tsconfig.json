@@ -17,13 +17,14 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react",
+    "jsx": "react-jsx",
     "baseUrl": "src",
     "typeRoots": [
       "./@types",
       "./node_modules/@types"
     ],
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+    "useUnknownInCatchVariables": true,
   },
   "include": [
     "src"

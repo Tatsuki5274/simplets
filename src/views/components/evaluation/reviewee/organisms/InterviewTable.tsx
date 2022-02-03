@@ -15,7 +15,7 @@ type Props = {
   InterviewMid3Comment: string | null;
 };
 
-export default function (props: Props) {
+export default function (props: Props): JSX.Element {
   const format = "yyyy/mm/dd";
   let interviewPlanDate: string | null = null;
   if (props.interviewPlanDate) {

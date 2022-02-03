@@ -5,7 +5,7 @@ type Props = {
   children: JSX.Element | string;
 };
 
-export default function (props: Props) {
+export default function (props: Props): JSX.Element {
   return <MainStyle>{props.children}</MainStyle>;
 }
 

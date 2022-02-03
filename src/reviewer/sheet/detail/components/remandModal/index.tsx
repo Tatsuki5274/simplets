@@ -22,7 +22,7 @@ type Props = {
   handleClose: () => void;
 };
 
-export const RemandModal = (props: Props) => {
+export const RemandModal = (props: Props): JSX.Element => {
   const context = useContext(SheetContext);
   const setError = useContext(ErrorContext);
   const sheet = context.sheet;

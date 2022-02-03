@@ -14,7 +14,7 @@ type Props = {
   sections: Section[];
 };
 
-export const ReviewerSheetPagesReadonly = (props: Props) => {
+export const ReviewerSheetPagesReadonly = (props: Props): JSX.Element => {
   return (
     <div>
       {/* 評価画面 */}

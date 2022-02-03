@@ -10,7 +10,9 @@ type Props = {
   sheet: Sheet;
 };
 
-export const ReviewerSheetDetailInterviewReadonly = (props: Props) => {
+export const ReviewerSheetDetailInterviewReadonly = (
+  props: Props
+): JSX.Element => {
   return (
     <Table bordered>
       <thead className={tableHeaderStyle}>

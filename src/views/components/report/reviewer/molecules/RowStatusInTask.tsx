@@ -11,7 +11,7 @@ type Props = {
   commentSuperior: string;
 };
 
-export default function (props: Props) {
+export default function (props: Props): JSX.Element {
   return (
     <tr>
       <CellStatusInTask>{props.date}</CellStatusInTask>

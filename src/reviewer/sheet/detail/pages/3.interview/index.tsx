@@ -20,7 +20,7 @@ type Props = {
   sections: Section[];
 };
 
-export const ReviewerSheetPagesStatus3 = (props: Props) => {
+export const ReviewerSheetPagesStatus3 = (props: Props): JSX.Element => {
   const setError = useContext(ErrorContext);
   const [isRemandModal, setIsRemandModal] = useState<boolean>(false);
   const handleClose = () => setIsRemandModal(false);

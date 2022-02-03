@@ -22,8 +22,7 @@ module.exports = {
   plugins: ["react", "@typescript-eslint", "prettier"],
   rules: {
     "react/display-name": "off",
-    "@typescript-eslint/no-var-requires": "off",
-    "@typescript-eslint/explicit-module-boundary-types": "off",
+    "@typescript-eslint/explicit-module-boundary-types": "error",
     "no-console": "warn",
     "@typescript-eslint/no-non-null-assertion": "error",
     "prettier/prettier": [

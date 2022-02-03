@@ -16,10 +16,11 @@ type Props = {
   };
 };
 
-export default function (props: Props) {
+export default function (props: Props): JSX.Element | null {
   const [report, setReport] = useState<Report | null>(null);
-  const [revieweeMailAddress, setRevieweeMailMailAddress] =
-    useState<string | null>(null);
+  const [revieweeMailAddress, setRevieweeMailMailAddress] = useState<
+    string | null
+  >(null);
   const [revieweeName, setRevieweeName] = useState<string | null>(null);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const currentUser = useContext(UserContext);

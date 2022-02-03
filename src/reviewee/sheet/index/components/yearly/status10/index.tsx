@@ -5,7 +5,7 @@ import {
 import React from "react";
 import { Table } from "react-bootstrap";
 
-export const YearlyTableStatus10 = () => {
+export const YearlyTableStatus10 = (): JSX.Element => {
   return (
     <Table bordered hover>
       <thead className={tableHeaderStyle}>

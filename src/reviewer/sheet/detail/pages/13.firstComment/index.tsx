@@ -19,7 +19,7 @@ import * as Yup from "yup";
 import { buttonComponentStyle } from "common/globalStyle.module.scss";
 import { routeBuilder } from "router";
 
-export const ReviewerSheetPagesStatus13 = () => {
+export const ReviewerSheetPagesStatus13 = (): JSX.Element | null => {
   const setError = useContext(ErrorContext);
   const context = useContext(SheetContext);
   const sheet = context.sheet;

@@ -3,7 +3,7 @@ import GaugeChart, { GaugeChartProps } from "react-gauge-chart";
 
 type Props = GaugeChartProps;
 
-export default function (props: Props) {
+export default function (props: Props): JSX.Element {
   return (
     <GaugeChart
       nrOfLevels={10}

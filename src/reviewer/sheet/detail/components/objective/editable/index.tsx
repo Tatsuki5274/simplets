@@ -14,7 +14,9 @@ type Props = {
   onChange: (e: React.ChangeEvent<HTMLElement>) => void;
 };
 
-export const ReviewerSheetDetailObjectiveEditable = (props: Props) => {
+export const ReviewerSheetDetailObjectiveEditable = (
+  props: Props
+): JSX.Element => {
   const setError = useContext(ErrorContext);
 
   return (

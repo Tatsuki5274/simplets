@@ -10,15 +10,17 @@ import { SelectLabel } from "views/components/common/atoms/Types";
 import { AdminEmployeeDataType } from "../organisms/AdminListEmployee";
 import AdminEmployeeList from "../templates/AdminEmployeeList";
 
-export default function () {
+export default function (): JSX.Element {
   const header = useContext(HeaderContext);
   const sidebar = useContext(SidebarContext);
 
   const [groups, setGroups] = useState<SelectLabel[] | null>(null);
-  const [tableData, setTableData] =
-    useState<(AdminEmployeeDataType | null)[] | null>(null);
-  const [initTableData, setInitTableData] =
-    useState<(AdminEmployeeDataType | null)[] | null>(null);
+  const [tableData, setTableData] = useState<
+    (AdminEmployeeDataType | null)[] | null
+  >(null);
+  const [initTableData, setInitTableData] = useState<
+    (AdminEmployeeDataType | null)[] | null
+  >(null);
 
   const currentUser = useContext(UserContext);
   const setError = useContext(ErrorContext);

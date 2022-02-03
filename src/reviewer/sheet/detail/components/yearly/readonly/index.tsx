@@ -6,7 +6,9 @@ import style from "../common/style.module.scss";
 type Props = {
   sheet: Sheet;
 };
-export const ReviewerSheetDetailYearlyReadonly = (props: Props) => {
+export const ReviewerSheetDetailYearlyReadonly = (
+  props: Props
+): JSX.Element => {
   return (
     <div>
       <Form.Group>

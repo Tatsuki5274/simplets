@@ -8,7 +8,7 @@ type Props = {
   data: AdminListCategoryRowType[] | null;
 };
 
-export default function (props: Props) {
+export default function (props: Props): JSX.Element {
   return (
     <ScrollTable>
       <thead>

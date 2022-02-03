@@ -24,7 +24,10 @@ const client = new AWSAppSyncClient({
  * @param params 実行クエリに対するパラメータ
  * @returns GraphQLの実行結果
  */
-export async function graphqlQuery(query: string, params: unknown) {
+export async function graphqlQuery(
+  query: string,
+  params: unknown
+): Promise<ApolloQueryResult<unknown>> {
   const result = (await client.query({
     query: gql(query),
     variables: params,
@@ -41,7 +44,10 @@ export async function graphqlQuery(query: string, params: unknown) {
  * @param params 実行ミューテーションに対するパラメータ
  * @returns GraphQLの実行結果
  */
-export async function graphqlMutation(mutation: string, params: unknown) {
+export async function graphqlMutation(
+  mutation: string,
+  params: unknown
+): Promise<ApolloQueryResult<unknown>> {
   const result = (await client.mutate({
     mutation: gql(mutation),
     variables: params,

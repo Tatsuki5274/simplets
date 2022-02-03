@@ -2,7 +2,7 @@ import { Spin } from "antd";
 import React from "react";
 import styled from "styled-components";
 
-const LoadingScreen = () => {
+const LoadingScreen = (): JSX.Element => {
   return (
     <Overlay>
       <OverlayText>

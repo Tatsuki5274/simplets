@@ -11,7 +11,7 @@ type Props = {
     | null;
 };
 
-export default function (props: Props) {
+export default function (props: Props): JSX.Element | null {
   return props.data ? (
     <Styled>
       {props.data.map((links, index) => {

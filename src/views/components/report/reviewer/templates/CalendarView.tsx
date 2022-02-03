@@ -27,7 +27,7 @@ type Props = {
   };
 };
 
-export default function CalendarView(props: Props) {
+export default function CalendarView(props: Props): JSX.Element {
   const history = useHistory();
   // const calendarRef = useRef<FullCalendar | null>(null)
 

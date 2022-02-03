@@ -6,7 +6,7 @@ type Props = {
   id: string;
 };
 
-export const SmallGage = (props: Props) => {
+export const SmallGage = (props: Props): JSX.Element => {
   return (
     <GaugeChart
       id={`chart-${props.id}`}

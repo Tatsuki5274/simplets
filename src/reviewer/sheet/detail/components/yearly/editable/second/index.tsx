@@ -10,7 +10,9 @@ type Props = {
   handleChange: (e: React.ChangeEvent<HTMLElement>) => void;
   sheet: Sheet;
 };
-export const ReviewerSheetDetailYearlyEditableSecond = (props: Props) => {
+export const ReviewerSheetDetailYearlyEditableSecond = (
+  props: Props
+): JSX.Element => {
   return (
     <div>
       <Form.Group>

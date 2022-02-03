@@ -27,7 +27,7 @@ import { SheetContext } from "reviewee/sheet/index";
 //     return result
 // }
 
-export const SubmitButtonStatus2 = () => {
+export const SubmitButtonStatus2 = (): JSX.Element | null => {
   const context = useContext(SheetContext);
   const setError = useContext(ErrorContext);
   const sheet = context.sheet;

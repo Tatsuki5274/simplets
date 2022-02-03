@@ -27,7 +27,7 @@ type Props = {
   id: string;
 };
 
-export default function (props: Props) {
+export default function (props: Props): JSX.Element {
   return (
     <Formik
       initialValues={{
@@ -164,7 +164,7 @@ ${routeBuilder.revieweeReportEditPath(props.id, hostUrl)}
 # 本メールに返信されましても、返答できませんのでご了承ください。
 `,
                         };
-                        if (sendEmailMutation(sendI)) {
+                        if (await sendEmailMutation(sendI)) {
                           window.alert("社員へのメール送信が完了しました");
                         }
                       }

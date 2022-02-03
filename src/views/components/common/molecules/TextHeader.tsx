@@ -10,7 +10,7 @@ const Styled = styled.div({
   display: "inline",
 });
 
-export default function (props: Props) {
+export default function (props: Props): JSX.Element {
   return (
     <Styled>
       <Navbar.Text>{props.children}</Navbar.Text>

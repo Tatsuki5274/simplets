@@ -12,7 +12,7 @@ export type AdminListCategoryRowType = {
 
 type Props = AdminListCategoryRowType;
 
-export default function (props: Props) {
+export default function (props: Props): JSX.Element | null {
   if (!props.link.dest) {
     return null;
   }

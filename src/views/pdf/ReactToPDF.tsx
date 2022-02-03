@@ -42,7 +42,7 @@ class ReactToPdf extends React.Component {
     targetRef: unknown;
   };
 
-  toPdf() {
+  toPdf(): void {
     const { targetRef, filename, x, y, options } = this.props;
     const source = targetRef || this.targetRef;
     const targetComponent = source.current;
@@ -84,7 +84,7 @@ class ReactToPdf extends React.Component {
     });
   }
 
-  render() {
+  render(): JSX.Element {
     const { children } = this.props;
     return children({ toPdf: this.toPdf, targetRef: this.targetRef });
   }

@@ -19,7 +19,7 @@ type Props = {
   data: ReviewerReportListEmployeeType[] | null;
 };
 
-export default function (props: Props) {
+export default function (props: Props): JSX.Element {
   return (
     <ScrollTable>
       <thead>

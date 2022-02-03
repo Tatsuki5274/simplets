@@ -31,7 +31,7 @@ type Props = {
   };
 };
 
-function EvalutionScreen(props: Props) {
+function EvalutionScreen(props: Props): JSX.Element {
   // const sheetId = props.match.params.sheetId;
 
   // sheet 情報取得

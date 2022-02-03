@@ -17,7 +17,7 @@ type Props = {
   setSelectedYear: React.Dispatch<React.SetStateAction<number | null>>;
 };
 
-export default function (props: Props) {
+export default function (props: Props): JSX.Element {
   return (
     <Formik
       initialValues={{

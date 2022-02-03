@@ -19,7 +19,7 @@ type Props = {
   id: string;
 };
 
-export default function (props: Props) {
+export default function (props: Props): JSX.Element {
   const setError = useContext(ErrorContext);
   const history = useHistory();
 

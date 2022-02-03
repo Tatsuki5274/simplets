@@ -20,7 +20,7 @@ const Link = styled.div({
   paddingBottom: "10px",
 });
 
-export default function (props: Props) {
+export default function (props: Props): JSX.Element {
   return (
     <Styled>
       {props.links.map((link, index) => {

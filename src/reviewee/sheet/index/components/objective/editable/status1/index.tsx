@@ -15,7 +15,9 @@ type Props = {
   setModalObjective: (objective: Objective) => void;
 };
 
-export const RevieweeSheetObjectiveEditableStatus1 = (props: Props) => {
+export const RevieweeSheetObjectiveEditableStatus1 = (
+  props: Props
+): JSX.Element | null => {
   const setError = useContext(ErrorContext);
   const progress: string | undefined = props.objective.progress
     ? props.objective.progress.toString()

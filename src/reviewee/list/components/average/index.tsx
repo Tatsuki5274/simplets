@@ -6,7 +6,7 @@ type Props = {
   sheet: Sheet;
 };
 
-export function DisplaySheetAverage(props: Props) {
+export function DisplaySheetAverage(props: Props): JSX.Element {
   // カテゴリ別の平均算出処理
   let avg: number | null = null;
   const sections = props.sheet.section?.items;

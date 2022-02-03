@@ -13,7 +13,7 @@ type Props = {
   style?: React.CSSProperties;
 };
 
-export default function (props: Props) {
+export default function (props: Props): JSX.Element {
   const defaultIndex = props.defaultIndex || 0;
   return (
     <select onChange={props.handleChange} name={props.name} style={props.style}>

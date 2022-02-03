@@ -37,7 +37,7 @@ const mockData = {
   ],
 };
 
-export default function () {
+export default function (): JSX.Element | null {
   const header = useContext(HeaderContext);
   const sidebar = useContext(SidebarContext);
   const currentUser = useContext(UserContext);

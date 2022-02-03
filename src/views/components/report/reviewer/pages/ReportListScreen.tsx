@@ -12,17 +12,19 @@ import { ReviewerReportFilterEmployeeType } from "../organisms/ReportListFilter"
 import { ReviewerReportListEmployeeType } from "../organisms/TableReportList";
 import ReportList from "../templates/ReportList";
 
-export default function () {
+export default function (): JSX.Element {
   const header = useContext(HeaderContext);
   const sidebar = useContext(SidebarContext);
 
   const currentUser = useContext(UserContext);
   const [groups, setGroups] = useState<SelectLabel[] | null>(null);
-  const [reviewee, setReviewee] =
-    useState<ReviewerReportFilterEmployeeType[] | null>(null);
+  const [reviewee, setReviewee] = useState<
+    ReviewerReportFilterEmployeeType[] | null
+  >(null);
 
-  const [table, setTable] =
-    useState<ReviewerReportListEmployeeType[] | null>(null);
+  const [table, setTable] = useState<ReviewerReportListEmployeeType[] | null>(
+    null
+  );
 
   useEffect(() => {
     // 部署情報の取得

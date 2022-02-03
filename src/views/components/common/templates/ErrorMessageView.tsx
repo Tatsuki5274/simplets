@@ -7,7 +7,7 @@ type Props = {
   children?: string;
 };
 
-export default function (props: Props) {
+export default function (props: Props): JSX.Element | null {
   // const timerId = setTimeout(clearError, 2000 );
   const setError = useContext(ErrorContext);
 

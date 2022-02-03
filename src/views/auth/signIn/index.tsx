@@ -11,7 +11,7 @@ export default class CustomSignIn extends SignIn {
     this._validAuthStates = ["signIn", "signedOut", "signedUp"];
   }
 
-  showComponent() {
+  showComponent(): JSX.Element {
     return (
       <Container>
         <LoginLogo />

@@ -6,7 +6,7 @@ type Props = ButtonProps & {
   children: string;
 };
 
-export default function (props: Props) {
+export default function (props: Props): JSX.Element {
   return (
     <Button variant="danger" {...props}>
       {props.children}

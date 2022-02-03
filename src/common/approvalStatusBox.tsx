@@ -6,7 +6,7 @@ type Props = {
   statusValue: number;
 };
 
-export default function ApprovalStatusBox(props: Props) {
+export default function ApprovalStatusBox(props: Props): JSX.Element {
   return (
     <Styled>
       <Badge variant="success">{getStatusValue(props.statusValue)}</Badge>

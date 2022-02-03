@@ -7,7 +7,7 @@ import React, { useContext } from "react";
 import { Button } from "react-bootstrap";
 import { SheetContext } from "reviewee/sheet/index";
 
-export const SubmitButtonStatus1 = () => {
+export const SubmitButtonStatus1 = (): JSX.Element | null => {
   const setError = useContext(ErrorContext);
   const context = useContext(SheetContext);
   const sheet = context.sheet;

@@ -9,7 +9,9 @@ type Props = {
   sheet: Sheet;
 };
 
-export const ReviewerSheetDetailInterviewEditable = (props: Props) => {
+export const ReviewerSheetDetailInterviewEditable = (
+  props: Props
+): JSX.Element => {
   return (
     <Table bordered>
       <thead className={tableHeaderStyle}>

@@ -15,7 +15,7 @@ type Props = {
   formik: FormikProps<TypeForm>;
 };
 
-export function ObjectiveCreateModalContent(props: Props) {
+export function ObjectiveCreateModalContent(props: Props): JSX.Element {
   return (
     <>
       <div>

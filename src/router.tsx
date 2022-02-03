@@ -25,7 +25,7 @@ import ReviewerReportListCalendar from "views/components/report/reviewer/pages/R
 import { EmployeeContext } from "App";
 import LoadingScreen from "views/components/common/templates/LoadingScreen";
 
-export default function Router() {
+export default function Router(): JSX.Element {
   return (
     <BrowserRouter>
       <Switch>
@@ -169,80 +169,80 @@ const RootPath = () => {
 
 // パスを生成する関数
 export const routeBuilder = {
-  revieweeDetailPath: (id: string, host?: string) => {
+  revieweeDetailPath: (id: string, host?: string): string => {
     return `${host || ""}/reviewee/evaluation/${id}`;
   },
-  reviewerDetailPath: (id: string, host?: string) => {
+  reviewerDetailPath: (id: string, host?: string): string => {
     return `${host || ""}/reviewer/evaluation/${id}`;
   },
-  revieweeListPath: (host?: string) => {
+  revieweeListPath: (host?: string): string => {
     return `${host || ""}/reviewee/ref/evaluation/list`;
   },
-  reviewerListPath: (host?: string) => {
+  reviewerListPath: (host?: string): string => {
     return `${host || ""}/reviewer/ref/evaluation/list/progress`;
   },
-  reviewerEvaluationListPath: (host?: string) => {
+  reviewerEvaluationListPath: (host?: string): string => {
     return `${host || ""}/reviewer/ref/evaluation/list/rate`;
   },
 
-  revieweeReportCalendarPath: (date: Date | string, host?: string) => {
+  revieweeReportCalendarPath: (date: Date | string, host?: string): string => {
     let dateStr = "";
     if (typeof date === "string") dateStr = date;
     else dateStr = dateFormat(date, "yyyy-mm");
     return `${host || ""}/reviewee/report/calendar/${dateStr}`;
   },
-  revieweeReportNewPath: (date: Date | string, host?: string) => {
+  revieweeReportNewPath: (date: Date | string, host?: string): string => {
     let dateStr = "";
     if (typeof date === "string") dateStr = date;
     else dateStr = dateFormat(date, "yyyy-mm-dd");
     return `${host || ""}/reviewee/report/new/${dateStr}`;
   },
-  revieweeReportEditPath: (id: string, host?: string) => {
+  revieweeReportEditPath: (id: string, host?: string): string => {
     return `${host || ""}/reviewee/report/edit/${id}`;
   },
-  reviewerReportCommentPath: (id: string, host?: string) => {
+  reviewerReportCommentPath: (id: string, host?: string): string => {
     return `${host || ""}/reviewer/report/edit/${id}`;
   },
-  reviewerReportEmployeePath: (host?: string) => {
+  reviewerReportEmployeePath: (host?: string): string => {
     return `${host || ""}/reviewer/report/employee`;
   },
-  reviewerReportCalendarPaht: (date: Date | string, host?: string) => {
+  reviewerReportCalendarPaht: (date: Date | string, host?: string): string => {
     let dateStr = "";
     if (typeof date === "string") dateStr = date;
     else dateStr = dateFormat(date, "yyyy-mm");
     return `${host || ""}/reviewer/report/calendar/${dateStr}`;
   },
-  previewPath: (id: string, host?: string) => {
+  previewPath: (id: string, host?: string): string => {
     return `${host || ""}/preview/${id}`;
   },
 
-  adminEmployeeNewPath: (host?: string) => {
+  adminEmployeeNewPath: (host?: string): string => {
     return `${host || ""}/admin/employee/new`;
   },
-  adminEmployeeEditPath: (employeeId: string, host?: string) => {
+  adminEmployeeEditPath: (employeeId: string, host?: string): string => {
     return `${host || ""}/admin/employee/${employeeId}/edit`;
   },
-  adminEmployeeListPath: (host?: string) => {
+  adminEmployeeListPath: (host?: string): string => {
     return `${host || ""}/admin/employee/list`;
   },
 
-  adminGroupNewPath: (host?: string) => {
+  adminGroupNewPath: (host?: string): string => {
     return `${host || ""}/admin/group/new`;
   },
-  adminGroupEditPath: (groupId: string, host?: string) => {
+  adminGroupEditPath: (groupId: string, host?: string): string => {
     return `${host || ""}/admin/group/${groupId}/edit`;
   },
-  adminGroupListPath: (host?: string) => {
+  adminGroupListPath: (host?: string): string => {
     return `${host || ""}/admin/group/list`;
   },
 
-  adminCategoryNewPath: (host?: string) => {
+  adminCategoryNewPath: (host?: string): string => {
     return `${host || ""}/admin/category/new`;
   },
-  adminCategoryEditPath: (categoryId: string, host?: string) => {
+  adminCategoryEditPath: (categoryId: string, host?: string): string => {
     return `${host || ""}/admin/category/${categoryId}/edit`;
   },
-  adminCategoryListPath: (host?: string) => {
+  adminCategoryListPath: (host?: string): string => {
     return `${host || ""}/admin/category/list`;
   },
 };

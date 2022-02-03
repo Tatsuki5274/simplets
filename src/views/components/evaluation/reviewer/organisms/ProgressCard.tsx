@@ -30,7 +30,7 @@ export type ProgressReferenceType = {
 
 type Props = ProgressReferenceType;
 
-export default function (props: Props) {
+export default function (props: Props): JSX.Element {
   return (
     <Card style={cardStyle}>
       <Link to={props.dest} style={cardLinkStyle} />

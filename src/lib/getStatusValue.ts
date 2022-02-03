@@ -14,7 +14,7 @@ export enum ApprovalStatus {
   DONE = 14,
 }
 
-export function getStatusValue(statusValue: number) {
+export function getStatusValue(statusValue: number): string {
   let ret = StatusString[statusValue];
   if (!ret) ret = "undefined";
 

@@ -8,7 +8,9 @@ type Props = {
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   sheet: Sheet;
 };
-export const ReviewerSheetDetailCareerEditable = (props: Props) => {
+export const ReviewerSheetDetailCareerEditable = (
+  props: Props
+): JSX.Element => {
   return (
     <div>
       <h4>本人希望</h4>

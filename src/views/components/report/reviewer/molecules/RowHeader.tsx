@@ -1,7 +1,7 @@
 import React from "react";
 import TableHeaderCell from "views/components/common/atoms/TableHeaderCell";
 
-export default function () {
+export default function (): JSX.Element {
   return (
     <tr>
       <TableHeaderCell>報告日</TableHeaderCell>

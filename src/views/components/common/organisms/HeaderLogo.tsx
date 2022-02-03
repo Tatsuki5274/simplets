@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import Logo from "../molecules/Logo";
 
-export default function () {
+export default function (): JSX.Element {
   return (
     <LogoStyle>
       <Logo />

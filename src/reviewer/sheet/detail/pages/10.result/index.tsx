@@ -25,7 +25,9 @@ type Props = {
   sections: Section[];
 };
 
-export const ReviewerSheetPagesStatus10 = (props: Props) => {
+export const ReviewerSheetPagesStatus10 = (
+  props: Props
+): JSX.Element | null => {
   const setError = useContext(ErrorContext);
   const context = useContext(SheetContext);
   const sheet = context.sheet;

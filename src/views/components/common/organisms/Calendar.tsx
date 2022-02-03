@@ -61,7 +61,7 @@ const EventStyle = styled.div({
   maxHeight: "1.4em",
 });
 
-export default function (props: Props) {
+export default function (props: Props): JSX.Element {
   const calendarRef = useRef<FullCalendar | null>(null);
 
   const dateStr = dateFormat(props.initialDate, "yyyy-mm-dd");

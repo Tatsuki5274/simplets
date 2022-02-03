@@ -12,7 +12,7 @@ const TripleSpaceStyle = styled.p({
   marginLeft: "3em",
 });
 
-export default function () {
+export default function (): JSX.Element {
   return (
     <Text>
       <p>

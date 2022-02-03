@@ -18,11 +18,13 @@ import { ProgressReferenceType } from "views/components/evaluation/reviewer/orga
 import ProgressReference from "views/components/evaluation/reviewee/templates/ProgressReference";
 import { SelectLabel } from "views/components/common/atoms/Types";
 
-export default function () {
-  const [cardData, setCardData] =
-    useState<(ProgressReferenceType | null)[] | null>(null);
-  const [initCardData, setInitCardData] =
-    useState<(ProgressReferenceType | null)[] | null>(null);
+export default function (): JSX.Element {
+  const [cardData, setCardData] = useState<
+    (ProgressReferenceType | null)[] | null
+  >(null);
+  const [initCardData, setInitCardData] = useState<
+    (ProgressReferenceType | null)[] | null
+  >(null);
 
   const [years, setYears] = useState<number[] | null>(null);
   const [groups, setGroups] = useState<SelectLabel[] | null>(null);

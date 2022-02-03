@@ -7,7 +7,9 @@ type Props = {
   objective: Objective;
 };
 
-export const RevieweeSheetObjectiveReadonlyStatus10 = (props: Props) => {
+export const RevieweeSheetObjectiveReadonlyStatus10 = (
+  props: Props
+): JSX.Element => {
   const date = new Date(props.objective.updatedAt || ""); // unsafe
   let expDoneDateStyle: string; //完了予定日のクラス名
   const currentDate = new Date().getTime();

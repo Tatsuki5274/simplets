@@ -22,7 +22,7 @@ import { ReviewerSheetDetailYearlyReadonly } from "../../../components/yearly/re
 //     sections: Section[]
 // }
 
-export const ReviewerSheetPagesStatus12Second = () => {
+export const ReviewerSheetPagesStatus12Second = (): JSX.Element | null => {
   const setError = useContext(ErrorContext);
   const context = useContext(SheetContext);
   const sheet = context.sheet;

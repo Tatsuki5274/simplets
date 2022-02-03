@@ -33,7 +33,7 @@ import { listSheetsReviewee } from "graphql/queries";
 //   }
 // `;
 
-export const OverEvaluationTableStatus10 = () => {
+export const OverEvaluationTableStatus10 = (): JSX.Element | null => {
   const currentUser = useContext(UserContext);
   const context = useContext(SheetContext);
   const sheet = context.sheet;

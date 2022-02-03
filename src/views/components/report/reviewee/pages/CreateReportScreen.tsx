@@ -22,7 +22,7 @@ type Props = {
   };
 };
 
-export function CreateReportScreen(props: Props) {
+export function CreateReportScreen(props: Props): JSX.Element {
   const header = useContext(HeaderContext);
   const sidebar = useContext(SidebarContext);
   const setError = useContext(ErrorContext);

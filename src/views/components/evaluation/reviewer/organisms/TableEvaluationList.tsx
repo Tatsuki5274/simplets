@@ -35,7 +35,7 @@ type Props = {
   selectedYear: number | null;
 };
 
-export default function (props: Props) {
+export default function (props: Props): JSX.Element | null {
   if (props.data && props.selectedYear) {
     return (
       <Table bordered>

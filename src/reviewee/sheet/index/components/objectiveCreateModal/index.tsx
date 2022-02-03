@@ -24,12 +24,13 @@ export type TypeForm = {
   expDoneDate: string;
 };
 
-export function ObjectiveCreateModal(props: Props) {
+export function ObjectiveCreateModal(props: Props): JSX.Element | null {
   const setError = useContext(ErrorContext);
   const [show, setShow] = useState(false);
   const [sheet, setSheet] = useState<Sheet | null>(null);
-  const [defaultSectionKeys, setDefaultSectionKeys] =
-    useState<string | null>(null);
+  const [defaultSectionKeys, setDefaultSectionKeys] = useState<string | null>(
+    null
+  );
   const currentUser = useContext(UserContext);
   const [isLoading, setLoading] = useState(false);
 

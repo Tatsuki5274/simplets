@@ -13,7 +13,7 @@ type Props = {
   handleClose: () => void;
 };
 
-export const RevieweeSheetCareerModal = (props: Props) => {
+export const RevieweeSheetCareerModal = (props: Props): JSX.Element => {
   const setError = useContext(ErrorContext);
   const context = useContext(SheetContext);
   const sheet = context.sheet;

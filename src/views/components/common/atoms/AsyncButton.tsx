@@ -11,7 +11,7 @@ import { Button, ButtonProps } from "react-bootstrap";
  *  onClick={async () => 何かの同期処理}
  * >ボタン</AsyncButton>>
  */
-export default function AsyncButton(props: ButtonProps) {
+export default function AsyncButton(props: ButtonProps): JSX.Element {
   const [isLoading, setIsLoading] = useState(false);
   const onClick = async (event: React.MouseEvent<HTMLElement, MouseEvent>) => {
     if (props.onClick) {

@@ -34,7 +34,7 @@ export function calcAvg(nums: (number | null)[]): number | null {
  * @param d 四捨五入の桁数
  * @returns 四捨五入結果
  */
-export function round(num: number, d: number) {
+export function round(num: number, d: number): number {
   const n = d - 1; // 小数点第n位まで残す
   const result = Math.round(num * Math.pow(10, n)) / Math.pow(10, n);
   return result;
@@ -233,18 +233,19 @@ export function CountLine(str: string): number {
   return line;
 }
 
+type ResultType = {
+  topReviewers: string[] | null;
+  secondReviewers: string[] | null;
+  referencer: string[] | null;
+};
+
 /**
  *
  * @param reviewee 社員
  * @param companyId 会社ID
  * @returns 所属長,部門長,参照者を返却
  */
-export async function getReviewers(reviewee: string) {
-  type ResultType = {
-    topReviewers: string[] | null;
-    secondReviewers: string[] | null;
-    referencer: string[] | null;
-  };
+export async function getReviewers(reviewee: string): Promise<ResultType> {
   const result: ResultType = {
     topReviewers: null,
     secondReviewers: null,

@@ -9,7 +9,9 @@ type Props = {
   sections: Section[];
 };
 
-export const ReviewerSheetDetailObjectiveReadonly = (props: Props) => {
+export const ReviewerSheetDetailObjectiveReadonly = (
+  props: Props
+): JSX.Element => {
   return (
     <div>
       {props.sections.map((section: Section) => {

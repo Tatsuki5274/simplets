@@ -6,7 +6,7 @@ import React, { useContext } from "react";
 import { Table } from "react-bootstrap";
 import { SheetContext } from "reviewee/sheet/index";
 
-export const RevieweeSheetCareerReadonly = () => {
+export const RevieweeSheetCareerReadonly = (): JSX.Element | null => {
   const context = useContext(SheetContext);
   const sheet = context.sheet;
   // const setSheet = context.setSheet

@@ -19,7 +19,7 @@ const TextStyle = styled.div({
   marginRight: "10px",
 });
 
-export default function (props: Props) {
+export default function (props: Props): JSX.Element {
   return (
     <Styled>
       <Navbar bg="dark" variant="dark" sticky="top" style={{ zIndex: "auto" }}>

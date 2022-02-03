@@ -6,7 +6,7 @@ type Props = {
   title: string;
 };
 
-export default function (props: Props) {
+export default function (props: Props): JSX.Element {
   return (
     <Styled>
       <CalendarEvent title={props.title} />

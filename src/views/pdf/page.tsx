@@ -35,14 +35,16 @@ const sortCategory = function (a: Section | null, b: Section | null) {
   }
 };
 
-export function PDFPage(props: Props) {
+export function PDFPage(props: Props): JSX.Element | null {
   const currentUser = useContext(UserContext);
   const setError = useContext(ErrorContext);
   const [sheet, setSheet] = useState<Sheet | null>(null);
-  const [lastOverAllEvaluations, setlastOverAllEvaluations] =
-    useState<Array<number | null> | null>();
-  const [secondReviewerName, setSecondReviewerName] =
-    useState<string | null>(null);
+  const [lastOverAllEvaluations, setlastOverAllEvaluations] = useState<Array<
+    number | null
+  > | null>();
+  const [secondReviewerName, setSecondReviewerName] = useState<string | null>(
+    null
+  );
   const [topReviewerName, setTopReviewerName] = useState<string | null>(null);
   // const [topReviewerName, setTopReviewerName] = useState<string | null>(null);
   useEffect(() => {
