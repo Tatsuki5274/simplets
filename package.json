@@ -1,6 +1,9 @@
 {
   "name": "scc-system-2",
   "version": "0.1.0",
+  "engines": {
+    "node": "16.x"
+  },
   "private": true,
   "dependencies": {
     "@apollo/client": "^3.3.6",
@@ -32,7 +35,7 @@
     "fullcalendar": "^5.5.1",
     "graphql": "^15.4.0",
     "jquery": "^3.5.1",
-    "node-sass": "^4.14.1",
+    "node-sass": "^6.0.1",
     "popper.js": "^1.16.1",
     "prettier": "^2.3.0",
     "react": "^16.13.1",
