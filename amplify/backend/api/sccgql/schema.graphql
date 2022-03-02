@@ -13,7 +13,7 @@ type Company #会社
     # 社員の閲覧権限
     {allow: groups, groupsField: "id", operations:[read]}
 
-    {allow: private, provider: iam ,operations:[read]}
+    {allow: private, provider: iam ,operations:[create, read]}
   ]
 )
 {
@@ -550,6 +550,7 @@ type Mutation{
 
 # 以下、ビルドスキーマから複製
 ## カテゴリ
+
 input CreateCategoryInput {
   id: ID
   companyID: ID!

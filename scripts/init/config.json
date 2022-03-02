@@ -1,0 +1,30 @@
+{
+    "std": {
+        "userpoolid": "ap-northeast-1_GX5XFR491",
+        "graphqlEndpoint": "https://tue4olnsdzetnmsuwnhf5l7fo4.appsync-api.ap-northeast-1.amazonaws.com/graphql",
+        "region": "ap-northeast-1",
+        "url": "https://www.app.simplets.jp",
+        "IAM": ""
+    },
+    "dev": {
+        "userpoolid": "ap-northeast-1_udR5E7uL6",
+        "graphqlEndpoint": "https://h6atavgafvgbnmjjlidjn3jv2a.appsync-api.ap-northeast-1.amazonaws.com/graphql",
+        "region": "ap-northeast-1",
+        "url": "https://master.d5cvlroqr6enf.amplifyapp.com",
+        "IAM": "hkinjo-script2"
+    },
+    "prod": {
+        "userpoolid": "ap-northeast-1_8h4Fg3kal",
+        "graphqlEndpoint": "https://3oqhvmxvira4vjsxprmaqzi73y.appsync-api.ap-northeast-1.amazonaws.com/graphql",
+        "region": "ap-northeast-1",
+        "url": "",
+        "IAM": ""
+    },
+    "prodb": {
+        "userpoolid": "ap-northeast-1_qkpxOPIy8",
+        "graphqlEndpoint": "https://yofqjto2ibdfvpdqwqjzfaxh6y.appsync-api.ap-northeast-1.amazonaws.com/graphql",
+        "region": "ap-northeast-1",
+        "url": "https://kanri.sisco-consulting.co.jp/",
+        "IAM": ""
+    }
+}
