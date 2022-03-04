@@ -301,7 +301,8 @@ function ListPerformanceEvalution(): JSX.Element {
           if (
             targetYear &&
             revieweeEmployee.username &&
-            revieweeEmployee.superior?.username
+            revieweeEmployee.superior?.username &&
+            categorys?.length
           ) {
             //シートを作成
             const createdSheet = await SheetDao.create(createSheet, {
