@@ -2,7 +2,13 @@ import React, { useContext, useEffect, useState } from "react";
 import { Button, Table } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Link } from "react-router-dom";
-import { ErrorContext, HeaderContext, SidebarContext, UserContext } from "App";
+import {
+  //CategoryContext,
+  ErrorContext,
+  HeaderContext,
+  SidebarContext,
+  UserContext,
+} from "App";
 import { ApprovalStatus, getStatusValue } from "lib/getStatusValue";
 import * as APIt from "API";
 import { SheetDao } from "lib/dao/sheetDao";
@@ -267,6 +273,12 @@ function ListPerformanceEvalution(): JSX.Element {
           listCategorysCompany,
           listI
         );
+        if (!categorys?.length) {
+          setError(
+            "カテゴリが登録されていません。管理者にカテゴリの作成を依頼してください。"
+          );
+        }
+
         if (categorys) {
           const reviewers = await getReviewers(currentUser.username);
           const managers = reviewers.referencer;
