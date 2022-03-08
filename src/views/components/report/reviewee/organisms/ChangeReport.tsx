@@ -264,7 +264,7 @@ ${routeBuilder.reviewerReportCommentPath(props.data.id, hostUrl)}
                   }
                 }}
               >
-                所属長へ送信
+                保存して所属長へ送信
               </CommandButton>
             </SpaceStyle>
           ) : null}

@@ -256,7 +256,7 @@ ${routeBuilder.reviewerReportCommentPath(createdReport.id || "", hostUrl)}
                   }
                 }}
               >
-                所属長へ送信
+                保存して所属長へ送信
               </AsyncButton>
             </SpaceStyle>
           ) : null}

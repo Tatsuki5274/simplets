@@ -174,7 +174,7 @@ ${routeBuilder.revieweeReportEditPath(props.id, hostUrl)}
                   }
                 }}
               >
-                社員に送信
+                保存して社員に送信
               </CommandButton>
             </SpaceStyle>
           ) : null}
