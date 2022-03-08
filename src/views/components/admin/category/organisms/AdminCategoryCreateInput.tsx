@@ -1,6 +1,6 @@
 import { CreateCategoryInput } from "API";
 import { ErrorContext } from "App";
-import { Formik } from "formik";
+import { Formik, ErrorMessage } from "formik";
 import { createCategoryByCompanyAdmin } from "graphql/mutations";
 import { CategoryDao } from "lib/dao/categoryDao";
 import React, { useContext } from "react";
@@ -8,9 +8,11 @@ import { useHistory } from "react-router";
 import { routeBuilder } from "router";
 import styled from "styled-components";
 import Button from "views/components/common/atoms/Button";
+import ErrorText from "views/components/common/atoms/ErrorText";
 import Text from "views/components/common/atoms/Text";
 import TextField from "views/components/common/atoms/TextField";
 import CommandButton from "views/components/common/molecules/CommandButton";
+import * as Yup from "yup";
 
 type Props = {
   companyId: string;
@@ -26,6 +28,10 @@ export default function (props: Props): JSX.Element {
         localID: "",
         name: "",
       }}
+      validationSchema={Yup.object({
+        localID: Yup.string().required("カテゴリIDを入力してください"),
+        name: Yup.string().required("カテゴリ内容を入力してください"),
+      })}
       onSubmit={async (values) => {
         const createI: CreateCategoryInput = {
           companyID: props.companyId,
@@ -54,6 +60,9 @@ export default function (props: Props): JSX.Element {
               </td>
               <td>
                 <TextField name="localID" onChange={formik.handleChange} />
+                <ErrorText>
+                  <ErrorMessage name="localID" />
+                </ErrorText>
               </td>
             </tr>
 
@@ -63,6 +72,9 @@ export default function (props: Props): JSX.Element {
               </td>
               <td>
                 <TextField name="name" onChange={formik.handleChange} />
+                <ErrorText>
+                  <ErrorMessage name="name" />
+                </ErrorText>
               </td>
             </tr>
 
