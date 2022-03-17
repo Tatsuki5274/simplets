@@ -161,7 +161,12 @@ export const handler = async (
       if (typeof params !== "object") {
         throw new TypeError("params not provided.");
       }
-      result = await deleteEmployeeByCompanyAdmin(params, companyId);
+      const loginUserSub = event.identity.claims.sub;
+      result = await deleteEmployeeByCompanyAdmin(
+        params,
+        companyId,
+        loginUserSub
+      );
     } else if (fieldName === "createGroupByCompanyAdmin") {
       if (!isCompanyAdmin) {
         // 社内管理者であることを検証

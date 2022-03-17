@@ -7,13 +7,17 @@ import { getEmployee } from "../../graphql/queries";
  */
 const deleteEmployeeByCompanyAdmin = async (
   params: DeleteEmployeeInput,
-  companyId: string
+  companyId: string,
+  sub: string
 ): Promise<Employee | null> => {
   const employee = await EmployeeDao.get(getEmployee, {
     username: params.username,
   });
   if (employee?.companyID !== companyId) {
     throw new Error("You don't have permission");
+  }
+  if (employee.sub == sub) {
+    throw new Error("You can't delete your own account");
   }
   const createResult = await EmployeeDao.delete(deleteEmployee, params);
   if (!createResult) {
