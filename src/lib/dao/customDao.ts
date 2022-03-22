@@ -12,10 +12,12 @@ export const CustomDao = {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const result: any = await BaseDao.create(updateOwners, {});
     if (typeof result !== "object" || !result) {
-      throw TypeError("Response is not object");
+      // eslint-disable-next-line no-console
+      console.error("型エラー: 結果がオブジェクトではありません。");
+      throw TypeError("内部エラーが発生しました。");
     }
     if (!result?.updateOwners?.isSuccess) {
-      throw new Error("Operation failed");
+      throw new Error("処理に失敗しました。");
     }
     return result?.updateOwners || null;
   },
