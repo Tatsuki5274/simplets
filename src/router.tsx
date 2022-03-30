@@ -24,6 +24,7 @@ import ReportListScreen from "views/components/report/reviewer/pages/ReportListS
 import ReviewerReportListCalendar from "views/components/report/reviewer/pages/ReviewerReportListCalendar";
 import { EmployeeContext } from "App";
 import LoadingScreen from "views/components/common/templates/LoadingScreen";
+import ProgressTaskScreen from "views/components/evaluation/reviewee/pages/ProgressTaskScreen";
 
 export default function Router(): JSX.Element {
   return (
@@ -54,6 +55,11 @@ export default function Router(): JSX.Element {
           exact
           path={routeBuilder.previewPath(":sheetId")}
           component={PDFPage}
+        />
+        <Route
+          exact
+          path={routeBuilder.reviewRequestListPath()}
+          component={ProgressTaskScreen}
         />
         <Route
           exact
@@ -180,6 +186,10 @@ export const routeBuilder = {
   },
   reviewerListPath: (host?: string): string => {
     return `${host || ""}/reviewer/ref/evaluation/list/progress`;
+  },
+  //これ
+  reviewRequestListPath: (host?: string): string => {
+    return `${host || ""}/reviewer/ref/evaluation/list/tasks`;
   },
   reviewerEvaluationListPath: (host?: string): string => {
     return `${host || ""}/reviewer/ref/evaluation/list/rate`;

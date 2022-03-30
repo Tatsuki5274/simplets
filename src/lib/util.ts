@@ -96,7 +96,10 @@ export function createSidebarElements(
     label: "総合評価参照",
     dest: routeBuilder.reviewerEvaluationListPath(),
   };
-
+  const notEvaluatedList = {
+    label: "未処理一覧",
+    dest: routeBuilder.reviewRequestListPath(),
+  };
   const reportTitle = {
     label: "- 作業報告 -",
     dest: null,
@@ -144,6 +147,7 @@ export function createSidebarElements(
   }
 
   if (isContractReport) {
+    resultEvaluation.push(notEvaluatedList);
     resultReport.push(reportTitle);
     resultReport.push(reportContentInputCalendar);
     if (!isMobile) {
