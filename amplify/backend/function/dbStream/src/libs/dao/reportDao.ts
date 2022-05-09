@@ -64,11 +64,21 @@ export const ReportDao = {
     query: string,
     params: APIt.ListReportsCompanyDateQueryVariables
   ): Promise<(Report | null)[] | null> => {
-    const result = (await BaseDao.list(
-      query,
-      params
-    )) as APIt.ListReportsCompanyDateQuery;
-    return result.listReportsCompanyDate?.items as (Report | null)[] | null;
+    let result: (Report | null)[] = [];
+    let resultQuery: APIt.ListReportsCompanyDateQuery | null = null;
+    let token: string | null = null;
+    do {
+      params.nextToken = token;
+      resultQuery = (await BaseDao.list(
+        query,
+        params
+      )) as APIt.ListReportsCompanyDateQuery;
+      result = result.concat(
+        (resultQuery.listReportsCompanyDate?.items as (Report | null)[]) || []
+      );
+      token = resultQuery.listReportsCompanyDate?.nextToken || null;
+    } while (token);
+    return result;
   },
   updateByAdmin: async (
     mutation: string,
