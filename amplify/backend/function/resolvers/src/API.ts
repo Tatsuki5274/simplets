@@ -12,8 +12,8 @@ export type sendEmailInput = {
 
 export type UpdateOwnerResponseType = {
   __typename: "UpdateOwnerResponseType",
-  isSuccess?: boolean,
-  message?: string,
+  isSuccess: boolean,
+  message: string,
   result?: string | null,
 };
 
@@ -26,12 +26,12 @@ export type CreateCategoryInput = {
 
 export type Category = {
   __typename: "Category",
-  id?: string,
-  companyID?: string,
-  no?: string,
-  name?: string,
-  createdAt?: string,
-  updatedAt?: string,
+  id: string,
+  companyID: string,
+  no: string,
+  name: string,
+  createdAt: string,
+  updatedAt: string,
 };
 
 export type UpdateCategoryInput = {
@@ -77,45 +77,47 @@ export enum BooleanType {
 
 export type Employee = {
   __typename: "Employee",
-  username?: string,
-  companyID?: string,
-  no?: string,
-  groupID?: string,
-  superiorUsername?: string,
-  firstName?: string,
-  lastName?: string,
-  grade?: string,
-  email?: string,
+  username: string,
+  companyID: string,
+  no: string,
+  groupID: string,
+  superiorUsername: string,
+  firstName: string,
+  lastName: string,
+  grade: string,
+  email: string,
   sub?: string | null,
-  manager?: EmployeeType,
+  manager: EmployeeType,
   isCompanyAdmin?: boolean | null,
-  isDeleted?: BooleanType,
-  createdAt?: string,
-  updatedAt?: string,
-  company?: Company,
-  superior?: Employee,
-  group?: Group,
+  isDeleted: BooleanType,
+  createdAt: string,
+  updatedAt: string,
+  company?: Company | null,
+  superior?: Employee | null,
+  group?: Group | null,
 };
 
 export type Company = {
   __typename: "Company",
-  id?: string,
-  name?: string,
-  startMonth?: number,
+  id: string,
+  name: string,
+  startMonth: number,
   shortName?: string | null,
   url?: string | null,
-  createdAt?: string,
-  updatedAt?: string,
+  isContractEvaluation?: boolean | null,
+  isContractReport?: boolean | null,
+  createdAt: string,
+  updatedAt: string,
 };
 
 export type Group = {
   __typename: "Group",
-  id?: string,
-  companyID?: string,
-  no?: string,
-  name?: string,
-  createdAt?: string,
-  updatedAt?: string,
+  id: string,
+  companyID: string,
+  no: string,
+  name: string,
+  createdAt: string,
+  updatedAt: string,
 };
 
 export type UpdateEmployeeInput = {
@@ -196,12 +198,12 @@ export type UpdateSheetInput = {
 
 export type Sheet = {
   __typename: "Sheet",
-  id?: string,
-  sub?: string,
-  year?: number,
-  companyID?: string,
-  groupID?: string,
-  grade?: string,
+  id: string,
+  sub: string,
+  year: number,
+  companyID: string,
+  groupID: string,
+  grade: string,
   careerPlan?: string | null,
   careerPlanComment?: string | null,
   reviewComment?: string | null,
@@ -226,52 +228,52 @@ export type Sheet = {
   topUsername?: string | null,
   sheetGroupName?: string | null,
   referencer?: Array< string > | null,
-  reviewee?: string,
+  reviewee: string,
   topReviewers?: Array< string > | null,
   secondReviewers?: Array< string > | null,
-  createdAt?: string,
-  updatedAt?: string,
-  revieweeEmployee?: Employee,
-  secondEmployee?: Employee,
-  topEmployee?: Employee,
-  group?: Group,
-  section?: ModelSectionConnection,
+  createdAt: string,
+  updatedAt: string,
+  revieweeEmployee?: Employee | null,
+  secondEmployee?: Employee | null,
+  topEmployee?: Employee | null,
+  group?: Group | null,
+  section?: ModelSectionConnection | null,
 };
 
 export type ModelSectionConnection = {
   __typename: "ModelSectionConnection",
-  items?:  Array<Section | null > | null,
+  items:  Array<Section | null >,
   nextToken?: string | null,
 };
 
 export type Section = {
   __typename: "Section",
-  id?: string,
-  sheetID?: string,
-  no?: string,
+  id: string,
+  sheetID: string,
+  no: string,
   sectionCategoryName?: string | null,
   reviewee?: string | null,
   topReviewers?: Array< string > | null,
   secondReviewers?: Array< string > | null,
   referencer?: Array< string > | null,
-  createdAt?: string,
-  updatedAt?: string,
-  objective?: ModelObjectiveConnection,
+  createdAt: string,
+  updatedAt: string,
+  objective?: ModelObjectiveConnection | null,
 };
 
 export type ModelObjectiveConnection = {
   __typename: "ModelObjectiveConnection",
-  items?:  Array<Objective | null > | null,
+  items:  Array<Objective | null >,
   nextToken?: string | null,
 };
 
 export type Objective = {
   __typename: "Objective",
-  id?: string,
-  sectionID?: string,
-  createdAt?: string,
-  companyID?: string,
-  content?: string,
+  id: string,
+  sectionID: string,
+  createdAt: string,
+  companyID: string,
+  content: string,
   result?: string | null,
   priority?: string | null,
   selfEvaluation?: number | null,
@@ -284,7 +286,7 @@ export type Objective = {
   topReviewers?: Array< string > | null,
   secondReviewers?: Array< string > | null,
   referencer?: Array< string > | null,
-  updatedAt?: string,
+  updatedAt: string,
 };
 
 export type DeleteSheetInput = {
@@ -324,20 +326,20 @@ export enum ReportWorkingStatus {
 
 export type Report = {
   __typename: "Report",
-  id?: string,
-  sub?: string,
-  date?: string,
+  id: string,
+  sub: string,
+  date: string,
   groupID?: string | null,
   reviewee?: string | null,
   reviewer?: Array< string | null > | null,
   companyID?: string | null,
   referencer?: Array< string | null > | null,
-  revieweeComments?: RevieweeReportComment,
-  reviewerComments?: ReviewerReportComment,
+  revieweeComments?: RevieweeReportComment | null,
+  reviewerComments?: ReviewerReportComment | null,
   workStatus?: ReportWorkingStatus | null,
-  createdAt?: string,
-  updatedAt?: string,
-  revieweeEmployee?: Employee,
+  createdAt: string,
+  updatedAt: string,
+  revieweeEmployee?: Employee | null,
 };
 
 export type RevieweeReportComment = {
@@ -356,12 +358,14 @@ export type DeleteReportInput = {
   id: string,
 };
 
-export type CreateCompanyInput = {
-  id?: string | null,
-  name: string,
-  startMonth: number,
+export type UpdateCompanyInput = {
+  id: string,
+  name?: string | null,
+  startMonth?: number | null,
   shortName?: string | null,
   url?: string | null,
+  isContractEvaluation?: boolean | null,
+  isContractReport?: boolean | null,
 };
 
 export type ModelCompanyConditionInput = {
@@ -369,6 +373,8 @@ export type ModelCompanyConditionInput = {
   startMonth?: ModelIntInput | null,
   shortName?: ModelStringInput | null,
   url?: ModelStringInput | null,
+  isContractEvaluation?: ModelBooleanInput | null,
+  isContractReport?: ModelBooleanInput | null,
   and?: Array< ModelCompanyConditionInput | null > | null,
   or?: Array< ModelCompanyConditionInput | null > | null,
   not?: ModelCompanyConditionInput | null,
@@ -426,16 +432,25 @@ export type ModelIntInput = {
   attributeType?: ModelAttributeTypes | null,
 };
 
-export type UpdateCompanyInput = {
-  id: string,
-  name?: string | null,
-  startMonth?: number | null,
-  shortName?: string | null,
-  url?: string | null,
+export type ModelBooleanInput = {
+  ne?: boolean | null,
+  eq?: boolean | null,
+  attributeExists?: boolean | null,
+  attributeType?: ModelAttributeTypes | null,
 };
 
 export type DeleteCompanyInput = {
   id: string,
+};
+
+export type CreateCompanyInput = {
+  id?: string | null,
+  name: string,
+  startMonth: number,
+  shortName?: string | null,
+  url?: string | null,
+  isContractEvaluation?: boolean | null,
+  isContractReport?: boolean | null,
 };
 
 export type ModelEmployeeConditionInput = {
@@ -474,13 +489,6 @@ export type ModelIDInput = {
 export type ModelEmployeeTypeInput = {
   eq?: EmployeeType | null,
   ne?: EmployeeType | null,
-};
-
-export type ModelBooleanInput = {
-  ne?: boolean | null,
-  eq?: boolean | null,
-  attributeExists?: boolean | null,
-  attributeType?: ModelAttributeTypes | null,
 };
 
 export type ModelBooleanTypeInput = {
@@ -702,12 +710,51 @@ export type ModelReportWorkingStatusInput = {
   ne?: ReportWorkingStatus | null,
 };
 
+export type CreateJobInput = {
+  id?: string | null,
+  status: string,
+  companyID: string,
+  email: string,
+};
+
+export type ModelJobConditionInput = {
+  status?: ModelStringInput | null,
+  companyID?: ModelStringInput | null,
+  email?: ModelStringInput | null,
+  and?: Array< ModelJobConditionInput | null > | null,
+  or?: Array< ModelJobConditionInput | null > | null,
+  not?: ModelJobConditionInput | null,
+};
+
+export type Job = {
+  __typename: "Job",
+  id: string,
+  status: string,
+  companyID: string,
+  email: string,
+  createdAt: string,
+  updatedAt: string,
+};
+
+export type UpdateJobInput = {
+  id: string,
+  status?: string | null,
+  companyID?: string | null,
+  email?: string | null,
+};
+
+export type DeleteJobInput = {
+  id: string,
+};
+
 export type ModelCompanyFilterInput = {
   id?: ModelIDInput | null,
   name?: ModelStringInput | null,
   startMonth?: ModelIntInput | null,
   shortName?: ModelStringInput | null,
   url?: ModelStringInput | null,
+  isContractEvaluation?: ModelBooleanInput | null,
+  isContractReport?: ModelBooleanInput | null,
   and?: Array< ModelCompanyFilterInput | null > | null,
   or?: Array< ModelCompanyFilterInput | null > | null,
   not?: ModelCompanyFilterInput | null,
@@ -715,7 +762,7 @@ export type ModelCompanyFilterInput = {
 
 export type ModelCompanyConnection = {
   __typename: "ModelCompanyConnection",
-  items?:  Array<Company | null > | null,
+  items:  Array<Company | null >,
   nextToken?: string | null,
 };
 
@@ -746,7 +793,7 @@ export enum ModelSortDirection {
 
 export type ModelEmployeeConnection = {
   __typename: "ModelEmployeeConnection",
-  items?:  Array<Employee | null > | null,
+  items:  Array<Employee | null >,
   nextToken?: string | null,
 };
 
@@ -788,7 +835,7 @@ export type ModelGroupFilterInput = {
 
 export type ModelGroupConnection = {
   __typename: "ModelGroupConnection",
-  items?:  Array<Group | null > | null,
+  items:  Array<Group | null >,
   nextToken?: string | null,
 };
 
@@ -804,7 +851,7 @@ export type ModelCategoryFilterInput = {
 
 export type ModelCategoryConnection = {
   __typename: "ModelCategoryConnection",
-  items?:  Array<Category | null > | null,
+  items:  Array<Category | null >,
   nextToken?: string | null,
 };
 
@@ -849,7 +896,7 @@ export type ModelSheetFilterInput = {
 
 export type ModelSheetConnection = {
   __typename: "ModelSheetConnection",
-  items?:  Array<Sheet | null > | null,
+  items:  Array<Sheet | null >,
   nextToken?: string | null,
 };
 
@@ -916,17 +963,24 @@ export type ModelReportFilterInput = {
 
 export type ModelReportConnection = {
   __typename: "ModelReportConnection",
-  items?:  Array<Report | null > | null,
+  items:  Array<Report | null >,
   nextToken?: string | null,
 };
 
-export type ApprovalStatusManagerMutationVariables = {
-  action?: string | null,
-  sheetId?: string | null,
+export type ModelJobFilterInput = {
+  id?: ModelIDInput | null,
+  status?: ModelStringInput | null,
+  companyID?: ModelStringInput | null,
+  email?: ModelStringInput | null,
+  and?: Array< ModelJobFilterInput | null > | null,
+  or?: Array< ModelJobFilterInput | null > | null,
+  not?: ModelJobFilterInput | null,
 };
 
-export type ApprovalStatusManagerMutation = {
-  approvalStatusManager?: string | null,
+export type ModelJobConnection = {
+  __typename: "ModelJobConnection",
+  items:  Array<Job | null >,
+  nextToken?: string | null,
 };
 
 export type SendEmailMutationVariables = {
@@ -1023,6 +1077,8 @@ export type CreateEmployeeByCompanyAdminMutation = {
       startMonth: number,
       shortName?: string | null,
       url?: string | null,
+      isContractEvaluation?: boolean | null,
+      isContractReport?: boolean | null,
       createdAt: string,
       updatedAt: string,
     } | null,
@@ -1050,6 +1106,8 @@ export type CreateEmployeeByCompanyAdminMutation = {
         startMonth: number,
         shortName?: string | null,
         url?: string | null,
+        isContractEvaluation?: boolean | null,
+        isContractReport?: boolean | null,
         createdAt: string,
         updatedAt: string,
       } | null,
@@ -1077,6 +1135,8 @@ export type CreateEmployeeByCompanyAdminMutation = {
           startMonth: number,
           shortName?: string | null,
           url?: string | null,
+          isContractEvaluation?: boolean | null,
+          isContractReport?: boolean | null,
           createdAt: string,
           updatedAt: string,
         } | null,
@@ -1104,6 +1164,8 @@ export type CreateEmployeeByCompanyAdminMutation = {
             startMonth: number,
             shortName?: string | null,
             url?: string | null,
+            isContractEvaluation?: boolean | null,
+            isContractReport?: boolean | null,
             createdAt: string,
             updatedAt: string,
           } | null,
@@ -1131,6 +1193,8 @@ export type CreateEmployeeByCompanyAdminMutation = {
               startMonth: number,
               shortName?: string | null,
               url?: string | null,
+              isContractEvaluation?: boolean | null,
+              isContractReport?: boolean | null,
               createdAt: string,
               updatedAt: string,
             } | null,
@@ -1158,6 +1222,8 @@ export type CreateEmployeeByCompanyAdminMutation = {
                 startMonth: number,
                 shortName?: string | null,
                 url?: string | null,
+                isContractEvaluation?: boolean | null,
+                isContractReport?: boolean | null,
                 createdAt: string,
                 updatedAt: string,
               } | null,
@@ -1270,6 +1336,8 @@ export type UpdateEmployeeByCompanyAdminMutation = {
       startMonth: number,
       shortName?: string | null,
       url?: string | null,
+      isContractEvaluation?: boolean | null,
+      isContractReport?: boolean | null,
       createdAt: string,
       updatedAt: string,
     } | null,
@@ -1297,6 +1365,8 @@ export type UpdateEmployeeByCompanyAdminMutation = {
         startMonth: number,
         shortName?: string | null,
         url?: string | null,
+        isContractEvaluation?: boolean | null,
+        isContractReport?: boolean | null,
         createdAt: string,
         updatedAt: string,
       } | null,
@@ -1324,6 +1394,8 @@ export type UpdateEmployeeByCompanyAdminMutation = {
           startMonth: number,
           shortName?: string | null,
           url?: string | null,
+          isContractEvaluation?: boolean | null,
+          isContractReport?: boolean | null,
           createdAt: string,
           updatedAt: string,
         } | null,
@@ -1351,6 +1423,8 @@ export type UpdateEmployeeByCompanyAdminMutation = {
             startMonth: number,
             shortName?: string | null,
             url?: string | null,
+            isContractEvaluation?: boolean | null,
+            isContractReport?: boolean | null,
             createdAt: string,
             updatedAt: string,
           } | null,
@@ -1378,6 +1452,8 @@ export type UpdateEmployeeByCompanyAdminMutation = {
               startMonth: number,
               shortName?: string | null,
               url?: string | null,
+              isContractEvaluation?: boolean | null,
+              isContractReport?: boolean | null,
               createdAt: string,
               updatedAt: string,
             } | null,
@@ -1405,6 +1481,8 @@ export type UpdateEmployeeByCompanyAdminMutation = {
                 startMonth: number,
                 shortName?: string | null,
                 url?: string | null,
+                isContractEvaluation?: boolean | null,
+                isContractReport?: boolean | null,
                 createdAt: string,
                 updatedAt: string,
               } | null,
@@ -1517,6 +1595,8 @@ export type DeleteEmployeeByCompanyAdminMutation = {
       startMonth: number,
       shortName?: string | null,
       url?: string | null,
+      isContractEvaluation?: boolean | null,
+      isContractReport?: boolean | null,
       createdAt: string,
       updatedAt: string,
     } | null,
@@ -1544,6 +1624,8 @@ export type DeleteEmployeeByCompanyAdminMutation = {
         startMonth: number,
         shortName?: string | null,
         url?: string | null,
+        isContractEvaluation?: boolean | null,
+        isContractReport?: boolean | null,
         createdAt: string,
         updatedAt: string,
       } | null,
@@ -1571,6 +1653,8 @@ export type DeleteEmployeeByCompanyAdminMutation = {
           startMonth: number,
           shortName?: string | null,
           url?: string | null,
+          isContractEvaluation?: boolean | null,
+          isContractReport?: boolean | null,
           createdAt: string,
           updatedAt: string,
         } | null,
@@ -1598,6 +1682,8 @@ export type DeleteEmployeeByCompanyAdminMutation = {
             startMonth: number,
             shortName?: string | null,
             url?: string | null,
+            isContractEvaluation?: boolean | null,
+            isContractReport?: boolean | null,
             createdAt: string,
             updatedAt: string,
           } | null,
@@ -1625,6 +1711,8 @@ export type DeleteEmployeeByCompanyAdminMutation = {
               startMonth: number,
               shortName?: string | null,
               url?: string | null,
+              isContractEvaluation?: boolean | null,
+              isContractReport?: boolean | null,
               createdAt: string,
               updatedAt: string,
             } | null,
@@ -1652,6 +1740,8 @@ export type DeleteEmployeeByCompanyAdminMutation = {
                 startMonth: number,
                 shortName?: string | null,
                 url?: string | null,
+                isContractEvaluation?: boolean | null,
+                isContractReport?: boolean | null,
                 createdAt: string,
                 updatedAt: string,
               } | null,
@@ -1849,6 +1939,8 @@ export type UpdateSheetByCompanyAdminMutation = {
         startMonth: number,
         shortName?: string | null,
         url?: string | null,
+        isContractEvaluation?: boolean | null,
+        isContractReport?: boolean | null,
         createdAt: string,
         updatedAt: string,
       } | null,
@@ -1876,6 +1968,8 @@ export type UpdateSheetByCompanyAdminMutation = {
           startMonth: number,
           shortName?: string | null,
           url?: string | null,
+          isContractEvaluation?: boolean | null,
+          isContractReport?: boolean | null,
           createdAt: string,
           updatedAt: string,
         } | null,
@@ -1903,6 +1997,8 @@ export type UpdateSheetByCompanyAdminMutation = {
             startMonth: number,
             shortName?: string | null,
             url?: string | null,
+            isContractEvaluation?: boolean | null,
+            isContractReport?: boolean | null,
             createdAt: string,
             updatedAt: string,
           } | null,
@@ -1930,6 +2026,8 @@ export type UpdateSheetByCompanyAdminMutation = {
               startMonth: number,
               shortName?: string | null,
               url?: string | null,
+              isContractEvaluation?: boolean | null,
+              isContractReport?: boolean | null,
               createdAt: string,
               updatedAt: string,
             } | null,
@@ -1957,6 +2055,8 @@ export type UpdateSheetByCompanyAdminMutation = {
                 startMonth: number,
                 shortName?: string | null,
                 url?: string | null,
+                isContractEvaluation?: boolean | null,
+                isContractReport?: boolean | null,
                 createdAt: string,
                 updatedAt: string,
               } | null,
@@ -2052,6 +2152,8 @@ export type UpdateSheetByCompanyAdminMutation = {
         startMonth: number,
         shortName?: string | null,
         url?: string | null,
+        isContractEvaluation?: boolean | null,
+        isContractReport?: boolean | null,
         createdAt: string,
         updatedAt: string,
       } | null,
@@ -2079,6 +2181,8 @@ export type UpdateSheetByCompanyAdminMutation = {
           startMonth: number,
           shortName?: string | null,
           url?: string | null,
+          isContractEvaluation?: boolean | null,
+          isContractReport?: boolean | null,
           createdAt: string,
           updatedAt: string,
         } | null,
@@ -2106,6 +2210,8 @@ export type UpdateSheetByCompanyAdminMutation = {
             startMonth: number,
             shortName?: string | null,
             url?: string | null,
+            isContractEvaluation?: boolean | null,
+            isContractReport?: boolean | null,
             createdAt: string,
             updatedAt: string,
           } | null,
@@ -2133,6 +2239,8 @@ export type UpdateSheetByCompanyAdminMutation = {
               startMonth: number,
               shortName?: string | null,
               url?: string | null,
+              isContractEvaluation?: boolean | null,
+              isContractReport?: boolean | null,
               createdAt: string,
               updatedAt: string,
             } | null,
@@ -2160,6 +2268,8 @@ export type UpdateSheetByCompanyAdminMutation = {
                 startMonth: number,
                 shortName?: string | null,
                 url?: string | null,
+                isContractEvaluation?: boolean | null,
+                isContractReport?: boolean | null,
                 createdAt: string,
                 updatedAt: string,
               } | null,
@@ -2255,6 +2365,8 @@ export type UpdateSheetByCompanyAdminMutation = {
         startMonth: number,
         shortName?: string | null,
         url?: string | null,
+        isContractEvaluation?: boolean | null,
+        isContractReport?: boolean | null,
         createdAt: string,
         updatedAt: string,
       } | null,
@@ -2282,6 +2394,8 @@ export type UpdateSheetByCompanyAdminMutation = {
           startMonth: number,
           shortName?: string | null,
           url?: string | null,
+          isContractEvaluation?: boolean | null,
+          isContractReport?: boolean | null,
           createdAt: string,
           updatedAt: string,
         } | null,
@@ -2309,6 +2423,8 @@ export type UpdateSheetByCompanyAdminMutation = {
             startMonth: number,
             shortName?: string | null,
             url?: string | null,
+            isContractEvaluation?: boolean | null,
+            isContractReport?: boolean | null,
             createdAt: string,
             updatedAt: string,
           } | null,
@@ -2336,6 +2452,8 @@ export type UpdateSheetByCompanyAdminMutation = {
               startMonth: number,
               shortName?: string | null,
               url?: string | null,
+              isContractEvaluation?: boolean | null,
+              isContractReport?: boolean | null,
               createdAt: string,
               updatedAt: string,
             } | null,
@@ -2363,6 +2481,8 @@ export type UpdateSheetByCompanyAdminMutation = {
                 startMonth: number,
                 shortName?: string | null,
                 url?: string | null,
+                isContractEvaluation?: boolean | null,
+                isContractReport?: boolean | null,
                 createdAt: string,
                 updatedAt: string,
               } | null,
@@ -2445,7 +2565,7 @@ export type UpdateSheetByCompanyAdminMutation = {
     } | null,
     section?:  {
       __typename: "ModelSectionConnection",
-      items?:  Array< {
+      items:  Array< {
         __typename: "Section",
         id: string,
         sheetID: string,
@@ -2459,7 +2579,7 @@ export type UpdateSheetByCompanyAdminMutation = {
         updatedAt: string,
         objective?:  {
           __typename: "ModelObjectiveConnection",
-          items?:  Array< {
+          items:  Array< {
             __typename: "Objective",
             id: string,
             sectionID: string,
@@ -2479,10 +2599,10 @@ export type UpdateSheetByCompanyAdminMutation = {
             secondReviewers?: Array< string > | null,
             referencer?: Array< string > | null,
             updatedAt: string,
-          } | null > | null,
+          } | null >,
           nextToken?: string | null,
         } | null,
-      } | null > | null,
+      } | null >,
       nextToken?: string | null,
     } | null,
   } | null,
@@ -2554,6 +2674,8 @@ export type DeleteSheetWithChildrenByCompanyAdminMutation = {
         startMonth: number,
         shortName?: string | null,
         url?: string | null,
+        isContractEvaluation?: boolean | null,
+        isContractReport?: boolean | null,
         createdAt: string,
         updatedAt: string,
       } | null,
@@ -2581,6 +2703,8 @@ export type DeleteSheetWithChildrenByCompanyAdminMutation = {
           startMonth: number,
           shortName?: string | null,
           url?: string | null,
+          isContractEvaluation?: boolean | null,
+          isContractReport?: boolean | null,
           createdAt: string,
           updatedAt: string,
         } | null,
@@ -2608,6 +2732,8 @@ export type DeleteSheetWithChildrenByCompanyAdminMutation = {
             startMonth: number,
             shortName?: string | null,
             url?: string | null,
+            isContractEvaluation?: boolean | null,
+            isContractReport?: boolean | null,
             createdAt: string,
             updatedAt: string,
           } | null,
@@ -2635,6 +2761,8 @@ export type DeleteSheetWithChildrenByCompanyAdminMutation = {
               startMonth: number,
               shortName?: string | null,
               url?: string | null,
+              isContractEvaluation?: boolean | null,
+              isContractReport?: boolean | null,
               createdAt: string,
               updatedAt: string,
             } | null,
@@ -2662,6 +2790,8 @@ export type DeleteSheetWithChildrenByCompanyAdminMutation = {
                 startMonth: number,
                 shortName?: string | null,
                 url?: string | null,
+                isContractEvaluation?: boolean | null,
+                isContractReport?: boolean | null,
                 createdAt: string,
                 updatedAt: string,
               } | null,
@@ -2757,6 +2887,8 @@ export type DeleteSheetWithChildrenByCompanyAdminMutation = {
         startMonth: number,
         shortName?: string | null,
         url?: string | null,
+        isContractEvaluation?: boolean | null,
+        isContractReport?: boolean | null,
         createdAt: string,
         updatedAt: string,
       } | null,
@@ -2784,6 +2916,8 @@ export type DeleteSheetWithChildrenByCompanyAdminMutation = {
           startMonth: number,
           shortName?: string | null,
           url?: string | null,
+          isContractEvaluation?: boolean | null,
+          isContractReport?: boolean | null,
           createdAt: string,
           updatedAt: string,
         } | null,
@@ -2811,6 +2945,8 @@ export type DeleteSheetWithChildrenByCompanyAdminMutation = {
             startMonth: number,
             shortName?: string | null,
             url?: string | null,
+            isContractEvaluation?: boolean | null,
+            isContractReport?: boolean | null,
             createdAt: string,
             updatedAt: string,
           } | null,
@@ -2838,6 +2974,8 @@ export type DeleteSheetWithChildrenByCompanyAdminMutation = {
               startMonth: number,
               shortName?: string | null,
               url?: string | null,
+              isContractEvaluation?: boolean | null,
+              isContractReport?: boolean | null,
               createdAt: string,
               updatedAt: string,
             } | null,
@@ -2865,6 +3003,8 @@ export type DeleteSheetWithChildrenByCompanyAdminMutation = {
                 startMonth: number,
                 shortName?: string | null,
                 url?: string | null,
+                isContractEvaluation?: boolean | null,
+                isContractReport?: boolean | null,
                 createdAt: string,
                 updatedAt: string,
               } | null,
@@ -2960,6 +3100,8 @@ export type DeleteSheetWithChildrenByCompanyAdminMutation = {
         startMonth: number,
         shortName?: string | null,
         url?: string | null,
+        isContractEvaluation?: boolean | null,
+        isContractReport?: boolean | null,
         createdAt: string,
         updatedAt: string,
       } | null,
@@ -2987,6 +3129,8 @@ export type DeleteSheetWithChildrenByCompanyAdminMutation = {
           startMonth: number,
           shortName?: string | null,
           url?: string | null,
+          isContractEvaluation?: boolean | null,
+          isContractReport?: boolean | null,
           createdAt: string,
           updatedAt: string,
         } | null,
@@ -3014,6 +3158,8 @@ export type DeleteSheetWithChildrenByCompanyAdminMutation = {
             startMonth: number,
             shortName?: string | null,
             url?: string | null,
+            isContractEvaluation?: boolean | null,
+            isContractReport?: boolean | null,
             createdAt: string,
             updatedAt: string,
           } | null,
@@ -3041,6 +3187,8 @@ export type DeleteSheetWithChildrenByCompanyAdminMutation = {
               startMonth: number,
               shortName?: string | null,
               url?: string | null,
+              isContractEvaluation?: boolean | null,
+              isContractReport?: boolean | null,
               createdAt: string,
               updatedAt: string,
             } | null,
@@ -3068,6 +3216,8 @@ export type DeleteSheetWithChildrenByCompanyAdminMutation = {
                 startMonth: number,
                 shortName?: string | null,
                 url?: string | null,
+                isContractEvaluation?: boolean | null,
+                isContractReport?: boolean | null,
                 createdAt: string,
                 updatedAt: string,
               } | null,
@@ -3150,7 +3300,7 @@ export type DeleteSheetWithChildrenByCompanyAdminMutation = {
     } | null,
     section?:  {
       __typename: "ModelSectionConnection",
-      items?:  Array< {
+      items:  Array< {
         __typename: "Section",
         id: string,
         sheetID: string,
@@ -3164,7 +3314,7 @@ export type DeleteSheetWithChildrenByCompanyAdminMutation = {
         updatedAt: string,
         objective?:  {
           __typename: "ModelObjectiveConnection",
-          items?:  Array< {
+          items:  Array< {
             __typename: "Objective",
             id: string,
             sectionID: string,
@@ -3184,10 +3334,10 @@ export type DeleteSheetWithChildrenByCompanyAdminMutation = {
             secondReviewers?: Array< string > | null,
             referencer?: Array< string > | null,
             updatedAt: string,
-          } | null > | null,
+          } | null >,
           nextToken?: string | null,
         } | null,
-      } | null > | null,
+      } | null >,
       nextToken?: string | null,
     } | null,
   } | null,
@@ -3245,6 +3395,8 @@ export type UpdateReportByCompanyAdminMutation = {
         startMonth: number,
         shortName?: string | null,
         url?: string | null,
+        isContractEvaluation?: boolean | null,
+        isContractReport?: boolean | null,
         createdAt: string,
         updatedAt: string,
       } | null,
@@ -3272,6 +3424,8 @@ export type UpdateReportByCompanyAdminMutation = {
           startMonth: number,
           shortName?: string | null,
           url?: string | null,
+          isContractEvaluation?: boolean | null,
+          isContractReport?: boolean | null,
           createdAt: string,
           updatedAt: string,
         } | null,
@@ -3299,6 +3453,8 @@ export type UpdateReportByCompanyAdminMutation = {
             startMonth: number,
             shortName?: string | null,
             url?: string | null,
+            isContractEvaluation?: boolean | null,
+            isContractReport?: boolean | null,
             createdAt: string,
             updatedAt: string,
           } | null,
@@ -3326,6 +3482,8 @@ export type UpdateReportByCompanyAdminMutation = {
               startMonth: number,
               shortName?: string | null,
               url?: string | null,
+              isContractEvaluation?: boolean | null,
+              isContractReport?: boolean | null,
               createdAt: string,
               updatedAt: string,
             } | null,
@@ -3353,6 +3511,8 @@ export type UpdateReportByCompanyAdminMutation = {
                 startMonth: number,
                 shortName?: string | null,
                 url?: string | null,
+                isContractEvaluation?: boolean | null,
+                isContractReport?: boolean | null,
                 createdAt: string,
                 updatedAt: string,
               } | null,
@@ -3479,6 +3639,8 @@ export type DeleteReportByCompanyAdminMutation = {
         startMonth: number,
         shortName?: string | null,
         url?: string | null,
+        isContractEvaluation?: boolean | null,
+        isContractReport?: boolean | null,
         createdAt: string,
         updatedAt: string,
       } | null,
@@ -3506,6 +3668,8 @@ export type DeleteReportByCompanyAdminMutation = {
           startMonth: number,
           shortName?: string | null,
           url?: string | null,
+          isContractEvaluation?: boolean | null,
+          isContractReport?: boolean | null,
           createdAt: string,
           updatedAt: string,
         } | null,
@@ -3533,6 +3697,8 @@ export type DeleteReportByCompanyAdminMutation = {
             startMonth: number,
             shortName?: string | null,
             url?: string | null,
+            isContractEvaluation?: boolean | null,
+            isContractReport?: boolean | null,
             createdAt: string,
             updatedAt: string,
           } | null,
@@ -3560,6 +3726,8 @@ export type DeleteReportByCompanyAdminMutation = {
               startMonth: number,
               shortName?: string | null,
               url?: string | null,
+              isContractEvaluation?: boolean | null,
+              isContractReport?: boolean | null,
               createdAt: string,
               updatedAt: string,
             } | null,
@@ -3587,6 +3755,8 @@ export type DeleteReportByCompanyAdminMutation = {
                 startMonth: number,
                 shortName?: string | null,
                 url?: string | null,
+                isContractEvaluation?: boolean | null,
+                isContractReport?: boolean | null,
                 createdAt: string,
                 updatedAt: string,
               } | null,
@@ -3661,26 +3831,12 @@ export type DeleteReportByCompanyAdminMutation = {
   } | null,
 };
 
-export type CreateCompanyMutationVariables = {
-  input?: CreateCompanyInput,
-  condition?: ModelCompanyConditionInput | null,
-};
-
-export type CreateCompanyMutation = {
-  createCompany?:  {
-    __typename: "Company",
-    id: string,
-    name: string,
-    startMonth: number,
-    shortName?: string | null,
-    url?: string | null,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
+export type CreateJobByAdminMutation = {
+  createJobByAdmin?: string | null,
 };
 
 export type UpdateCompanyMutationVariables = {
-  input?: UpdateCompanyInput,
+  input: UpdateCompanyInput,
   condition?: ModelCompanyConditionInput | null,
 };
 
@@ -3692,13 +3848,15 @@ export type UpdateCompanyMutation = {
     startMonth: number,
     shortName?: string | null,
     url?: string | null,
+    isContractEvaluation?: boolean | null,
+    isContractReport?: boolean | null,
     createdAt: string,
     updatedAt: string,
   } | null,
 };
 
 export type DeleteCompanyMutationVariables = {
-  input?: DeleteCompanyInput,
+  input: DeleteCompanyInput,
   condition?: ModelCompanyConditionInput | null,
 };
 
@@ -3710,13 +3868,35 @@ export type DeleteCompanyMutation = {
     startMonth: number,
     shortName?: string | null,
     url?: string | null,
+    isContractEvaluation?: boolean | null,
+    isContractReport?: boolean | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type CreateCompanyMutationVariables = {
+  input: CreateCompanyInput,
+  condition?: ModelCompanyConditionInput | null,
+};
+
+export type CreateCompanyMutation = {
+  createCompany?:  {
+    __typename: "Company",
+    id: string,
+    name: string,
+    startMonth: number,
+    shortName?: string | null,
+    url?: string | null,
+    isContractEvaluation?: boolean | null,
+    isContractReport?: boolean | null,
     createdAt: string,
     updatedAt: string,
   } | null,
 };
 
 export type CreateEmployeeMutationVariables = {
-  input?: CreateEmployeeInput,
+  input: CreateEmployeeInput,
   condition?: ModelEmployeeConditionInput | null,
 };
 
@@ -3745,6 +3925,8 @@ export type CreateEmployeeMutation = {
       startMonth: number,
       shortName?: string | null,
       url?: string | null,
+      isContractEvaluation?: boolean | null,
+      isContractReport?: boolean | null,
       createdAt: string,
       updatedAt: string,
     } | null,
@@ -3772,6 +3954,8 @@ export type CreateEmployeeMutation = {
         startMonth: number,
         shortName?: string | null,
         url?: string | null,
+        isContractEvaluation?: boolean | null,
+        isContractReport?: boolean | null,
         createdAt: string,
         updatedAt: string,
       } | null,
@@ -3799,6 +3983,8 @@ export type CreateEmployeeMutation = {
           startMonth: number,
           shortName?: string | null,
           url?: string | null,
+          isContractEvaluation?: boolean | null,
+          isContractReport?: boolean | null,
           createdAt: string,
           updatedAt: string,
         } | null,
@@ -3826,6 +4012,8 @@ export type CreateEmployeeMutation = {
             startMonth: number,
             shortName?: string | null,
             url?: string | null,
+            isContractEvaluation?: boolean | null,
+            isContractReport?: boolean | null,
             createdAt: string,
             updatedAt: string,
           } | null,
@@ -3853,6 +4041,8 @@ export type CreateEmployeeMutation = {
               startMonth: number,
               shortName?: string | null,
               url?: string | null,
+              isContractEvaluation?: boolean | null,
+              isContractReport?: boolean | null,
               createdAt: string,
               updatedAt: string,
             } | null,
@@ -3880,6 +4070,8 @@ export type CreateEmployeeMutation = {
                 startMonth: number,
                 shortName?: string | null,
                 url?: string | null,
+                isContractEvaluation?: boolean | null,
+                isContractReport?: boolean | null,
                 createdAt: string,
                 updatedAt: string,
               } | null,
@@ -3964,7 +4156,7 @@ export type CreateEmployeeMutation = {
 };
 
 export type UpdateEmployeeMutationVariables = {
-  input?: UpdateEmployeeInput,
+  input: UpdateEmployeeInput,
   condition?: ModelEmployeeConditionInput | null,
 };
 
@@ -3993,6 +4185,8 @@ export type UpdateEmployeeMutation = {
       startMonth: number,
       shortName?: string | null,
       url?: string | null,
+      isContractEvaluation?: boolean | null,
+      isContractReport?: boolean | null,
       createdAt: string,
       updatedAt: string,
     } | null,
@@ -4020,6 +4214,8 @@ export type UpdateEmployeeMutation = {
         startMonth: number,
         shortName?: string | null,
         url?: string | null,
+        isContractEvaluation?: boolean | null,
+        isContractReport?: boolean | null,
         createdAt: string,
         updatedAt: string,
       } | null,
@@ -4047,6 +4243,8 @@ export type UpdateEmployeeMutation = {
           startMonth: number,
           shortName?: string | null,
           url?: string | null,
+          isContractEvaluation?: boolean | null,
+          isContractReport?: boolean | null,
           createdAt: string,
           updatedAt: string,
         } | null,
@@ -4074,6 +4272,8 @@ export type UpdateEmployeeMutation = {
             startMonth: number,
             shortName?: string | null,
             url?: string | null,
+            isContractEvaluation?: boolean | null,
+            isContractReport?: boolean | null,
             createdAt: string,
             updatedAt: string,
           } | null,
@@ -4101,6 +4301,8 @@ export type UpdateEmployeeMutation = {
               startMonth: number,
               shortName?: string | null,
               url?: string | null,
+              isContractEvaluation?: boolean | null,
+              isContractReport?: boolean | null,
               createdAt: string,
               updatedAt: string,
             } | null,
@@ -4128,6 +4330,8 @@ export type UpdateEmployeeMutation = {
                 startMonth: number,
                 shortName?: string | null,
                 url?: string | null,
+                isContractEvaluation?: boolean | null,
+                isContractReport?: boolean | null,
                 createdAt: string,
                 updatedAt: string,
               } | null,
@@ -4212,7 +4416,7 @@ export type UpdateEmployeeMutation = {
 };
 
 export type DeleteEmployeeMutationVariables = {
-  input?: DeleteEmployeeInput,
+  input: DeleteEmployeeInput,
   condition?: ModelEmployeeConditionInput | null,
 };
 
@@ -4241,6 +4445,8 @@ export type DeleteEmployeeMutation = {
       startMonth: number,
       shortName?: string | null,
       url?: string | null,
+      isContractEvaluation?: boolean | null,
+      isContractReport?: boolean | null,
       createdAt: string,
       updatedAt: string,
     } | null,
@@ -4268,6 +4474,8 @@ export type DeleteEmployeeMutation = {
         startMonth: number,
         shortName?: string | null,
         url?: string | null,
+        isContractEvaluation?: boolean | null,
+        isContractReport?: boolean | null,
         createdAt: string,
         updatedAt: string,
       } | null,
@@ -4295,6 +4503,8 @@ export type DeleteEmployeeMutation = {
           startMonth: number,
           shortName?: string | null,
           url?: string | null,
+          isContractEvaluation?: boolean | null,
+          isContractReport?: boolean | null,
           createdAt: string,
           updatedAt: string,
         } | null,
@@ -4322,6 +4532,8 @@ export type DeleteEmployeeMutation = {
             startMonth: number,
             shortName?: string | null,
             url?: string | null,
+            isContractEvaluation?: boolean | null,
+            isContractReport?: boolean | null,
             createdAt: string,
             updatedAt: string,
           } | null,
@@ -4349,6 +4561,8 @@ export type DeleteEmployeeMutation = {
               startMonth: number,
               shortName?: string | null,
               url?: string | null,
+              isContractEvaluation?: boolean | null,
+              isContractReport?: boolean | null,
               createdAt: string,
               updatedAt: string,
             } | null,
@@ -4376,6 +4590,8 @@ export type DeleteEmployeeMutation = {
                 startMonth: number,
                 shortName?: string | null,
                 url?: string | null,
+                isContractEvaluation?: boolean | null,
+                isContractReport?: boolean | null,
                 createdAt: string,
                 updatedAt: string,
               } | null,
@@ -4460,7 +4676,7 @@ export type DeleteEmployeeMutation = {
 };
 
 export type CreateGroupMutationVariables = {
-  input?: CreateGroupInput,
+  input: CreateGroupInput,
   condition?: ModelGroupConditionInput | null,
 };
 
@@ -4477,7 +4693,7 @@ export type CreateGroupMutation = {
 };
 
 export type UpdateGroupMutationVariables = {
-  input?: UpdateGroupInput,
+  input: UpdateGroupInput,
   condition?: ModelGroupConditionInput | null,
 };
 
@@ -4494,7 +4710,7 @@ export type UpdateGroupMutation = {
 };
 
 export type DeleteGroupMutationVariables = {
-  input?: DeleteGroupInput,
+  input: DeleteGroupInput,
   condition?: ModelGroupConditionInput | null,
 };
 
@@ -4511,7 +4727,7 @@ export type DeleteGroupMutation = {
 };
 
 export type CreateCategoryMutationVariables = {
-  input?: CreateCategoryInput,
+  input: CreateCategoryInput,
   condition?: ModelCategoryConditionInput | null,
 };
 
@@ -4528,7 +4744,7 @@ export type CreateCategoryMutation = {
 };
 
 export type UpdateCategoryMutationVariables = {
-  input?: UpdateCategoryInput,
+  input: UpdateCategoryInput,
   condition?: ModelCategoryConditionInput | null,
 };
 
@@ -4545,7 +4761,7 @@ export type UpdateCategoryMutation = {
 };
 
 export type DeleteCategoryMutationVariables = {
-  input?: DeleteCategoryInput,
+  input: DeleteCategoryInput,
   condition?: ModelCategoryConditionInput | null,
 };
 
@@ -4562,7 +4778,7 @@ export type DeleteCategoryMutation = {
 };
 
 export type CreateSheetMutationVariables = {
-  input?: CreateSheetInput,
+  input: CreateSheetInput,
   condition?: ModelSheetConditionInput | null,
 };
 
@@ -4628,6 +4844,8 @@ export type CreateSheetMutation = {
         startMonth: number,
         shortName?: string | null,
         url?: string | null,
+        isContractEvaluation?: boolean | null,
+        isContractReport?: boolean | null,
         createdAt: string,
         updatedAt: string,
       } | null,
@@ -4655,6 +4873,8 @@ export type CreateSheetMutation = {
           startMonth: number,
           shortName?: string | null,
           url?: string | null,
+          isContractEvaluation?: boolean | null,
+          isContractReport?: boolean | null,
           createdAt: string,
           updatedAt: string,
         } | null,
@@ -4682,6 +4902,8 @@ export type CreateSheetMutation = {
             startMonth: number,
             shortName?: string | null,
             url?: string | null,
+            isContractEvaluation?: boolean | null,
+            isContractReport?: boolean | null,
             createdAt: string,
             updatedAt: string,
           } | null,
@@ -4709,6 +4931,8 @@ export type CreateSheetMutation = {
               startMonth: number,
               shortName?: string | null,
               url?: string | null,
+              isContractEvaluation?: boolean | null,
+              isContractReport?: boolean | null,
               createdAt: string,
               updatedAt: string,
             } | null,
@@ -4736,6 +4960,8 @@ export type CreateSheetMutation = {
                 startMonth: number,
                 shortName?: string | null,
                 url?: string | null,
+                isContractEvaluation?: boolean | null,
+                isContractReport?: boolean | null,
                 createdAt: string,
                 updatedAt: string,
               } | null,
@@ -4831,6 +5057,8 @@ export type CreateSheetMutation = {
         startMonth: number,
         shortName?: string | null,
         url?: string | null,
+        isContractEvaluation?: boolean | null,
+        isContractReport?: boolean | null,
         createdAt: string,
         updatedAt: string,
       } | null,
@@ -4858,6 +5086,8 @@ export type CreateSheetMutation = {
           startMonth: number,
           shortName?: string | null,
           url?: string | null,
+          isContractEvaluation?: boolean | null,
+          isContractReport?: boolean | null,
           createdAt: string,
           updatedAt: string,
         } | null,
@@ -4885,6 +5115,8 @@ export type CreateSheetMutation = {
             startMonth: number,
             shortName?: string | null,
             url?: string | null,
+            isContractEvaluation?: boolean | null,
+            isContractReport?: boolean | null,
             createdAt: string,
             updatedAt: string,
           } | null,
@@ -4912,6 +5144,8 @@ export type CreateSheetMutation = {
               startMonth: number,
               shortName?: string | null,
               url?: string | null,
+              isContractEvaluation?: boolean | null,
+              isContractReport?: boolean | null,
               createdAt: string,
               updatedAt: string,
             } | null,
@@ -4939,6 +5173,8 @@ export type CreateSheetMutation = {
                 startMonth: number,
                 shortName?: string | null,
                 url?: string | null,
+                isContractEvaluation?: boolean | null,
+                isContractReport?: boolean | null,
                 createdAt: string,
                 updatedAt: string,
               } | null,
@@ -5034,6 +5270,8 @@ export type CreateSheetMutation = {
         startMonth: number,
         shortName?: string | null,
         url?: string | null,
+        isContractEvaluation?: boolean | null,
+        isContractReport?: boolean | null,
         createdAt: string,
         updatedAt: string,
       } | null,
@@ -5061,6 +5299,8 @@ export type CreateSheetMutation = {
           startMonth: number,
           shortName?: string | null,
           url?: string | null,
+          isContractEvaluation?: boolean | null,
+          isContractReport?: boolean | null,
           createdAt: string,
           updatedAt: string,
         } | null,
@@ -5088,6 +5328,8 @@ export type CreateSheetMutation = {
             startMonth: number,
             shortName?: string | null,
             url?: string | null,
+            isContractEvaluation?: boolean | null,
+            isContractReport?: boolean | null,
             createdAt: string,
             updatedAt: string,
           } | null,
@@ -5115,6 +5357,8 @@ export type CreateSheetMutation = {
               startMonth: number,
               shortName?: string | null,
               url?: string | null,
+              isContractEvaluation?: boolean | null,
+              isContractReport?: boolean | null,
               createdAt: string,
               updatedAt: string,
             } | null,
@@ -5142,6 +5386,8 @@ export type CreateSheetMutation = {
                 startMonth: number,
                 shortName?: string | null,
                 url?: string | null,
+                isContractEvaluation?: boolean | null,
+                isContractReport?: boolean | null,
                 createdAt: string,
                 updatedAt: string,
               } | null,
@@ -5224,7 +5470,7 @@ export type CreateSheetMutation = {
     } | null,
     section?:  {
       __typename: "ModelSectionConnection",
-      items?:  Array< {
+      items:  Array< {
         __typename: "Section",
         id: string,
         sheetID: string,
@@ -5238,7 +5484,7 @@ export type CreateSheetMutation = {
         updatedAt: string,
         objective?:  {
           __typename: "ModelObjectiveConnection",
-          items?:  Array< {
+          items:  Array< {
             __typename: "Objective",
             id: string,
             sectionID: string,
@@ -5258,17 +5504,17 @@ export type CreateSheetMutation = {
             secondReviewers?: Array< string > | null,
             referencer?: Array< string > | null,
             updatedAt: string,
-          } | null > | null,
+          } | null >,
           nextToken?: string | null,
         } | null,
-      } | null > | null,
+      } | null >,
       nextToken?: string | null,
     } | null,
   } | null,
 };
 
 export type UpdateSheetMutationVariables = {
-  input?: UpdateSheetInput,
+  input: UpdateSheetInput,
   condition?: ModelSheetConditionInput | null,
 };
 
@@ -5334,6 +5580,8 @@ export type UpdateSheetMutation = {
         startMonth: number,
         shortName?: string | null,
         url?: string | null,
+        isContractEvaluation?: boolean | null,
+        isContractReport?: boolean | null,
         createdAt: string,
         updatedAt: string,
       } | null,
@@ -5361,6 +5609,8 @@ export type UpdateSheetMutation = {
           startMonth: number,
           shortName?: string | null,
           url?: string | null,
+          isContractEvaluation?: boolean | null,
+          isContractReport?: boolean | null,
           createdAt: string,
           updatedAt: string,
         } | null,
@@ -5388,6 +5638,8 @@ export type UpdateSheetMutation = {
             startMonth: number,
             shortName?: string | null,
             url?: string | null,
+            isContractEvaluation?: boolean | null,
+            isContractReport?: boolean | null,
             createdAt: string,
             updatedAt: string,
           } | null,
@@ -5415,6 +5667,8 @@ export type UpdateSheetMutation = {
               startMonth: number,
               shortName?: string | null,
               url?: string | null,
+              isContractEvaluation?: boolean | null,
+              isContractReport?: boolean | null,
               createdAt: string,
               updatedAt: string,
             } | null,
@@ -5442,6 +5696,8 @@ export type UpdateSheetMutation = {
                 startMonth: number,
                 shortName?: string | null,
                 url?: string | null,
+                isContractEvaluation?: boolean | null,
+                isContractReport?: boolean | null,
                 createdAt: string,
                 updatedAt: string,
               } | null,
@@ -5537,6 +5793,8 @@ export type UpdateSheetMutation = {
         startMonth: number,
         shortName?: string | null,
         url?: string | null,
+        isContractEvaluation?: boolean | null,
+        isContractReport?: boolean | null,
         createdAt: string,
         updatedAt: string,
       } | null,
@@ -5564,6 +5822,8 @@ export type UpdateSheetMutation = {
           startMonth: number,
           shortName?: string | null,
           url?: string | null,
+          isContractEvaluation?: boolean | null,
+          isContractReport?: boolean | null,
           createdAt: string,
           updatedAt: string,
         } | null,
@@ -5591,6 +5851,8 @@ export type UpdateSheetMutation = {
             startMonth: number,
             shortName?: string | null,
             url?: string | null,
+            isContractEvaluation?: boolean | null,
+            isContractReport?: boolean | null,
             createdAt: string,
             updatedAt: string,
           } | null,
@@ -5618,6 +5880,8 @@ export type UpdateSheetMutation = {
               startMonth: number,
               shortName?: string | null,
               url?: string | null,
+              isContractEvaluation?: boolean | null,
+              isContractReport?: boolean | null,
               createdAt: string,
               updatedAt: string,
             } | null,
@@ -5645,6 +5909,8 @@ export type UpdateSheetMutation = {
                 startMonth: number,
                 shortName?: string | null,
                 url?: string | null,
+                isContractEvaluation?: boolean | null,
+                isContractReport?: boolean | null,
                 createdAt: string,
                 updatedAt: string,
               } | null,
@@ -5740,6 +6006,8 @@ export type UpdateSheetMutation = {
         startMonth: number,
         shortName?: string | null,
         url?: string | null,
+        isContractEvaluation?: boolean | null,
+        isContractReport?: boolean | null,
         createdAt: string,
         updatedAt: string,
       } | null,
@@ -5767,6 +6035,8 @@ export type UpdateSheetMutation = {
           startMonth: number,
           shortName?: string | null,
           url?: string | null,
+          isContractEvaluation?: boolean | null,
+          isContractReport?: boolean | null,
           createdAt: string,
           updatedAt: string,
         } | null,
@@ -5794,6 +6064,8 @@ export type UpdateSheetMutation = {
             startMonth: number,
             shortName?: string | null,
             url?: string | null,
+            isContractEvaluation?: boolean | null,
+            isContractReport?: boolean | null,
             createdAt: string,
             updatedAt: string,
           } | null,
@@ -5821,6 +6093,8 @@ export type UpdateSheetMutation = {
               startMonth: number,
               shortName?: string | null,
               url?: string | null,
+              isContractEvaluation?: boolean | null,
+              isContractReport?: boolean | null,
               createdAt: string,
               updatedAt: string,
             } | null,
@@ -5848,6 +6122,8 @@ export type UpdateSheetMutation = {
                 startMonth: number,
                 shortName?: string | null,
                 url?: string | null,
+                isContractEvaluation?: boolean | null,
+                isContractReport?: boolean | null,
                 createdAt: string,
                 updatedAt: string,
               } | null,
@@ -5930,7 +6206,7 @@ export type UpdateSheetMutation = {
     } | null,
     section?:  {
       __typename: "ModelSectionConnection",
-      items?:  Array< {
+      items:  Array< {
         __typename: "Section",
         id: string,
         sheetID: string,
@@ -5944,7 +6220,7 @@ export type UpdateSheetMutation = {
         updatedAt: string,
         objective?:  {
           __typename: "ModelObjectiveConnection",
-          items?:  Array< {
+          items:  Array< {
             __typename: "Objective",
             id: string,
             sectionID: string,
@@ -5964,17 +6240,17 @@ export type UpdateSheetMutation = {
             secondReviewers?: Array< string > | null,
             referencer?: Array< string > | null,
             updatedAt: string,
-          } | null > | null,
+          } | null >,
           nextToken?: string | null,
         } | null,
-      } | null > | null,
+      } | null >,
       nextToken?: string | null,
     } | null,
   } | null,
 };
 
 export type DeleteSheetMutationVariables = {
-  input?: DeleteSheetInput,
+  input: DeleteSheetInput,
   condition?: ModelSheetConditionInput | null,
 };
 
@@ -6040,6 +6316,8 @@ export type DeleteSheetMutation = {
         startMonth: number,
         shortName?: string | null,
         url?: string | null,
+        isContractEvaluation?: boolean | null,
+        isContractReport?: boolean | null,
         createdAt: string,
         updatedAt: string,
       } | null,
@@ -6067,6 +6345,8 @@ export type DeleteSheetMutation = {
           startMonth: number,
           shortName?: string | null,
           url?: string | null,
+          isContractEvaluation?: boolean | null,
+          isContractReport?: boolean | null,
           createdAt: string,
           updatedAt: string,
         } | null,
@@ -6094,6 +6374,8 @@ export type DeleteSheetMutation = {
             startMonth: number,
             shortName?: string | null,
             url?: string | null,
+            isContractEvaluation?: boolean | null,
+            isContractReport?: boolean | null,
             createdAt: string,
             updatedAt: string,
           } | null,
@@ -6121,6 +6403,8 @@ export type DeleteSheetMutation = {
               startMonth: number,
               shortName?: string | null,
               url?: string | null,
+              isContractEvaluation?: boolean | null,
+              isContractReport?: boolean | null,
               createdAt: string,
               updatedAt: string,
             } | null,
@@ -6148,6 +6432,8 @@ export type DeleteSheetMutation = {
                 startMonth: number,
                 shortName?: string | null,
                 url?: string | null,
+                isContractEvaluation?: boolean | null,
+                isContractReport?: boolean | null,
                 createdAt: string,
                 updatedAt: string,
               } | null,
@@ -6243,6 +6529,8 @@ export type DeleteSheetMutation = {
         startMonth: number,
         shortName?: string | null,
         url?: string | null,
+        isContractEvaluation?: boolean | null,
+        isContractReport?: boolean | null,
         createdAt: string,
         updatedAt: string,
       } | null,
@@ -6270,6 +6558,8 @@ export type DeleteSheetMutation = {
           startMonth: number,
           shortName?: string | null,
           url?: string | null,
+          isContractEvaluation?: boolean | null,
+          isContractReport?: boolean | null,
           createdAt: string,
           updatedAt: string,
         } | null,
@@ -6297,6 +6587,8 @@ export type DeleteSheetMutation = {
             startMonth: number,
             shortName?: string | null,
             url?: string | null,
+            isContractEvaluation?: boolean | null,
+            isContractReport?: boolean | null,
             createdAt: string,
             updatedAt: string,
           } | null,
@@ -6324,6 +6616,8 @@ export type DeleteSheetMutation = {
               startMonth: number,
               shortName?: string | null,
               url?: string | null,
+              isContractEvaluation?: boolean | null,
+              isContractReport?: boolean | null,
               createdAt: string,
               updatedAt: string,
             } | null,
@@ -6351,6 +6645,8 @@ export type DeleteSheetMutation = {
                 startMonth: number,
                 shortName?: string | null,
                 url?: string | null,
+                isContractEvaluation?: boolean | null,
+                isContractReport?: boolean | null,
                 createdAt: string,
                 updatedAt: string,
               } | null,
@@ -6446,6 +6742,8 @@ export type DeleteSheetMutation = {
         startMonth: number,
         shortName?: string | null,
         url?: string | null,
+        isContractEvaluation?: boolean | null,
+        isContractReport?: boolean | null,
         createdAt: string,
         updatedAt: string,
       } | null,
@@ -6473,6 +6771,8 @@ export type DeleteSheetMutation = {
           startMonth: number,
           shortName?: string | null,
           url?: string | null,
+          isContractEvaluation?: boolean | null,
+          isContractReport?: boolean | null,
           createdAt: string,
           updatedAt: string,
         } | null,
@@ -6500,6 +6800,8 @@ export type DeleteSheetMutation = {
             startMonth: number,
             shortName?: string | null,
             url?: string | null,
+            isContractEvaluation?: boolean | null,
+            isContractReport?: boolean | null,
             createdAt: string,
             updatedAt: string,
           } | null,
@@ -6527,6 +6829,8 @@ export type DeleteSheetMutation = {
               startMonth: number,
               shortName?: string | null,
               url?: string | null,
+              isContractEvaluation?: boolean | null,
+              isContractReport?: boolean | null,
               createdAt: string,
               updatedAt: string,
             } | null,
@@ -6554,6 +6858,8 @@ export type DeleteSheetMutation = {
                 startMonth: number,
                 shortName?: string | null,
                 url?: string | null,
+                isContractEvaluation?: boolean | null,
+                isContractReport?: boolean | null,
                 createdAt: string,
                 updatedAt: string,
               } | null,
@@ -6636,7 +6942,7 @@ export type DeleteSheetMutation = {
     } | null,
     section?:  {
       __typename: "ModelSectionConnection",
-      items?:  Array< {
+      items:  Array< {
         __typename: "Section",
         id: string,
         sheetID: string,
@@ -6650,7 +6956,7 @@ export type DeleteSheetMutation = {
         updatedAt: string,
         objective?:  {
           __typename: "ModelObjectiveConnection",
-          items?:  Array< {
+          items:  Array< {
             __typename: "Objective",
             id: string,
             sectionID: string,
@@ -6670,17 +6976,17 @@ export type DeleteSheetMutation = {
             secondReviewers?: Array< string > | null,
             referencer?: Array< string > | null,
             updatedAt: string,
-          } | null > | null,
+          } | null >,
           nextToken?: string | null,
         } | null,
-      } | null > | null,
+      } | null >,
       nextToken?: string | null,
     } | null,
   } | null,
 };
 
 export type CreateSectionMutationVariables = {
-  input?: CreateSectionInput,
+  input: CreateSectionInput,
   condition?: ModelSectionConditionInput | null,
 };
 
@@ -6699,7 +7005,7 @@ export type CreateSectionMutation = {
     updatedAt: string,
     objective?:  {
       __typename: "ModelObjectiveConnection",
-      items?:  Array< {
+      items:  Array< {
         __typename: "Objective",
         id: string,
         sectionID: string,
@@ -6719,14 +7025,14 @@ export type CreateSectionMutation = {
         secondReviewers?: Array< string > | null,
         referencer?: Array< string > | null,
         updatedAt: string,
-      } | null > | null,
+      } | null >,
       nextToken?: string | null,
     } | null,
   } | null,
 };
 
 export type UpdateSectionMutationVariables = {
-  input?: UpdateSectionInput,
+  input: UpdateSectionInput,
   condition?: ModelSectionConditionInput | null,
 };
 
@@ -6745,7 +7051,7 @@ export type UpdateSectionMutation = {
     updatedAt: string,
     objective?:  {
       __typename: "ModelObjectiveConnection",
-      items?:  Array< {
+      items:  Array< {
         __typename: "Objective",
         id: string,
         sectionID: string,
@@ -6765,14 +7071,14 @@ export type UpdateSectionMutation = {
         secondReviewers?: Array< string > | null,
         referencer?: Array< string > | null,
         updatedAt: string,
-      } | null > | null,
+      } | null >,
       nextToken?: string | null,
     } | null,
   } | null,
 };
 
 export type DeleteSectionMutationVariables = {
-  input?: DeleteSectionInput,
+  input: DeleteSectionInput,
   condition?: ModelSectionConditionInput | null,
 };
 
@@ -6791,7 +7097,7 @@ export type DeleteSectionMutation = {
     updatedAt: string,
     objective?:  {
       __typename: "ModelObjectiveConnection",
-      items?:  Array< {
+      items:  Array< {
         __typename: "Objective",
         id: string,
         sectionID: string,
@@ -6811,14 +7117,14 @@ export type DeleteSectionMutation = {
         secondReviewers?: Array< string > | null,
         referencer?: Array< string > | null,
         updatedAt: string,
-      } | null > | null,
+      } | null >,
       nextToken?: string | null,
     } | null,
   } | null,
 };
 
 export type CreateObjectiveMutationVariables = {
-  input?: CreateObjectiveInput,
+  input: CreateObjectiveInput,
   condition?: ModelObjectiveConditionInput | null,
 };
 
@@ -6847,7 +7153,7 @@ export type CreateObjectiveMutation = {
 };
 
 export type UpdateObjectiveMutationVariables = {
-  input?: UpdateObjectiveInput,
+  input: UpdateObjectiveInput,
   condition?: ModelObjectiveConditionInput | null,
 };
 
@@ -6876,7 +7182,7 @@ export type UpdateObjectiveMutation = {
 };
 
 export type DeleteObjectiveMutationVariables = {
-  input?: DeleteObjectiveInput,
+  input: DeleteObjectiveInput,
   condition?: ModelObjectiveConditionInput | null,
 };
 
@@ -6905,7 +7211,7 @@ export type DeleteObjectiveMutation = {
 };
 
 export type CreateReportMutationVariables = {
-  input?: CreateReportInput,
+  input: CreateReportInput,
   condition?: ModelReportConditionInput | null,
 };
 
@@ -6957,6 +7263,8 @@ export type CreateReportMutation = {
         startMonth: number,
         shortName?: string | null,
         url?: string | null,
+        isContractEvaluation?: boolean | null,
+        isContractReport?: boolean | null,
         createdAt: string,
         updatedAt: string,
       } | null,
@@ -6984,6 +7292,8 @@ export type CreateReportMutation = {
           startMonth: number,
           shortName?: string | null,
           url?: string | null,
+          isContractEvaluation?: boolean | null,
+          isContractReport?: boolean | null,
           createdAt: string,
           updatedAt: string,
         } | null,
@@ -7011,6 +7321,8 @@ export type CreateReportMutation = {
             startMonth: number,
             shortName?: string | null,
             url?: string | null,
+            isContractEvaluation?: boolean | null,
+            isContractReport?: boolean | null,
             createdAt: string,
             updatedAt: string,
           } | null,
@@ -7038,6 +7350,8 @@ export type CreateReportMutation = {
               startMonth: number,
               shortName?: string | null,
               url?: string | null,
+              isContractEvaluation?: boolean | null,
+              isContractReport?: boolean | null,
               createdAt: string,
               updatedAt: string,
             } | null,
@@ -7065,6 +7379,8 @@ export type CreateReportMutation = {
                 startMonth: number,
                 shortName?: string | null,
                 url?: string | null,
+                isContractEvaluation?: boolean | null,
+                isContractReport?: boolean | null,
                 createdAt: string,
                 updatedAt: string,
               } | null,
@@ -7140,7 +7456,7 @@ export type CreateReportMutation = {
 };
 
 export type UpdateReportMutationVariables = {
-  input?: UpdateReportInput,
+  input: UpdateReportInput,
   condition?: ModelReportConditionInput | null,
 };
 
@@ -7192,6 +7508,8 @@ export type UpdateReportMutation = {
         startMonth: number,
         shortName?: string | null,
         url?: string | null,
+        isContractEvaluation?: boolean | null,
+        isContractReport?: boolean | null,
         createdAt: string,
         updatedAt: string,
       } | null,
@@ -7219,6 +7537,8 @@ export type UpdateReportMutation = {
           startMonth: number,
           shortName?: string | null,
           url?: string | null,
+          isContractEvaluation?: boolean | null,
+          isContractReport?: boolean | null,
           createdAt: string,
           updatedAt: string,
         } | null,
@@ -7246,6 +7566,8 @@ export type UpdateReportMutation = {
             startMonth: number,
             shortName?: string | null,
             url?: string | null,
+            isContractEvaluation?: boolean | null,
+            isContractReport?: boolean | null,
             createdAt: string,
             updatedAt: string,
           } | null,
@@ -7273,6 +7595,8 @@ export type UpdateReportMutation = {
               startMonth: number,
               shortName?: string | null,
               url?: string | null,
+              isContractEvaluation?: boolean | null,
+              isContractReport?: boolean | null,
               createdAt: string,
               updatedAt: string,
             } | null,
@@ -7300,6 +7624,8 @@ export type UpdateReportMutation = {
                 startMonth: number,
                 shortName?: string | null,
                 url?: string | null,
+                isContractEvaluation?: boolean | null,
+                isContractReport?: boolean | null,
                 createdAt: string,
                 updatedAt: string,
               } | null,
@@ -7375,7 +7701,7 @@ export type UpdateReportMutation = {
 };
 
 export type DeleteReportMutationVariables = {
-  input?: DeleteReportInput,
+  input: DeleteReportInput,
   condition?: ModelReportConditionInput | null,
 };
 
@@ -7427,6 +7753,8 @@ export type DeleteReportMutation = {
         startMonth: number,
         shortName?: string | null,
         url?: string | null,
+        isContractEvaluation?: boolean | null,
+        isContractReport?: boolean | null,
         createdAt: string,
         updatedAt: string,
       } | null,
@@ -7454,6 +7782,8 @@ export type DeleteReportMutation = {
           startMonth: number,
           shortName?: string | null,
           url?: string | null,
+          isContractEvaluation?: boolean | null,
+          isContractReport?: boolean | null,
           createdAt: string,
           updatedAt: string,
         } | null,
@@ -7481,6 +7811,8 @@ export type DeleteReportMutation = {
             startMonth: number,
             shortName?: string | null,
             url?: string | null,
+            isContractEvaluation?: boolean | null,
+            isContractReport?: boolean | null,
             createdAt: string,
             updatedAt: string,
           } | null,
@@ -7508,6 +7840,8 @@ export type DeleteReportMutation = {
               startMonth: number,
               shortName?: string | null,
               url?: string | null,
+              isContractEvaluation?: boolean | null,
+              isContractReport?: boolean | null,
               createdAt: string,
               updatedAt: string,
             } | null,
@@ -7535,6 +7869,8 @@ export type DeleteReportMutation = {
                 startMonth: number,
                 shortName?: string | null,
                 url?: string | null,
+                isContractEvaluation?: boolean | null,
+                isContractReport?: boolean | null,
                 createdAt: string,
                 updatedAt: string,
               } | null,
@@ -7609,8 +7945,59 @@ export type DeleteReportMutation = {
   } | null,
 };
 
+export type CreateJobMutationVariables = {
+  input: CreateJobInput,
+  condition?: ModelJobConditionInput | null,
+};
+
+export type CreateJobMutation = {
+  createJob?:  {
+    __typename: "Job",
+    id: string,
+    status: string,
+    companyID: string,
+    email: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type UpdateJobMutationVariables = {
+  input: UpdateJobInput,
+  condition?: ModelJobConditionInput | null,
+};
+
+export type UpdateJobMutation = {
+  updateJob?:  {
+    __typename: "Job",
+    id: string,
+    status: string,
+    companyID: string,
+    email: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type DeleteJobMutationVariables = {
+  input: DeleteJobInput,
+  condition?: ModelJobConditionInput | null,
+};
+
+export type DeleteJobMutation = {
+  deleteJob?:  {
+    __typename: "Job",
+    id: string,
+    status: string,
+    companyID: string,
+    email: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
 export type GetCompanyQueryVariables = {
-  id?: string,
+  id: string,
 };
 
 export type GetCompanyQuery = {
@@ -7621,6 +8008,8 @@ export type GetCompanyQuery = {
     startMonth: number,
     shortName?: string | null,
     url?: string | null,
+    isContractEvaluation?: boolean | null,
+    isContractReport?: boolean | null,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -7635,22 +8024,24 @@ export type ListCompanysQueryVariables = {
 export type ListCompanysQuery = {
   listCompanys?:  {
     __typename: "ModelCompanyConnection",
-    items?:  Array< {
+    items:  Array< {
       __typename: "Company",
       id: string,
       name: string,
       startMonth: number,
       shortName?: string | null,
       url?: string | null,
+      isContractEvaluation?: boolean | null,
+      isContractReport?: boolean | null,
       createdAt: string,
       updatedAt: string,
-    } | null > | null,
+    } | null >,
     nextToken?: string | null,
   } | null,
 };
 
 export type GetEmployeeQueryVariables = {
-  username?: string,
+  username: string,
 };
 
 export type GetEmployeeQuery = {
@@ -7678,6 +8069,8 @@ export type GetEmployeeQuery = {
       startMonth: number,
       shortName?: string | null,
       url?: string | null,
+      isContractEvaluation?: boolean | null,
+      isContractReport?: boolean | null,
       createdAt: string,
       updatedAt: string,
     } | null,
@@ -7705,6 +8098,8 @@ export type GetEmployeeQuery = {
         startMonth: number,
         shortName?: string | null,
         url?: string | null,
+        isContractEvaluation?: boolean | null,
+        isContractReport?: boolean | null,
         createdAt: string,
         updatedAt: string,
       } | null,
@@ -7732,6 +8127,8 @@ export type GetEmployeeQuery = {
           startMonth: number,
           shortName?: string | null,
           url?: string | null,
+          isContractEvaluation?: boolean | null,
+          isContractReport?: boolean | null,
           createdAt: string,
           updatedAt: string,
         } | null,
@@ -7759,6 +8156,8 @@ export type GetEmployeeQuery = {
             startMonth: number,
             shortName?: string | null,
             url?: string | null,
+            isContractEvaluation?: boolean | null,
+            isContractReport?: boolean | null,
             createdAt: string,
             updatedAt: string,
           } | null,
@@ -7786,6 +8185,8 @@ export type GetEmployeeQuery = {
               startMonth: number,
               shortName?: string | null,
               url?: string | null,
+              isContractEvaluation?: boolean | null,
+              isContractReport?: boolean | null,
               createdAt: string,
               updatedAt: string,
             } | null,
@@ -7813,6 +8214,8 @@ export type GetEmployeeQuery = {
                 startMonth: number,
                 shortName?: string | null,
                 url?: string | null,
+                isContractEvaluation?: boolean | null,
+                isContractReport?: boolean | null,
                 createdAt: string,
                 updatedAt: string,
               } | null,
@@ -7907,7 +8310,7 @@ export type ListEmployeesQueryVariables = {
 export type ListEmployeesQuery = {
   listEmployees?:  {
     __typename: "ModelEmployeeConnection",
-    items?:  Array< {
+    items:  Array< {
       __typename: "Employee",
       username: string,
       companyID: string,
@@ -7931,6 +8334,8 @@ export type ListEmployeesQuery = {
         startMonth: number,
         shortName?: string | null,
         url?: string | null,
+        isContractEvaluation?: boolean | null,
+        isContractReport?: boolean | null,
         createdAt: string,
         updatedAt: string,
       } | null,
@@ -7958,6 +8363,8 @@ export type ListEmployeesQuery = {
           startMonth: number,
           shortName?: string | null,
           url?: string | null,
+          isContractEvaluation?: boolean | null,
+          isContractReport?: boolean | null,
           createdAt: string,
           updatedAt: string,
         } | null,
@@ -7985,6 +8392,8 @@ export type ListEmployeesQuery = {
             startMonth: number,
             shortName?: string | null,
             url?: string | null,
+            isContractEvaluation?: boolean | null,
+            isContractReport?: boolean | null,
             createdAt: string,
             updatedAt: string,
           } | null,
@@ -8012,6 +8421,8 @@ export type ListEmployeesQuery = {
               startMonth: number,
               shortName?: string | null,
               url?: string | null,
+              isContractEvaluation?: boolean | null,
+              isContractReport?: boolean | null,
               createdAt: string,
               updatedAt: string,
             } | null,
@@ -8039,6 +8450,8 @@ export type ListEmployeesQuery = {
                 startMonth: number,
                 shortName?: string | null,
                 url?: string | null,
+                isContractEvaluation?: boolean | null,
+                isContractReport?: boolean | null,
                 createdAt: string,
                 updatedAt: string,
               } | null,
@@ -8109,7 +8522,7 @@ export type ListEmployeesQuery = {
         createdAt: string,
         updatedAt: string,
       } | null,
-    } | null > | null,
+    } | null >,
     nextToken?: string | null,
   } | null,
 };
@@ -8126,7 +8539,7 @@ export type ListEmployeesCompanyQueryVariables = {
 export type ListEmployeesCompanyQuery = {
   listEmployeesCompany?:  {
     __typename: "ModelEmployeeConnection",
-    items?:  Array< {
+    items:  Array< {
       __typename: "Employee",
       username: string,
       companyID: string,
@@ -8150,6 +8563,8 @@ export type ListEmployeesCompanyQuery = {
         startMonth: number,
         shortName?: string | null,
         url?: string | null,
+        isContractEvaluation?: boolean | null,
+        isContractReport?: boolean | null,
         createdAt: string,
         updatedAt: string,
       } | null,
@@ -8177,6 +8592,8 @@ export type ListEmployeesCompanyQuery = {
           startMonth: number,
           shortName?: string | null,
           url?: string | null,
+          isContractEvaluation?: boolean | null,
+          isContractReport?: boolean | null,
           createdAt: string,
           updatedAt: string,
         } | null,
@@ -8204,6 +8621,8 @@ export type ListEmployeesCompanyQuery = {
             startMonth: number,
             shortName?: string | null,
             url?: string | null,
+            isContractEvaluation?: boolean | null,
+            isContractReport?: boolean | null,
             createdAt: string,
             updatedAt: string,
           } | null,
@@ -8231,6 +8650,8 @@ export type ListEmployeesCompanyQuery = {
               startMonth: number,
               shortName?: string | null,
               url?: string | null,
+              isContractEvaluation?: boolean | null,
+              isContractReport?: boolean | null,
               createdAt: string,
               updatedAt: string,
             } | null,
@@ -8258,6 +8679,8 @@ export type ListEmployeesCompanyQuery = {
                 startMonth: number,
                 shortName?: string | null,
                 url?: string | null,
+                isContractEvaluation?: boolean | null,
+                isContractReport?: boolean | null,
                 createdAt: string,
                 updatedAt: string,
               } | null,
@@ -8328,7 +8751,7 @@ export type ListEmployeesCompanyQuery = {
         createdAt: string,
         updatedAt: string,
       } | null,
-    } | null > | null,
+    } | null >,
     nextToken?: string | null,
   } | null,
 };
@@ -8345,7 +8768,7 @@ export type ListEmployeesManagerQueryVariables = {
 export type ListEmployeesManagerQuery = {
   listEmployeesManager?:  {
     __typename: "ModelEmployeeConnection",
-    items?:  Array< {
+    items:  Array< {
       __typename: "Employee",
       username: string,
       companyID: string,
@@ -8369,6 +8792,8 @@ export type ListEmployeesManagerQuery = {
         startMonth: number,
         shortName?: string | null,
         url?: string | null,
+        isContractEvaluation?: boolean | null,
+        isContractReport?: boolean | null,
         createdAt: string,
         updatedAt: string,
       } | null,
@@ -8396,6 +8821,8 @@ export type ListEmployeesManagerQuery = {
           startMonth: number,
           shortName?: string | null,
           url?: string | null,
+          isContractEvaluation?: boolean | null,
+          isContractReport?: boolean | null,
           createdAt: string,
           updatedAt: string,
         } | null,
@@ -8423,6 +8850,8 @@ export type ListEmployeesManagerQuery = {
             startMonth: number,
             shortName?: string | null,
             url?: string | null,
+            isContractEvaluation?: boolean | null,
+            isContractReport?: boolean | null,
             createdAt: string,
             updatedAt: string,
           } | null,
@@ -8450,6 +8879,8 @@ export type ListEmployeesManagerQuery = {
               startMonth: number,
               shortName?: string | null,
               url?: string | null,
+              isContractEvaluation?: boolean | null,
+              isContractReport?: boolean | null,
               createdAt: string,
               updatedAt: string,
             } | null,
@@ -8477,6 +8908,8 @@ export type ListEmployeesManagerQuery = {
                 startMonth: number,
                 shortName?: string | null,
                 url?: string | null,
+                isContractEvaluation?: boolean | null,
+                isContractReport?: boolean | null,
                 createdAt: string,
                 updatedAt: string,
               } | null,
@@ -8547,13 +8980,13 @@ export type ListEmployeesManagerQuery = {
         createdAt: string,
         updatedAt: string,
       } | null,
-    } | null > | null,
+    } | null >,
     nextToken?: string | null,
   } | null,
 };
 
 export type GetGroupQueryVariables = {
-  id?: string,
+  id: string,
 };
 
 export type GetGroupQuery = {
@@ -8577,7 +9010,7 @@ export type ListGroupsQueryVariables = {
 export type ListGroupsQuery = {
   listGroups?:  {
     __typename: "ModelGroupConnection",
-    items?:  Array< {
+    items:  Array< {
       __typename: "Group",
       id: string,
       companyID: string,
@@ -8585,7 +9018,7 @@ export type ListGroupsQuery = {
       name: string,
       createdAt: string,
       updatedAt: string,
-    } | null > | null,
+    } | null >,
     nextToken?: string | null,
   } | null,
 };
@@ -8602,7 +9035,7 @@ export type ListGroupsCompanyQueryVariables = {
 export type ListGroupsCompanyQuery = {
   listGroupsCompany?:  {
     __typename: "ModelGroupConnection",
-    items?:  Array< {
+    items:  Array< {
       __typename: "Group",
       id: string,
       companyID: string,
@@ -8610,13 +9043,13 @@ export type ListGroupsCompanyQuery = {
       name: string,
       createdAt: string,
       updatedAt: string,
-    } | null > | null,
+    } | null >,
     nextToken?: string | null,
   } | null,
 };
 
 export type GetCategoryQueryVariables = {
-  id?: string,
+  id: string,
 };
 
 export type GetCategoryQuery = {
@@ -8640,7 +9073,7 @@ export type ListCategorysQueryVariables = {
 export type ListCategorysQuery = {
   listCategorys?:  {
     __typename: "ModelCategoryConnection",
-    items?:  Array< {
+    items:  Array< {
       __typename: "Category",
       id: string,
       companyID: string,
@@ -8648,7 +9081,7 @@ export type ListCategorysQuery = {
       name: string,
       createdAt: string,
       updatedAt: string,
-    } | null > | null,
+    } | null >,
     nextToken?: string | null,
   } | null,
 };
@@ -8665,7 +9098,7 @@ export type ListCategorysCompanyQueryVariables = {
 export type ListCategorysCompanyQuery = {
   listCategorysCompany?:  {
     __typename: "ModelCategoryConnection",
-    items?:  Array< {
+    items:  Array< {
       __typename: "Category",
       id: string,
       companyID: string,
@@ -8673,13 +9106,13 @@ export type ListCategorysCompanyQuery = {
       name: string,
       createdAt: string,
       updatedAt: string,
-    } | null > | null,
+    } | null >,
     nextToken?: string | null,
   } | null,
 };
 
 export type GetSheetQueryVariables = {
-  id?: string,
+  id: string,
 };
 
 export type GetSheetQuery = {
@@ -8744,6 +9177,8 @@ export type GetSheetQuery = {
         startMonth: number,
         shortName?: string | null,
         url?: string | null,
+        isContractEvaluation?: boolean | null,
+        isContractReport?: boolean | null,
         createdAt: string,
         updatedAt: string,
       } | null,
@@ -8771,6 +9206,8 @@ export type GetSheetQuery = {
           startMonth: number,
           shortName?: string | null,
           url?: string | null,
+          isContractEvaluation?: boolean | null,
+          isContractReport?: boolean | null,
           createdAt: string,
           updatedAt: string,
         } | null,
@@ -8798,6 +9235,8 @@ export type GetSheetQuery = {
             startMonth: number,
             shortName?: string | null,
             url?: string | null,
+            isContractEvaluation?: boolean | null,
+            isContractReport?: boolean | null,
             createdAt: string,
             updatedAt: string,
           } | null,
@@ -8825,6 +9264,8 @@ export type GetSheetQuery = {
               startMonth: number,
               shortName?: string | null,
               url?: string | null,
+              isContractEvaluation?: boolean | null,
+              isContractReport?: boolean | null,
               createdAt: string,
               updatedAt: string,
             } | null,
@@ -8852,6 +9293,8 @@ export type GetSheetQuery = {
                 startMonth: number,
                 shortName?: string | null,
                 url?: string | null,
+                isContractEvaluation?: boolean | null,
+                isContractReport?: boolean | null,
                 createdAt: string,
                 updatedAt: string,
               } | null,
@@ -8947,6 +9390,8 @@ export type GetSheetQuery = {
         startMonth: number,
         shortName?: string | null,
         url?: string | null,
+        isContractEvaluation?: boolean | null,
+        isContractReport?: boolean | null,
         createdAt: string,
         updatedAt: string,
       } | null,
@@ -8974,6 +9419,8 @@ export type GetSheetQuery = {
           startMonth: number,
           shortName?: string | null,
           url?: string | null,
+          isContractEvaluation?: boolean | null,
+          isContractReport?: boolean | null,
           createdAt: string,
           updatedAt: string,
         } | null,
@@ -9001,6 +9448,8 @@ export type GetSheetQuery = {
             startMonth: number,
             shortName?: string | null,
             url?: string | null,
+            isContractEvaluation?: boolean | null,
+            isContractReport?: boolean | null,
             createdAt: string,
             updatedAt: string,
           } | null,
@@ -9028,6 +9477,8 @@ export type GetSheetQuery = {
               startMonth: number,
               shortName?: string | null,
               url?: string | null,
+              isContractEvaluation?: boolean | null,
+              isContractReport?: boolean | null,
               createdAt: string,
               updatedAt: string,
             } | null,
@@ -9055,6 +9506,8 @@ export type GetSheetQuery = {
                 startMonth: number,
                 shortName?: string | null,
                 url?: string | null,
+                isContractEvaluation?: boolean | null,
+                isContractReport?: boolean | null,
                 createdAt: string,
                 updatedAt: string,
               } | null,
@@ -9150,6 +9603,8 @@ export type GetSheetQuery = {
         startMonth: number,
         shortName?: string | null,
         url?: string | null,
+        isContractEvaluation?: boolean | null,
+        isContractReport?: boolean | null,
         createdAt: string,
         updatedAt: string,
       } | null,
@@ -9177,6 +9632,8 @@ export type GetSheetQuery = {
           startMonth: number,
           shortName?: string | null,
           url?: string | null,
+          isContractEvaluation?: boolean | null,
+          isContractReport?: boolean | null,
           createdAt: string,
           updatedAt: string,
         } | null,
@@ -9204,6 +9661,8 @@ export type GetSheetQuery = {
             startMonth: number,
             shortName?: string | null,
             url?: string | null,
+            isContractEvaluation?: boolean | null,
+            isContractReport?: boolean | null,
             createdAt: string,
             updatedAt: string,
           } | null,
@@ -9231,6 +9690,8 @@ export type GetSheetQuery = {
               startMonth: number,
               shortName?: string | null,
               url?: string | null,
+              isContractEvaluation?: boolean | null,
+              isContractReport?: boolean | null,
               createdAt: string,
               updatedAt: string,
             } | null,
@@ -9258,6 +9719,8 @@ export type GetSheetQuery = {
                 startMonth: number,
                 shortName?: string | null,
                 url?: string | null,
+                isContractEvaluation?: boolean | null,
+                isContractReport?: boolean | null,
                 createdAt: string,
                 updatedAt: string,
               } | null,
@@ -9340,7 +9803,7 @@ export type GetSheetQuery = {
     } | null,
     section?:  {
       __typename: "ModelSectionConnection",
-      items?:  Array< {
+      items:  Array< {
         __typename: "Section",
         id: string,
         sheetID: string,
@@ -9354,7 +9817,7 @@ export type GetSheetQuery = {
         updatedAt: string,
         objective?:  {
           __typename: "ModelObjectiveConnection",
-          items?:  Array< {
+          items:  Array< {
             __typename: "Objective",
             id: string,
             sectionID: string,
@@ -9374,10 +9837,10 @@ export type GetSheetQuery = {
             secondReviewers?: Array< string > | null,
             referencer?: Array< string > | null,
             updatedAt: string,
-          } | null > | null,
+          } | null >,
           nextToken?: string | null,
         } | null,
-      } | null > | null,
+      } | null >,
       nextToken?: string | null,
     } | null,
   } | null,
@@ -9392,7 +9855,7 @@ export type ListSheetsQueryVariables = {
 export type ListSheetsQuery = {
   listSheets?:  {
     __typename: "ModelSheetConnection",
-    items?:  Array< {
+    items:  Array< {
       __typename: "Sheet",
       id: string,
       sub: string,
@@ -9453,6 +9916,8 @@ export type ListSheetsQuery = {
           startMonth: number,
           shortName?: string | null,
           url?: string | null,
+          isContractEvaluation?: boolean | null,
+          isContractReport?: boolean | null,
           createdAt: string,
           updatedAt: string,
         } | null,
@@ -9480,6 +9945,8 @@ export type ListSheetsQuery = {
             startMonth: number,
             shortName?: string | null,
             url?: string | null,
+            isContractEvaluation?: boolean | null,
+            isContractReport?: boolean | null,
             createdAt: string,
             updatedAt: string,
           } | null,
@@ -9507,6 +9974,8 @@ export type ListSheetsQuery = {
               startMonth: number,
               shortName?: string | null,
               url?: string | null,
+              isContractEvaluation?: boolean | null,
+              isContractReport?: boolean | null,
               createdAt: string,
               updatedAt: string,
             } | null,
@@ -9534,6 +10003,8 @@ export type ListSheetsQuery = {
                 startMonth: number,
                 shortName?: string | null,
                 url?: string | null,
+                isContractEvaluation?: boolean | null,
+                isContractReport?: boolean | null,
                 createdAt: string,
                 updatedAt: string,
               } | null,
@@ -9619,6 +10090,8 @@ export type ListSheetsQuery = {
           startMonth: number,
           shortName?: string | null,
           url?: string | null,
+          isContractEvaluation?: boolean | null,
+          isContractReport?: boolean | null,
           createdAt: string,
           updatedAt: string,
         } | null,
@@ -9646,6 +10119,8 @@ export type ListSheetsQuery = {
             startMonth: number,
             shortName?: string | null,
             url?: string | null,
+            isContractEvaluation?: boolean | null,
+            isContractReport?: boolean | null,
             createdAt: string,
             updatedAt: string,
           } | null,
@@ -9673,6 +10148,8 @@ export type ListSheetsQuery = {
               startMonth: number,
               shortName?: string | null,
               url?: string | null,
+              isContractEvaluation?: boolean | null,
+              isContractReport?: boolean | null,
               createdAt: string,
               updatedAt: string,
             } | null,
@@ -9700,6 +10177,8 @@ export type ListSheetsQuery = {
                 startMonth: number,
                 shortName?: string | null,
                 url?: string | null,
+                isContractEvaluation?: boolean | null,
+                isContractReport?: boolean | null,
                 createdAt: string,
                 updatedAt: string,
               } | null,
@@ -9785,6 +10264,8 @@ export type ListSheetsQuery = {
           startMonth: number,
           shortName?: string | null,
           url?: string | null,
+          isContractEvaluation?: boolean | null,
+          isContractReport?: boolean | null,
           createdAt: string,
           updatedAt: string,
         } | null,
@@ -9812,6 +10293,8 @@ export type ListSheetsQuery = {
             startMonth: number,
             shortName?: string | null,
             url?: string | null,
+            isContractEvaluation?: boolean | null,
+            isContractReport?: boolean | null,
             createdAt: string,
             updatedAt: string,
           } | null,
@@ -9839,6 +10322,8 @@ export type ListSheetsQuery = {
               startMonth: number,
               shortName?: string | null,
               url?: string | null,
+              isContractEvaluation?: boolean | null,
+              isContractReport?: boolean | null,
               createdAt: string,
               updatedAt: string,
             } | null,
@@ -9866,6 +10351,8 @@ export type ListSheetsQuery = {
                 startMonth: number,
                 shortName?: string | null,
                 url?: string | null,
+                isContractEvaluation?: boolean | null,
+                isContractReport?: boolean | null,
                 createdAt: string,
                 updatedAt: string,
               } | null,
@@ -9938,7 +10425,7 @@ export type ListSheetsQuery = {
       } | null,
       section?:  {
         __typename: "ModelSectionConnection",
-        items?:  Array< {
+        items:  Array< {
           __typename: "Section",
           id: string,
           sheetID: string,
@@ -9952,7 +10439,7 @@ export type ListSheetsQuery = {
           updatedAt: string,
           objective?:  {
             __typename: "ModelObjectiveConnection",
-            items?:  Array< {
+            items:  Array< {
               __typename: "Objective",
               id: string,
               sectionID: string,
@@ -9972,13 +10459,13 @@ export type ListSheetsQuery = {
               secondReviewers?: Array< string > | null,
               referencer?: Array< string > | null,
               updatedAt: string,
-            } | null > | null,
+            } | null >,
             nextToken?: string | null,
           } | null,
-        } | null > | null,
+        } | null >,
         nextToken?: string | null,
       } | null,
-    } | null > | null,
+    } | null >,
     nextToken?: string | null,
   } | null,
 };
@@ -9995,7 +10482,7 @@ export type ListSheetsRevieweeQueryVariables = {
 export type ListSheetsRevieweeQuery = {
   listSheetsReviewee?:  {
     __typename: "ModelSheetConnection",
-    items?:  Array< {
+    items:  Array< {
       __typename: "Sheet",
       id: string,
       sub: string,
@@ -10056,6 +10543,8 @@ export type ListSheetsRevieweeQuery = {
           startMonth: number,
           shortName?: string | null,
           url?: string | null,
+          isContractEvaluation?: boolean | null,
+          isContractReport?: boolean | null,
           createdAt: string,
           updatedAt: string,
         } | null,
@@ -10083,6 +10572,8 @@ export type ListSheetsRevieweeQuery = {
             startMonth: number,
             shortName?: string | null,
             url?: string | null,
+            isContractEvaluation?: boolean | null,
+            isContractReport?: boolean | null,
             createdAt: string,
             updatedAt: string,
           } | null,
@@ -10110,6 +10601,8 @@ export type ListSheetsRevieweeQuery = {
               startMonth: number,
               shortName?: string | null,
               url?: string | null,
+              isContractEvaluation?: boolean | null,
+              isContractReport?: boolean | null,
               createdAt: string,
               updatedAt: string,
             } | null,
@@ -10137,6 +10630,8 @@ export type ListSheetsRevieweeQuery = {
                 startMonth: number,
                 shortName?: string | null,
                 url?: string | null,
+                isContractEvaluation?: boolean | null,
+                isContractReport?: boolean | null,
                 createdAt: string,
                 updatedAt: string,
               } | null,
@@ -10222,6 +10717,8 @@ export type ListSheetsRevieweeQuery = {
           startMonth: number,
           shortName?: string | null,
           url?: string | null,
+          isContractEvaluation?: boolean | null,
+          isContractReport?: boolean | null,
           createdAt: string,
           updatedAt: string,
         } | null,
@@ -10249,6 +10746,8 @@ export type ListSheetsRevieweeQuery = {
             startMonth: number,
             shortName?: string | null,
             url?: string | null,
+            isContractEvaluation?: boolean | null,
+            isContractReport?: boolean | null,
             createdAt: string,
             updatedAt: string,
           } | null,
@@ -10276,6 +10775,8 @@ export type ListSheetsRevieweeQuery = {
               startMonth: number,
               shortName?: string | null,
               url?: string | null,
+              isContractEvaluation?: boolean | null,
+              isContractReport?: boolean | null,
               createdAt: string,
               updatedAt: string,
             } | null,
@@ -10303,6 +10804,8 @@ export type ListSheetsRevieweeQuery = {
                 startMonth: number,
                 shortName?: string | null,
                 url?: string | null,
+                isContractEvaluation?: boolean | null,
+                isContractReport?: boolean | null,
                 createdAt: string,
                 updatedAt: string,
               } | null,
@@ -10388,6 +10891,8 @@ export type ListSheetsRevieweeQuery = {
           startMonth: number,
           shortName?: string | null,
           url?: string | null,
+          isContractEvaluation?: boolean | null,
+          isContractReport?: boolean | null,
           createdAt: string,
           updatedAt: string,
         } | null,
@@ -10415,6 +10920,8 @@ export type ListSheetsRevieweeQuery = {
             startMonth: number,
             shortName?: string | null,
             url?: string | null,
+            isContractEvaluation?: boolean | null,
+            isContractReport?: boolean | null,
             createdAt: string,
             updatedAt: string,
           } | null,
@@ -10442,6 +10949,8 @@ export type ListSheetsRevieweeQuery = {
               startMonth: number,
               shortName?: string | null,
               url?: string | null,
+              isContractEvaluation?: boolean | null,
+              isContractReport?: boolean | null,
               createdAt: string,
               updatedAt: string,
             } | null,
@@ -10469,6 +10978,8 @@ export type ListSheetsRevieweeQuery = {
                 startMonth: number,
                 shortName?: string | null,
                 url?: string | null,
+                isContractEvaluation?: boolean | null,
+                isContractReport?: boolean | null,
                 createdAt: string,
                 updatedAt: string,
               } | null,
@@ -10541,7 +11052,7 @@ export type ListSheetsRevieweeQuery = {
       } | null,
       section?:  {
         __typename: "ModelSectionConnection",
-        items?:  Array< {
+        items:  Array< {
           __typename: "Section",
           id: string,
           sheetID: string,
@@ -10555,7 +11066,7 @@ export type ListSheetsRevieweeQuery = {
           updatedAt: string,
           objective?:  {
             __typename: "ModelObjectiveConnection",
-            items?:  Array< {
+            items:  Array< {
               __typename: "Objective",
               id: string,
               sectionID: string,
@@ -10575,13 +11086,13 @@ export type ListSheetsRevieweeQuery = {
               secondReviewers?: Array< string > | null,
               referencer?: Array< string > | null,
               updatedAt: string,
-            } | null > | null,
+            } | null >,
             nextToken?: string | null,
           } | null,
-        } | null > | null,
+        } | null >,
         nextToken?: string | null,
       } | null,
-    } | null > | null,
+    } | null >,
     nextToken?: string | null,
   } | null,
 };
@@ -10597,7 +11108,7 @@ export type ListSheetsCompanyQueryVariables = {
 export type ListSheetsCompanyQuery = {
   listSheetsCompany?:  {
     __typename: "ModelSheetConnection",
-    items?:  Array< {
+    items:  Array< {
       __typename: "Sheet",
       id: string,
       sub: string,
@@ -10658,6 +11169,8 @@ export type ListSheetsCompanyQuery = {
           startMonth: number,
           shortName?: string | null,
           url?: string | null,
+          isContractEvaluation?: boolean | null,
+          isContractReport?: boolean | null,
           createdAt: string,
           updatedAt: string,
         } | null,
@@ -10685,6 +11198,8 @@ export type ListSheetsCompanyQuery = {
             startMonth: number,
             shortName?: string | null,
             url?: string | null,
+            isContractEvaluation?: boolean | null,
+            isContractReport?: boolean | null,
             createdAt: string,
             updatedAt: string,
           } | null,
@@ -10712,6 +11227,8 @@ export type ListSheetsCompanyQuery = {
               startMonth: number,
               shortName?: string | null,
               url?: string | null,
+              isContractEvaluation?: boolean | null,
+              isContractReport?: boolean | null,
               createdAt: string,
               updatedAt: string,
             } | null,
@@ -10739,6 +11256,8 @@ export type ListSheetsCompanyQuery = {
                 startMonth: number,
                 shortName?: string | null,
                 url?: string | null,
+                isContractEvaluation?: boolean | null,
+                isContractReport?: boolean | null,
                 createdAt: string,
                 updatedAt: string,
               } | null,
@@ -10824,6 +11343,8 @@ export type ListSheetsCompanyQuery = {
           startMonth: number,
           shortName?: string | null,
           url?: string | null,
+          isContractEvaluation?: boolean | null,
+          isContractReport?: boolean | null,
           createdAt: string,
           updatedAt: string,
         } | null,
@@ -10851,6 +11372,8 @@ export type ListSheetsCompanyQuery = {
             startMonth: number,
             shortName?: string | null,
             url?: string | null,
+            isContractEvaluation?: boolean | null,
+            isContractReport?: boolean | null,
             createdAt: string,
             updatedAt: string,
           } | null,
@@ -10878,6 +11401,8 @@ export type ListSheetsCompanyQuery = {
               startMonth: number,
               shortName?: string | null,
               url?: string | null,
+              isContractEvaluation?: boolean | null,
+              isContractReport?: boolean | null,
               createdAt: string,
               updatedAt: string,
             } | null,
@@ -10905,6 +11430,8 @@ export type ListSheetsCompanyQuery = {
                 startMonth: number,
                 shortName?: string | null,
                 url?: string | null,
+                isContractEvaluation?: boolean | null,
+                isContractReport?: boolean | null,
                 createdAt: string,
                 updatedAt: string,
               } | null,
@@ -10990,6 +11517,8 @@ export type ListSheetsCompanyQuery = {
           startMonth: number,
           shortName?: string | null,
           url?: string | null,
+          isContractEvaluation?: boolean | null,
+          isContractReport?: boolean | null,
           createdAt: string,
           updatedAt: string,
         } | null,
@@ -11017,6 +11546,8 @@ export type ListSheetsCompanyQuery = {
             startMonth: number,
             shortName?: string | null,
             url?: string | null,
+            isContractEvaluation?: boolean | null,
+            isContractReport?: boolean | null,
             createdAt: string,
             updatedAt: string,
           } | null,
@@ -11044,6 +11575,8 @@ export type ListSheetsCompanyQuery = {
               startMonth: number,
               shortName?: string | null,
               url?: string | null,
+              isContractEvaluation?: boolean | null,
+              isContractReport?: boolean | null,
               createdAt: string,
               updatedAt: string,
             } | null,
@@ -11071,6 +11604,8 @@ export type ListSheetsCompanyQuery = {
                 startMonth: number,
                 shortName?: string | null,
                 url?: string | null,
+                isContractEvaluation?: boolean | null,
+                isContractReport?: boolean | null,
                 createdAt: string,
                 updatedAt: string,
               } | null,
@@ -11143,7 +11678,7 @@ export type ListSheetsCompanyQuery = {
       } | null,
       section?:  {
         __typename: "ModelSectionConnection",
-        items?:  Array< {
+        items:  Array< {
           __typename: "Section",
           id: string,
           sheetID: string,
@@ -11157,7 +11692,7 @@ export type ListSheetsCompanyQuery = {
           updatedAt: string,
           objective?:  {
             __typename: "ModelObjectiveConnection",
-            items?:  Array< {
+            items:  Array< {
               __typename: "Objective",
               id: string,
               sectionID: string,
@@ -11177,19 +11712,19 @@ export type ListSheetsCompanyQuery = {
               secondReviewers?: Array< string > | null,
               referencer?: Array< string > | null,
               updatedAt: string,
-            } | null > | null,
+            } | null >,
             nextToken?: string | null,
           } | null,
-        } | null > | null,
+        } | null >,
         nextToken?: string | null,
       } | null,
-    } | null > | null,
+    } | null >,
     nextToken?: string | null,
   } | null,
 };
 
 export type GetSectionQueryVariables = {
-  id?: string,
+  id: string,
 };
 
 export type GetSectionQuery = {
@@ -11207,7 +11742,7 @@ export type GetSectionQuery = {
     updatedAt: string,
     objective?:  {
       __typename: "ModelObjectiveConnection",
-      items?:  Array< {
+      items:  Array< {
         __typename: "Objective",
         id: string,
         sectionID: string,
@@ -11227,7 +11762,7 @@ export type GetSectionQuery = {
         secondReviewers?: Array< string > | null,
         referencer?: Array< string > | null,
         updatedAt: string,
-      } | null > | null,
+      } | null >,
       nextToken?: string | null,
     } | null,
   } | null,
@@ -11242,7 +11777,7 @@ export type ListSectionsQueryVariables = {
 export type ListSectionsQuery = {
   listSections?:  {
     __typename: "ModelSectionConnection",
-    items?:  Array< {
+    items:  Array< {
       __typename: "Section",
       id: string,
       sheetID: string,
@@ -11256,7 +11791,7 @@ export type ListSectionsQuery = {
       updatedAt: string,
       objective?:  {
         __typename: "ModelObjectiveConnection",
-        items?:  Array< {
+        items:  Array< {
           __typename: "Objective",
           id: string,
           sectionID: string,
@@ -11276,16 +11811,16 @@ export type ListSectionsQuery = {
           secondReviewers?: Array< string > | null,
           referencer?: Array< string > | null,
           updatedAt: string,
-        } | null > | null,
+        } | null >,
         nextToken?: string | null,
       } | null,
-    } | null > | null,
+    } | null >,
     nextToken?: string | null,
   } | null,
 };
 
 export type GetObjectiveQueryVariables = {
-  id?: string,
+  id: string,
 };
 
 export type GetObjectiveQuery = {
@@ -11321,7 +11856,7 @@ export type ListObjectivesQueryVariables = {
 export type ListObjectivesQuery = {
   listObjectives?:  {
     __typename: "ModelObjectiveConnection",
-    items?:  Array< {
+    items:  Array< {
       __typename: "Objective",
       id: string,
       sectionID: string,
@@ -11341,13 +11876,13 @@ export type ListObjectivesQuery = {
       secondReviewers?: Array< string > | null,
       referencer?: Array< string > | null,
       updatedAt: string,
-    } | null > | null,
+    } | null >,
     nextToken?: string | null,
   } | null,
 };
 
 export type GetReportQueryVariables = {
-  id?: string,
+  id: string,
 };
 
 export type GetReportQuery = {
@@ -11398,6 +11933,8 @@ export type GetReportQuery = {
         startMonth: number,
         shortName?: string | null,
         url?: string | null,
+        isContractEvaluation?: boolean | null,
+        isContractReport?: boolean | null,
         createdAt: string,
         updatedAt: string,
       } | null,
@@ -11425,6 +11962,8 @@ export type GetReportQuery = {
           startMonth: number,
           shortName?: string | null,
           url?: string | null,
+          isContractEvaluation?: boolean | null,
+          isContractReport?: boolean | null,
           createdAt: string,
           updatedAt: string,
         } | null,
@@ -11452,6 +11991,8 @@ export type GetReportQuery = {
             startMonth: number,
             shortName?: string | null,
             url?: string | null,
+            isContractEvaluation?: boolean | null,
+            isContractReport?: boolean | null,
             createdAt: string,
             updatedAt: string,
           } | null,
@@ -11479,6 +12020,8 @@ export type GetReportQuery = {
               startMonth: number,
               shortName?: string | null,
               url?: string | null,
+              isContractEvaluation?: boolean | null,
+              isContractReport?: boolean | null,
               createdAt: string,
               updatedAt: string,
             } | null,
@@ -11506,6 +12049,8 @@ export type GetReportQuery = {
                 startMonth: number,
                 shortName?: string | null,
                 url?: string | null,
+                isContractEvaluation?: boolean | null,
+                isContractReport?: boolean | null,
                 createdAt: string,
                 updatedAt: string,
               } | null,
@@ -11589,7 +12134,7 @@ export type ListReportsQueryVariables = {
 export type ListReportsQuery = {
   listReports?:  {
     __typename: "ModelReportConnection",
-    items?:  Array< {
+    items:  Array< {
       __typename: "Report",
       id: string,
       sub: string,
@@ -11636,6 +12181,8 @@ export type ListReportsQuery = {
           startMonth: number,
           shortName?: string | null,
           url?: string | null,
+          isContractEvaluation?: boolean | null,
+          isContractReport?: boolean | null,
           createdAt: string,
           updatedAt: string,
         } | null,
@@ -11663,6 +12210,8 @@ export type ListReportsQuery = {
             startMonth: number,
             shortName?: string | null,
             url?: string | null,
+            isContractEvaluation?: boolean | null,
+            isContractReport?: boolean | null,
             createdAt: string,
             updatedAt: string,
           } | null,
@@ -11690,6 +12239,8 @@ export type ListReportsQuery = {
               startMonth: number,
               shortName?: string | null,
               url?: string | null,
+              isContractEvaluation?: boolean | null,
+              isContractReport?: boolean | null,
               createdAt: string,
               updatedAt: string,
             } | null,
@@ -11717,6 +12268,8 @@ export type ListReportsQuery = {
                 startMonth: number,
                 shortName?: string | null,
                 url?: string | null,
+                isContractEvaluation?: boolean | null,
+                isContractReport?: boolean | null,
                 createdAt: string,
                 updatedAt: string,
               } | null,
@@ -11778,7 +12331,7 @@ export type ListReportsQuery = {
           updatedAt: string,
         } | null,
       } | null,
-    } | null > | null,
+    } | null >,
     nextToken?: string | null,
   } | null,
 };
@@ -11795,7 +12348,7 @@ export type ListReportsSubQueryVariables = {
 export type ListReportsSubQuery = {
   listReportsSub?:  {
     __typename: "ModelReportConnection",
-    items?:  Array< {
+    items:  Array< {
       __typename: "Report",
       id: string,
       sub: string,
@@ -11842,6 +12395,8 @@ export type ListReportsSubQuery = {
           startMonth: number,
           shortName?: string | null,
           url?: string | null,
+          isContractEvaluation?: boolean | null,
+          isContractReport?: boolean | null,
           createdAt: string,
           updatedAt: string,
         } | null,
@@ -11869,6 +12424,8 @@ export type ListReportsSubQuery = {
             startMonth: number,
             shortName?: string | null,
             url?: string | null,
+            isContractEvaluation?: boolean | null,
+            isContractReport?: boolean | null,
             createdAt: string,
             updatedAt: string,
           } | null,
@@ -11896,6 +12453,8 @@ export type ListReportsSubQuery = {
               startMonth: number,
               shortName?: string | null,
               url?: string | null,
+              isContractEvaluation?: boolean | null,
+              isContractReport?: boolean | null,
               createdAt: string,
               updatedAt: string,
             } | null,
@@ -11923,6 +12482,8 @@ export type ListReportsSubQuery = {
                 startMonth: number,
                 shortName?: string | null,
                 url?: string | null,
+                isContractEvaluation?: boolean | null,
+                isContractReport?: boolean | null,
                 createdAt: string,
                 updatedAt: string,
               } | null,
@@ -11984,7 +12545,7 @@ export type ListReportsSubQuery = {
           updatedAt: string,
         } | null,
       } | null,
-    } | null > | null,
+    } | null >,
     nextToken?: string | null,
   } | null,
 };
@@ -12001,7 +12562,7 @@ export type ListReportsCompanyDateQueryVariables = {
 export type ListReportsCompanyDateQuery = {
   listReportsCompanyDate?:  {
     __typename: "ModelReportConnection",
-    items?:  Array< {
+    items:  Array< {
       __typename: "Report",
       id: string,
       sub: string,
@@ -12048,6 +12609,8 @@ export type ListReportsCompanyDateQuery = {
           startMonth: number,
           shortName?: string | null,
           url?: string | null,
+          isContractEvaluation?: boolean | null,
+          isContractReport?: boolean | null,
           createdAt: string,
           updatedAt: string,
         } | null,
@@ -12075,6 +12638,8 @@ export type ListReportsCompanyDateQuery = {
             startMonth: number,
             shortName?: string | null,
             url?: string | null,
+            isContractEvaluation?: boolean | null,
+            isContractReport?: boolean | null,
             createdAt: string,
             updatedAt: string,
           } | null,
@@ -12102,6 +12667,8 @@ export type ListReportsCompanyDateQuery = {
               startMonth: number,
               shortName?: string | null,
               url?: string | null,
+              isContractEvaluation?: boolean | null,
+              isContractReport?: boolean | null,
               createdAt: string,
               updatedAt: string,
             } | null,
@@ -12129,6 +12696,8 @@ export type ListReportsCompanyDateQuery = {
                 startMonth: number,
                 shortName?: string | null,
                 url?: string | null,
+                isContractEvaluation?: boolean | null,
+                isContractReport?: boolean | null,
                 createdAt: string,
                 updatedAt: string,
               } | null,
@@ -12190,7 +12759,45 @@ export type ListReportsCompanyDateQuery = {
           updatedAt: string,
         } | null,
       } | null,
-    } | null > | null,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type GetJobQueryVariables = {
+  id: string,
+};
+
+export type GetJobQuery = {
+  getJob?:  {
+    __typename: "Job",
+    id: string,
+    status: string,
+    companyID: string,
+    email: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type ListJobsQueryVariables = {
+  filter?: ModelJobFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListJobsQuery = {
+  listJobs?:  {
+    __typename: "ModelJobConnection",
+    items:  Array< {
+      __typename: "Job",
+      id: string,
+      status: string,
+      companyID: string,
+      email: string,
+      createdAt: string,
+      updatedAt: string,
+    } | null >,
     nextToken?: string | null,
   } | null,
 };

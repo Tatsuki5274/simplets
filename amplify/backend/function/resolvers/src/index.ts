@@ -14,6 +14,9 @@ import createGroupByCompanyAdmin from "./resolvers/createGroupByCompanyAdmin";
 import updateGroupByCompanyAdmin from "./resolvers/updateGroupByCompanyAdmin";
 import deleteGroupByCompanyAdmin from "./resolvers/deleteGroupByCompanyAdmin";
 import updateSheetByCompanyAdmin from "./resolvers/updateSheetByCompanyAdmin";
+import InvokeUpdateOwners from "resolvers/invokeUpdateOwner";
+import createJob from "resolvers/createJob";
+import { CreateJobInput } from "API";
 
 export type EventType = {
   typeName?: string;
@@ -245,6 +248,34 @@ export const handler = async (
         throw new TypeError("params not provided.");
       }
       result = await deleteReportByCompanyAdmin(params, companyId);
+    } else if (fieldName === "createJobByAdmin") {
+      if (!isCompanyAdmin) {
+        // 社内管理者であることを検証
+        throw new Error("You don't have permission");
+      }
+      if (!companyId) {
+        throw new Error("companyId is required.");
+      }
+      const email = event.identity?.claims?.email;
+      if (typeof email !== "string") {
+        throw new Error("email is not string");
+      }
+      const params: CreateJobInput = {
+        companyID: companyId,
+        status: "", //Todo 仮実装
+        email: email,
+      };
+      await createJob(params);
+    } else if (fieldName === "InvokeUpdateOwners") {
+      if (!isCompanyAdmin) {
+        // 社内管理者であることを検証
+        throw new Error("You don't have permission");
+      }
+      if (!companyId) {
+        throw new Error("companyId is required.");
+      }
+      await InvokeUpdateOwners(companyId);
+      return "invoke success";
     } else {
       throw new Error("unknown fieldName");
     }

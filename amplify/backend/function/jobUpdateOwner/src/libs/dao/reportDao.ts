@@ -1,0 +1,103 @@
+import * as APIt from "../../API";
+import { Report } from "../../API";
+import { BaseDao } from "./common/baseDao";
+
+export const ReportDao = {
+  create: async (
+    mutation: string,
+    params: APIt.CreateReportInput
+  ): Promise<Report | null> => {
+    const result = (await BaseDao.create(
+      mutation,
+      params
+    )) as APIt.CreateReportMutation;
+    return (result.createReport as Report) || null; // unsafe
+  },
+  update: async (
+    mutation: string,
+    params: APIt.UpdateReportInput
+  ): Promise<Report | null> => {
+    const result = (await BaseDao.update(
+      mutation,
+      params
+    )) as APIt.UpdateReportMutation;
+    return (result.updateReport as Report) || null;
+  },
+  delete: async (
+    mutation: string,
+    params: APIt.DeleteReportInput
+  ): Promise<Report | null> => {
+    const result = (await BaseDao.delete(
+      mutation,
+      params
+    )) as APIt.DeleteReportMutation;
+    return (result.deleteReport as Report) || null;
+  },
+  get: async (
+    query: string,
+    params: APIt.GetReportQueryVariables
+  ): Promise<Report | null> => {
+    const result = (await BaseDao.get(query, params)) as APIt.GetReportQuery;
+    return (result.getReport as Report) || null;
+  },
+  /**
+   * @deprecated 検証用のみ
+   */
+  list: async (
+    query: string,
+    params: APIt.ListReportsQueryVariables
+  ): Promise<(Report | null)[] | null> => {
+    const result = (await BaseDao.list(query, params)) as APIt.ListReportsQuery;
+    return result.listReports?.items as (Report | null)[] | null;
+  },
+  listSub: async (
+    query: string,
+    params: APIt.ListReportsSubQueryVariables
+  ): Promise<(Report | null)[] | null> => {
+    const result = (await BaseDao.list(
+      query,
+      params
+    )) as APIt.ListReportsSubQuery;
+    return result.listReportsSub?.items as (Report | null)[] | null;
+  },
+  listCompanyDate: async (
+    query: string,
+    params: APIt.ListReportsCompanyDateQueryVariables
+  ): Promise<(Report | null)[] | null> => {
+    let result: (Report | null)[] = [];
+    let resultQuery: APIt.ListReportsCompanyDateQuery | null = null;
+    let token: string | null = null;
+    do {
+      params.nextToken = token;
+      resultQuery = (await BaseDao.list(
+        query,
+        params
+      )) as APIt.ListReportsCompanyDateQuery;
+      result = result.concat(
+        (resultQuery.listReportsCompanyDate?.items as (Report | null)[]) || []
+      );
+      token = resultQuery.listReportsCompanyDate?.nextToken || null;
+    } while (token);
+    return result;
+  },
+  updateByAdmin: async (
+    mutation: string,
+    params: APIt.UpdateReportInput
+  ): Promise<Report | null> => {
+    const result = (await BaseDao.update(
+      mutation,
+      params
+    )) as APIt.UpdateReportByCompanyAdminMutation;
+    return (result.updateReportByCompanyAdmin as Report) || null;
+  },
+  deleteByAdmin: async (
+    mutation: string,
+    params: APIt.DeleteReportInput
+  ): Promise<Report | null> => {
+    const result = (await BaseDao.delete(
+      mutation,
+      params
+    )) as APIt.DeleteReportByCompanyAdminMutation;
+    return (result.deleteReportByCompanyAdmin as Report) || null;
+  },
+};

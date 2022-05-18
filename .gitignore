@@ -40,4 +40,8 @@ amplifytools.xcconfig
 amplify/backend/api/sccgql/pipelineFunctions/
 
 *.js
+*.map
 !.eslintrc.js
+amplify/backend/api/sccgql/resolvers/
+amplify/backend/function/jobUpdateOwner/src/*.js
+amplify/backend/function/jobUpdateOwner/src/*.map

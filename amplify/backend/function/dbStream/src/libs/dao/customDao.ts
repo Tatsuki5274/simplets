@@ -1,4 +1,4 @@
-import { updateOwners } from "graphql/mutations";
+import { sendEmail, updateOwners } from "../../graphql/mutations";
 import * as APIt from "../../API";
 import { BaseDao } from "./common/baseDao";
 
@@ -12,11 +12,23 @@ export const CustomDao = {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const result: any = await BaseDao.create(updateOwners, {});
     if (typeof result !== "object" || !result) {
-      throw TypeError("Response is not object");
+      // eslint-disable-next-line no-console
+      console.error("型エラー: 結果がオブジェクトではありません。");
+      throw TypeError("内部エラーが発生しました。");
     }
     if (!result?.updateOwners?.isSuccess) {
-      throw new Error("Operation failed");
+      throw new Error("処理に失敗しました。");
     }
     return result?.updateOwners || null;
+  },
+  sendEmail: async (
+    params: APIt.sendEmailInput
+  ): Promise<APIt.SendEmailMutation> => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const result = (await BaseDao.create(
+      sendEmail,
+      params
+    )) as APIt.SendEmailMutation;
+    return result;
   },
 };

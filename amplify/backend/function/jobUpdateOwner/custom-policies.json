@@ -1,0 +1,8 @@
+[
+  {
+    "Action": ["Lambda:InvokeFunction"],
+    "Resource": [
+        "arn:aws:lambda:*:*:function:updateOwner-${env}"
+    ]
+  }
+]

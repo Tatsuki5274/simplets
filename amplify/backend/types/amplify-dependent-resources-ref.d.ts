@@ -8,44 +8,38 @@ export type AmplifyDependentResourcesAttributes = {
             "AppClientIDWeb": "string",
             "AppClientID": "string",
             "AppClientSecret": "string"
+        }
+    },
+    "api": {
+        "sccgql": {
+            "GraphQLAPIIdOutput": "string",
+            "GraphQLAPIEndpointOutput": "string"
+        }
+    },
+    "function": {
+        "sendEmail": {
+            "Name": "string",
+            "Arn": "string",
+            "Region": "string",
+            "LambdaExecutionRole": "string"
         },
-        "api": {
-            "sccgql": {
-                "GraphQLAPIIdOutput": "string",
-                "GraphQLAPIEndpointOutput": "string"
-            },
-            "function": {
-                "approvalStatusManager": {
-                    "Name": "string",
-                    "Arn": "string",
-                    "Region": "string",
-                    "LambdaExecutionRole": "string"
-                }
-            }
-                "sendEmail": {
-                    "Name": "string",
-                    "Arn": "string",
-                    "Region": "string",
-                    "LambdaExecutionRole": "string"
-                },
-                "scriptGraphQL": {
-                    "Name": "string",
-                    "Arn": "string",
-                    "Region": "string",
-                    "LambdaExecutionRole": "string"
-                },
-                "resolvers": {
-                    "Name": "string",
-                    "Arn": "string",
-                    "Region": "string",
-                    "LambdaExecutionRole": "string"
-                },
-                "dbStream": {
-                    "Name": "string",
-                    "Arn": "string",
-                    "Region": "string",
-                    "LambdaExecutionRole": "string"
-                }
-            }
+        "resolvers": {
+            "Name": "string",
+            "Arn": "string",
+            "Region": "string",
+            "LambdaExecutionRole": "string"
+        },
+        "dbStream": {
+            "Name": "string",
+            "Arn": "string",
+            "Region": "string",
+            "LambdaExecutionRole": "string"
+        },
+        "jobUpdateOwner": {
+            "Name": "string",
+            "Arn": "string",
+            "Region": "string",
+            "LambdaExecutionRole": "string"
         }
     }
+}

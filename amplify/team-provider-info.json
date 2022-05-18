@@ -166,11 +166,16 @@
         },
         "resolvers": {
           "deploymentBucketName": "amplify-sccsystem-dev-110829-deployment",
-          "s3Key": "amplify-builds/resolvers-306c4e6c596c4e584145-build.zip"
+          "s3Key": "amplify-builds/resolvers-45586b48667576745037-build.zip"
         },
         "dbStream": {
           "deploymentBucketName": "amplify-sccsystem-dev-110829-deployment",
-          "s3Key": "amplify-builds/dbStream-58666935475144376878-build.zip"
+          "s3Key": "amplify-builds/dbStream-6a45622b326e42627648-build.zip"
+        },
+        "jobUpdateOwner": {
+          "nodeOptions": "--enable-source-maps",
+          "deploymentBucketName": "amplify-sccsystem-dev-110829-deployment",
+          "s3Key": "amplify-builds/jobUpdateOwner-306e717756356b326542-build.zip"
         }
       }
     }

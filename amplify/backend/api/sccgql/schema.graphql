@@ -408,6 +408,27 @@ type Report
   revieweeEmployee: Employee @connection(fields: ["reviewee"])  #被評価者参照
 }
 
+type Job
+@model(
+  queries: {
+    get: "getJob",
+    list: "listJobs"
+  }
+  subscriptions: null
+)
+@auth(
+  rules: [
+    {allow: groups, groups: ["Admin"]}
+    {allow: private, provider: iam, operations: [create, read, update, delete] }
+  ]
+)
+{
+  id: ID!
+  status: String!
+  companyID: String!
+  email: String!
+}
+
 # type Query {
 #   #listSheetsLtGrade: String @function(name: "listSheetsLtGrade_${env}")
 #   # listSheetsLtGrade: [Sheet] @function(name: "listSheetsLtGrade_${env}")
@@ -438,12 +459,6 @@ type UpdateOwnerResponseType {
 }
 
 type Mutation{
-  # 廃止
-  approvalStatusManager(action: String, sheetId: String): String @function(name: "approvalStatusManager_${env}")
-    @auth(rules:[
-      {allow: private}
-    ])
-  
   # メールを送信する関数を呼び出す
   sendEmail(input: sendEmailInput): String
     @function(name: "sendEmail-${env}")
@@ -542,6 +557,12 @@ type Mutation{
       {allow: private}
     ])
   deleteReportByCompanyAdmin(input: DeleteReportInput): Report
+    @function(name: "resolvers-${env}")
+    @auth(rules: [
+      {allow: private}
+    ])
+
+  createJobByAdmin: String
     @function(name: "resolvers-${env}")
     @auth(rules: [
       {allow: private}

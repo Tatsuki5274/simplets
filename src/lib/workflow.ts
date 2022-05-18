@@ -114,7 +114,7 @@ function getEmployees(employee: Employee): Employee[] {
   let work: Employee | undefined = employee;
   do {
     ret.push(work);
-    work = work.superior;
+    work = work.superior || undefined;
   } while (work);
   return ret;
 }
