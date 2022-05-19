@@ -9,5 +9,11 @@
         "delete"
       ]
     }
-  }
+  },
+  "environmentVariableList": [
+    {
+      "cloudFormationParameterName": "nodeOptions",
+      "environmentVariableName": "NODE_OPTIONS"
+    }
+  ]
 }
