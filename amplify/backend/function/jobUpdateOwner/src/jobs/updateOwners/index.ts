@@ -31,7 +31,32 @@ export default async function UpdateOwners(
   //   // 会社番号が登録されていない場合
   //   throw new Error("CompanyID is not set");
   // }
-
+  // セルフタイムアウトの設置
+  setTimeout(async () => {
+    // リクエストの失敗を通知する
+    AWS.config.update({ region: "us-east-1" });
+    const ses = new AWS.SES();
+    const params = {
+      Destination: {
+        ToAddresses: [email],
+      },
+      Message: {
+        Body: {
+          Text: {
+            Charset: "UTF-8",
+            Data: "処理に失敗しました。[タイムアウトが発生しました]",
+          },
+        },
+        Subject: {
+          Charset: "UTF-8",
+          Data: "[失敗]更新結果通知",
+        },
+      },
+      Source: "simplets_desk@simplets.jp" /* required */,
+    };
+    await ses.sendEmail(params).promise();
+    throw new Error("リクエストがタイムアウトしました");
+  }, 14 * 60 * 1000);
   // 社員情報の取得
   const employees = await EmployeeDao.listCompany(listEmployeesCompany, {
     companyID: "SCC",
@@ -134,13 +159,6 @@ export default async function UpdateOwners(
     });
   });
   await Apply(data.sheets, data.sections, data.objectives, data.reports);
-
-  // const result = await CustomDao.sendEmail({
-  //   to: [email],
-  //   subject: "[成功]更新結果通知",
-  //   body: "リクエストの正常終了をお知らせします。",
-  // });
-  // console.log("mail result", JSON.stringify(result));
 
   AWS.config.update({ region: "us-east-1" });
   const ses = new AWS.SES();

@@ -180,7 +180,7 @@
         "jobUpdateOwner": {
           "nodeOptions": "--enable-source-maps",
           "deploymentBucketName": "amplify-sccsystem-dev-110829-deployment",
-          "s3Key": "amplify-builds/jobUpdateOwner-306e717756356b326542-build.zip"
+          "s3Key": "amplify-builds/jobUpdateOwner-68394d55453032383968-build.zip"
         }
       }
     }

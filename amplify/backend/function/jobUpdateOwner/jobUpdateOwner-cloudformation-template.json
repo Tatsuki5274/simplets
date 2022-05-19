@@ -317,6 +317,7 @@
       "Properties": {
         "BatchSize": 100,
         "Enabled": true,
+        "MaximumRetryAttempts": 0,
         "EventSourceArn": {
           "Fn::ImportValue": {
             "Fn::Sub": "${apisccgqlGraphQLAPIIdOutput}:GetAtt:JobTable:StreamArn"
