@@ -19,7 +19,7 @@ export default function (): JSX.Element {
       //   alert("更新が完了しました");
       // }
       await JobDao.createByAdmin(createJobByAdmin);
-      alert("リクエストを送信しました。処理結果はメールでお知らせします。");
+      alert("社員情報変更を開始しました。処理結果はメールでお知らせします。");
     } catch (e: unknown) {
       if (e instanceof Error) {
         // eslint-disable-next-line no-console

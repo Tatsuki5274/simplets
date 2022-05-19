@@ -44,12 +44,14 @@ export default async function UpdateOwners(
         Body: {
           Text: {
             Charset: "UTF-8",
-            Data: "処理に失敗しました。[タイムアウトが発生しました]",
+            Data: `
+社員情報の更新に失敗しました。
+simplets_desk@sisco-consulting.co.jpまでご連絡をお願いいたします。`,
           },
         },
         Subject: {
           Charset: "UTF-8",
-          Data: "[失敗]更新結果通知",
+          Data: "「Simplet's」社員管理 変更結果のお知らせ",
         },
       },
       Source: "simplets_desk@simplets.jp" /* required */,
@@ -170,12 +172,12 @@ export default async function UpdateOwners(
       Body: {
         Text: {
           Charset: "UTF-8",
-          Data: "リクエストの正常終了をお知らせします。",
+          Data: "社員情報が正しく更新されました。",
         },
       },
       Subject: {
         Charset: "UTF-8",
-        Data: "[成功]更新結果通知",
+        Data: "「Simplet's」社員管理 変更結果のお知らせ",
       },
     },
     Source: "simplets_desk@simplets.jp" /* required */,
