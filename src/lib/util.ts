@@ -150,9 +150,7 @@ export function createSidebarElements(
     resultEvaluation.push(notEvaluatedList);
     resultReport.push(reportTitle);
     resultReport.push(reportContentInputCalendar);
-    if (!isMobile) {
-      resultReport.push(reportContentRefCalendar);
-    }
+    resultReport.push(reportContentRefCalendar);
     resultReport.push(reportContentRefEmp);
   }
 
