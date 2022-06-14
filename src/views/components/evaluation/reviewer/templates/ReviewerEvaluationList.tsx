@@ -38,6 +38,10 @@ const EvaluationFilterStyle = styled.div({
   paddingTop: "20px",
 });
 
+const CSVButtonStyle = styled.div({
+  margin: "10px 0",
+});
+
 export default function (props: Props): JSX.Element {
   const yearList = props.data.years?.map((year) => {
     return {
@@ -138,7 +142,9 @@ export default function (props: Props): JSX.Element {
                 </EvaluationFilterStyle>
               ) : null}
               {props.tableData ? (
-                <ProgressCsv params={props.tableData} />
+                <CSVButtonStyle>
+                  <ProgressCsv params={props.tableData} />
+                </CSVButtonStyle>
               ) : null}
               {props.tableData ? (
                 <TableEvaluationList
