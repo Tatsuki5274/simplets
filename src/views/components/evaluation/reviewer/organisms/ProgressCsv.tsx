@@ -1,31 +1,29 @@
 import React from "react";
 import { CSVLink } from "react-csv";
 import styled from "styled-components";
-import { ProgressReferenceType } from "./ProgressCard";
 import { Button } from "react-bootstrap";
+import { TableEvaluationListType } from "./TableEvaluationList";
+import dateFormat from "dateformat";
 
 type PropsType = {
-  params: (ProgressReferenceType | null)[];
+  params: (TableEvaluationListType | null)[];
 };
 
 export default function (props: PropsType): JSX.Element {
-  // const csvData = [
-  //   ["firstname", "lastname", "email"],
-  //   ["Ahmed", "Tomi", "ah@smthing.co.com"],
-  //   ["Raed", "Labes", "rl@smthing.co.com"],
-  //   ["Yezzi", "Min l3b", "ymin@cocococo.com"],
-  // ];
   const csvData = props.params.map((param) => [
     param?.groupName,
-    param?.empNo,
-    param?.employeeName,
+    param?.data.empNo,
+    param?.name,
     param?.overAllEvaluation,
   ]);
   csvData.unshift(["部署名", "社員番号", "社員名", "総合評価"]);
   return (
     <Button variant="primary">
-      <CSVLink data={csvData}>
-        <ButtonStyle>Download CSV</ButtonStyle>
+      <CSVLink
+        data={csvData}
+        filename={`Rating_data_${dateFormat(new Date(), "yyyymmdd")}.csv`}
+      >
+        <ButtonStyle>評価データCSV出力</ButtonStyle>
       </CSVLink>
     </Button>
   );

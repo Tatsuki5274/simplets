@@ -9,6 +9,7 @@ import RightBox from "views/components/common/templates/RightBox";
 import Sidebar from "views/components/common/templates/Sidebar";
 import EvaluationFilter from "../organisms/EvaluationFilter";
 import EvaluationListTitle from "../organisms/EvaluationListTitle";
+import ProgressCsv from "../organisms/ProgressCsv";
 import TableEvaluationList, {
   TableEvaluationListType,
 } from "../organisms/TableEvaluationList";
@@ -135,6 +136,9 @@ export default function (props: Props): JSX.Element {
                     setSelectedYear={props.setSelectedYear}
                   />
                 </EvaluationFilterStyle>
+              ) : null}
+              {props.tableData ? (
+                <ProgressCsv params={props.tableData} />
               ) : null}
               {props.tableData ? (
                 <TableEvaluationList

@@ -9,7 +9,6 @@ import ProgressCard, {
   ProgressReferenceType,
 } from "views/components/evaluation/reviewer/organisms/ProgressCard";
 import Container from "../../../common/templates/Container";
-import ProgressCsv from "../../reviewer/organisms/ProgressCsv";
 import ProgressFilter from "../../reviewer/organisms/ProgressFilter";
 import ProgressTitle from "../../reviewer/organisms/ProgressTitle";
 
@@ -93,9 +92,6 @@ export default function (props: Props): JSX.Element {
                   setCardData={props.setCardData}
                 />
               ) : null}
-
-              {/* CSVダウンロード用コンポーネントを呼び出し */}
-              {props.cardData ? <ProgressCsv params={props.cardData} /> : null}
 
               {props.cardData?.map((data) => {
                 if (data) {
