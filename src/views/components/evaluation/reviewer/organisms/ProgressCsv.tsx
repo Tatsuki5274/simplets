@@ -14,7 +14,7 @@ export default function (props: PropsType): JSX.Element {
     param?.groupName,
     param?.data.empNo,
     param?.name,
-    param?.overAllEvaluation,
+    param?.overAllEvaluation || "未評価",
   ]);
   csvData.unshift(["部署名", "社員番号", "社員名", "総合評価"]);
   return (
