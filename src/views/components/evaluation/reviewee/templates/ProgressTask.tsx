@@ -66,6 +66,9 @@ export default function (props: Props): JSX.Element {
                       groupName={data.groupName}
                       objective={data.objective}
                       statusValue={data.statusValue}
+                      // CSV用の特別なパラメータ
+                      empNo={data.empNo}
+                      overAllEvaluation={data.overAllEvaluation}
                     />
                   );
                 }

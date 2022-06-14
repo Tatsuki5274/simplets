@@ -184,6 +184,9 @@ export default function (): JSX.Element {
                   }
                   return null;
                 }) || null,
+              // CSV用の特別なパラメータ
+              empNo: sheet?.revieweeEmployee?.no || null,
+              overAllEvaluation: sheet?.overAllEvaluation || null,
             };
             data.avg = data.objective
               ? calcAvg(

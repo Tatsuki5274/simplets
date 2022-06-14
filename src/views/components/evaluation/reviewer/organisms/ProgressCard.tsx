@@ -26,6 +26,10 @@ export type ProgressReferenceType = {
         gaugeId: string | null;
       } | null)[]
     | null;
+
+  //csv出力用の特別に仕様するパラメータ
+  overAllEvaluation: number | null;
+  empNo: string | null;
 };
 
 type Props = ProgressReferenceType;
