@@ -18,10 +18,10 @@ export default async function (record: StreamEventRecordType) {
 
   const userPoolId = env.AUTH_SCCSYSTEME53C89F0_USERPOOLID;
   if (!userPoolId) {
-    throw new Error("userPoolId is not defined");
+    throw new Error("userPoolId is not set.");
   }
   if (typeof username !== "string") {
-    throw new TypeError("username is not string");
+    throw new TypeError("username is not string.");
   }
 
   const params = {

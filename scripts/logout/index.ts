@@ -14,11 +14,11 @@ const argv = yargs
   .help().argv;
 const userPoolId = argv["user-pool-id"];
 if (typeof userPoolId !== "string") {
-  throw new Error("user-pool-idが文字列ではありません。");
+  throw new Error("想定されていない型を受け取りました");
 }
 const profile = argv.profile;
 if (typeof profile !== "string") {
-  throw new Error("profileが文字列ではありません");
+  throw new Error("想定されていない型を受け取りました");
 }
 
 AWS.config.update({ region: "ap-northeast-1" });

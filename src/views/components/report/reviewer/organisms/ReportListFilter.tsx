@@ -122,7 +122,7 @@ export default function (props: Props): JSX.Element {
           if (e instanceof Error) {
             await catcher(e);
           } else {
-            throw new Error("処理されていないエラー");
+            throw new Error("不明なエラーです");
           }
         }
       }}

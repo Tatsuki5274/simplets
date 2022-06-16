@@ -14,7 +14,7 @@ const updateGroupByCompanyAdmin = async (
     id: params.id,
   });
   if (group?.companyID !== companyId) {
-    throw new Error("You don't have permission");
+    throw new Error("You don't have permission.");
   }
   const updateResult = await GroupDao.update(updateGroup, params);
   if (!updateResult) {

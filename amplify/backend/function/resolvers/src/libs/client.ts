@@ -23,15 +23,15 @@ export class GraphQLClient {
     // 必要な情報の確認
     if (!env.API_SCCGQL_GRAPHQLAPIENDPOINTOUTPUT) {
       // エンドポイントの環境変数が未設定
-      throw new Error("endpoint is undefined");
+      throw new Error("endpoint is not set.");
     }
     if (!env.REGION) {
       // エンドポイントのリージョンが未設定
-      throw new Error("region is undefined");
+      throw new Error("region is not set.");
     }
     if (!aws.config.credentials) {
       // 認証が存在しない
-      throw new Error("credentials is undefined");
+      throw new Error("credentials is not set.");
     }
 
     const endpoint = env.API_SCCGQL_GRAPHQLAPIENDPOINTOUTPUT;

@@ -65,7 +65,7 @@ simplets_desk@sisco-consulting.co.jpまでご連絡をお願いいたします�
   });
   if (!employees) {
     // 社員が取得できなかった場合
-    throw new Error("Employees couldn't get");
+    throw new Error("Failed to fetch Employee");
   }
 
   // シート情報の取得
@@ -82,7 +82,7 @@ simplets_desk@sisco-consulting.co.jpまでご連絡をお願いいたします�
   });
 
   if (!sheets) {
-    throw new Error("sheet couldn't get.");
+    throw new Error("Failed to fetch Sheet");
   }
 
   const data: {

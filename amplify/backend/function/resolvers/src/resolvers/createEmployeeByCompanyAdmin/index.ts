@@ -11,7 +11,6 @@ const createEmployeeByCompanyAdmin = async (
   params.companyID = companyId; // 会社番号を上書きする
   const createResult = await EmployeeDao.create(createEmployee, params);
   if (!createResult) {
-    // 自社の評価シートではない場合
     throw new Error("Operation failed.");
   }
 

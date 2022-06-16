@@ -5,7 +5,7 @@ const lambda = new AWS.Lambda();
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export default async function InvokeUpdateOwners(companyId: string) {
   if (!process.env.FUNCTION_UPDATEOWNER_NAME) {
-    throw new Error("Function name is not defined");
+    throw new Error("Function's name is not set");
   }
   const payload = {
     companyId: companyId,
@@ -30,7 +30,7 @@ export default async function InvokeUpdateOwners(companyId: string) {
 
 const invokePromiseFunction = (payload: InvocationResponse) => {
   if (!process.env.FUNCTION_UPDATEOWNER_NAME) {
-    throw new Error("Function name is not defined");
+    throw new Error("Function's name is not set.");
   }
   return lambda
     .invoke({

@@ -26,11 +26,11 @@ export const handler = async (event: StreamEventType) => {
               await onDeleteEmployee(record);
               break;
             default:
-              throw new Error("不明なイベントが指定されました");
+              throw new Error("event is not expected value.");
           }
           break;
         default:
-          throw new Error("不明なテーブルが指定されました");
+          throw new Error("type is not expected value.");
       }
     }
   } catch (e) {

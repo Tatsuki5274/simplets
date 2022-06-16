@@ -22,7 +22,7 @@ const deleteSheetWithChildrenByCompanyAdmin = async (
   claims: any
 ): Promise<Sheet | null> => {
   if (typeof claims !== "object") {
-    throw TypeError("claims is not found.");
+    throw TypeError("claims is not object");
   }
   const companyId: string | null = claims["custom:companyId"] || null;
 
@@ -32,27 +32,27 @@ const deleteSheetWithChildrenByCompanyAdmin = async (
   // 会社チェック
   if (sheet?.companyID !== companyId) {
     // 自社の評価シートではない場合
-    throw new Error("You don't have permission");
+    throw new Error("You don't have permission.");
   }
 
   // 全ての目標カテゴリを削除する
   await Promise.all(
     sheet?.section?.items?.map(async (section) => {
       if (!section?.id) {
-        throw new Error("section.idがありません");
+        throw new Error("section.id is not set.");
       }
 
       // 全ての目標を削除する
       await Promise.all(
         section?.objective?.items?.map(async (objective) => {
           if (!objective?.id) {
-            throw new Error("objective.idがありません");
+            throw new Error("objective.id is not set.");
           }
           const delObjective = await ObjectiveDao.delete(deleteObjective, {
             id: objective.id,
           });
           if (!delObjective) {
-            throw new Error("目標の削除に失敗しました");
+            throw new Error("Failed to delete Objective.");
           }
         }) || []
       );
@@ -62,7 +62,7 @@ const deleteSheetWithChildrenByCompanyAdmin = async (
         id: section.id,
       });
       if (!delSection) {
-        throw new Error("目標カテゴリの削除に失敗しました");
+        throw new Error("Failed to delete Section.");
       }
       return;
     }) || []
@@ -70,7 +70,7 @@ const deleteSheetWithChildrenByCompanyAdmin = async (
 
   const result = SheetDao.delete(deleteSheet, params);
   if (!result) {
-    throw new Error("Operation failed");
+    throw new Error("Operation failed.");
   }
   return result;
 };

@@ -70,7 +70,7 @@ export const catcher = async (error: Error): Promise<void> => {
     message.error(error.message);
     logError(error, null);
   } else {
-    throw new Error("不明なエラーが渡されました。");
+    throw new Error("不明なエラーです");
   }
 };
 

@@ -13,7 +13,7 @@ const updateSheetByCompanyAdmin = async (
     id: params.id,
   });
   if (sheet?.companyID !== companyId) {
-    throw new Error("You don't have permission");
+    throw new Error("You don't have permission.");
   }
   const updateResult = await SheetDao.update(updateSheet, params);
   if (!updateResult) {

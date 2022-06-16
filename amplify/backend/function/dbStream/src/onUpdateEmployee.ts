@@ -24,7 +24,7 @@ export default async function (record: StreamEventRecordType) {
 
   const userPoolId = env.AUTH_SCCSYSTEME53C89F0_USERPOOLID;
   if (!userPoolId) {
-    throw new Error("userPoolId is not defined");
+    throw new Error("userPoolId is not set");
   }
   if (newCompanyId !== oldCompanyId) {
     // 社員の所属会社を変更することは許容しない

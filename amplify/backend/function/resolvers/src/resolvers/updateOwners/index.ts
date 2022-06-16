@@ -45,7 +45,7 @@ export default async function UpdateOwners(
       claims["custom:isCompanyAdmin"] === "true" ? true : false;
     if (!isCompanyAdmin) {
       // 社内管理者ではない場合
-      throw new Error("You don't have permission");
+      throw new Error("You don't have permission.");
     }
   }
 
@@ -55,7 +55,7 @@ export default async function UpdateOwners(
   });
   if (!employees) {
     // 社員が取得できなかった場合
-    throw new Error("Employees couldn't get");
+    throw new Error("Failed to fetch Employee");
   }
 
   // シート情報の取得
@@ -72,7 +72,7 @@ export default async function UpdateOwners(
   });
 
   if (!sheets) {
-    throw new Error("sheet couldn't get.");
+    throw new Error("Failed to fetch Sheet");
   }
 
   const data: {

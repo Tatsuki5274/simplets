@@ -337,7 +337,7 @@ export default function (props: Props): JSX.Element {
       if (e instanceof Error) {
         setError(e.message);
       } else {
-        throw new Error("処理されていないエラー");
+        throw new Error("不明なエラーです");
       }
     }
   };

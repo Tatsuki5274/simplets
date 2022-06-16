@@ -11,7 +11,6 @@ const createCategoryByCompanyAdmin = async (
   params.companyID = companyId; // 会社番号を上書きする
   const category = await CategoryDao.create(createCategory, params);
   if (!category) {
-    // 自社の評価シートではない場合
     throw new Error("Operation failed.");
   }
 

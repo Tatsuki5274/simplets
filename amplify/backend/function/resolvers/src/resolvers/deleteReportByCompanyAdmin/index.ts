@@ -12,7 +12,7 @@ const deleteReportByCompanyAdmin = async (
   const report = await ReportDao.get(getReport, { id: params.id });
   if (report?.companyID !== companyId) {
     // データの所有者が別の会社のデータなら削除は許可しない
-    throw new Error("You don't have permission");
+    throw new Error("You don't have permission.");
   }
   const updateResult = await ReportDao.delete(deleteReport, params);
   if (!updateResult) {

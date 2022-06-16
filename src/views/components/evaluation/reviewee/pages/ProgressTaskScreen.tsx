@@ -86,7 +86,7 @@ export default function (): JSX.Element {
         let sheets = await SheetDao.listCompany(listSheetsCompany, listI);
         //ここでfilter
         if (!sheets) {
-          throw new Error("Sheet is maybe undefined");
+          throw new Error("評価シートの取得に失敗しました");
         }
         const loginUserName = currentUser.username;
         //一般社員

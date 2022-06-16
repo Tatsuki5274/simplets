@@ -11,7 +11,9 @@ const deleteCategoryByCompanyAdmin = async (
 ): Promise<Category | null> => {
   const category = await CategoryDao.get(getCategory, { id: params.id });
   if (category?.companyID !== companyId) {
-    throw new Error("You don't have permission");
+    // eslint-disable-next-line no-console
+    console.log("You can't delete the data belongs to other company");
+    throw new Error("You don't have permission.");
   }
   const deleteResult = await CategoryDao.delete(deleteCategory, params);
   if (!deleteResult) {

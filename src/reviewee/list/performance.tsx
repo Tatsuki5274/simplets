@@ -261,7 +261,7 @@ function ListPerformanceEvalution(): JSX.Element {
         username: currentUser.username,
       });
       if (!revieweeEmployee?.groupID) {
-        throw new Error("GroupID is maybe undefined.");
+        throw new Error("GroupIDに想定されていない値が含まれます");
       }
 
       if (revieweeEmployee) {
@@ -292,7 +292,7 @@ function ListPerformanceEvalution(): JSX.Element {
             currentUser.attributes["custom:companyId"] || null;
 
           if (!companyId) {
-            throw new Error("会社情報が登録されていません");
+            throw new Error("会社が正しく登録されていませんでした");
           }
           if (!secondUsername) {
             setError("所属長が登録されていません。管理者に確認してください。");

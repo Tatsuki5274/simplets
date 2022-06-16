@@ -158,18 +158,18 @@ export const ReviewerSheetPagesStatus2 = (): JSX.Element | null => {
                         // updatedSheet = await statusManager.exec(updatedSheet, "proceed");
                         // setSheet({...updatedSheet});
                       } else {
-                        setError("フォームデータの登録に失敗しました");
-                        throw new IOError("フォームデータの登録に失敗しました");
+                        setError("評価シートの登録に失敗しました");
+                        throw new IOError("評価シートの登録に失敗しました");
                       }
                     }
                   } else {
-                    setError("評価シートの特定に失敗しました");
+                    setError("評価シートが正しく取得されませんでした");
                   }
                 } catch (e) {
                   if (e instanceof Error) {
                     setError(e.message);
                   } else {
-                    throw new Error("処理されていないエラー");
+                    throw new Error("不明なエラーです");
                   }
                 }
               }}

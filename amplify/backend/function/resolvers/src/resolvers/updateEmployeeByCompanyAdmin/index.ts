@@ -14,7 +14,7 @@ const updateEmployeeByCompanyAdmin = async (
     username: params.username,
   });
   if (employee?.companyID !== companyId) {
-    throw new Error("You don't have permission");
+    throw new Error("You don't have permission.");
   }
   const createResult = await EmployeeDao.update(updateEmployee, params);
   if (!createResult) {

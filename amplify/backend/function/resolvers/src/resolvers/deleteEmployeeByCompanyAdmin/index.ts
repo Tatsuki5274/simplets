@@ -14,10 +14,14 @@ const deleteEmployeeByCompanyAdmin = async (
     username: params.username,
   });
   if (employee?.companyID !== companyId) {
-    throw new Error("You don't have permission");
+    // eslint-disable-next-line no-console
+    console.log("You can't delete the data belongs to other company");
+    throw new Error("You don't have permission.");
   }
   if (employee.sub == sub) {
-    throw new Error("You can't delete your own account");
+    // eslint-disable-next-line no-console
+    console.error("You can't delete the data belongs to your own account");
+    throw new Error("You don't have permission.");
   }
   const createResult = await EmployeeDao.delete(deleteEmployee, params);
   if (!createResult) {

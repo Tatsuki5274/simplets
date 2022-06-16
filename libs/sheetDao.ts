@@ -49,7 +49,7 @@ export const SheetDao = {
       params
     );
     if (typeof result !== "object" || !result) {
-      throw TypeError("Response is not object");
+      throw TypeError("想定されていない型を受け取りました");
     }
     return result.deleteSheetWithChildrenByCompanyAdmin || null;
   },

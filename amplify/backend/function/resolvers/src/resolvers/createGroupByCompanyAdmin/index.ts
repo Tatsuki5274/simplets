@@ -11,7 +11,6 @@ const createGroupByCompanyAdmin = async (
   params.companyID = companyId; // 会社番号を上書きする
   const createResult = await GroupDao.create(createGroup, params);
   if (!createResult) {
-    // 自社の評価シートではない場合
     throw new Error("Operation failed.");
   }
 

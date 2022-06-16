@@ -13,7 +13,7 @@ const deleteGroupByCompanyAdmin = async (
     id: params.id,
   });
   if (group?.companyID !== companyId) {
-    throw new Error("You don't have permission");
+    throw new Error("You don't have permission.");
   }
   const deleteResult = await GroupDao.delete(deleteGroup, params);
   if (!deleteResult) {

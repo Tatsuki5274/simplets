@@ -42,7 +42,7 @@ context: {
 //     if (fieldName === "updateOwners") {
 //       if (!isCompanyAdmin) {
 //         // 社内管理者であることを検証
-//         throw new Error("You don't have permission");
+//         throw new Error("You don't have permission.");
 //       }
 //       if (!companyId) {
 //         throw new Error("companyId is required.");

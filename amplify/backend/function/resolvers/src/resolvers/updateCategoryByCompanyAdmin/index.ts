@@ -13,7 +13,7 @@ const updateCategoryByCompanyAdmin = async (
   const category = await CategoryDao.get(getCategory, { id: params.id });
   if (category?.companyID !== companyId) {
     // 登録しているカテゴリが別の会社のデータの場合は拒否
-    throw new Error("You don't have permission");
+    throw new Error("You don't have permission.");
   }
   const updateResult = await CategoryDao.update(updateCategory, params);
   if (!updateResult) {
