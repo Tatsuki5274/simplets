@@ -10,10 +10,5 @@
       ]
     }
   },
-  "environmentVariableList": [
-    {
-      "cloudFormationParameterName": "nodeOptions",
-      "environmentVariableName": "NODE_OPTIONS"
-    }
-  ]
+  "environmentVariableList": []
 }

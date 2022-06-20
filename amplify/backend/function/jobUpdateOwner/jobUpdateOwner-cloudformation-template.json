@@ -16,9 +16,6 @@
     "s3Key": {
       "Type": "String"
     },
-    "nodeOptions": {
-      "Type": "String"
-    },
     "apisccgqlGraphQLAPIIdOutput": {
       "Type": "String",
       "Default": "apisccgqlGraphQLAPIIdOutput"
@@ -86,9 +83,6 @@
             },
             "API_SCCGQL_GRAPHQLAPIENDPOINTOUTPUT": {
               "Ref": "apisccgqlGraphQLAPIEndpointOutput"
-            },
-            "NODE_OPTIONS": {
-              "Ref": "nodeOptions"
             }
           }
         },
