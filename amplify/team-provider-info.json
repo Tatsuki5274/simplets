@@ -170,16 +170,15 @@
         },
         "resolvers": {
           "deploymentBucketName": "amplify-sccsystem-prodb-90246-deployment",
-          "s3Key": "amplify-builds/resolvers-45586b48667576745037-build.zip"
+          "s3Key": "amplify-builds/resolvers-49705550436d79726e6f-build.zip"
         },
         "dbStream": {
           "deploymentBucketName": "amplify-sccsystem-prodb-90246-deployment",
-          "s3Key": "amplify-builds/dbStream-6a45622b326e42627648-build.zip"
+          "s3Key": "amplify-builds/dbStream-37476b4f45732f654a51-build.zip"
         },
         "jobUpdateOwner": {
           "deploymentBucketName": "amplify-sccsystem-prodb-90246-deployment",
-          "s3Key": "amplify-builds/jobUpdateOwner-306e717756356b326542-build.zip",
-          "nodeOptions": "--enable-source-maps"
+          "s3Key": "amplify-builds/jobUpdateOwner-306e717756356b326542-build.zip"
         }
       }
     }
@@ -247,7 +246,7 @@
         },
         "sendEmail": {
           "deploymentBucketName": "amplify-sccsystem-std-150447-deployment",
-          "s3Key": "amplify-builds/sendEmail-5858497a4d51436a5642-build.zip"
+          "s3Key": "amplify-builds/sendEmail-55796c704461745a744a-build.zip"
         },
         "scriptGraphQL": {
           "deploymentBucketName": "amplify-sccsystem-std-150447-deployment",
@@ -260,7 +259,8 @@
         "dbStream": {
           "deploymentBucketName": "amplify-sccsystem-std-150447-deployment",
           "s3Key": "amplify-builds/dbStream-796747554a70764c3271-build.zip"
-        }
+        },
+        "jobUpdateOwner": {}
       }
     }
   }
