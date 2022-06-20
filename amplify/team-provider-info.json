@@ -1,4 +1,40 @@
 {
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-sccsystem-dev-110829-authRole",
+      "UnauthRoleArn": "arn:aws:iam::251893532135:role/amplify-sccsystem-dev-110829-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::251893532135:role/amplify-sccsystem-dev-110829-authRole",
+      "Region": "ap-northeast-1",
+      "DeploymentBucketName": "amplify-sccsystem-dev-110829-deployment",
+      "UnauthRoleName": "amplify-sccsystem-dev-110829-unauthRole",
+      "StackName": "amplify-sccsystem-dev-110829",
+      "StackId": "arn:aws:cloudformation:ap-northeast-1:251893532135:stack/amplify-sccsystem-dev-110829/1cd33b80-b390-11eb-a46c-0a5f9b17c5df",
+      "AmplifyAppId": "d5cvlroqr6enf"
+    },
+    "categories": {
+      "auth": {
+        "sccsysteme53c89f0": {}
+      },
+      "function": {
+        "sendEmail": {
+          "deploymentBucketName": "amplify-sccsystem-dev-110829-deployment",
+          "s3Key": "amplify-builds/sendEmail-55796c704461745a744a-build.zip"
+        },
+        "resolvers": {
+          "deploymentBucketName": "amplify-sccsystem-dev-110829-deployment",
+          "s3Key": "amplify-builds/resolvers-49705550436d79726e6f-build.zip"
+        },
+        "dbStream": {
+          "deploymentBucketName": "amplify-sccsystem-dev-110829-deployment",
+          "s3Key": "amplify-builds/dbStream-37476b4f45732f654a51-build.zip"
+        },
+        "jobUpdateOwner": {
+          "deploymentBucketName": "amplify-sccsystem-dev-110829-deployment",
+          "s3Key": "amplify-builds/jobUpdateOwner-61496665766e52566261-build.zip"
+        }
+      }
+    }
+  },
   "prod": {
     "awscloudformation": {
       "AuthRoleName": "amplify-sccsystem-prod-92900-authRole",
@@ -144,43 +180,6 @@
           "deploymentBucketName": "amplify-sccsystem-prodb-90246-deployment",
           "s3Key": "amplify-builds/jobUpdateOwner-306e717756356b326542-build.zip",
           "nodeOptions": "--enable-source-maps"
-        }
-      }
-    }
-  },
-  "dev": {
-    "awscloudformation": {
-      "AuthRoleName": "amplify-sccsystem-dev-110829-authRole",
-      "UnauthRoleArn": "arn:aws:iam::251893532135:role/amplify-sccsystem-dev-110829-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::251893532135:role/amplify-sccsystem-dev-110829-authRole",
-      "Region": "ap-northeast-1",
-      "DeploymentBucketName": "amplify-sccsystem-dev-110829-deployment",
-      "UnauthRoleName": "amplify-sccsystem-dev-110829-unauthRole",
-      "StackName": "amplify-sccsystem-dev-110829",
-      "StackId": "arn:aws:cloudformation:ap-northeast-1:251893532135:stack/amplify-sccsystem-dev-110829/1cd33b80-b390-11eb-a46c-0a5f9b17c5df",
-      "AmplifyAppId": "d5cvlroqr6enf"
-    },
-    "categories": {
-      "auth": {
-        "sccsysteme53c89f0": {}
-      },
-      "function": {
-        "sendEmail": {
-          "deploymentBucketName": "amplify-sccsystem-dev-110829-deployment",
-          "s3Key": "amplify-builds/sendEmail-55796c704461745a744a-build.zip"
-        },
-        "resolvers": {
-          "deploymentBucketName": "amplify-sccsystem-dev-110829-deployment",
-          "s3Key": "amplify-builds/resolvers-45586b48667576745037-build.zip"
-        },
-        "dbStream": {
-          "deploymentBucketName": "amplify-sccsystem-dev-110829-deployment",
-          "s3Key": "amplify-builds/dbStream-6a45622b326e42627648-build.zip"
-        },
-        "jobUpdateOwner": {
-          "nodeOptions": "--enable-source-maps",
-          "deploymentBucketName": "amplify-sccsystem-dev-110829-deployment",
-          "s3Key": "amplify-builds/jobUpdateOwner-68394d55453032383968-build.zip"
         }
       }
     }
